@@ -1,0 +1,17 @@
+[
+  {
+    "narrative": "During the trial for armed robbery, the prosecutor sought to introduce testimony from Officer Smith that the victim told him at the hospital, 'The man who shot me wore a red hat.' The defense objected that the statement is hearsay.",
+    "label": "Yes",
+    "reasoning": "The victim's statement was made out of court (at the hospital) and is offered to prove the truth of the matter asserted (that the perpetrator wore a red hat). No applicable exception eliminates hearsay status. Answer: Yes"
+  },
+  {
+    "narrative": "In a contract dispute, plaintiff's counsel introduced defendant's own letter stating 'I agree to pay $10,000 by March 1st.' Defendant objected that the letter is hearsay.",
+    "label": "No",
+    "reasoning": "The letter is a party-opponent admission under FRE 801(d)(2)(A). It is expressly excluded from the definition of hearsay. Answer: No"
+  },
+  {
+    "narrative": "In a personal injury case, a bystander testified that immediately after the car crash she heard the driver shout 'My brakes failed!' The plaintiff offered this to show the driver knew about the brake defect.",
+    "label": "Yes",
+    "reasoning": "The driver's exclamation is an out-of-court statement. It is offered for the truth of the matter asserted (that brakes failed). The excited utterance exception (FRE 803(2)) affects admissibility but the statement remains definitionally hearsay. Answer: Yes"
+  }
+]

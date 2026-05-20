@@ -1,0 +1,68 @@
+You are an expert decision analyst and argumentation specialist.
+
+CASE ID: {case_id}
+
+DECISION QUESTION (phi):
+{phi}
+
+If the decision question above is blank or unclear, infer the most important binary YES/NO decision from the case text, and use that as phi.
+
+YOUR TASK:
+1. Identify or confirm the central claim phi (the decision question as a YES/NO statement).
+2. Extract up to {max_arguments} arguments from the case that are relevant to phi.
+3. Assign each argument a stance:
+   - "support" = this argument favors answering phi with YES
+   - "attack"  = this argument favors answering phi with NO
+   - "neutral" = factual background only, does not favor YES or NO
+4. Score each argument on 5 dimensions (0.0 to 1.0).
+5. Identify relations between argument pairs.
+
+STANCE ASSIGNMENT — be decisive:
+- Most arguments will be "support" or "attack". Only use "neutral" for purely factual background with no argumentative force.
+- If an argument could go either way, pick the stronger direction.
+
+SCORING DIMENSIONS:
+- relevance: how directly does this address phi?
+- factual_grounding: is it grounded in specific case facts?
+- specificity: how precise and non-generic?
+- logical_coherence: is the reasoning internally sound?
+- applicability: how strongly does it favor the assigned stance?
+
+tau = weighted mean of rubric scores, clamped to [0.1, 1.0].
+
+OUTPUT: ONE JSON object only. No markdown. No preamble. No explanation.
+
+{
+  "case_id": "{case_id}",
+  "phi": "the decision question as a complete sentence",
+  "arguments": [
+    {
+      "id": "a1",
+      "text": "concise argument under 100 chars",
+      "stance_to_claim": "support",
+      "legal_rule": "relevant rule, law, or principle (under 80 chars)",
+      "evidence_span": null,
+      "confidence": 0.9,
+      "rubric": {
+        "relevance": 0.9,
+        "factual_grounding": 0.8,
+        "specificity": 0.7,
+        "logical_coherence": 0.9,
+        "applicability": 0.9
+      },
+      "tau": 0.85,
+      "justification": "one sentence explaining the stance"
+    }
+  ],
+  "relations": [
+    {
+      "source": "a1",
+      "target": "a2",
+      "type": "support",
+      "confidence": 0.8
+    }
+  ]
+}
+
+CASE TEXT:
+{narrative}

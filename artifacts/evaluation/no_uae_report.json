@@ -1,0 +1,45 @@
+{
+  "system_name": "no_uae",
+  "accuracy": 0.0,
+  "macro_f1": 0.0,
+  "per_class": [
+    {
+      "label": "Yes",
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "support": 0
+    },
+    {
+      "label": "No",
+      "precision": 0.0,
+      "recall": 0.0,
+      "f1": 0.0,
+      "support": 20
+    }
+  ],
+  "confusion_matrix": [
+    [
+      0,
+      0
+    ],
+    [
+      20,
+      0
+    ]
+  ],
+  "confusion_labels": [
+    "Yes",
+    "No"
+  ],
+  "accuracy_ci": [
+    0.0,
+    0.0
+  ],
+  "macro_f1_ci": [
+    0.0,
+    0.0
+  ],
+  "n_samples": 20,
+  "n_uncertain_escalated": 0
+}

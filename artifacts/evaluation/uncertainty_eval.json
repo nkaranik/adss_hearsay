@@ -1,0 +1,10 @@
+{
+  "certain_accuracy": 0.0,
+  "certain_share": 0.0,
+  "borderline_accuracy": 1.0,
+  "borderline_share": 1.0,
+  "post_escalation_acc": 1.0,
+  "false_certainty_rate": 0.0,
+  "n_certain": 0,
+  "n_borderline": 20
+}

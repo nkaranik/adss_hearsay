@@ -1,0 +1,35 @@
+{
+  "case_id": "test_0010",
+  "input_text": "On the issue of how long Joseph and Thomas had known each other, the fact that were neighbors during elementary school.",
+  "phi_text": "",
+  "gold_label": "No",
+  "extraction": {
+    "case_id": "test_0010",
+    "input_text": "On the issue of how long Joseph and Thomas had known each other, the fact that were neighbors during elementary school.",
+    "claim": {
+      "id": "phi",
+      "text": ""
+    },
+    "arguments": [],
+    "relations": [],
+    "extraction_model": "",
+    "raw_llm_response": "",
+    "parse_error": "'charmap' codec can't encode character '\\u2208' in position 11220: character maps to <undefined>",
+    "n_raw_arguments": 0
+  },
+  "strengths": [],
+  "solver_output": null,
+  "sigma_phi": 0.5,
+  "decision": "UNCERTAIN",
+  "uncertainty": {
+    "is_uncertain": false,
+    "sigma_phi": 0.0,
+    "threshold_low": 0.45,
+    "threshold_high": 0.55,
+    "escalation_triggered": false,
+    "escalation_actions": [],
+    "escalation_log": []
+  },
+  "hitl_interventions": [],
+  "pre_hitl_decision": null
+}

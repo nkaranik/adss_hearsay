@@ -1,0 +1,331 @@
+{
+  "case_id": "test_0011",
+  "input_text": "On the issue of whether Susan was familiar with Shakespeare, the fact that she had once played the role of Macbeth and recieved a standing ovation after her monologue.",
+  "phi_text": "",
+  "gold_label": "No",
+  "extraction": {
+    "case_id": "test_0011",
+    "input_text": "On the issue of whether Susan was familiar with Shakespeare, the fact that she had once played the role of Macbeth and recieved a standing ovation after her monologue.",
+    "claim": {
+      "id": "phi",
+      "text": "Is the statement described in this narrative hearsay under FRE 801(c)?"
+    },
+    "arguments": [
+      {
+        "id": "a1",
+        "text": "Acting is non-assertive conduct, falling outside FRE 801(a) hearsay scope.",
+        "stance_to_claim": "attack",
+        "legal_rule": "FRE 801(a) excludes non-assertive conduct from hearsay classification.",
+        "evidence_span": null,
+        "confidence": 0.92
+      },
+      {
+        "id": "a2",
+        "text": "Evidence proves capability, not an out-of-court assertion of fact.",
+        "stance_to_claim": "attack",
+        "legal_rule": "FRE 801(c) requires an asserted statement to trigger hearsay.",
+        "evidence_span": null,
+        "confidence": 0.88
+      },
+      {
+        "id": "a3",
+        "text": "Role performance is intentional art, lacking intent to assert truth.",
+        "stance_to_claim": "attack",
+        "legal_rule": "FRE 801(a)(2) mandates intent to assert for hearsay status.",
+        "evidence_span": null,
+        "confidence": 0.85
+      },
+      {
+        "id": "a4",
+        "text": "Audience ovation reflects reaction, not the declarant's own assertion.",
+        "stance_to_claim": "attack",
+        "legal_rule": "FRE 801(a) limits hearsay to the declarant's own conduct.",
+        "evidence_span": null,
+        "confidence": 0.82
+      },
+      {
+        "id": "a5",
+        "text": "Circumstantial proof of familiarity bypasses hearsay classification.",
+        "stance_to_claim": "attack",
+        "legal_rule": "FRE 801(c) applies only to testimonial assertions, not conduct.",
+        "evidence_span": null,
+        "confidence": 0.87
+      },
+      {
+        "id": "a6",
+        "text": "No out-of-court assertion exists; only physical performance occurred.",
+        "stance_to_claim": "attack",
+        "legal_rule": "FRE 801(c) definition requires a verbal or assertive act.",
+        "evidence_span": null,
+        "confidence": 0.9
+      }
+    ],
+    "relations": [
+      {
+        "source": "a1",
+        "target": "a2",
+        "type": "support",
+        "confidence": 0.85
+      },
+      {
+        "source": "a2",
+        "target": "a3",
+        "type": "support",
+        "confidence": 0.82
+      },
+      {
+        "source": "a3",
+        "target": "a4",
+        "type": "support",
+        "confidence": 0.78
+      },
+      {
+        "source": "a4",
+        "target": "a5",
+        "type": "support",
+        "confidence": 0.8
+      },
+      {
+        "source": "a5",
+        "target": "a6",
+        "type": "support",
+        "confidence": 0.84
+      }
+    ],
+    "extraction_model": "",
+    "raw_llm_response": "{\n  \"case_id\": \"test_0011\",\n  \"arguments\": [\n    {\n      \"id\": \"a1\",\n      \"text\": \"Acting is non-assertive conduct, falling outside FRE 801(a) hearsay scope.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"FRE 801(a) excludes non-assertive conduct from hearsay classification.\",\n      \"evidence_span\": null,\n      \"confidence\": 0.92,\n      \"rubric\": {\n        \"legal_relevance\": 0.95,\n        \"factual_grounding\": 0.9,\n        \"specificity\": 0.85,\n        \"logical_coherence\": 0.9,\n        \"fre_801c_applicability\": 0.95\n      },\n      \"tau\": 0.91,\n      \"justification\": \"Conduct lacks declarative intent, so FRE 801(c) does not apply.\"\n    },\n    {\n      \"id\": \"a2\",\n      \"text\": \"Evidence proves capability, not an out-of-court assertion of fact.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"FRE 801(c) requires an asserted statement to trigger hearsay.\",\n      \"evidence_span\": null,\n      \"confidence\": 0.88,\n      \"rubric\": {\n        \"legal_relevance\": 0.9,\n        \"factual_grounding\": 0.85,\n        \"specificity\": 0.8,\n        \"logical_coherence\": 0.88,\n        \"fre_801c_applicability\": 0.9\n      },\n      \"tau\": 0.87,\n      \"justification\": \"Proving familiarity through performance bypasses the assertion requirement.\"\n    },\n    {\n      \"id\": \"a3\",\n      \"text\": \"Role performance is intentional art, lacking intent to assert truth.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"FRE 801(a)(2) mandates intent to assert for hearsay status.\",\n      \"evidence_span\": null,\n      \"confidence\": 0.85,\n      \"rubric\": {\n        \"legal_relevance\": 0.88,\n        \"factual_grounding\": 0.82,\n        \"specificity\": 0.78,\n        \"logical_coherence\": 0.85,\n        \"fre_801c_applicability\": 0.88\n      },\n      \"tau\": 0.84,\n      \"justification\": \"Theatrical performance lacks the requisite intent to make a factual assertion.\"\n    },\n    {\n      \"id\": \"a4\",\n      \"text\": \"Audience ovation reflects reaction, not the declarant's own assertion.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"FRE 801(a) limits hearsay to the declarant's own conduct.\",\n      \"evidence_span\": null,\n      \"confidence\": 0.82,\n      \"rubric\": {\n        \"legal_relevance\": 0.85,\n        \"factual_grounding\": 0.8,\n        \"specificity\": 0.75,\n        \"logical_coherence\": 0.82,\n        \"fre_801c_applicability\": 0.85\n      },\n      \"tau\": 0.81,\n      \"justification\": \"External applause cannot be attributed as an out-of-court statement by Susan.\"\n    },\n    {\n      \"id\": \"a5\",\n      \"text\": \"Circumstantial proof of familiarity bypasses hearsay classification.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"FRE 801(c) applies only to testimonial assertions, not conduct.\",\n      \"evidence_span\": null,\n      \"confidence\": 0.87,\n      \"rubric\": {\n        \"legal_relevance\": 0.9,\n        \"factual_grounding\": 0.85,\n        \"specificity\": 0.8,\n        \"logical_coherence\": 0.87,\n        \"fre_801c_applicability\": 0.9\n      },\n      \"tau\": 0.86,\n      \"justification\": \"Using performance as circumstantial evidence avoids the hearsay rule entirely.\"\n    },\n    {\n      \"id\": \"a6\",\n      \"text\": \"No out-of-court assertion exists; only physical performance occurred.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"FRE 801(c) definition requires a verbal or assertive act.\",\n      \"evidence_span\": null,\n      \"confidence\": 0.9,\n      \"rubric\": {\n        \"legal_relevance\": 0.92,\n        \"factual_grounding\": 0.88,\n        \"specificity\": 0.83,\n        \"logical_coherence\": 0.9,\n        \"fre_801c_applicability\": 0.92\n      },\n      \"tau\": 0.89,\n      \"justification\": \"Physical acts alone cannot satisfy the foundational requirement of FRE 801(c).\"\n    }\n  ],\n  \"relations\": [\n    {\"source\": \"a1\", \"target\": \"a2\", \"type\": \"support\", \"confidence\": 0.85},\n    {\"source\": \"a2\", \"target\": \"a3\", \"type\": \"support\", \"confidence\": 0.82},\n    {\"source\": \"a3\", \"target\": \"a4\", \"type\": \"support\", \"confidence\": 0.78},\n    {\"source\": \"a4\", \"target\": \"a5\", \"type\": \"support\", \"confidence\": 0.8},\n    {\"source\": \"a5\", \"target\": \"a6\", \"type\": \"support\", \"confidence\": 0.84}\n  ]\n}",
+    "parse_error": null,
+    "n_raw_arguments": 6
+  },
+  "strengths": [
+    {
+      "argument_id": "a1",
+      "tau": 0.92,
+      "rubric": {
+        "relevance": 0.92,
+        "factual_grounding": 0.92,
+        "specificity": 0.92,
+        "logical_coherence": 0.92,
+        "applicability": 0.92
+      },
+      "justification": "Fallback from extraction confidence.",
+      "model": "fallback"
+    },
+    {
+      "argument_id": "a2",
+      "tau": 0.88,
+      "rubric": {
+        "relevance": 0.88,
+        "factual_grounding": 0.88,
+        "specificity": 0.88,
+        "logical_coherence": 0.88,
+        "applicability": 0.88
+      },
+      "justification": "Fallback from extraction confidence.",
+      "model": "fallback"
+    },
+    {
+      "argument_id": "a3",
+      "tau": 0.85,
+      "rubric": {
+        "relevance": 0.85,
+        "factual_grounding": 0.85,
+        "specificity": 0.85,
+        "logical_coherence": 0.85,
+        "applicability": 0.85
+      },
+      "justification": "Fallback from extraction confidence.",
+      "model": "fallback"
+    },
+    {
+      "argument_id": "a4",
+      "tau": 0.82,
+      "rubric": {
+        "relevance": 0.82,
+        "factual_grounding": 0.82,
+        "specificity": 0.82,
+        "logical_coherence": 0.82,
+        "applicability": 0.82
+      },
+      "justification": "Fallback from extraction confidence.",
+      "model": "fallback"
+    },
+    {
+      "argument_id": "a5",
+      "tau": 0.87,
+      "rubric": {
+        "relevance": 0.87,
+        "factual_grounding": 0.87,
+        "specificity": 0.87,
+        "logical_coherence": 0.87,
+        "applicability": 0.87
+      },
+      "justification": "Fallback from extraction confidence.",
+      "model": "fallback"
+    },
+    {
+      "argument_id": "a6",
+      "tau": 0.9,
+      "rubric": {
+        "relevance": 0.9,
+        "factual_grounding": 0.9,
+        "specificity": 0.9,
+        "logical_coherence": 0.9,
+        "applicability": 0.9
+      },
+      "justification": "Fallback from extraction confidence.",
+      "model": "fallback"
+    }
+  ],
+  "solver_output": {
+    "case_id": "test_0011",
+    "graph": {
+      "nodes": {
+        "phi": {
+          "id": "phi",
+          "text": "Is the statement described in this narrative hearsay under FRE 801(c)?",
+          "tau": 0.5,
+          "sigma": 0.0,
+          "is_claim": true
+        },
+        "a1": {
+          "id": "a1",
+          "text": "Acting is non-assertive conduct, falling outside FRE 801(a) hearsay scope.",
+          "tau": 0.92,
+          "sigma": 0.92,
+          "is_claim": false
+        },
+        "a2": {
+          "id": "a2",
+          "text": "Evidence proves capability, not an out-of-court assertion of fact.",
+          "tau": 0.88,
+          "sigma": 0.9904,
+          "is_claim": false
+        },
+        "a3": {
+          "id": "a3",
+          "text": "Role performance is intentional art, lacking intent to assert truth.",
+          "tau": 0.85,
+          "sigma": 0.99856,
+          "is_claim": false
+        },
+        "a4": {
+          "id": "a4",
+          "text": "Audience ovation reflects reaction, not the declarant's own assertion.",
+          "tau": 0.82,
+          "sigma": 0.9997408,
+          "is_claim": false
+        },
+        "a5": {
+          "id": "a5",
+          "text": "Circumstantial proof of familiarity bypasses hearsay classification.",
+          "tau": 0.87,
+          "sigma": 0.999966304,
+          "is_claim": false
+        },
+        "a6": {
+          "id": "a6",
+          "text": "No out-of-court assertion exists; only physical performance occurred.",
+          "tau": 0.9,
+          "sigma": 0.9999966304,
+          "is_claim": false
+        }
+      },
+      "edges": [
+        {
+          "source": "a1",
+          "target": "a2",
+          "type": "support",
+          "confidence": 0.85
+        },
+        {
+          "source": "a2",
+          "target": "a3",
+          "type": "support",
+          "confidence": 0.82
+        },
+        {
+          "source": "a3",
+          "target": "a4",
+          "type": "support",
+          "confidence": 0.78
+        },
+        {
+          "source": "a4",
+          "target": "a5",
+          "type": "support",
+          "confidence": 0.8
+        },
+        {
+          "source": "a5",
+          "target": "a6",
+          "type": "support",
+          "confidence": 0.84
+        },
+        {
+          "source": "a1",
+          "target": "phi",
+          "type": "attack",
+          "confidence": 0.92
+        },
+        {
+          "source": "a2",
+          "target": "phi",
+          "type": "attack",
+          "confidence": 0.88
+        },
+        {
+          "source": "a3",
+          "target": "phi",
+          "type": "attack",
+          "confidence": 0.85
+        },
+        {
+          "source": "a4",
+          "target": "phi",
+          "type": "attack",
+          "confidence": 0.82
+        },
+        {
+          "source": "a5",
+          "target": "phi",
+          "type": "attack",
+          "confidence": 0.87
+        },
+        {
+          "source": "a6",
+          "target": "phi",
+          "type": "attack",
+          "confidence": 0.9
+        }
+      ],
+      "solver_type": "df_quad"
+    },
+    "sigma_phi": 0.0,
+    "sigma_all": {
+      "phi": 0.0,
+      "a1": 0.92,
+      "a2": 0.9904,
+      "a3": 0.99856,
+      "a4": 0.9997408,
+      "a5": 0.999966304,
+      "a6": 0.9999966304
+    },
+    "iterations": 2,
+    "converged": true,
+    "solver_type": "df_quad"
+  },
+  "sigma_phi": 0.0,
+  "decision": "No",
+  "uncertainty": {
+    "is_uncertain": false,
+    "sigma_phi": 0.0,
+    "threshold_low": 0.45,
+    "threshold_high": 0.55,
+    "escalation_triggered": false,
+    "escalation_actions": [],
+    "escalation_log": []
+  },
+  "hitl_interventions": [],
+  "pre_hitl_decision": null
+}

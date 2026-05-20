@@ -1,0 +1,64 @@
+## Setup
+
+```bash
+# 1. Clone and create venv
+python -m venv .venv && source .venv/bin/activate
+
+# 2. Install dependencies
+pip install -r requirements.txt
+
+# 3. Set API key
+export ANTHROPIC_API_KEY=your_key_here
+
+# 4. (Optional) pre-download dataset
+python -c "from src.data.loader import load_examples; from src.utils.helpers import load_config; load_examples(load_config()['dataset'], 'train')"
+```
+
+## Run the dashboard
+
+```bash
+streamlit run src/dashboard/app.py
+```
+
+## Run evaluation
+
+```bash
+# Full evaluation on test split
+python scripts/run_eval.py --split test
+
+# Quick test on 20 samples
+python scripts/run_eval.py --split test --max 20
+
+# Use QE semantics solver
+python scripts/run_eval.py --solver qe_semantics --max 50
+```
+
+## Run case studies
+
+```bash
+python scripts/case_studies.py
+# Outputs to artifacts/case_studies/
+```
+
+## Run tests
+
+```bash
+pytest tests/ -v
+```
+
+## Configuration
+
+All thresholds, model names, and solver semantics live in `configs/config.yaml`.
+Key settings:
+
+| Key | Default | Description |
+|-----|---------|-------------|
+| `qbaf.solver` | `df_quad` | `df_quad` or `qe_semantics` |
+| `qbaf.decision_threshold` | `0.5` | σ(φ) cut-off for Yes/No |
+| `qbaf.uncertainty_band` | `[0.45, 0.55]` | UAE escalation zone |
+| `mining.max_arguments` | `8` | Max arguments extracted per case |
+| `anthropic.model` | `claude-sonnet-4-20250514` | LLM for all modules |
+
+## Solvers
+
+### DF-QuAD (default)

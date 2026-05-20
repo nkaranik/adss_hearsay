@@ -1,0 +1,142 @@
+[
+  {
+    "case_id": "test_0000",
+    "text": "On the issue of whether James is an smart individual, the fact that James came first in his class in law school.",
+    "decision_question": null,
+    "label": "No",
+    "split": "test"
+  },
+  {
+    "case_id": "test_0001",
+    "text": "On the issue of whether Robert negligently drove, the fact that Robert fell asleep while driving.",
+    "decision_question": null,
+    "label": "No",
+    "split": "test"
+  },
+  {
+    "case_id": "test_0002",
+    "text": "On the issue of whether John knew about the conspiracy, the fact that John likes sweatpants.",
+    "decision_question": null,
+    "label": "No",
+    "split": "test"
+  },
+  {
+    "case_id": "test_0003",
+    "text": "On the issue of whether Michael was guilty of murder, the fact that Michael left the crime scene immediately.",
+    "decision_question": null,
+    "label": "No",
+    "split": "test"
+  },
+  {
+    "case_id": "test_0004",
+    "text": "On the issue of whether William was loved by his community, the fact that he was selected to speak at his graduation.",
+    "decision_question": null,
+    "label": "No",
+    "split": "test"
+  },
+  {
+    "case_id": "test_0005",
+    "text": "On the issue of whether Mary robbed the bank, the fact that Mary went to the bank in disguise.",
+    "decision_question": null,
+    "label": "No",
+    "split": "test"
+  },
+  {
+    "case_id": "test_0006",
+    "text": "On the issue of whether Patricia was a fan of Coldplay, the fact that she had a poster with the lyrics of \"Viva la Vida\" on her bedroom wall.",
+    "decision_question": null,
+    "label": "No",
+    "split": "test"
+  },
+  {
+    "case_id": "test_0007",
+    "text": "On the issue of whether Jennifer suffered reputational harm from Linda's article, the fact that Linda worked with several different editors to proof read and cross-check her article.",
+    "decision_question": null,
+    "label": "No",
+    "split": "test"
+  },
+  {
+    "case_id": "test_0008",
+    "text": "On the issue of whether Elizabeth was misdiagnosed by Barbara, the fact that Barbara didn't consult with her usual charts while assessing Elizabethg.",
+    "decision_question": null,
+    "label": "No",
+    "split": "test"
+  },
+  {
+    "case_id": "test_0009",
+    "text": "On the issue of whether Richard had ever visited Chicago, the fact that he gave a speech there in 2005.",
+    "decision_question": null,
+    "label": "No",
+    "split": "test"
+  },
+  {
+    "case_id": "test_0010",
+    "text": "On the issue of how long Joseph and Thomas had known each other, the fact that were neighbors during elementary school.",
+    "decision_question": null,
+    "label": "No",
+    "split": "test"
+  },
+  {
+    "case_id": "test_0011",
+    "text": "On the issue of whether Susan was familiar with Shakespeare, the fact that she had once played the role of Macbeth and recieved a standing ovation after her monologue.",
+    "decision_question": null,
+    "label": "No",
+    "split": "test"
+  },
+  {
+    "case_id": "test_0012",
+    "text": "On the issue of whether Jessica was aware she was trespassing, the fact that Jessica had been diagnosed as near-sighted by her ophthalmologist.",
+    "decision_question": null,
+    "label": "No",
+    "split": "test"
+  },
+  {
+    "case_id": "test_0013",
+    "text": "On the issue of whether Sarah was acting as an agent for the corporation, the fact that Sarah had worked there previously for four years.",
+    "decision_question": null,
+    "label": "No",
+    "split": "test"
+  },
+  {
+    "case_id": "test_0014",
+    "text": "On the issue of whether Charles was responsible for the defamatory article published online, the fact that Charles had visited the website responsible for the article multiple times in the past year.",
+    "decision_question": null,
+    "label": "No",
+    "split": "test"
+  },
+  {
+    "case_id": "test_0015",
+    "text": "On the issue of whether Karen negligently operated the forklift, the fact that Karen is a terrible driver who needed several tries to pass her commercial license test.",
+    "decision_question": null,
+    "label": "No",
+    "split": "test"
+  },
+  {
+    "case_id": "test_0016",
+    "text": "On the issue of whether the patent was infringed, the fact that the corporation's chief scientist was known to cheat at card games.",
+    "decision_question": null,
+    "label": "No",
+    "split": "test"
+  },
+  {
+    "case_id": "test_0017",
+    "text": "On the issue of whether Christopher acted with malice, the fact that Christopher was often moody and had a large temper.",
+    "decision_question": null,
+    "label": "No",
+    "split": "test"
+  },
+  {
+    "case_id": "test_0018",
+    "text": "On the issue of whether the parties had actually agreed to the contract, the fact that one of the parties had mistaken the identity of the other party.",
+    "decision_question": null,
+    "label": "No",
+    "split": "test"
+  },
+  {
+    "case_id": "test_0019",
+    "text": "On the issue of which car was responsible for a hit-and-run, the witness's statement in court that she believed it was the blue sedan.",
+    "decision_question": null,
+    "label": "No",
+    "split": "test"
+  }
+]

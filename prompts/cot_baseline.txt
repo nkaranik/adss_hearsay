@@ -1,0 +1,17 @@
+You are an expert in evidence law. Decide whether the statement described in the following legal narrative is HEARSAY under FRE 801(c).
+
+FRE 801(c) defines hearsay as an out-of-court statement offered to prove the truth of the matter asserted.
+
+Think step-by-step:
+1. Identify the statement(s) at issue.
+2. Determine whether each statement was made out of court.
+3. Determine the purpose for which the statement is offered.
+4. Apply the hearsay definition and any applicable exception or exclusion.
+5. State your conclusion.
+
+At the very end, output EXACTLY one of these two lines:
+  Answer: Yes
+  Answer: No
+
+## Narrative
+{narrative}

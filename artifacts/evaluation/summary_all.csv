@@ -1,0 +1,9 @@
+system,accuracy,macro_f1,n
+full_adss,1.0,0.5,20
+zero_shot_cot,1.0,0.5,20
+few_shot,1.0,0.5,20
+adss_no_symbolic,1.0,0.5,20
+no_relation_extraction,1.0,0.5,20
+no_uae,0.0,0.0,20
+qe_solver,1.0,0.5,20
+dfquad_solver,1.0,0.5,20

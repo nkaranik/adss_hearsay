@@ -1,0 +1,331 @@
+{
+  "case_id": "test_0015",
+  "input_text": "On the issue of whether Karen negligently operated the forklift, the fact that Karen is a terrible driver who needed several tries to pass her commercial license test.",
+  "phi_text": "",
+  "gold_label": "No",
+  "extraction": {
+    "case_id": "test_0015",
+    "input_text": "On the issue of whether Karen negligently operated the forklift, the fact that Karen is a terrible driver who needed several tries to pass her commercial license test.",
+    "claim": {
+      "id": "phi",
+      "text": "Is the statement described in this narrative hearsay under FRE 801(c)?"
+    },
+    "arguments": [
+      {
+        "id": "a1",
+        "text": "Describes driving ability, not an out-of-court assertion, failing 801(c) definition.",
+        "stance_to_claim": "attack",
+        "legal_rule": "FRE 801(c) hearsay definition",
+        "evidence_span": null,
+        "confidence": 0.9
+      },
+      {
+        "id": "a2",
+        "text": "Prior test failures prove conduct, not a declarant's statement truth.",
+        "stance_to_claim": "attack",
+        "legal_rule": "FRE 801(c) statement requirement",
+        "evidence_span": null,
+        "confidence": 0.9
+      },
+      {
+        "id": "a3",
+        "text": "If based on an instructor's report, it is an out-of-court statement for truth.",
+        "stance_to_claim": "support",
+        "legal_rule": "FRE 801(c) out-of-court statement",
+        "evidence_span": null,
+        "confidence": 0.85
+      },
+      {
+        "id": "a4",
+        "text": "Character rules govern propensity, not hearsay, as reliability is irrelevant.",
+        "stance_to_claim": "attack",
+        "legal_rule": "FRE 404 character evidence rule",
+        "evidence_span": null,
+        "confidence": 0.85
+      },
+      {
+        "id": "a5",
+        "text": "Proving negligence requires establishing truth of the matter, triggering 801(c).",
+        "stance_to_claim": "support",
+        "legal_rule": "FRE 801(c) truth of matter asserted",
+        "evidence_span": null,
+        "confidence": 0.85
+      },
+      {
+        "id": "a6",
+        "text": "Mere observations of driving skill lack the assertive element required by 801(c).",
+        "stance_to_claim": "attack",
+        "legal_rule": "FRE 801(c) assertive element requirement",
+        "evidence_span": null,
+        "confidence": 0.9
+      }
+    ],
+    "relations": [
+      {
+        "source": "a1",
+        "target": "a6",
+        "type": "support",
+        "confidence": 0.85
+      },
+      {
+        "source": "a3",
+        "target": "a5",
+        "type": "support",
+        "confidence": 0.8
+      },
+      {
+        "source": "a1",
+        "target": "a3",
+        "type": "attack",
+        "confidence": 0.9
+      },
+      {
+        "source": "a2",
+        "target": "a6",
+        "type": "support",
+        "confidence": 0.82
+      },
+      {
+        "source": "a4",
+        "target": "a1",
+        "type": "support",
+        "confidence": 0.78
+      }
+    ],
+    "extraction_model": "",
+    "raw_llm_response": "{\n  \"case_id\": \"test_0015\",\n  \"arguments\": [\n    {\n      \"id\": \"a1\",\n      \"text\": \"Describes driving ability, not an out-of-court assertion, failing 801(c) definition.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"FRE 801(c) hearsay definition\",\n      \"evidence_span\": null,\n      \"confidence\": 0.9,\n      \"rubric\": {\n        \"legal_relevance\": 0.9,\n        \"factual_grounding\": 0.8,\n        \"specificity\": 0.7,\n        \"logical_coherence\": 0.9,\n        \"fre_801c_applicability\": 0.9\n      },\n      \"tau\": 0.85,\n      \"justification\": \"The narrative cites a factual condition rather than a declarant's assertion, which falls outside the hearsay definition.\"\n    },\n    {\n      \"id\": \"a2\",\n      \"text\": \"Prior test failures prove conduct, not a declarant's statement truth.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"FRE 801(c) statement requirement\",\n      \"evidence_span\": null,\n      \"confidence\": 0.9,\n      \"rubric\": {\n        \"legal_relevance\": 0.85,\n        \"factual_grounding\": 0.8,\n        \"specificity\": 0.75,\n        \"logical_coherence\": 0.85,\n        \"fre_801c_applicability\": 0.85\n      },\n      \"tau\": 0.82,\n      \"justification\": \"Evidence of license test history targets specific conduct rather than relying on an out-of-court statement for truth.\"\n    },\n    {\n      \"id\": \"a3\",\n      \"text\": \"If based on an instructor's report, it is an out-of-court statement for truth.\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"FRE 801(c) out-of-court statement\",\n      \"evidence_span\": null,\n      \"confidence\": 0.85,\n      \"rubric\": {\n        \"legal_relevance\": 0.8,\n        \"factual_grounding\": 0.7,\n        \"specificity\": 0.65,\n        \"logical_coherence\": 0.8,\n        \"fre_801c_applicability\": 0.8\n      },\n      \"tau\": 0.78,\n      \"justification\": \"If the fact derives from a third-party report, it meets the threshold for an out-of-court statement offered for its truth.\"\n    },\n    {\n      \"id\": \"a4\",\n      \"text\": \"Character rules govern propensity, not hearsay, as reliability is irrelevant.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"FRE 404 character evidence rule\",\n      \"evidence_span\": null,\n      \"confidence\": 0.85,\n      \"rubric\": {\n        \"legal_relevance\": 0.85,\n        \"factual_grounding\": 0.75,\n        \"specificity\": 0.7,\n        \"logical_coherence\": 0.85,\n        \"fre_801c_applicability\": 0.75\n      },\n      \"tau\": 0.8,\n      \"justification\": \"The evidence addresses driving propensity under character rules, making hearsay analysis secondary or inapplicable.\"\n    },\n    {\n      \"id\": \"a5\",\n      \"text\": \"Proving negligence requires establishing truth of the matter, triggering 801(c).\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"FRE 801(c) truth of matter asserted\",\n      \"evidence_span\": null,\n      \"confidence\": 0.85,\n      \"rubric\": {\n        \"legal_relevance\": 0.8,\n        \"factual_grounding\": 0.75,\n        \"specificity\": 0.7,\n        \"logical_coherence\": 0.8,\n        \"fre_801c_applicability\": 0.8\n      },\n      \"tau\": 0.79,\n      \"justification\": \"Using the evidence to prove negligence inherently relies on the truth of the asserted driving deficiency, aligning with 801(c).\"\n    },\n    {\n      \"id\": \"a6\",\n      \"text\": \"Mere observations of driving skill lack the assertive element required by 801(c).\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"FRE 801(c) assertive element requirement\",\n      \"evidence_span\": null,\n      \"confidence\": 0.9,\n      \"rubric\": {\n        \"legal_relevance\": 0.9,\n        \"factual_grounding\": 0.85,\n        \"specificity\": 0.8,\n        \"logical_coherence\": 0.9,\n        \"fre_801c_applicability\": 0.9\n      },\n      \"tau\": 0.87,\n      \"justification\": \"Driving ability is a non-assertive condition, and FRE 801(c) strictly requires an assertive statement to qualify as hearsay.\"\n    }\n  ],\n  \"relations\": [\n    {\"source\": \"a1\", \"target\": \"a6\", \"type\": \"support\", \"confidence\": 0.85},\n    {\"source\": \"a3\", \"target\": \"a5\", \"type\": \"support\", \"confidence\": 0.8},\n    {\"source\": \"a1\", \"target\": \"a3\", \"type\": \"attack\", \"confidence\": 0.9},\n    {\"source\": \"a2\", \"target\": \"a6\", \"type\": \"support\", \"confidence\": 0.82},\n    {\"source\": \"a4\", \"target\": \"a1\", \"type\": \"support\", \"confidence\": 0.78}\n  ]\n}",
+    "parse_error": null,
+    "n_raw_arguments": 6
+  },
+  "strengths": [
+    {
+      "argument_id": "a1",
+      "tau": 0.9,
+      "rubric": {
+        "relevance": 0.9,
+        "factual_grounding": 0.9,
+        "specificity": 0.9,
+        "logical_coherence": 0.9,
+        "applicability": 0.9
+      },
+      "justification": "Fallback from extraction confidence.",
+      "model": "fallback"
+    },
+    {
+      "argument_id": "a2",
+      "tau": 0.9,
+      "rubric": {
+        "relevance": 0.9,
+        "factual_grounding": 0.9,
+        "specificity": 0.9,
+        "logical_coherence": 0.9,
+        "applicability": 0.9
+      },
+      "justification": "Fallback from extraction confidence.",
+      "model": "fallback"
+    },
+    {
+      "argument_id": "a3",
+      "tau": 0.85,
+      "rubric": {
+        "relevance": 0.85,
+        "factual_grounding": 0.85,
+        "specificity": 0.85,
+        "logical_coherence": 0.85,
+        "applicability": 0.85
+      },
+      "justification": "Fallback from extraction confidence.",
+      "model": "fallback"
+    },
+    {
+      "argument_id": "a4",
+      "tau": 0.85,
+      "rubric": {
+        "relevance": 0.85,
+        "factual_grounding": 0.85,
+        "specificity": 0.85,
+        "logical_coherence": 0.85,
+        "applicability": 0.85
+      },
+      "justification": "Fallback from extraction confidence.",
+      "model": "fallback"
+    },
+    {
+      "argument_id": "a5",
+      "tau": 0.85,
+      "rubric": {
+        "relevance": 0.85,
+        "factual_grounding": 0.85,
+        "specificity": 0.85,
+        "logical_coherence": 0.85,
+        "applicability": 0.85
+      },
+      "justification": "Fallback from extraction confidence.",
+      "model": "fallback"
+    },
+    {
+      "argument_id": "a6",
+      "tau": 0.9,
+      "rubric": {
+        "relevance": 0.9,
+        "factual_grounding": 0.9,
+        "specificity": 0.9,
+        "logical_coherence": 0.9,
+        "applicability": 0.9
+      },
+      "justification": "Fallback from extraction confidence.",
+      "model": "fallback"
+    }
+  ],
+  "solver_output": {
+    "case_id": "test_0015",
+    "graph": {
+      "nodes": {
+        "phi": {
+          "id": "phi",
+          "text": "Is the statement described in this narrative hearsay under FRE 801(c)?",
+          "tau": 0.5,
+          "sigma": 0.4269003246875,
+          "is_claim": true
+        },
+        "a1": {
+          "id": "a1",
+          "text": "Describes driving ability, not an out-of-court assertion, failing 801(c) definition.",
+          "tau": 0.9,
+          "sigma": 0.985,
+          "is_claim": false
+        },
+        "a2": {
+          "id": "a2",
+          "text": "Prior test failures prove conduct, not a declarant's statement truth.",
+          "tau": 0.9,
+          "sigma": 0.9,
+          "is_claim": false
+        },
+        "a3": {
+          "id": "a3",
+          "text": "If based on an instructor's report, it is an out-of-court statement for truth.",
+          "tau": 0.85,
+          "sigma": 0.012750000000000039,
+          "is_claim": false
+        },
+        "a4": {
+          "id": "a4",
+          "text": "Character rules govern propensity, not hearsay, as reliability is irrelevant.",
+          "tau": 0.85,
+          "sigma": 0.85,
+          "is_claim": false
+        },
+        "a5": {
+          "id": "a5",
+          "text": "Proving negligence requires establishing truth of the matter, triggering 801(c).",
+          "tau": 0.85,
+          "sigma": 0.8519125,
+          "is_claim": false
+        },
+        "a6": {
+          "id": "a6",
+          "text": "Mere observations of driving skill lack the assertive element required by 801(c).",
+          "tau": 0.9,
+          "sigma": 0.99985,
+          "is_claim": false
+        }
+      },
+      "edges": [
+        {
+          "source": "a1",
+          "target": "a6",
+          "type": "support",
+          "confidence": 0.85
+        },
+        {
+          "source": "a3",
+          "target": "a5",
+          "type": "support",
+          "confidence": 0.8
+        },
+        {
+          "source": "a1",
+          "target": "a3",
+          "type": "attack",
+          "confidence": 0.9
+        },
+        {
+          "source": "a2",
+          "target": "a6",
+          "type": "support",
+          "confidence": 0.82
+        },
+        {
+          "source": "a4",
+          "target": "a1",
+          "type": "support",
+          "confidence": 0.78
+        },
+        {
+          "source": "a1",
+          "target": "phi",
+          "type": "attack",
+          "confidence": 0.9
+        },
+        {
+          "source": "a2",
+          "target": "phi",
+          "type": "attack",
+          "confidence": 0.9
+        },
+        {
+          "source": "a3",
+          "target": "phi",
+          "type": "support",
+          "confidence": 0.85
+        },
+        {
+          "source": "a4",
+          "target": "phi",
+          "type": "attack",
+          "confidence": 0.85
+        },
+        {
+          "source": "a5",
+          "target": "phi",
+          "type": "support",
+          "confidence": 0.85
+        },
+        {
+          "source": "a6",
+          "target": "phi",
+          "type": "attack",
+          "confidence": 0.9
+        }
+      ],
+      "solver_type": "df_quad"
+    },
+    "sigma_phi": 0.4269003246875,
+    "sigma_all": {
+      "phi": 0.4269003246875,
+      "a1": 0.985,
+      "a2": 0.9,
+      "a3": 0.012750000000000039,
+      "a4": 0.85,
+      "a5": 0.8519125,
+      "a6": 0.99985
+    },
+    "iterations": 2,
+    "converged": true,
+    "solver_type": "df_quad"
+  },
+  "sigma_phi": 0.4269003246875,
+  "decision": "No",
+  "uncertainty": {
+    "is_uncertain": false,
+    "sigma_phi": 0.4269003246875,
+    "threshold_low": 0.45,
+    "threshold_high": 0.55,
+    "escalation_triggered": false,
+    "escalation_actions": [],
+    "escalation_log": []
+  },
+  "hitl_interventions": [],
+  "pre_hitl_decision": null
+}
