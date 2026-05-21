@@ -1,9 +1,12 @@
-# ADSS-Hearsay: A Neuro-Symbolic Argumentative Decision Support System
+# ADSS: A Neuro-Symbolic Argumentative Decision Support System
 
-**ADSS-Hearsay** is a research-oriented Python system for **explainable legal decision support** on the LegalBench *hearsay* task. It combines large language model (LLM) argument mining with symbolic quantitative bipolar argumentation frameworks (QBAFs) to produce transparent **Yes / No / UNCERTAIN** decisions.
+**ADSS** is a research-oriented Python framework for **explainable decision support**. It combines large language model (LLM) argument mining with symbolic reasoning over **Quantitative Bipolar Argumentation Frameworks (QBAFs)** to produce transparent, inspectable, and uncertainty-aware decisions.
 
-The system was originally designed for deciding whether a legal narrative contains **hearsay under FRE 801(c)**, and has been extended with a more generic decision-support dashboard where a user may provide or auto-extract a custom decision problem φ.
+Given a textual case description, ADSS allows the user to define a binary decision problem, denoted as **φ**, either manually or through automatic LLM-based extraction. The system then identifies the relevant arguments in the input text, assigns each argument a stance with respect to φ, estimates intrinsic argument strengths, and detects support or attack relations among arguments.
 
+These extracted arguments are used to construct a QBAF graph, where arguments become nodes and argumentative relations become directed support or attack edges. A symbolic solver then propagates argument strengths through the graph using configurable semantics, such as **DF-QuAD** or **QE semantics**, and computes the final acceptability score **σ(φ)** for the central claim.
+
+Based on this score, ADSS recommends a decision — **Yes**, **No**, or **UNCERTAIN** — while preserving the underlying argument structure for explanation, contestation, and human-in-the-loop review.
 ---
 
 ## Key Contributions
@@ -83,7 +86,7 @@ uncertainty_band: [0.45, 0.55]
 
 ## Solvers
 
-ADSS-Hearsay supports two QBAF semantics:
+ADSS supports two QBAF semantics:
 
 ### DF-QuAD Semantics
 
