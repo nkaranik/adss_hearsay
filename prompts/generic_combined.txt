@@ -40,7 +40,7 @@ OUTPUT: ONE JSON object only. No markdown. No preamble. No explanation.
       "id": "a1",
       "text": "concise argument under 100 chars",
       "stance_to_claim": "support",
-      "legal_rule": "relevant rule, law, or principle (under 80 chars)",
+      "principle": "relevant rule, policy, obligation, fact, or norm",
       "evidence_span": null,
       "confidence": 0.9,
       "rubric": {

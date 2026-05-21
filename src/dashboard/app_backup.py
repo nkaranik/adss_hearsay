@@ -286,26 +286,25 @@ def main():
         key="preset_sel",
     )
 
-    # Streamlit rule: once a widget with a key is instantiated in a run,
-    # that key cannot be modified later in the same run. Therefore the
-    # Auto-extract button is processed BEFORE the decision-problem text_input
-    # is instantiated.
-    if "phi_input" not in st.session_state:
-        st.session_state["phi_input"] = DECISION_PRESETS.get(preset, "")
-    if "last_preset" not in st.session_state:
-        st.session_state["last_preset"] = preset
+    # Session-state key ensures value persists across reruns
+    if "phi_text" not in st.session_state:
+        st.session_state["phi_text"] = DECISION_PRESETS.get(preset, "")
 
-    # Only update the input when the user changes to a concrete preset.
-    # Never clear the value on ordinary reruns while Auto / Custom is selected.
-    if preset != st.session_state["last_preset"]:
-        st.session_state["last_preset"] = preset
-        if preset != "Auto / Custom":
-            st.session_state["phi_input"] = DECISION_PRESETS[preset]
+    # When preset changes (and is not Custom), sync the text box
+    if preset != "Custom…":
+        st.session_state["phi_text"] = DECISION_PRESETS[preset]
 
     phi_col, btn_col = st.columns([4, 1])
+    with phi_col:
+        decision_problem = st.text_input(
+            "Decision problem:",
+            value=st.session_state["phi_text"],
+            placeholder="e.g. Is the defendant liable for breach of contract?",
+            key="phi_input",
+        )
+        # Keep session state in sync with manual edits
+        st.session_state["phi_text"] = decision_problem
 
-    # Render/process the button first so it can safely update phi_input before
-    # the text_input widget with key="phi_input" is created.
     with btn_col:
         st.markdown("<br>", unsafe_allow_html=True)  # vertical align
         auto_btn = st.button(
@@ -318,19 +317,9 @@ def main():
     if auto_btn and narrative.strip():
         with st.spinner("Extracting decision problem from narrative…"):
             suggested = _auto_extract_phi(narrative, cfg)
-            st.session_state["phi_input"] = suggested
-            st.session_state["last_preset"] = "Auto / Custom"
-            st.info(f"Suggested φ: **{suggested}**")
-            st.rerun()
-
-    with phi_col:
-        st.text_input(
-            "Decision problem:",
-            placeholder="e.g. Is the defendant liable for breach of contract?",
-            key="phi_input",
-        )
-
-    decision_problem = st.session_state.get("phi_input", "").strip()
+        st.session_state["phi_text"] = suggested
+        st.info(f"Suggested φ: **{suggested}**")
+        st.rerun()
 
     ready = (backend == "lmstudio") or bool(_gc.get_active_key())
     can_run = ready and bool(decision_problem.strip()) and bool(narrative.strip())

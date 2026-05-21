@@ -1,0 +1,4556 @@
+===== FILE: C:\Users\nkaran\Dropbox\work account\Diplomatikes\diplo oiko2k\app\adss_hearsay\.pytest_cache\README.md =====
+# pytest cache directory #
+
+This directory contains data from the pytest's cache plugin,
+which provides the `--lf` and `--ff` options, as well as the `cache` fixture.
+
+**Do not** commit this to version control.
+
+See [the docs](https://docs.pytest.org/en/stable/how-to/cache.html) for more information.
+
+
+===== FILE: C:\Users\nkaran\Dropbox\work account\Diplomatikes\diplo oiko2k\app\adss_hearsay\configs\config.yaml =====
+system:
+  name: "ADSS-Hearsay"
+  version: "1.0.0"
+  log_level: "INFO"
+  artifact_dir: "artifacts"
+  seed: 42
+
+# ── Backend selection ─────────────────────────────────────────────────────────
+# "gemini"    → Google Gemini API  (needs GEMINI_API_KEY)
+# "lmstudio"  → Local LM Studio   (needs LM Studio running on localhost)
+backend: "gemini"
+
+gemini:
+  model: "gemini-2.5-flash"
+  max_tokens: 4096
+  temperature: 0.0
+
+lmstudio:
+  base_url:    "http://127.0.0.1:1234/v1"
+  model:       "qwen/qwen3.6-35b-a3b"   # must match model loaded in LM Studio
+  max_tokens:  260000    # for 262144 context: 262144 - 700 (prompt) - 1444 (buffer)
+  temperature: 0.0
+  disable_thinking: true   # appends /no_think for Qwen3 reasoning models
+
+dataset:
+  source: "huggingface"
+  hf_repo: "nguha/legalbench"
+  hf_config: "hearsay"
+  train_split: "train"
+  test_split: "test"
+  max_samples: null
+  local_cache: "data/hearsay_cache.json"
+
+mining:
+  max_arguments: 6          # fewer args = faster + fewer tokens
+  min_confidence: 0.3
+  include_neutral_relations: false
+  max_retries: 2
+
+scoring:
+  strength_min: 0.1
+  strength_max: 1.0
+
+qbaf:
+  solver: "df_quad"
+  max_iterations: 50
+  convergence_eps: 1.0e-6
+  decision_threshold: 0.5
+  uncertainty_band: [0.45, 0.55]
+  phi_initial_strength: 0.5
+
+evaluation:
+  bootstrap_samples: 1000
+  confidence_level: 0.95
+  output_dir: "artifacts/evaluation"
+
+baselines:
+  few_shot_examples: 3
+
+
+===== FILE: C:\Users\nkaran\Dropbox\work account\Diplomatikes\diplo oiko2k\app\adss_hearsay\prompts\combined.txt =====
+You are an expert AI reasoning assistant for decision support and argumentation analysis.
+
+DECISION PROBLEM (central claim phi):
+{decision_problem}
+
+TASK: Analyse the narrative and extract up to {max_arguments} arguments relevant to
+whether the decision problem is true or false.
+
+STANCE RULES — assign carefully:
+- "support" : this argument provides evidence that the claim IS true
+- "attack"  : this argument provides evidence that the claim is NOT true / an exception applies
+- "neutral" : the argument is genuinely irrelevant or meta-commentary about the decision itself
+
+Extract arguments that take a clear position. Avoid neutral unless the argument truly
+cannot be classified as support or attack.
+
+OUTPUT RULES:
+- ONE JSON object only. No markdown, no explanation, no preamble.
+- Do NOT copy narrative text verbatim into JSON fields — paraphrase concisely.
+- "text" and "legal_rule" fields: max 80 characters each.
+- Include rubric scores and tau for each argument.
+- Relations only between argument ids (never "phi" as source).
+- Use domain-appropriate rules (legal, medical, ethical, factual, etc.) in "legal_rule".
+
+{
+  "case_id": "{case_id}",
+  "arguments": [
+    {
+      "id": "a1",
+      "text": "concise argument under 80 chars",
+      "stance_to_claim": "support",
+      "legal_rule": "relevant rule or principle",
+      "evidence_span": null,
+      "confidence": 0.9,
+      "rubric": {
+        "legal_relevance": 0.9,
+        "factual_grounding": 0.8,
+        "specificity": 0.7,
+        "logical_coherence": 0.9,
+        "fre_801c_applicability": 0.9
+      },
+      "tau": 0.85,
+      "justification": "one sentence explaining stance"
+    }
+  ],
+  "relations": [
+    {"source": "a1", "target": "a2", "type": "support", "confidence": 0.8}
+  ]
+}
+
+Narrative (Case {case_id}):
+{narrative}
+
+
+===== FILE: C:\Users\nkaran\Dropbox\work account\Diplomatikes\diplo oiko2k\app\adss_hearsay\prompts\cot_baseline.txt =====
+You are an expert in evidence law. Decide whether the statement described in the following legal narrative is HEARSAY under FRE 801(c).
+
+FRE 801(c) defines hearsay as an out-of-court statement offered to prove the truth of the matter asserted.
+
+Think step-by-step:
+1. Identify the statement(s) at issue.
+2. Determine whether each statement was made out of court.
+3. Determine the purpose for which the statement is offered.
+4. Apply the hearsay definition and any applicable exception or exclusion.
+5. State your conclusion.
+
+At the very end, output EXACTLY one of these two lines:
+  Answer: Yes
+  Answer: No
+
+## Narrative
+{narrative}
+
+
+===== FILE: C:\Users\nkaran\Dropbox\work account\Diplomatikes\diplo oiko2k\app\adss_hearsay\prompts\extraction.txt =====
+You are an expert legal AI assistant specialising in evidence law and the Federal Rules of Evidence (FRE).
+
+## Task
+Analyse the legal narrative (provided separately below) and extract structured arguments relevant to the central claim:
+
+  phi = "The statement is hearsay under FRE 801(c)."
+
+Under FRE 801(c), a statement is hearsay if:
+  1. It is an out-of-court statement.
+  2. It is offered to prove the truth of the matter asserted.
+
+Factors that ATTACK (undermine) the hearsay claim:
+  - Party-opponent admissions (FRE 801(d)(2))
+  - Prior inconsistent/consistent statements (FRE 801(d)(1))
+  - Excited utterances (FRE 803(2))
+  - Present sense impressions (FRE 803(1))
+  - Statements for medical diagnosis (FRE 803(4))
+  - Business records (FRE 803(6))
+  - Not offered for truth (verbal act, legally operative words, effect on listener)
+
+## Output instructions
+- Extract up to {max_arguments} arguments.
+- Each argument: "support" = supports hearsay; "attack" = undermines hearsay.
+- For each pair of arguments, classify their relation as "support", "attack", or "neutral".
+- Do NOT include the narrative text anywhere in the JSON.
+- Return ONLY the JSON object below — no markdown fences, no explanation, no preamble.
+- All string values must use standard ASCII double quotes. Do not use smart quotes.
+- Keep argument "text" and "legal_rule" fields short (under 120 characters each).
+
+## JSON schema (return exactly this structure)
+{
+  "case_id": "CASE_ID_PLACEHOLDER",
+  "arguments": [
+    {
+      "id": "a1",
+      "text": "short argument text here",
+      "stance_to_claim": "support",
+      "legal_rule": "FRE 801(c)(1)",
+      "evidence_span": null,
+      "confidence": 0.9
+    }
+  ],
+  "relations": [
+    {
+      "source": "a1",
+      "target": "a2",
+      "type": "support",
+      "confidence": 0.8
+    }
+  ]
+}
+
+## Narrative (Case ID: {case_id})
+{narrative}
+
+
+===== FILE: C:\Users\nkaran\Dropbox\work account\Diplomatikes\diplo oiko2k\app\adss_hearsay\prompts\few_shot_examples.json =====
+[
+  {
+    "narrative": "During the trial for armed robbery, the prosecutor sought to introduce testimony from Officer Smith that the victim told him at the hospital, 'The man who shot me wore a red hat.' The defense objected that the statement is hearsay.",
+    "label": "Yes",
+    "reasoning": "The victim's statement was made out of court (at the hospital) and is offered to prove the truth of the matter asserted (that the perpetrator wore a red hat). No applicable exception eliminates hearsay status. Answer: Yes"
+  },
+  {
+    "narrative": "In a contract dispute, plaintiff's counsel introduced defendant's own letter stating 'I agree to pay $10,000 by March 1st.' Defendant objected that the letter is hearsay.",
+    "label": "No",
+    "reasoning": "The letter is a party-opponent admission under FRE 801(d)(2)(A). It is expressly excluded from the definition of hearsay. Answer: No"
+  },
+  {
+    "narrative": "In a personal injury case, a bystander testified that immediately after the car crash she heard the driver shout 'My brakes failed!' The plaintiff offered this to show the driver knew about the brake defect.",
+    "label": "Yes",
+    "reasoning": "The driver's exclamation is an out-of-court statement. It is offered for the truth of the matter asserted (that brakes failed). The excited utterance exception (FRE 803(2)) affects admissibility but the statement remains definitionally hearsay. Answer: Yes"
+  }
+]
+
+
+===== FILE: C:\Users\nkaran\Dropbox\work account\Diplomatikes\diplo oiko2k\app\adss_hearsay\prompts\generic_combined.txt =====
+You are an expert decision analyst and argumentation specialist.
+
+CASE ID: {case_id}
+
+DECISION QUESTION (phi):
+{phi}
+
+If the decision question above is blank or unclear, infer the most important binary YES/NO decision from the case text, and use that as phi.
+
+YOUR TASK:
+1. Identify or confirm the central claim phi (the decision question as a YES/NO statement).
+2. Extract up to {max_arguments} arguments from the case that are relevant to phi.
+3. Assign each argument a stance:
+   - "support" = this argument favors answering phi with YES
+   - "attack"  = this argument favors answering phi with NO
+   - "neutral" = factual background only, does not favor YES or NO
+4. Score each argument on 5 dimensions (0.0 to 1.0).
+5. Identify relations between argument pairs.
+
+STANCE ASSIGNMENT — be decisive:
+- Most arguments will be "support" or "attack". Only use "neutral" for purely factual background with no argumentative force.
+- If an argument could go either way, pick the stronger direction.
+
+SCORING DIMENSIONS:
+- relevance: how directly does this address phi?
+- factual_grounding: is it grounded in specific case facts?
+- specificity: how precise and non-generic?
+- logical_coherence: is the reasoning internally sound?
+- applicability: how strongly does it favor the assigned stance?
+
+tau = weighted mean of rubric scores, clamped to [0.1, 1.0].
+
+OUTPUT: ONE JSON object only. No markdown. No preamble. No explanation.
+
+{
+  "case_id": "{case_id}",
+  "phi": "the decision question as a complete sentence",
+  "arguments": [
+    {
+      "id": "a1",
+      "text": "concise argument under 100 chars",
+      "stance_to_claim": "support",
+      "legal_rule": "relevant rule, law, or principle (under 80 chars)",
+      "evidence_span": null,
+      "confidence": 0.9,
+      "rubric": {
+        "relevance": 0.9,
+        "factual_grounding": 0.8,
+        "specificity": 0.7,
+        "logical_coherence": 0.9,
+        "applicability": 0.9
+      },
+      "tau": 0.85,
+      "justification": "one sentence explaining the stance"
+    }
+  ],
+  "relations": [
+    {
+      "source": "a1",
+      "target": "a2",
+      "type": "support",
+      "confidence": 0.8
+    }
+  ]
+}
+
+CASE TEXT:
+{narrative}
+
+
+===== FILE: C:\Users\nkaran\Dropbox\work account\Diplomatikes\diplo oiko2k\app\adss_hearsay\prompts\strength.txt =====
+You are a legal argument strength evaluator specialising in FRE 801(c) hearsay law.
+
+## Task
+Score the following argument on five dimensions, each on a scale of 0.0 to 1.0:
+
+1. legal_relevance         – How directly does this argument address FRE 801(c)?
+2. factual_grounding       – Is the argument grounded in specific facts from the narrative?
+3. specificity             – How precise and non-generic is the argument?
+4. logical_coherence       – Is the internal reasoning sound and non-contradictory?
+5. fre_801c_applicability  – How correctly is the relevant FRE rule applied?
+
+## Scoring guidance
+  0.9–1.0 : highly specific, legally precise, strongly grounded, logically flawless
+  0.7–0.8 : strong but with minor gaps
+  0.5–0.6 : plausible but incomplete or somewhat generic
+  0.3–0.4 : generic or weakly grounded
+  0.1–0.2 : poor quality or mostly irrelevant
+
+Compute tau as: (legal_relevance*0.30 + factual_grounding*0.20 + specificity*0.15 + logical_coherence*0.15 + fre_801c_applicability*0.20), clamped to [0.1, 1.0].
+
+## Return ONLY this JSON (no preamble, no markdown fences):
+{
+  "argument_id": "<id>",
+  "rubric": {
+    "legal_relevance": 0.0,
+    "factual_grounding": 0.0,
+    "specificity": 0.0,
+    "logical_coherence": 0.0,
+    "fre_801c_applicability": 0.0
+  },
+  "tau": 0.0,
+  "justification": "<one sentence>"
+}
+
+## Narrative
+{narrative}
+
+## Argument to score
+ID: {arg_id}
+Text: {arg_text}
+Stance to claim: {stance}
+Legal rule: {legal_rule}
+
+
+===== FILE: C:\Users\nkaran\Dropbox\work account\Diplomatikes\diplo oiko2k\app\adss_hearsay\scripts\case_studies.py =====
+#!/usr/bin/env python3
+"""
+Generate 3 illustrative HITL case studies.
+Usage:  python scripts/case_studies.py
+"""
+from __future__ import annotations
+
+import json, sys
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).parent.parent))
+
+from src.utils.helpers import load_config, setup_logging, ensure_api_key
+from src.data.models import HearsayExample, HITLIntervention, Decision
+from src.pipeline.orchestrator import ADSSPipeline
+
+CASES = [
+    {
+        "id": "cs_001", "label": "CORRECT_INITIAL", "gold": "Yes",
+        "text": (
+            "At trial for fraud, the prosecutor introduced testimony from a bank "
+            "officer that a customer told him: 'I transferred the money as "
+            "instructed by my financial advisor.' Offered to prove the advisor "
+            "gave the instruction."
+        ),
+        "description": "Classic hearsay: out-of-court statement offered for truth.",
+    },
+    {
+        "id": "cs_002", "label": "CORRECTED_BY_HITL", "gold": "No",
+        "text": (
+            "In a breach of contract case the plaintiff's attorney offered the "
+            "defendant's own signed letter admitting: 'I failed to deliver goods "
+            "by the agreed date.' The defendant objected the letter is hearsay."
+        ),
+        "description": "Party-opponent admission (FRE 801(d)(2)): NOT hearsay. HITL corrects initial error.",
+    },
+    {
+        "id": "cs_003", "label": "UNCERTAINTY_ESCALATION", "gold": "Yes",
+        "text": (
+            "A witness overheard two unidentified persons near a storage unit "
+            "saying 'the package contains drugs.' Offered to prove the package "
+            "did contain drugs. The identity of the declarants is unclear."
+        ),
+        "description": "Borderline case triggering uncertainty escalation.",
+    },
+]
+
+
+def run(pipeline: ADSSPipeline, cs: dict) -> dict:
+    pred = pipeline.run_case(
+        HearsayExample(case_id=cs["id"], text=cs["text"],
+                       label=cs["gold"], split="case_study"),
+        save_artifacts=True,
+    )
+    result = {
+        "case_id": cs["id"], "label": cs["label"], "gold": cs["gold"],
+        "description": cs["description"],
+        "initial_sigma_phi": pred.sigma_phi,
+        "initial_decision": pred.decision.value,
+        "is_correct_initial": pred.is_correct(),
+        "n_args": len(pred.extraction.arguments),
+        "is_uncertain": pred.uncertainty.is_uncertain,
+        "escalation_log": pred.uncertainty.escalation_log,
+    }
+
+    if cs["label"] == "CORRECTED_BY_HITL":
+        attack_args = [a for a in pred.extraction.arguments
+                       if a.stance_to_claim.value == "attack"]
+        if attack_args and pred.solver_output:
+            tgt     = attack_args[0].id
+            old_tau = pred.solver_output.graph.nodes[tgt].tau
+            pred    = pipeline.apply_hitl_intervention(pred, HITLIntervention(
+                intervention_type="edit_tau", target_id=tgt,
+                old_value=old_tau, new_value=0.95,
+            ))
+            result["hitl"] = {
+                "target": tgt, "old_tau": old_tau, "new_tau": 0.95,
+                "new_sigma_phi": pred.sigma_phi,
+                "new_decision": pred.decision.value,
+                "decision_changed": pred.decision.value != result["initial_decision"],
+                "correct_after": pred.is_correct(),
+            }
+
+    # Build plain-text explanation
+    lines = [
+        f"{'='*60}",
+        f"Case {cs['id']} — {cs['label']}",
+        f"Gold: {cs['gold']}  |  {cs['description']}",
+        "",
+        f"Step 1 – Extraction: {result['n_args']} arguments",
+    ]
+    if pred.solver_output:
+        for a in pred.extraction.arguments:
+            t = pred.solver_output.graph.nodes[a.id].tau
+            s = pred.solver_output.sigma_all.get(a.id, 0.0)
+            lines.append(f"  [{a.id}] {a.stance_to_claim.value.upper()} "
+                         f"τ={t:.2f} σ={s:.2f}  {a.text[:60]}…")
+    lines += [
+        "",
+        f"Step 2 – Initial σ(φ)={result['initial_sigma_phi']:.4f}",
+        f"Step 3 – Initial decision: {result['initial_decision']} "
+        f"(correct={result['is_correct_initial']})",
+    ]
+    if result["is_uncertain"]:
+        lines.append(f"Step 4 – UNCERTAIN zone → {result['escalation_log']}")
+    if "hitl" in result:
+        h = result["hitl"]
+        lines += [
+            "",
+            f"Step 5 – HITL: boost τ({h['target']}) {h['old_tau']:.2f}→{h['new_tau']:.2f}",
+            f"Step 6 – New σ(φ)={h['new_sigma_phi']:.4f} → {h['new_decision']}",
+            f"Step 7 – Decision changed: {h['decision_changed']} | Correct: {h['correct_after']}",
+        ]
+    lines.append(f"\nFinal: {pred.decision.value}  σ(φ)={pred.sigma_phi:.4f}")
+    result["explanation"] = "\n".join(lines)
+    print(result["explanation"])
+    return result
+
+
+def main():
+    cfg = load_config()
+    setup_logging(cfg)
+    ensure_api_key()
+
+    pipeline = ADSSPipeline(cfg)
+    out_dir  = Path(cfg.get("system", {}).get("artifact_dir", "artifacts")) / "case_studies"
+    out_dir.mkdir(parents=True, exist_ok=True)
+
+    all_results = [run(pipeline, cs) for cs in CASES]
+    (out_dir / "all_case_studies.json").write_text(
+        json.dumps(all_results, indent=2, default=str, encoding="utf-8")
+    )
+    print(f"\nSaved to {out_dir}/")
+
+
+if __name__ == "__main__":
+    main()
+
+
+===== FILE: C:\Users\nkaran\Dropbox\work account\Diplomatikes\diplo oiko2k\app\adss_hearsay\scripts\run_eval.py =====
+#!/usr/bin/env python3
+"""
+Reproducible evaluation script (Gemini backend).
+Usage:  python scripts/run_eval.py [--split test] [--max 20]
+"""
+from __future__ import annotations
+
+import argparse, csv, sys
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).parent.parent))
+
+from src.utils.helpers import load_config, setup_logging, ensure_api_key, flatten_report
+from src.data.loader import load_examples
+from src.pipeline.orchestrator import ADSSPipeline, BaselineRunner
+from src.evaluation.evaluator import evaluate_predictions, print_report
+
+
+def parse_args():
+    p = argparse.ArgumentParser()
+    p.add_argument("--split",  default="test")
+    p.add_argument("--max",    type=int)
+    p.add_argument("--solver", default="df_quad")
+    p.add_argument("--baselines-only", action="store_true")
+    return p.parse_args()
+
+
+def main():
+    args = parse_args()
+    cfg  = load_config()
+    if args.max:
+        cfg.setdefault("dataset", {})["max_samples"] = args.max
+    cfg.setdefault("qbaf", {})["solver"] = args.solver
+    setup_logging(cfg)
+    ensure_api_key()
+
+    import logging
+    logger  = logging.getLogger(__name__)
+    out_dir = Path(cfg.get("evaluation", {}).get("output_dir", "artifacts/evaluation"))
+
+    examples = load_examples(cfg.get("dataset", {}), split=args.split)
+    logger.info(f"Loaded {len(examples)} examples ({args.split}).")
+
+    all_reports = []
+
+    if not args.baselines_only:
+        logger.info("Running Full ADSS…")
+        pipeline    = ADSSPipeline(cfg)
+        adss_preds  = pipeline.run_batch(examples)
+        r = evaluate_predictions(adss_preds, "full_adss", cfg, out_dir)
+        print_report(r)
+        all_reports.append(flatten_report(r))
+
+        logger.info("Running ADSS-no-symbolic…")
+        br = BaselineRunner(cfg)
+        no_sym = []
+        for p in adss_preds:
+            sigma, dec = br.run_adss_no_symbolic(p.extraction, p.strengths)
+            no_sym.append(p.model_copy(update={
+                "sigma_phi": sigma, "decision": dec, "solver_output": None
+            }))
+        r2 = evaluate_predictions(no_sym, "adss_no_symbolic", cfg, out_dir)
+        print_report(r2)
+        all_reports.append(flatten_report(r2))
+
+    br = BaselineRunner(cfg)
+
+    logger.info("Running Zero-shot CoT…")
+    cot = [br.run_cot(ex) for ex in examples]
+    r3  = evaluate_predictions(cot, "zero_shot_cot", cfg, out_dir)
+    print_report(r3)
+    all_reports.append(flatten_report(r3))
+
+    logger.info("Running Few-shot…")
+    fs  = [br.run_few_shot(ex) for ex in examples]
+    r4  = evaluate_predictions(fs, "few_shot", cfg, out_dir)
+    print_report(r4)
+    all_reports.append(flatten_report(r4))
+
+    if all_reports:
+        out_dir.mkdir(parents=True, exist_ok=True)
+        summary = out_dir / "summary.csv"
+        with open(summary, "w", encoding="utf-8", newline="", encoding="utf-8") as f:
+            w = csv.DictWriter(f, fieldnames=list(all_reports[0].keys()))
+            w.writeheader(); w.writerows(all_reports)
+        logger.info(f"Summary → {summary}")
+
+
+if __name__ == "__main__":
+    main()
+
+
+===== FILE: C:\Users\nkaran\Dropbox\work account\Diplomatikes\diplo oiko2k\app\adss_hearsay\scripts\run_eval_full - Copy.py =====
+#!/usr/bin/env python3
+"""
+Full evaluation script for the research paper.
+Runs ALL experiments described in the paper:
+  1. Main results      (Table 1): 4 systems
+  2. Ablation          (Table 2): 7 variants
+  3. Contestability    (Table 3): DFR, CFR, MEC, SSM
+  4. Uncertainty eval  (Table 4): certain vs borderline
+  5. Robustness        (Figure ): perturbation curves
+  6. Error analysis    (Table 5): 4 error categories
+
+Usage:
+  python scripts/run_eval_full.py --split test --max 100
+"""
+from __future__ import annotations
+
+import argparse, csv, json, logging, sys
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).parent.parent))
+
+from src.utils.helpers import load_config, setup_logging, ensure_api_key, flatten_report
+from src.data.loader import load_examples
+from src.data.models import ADSSPrediction, Decision
+from src.pipeline.orchestrator import ADSSPipeline, BaselineRunner
+from src.qbaf.graph import build_qbaf
+from src.qbaf.solver import get_solver, DFQuADSolver, QESemanticsSolver, make_decision
+from src.evaluation.evaluator import evaluate_predictions, print_report
+from src.evaluation.contestability import compute_contestability, print_contestability
+from src.evaluation.robustness import run_robustness, print_robustness
+from src.evaluation.error_analysis import analyse_errors, print_error_analysis
+
+
+def parse_args():
+    p = argparse.ArgumentParser()
+    p.add_argument("--split",  default="test")
+    p.add_argument("--max",    type=int, help="Limit samples (quick test)")
+    p.add_argument("--solver", default="df_quad")
+    p.add_argument("--skip-robustness", action="store_true",
+                   help="Skip slow robustness experiments")
+    p.add_argument("--backend", default=None,
+                   choices=["gemini", "lmstudio"],
+                   help="Override backend (default: from config.yaml)")
+    return p.parse_args()
+
+
+# ── Ablation helpers ──────────────────────────────────────────────────────────
+
+def run_no_relation_extraction(
+    adss_preds: list[ADSSPrediction], cfg: dict
+) -> list[ADSSPrediction]:
+    """
+    Ablation: ignore inter-argument relations.
+    Each argument connects to phi directly (stance-based), no arg-arg edges.
+    """
+    import copy
+    from src.data.models import QBAFEdge, RelationType, SolverType
+
+    results = []
+    solver  = get_solver(cfg)
+    phi_tau = cfg.get("qbaf", {}).get("phi_initial_strength", 0.5)
+
+    for pred in adss_preds:
+        new_pred = pred.model_copy(deep=True)
+        # Build graph with ONLY arg→phi edges (drop all arg-arg edges)
+        graph = build_qbaf(
+            pred.extraction, pred.strengths, phi_tau,
+            SolverType(cfg.get("qbaf", {}).get("solver", "df_quad")),
+        )
+        # Remove all edges that don't target phi
+        graph.edges = [e for e in graph.edges if e.target == "phi"]
+
+        solver_out  = solver.solve(graph, pred.case_id)
+        sigma_phi   = solver_out.sigma_phi
+        dec_str, _  = make_decision(sigma_phi, cfg)
+
+        new_pred.solver_output = solver_out
+        new_pred.sigma_phi     = sigma_phi
+        new_pred.decision      = Decision(dec_str)
+        results.append(new_pred)
+    return results
+
+
+def run_no_uae(adss_preds: list[ADSSPrediction], cfg: dict) -> list[ADSSPrediction]:
+    """
+    Ablation: disable UAE — force binary decision even in uncertainty band.
+    """
+    threshold = cfg.get("qbaf", {}).get("decision_threshold", 0.5)
+    results = []
+    for pred in adss_preds:
+        new_pred = pred.model_copy(deep=True)
+        # Ignore uncertainty band — use threshold only
+        dec = Decision.YES if pred.sigma_phi >= threshold else Decision.NO
+        new_pred.decision = dec
+        new_pred.uncertainty.is_uncertain = False
+        results.append(new_pred)
+    return results
+
+
+def run_with_solver(
+    adss_preds: list[ADSSPrediction], cfg: dict, solver_name: str
+) -> list[ADSSPrediction]:
+    """Re-solve all predictions with a different solver."""
+    cfg2 = {**cfg, "qbaf": {**cfg.get("qbaf", {}), "solver": solver_name}}
+    solver   = get_solver(cfg2)
+    phi_tau  = cfg2.get("qbaf", {}).get("phi_initial_strength", 0.5)
+    results  = []
+    from src.data.models import SolverType
+    stype = SolverType(solver_name)
+
+    for pred in adss_preds:
+        new_pred = pred.model_copy(deep=True)
+        if pred.solver_output is None:
+            results.append(new_pred)
+            continue
+        # Rebuild graph with original strengths and re-solve
+        graph       = build_qbaf(pred.extraction, pred.strengths, phi_tau, stype)
+        solver_out  = solver.solve(graph, pred.case_id)
+        sigma_phi   = solver_out.sigma_phi
+        dec_str, _  = make_decision(sigma_phi, cfg2)
+        new_pred.solver_output = solver_out
+        new_pred.sigma_phi     = sigma_phi
+        new_pred.decision      = Decision(dec_str)
+        results.append(new_pred)
+    return results
+
+
+# ── Uncertainty partition ─────────────────────────────────────────────────────
+
+def uncertainty_partition(
+    predictions: list[ADSSPrediction], cfg: dict
+) -> dict:
+    low, high = cfg.get("qbaf", {}).get("uncertainty_band", [0.45, 0.55])
+    certain   = [p for p in predictions
+                 if p.gold_label and not (low <= p.sigma_phi <= high)]
+    borderline = [p for p in predictions
+                  if p.gold_label and (low <= p.sigma_phi <= high)]
+
+    def acc(preds):
+        if not preds:
+            return 0.0
+        correct = sum(
+            (p.decision.value if p.decision != Decision.UNCERTAIN else "No") == p.gold_label
+            for p in preds
+        )
+        return correct / len(preds)
+
+    # Post-escalation: for borderline cases, if we "escalate" (abstain → No as default)
+    # measure how often the gold label was also No (conservative estimate)
+    post_esc_acc = acc(borderline)   # same as borderline acc in current implementation
+
+    # False certainty rate: wrong predictions OUTSIDE uncertainty band
+    wrong_certain = [p for p in certain
+                     if (p.decision.value if p.decision != Decision.UNCERTAIN else "No")
+                     != p.gold_label]
+    false_certainty_rate = len(wrong_certain) / len(certain) if certain else 0.0
+
+    return {
+        "certain_accuracy":        acc(certain),
+        "certain_share":           len(certain) / max(1, len(predictions)),
+        "borderline_accuracy":     acc(borderline),
+        "borderline_share":        len(borderline) / max(1, len(predictions)),
+        "post_escalation_acc":     post_esc_acc,
+        "false_certainty_rate":    false_certainty_rate,
+        "n_certain":               len(certain),
+        "n_borderline":            len(borderline),
+    }
+
+
+# ── Main ──────────────────────────────────────────────────────────────────────
+
+def main():
+    args = parse_args()
+    cfg  = load_config()
+    if args.max:
+        cfg.setdefault("dataset", {})["max_samples"] = args.max
+    cfg.setdefault("qbaf", {})["solver"] = args.solver
+    if args.backend:
+        cfg["backend"] = args.backend
+    setup_logging(cfg)
+    ensure_api_key(cfg)
+
+    logger  = logging.getLogger(__name__)
+    out_dir = Path(cfg.get("evaluation", {}).get("output_dir", "artifacts/evaluation"))
+    out_dir.mkdir(parents=True, exist_ok=True)
+
+    examples = load_examples(cfg.get("dataset", {}), split=args.split)
+    logger.info(f"Loaded {len(examples)} examples ({args.split}).")
+
+    # ── 1. Run Full ADSS ──────────────────────────────────────────────────────
+    logger.info("=" * 60)
+    logger.info("EXPERIMENT 1: Full ADSS")
+    pipeline   = ADSSPipeline(cfg)
+    adss_preds = pipeline.run_batch(examples)
+
+    r_full = evaluate_predictions(adss_preds, "full_adss", cfg, out_dir)
+    print_report(r_full)
+
+    # ── 2. Baselines ──────────────────────────────────────────────────────────
+    logger.info("EXPERIMENT 2: Baselines")
+    br = BaselineRunner(cfg)
+
+    logger.info("  Zero-shot CoT…")
+    cot_preds = [br.run_cot(ex) for ex in examples]
+    r_cot = evaluate_predictions(cot_preds, "zero_shot_cot", cfg, out_dir)
+    print_report(r_cot)
+
+    logger.info("  Few-shot…")
+    fs_preds = [br.run_few_shot(ex) for ex in examples]
+    r_fs = evaluate_predictions(fs_preds, "few_shot", cfg, out_dir)
+    print_report(r_fs)
+
+    logger.info("  ADSS without symbolic solver…")
+    no_sym_preds = []
+    for p in adss_preds:
+        sigma, dec = br.run_adss_no_symbolic(p.extraction, p.strengths)
+        no_sym_preds.append(p.model_copy(update={
+            "sigma_phi": sigma, "decision": dec, "solver_output": None
+        }))
+    r_nosym = evaluate_predictions(no_sym_preds, "adss_no_symbolic", cfg, out_dir)
+    print_report(r_nosym)
+
+    # ── 3. Ablations ──────────────────────────────────────────────────────────
+    logger.info("EXPERIMENT 3: Ablation study")
+
+    logger.info("  No relation extraction…")
+    no_rel_preds = run_no_relation_extraction(adss_preds, cfg)
+    r_norel = evaluate_predictions(no_rel_preds, "no_relation_extraction", cfg, out_dir)
+    print_report(r_norel)
+
+    logger.info("  No UAE…")
+    no_uae_preds = run_no_uae(adss_preds, cfg)
+    r_nouae = evaluate_predictions(no_uae_preds, "no_uae", cfg, out_dir)
+    print_report(r_nouae)
+
+    logger.info("  QE semantics solver…")
+    qe_preds = run_with_solver(adss_preds, cfg, "qe_semantics")
+    r_qe = evaluate_predictions(qe_preds, "qe_solver", cfg, out_dir)
+    print_report(r_qe)
+
+    logger.info("  DF-QuAD fallback solver…")
+    dfquad_preds = run_with_solver(adss_preds, cfg, "df_quad")
+    r_dfquad = evaluate_predictions(dfquad_preds, "dfquad_solver", cfg, out_dir)
+    print_report(r_dfquad)
+
+    # ── 4. Contestability ─────────────────────────────────────────────────────
+    logger.info("EXPERIMENT 4: Contestability")
+    solver = get_solver(cfg)
+
+    r_oracle = compute_contestability(adss_preds, solver, cfg, regime="oracle")
+    print_contestability(r_oracle)
+
+    r_conf = compute_contestability(adss_preds, solver, cfg, regime="confidence")
+    print_contestability(r_conf)
+
+    # Save contestability details
+    for r in [r_oracle, r_conf]:
+        with open(out_dir / f"contestability_{r.regime}.json", "w") as f:
+            json.dump({
+                "regime": r.regime, "dfr": r.dfr, "cfr": r.cfr,
+                "mec": r.mec, "ssm": r.ssm,
+                "n_total": r.n_total, "details": r.details,
+            }, f, indent=2)
+
+    # ── 5. Uncertainty partition ───────────────────────────────────────────────
+    logger.info("EXPERIMENT 5: Uncertainty evaluation")
+    uae_stats = uncertainty_partition(adss_preds, cfg)
+    print("\n  Uncertainty-Aware Evaluation")
+    for k, v in uae_stats.items():
+        print(f"    {k:35s}: {v:.4f}")
+    with open(out_dir / "uncertainty_eval.json", "w") as f:
+        json.dump(uae_stats, f, indent=2)
+
+    # ── 6. Robustness ─────────────────────────────────────────────────────────
+    if not args.skip_robustness:
+        logger.info("EXPERIMENT 6: Robustness (may take a while…)")
+        all_rob = []
+        for ptype in ["arg_removal", "relation_flip", "tau_noise", "low_conf_pruning"]:
+            rob = run_robustness(adss_preds, solver, cfg, perturbation=ptype)
+            print_robustness(rob)
+            all_rob.extend([
+                {"perturbation": r.perturbation, "p": r.p_level,
+                 "accuracy": r.accuracy, "macro_f1": r.macro_f1,
+                 "score_shift": r.mean_score_shift}
+                for r in rob
+            ])
+        with open(out_dir / "robustness.json", "w") as f:
+            json.dump(all_rob, f, indent=2)
+    else:
+        logger.info("Skipping robustness (--skip-robustness).")
+
+    # ── 7. Error analysis ─────────────────────────────────────────────────────
+    logger.info("EXPERIMENT 7: Error analysis")
+    error_props = analyse_errors(adss_preds, out_dir)
+    print_error_analysis(error_props)
+
+    # ── Summary CSV (for paper tables) ────────────────────────────────────────
+    summary_rows = [
+        flatten_report(r_cot),
+        flatten_report(r_fs),
+        flatten_report(r_nosym),
+        flatten_report(r_full),
+        flatten_report(r_norel),
+        flatten_report(r_nouae),
+        flatten_report(r_qe),
+        flatten_report(r_dfquad),
+    ]
+    summary_path = out_dir / "summary_all.csv"
+    with open(summary_path, "w", newline="") as f:
+        w = csv.DictWriter(f, fieldnames=list(summary_rows[0].keys()))
+        w.writeheader()
+        w.writerows(summary_rows)
+
+    # Contestability summary
+    with open(out_dir / "contestability_summary.csv", "w", newline="") as f:
+        w = csv.DictWriter(f, fieldnames=["regime","dfr","cfr","mec","ssm","n_total"])
+        w.writeheader()
+        for r in [r_oracle, r_conf]:
+            w.writerow({"regime": r.regime, "dfr": r.dfr, "cfr": r.cfr,
+                        "mec": r.mec, "ssm": r.ssm, "n_total": r.n_total})
+
+    logger.info(f"\nAll results saved to {out_dir}/")
+    logger.info("Files:")
+    for f in sorted(out_dir.glob("*.json")) + sorted(out_dir.glob("*.csv")):
+        logger.info(f"  {f.name}")
+
+
+if __name__ == "__main__":
+    main()
+
+
+===== FILE: C:\Users\nkaran\Dropbox\work account\Diplomatikes\diplo oiko2k\app\adss_hearsay\scripts\run_eval_full.py =====
+#!/usr/bin/env python3
+"""
+Full evaluation script for the research paper.
+Runs ALL experiments described in the paper:
+  1. Main results      (Table 1): 4 systems
+  2. Ablation          (Table 2): 7 variants
+  3. Contestability    (Table 3): DFR, CFR, MEC, SSM
+  4. Uncertainty eval  (Table 4): certain vs borderline
+  5. Robustness        (Figure ): perturbation curves
+  6. Error analysis    (Table 5): 4 error categories
+
+Usage:
+  python scripts/run_eval_full.py --split test --max 20 --skip-robustness
+  python scripts/run_eval_full.py --split test --max 20 --backend lmstudio
+"""
+from __future__ import annotations
+
+import argparse, csv, json, logging, sys, time
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).parent.parent))
+
+from src.utils.helpers import load_config, setup_logging, ensure_api_key, flatten_report
+from src.data.loader import load_examples
+from src.data.models import ADSSPrediction, Decision
+from src.pipeline.orchestrator import ADSSPipeline, BaselineRunner
+from src.qbaf.graph import build_qbaf
+from src.qbaf.solver import get_solver, make_decision
+from src.evaluation.evaluator import evaluate_predictions, print_report
+from src.evaluation.contestability import compute_contestability, print_contestability
+from src.evaluation.robustness import run_robustness, print_robustness
+from src.evaluation.error_analysis import analyse_errors, print_error_analysis
+
+
+def parse_args():
+    p = argparse.ArgumentParser()
+    p.add_argument("--split",  default="test")
+    p.add_argument("--max",    type=int, help="Limit samples (quick test)")
+    p.add_argument("--solver", default="df_quad")
+    p.add_argument("--backend", default=None, choices=["gemini", "lmstudio"])
+    p.add_argument("--delay",  type=float, default=2.0,
+                   help="Seconds to wait between LLM calls (default: 2.0). "
+                        "Increase to avoid rate-limiting on free-tier APIs.")
+    p.add_argument("--skip-robustness", action="store_true")
+    p.add_argument("--experiment", type=int, default=0,
+                   help="Run only one experiment (1-7). 0=all.")
+    return p.parse_args()
+
+
+# ── Rate-limited batch runner ─────────────────────────────────────────────────
+
+def run_batch_with_delay(pipeline, examples, delay: float, save: bool = True):
+    """Run pipeline one case at a time with a delay between calls."""
+    results = []
+    for i, ex in enumerate(examples):
+        try:
+            pred = pipeline.run_case(ex, save_artifacts=save)
+        except Exception as e:
+            logging.getLogger(__name__).error(f"[{ex.case_id}] Error: {e}")
+            from src.data.models import ExtractionResult
+            pred = ADSSPrediction(
+                case_id=ex.case_id, input_text=ex.text, gold_label=ex.label,
+                extraction=ExtractionResult(case_id=ex.case_id, input_text=ex.text,
+                                            parse_error=str(e)),
+                sigma_phi=0.5, decision=Decision.UNCERTAIN,
+            )
+        results.append(pred)
+        if delay > 0 and i < len(examples) - 1:
+            time.sleep(delay)
+    return results
+
+
+# ── Ablation helpers ──────────────────────────────────────────────────────────
+
+def run_no_relation_extraction(adss_preds, cfg):
+    from src.data.models import SolverType
+    solver  = get_solver(cfg)
+    phi_tau = cfg.get("qbaf", {}).get("phi_initial_strength", 0.5)
+    stype   = SolverType(cfg.get("qbaf", {}).get("solver", "df_quad"))
+    results = []
+    for pred in adss_preds:
+        new = pred.model_copy(deep=True)
+        graph = build_qbaf(pred.extraction, pred.strengths, phi_tau, stype)
+        graph.edges = [e for e in graph.edges if e.target == "phi"]
+        solver_out  = solver.solve(graph, pred.case_id)
+        sigma_phi   = solver_out.sigma_phi
+        dec_str, _  = make_decision(sigma_phi, cfg)
+        new.solver_output = solver_out
+        new.sigma_phi     = sigma_phi
+        new.decision      = Decision(dec_str)
+        results.append(new)
+    return results
+
+
+def run_no_uae(adss_preds, cfg):
+    threshold = cfg.get("qbaf", {}).get("decision_threshold", 0.5)
+    results = []
+    for pred in adss_preds:
+        new = pred.model_copy(deep=True)
+        new.decision = Decision.YES if pred.sigma_phi >= threshold else Decision.NO
+        new.uncertainty.is_uncertain = False
+        results.append(new)
+    return results
+
+
+def run_with_solver(adss_preds, cfg, solver_name):
+    from src.data.models import SolverType
+    cfg2    = {**cfg, "qbaf": {**cfg.get("qbaf", {}), "solver": solver_name}}
+    solver  = get_solver(cfg2)
+    phi_tau = cfg2.get("qbaf", {}).get("phi_initial_strength", 0.5)
+    stype   = SolverType(solver_name)
+    results = []
+    for pred in adss_preds:
+        new = pred.model_copy(deep=True)
+        if pred.solver_output is None:
+            results.append(new); continue
+        graph      = build_qbaf(pred.extraction, pred.strengths, phi_tau, stype)
+        solver_out = solver.solve(graph, pred.case_id)
+        sigma_phi  = solver_out.sigma_phi
+        dec_str, _ = make_decision(sigma_phi, cfg2)
+        new.solver_output = solver_out
+        new.sigma_phi     = sigma_phi
+        new.decision      = Decision(dec_str)
+        results.append(new)
+    return results
+
+
+def uncertainty_partition(predictions, cfg):
+    low, high = cfg.get("qbaf", {}).get("uncertainty_band", [0.45, 0.55])
+    certain    = [p for p in predictions if p.gold_label and not (low <= p.sigma_phi <= high)]
+    borderline = [p for p in predictions if p.gold_label and (low <= p.sigma_phi <= high)]
+
+    def acc(preds):
+        if not preds: return 0.0
+        return sum(
+            (p.decision.value if p.decision != Decision.UNCERTAIN else "No") == p.gold_label
+            for p in preds
+        ) / len(preds)
+
+    wrong_certain = [p for p in certain
+                     if (p.decision.value if p.decision != Decision.UNCERTAIN else "No")
+                     != p.gold_label]
+    return {
+        "certain_accuracy":     acc(certain),
+        "certain_share":        len(certain) / max(1, len(predictions)),
+        "borderline_accuracy":  acc(borderline),
+        "borderline_share":     len(borderline) / max(1, len(predictions)),
+        "post_escalation_acc":  acc(borderline),
+        "false_certainty_rate": len(wrong_certain) / max(1, len(certain)),
+        "n_certain":            len(certain),
+        "n_borderline":         len(borderline),
+    }
+
+
+# ── Main ──────────────────────────────────────────────────────────────────────
+
+def main():
+    args = parse_args()
+    cfg  = load_config()
+    if args.max:
+        cfg.setdefault("dataset", {})["max_samples"] = args.max
+    cfg.setdefault("qbaf", {})["solver"] = args.solver
+    if args.backend:
+        cfg["backend"] = args.backend
+    setup_logging(cfg)
+    ensure_api_key(cfg)
+
+    logger  = logging.getLogger(__name__)
+    out_dir = Path(cfg.get("evaluation", {}).get("output_dir", "artifacts/evaluation"))
+    out_dir.mkdir(parents=True, exist_ok=True)
+    delay   = args.delay
+
+    backend = cfg.get("backend", "gemini")
+    if backend == "gemini" and delay < 2.0:
+        logger.warning(
+            "Gemini free tier allows only ~20 requests/day. "
+            "Consider --delay 3 to avoid rate limiting."
+        )
+
+    examples = load_examples(cfg.get("dataset", {}), split=args.split)
+    logger.info(f"Loaded {len(examples)} examples ({args.split}).")
+
+    run_all = args.experiment == 0
+    adss_preds = None  # populated in exp 1
+
+    # ── 1. Full ADSS ──────────────────────────────────────────────────────────
+    if run_all or args.experiment == 1:
+        logger.info("=" * 60)
+        logger.info("EXPERIMENT 1: Full ADSS")
+        pipeline   = ADSSPipeline(cfg)
+        adss_preds = run_batch_with_delay(pipeline, examples, delay)
+        r_full = evaluate_predictions(adss_preds, "full_adss", cfg, out_dir)
+        print_report(r_full)
+
+    # Load cached predictions if skipping exp 1
+    if adss_preds is None:
+        logger.error("No ADSS predictions — run experiment 1 first (omit --experiment flag).")
+        return
+
+    # ── 2. Baselines ──────────────────────────────────────────────────────────
+    if run_all or args.experiment == 2:
+        logger.info("EXPERIMENT 2: Baselines")
+        br = BaselineRunner(cfg)
+
+        logger.info("  Zero-shot CoT…")
+        cot_preds = []
+        for i, ex in enumerate(examples):
+            try:
+                cot_preds.append(br.run_cot(ex))
+            except Exception as e:
+                logger.error(f"CoT failed [{ex.case_id}]: {e}")
+                from src.data.models import BaselinePrediction
+                cot_preds.append(BaselinePrediction(
+                    case_id=ex.case_id, baseline_name="zero_shot_cot",
+                    decision=Decision.NO, raw_response="", gold_label=ex.label,
+                ))
+            if delay > 0 and i < len(examples) - 1:
+                time.sleep(delay)
+        r_cot = evaluate_predictions(cot_preds, "zero_shot_cot", cfg, out_dir)
+        print_report(r_cot)
+
+        logger.info("  Few-shot…")
+        fs_preds = []
+        for i, ex in enumerate(examples):
+            try:
+                fs_preds.append(br.run_few_shot(ex))
+            except Exception as e:
+                logger.error(f"Few-shot failed [{ex.case_id}]: {e}")
+                from src.data.models import BaselinePrediction
+                fs_preds.append(BaselinePrediction(
+                    case_id=ex.case_id, baseline_name="few_shot",
+                    decision=Decision.NO, raw_response="", gold_label=ex.label,
+                ))
+            if delay > 0 and i < len(examples) - 1:
+                time.sleep(delay)
+        r_fs = evaluate_predictions(fs_preds, "few_shot", cfg, out_dir)
+        print_report(r_fs)
+
+        logger.info("  ADSS without symbolic solver…")
+        no_sym = []
+        for p in adss_preds:
+            sigma, dec = br.run_adss_no_symbolic(p.extraction, p.strengths)
+            no_sym.append(p.model_copy(update={
+                "sigma_phi": sigma, "decision": dec, "solver_output": None
+            }))
+        r_nosym = evaluate_predictions(no_sym, "adss_no_symbolic", cfg, out_dir)
+        print_report(r_nosym)
+
+    # ── 3. Ablations ──────────────────────────────────────────────────────────
+    if run_all or args.experiment == 3:
+        logger.info("EXPERIMENT 3: Ablation study")
+        no_rel  = run_no_relation_extraction(adss_preds, cfg)
+        r_norel = evaluate_predictions(no_rel, "no_relation_extraction", cfg, out_dir)
+        print_report(r_norel)
+
+        no_uae  = run_no_uae(adss_preds, cfg)
+        r_nouae = evaluate_predictions(no_uae, "no_uae", cfg, out_dir)
+        print_report(r_nouae)
+
+        qe_preds    = run_with_solver(adss_preds, cfg, "qe_semantics")
+        r_qe        = evaluate_predictions(qe_preds, "qe_solver", cfg, out_dir)
+        print_report(r_qe)
+
+        dfq_preds   = run_with_solver(adss_preds, cfg, "df_quad")
+        r_dfquad    = evaluate_predictions(dfq_preds, "dfquad_solver", cfg, out_dir)
+        print_report(r_dfquad)
+
+    # ── 4. Contestability ─────────────────────────────────────────────────────
+    if run_all or args.experiment == 4:
+        logger.info("EXPERIMENT 4: Contestability")
+        solver   = get_solver(cfg)
+        r_oracle = compute_contestability(adss_preds, solver, cfg, regime="oracle")
+        print_contestability(r_oracle)
+        r_conf   = compute_contestability(adss_preds, solver, cfg, regime="confidence")
+        print_contestability(r_conf)
+        for r in [r_oracle, r_conf]:
+            with open(out_dir / f"contestability_{r.regime}.json", "w", encoding="utf-8") as f:
+                json.dump({"regime": r.regime, "dfr": r.dfr, "cfr": r.cfr,
+                           "mec": r.mec, "ssm": r.ssm,
+                           "n_total": r.n_total, "details": r.details}, f, indent=2)
+
+    # ── 5. Uncertainty ────────────────────────────────────────────────────────
+    if run_all or args.experiment == 5:
+        logger.info("EXPERIMENT 5: Uncertainty evaluation")
+        uae_stats = uncertainty_partition(adss_preds, cfg)
+        print("\n  Uncertainty-Aware Evaluation")
+        for k, v in uae_stats.items():
+            print(f"    {k:35s}: {v:.4f}")
+        with open(out_dir / "uncertainty_eval.json", "w", encoding="utf-8") as f:
+            json.dump(uae_stats, f, indent=2)
+
+    # ── 6. Robustness ─────────────────────────────────────────────────────────
+    if (run_all or args.experiment == 6) and not args.skip_robustness:
+        logger.info("EXPERIMENT 6: Robustness")
+        solver  = get_solver(cfg)
+        all_rob = []
+        for ptype in ["arg_removal", "relation_flip", "tau_noise", "low_conf_pruning"]:
+            rob = run_robustness(adss_preds, solver, cfg, perturbation=ptype)
+            print_robustness(rob)
+            all_rob.extend([{"perturbation": r.perturbation, "p": r.p_level,
+                             "accuracy": r.accuracy, "macro_f1": r.macro_f1,
+                             "score_shift": r.mean_score_shift} for r in rob])
+        with open(out_dir / "robustness.json", "w", encoding="utf-8") as f:
+            json.dump(all_rob, f, indent=2)
+
+    # ── 7. Error analysis ─────────────────────────────────────────────────────
+    if run_all or args.experiment == 7:
+        logger.info("EXPERIMENT 7: Error analysis")
+        props = analyse_errors(adss_preds, out_dir)
+        print_error_analysis(props)
+
+    # ── Summary CSV ───────────────────────────────────────────────────────────
+    if run_all:
+        rows = []
+        for name in ["full_adss", "zero_shot_cot", "few_shot", "adss_no_symbolic",
+                     "no_relation_extraction", "no_uae", "qe_solver", "dfquad_solver"]:
+            rfile = out_dir / f"{name}_report.json"
+            if rfile.exists():
+                d = json.loads(rfile.read_text(encoding="utf-8"))
+                rows.append({"system": name,
+                             "accuracy": d["accuracy"], "macro_f1": d["macro_f1"],
+                             "n": d["n_samples"]})
+        if rows:
+            with open(out_dir / "summary_all.csv", "w", newline="", encoding="utf-8") as f:
+                w = csv.DictWriter(f, fieldnames=list(rows[0].keys()))
+                w.writeheader(); w.writerows(rows)
+
+        # Contestability summary
+        c_rows = []
+        for regime in ["oracle", "confidence"]:
+            cf = out_dir / f"contestability_{regime}.json"
+            if cf.exists():
+                d = json.loads(cf.read_text(encoding="utf-8"))
+                c_rows.append({k: d[k] for k in ["regime","dfr","cfr","mec","ssm","n_total"]})
+        if c_rows:
+            with open(out_dir / "contestability_summary.csv", "w", newline="", encoding="utf-8") as f:
+                w = csv.DictWriter(f, fieldnames=list(c_rows[0].keys()))
+                w.writeheader(); w.writerows(c_rows)
+
+    logger.info(f"\nAll results saved to {out_dir}/")
+
+
+if __name__ == "__main__":
+    main()
+
+
+===== FILE: C:\Users\nkaran\Dropbox\work account\Diplomatikes\diplo oiko2k\app\adss_hearsay\src\dashboard\app.py =====
+"""
+Module D: HITL Contestability Dashboard — Generic Decision Support.
+Run:  streamlit run src/dashboard/app.py
+"""
+from __future__ import annotations
+
+import logging
+import sys
+from pathlib import Path
+
+sys.path.insert(0, str(Path(__file__).parent.parent.parent))
+
+import streamlit as st
+
+st.set_page_config(
+    page_title="ADSS – Decision Support",
+    page_icon="⚖️",
+    layout="wide",
+)
+
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
+
+_DEFAULT_DECISION = "Is the statement described in this narrative hearsay under FRE 801(c)?"
+
+DECISION_PRESETS = {
+    "Hearsay (FRE 801c)":       "Is the statement described in this narrative hearsay under FRE 801(c)?",
+    "Criminal guilt":           "Is the defendant guilty of the charged offence?",
+    "Contract breach":          "Did the defendant breach the contract?",
+    "Medical — surgery needed": "Should the patient undergo surgery?",
+    "Custom…":                  "",
+}
+
+
+@st.cache_resource
+def _base_cfg():
+    from src.utils.helpers import load_config
+    return load_config()
+
+
+def _render_graph(graph) -> str:
+    try:
+        from pyvis.network import Network  # type: ignore
+        net = Network(height="420px", width="100%", directed=True,
+                      bgcolor="#0e1117", font_color="#ffffff")
+        for nid, node in graph.nodes.items():
+            color = "#FFD700" if node.is_claim else (
+                "#28a745" if node.sigma >= 0.5 else "#dc3545"
+            )
+            net.add_node(nid,
+                         label=f"{nid}\nτ={node.tau:.2f} σ={node.sigma:.2f}",
+                         title=node.text, color=color,
+                         shape="star" if node.is_claim else "dot", size=20)
+        for e in graph.edges:
+            net.add_edge(e.source, e.target,
+                         color="#00ff88" if e.type.value == "support" else "#ff4444",
+                         title=e.type.value, arrows="to", width=2)
+        return net.generate_html()
+    except ImportError:
+        lines = ["**Graph (install pyvis for visual rendering):**"]
+        for e in graph.edges:
+            lines.append(f"  {e.source} "
+                         f"{'→(+)' if e.type.value=='support' else '→(-)'} {e.target}")
+        return "\n".join(lines)
+
+
+def _show_graph(html: str) -> None:
+    if html.strip().startswith("<"):
+        st.components.v1.html(html, height=450)
+    else:
+        st.markdown(html)
+
+
+def _decision_badge(val: str, sigma: float, claim_text: str = "") -> None:
+    color = {"Yes": "#28a745", "No": "#dc3545", "UNCERTAIN": "#FFA500"}.get(val, "#888")
+    claim_line = (
+        f"<p style='text-align:center;font-size:0.85rem;opacity:0.8;margin-top:4px'>"
+        f"φ: {claim_text[:80]}{'…' if len(claim_text)>80 else ''}</p>"
+    ) if claim_text else ""
+    st.markdown(
+        f"<div style='background:{color};padding:14px 24px;border-radius:10px;"
+        f"text-align:center;font-size:1.6rem;font-weight:bold;color:white;"
+        f"letter-spacing:2px'>{val}</div>"
+        f"<p style='text-align:center;margin-top:6px'>σ(φ) = {sigma:.4f}</p>"
+        f"{claim_line}",
+        unsafe_allow_html=True,
+    )
+
+
+def _auto_extract_phi(narrative: str, cfg: dict) -> str:
+    """Ask the LLM to identify the central yes/no decision question from the narrative."""
+    import src.utils.llm_client as _llm
+    prompt = (
+        "Read the following case summary and write one yes/no question that captures "
+        "the central decision to be made. Examples: "
+        "'Is the defendant liable for breach of contract?' or "
+        "'Is the plaintiff entitled to compensation?' or "
+        "'Is the statement hearsay under FRE 801(c)?'\n\n"
+        "Return ONLY the question — no explanation, no preamble, nothing else.\n\n"
+        f"Case summary:\n{narrative[:1500]}"
+    )
+    # Use the full configured token budget (Qwen3 needs room for reasoning + answer).
+    backend = cfg.get("backend", "gemini")
+    if backend == "lmstudio":
+        max_tok = cfg.get("lmstudio", {}).get("max_tokens", 7000)
+    else:
+        max_tok = min(cfg.get("gemini", {}).get("max_tokens", 4096), 1024)
+
+    try:
+        result = _llm.call_llm(prompt, cfg, max_tokens=max_tok)
+        logger.info(f"Auto-extract raw response (first 200 chars): {result[:200]!r}")
+
+        if not result or not result.strip():
+            logger.warning(
+                "Auto-extract returned empty response. "
+                "Gemini may have filtered it or the model returned no text. "
+                "Falling back to default decision problem."
+            )
+            return _DEFAULT_DECISION
+
+        # Take first non-empty line that contains a question mark
+        for line in result.strip().splitlines():
+            q = line.strip().strip('"').strip("'").strip()
+            if q and "?" in q:
+                return q
+        # Fallback: first non-empty line even without ?
+        for line in result.strip().splitlines():
+            q = line.strip().strip('"').strip("'").strip()
+            if len(q) > 10:   # ignore single-word noise
+                return q if q.endswith("?") else q + "?"
+        return _DEFAULT_DECISION
+    except Exception as e:
+        logger.error(f"Auto-extract phi failed: {e}")
+        return _DEFAULT_DECISION
+
+
+def main():
+    import src.utils.gemini_client as _gc
+    import src.utils.llm_client as _llm_mod
+
+    if "cfg" not in st.session_state:
+        st.session_state["cfg"] = dict(_base_cfg())
+    cfg = st.session_state["cfg"]
+
+    st.title("⚖️ ADSS — Argumentative Decision Support System")
+    st.caption("Neuro-Symbolic HITL · Generic Decision Problems · 1 LLM call per case")
+
+    # ── Sidebar ───────────────────────────────────────────────────────────────
+    with st.sidebar:
+        st.header("⚙️ Settings")
+
+        st.subheader("🔌 Backend")
+        backend = st.radio(
+            "LLM backend", ["gemini", "lmstudio"],
+            index=0 if cfg.get("backend", "gemini") == "gemini" else 1,
+            horizontal=True,
+        )
+        cfg["backend"] = backend
+
+        if backend == "gemini":
+            st.subheader("🔑 Gemini API Key")
+            active_key = _gc.get_active_key()
+            st.markdown(f"**Active key:** `{_gc.masked_key(active_key)}`")
+            if active_key:
+                st.success("Key is set ✅")
+            else:
+                st.error("No key ❌")
+            with st.expander("Paste / change key", expanded=not bool(active_key)):
+                pasted = st.text_input("API key", type="password",
+                                       placeholder="AIzaSy…", key="key_input")
+                if st.button("Apply key", key="apply_key_btn"):
+                    if pasted.strip():
+                        _gc.set_runtime_key(pasted.strip())
+                        st.success(f"Key set: {_gc.masked_key(pasted.strip())}")
+                        st.rerun()
+                    else:
+                        st.warning("Enter a key first.")
+
+            st.subheader("🤖 Gemini model")
+            model_opts = ["gemini-2.5-flash", "gemini-2.5-pro",
+                          "gemini-2.0-flash", "gemini-1.5-flash"]
+            cur    = cfg.get("gemini", {}).get("model", "gemini-2.5-flash")
+            chosen = st.selectbox("Model", model_opts,
+                                  index=model_opts.index(cur) if cur in model_opts else 0)
+            cfg.setdefault("gemini", {})["model"] = chosen
+            st.caption(
+                "Free tier: 2.5-flash  |  Paid: 2.5-pro\n"
+                "Tip: if 2.5-flash returns empty responses, switch to "
+                "**gemini-2.0-flash** (not a thinking model → more reliable "
+                "for short structured tasks like auto-extract)."
+            )
+
+        else:
+            st.subheader("🖥️ LM Studio")
+            st.info("Make sure LM Studio is running with a model loaded.")
+            lscfg = cfg.setdefault("lmstudio", {})
+            lscfg["base_url"] = st.text_input(
+                "Base URL", value=lscfg.get("base_url", "http://127.0.0.1:1234/v1"))
+            lscfg["model"] = st.text_input(
+                "Model name", value=lscfg.get("model", "qwen/qwen3.6-35b-a3b"),
+                help="Must match exactly the model loaded in LM Studio")
+
+            st.markdown("**🧠 Thinking mode**")
+            thinking_choice = st.radio(
+                "Qwen3 reasoning",
+                ["Off (faster, ~1-2 min)", "On (slower, ~4-6 min, needs 8192 ctx)"],
+                index=0 if lscfg.get("disable_thinking", True) else 1,
+            )
+            lscfg["disable_thinking"] = thinking_choice.startswith("Off")
+            if not lscfg["disable_thinking"]:
+                st.warning(
+                    "⚠️ Thinking ON: Qwen3 may contradict its own reasoning in JSON. "
+                    "Thinking OFF recommended. Use context ≥ 8192 if ON."
+                )
+            st.caption("No API key needed for local models.")
+
+            st.divider()
+            st.markdown("**⚙️ Token Budget**")
+            ctx_size = st.selectbox(
+                "LM Studio context length",
+                [4096, 8192, 16384, 32768, 65536, 131072, 262144], index=6)
+            recommended = max(1000, ctx_size - 700 - 500)
+            lscfg["max_tokens"] = st.slider(
+                "max_tokens", 1000, ctx_size - 500,
+                min(recommended, lscfg.get("max_tokens", 7000)), 256)
+            answer_budget = lscfg["max_tokens"] - 3400
+            if answer_budget < 600:
+                st.error(f"⚠️ Only ~{answer_budget} tokens for answer. Increase context.")
+            elif answer_budget < 1200:
+                st.warning(f"~{answer_budget} tokens for answer. May truncate.")
+            else:
+                st.success(f"~{answer_budget} tokens for answer ✅")
+
+            if st.button("🔗 Test connection"):
+                try:
+                    from src.utils.lmstudio_client import call_lmstudio
+                    r = call_lmstudio(
+                        "Reply with exactly one word: OK",
+                        model=lscfg["model"], max_tokens=50,
+                        base_url=lscfg["base_url"],
+                        disable_thinking=lscfg.get("disable_thinking", True),
+                    )
+                    st.success(f"Connected ✅ — {r.strip()[:40]}")
+                except Exception as e:
+                    st.error(f"Connection failed: {e}")
+
+        st.divider()
+        st.subheader("🧮 Solver")
+        solver    = st.selectbox("Semantics", ["df_quad", "qe_semantics"])
+        threshold = st.slider("Decision threshold σ(φ)", 0.0, 1.0, 0.5, 0.01)
+        ub_lo     = st.slider("Uncertainty band low",  0.0, 0.5, 0.45, 0.01)
+        ub_hi     = st.slider("Uncertainty band high", 0.5, 1.0, 0.55, 0.01)
+        max_args  = st.slider("Max arguments", 2, 10,
+                              cfg.get("mining", {}).get("max_arguments", 6))
+        cfg.setdefault("qbaf", {}).update({
+            "solver": solver, "decision_threshold": threshold,
+            "uncertainty_band": [ub_lo, ub_hi],
+        })
+        cfg.setdefault("mining", {})["max_arguments"] = max_args
+        from src.qbaf.solver import get_solver
+        st.caption(f"Backend: **{_llm_mod.backend_label(cfg)}**")
+
+    # ── Input — narrative FIRST, then phi ─────────────────────────────────────
+    st.header("1 · Case Input")
+
+    narrative = st.text_area(
+        "Case narrative:",
+        value=(
+            "At trial for fraud, Officer Reyes testified that the victim told him "
+            "over the phone: 'I transferred the money as instructed by my advisor.' "
+            "The statement is offered to prove the advisor gave the instruction."
+        ),
+        height=160,
+        key="narrative_input",
+    )
+    case_id = st.text_input("Case ID", value="case_001")
+
+    st.divider()
+    st.markdown("**Decision problem (φ) — what yes/no question should the system answer?**")
+
+    preset = st.selectbox(
+        "Preset",
+        list(DECISION_PRESETS.keys()),
+        key="preset_sel",
+    )
+
+    # Session-state key ensures value persists across reruns
+    if "phi_text" not in st.session_state:
+        st.session_state["phi_text"] = DECISION_PRESETS.get(preset, "")
+
+    # When preset changes (and is not Custom), sync the text box
+    if preset != "Custom…":
+        st.session_state["phi_text"] = DECISION_PRESETS[preset]
+
+    phi_col, btn_col = st.columns([4, 1])
+    with phi_col:
+        decision_problem = st.text_input(
+            "Decision problem:",
+            value=st.session_state["phi_text"],
+            placeholder="e.g. Is the defendant liable for breach of contract?",
+            key="phi_input",
+        )
+        # Keep session state in sync with manual edits
+        st.session_state["phi_text"] = decision_problem
+
+    with btn_col:
+        st.markdown("<br>", unsafe_allow_html=True)  # vertical align
+        auto_btn = st.button(
+            "🤖 Auto-extract",
+            help="Let the LLM read the narrative and suggest the decision question.",
+            disabled=not narrative.strip(),
+            key="auto_phi_btn",
+        )
+
+    if auto_btn and narrative.strip():
+        with st.spinner("Extracting decision problem from narrative…"):
+            suggested = _auto_extract_phi(narrative, cfg)
+        st.session_state["phi_text"] = suggested
+        st.info(f"Suggested φ: **{suggested}**")
+        st.rerun()
+
+    ready = (backend == "lmstudio") or bool(_gc.get_active_key())
+    can_run = ready and bool(decision_problem.strip()) and bool(narrative.strip())
+
+    c1, c2 = st.columns([2, 1])
+    with c1:
+        run = st.button("🔍  Analyse Case  (1 API call)",
+                        type="primary", disabled=not can_run)
+    with c2:
+        if st.button("🗑️  Clear"):
+            st.session_state.pop("pred", None)
+            st.rerun()
+
+    if not ready:
+        st.warning("⬅️ Set your API key or switch to LM Studio in the sidebar.")
+    elif not decision_problem.strip():
+        st.warning("Enter a decision problem above, or click **🤖 Auto-extract**.")
+
+    if "pred" not in st.session_state:
+        st.session_state["pred"] = None
+
+    if run and can_run:
+        from src.data.models import HearsayExample
+        from src.pipeline.orchestrator import ADSSPipeline
+
+        # Store phi alongside pred so display is always consistent
+        st.session_state["last_phi"] = decision_problem.strip()
+
+        ex = HearsayExample(
+            case_id=case_id,
+            text=narrative,
+            split="demo",
+            decision_problem=decision_problem.strip(),
+        )
+        pipeline = ADSSPipeline(cfg)
+        pipeline.solver = get_solver(cfg)
+        with st.spinner(f"Running via **{_llm_mod.backend_label(cfg)}**…"):
+            try:
+                st.session_state["pred"] = pipeline.run_case(ex, save_artifacts=False)
+            except Exception as e:
+                err = str(e)
+                if "ContextTooSmallError" in type(e).__name__ or "Context window overflow" in err:
+                    st.error(
+                        "**Context window too small.**\n\n"
+                        "LM Studio: load model → ⚙️ gear → Context Length → 8192 → Apply.\n\n"
+                        f"Detail: {err[:200]}"
+                    )
+                elif "RESOURCE_EXHAUSTED" in err or "429" in err:
+                    st.error("**Rate limit (429).** Try another model or wait.")
+                elif "503" in err or "UNAVAILABLE" in err:
+                    st.error("**Server busy (503).** Try again in a moment.")
+                elif "Connection" in err or "refused" in err:
+                    st.error("**LM Studio not reachable.** Check it is running.")
+                else:
+                    st.error(f"Error: {e}")
+
+    pred = st.session_state.get("pred")
+    if pred is None:
+        return
+
+    # Use stored phi (from when analysis was run) — not current input state
+    stored_phi = st.session_state.get("last_phi", decision_problem)
+    # Use stored phi when claim text is empty or a generic default
+    _generic = {"The central claim", "The statement is hearsay under FRE 801(c)"}
+    claim_text = (
+        pred.extraction.claim.text
+        if pred.extraction.claim and pred.extraction.claim.text not in _generic
+        else stored_phi
+    )
+
+    # ── About ────────────────────────────────────────────────────────────────
+    with st.expander("ℹ️ About this analysis", expanded=False):
+        st.markdown(
+            f"**Decision problem (φ):**\n> *{claim_text}*\n\n"
+            "**How it works:** arguments extracted from the narrative are classified "
+            "as *supporting* or *attacking* φ, scored τ ∈ [0.1,1], propagated through "
+            "a QBAF graph, and the final dialectical strength σ(φ) determines:\n"
+            f"- **Yes** → σ(φ) ≥ {threshold:.2f}\n"
+            f"- **No** → σ(φ) < {threshold:.2f}\n"
+            f"- **UNCERTAIN** → σ(φ) ∈ [{ub_lo:.2f}, {ub_hi:.2f}]\n\n"
+            "*Neutral arguments (irrelevant to φ) are excluded from the graph.*"
+        )
+
+    # ── Decision ──────────────────────────────────────────────────────────────
+    st.header("2 · Decision")
+    d_col, w_col = st.columns([1, 2])
+    with d_col:
+        _decision_badge(pred.decision.value, pred.sigma_phi, claim_text)
+    with w_col:
+        if pred.uncertainty.is_uncertain:
+            st.warning(
+                f"⚠️ **UNCERTAIN** — σ(φ) = {pred.sigma_phi:.4f} ∈ "
+                f"[{ub_lo:.2f}, {ub_hi:.2f}]. Human review recommended."
+            )
+        if pred.pre_hitl_decision:
+            st.info(f"Pre-HITL decision: **{pred.pre_hitl_decision.value}**")
+
+    # ── Arguments ─────────────────────────────────────────────────────────────
+    st.header("3 · Extracted Arguments")
+    n_raw  = pred.extraction.n_raw_arguments
+    n_kept = len(pred.extraction.arguments)
+    n_neut = max(0, n_raw - n_kept)
+
+    if n_neut > 0 and n_kept == 0:
+        st.info(
+            f"ℹ️ The model found **{n_raw} argument(s)** but classified all as "
+            "**neutral** with respect to the decision problem.\n\n"
+            f"Decision problem asked: *{claim_text}*\n\n"
+            "This usually means the narrative does not directly address that question. "
+            "Try rephrasing φ or clicking **🤖 Auto-extract** to let the LLM suggest "
+            "a better question."
+        )
+    elif n_neut > 0:
+        st.info(
+            f"ℹ️ {n_neut} of {n_raw} argument(s) were neutral and excluded from the graph."
+        )
+
+    if not pred.extraction.arguments:
+        if pred.extraction.parse_error:
+            st.error(f"Parse error: {pred.extraction.parse_error[:400]}")
+        with st.expander("🔍 Raw LLM response", expanded=True):
+            raw = pred.extraction.raw_llm_response
+            st.text_area("Raw output:", value=raw[:3000] if raw else "(empty)", height=200)
+    else:
+        sigma_map = pred.solver_output.sigma_all if pred.solver_output else {}
+        tau_map   = {s.argument_id: s.tau for s in pred.strengths}
+        st.dataframe([{
+            "ID": a.id, "Stance": a.stance_to_claim.value,
+            "τ": round(tau_map.get(a.id, a.confidence), 3),
+            "σ": round(sigma_map.get(a.id, 0.0), 3),
+            "Rule": a.legal_rule,
+            "Text": (a.text[:90] + "…") if len(a.text) > 90 else a.text,
+        } for a in pred.extraction.arguments], use_container_width=True)
+
+    # ── Graph ─────────────────────────────────────────────────────────────────
+    st.header("4 · QBAF Graph")
+    if pred.solver_output:
+        _show_graph(_render_graph(pred.solver_output.graph))
+
+    # ── HITL ──────────────────────────────────────────────────────────────────
+    st.header("5 · Human-in-the-Loop Interventions")
+    if not pred.solver_output:
+        st.info("No solver output — no arguments were extracted.")
+        return
+
+    from src.pipeline.orchestrator import ADSSPipeline as _P
+    pipeline_hitl        = _P(cfg)
+    pipeline_hitl.solver = get_solver(cfg)
+    graph   = pred.solver_output.graph
+    non_phi = [nid for nid in graph.nodes if nid != "phi"]
+
+    t1, t2, t3 = st.tabs(["Edit τ (strength)", "Edit Edges", "Add Edge"])
+
+    with t1:
+        if not non_phi:
+            st.info("No argument nodes to edit.")
+        else:
+            sel  = st.selectbox("Argument node", non_phi, key="tau_sel")
+            cur  = graph.nodes[sel].tau
+            nval = st.slider(f"New τ for **{sel}**",
+                             0.1, 1.0, float(round(cur, 2)), 0.05, key="tau_sl")
+            if st.button("Apply τ change"):
+                from src.data.models import HITLIntervention
+                pred = pipeline_hitl.apply_hitl_intervention(pred, HITLIntervention(
+                    intervention_type="edit_tau", target_id=sel,
+                    old_value=cur, new_value=nval,
+                ))
+                st.session_state["pred"] = pred
+                st.success(f"τ({sel})={nval:.2f} → σ(φ)={pred.sigma_phi:.4f} → {pred.decision.value}")
+                st.rerun()
+
+    with t2:
+        edge_opts = [f"{e.source}→{e.target} [{e.type.value}]" for e in graph.edges]
+        if not edge_opts:
+            st.info("No edges in graph.")
+        else:
+            sel_e = st.selectbox("Edge", edge_opts, key="edge_sel")
+            ekey  = sel_e.split(" ")[0]
+            c1, c2 = st.columns(2)
+            with c1:
+                if st.button("🔀 Flip support↔attack"):
+                    from src.data.models import HITLIntervention
+                    pred = pipeline_hitl.apply_hitl_intervention(pred, HITLIntervention(
+                        intervention_type="flip_edge", target_id=ekey,
+                        old_value=None, new_value=None,
+                    ))
+                    st.session_state["pred"] = pred
+                    st.success(f"Flipped → {pred.decision.value}")
+                    st.rerun()
+            with c2:
+                if st.button("🗑️ Delete edge"):
+                    from src.data.models import HITLIntervention
+                    pred = pipeline_hitl.apply_hitl_intervention(pred, HITLIntervention(
+                        intervention_type="delete_edge", target_id=ekey,
+                        old_value=None, new_value=None,
+                    ))
+                    st.session_state["pred"] = pred
+                    st.success(f"Deleted → {pred.decision.value}")
+                    st.rerun()
+
+    with t3:
+        all_ids  = list(graph.nodes.keys())
+        new_src  = st.selectbox("Source", all_ids, key="ns")
+        new_tgt  = st.selectbox("Target", all_ids, key="nt")
+        new_type = st.selectbox("Type", ["support", "attack"], key="ntype")
+        if st.button("➕ Add edge"):
+            from src.data.models import HITLIntervention
+            pred = pipeline_hitl.apply_hitl_intervention(pred, HITLIntervention(
+                intervention_type="add_edge",
+                target_id=f"{new_src}→{new_tgt}",
+                old_value=None,
+                new_value={"source": new_src, "target": new_tgt,
+                           "type": new_type, "confidence": 1.0},
+            ))
+            st.session_state["pred"] = pred
+            st.success(f"Added {new_src}→{new_tgt} [{new_type}] → {pred.decision.value}")
+            st.rerun()
+
+    # ── Intervention log ──────────────────────────────────────────────────────
+    st.header("6 · Intervention Log")
+    if pred.hitl_interventions:
+        st.dataframe([{
+            "Type":           i.intervention_type,
+            "Target":         i.target_id,
+            "Old":            str(i.old_value)[:30],
+            "New":            str(i.new_value)[:30],
+            "σ(φ) after":    f"{i.recomputed_sigma_phi:.4f}" if i.recomputed_sigma_phi else "—",
+            "Decision after": i.recomputed_decision.value if i.recomputed_decision else "—",
+            "Time":           i.timestamp[:19],
+        } for i in pred.hitl_interventions], use_container_width=True)
+    else:
+        st.info("No interventions yet.")
+
+    st.divider()
+    st.download_button(
+        "💾 Export prediction JSON",
+        data=pred.model_dump_json(indent=2),
+        file_name=f"{pred.case_id}_prediction.json",
+        mime="application/json",
+    )
+
+
+if __name__ == "__main__":
+    main()
+
+
+===== FILE: C:\Users\nkaran\Dropbox\work account\Diplomatikes\diplo oiko2k\app\adss_hearsay\src\dashboard\__init__.py =====
+
+
+
+===== FILE: C:\Users\nkaran\Dropbox\work account\Diplomatikes\diplo oiko2k\app\adss_hearsay\src\evaluation\contestability.py =====
+"""
+Contestability evaluation module.
+Computes DFR, CFR, MEC, SSM under simulated interventions.
+
+Two simulation regimes:
+  oracle-guided    — interventions selected using gold labels (upper bound)
+  confidence-guided — interventions selected from low-confidence args/edges (blind)
+"""
+from __future__ import annotations
+
+import logging
+import random
+from copy import deepcopy
+from dataclasses import dataclass, field
+from typing import Optional
+
+from src.data.models import ADSSPrediction, Decision, HITLIntervention, RelationType
+
+logger = logging.getLogger(__name__)
+
+
+@dataclass
+class ContestabilityResult:
+    regime:   str          # "oracle" | "confidence"
+    dfr:      float = 0.0  # Decision Flip Rate
+    cfr:      float = 0.0  # Corrective Flip Rate
+    mec:      float = 0.0  # Mean Minimal Edit Count
+    ssm:      float = 0.0  # Mean Score Shift Magnitude
+    n_total:  int   = 0
+    n_flipped: int  = 0
+    n_corrected: int = 0
+    details:  list  = field(default_factory=list)
+
+
+def _apply_tau_edit(graph, arg_id: str, new_tau: float):
+    """Mutate tau in-place on a deep-copied graph."""
+    if arg_id in graph.nodes:
+        graph.nodes[arg_id].tau   = max(0.1, min(1.0, new_tau))
+        graph.nodes[arg_id].sigma = graph.nodes[arg_id].tau
+
+
+def _resolve_decision(sigma_phi: float, cfg: dict) -> Decision:
+    from src.qbaf.solver import make_decision
+    return Decision(make_decision(sigma_phi, cfg)[0])
+
+
+def _re_solve(graph, solver, case_id: str) -> float:
+    out = solver.solve(graph, case_id)
+    return out.sigma_phi
+
+
+# ── Oracle-guided simulation ──────────────────────────────────────────────────
+
+def _oracle_intervention(
+    pred: ADSSPrediction,
+    solver,
+    cfg: dict,
+    max_edits: int = 3,
+) -> tuple[float, int, float]:
+    """
+    Try to flip the decision toward the gold label using oracle knowledge.
+    Returns (new_sigma_phi, edits_used, score_shift).
+    If already correct, returns original sigma unchanged.
+    """
+    if pred.gold_label is None or pred.solver_output is None:
+        return pred.sigma_phi, 0, 0.0
+
+    gold     = pred.gold_label          # "Yes" or "No"
+    is_wrong = not pred.is_correct()
+    original_sigma = pred.sigma_phi
+
+    graph = pred.solver_output.graph.model_copy(deep=True)
+    non_phi = [nid for nid in graph.nodes if nid != "phi"]
+
+    edits = 0
+    for edit_num in range(1, max_edits + 1):
+        if not non_phi:
+            break
+
+        # Find the arg that most needs changing
+        # For gold=Yes: boost support args, reduce attack args
+        # For gold=No:  boost attack args, reduce support args
+        arg_ids_support = graph.supporters_of("phi")
+        arg_ids_attack  = graph.attackers_of("phi")
+
+        if gold == "Yes":
+            # boost best support, reduce best attack
+            candidates = (
+                [(aid, graph.nodes[aid].tau, "boost") for aid in arg_ids_support]
+                + [(aid, graph.nodes[aid].tau, "reduce") for aid in arg_ids_attack]
+            )
+        else:
+            candidates = (
+                [(aid, graph.nodes[aid].tau, "reduce") for aid in arg_ids_support]
+                + [(aid, graph.nodes[aid].tau, "boost") for aid in arg_ids_attack]
+            )
+
+        if not candidates:
+            break
+
+        # Sort: boost targets with lowest tau first, reduce with highest tau first
+        def sort_key(c):
+            _, tau, action = c
+            return tau if action == "boost" else -tau
+
+        candidates.sort(key=sort_key)
+        target_id, old_tau, action = candidates[0]
+        new_tau = 0.95 if action == "boost" else 0.1
+        _apply_tau_edit(graph, target_id, new_tau)
+        edits += 1
+
+        new_sigma = _re_solve(graph, solver, pred.case_id)
+        new_dec   = _resolve_decision(new_sigma, cfg)
+
+        if new_dec.value == gold:
+            shift = abs(new_sigma - original_sigma)
+            return new_sigma, edits, shift
+
+    # After max_edits, return best achieved
+    final_sigma = _re_solve(graph, solver, pred.case_id)
+    return final_sigma, edits, abs(final_sigma - original_sigma)
+
+
+# ── Confidence-guided simulation ──────────────────────────────────────────────
+
+def _confidence_intervention(
+    pred: ADSSPrediction,
+    solver,
+    cfg: dict,
+    confidence_threshold: float = 0.5,
+    max_edits: int = 3,
+) -> tuple[float, int, float]:
+    """
+    Simulate edits based on low-confidence arguments (no gold label access).
+    Reduce τ of low-confidence args, remove low-confidence edges.
+    """
+    if pred.solver_output is None:
+        return pred.sigma_phi, 0, 0.0
+
+    original_sigma = pred.sigma_phi
+    graph = pred.solver_output.graph.model_copy(deep=True)
+
+    # Low-confidence args (from extraction confidence)
+    low_conf_args = [
+        a for a in pred.extraction.arguments
+        if a.confidence < confidence_threshold
+    ]
+    # Low-confidence edges
+    low_conf_edges = [
+        e for e in graph.edges
+        if e.confidence < confidence_threshold and e.target == "phi"
+    ]
+
+    edits = 0
+    # Reduce tau of low-confidence args
+    for arg in low_conf_args[:max_edits]:
+        if arg.id in graph.nodes:
+            old = graph.nodes[arg.id].tau
+            _apply_tau_edit(graph, arg.id, old * 0.5)
+            edits += 1
+            if edits >= max_edits:
+                break
+
+    # Remove low-confidence edges if budget remains
+    for edge in low_conf_edges:
+        if edits >= max_edits:
+            break
+        graph.edges = [e for e in graph.edges
+                       if not (e.source == edge.source and e.target == edge.target)]
+        edits += 1
+
+    final_sigma = _re_solve(graph, solver, pred.case_id)
+    shift = abs(final_sigma - original_sigma)
+    return final_sigma, edits, shift
+
+
+# ── Main evaluation ───────────────────────────────────────────────────────────
+
+def compute_contestability(
+    predictions: list[ADSSPrediction],
+    solver,
+    cfg: dict,
+    regime: str = "oracle",
+    max_edits: int = 3,
+    seed: int = 42,
+) -> ContestabilityResult:
+    """
+    Compute DFR, CFR, MEC, SSM for a list of predictions.
+
+    regime: "oracle" | "confidence"
+    """
+    random.seed(seed)
+    result = ContestabilityResult(regime=regime)
+
+    labelled = [p for p in predictions
+                if p.gold_label is not None and p.solver_output is not None]
+    result.n_total = len(labelled)
+    if not labelled:
+        logger.warning("No labelled predictions with solver output for contestability eval.")
+        return result
+
+    total_edits = 0
+    total_shift = 0.0
+    n_flipped   = 0
+    n_corrected = 0
+
+    for pred in labelled:
+        orig_dec   = pred.decision
+        orig_sigma = pred.sigma_phi
+        orig_correct = pred.is_correct()
+
+        if regime == "oracle":
+            new_sigma, edits, shift = _oracle_intervention(pred, solver, cfg, max_edits)
+        else:
+            new_sigma, edits, shift = _confidence_intervention(
+                pred, solver, cfg, max_edits=max_edits
+            )
+
+        new_dec     = _resolve_decision(new_sigma, cfg)
+        flipped     = new_dec != orig_dec and new_dec != Decision.UNCERTAIN
+        corrected   = (not orig_correct) and (new_dec.value == pred.gold_label)
+
+        total_edits  += edits
+        total_shift  += shift
+        n_flipped    += int(flipped)
+        n_corrected  += int(corrected)
+
+        result.details.append({
+            "case_id":      pred.case_id,
+            "gold":         pred.gold_label,
+            "orig_dec":     orig_dec.value,
+            "orig_sigma":   orig_sigma,
+            "new_dec":      new_dec.value,
+            "new_sigma":    new_sigma,
+            "edits":        edits,
+            "shift":        shift,
+            "flipped":      flipped,
+            "corrected":    corrected,
+        })
+
+    n_wrong = sum(1 for p in labelled if not p.is_correct())
+
+    result.dfr = n_flipped / result.n_total if result.n_total else 0.0
+    result.cfr = n_corrected / n_wrong if n_wrong else 0.0
+    result.mec = total_edits / result.n_total if result.n_total else 0.0
+    result.ssm = total_shift / result.n_total if result.n_total else 0.0
+    result.n_flipped   = n_flipped
+    result.n_corrected = n_corrected
+
+    logger.info(
+        f"[{regime}] DFR={result.dfr:.3f} CFR={result.cfr:.3f} "
+        f"MEC={result.mec:.3f} SSM={result.ssm:.3f}"
+    )
+    return result
+
+
+def print_contestability(r: ContestabilityResult) -> None:
+    print(f"\n  Contestability [{r.regime}]")
+    print(f"    n={r.n_total}  flipped={r.n_flipped}  corrected={r.n_corrected}")
+    print(f"    DFR={r.dfr:.3f}  CFR={r.cfr:.3f}  MEC={r.mec:.3f}  SSM={r.ssm:.3f}")
+
+
+===== FILE: C:\Users\nkaran\Dropbox\work account\Diplomatikes\diplo oiko2k\app\adss_hearsay\src\evaluation\error_analysis.py =====
+"""
+Error analysis: categorise misclassified predictions into the 4 paper categories.
+  1. Argument omission
+  2. Relation error
+  3. Strength miscalibration
+  4. Threshold / uncertainty failure
+"""
+from __future__ import annotations
+
+import json
+import logging
+from dataclasses import dataclass
+from pathlib import Path
+
+from src.data.models import ADSSPrediction, Decision
+
+logger = logging.getLogger(__name__)
+
+CATEGORIES = [
+    "argument_omission",
+    "relation_error",
+    "strength_miscalibration",
+    "threshold_uncertainty_failure",
+]
+
+
+@dataclass
+class ErrorRecord:
+    case_id:   str
+    gold:      str
+    predicted: str
+    sigma_phi: float
+    category:  str
+    reason:    str
+
+
+def _classify_error(pred: ADSSPrediction) -> tuple[str, str]:
+    """
+    Return (category, reason) for a misclassified prediction.
+    Categories are mutually exclusive; first matching rule wins.
+    """
+    n_args = len(pred.extraction.arguments)
+    sigma  = pred.sigma_phi
+    gold   = pred.gold_label or "?"
+
+    # 1. Argument omission — too few args extracted
+    if n_args == 0:
+        return "argument_omission", "No arguments extracted at all."
+    if n_args <= 1:
+        return "argument_omission", f"Only {n_args} argument(s) extracted; insufficient coverage."
+
+    # 2. Threshold / uncertainty failure — sigma very close to boundary
+    low, high = 0.40, 0.60   # slightly wider than UAE band for error analysis
+    if low <= sigma <= high:
+        return "threshold_uncertainty_failure", (
+            f"σ(φ)={sigma:.4f} falls in borderline zone [{low},{high}]; "
+            "escalation should have applied."
+        )
+
+    # 3. Relation error — wrong stances dominate
+    if pred.solver_output:
+        supporters = pred.solver_output.graph.supporters_of("phi")
+        attackers  = pred.solver_output.graph.attackers_of("phi")
+        if gold == "Yes" and len(attackers) > len(supporters):
+            return "relation_error", (
+                f"Gold=Yes but {len(attackers)} attack(s) > {len(supporters)} support(s); "
+                "stances likely misclassified."
+            )
+        if gold == "No" and len(supporters) > len(attackers):
+            return "relation_error", (
+                f"Gold=No but {len(supporters)} support(s) > {len(attackers)} attack(s); "
+                "stances likely misclassified."
+            )
+
+    # 4. Strength miscalibration — stances are in the right direction but sigma is wrong
+    if pred.strengths:
+        tau_map = {s.argument_id: s.tau for s in pred.strengths}
+        supporters = pred.solver_output.graph.supporters_of("phi") if pred.solver_output else []
+        attackers  = pred.solver_output.graph.attackers_of("phi")  if pred.solver_output else []
+        sup_taus   = [tau_map.get(aid, 0.5) for aid in supporters]
+        att_taus   = [tau_map.get(aid, 0.5) for aid in attackers]
+        mean_sup   = sum(sup_taus) / len(sup_taus) if sup_taus else 0.5
+        mean_att   = sum(att_taus) / len(att_taus) if att_taus else 0.5
+        if gold == "Yes" and mean_att > mean_sup:
+            return "strength_miscalibration", (
+                f"Gold=Yes but mean τ(attack)={mean_att:.3f} > mean τ(support)={mean_sup:.3f}; "
+                "attackers over-scored."
+            )
+        if gold == "No" and mean_sup > mean_att:
+            return "strength_miscalibration", (
+                f"Gold=No but mean τ(support)={mean_sup:.3f} > mean τ(attack)={mean_att:.3f}; "
+                "supporters over-scored."
+            )
+
+    # Default fallback
+    return "argument_omission", (
+        f"No specific pattern identified. n_args={n_args}, σ={sigma:.4f}."
+    )
+
+
+def analyse_errors(
+    predictions: list[ADSSPrediction],
+    output_dir: str | Path | None = None,
+) -> dict[str, float]:
+    """
+    Classify each misclassified prediction and return proportions per category.
+    """
+    errors: list[ErrorRecord] = []
+
+    for pred in predictions:
+        if pred.gold_label is None:
+            continue
+        if pred.is_correct():
+            continue   # only errors
+
+        cat, reason = _classify_error(pred)
+        dec = pred.decision.value if pred.decision != Decision.UNCERTAIN else "No"
+        errors.append(ErrorRecord(
+            case_id=pred.case_id,
+            gold=pred.gold_label,
+            predicted=dec,
+            sigma_phi=pred.sigma_phi,
+            category=cat,
+            reason=reason,
+        ))
+
+    if not errors:
+        logger.info("No errors to analyse.")
+        return {c: 0.0 for c in CATEGORIES}
+
+    total = len(errors)
+    counts = {c: sum(1 for e in errors if e.category == c) for c in CATEGORIES}
+    proportions = {c: counts[c] / total for c in CATEGORIES}
+
+    logger.info(f"Error analysis: {total} errors total")
+    for c in CATEGORIES:
+        logger.info(f"  {c}: {counts[c]} ({proportions[c]:.1%})")
+
+    if output_dir:
+        out = Path(output_dir)
+        out.mkdir(parents=True, exist_ok=True)
+        with open(out / "error_analysis.json", "w", encoding="utf-8") as f:
+            json.dump({
+                "total_errors": total,
+                "counts": counts,
+                "proportions": {k: round(v, 4) for k, v in proportions.items()},
+                "records": [
+                    {"case_id": e.case_id, "gold": e.gold,
+                     "predicted": e.predicted, "sigma_phi": e.sigma_phi,
+                     "category": e.category, "reason": e.reason}
+                    for e in errors
+                ],
+            }, f, indent=2)
+
+    return proportions
+
+
+def print_error_analysis(proportions: dict[str, float]) -> None:
+    labels = {
+        "argument_omission":            "Argument omission",
+        "relation_error":               "Relation error",
+        "strength_miscalibration":      "Strength miscalibration",
+        "threshold_uncertainty_failure":"Threshold / uncertainty failure",
+    }
+    print("\n  Error Analysis")
+    for cat, prop in proportions.items():
+        print(f"    {labels.get(cat, cat):40s}  {prop:.1%}")
+
+
+===== FILE: C:\Users\nkaran\Dropbox\work account\Diplomatikes\diplo oiko2k\app\adss_hearsay\src\evaluation\evaluator.py =====
+"""
+Evaluation module.
+Reports accuracy, macro-F1, per-class metrics, confusion matrix,
+and 95% bootstrap confidence intervals.
+"""
+from __future__ import annotations
+
+import csv
+import json
+import logging
+import random
+from pathlib import Path
+from typing import Optional, Union
+
+from src.data.models import (
+    ADSSPrediction, BaselinePrediction, ClassMetrics,
+    Decision, EvaluationReport,
+)
+
+logger = logging.getLogger(__name__)
+LABELS = ["Yes", "No"]
+
+
+def _to_binary(d: Decision) -> str:
+    return d.value if d != Decision.UNCERTAIN else "No"
+
+
+def _accuracy(golds: list[str], preds: list[str]) -> float:
+    return sum(g == p for g, p in zip(golds, preds)) / len(golds) if golds else 0.0
+
+
+def _per_class(golds: list[str], preds: list[str]) -> list[ClassMetrics]:
+    results = []
+    for label in LABELS:
+        tp = sum(g == label and p == label for g, p in zip(golds, preds))
+        fp = sum(g != label and p == label for g, p in zip(golds, preds))
+        fn = sum(g == label and p != label for g, p in zip(golds, preds))
+        prec = tp / (tp + fp) if (tp + fp) else 0.0
+        rec  = tp / (tp + fn) if (tp + fn) else 0.0
+        f1   = 2 * prec * rec / (prec + rec) if (prec + rec) else 0.0
+        results.append(ClassMetrics(
+            label=label, precision=prec, recall=rec,
+            f1=f1, support=sum(g == label for g in golds),
+        ))
+    return results
+
+
+def _macro_f1(pc: list[ClassMetrics]) -> float:
+    return sum(m.f1 for m in pc) / len(pc) if pc else 0.0
+
+
+def _conf_matrix(golds: list[str], preds: list[str]) -> list[list[int]]:
+    idx = {l: i for i, l in enumerate(LABELS)}
+    n   = len(LABELS)
+    cm  = [[0] * n for _ in range(n)]
+    for g, p in zip(golds, preds):
+        if g in idx and p in idx:
+            cm[idx[g]][idx[p]] += 1
+    return cm
+
+
+def _bootstrap_ci(
+    golds: list[str],
+    preds: list[str],
+    metric_fn,
+    n: int = 1000,
+    ci: float = 0.95,
+    seed: int = 42,
+) -> tuple[float, float]:
+    rng    = random.Random(seed)
+    size   = len(golds)
+    scores = []
+    for _ in range(n):
+        idx   = [rng.randint(0, size - 1) for _ in range(size)]
+        g     = [golds[i] for i in idx]
+        p     = [preds[i]  for i in idx]
+        scores.append(metric_fn(g, p))
+    scores.sort()
+    alpha = 1 - ci
+    return scores[int(alpha / 2 * n)], scores[int((1 - alpha / 2) * n)]
+
+
+def evaluate_predictions(
+    predictions: list[Union[ADSSPrediction, BaselinePrediction]],
+    system_name: str,
+    cfg: dict,
+    output_dir: Optional[Union[str, Path]] = None,
+) -> EvaluationReport:
+    golds, preds, n_unc = [], [], 0
+    for p in predictions:
+        if p.gold_label is None:
+            continue
+        dec = p.decision
+        if dec == Decision.UNCERTAIN:
+            n_unc += 1
+        golds.append(p.gold_label)
+        preds.append(_to_binary(dec))
+
+    if not golds:
+        raise ValueError("No labelled examples to evaluate.")
+
+    n_boot = cfg.get("evaluation", {}).get("bootstrap_samples", 1000)
+    conf   = cfg.get("evaluation", {}).get("confidence_level", 0.95)
+
+    pc     = _per_class(golds, preds)
+    report = EvaluationReport(
+        system_name=system_name,
+        accuracy=_accuracy(golds, preds),
+        macro_f1=_macro_f1(pc),
+        per_class=pc,
+        confusion_matrix=_conf_matrix(golds, preds),
+        confusion_labels=LABELS,
+        accuracy_ci=_bootstrap_ci(golds, preds, _accuracy, n_boot, conf),
+        macro_f1_ci=_bootstrap_ci(
+            golds, preds,
+            lambda g, p: _macro_f1(_per_class(g, p)),
+            n_boot, conf,
+        ),
+        n_samples=len(golds),
+        n_uncertain_escalated=n_unc,
+    )
+
+    if output_dir:
+        out = Path(output_dir)
+        out.mkdir(parents=True, exist_ok=True)
+        (out / f"{system_name}_report.json").write_text(
+            json.dumps(report.to_dict(), indent=2), encoding="utf-8"
+        )
+        with open(out / f"{system_name}_predictions.csv", "w", newline="", encoding="utf-8") as f:
+            w = csv.writer(f)
+            w.writerow(["case_id", "gold", "prediction", "sigma_phi", "uncertain"])
+            for p in predictions:
+                sigma = p.sigma_phi if isinstance(p, (ADSSPrediction, BaselinePrediction)) else ""
+                unc   = p.uncertainty.is_uncertain if isinstance(p, ADSSPrediction) else False
+                w.writerow([p.case_id, p.gold_label, _to_binary(p.decision),
+                            f"{sigma:.4f}" if sigma else "", unc])
+
+    logger.info(
+        f"[{system_name}] Acc={report.accuracy:.3f} "
+        f"CI95=[{report.accuracy_ci[0]:.3f},{report.accuracy_ci[1]:.3f}] "
+        f"| Macro-F1={report.macro_f1:.3f} "
+        f"CI95=[{report.macro_f1_ci[0]:.3f},{report.macro_f1_ci[1]:.3f}]"
+    )
+    return report
+
+
+def print_report(r: EvaluationReport) -> None:
+    print(f"\n{'='*60}")
+    print(f"  {r.system_name}  (n={r.n_samples}, uncertain={r.n_uncertain_escalated})")
+    print(f"  Accuracy : {r.accuracy:.3f}  [{r.accuracy_ci[0]:.3f}–{r.accuracy_ci[1]:.3f}]")
+    print(f"  Macro-F1 : {r.macro_f1:.3f}  [{r.macro_f1_ci[0]:.3f}–{r.macro_f1_ci[1]:.3f}]")
+    print("  Per-class:")
+    for m in r.per_class:
+        print(f"    {m.label:4s}  P={m.precision:.3f}  R={m.recall:.3f}  F1={m.f1:.3f}  n={m.support}")
+    print(f"  Confusion matrix {r.confusion_labels}:")
+    for row in r.confusion_matrix:
+        print(f"    {row}")
+    print("="*60)
+
+
+===== FILE: C:\Users\nkaran\Dropbox\work account\Diplomatikes\diplo oiko2k\app\adss_hearsay\src\evaluation\robustness.py =====
+"""
+Robustness evaluation: controlled perturbation of mined argument graphs.
+Tests degradation under: arg removal, relation flipping, tau noise, low-conf pruning.
+"""
+from __future__ import annotations
+
+import logging
+import math
+import random
+from copy import deepcopy
+from dataclasses import dataclass, field
+
+from src.data.models import ADSSPrediction, Decision, QBAFEdge, RelationType
+
+logger = logging.getLogger(__name__)
+
+
+@dataclass
+class RobustnessResult:
+    perturbation:  str
+    p_level:       float
+    accuracy:      float
+    macro_f1:      float
+    mean_score_shift: float   # E[|σ_p - σ_0|]
+    n_samples:     int
+
+
+def _accuracy(golds, preds):
+    return sum(g == p for g, p in zip(golds, preds)) / len(golds) if golds else 0.0
+
+
+def _macro_f1(golds, preds, labels=("Yes", "No")):
+    f1s = []
+    for label in labels:
+        tp = sum(g == label and p == label for g, p in zip(golds, preds))
+        fp = sum(g != label and p == label for g, p in zip(golds, preds))
+        fn = sum(g == label and p != label for g, p in zip(golds, preds))
+        pr = tp / (tp + fp) if (tp + fp) else 0.0
+        re = tp / (tp + fn) if (tp + fn) else 0.0
+        f1s.append(2 * pr * re / (pr + re) if (pr + re) else 0.0)
+    return sum(f1s) / len(f1s)
+
+
+def _perturb_and_solve(pred: ADSSPrediction, perturbation: str,
+                        p: float, solver, cfg: dict, rng: random.Random) -> float:
+    """Apply perturbation to graph and re-solve. Returns new sigma_phi."""
+    if pred.solver_output is None:
+        return pred.sigma_phi
+
+    graph = pred.solver_output.graph.model_copy(deep=True)
+    non_phi = [nid for nid in graph.nodes if nid != "phi"]
+
+    if perturbation == "arg_removal" and non_phi:
+        n_remove = max(0, round(p * len(non_phi)))
+        to_remove = set(rng.sample(non_phi, min(n_remove, len(non_phi))))
+        graph.nodes  = {k: v for k, v in graph.nodes.items() if k not in to_remove}
+        graph.edges  = [e for e in graph.edges
+                        if e.source not in to_remove and e.target not in to_remove]
+
+    elif perturbation == "relation_flip" and graph.edges:
+        n_flip = max(0, round(p * len(graph.edges)))
+        flip_idx = set(rng.sample(range(len(graph.edges)), min(n_flip, len(graph.edges))))
+        for i in flip_idx:
+            e = graph.edges[i]
+            if e.type == RelationType.SUPPORT:
+                graph.edges[i] = e.model_copy(update={"type": RelationType.ATTACK})
+            elif e.type == RelationType.ATTACK:
+                graph.edges[i] = e.model_copy(update={"type": RelationType.SUPPORT})
+
+    elif perturbation == "tau_noise":
+        for nid in non_phi:
+            if nid in graph.nodes:
+                noise = rng.uniform(-p, p)
+                new_tau = max(0.1, min(1.0, graph.nodes[nid].tau + noise))
+                graph.nodes[nid] = graph.nodes[nid].model_copy(
+                    update={"tau": new_tau, "sigma": new_tau}
+                )
+
+    elif perturbation == "low_conf_pruning":
+        # Remove edges/nodes below confidence threshold p (interpreted as threshold)
+        threshold = p
+        graph.edges = [e for e in graph.edges if e.confidence >= threshold]
+        # Remove isolated non-phi nodes
+        connected = {e.source for e in graph.edges} | {e.target for e in graph.edges}
+        for nid in list(graph.nodes.keys()):
+            if nid != "phi" and nid not in connected:
+                del graph.nodes[nid]
+
+    out = solver.solve(graph, pred.case_id)
+    return out.sigma_phi
+
+
+def run_robustness(
+    predictions: list[ADSSPrediction],
+    solver,
+    cfg: dict,
+    perturbation: str = "arg_removal",
+    p_levels: list[float] | None = None,
+    seed: int = 42,
+) -> list[RobustnessResult]:
+    """
+    Run robustness experiment for one perturbation type across p_levels.
+    perturbation: arg_removal | relation_flip | tau_noise | low_conf_pruning
+    """
+    if p_levels is None:
+        p_levels = [0.0, 0.1, 0.2, 0.3, 0.5]
+
+    rng     = random.Random(seed)
+    labelled = [p for p in predictions
+                if p.gold_label is not None and p.solver_output is not None]
+
+    results = []
+    for p in p_levels:
+        golds, preds_dec, shifts = [], [], []
+        for pred in labelled:
+            orig_sigma = pred.sigma_phi
+            new_sigma  = _perturb_and_solve(pred, perturbation, p, solver, cfg, rng)
+            from src.qbaf.solver import make_decision
+            new_dec_str, _ = make_decision(new_sigma, cfg)
+            # Map UNCERTAIN → No for metric computation
+            new_dec = new_dec_str if new_dec_str != "UNCERTAIN" else "No"
+            golds.append(pred.gold_label)
+            preds_dec.append(new_dec)
+            shifts.append(abs(new_sigma - orig_sigma))
+
+        results.append(RobustnessResult(
+            perturbation=perturbation,
+            p_level=p,
+            accuracy=_accuracy(golds, preds_dec),
+            macro_f1=_macro_f1(golds, preds_dec),
+            mean_score_shift=sum(shifts) / len(shifts) if shifts else 0.0,
+            n_samples=len(labelled),
+        ))
+        logger.info(
+            f"[robustness/{perturbation} p={p:.2f}] "
+            f"Acc={results[-1].accuracy:.3f} F1={results[-1].macro_f1:.3f} "
+            f"Δσ={results[-1].mean_score_shift:.4f}"
+        )
+    return results
+
+
+def print_robustness(results: list[RobustnessResult]) -> None:
+    if not results:
+        return
+    print(f"\n  Robustness [{results[0].perturbation}]")
+    print(f"  {'p':>5}  {'Acc':>6}  {'F1':>6}  {'Δσ':>8}")
+    for r in results:
+        print(f"  {r.p_level:>5.2f}  {r.accuracy:>6.3f}  "
+              f"{r.macro_f1:>6.3f}  {r.mean_score_shift:>8.4f}")
+
+
+===== FILE: C:\Users\nkaran\Dropbox\work account\Diplomatikes\diplo oiko2k\app\adss_hearsay\src\evaluation\__init__.py =====
+
+
+
+===== FILE: C:\Users\nkaran\Dropbox\work account\Diplomatikes\diplo oiko2k\app\adss_hearsay\src\mining\extractor.py =====
+"""
+Module A+B combined: single LLM call extracts arguments AND scores strength.
+Now fully domain-generic — works for any decision problem, not just hearsay.
+"""
+from __future__ import annotations
+
+import json
+import logging
+import re
+from pathlib import Path
+from typing import Any
+
+from src.data.models import (
+    Argument, ArgumentStrength, ClaimNode,
+    ExtractionResult, Relation, RelationType, RubricScore,
+)
+import src.utils.llm_client as _llm
+
+logger = logging.getLogger(__name__)
+
+_COMBINED_PATH = Path("prompts/combined.txt")
+_EXTRACT_PATH  = Path("prompts/extraction.txt")
+
+_WEIGHTS = {
+    "legal_relevance":        0.30,
+    "factual_grounding":      0.20,
+    "specificity":            0.15,
+    "logical_coherence":      0.15,
+    "fre_801c_applicability": 0.20,
+}
+
+_DEFAULT_DECISION = "Is the statement described in this narrative hearsay under FRE 801(c)?"
+
+
+def _load_template() -> str:
+    for p in (_COMBINED_PATH, _EXTRACT_PATH):
+        if p.exists():
+            return p.read_text()
+    return (
+        "Extract arguments as a JSON object for this decision problem:\n"
+        "{decision_problem}\n\nCase: {case_id}\nMax args: {max_arguments}\n\n"
+        "Narrative:\n{narrative}"
+    )
+
+
+def _render(template: str, case_id: str, narrative: str,
+            max_arguments: int, decision_problem: str) -> str:
+    r = template.replace("{case_id}", case_id)
+    r = r.replace("{narrative}", narrative)
+    r = r.replace("{max_arguments}", str(max_arguments))
+    r = r.replace("{decision_problem}", decision_problem)
+    return r
+
+
+def _strip_fences(text: str) -> str:
+    text = re.sub(r"^```(?:json)?\s*", "", text.strip(), flags=re.IGNORECASE)
+    text = re.sub(r"\s*```\s*$", "", text)
+    return text.strip()
+
+
+def _repair_json(raw: str) -> dict[str, Any] | None:
+    cleaned = _strip_fences(raw)
+    try:
+        return json.loads(cleaned)
+    except Exception:
+        pass
+    try:
+        from json_repair import repair_json  # type: ignore
+        r = repair_json(cleaned, return_objects=True)
+        if isinstance(r, dict):
+            return r
+        if isinstance(r, list) and r and isinstance(r[0], dict):
+            return r[0]
+    except Exception as e:
+        logger.debug(f"json_repair: {e}")
+    m = re.search(r"\{.*\}", cleaned, re.DOTALL)
+    if m:
+        try:
+            return json.loads(m.group(0))
+        except Exception:
+            pass
+        try:
+            from json_repair import repair_json  # type: ignore
+            r = repair_json(m.group(0), return_objects=True)
+            if isinstance(r, dict):
+                return r
+        except Exception:
+            pass
+    return None
+
+
+def _normalise_stance(v: str) -> str | None:
+    """
+    'support' → supports the claim being true
+    'attack'  → argues the claim is false / exception applies
+    None      → neutral / irrelevant → excluded from QBAF graph
+    """
+    v = v.lower().strip()
+    if "support" in v:
+        return "support"
+    if "attack" in v or "oppose" in v or "against" in v:
+        return "attack"
+    return None   # neutral, n/a, irrelevant, etc.
+
+
+def _normalise_rel_type(v: str) -> str:
+    v = v.lower()
+    if "support" in v:
+        return "support"
+    if "attack" in v:
+        return "attack"
+    return "neutral"
+
+
+def _parse_combined(
+    raw: str,
+    case_id: str,
+    input_text: str,
+    decision_problem: str,
+    min_confidence: float,
+    include_neutral: bool,
+) -> tuple[ExtractionResult, list[ArgumentStrength]]:
+    data = _repair_json(raw)
+    if data is None:
+        logger.warning(f"[{case_id}] JSON repair failed. Snippet: {raw[:300]!r}")
+        return (
+            ExtractionResult(
+                case_id=case_id, input_text=input_text,
+                claim=ClaimNode(text=decision_problem),
+                raw_llm_response=raw,
+                parse_error=f"JSON repair failed. Raw: {raw[:400]}",
+            ),
+            [],
+        )
+
+    args:            list[Argument]         = []
+    strengths:       list[ArgumentStrength] = []
+    seen:            set[str]               = set()
+    n_raw_arguments: int                    = 0   # count before neutral filter
+
+    for raw_arg in data.get("arguments", []):
+        try:
+            rubric_data   = raw_arg.pop("rubric",        None)
+            tau_val       = raw_arg.pop("tau",           None)
+            justification = raw_arg.pop("justification", "")
+
+            n_raw_arguments += 1
+
+            raw_stance = raw_arg.get("stance_to_claim", "")
+            normalised = _normalise_stance(str(raw_stance))
+
+            if normalised is None:
+                logger.debug(
+                    f"[{case_id}] '{raw_arg.get('id','?')}' stance='{raw_stance}' "
+                    "is neutral — excluded from graph."
+                )
+                continue
+
+            raw_arg["stance_to_claim"] = normalised
+            if raw_arg.get("confidence", 1.0) < min_confidence:
+                continue
+
+            arg = Argument(**raw_arg)
+            while arg.id in seen:
+                arg = arg.model_copy(update={"id": f"{arg.id}_x"})
+            seen.add(arg.id)
+            args.append(arg)
+
+            if rubric_data and isinstance(rubric_data, dict):
+                try:
+                    # Normalise any camelCase or missing rubric keys from LLM output
+                    key_map = {
+                        "legalrelevance": "legal_relevance",
+                        "factualgrounding": "factual_grounding",
+                        "logicalcoherence": "logical_coherence",
+                        "fre801capplicability": "fre_801c_applicability",
+                        "freapplicability": "fre_801c_applicability",
+                    }
+                    norm = {}
+                    for k, v in rubric_data.items():
+                        clean = k.lower().replace(" ", "").replace("-", "").replace("_", "")
+                        norm[key_map.get(clean, k)] = v
+                    for field in _WEIGHTS:
+                        if field not in norm:
+                            norm[field] = float(arg.confidence)
+                    rubric = RubricScore(**norm)
+                    if tau_val is None:
+                        tau_val = sum(
+                            getattr(rubric, d) * w for d, w in _WEIGHTS.items()
+                        )
+                    strengths.append(ArgumentStrength(
+                        argument_id=arg.id,
+                        tau=max(0.1, min(1.0, float(tau_val))),
+                        rubric=rubric,
+                        justification=str(justification),
+                        model="combined",
+                    ))
+                except Exception as e:
+                    logger.info(f"Rubric parse error for {arg.id}: {e} — using fallback")
+                    _fallback_strength(strengths, arg)
+            else:
+                logger.debug(f"No rubric for {arg.id} — using fallback")
+                _fallback_strength(strengths, arg)
+
+        except Exception as e:
+            logger.debug(f"[{case_id}] Skipping malformed argument: {e}")
+
+    n_neutral = n_raw_arguments - len(args)
+    if n_neutral > 0:
+        logger.info(
+            f"[{case_id}] {n_neutral}/{n_raw_arguments} argument(s) were neutral "
+            "and excluded from the graph."
+        )
+
+    valid = {a.id for a in args} | {"phi"}
+    rels: list[Relation] = []
+    for raw_rel in data.get("relations", []):
+        try:
+            if isinstance(raw_rel.get("type"), str):
+                raw_rel["type"] = _normalise_rel_type(raw_rel["type"])
+            rel = Relation(**raw_rel)
+            if rel.source not in valid or rel.target not in valid:
+                continue
+            if rel.type == RelationType.NEUTRAL and not include_neutral:
+                continue
+            rels.append(rel)
+        except Exception as e:
+            logger.debug(f"[{case_id}] Skipping malformed relation: {e}")
+
+    try:
+        extraction = ExtractionResult(
+            case_id=case_id,
+            input_text=input_text,
+            claim=ClaimNode(text=decision_problem),
+            arguments=args,
+            relations=rels,
+            raw_llm_response=raw,
+            n_raw_arguments=n_raw_arguments,
+        )
+    except Exception as e:
+        logger.warning(f"[{case_id}] Extraction validation error: {e}")
+        extraction = ExtractionResult(
+            case_id=case_id,
+            input_text=input_text,
+            claim=ClaimNode(text=decision_problem),
+            raw_llm_response=raw,
+            parse_error=str(e),
+            arguments=args,
+            n_raw_arguments=n_raw_arguments,
+        )
+
+    return extraction, strengths
+
+
+def _fallback_strength(strengths: list[ArgumentStrength], arg: Argument) -> None:
+    tau = max(0.1, min(1.0, arg.confidence))
+    strengths.append(ArgumentStrength(
+        argument_id=arg.id, tau=tau,
+        rubric=RubricScore(**{d: tau for d in _WEIGHTS}),
+        justification="Fallback: rubric not provided by LLM.",
+        model="fallback",
+    ))
+
+
+class ArgumentExtractor:
+    def __init__(self, cfg: dict):
+        self.cfg         = cfg
+        mcfg             = cfg.get("mining", {})
+        self.max_args    = mcfg.get("max_arguments", 8)
+        self.min_conf    = mcfg.get("min_confidence", 0.3)
+        self.inc_neutral = mcfg.get("include_neutral_relations", False)
+        self.max_retries = mcfg.get("max_retries", 2)
+        self._tmpl       = _load_template()
+
+    def _prompt(self, case_id: str, narrative: str, decision_problem: str) -> str:
+        return _render(self._tmpl, case_id, narrative,
+                       self.max_args, decision_problem)
+
+    def extract_combined(
+        self,
+        case_id:          str,
+        narrative:        str,
+        decision_problem: str = _DEFAULT_DECISION,
+    ) -> tuple[ExtractionResult, list[ArgumentStrength]]:
+        prompt = self._prompt(case_id, narrative, decision_problem)
+        raw    = ""
+        for attempt in range(1, self.max_retries + 1):
+            try:
+                raw = _llm.call_llm(prompt, self.cfg)
+                logger.debug(f"[{case_id}] Raw (first 400): {raw[:400]}")
+                extraction, strengths = _parse_combined(
+                    raw, case_id, narrative, decision_problem,
+                    self.min_conf, self.inc_neutral,
+                )
+                if extraction.parse_error and attempt < self.max_retries:
+                    logger.warning(f"[{case_id}] Parse failed, retrying…")
+                    continue
+                return extraction, strengths
+            except Exception as exc:
+                logger.error(f"[{case_id}] LLM error attempt {attempt}: {exc}")
+                if attempt == self.max_retries:
+                    return (
+                        ExtractionResult(
+                            case_id=case_id, input_text=narrative,
+                            claim=ClaimNode(text=decision_problem),
+                            raw_llm_response=raw, parse_error=str(exc),
+                        ),
+                        [],
+                    )
+        return (
+            ExtractionResult(
+                case_id=case_id, input_text=narrative,
+                claim=ClaimNode(text=decision_problem),
+                raw_llm_response=raw,
+            ),
+            [],
+        )
+
+
+===== FILE: C:\Users\nkaran\Dropbox\work account\Diplomatikes\diplo oiko2k\app\adss_hearsay\src\mining\__init__.py =====
+
+
+
+===== FILE: C:\Users\nkaran\Dropbox\work account\Diplomatikes\diplo oiko2k\app\adss_hearsay\src\pipeline\orchestrator.py =====
+"""
+End-to-end ADSS pipeline orchestrator — generic decision support.
+Supports any decision problem, not just FRE hearsay.
+"""
+from __future__ import annotations
+
+import json
+import logging
+from datetime import datetime, timezone
+from pathlib import Path
+from typing import Optional
+
+from src.data.models import (
+    ADSSPrediction, BaselinePrediction, Decision,
+    EscalationAction, ExtractionResult, HearsayExample,
+    HITLIntervention, QBAFEdge, RelationType,
+    SolverType, UncertaintyFlags,
+)
+from src.mining.extractor import ArgumentExtractor, _DEFAULT_DECISION
+from src.scoring.strength import StrengthAttributor
+from src.qbaf.graph import build_qbaf
+from src.qbaf.solver import get_solver, make_decision
+import src.utils.llm_client as _llm
+
+logger = logging.getLogger(__name__)
+
+
+def _uncertainty_flags(sigma_phi: float, cfg: dict, case_id: str) -> UncertaintyFlags:
+    low, high    = cfg.get("qbaf", {}).get("uncertainty_band", [0.45, 0.55])
+    is_uncertain = low <= sigma_phi <= high
+    flags = UncertaintyFlags(
+        is_uncertain=is_uncertain, sigma_phi=sigma_phi,
+        threshold_low=low, threshold_high=high,
+    )
+    if is_uncertain:
+        flags.escalation_triggered = True
+        flags.escalation_actions   = [
+            EscalationAction.RERUN_EXTRACTION,
+            EscalationAction.HUMAN_REVIEW,
+        ]
+        msg = (f"[{case_id}] UNCERTAIN σ(φ)={sigma_phi:.4f} ∈ [{low},{high}]. "
+               "Human review recommended.")
+        flags.escalation_log.append(msg)
+        logger.warning(msg)
+    return flags
+
+
+class ADSSPipeline:
+    """Generic ADSS pipeline — one LLM call per case for any decision problem."""
+
+    def __init__(self, cfg: dict):
+        self.cfg          = cfg
+        self.extractor    = ArgumentExtractor(cfg)
+        self.attributor   = StrengthAttributor(cfg)
+        self.solver       = get_solver(cfg)
+        self.artifact_dir = Path(cfg.get("system", {}).get("artifact_dir", "artifacts"))
+        self.artifact_dir.mkdir(parents=True, exist_ok=True)
+        logger.info(f"ADSSPipeline ready. Backend: {_llm.backend_label(cfg)}")
+
+    def run_case(
+        self,
+        example: HearsayExample,
+        save_artifacts: bool = True,
+    ) -> ADSSPrediction:
+        cid              = example.case_id
+        decision_problem = getattr(example, "decision_problem", _DEFAULT_DECISION)
+        logger.info(f"=== {cid} === (1 LLM call)")
+
+        # Combined extraction + strength scoring
+        extraction, prefilled_strengths = self.extractor.extract_combined(
+            cid, example.text, decision_problem
+        )
+        logger.info(
+            f"  {len(extraction.arguments)} args extracted, "
+            f"{len(prefilled_strengths)} strengths."
+        )
+
+        strengths   = self.attributor.score_all(extraction, prefilled_strengths)
+        solver_type = SolverType(self.cfg.get("qbaf", {}).get("solver", "df_quad"))
+        phi_tau     = self.cfg.get("qbaf", {}).get("phi_initial_strength", 0.5)
+        graph       = build_qbaf(extraction, strengths, phi_tau, solver_type)
+        solver_out  = self.solver.solve(graph, cid)
+        sigma_phi   = solver_out.sigma_phi
+
+        dec_str, _  = make_decision(sigma_phi, self.cfg)
+        uncertainty = _uncertainty_flags(sigma_phi, self.cfg, cid)
+        decision    = Decision(dec_str)
+
+        pred = ADSSPrediction(
+            case_id=cid, input_text=example.text,
+            gold_label=example.label,
+            extraction=extraction, strengths=strengths,
+            solver_output=solver_out,
+            sigma_phi=sigma_phi, decision=decision,
+            uncertainty=uncertainty,
+        )
+        if save_artifacts:
+            self._save(pred)
+        return pred
+
+    def run_batch(
+        self,
+        examples: list[HearsayExample],
+        save_artifacts: bool = True,
+    ) -> list[ADSSPrediction]:
+        results: list[ADSSPrediction] = []
+        for ex in examples:
+            try:
+                results.append(self.run_case(ex, save_artifacts))
+            except Exception as e:
+                logger.error(f"[{ex.case_id}] Pipeline error: {e}")
+                results.append(ADSSPrediction(
+                    case_id=ex.case_id, input_text=ex.text,
+                    gold_label=ex.label,
+                    extraction=ExtractionResult(
+                        case_id=ex.case_id, input_text=ex.text,
+                        parse_error=str(e),
+                    ),
+                    sigma_phi=0.5, decision=Decision.UNCERTAIN,
+                ))
+        return results
+
+    def _save(self, pred: ADSSPrediction) -> None:
+        (self.artifact_dir / f"{pred.case_id}_prediction.json").write_text(
+            pred.model_dump_json(indent=2, encoding="utf-8"), encoding="utf-8"
+        )
+
+    def apply_hitl_intervention(
+        self,
+        pred: ADSSPrediction,
+        intervention: HITLIntervention,
+    ) -> ADSSPrediction:
+        intervention.timestamp = datetime.now(timezone.utc).isoformat()
+        pred.pre_hitl_decision = pred.pre_hitl_decision or pred.decision
+
+        if pred.solver_output is None:
+            logger.warning("No solver output for HITL.")
+            return pred
+
+        graph = pred.solver_output.graph.model_copy(deep=True)
+        itype = intervention.intervention_type
+        tid   = intervention.target_id
+
+        if itype == "edit_tau":
+            if tid in graph.nodes:
+                intervention.old_value = graph.nodes[tid].tau
+                graph.nodes[tid].tau   = max(0.1, min(1.0, float(intervention.new_value)))
+                graph.nodes[tid].sigma = graph.nodes[tid].tau
+
+        elif itype == "flip_edge":
+            src, tgt = (tid.split("→") + [""])[:2]
+            for edge in graph.edges:
+                if edge.source == src and edge.target == tgt:
+                    intervention.old_value = edge.type.value
+                    edge.type = (
+                        RelationType.ATTACK
+                        if edge.type == RelationType.SUPPORT
+                        else RelationType.SUPPORT
+                    )
+                    break
+
+        elif itype == "delete_edge":
+            src, tgt = (tid.split("→") + [""])[:2]
+            before = len(graph.edges)
+            graph.edges = [e for e in graph.edges
+                           if not (e.source == src and e.target == tgt)]
+            intervention.old_value = before - len(graph.edges)
+
+        elif itype == "add_edge":
+            try:
+                graph.edges.append(QBAFEdge(**dict(intervention.new_value)))
+            except Exception as e:
+                logger.error(f"HITL add_edge error: {e}")
+
+        new_out = self.solver.solve(graph, pred.case_id)
+        new_sig = new_out.sigma_phi
+        new_dec = Decision(make_decision(new_sig, self.cfg)[0])
+
+        intervention.recomputed_sigma_phi = new_sig
+        intervention.recomputed_decision  = new_dec
+
+        pred.solver_output = new_out
+        pred.sigma_phi     = new_sig
+        pred.decision      = new_dec
+        pred.uncertainty   = _uncertainty_flags(new_sig, self.cfg, pred.case_id)
+        pred.hitl_interventions.append(intervention)
+        return pred
+
+
+class BaselineRunner:
+    def __init__(self, cfg: dict):
+        self.cfg = cfg
+
+    def _call(self, prompt: str) -> str:
+        return _llm.call_llm(prompt, self.cfg, max_tokens=1024)
+
+    @staticmethod
+    def _extract_decision(text: str) -> Decision:
+        import re
+        m = re.search(r"Answer:\s*(Yes|No)", text, re.IGNORECASE)
+        if m:
+            return Decision.YES if m.group(1).lower() == "yes" else Decision.NO
+        low = text.lower()
+        if "not hearsay" in low or "no hearsay" in low:
+            return Decision.NO
+        if "hearsay" in low:
+            return Decision.YES
+        return Decision.NO
+
+    def run_cot(self, example: HearsayExample) -> BaselinePrediction:
+        tmpl   = Path("prompts/cot_baseline.txt")
+        prompt = (
+            tmpl.read_text().replace("{narrative}", example.text)
+            if tmpl.exists()
+            else f"Analyse this case. End with 'Answer: Yes' or 'Answer: No'.\n\n{example.text}"
+        )
+        raw = self._call(prompt)
+        return BaselinePrediction(
+            case_id=example.case_id, baseline_name="zero_shot_cot",
+            decision=self._extract_decision(raw),
+            raw_response=raw, gold_label=example.label,
+        )
+
+    def run_few_shot(self, example: HearsayExample) -> BaselinePrediction:
+        ex_path = Path("prompts/few_shot_examples.json")
+        shots   = ""
+        if ex_path.exists():
+            n = self.cfg.get("baselines", {}).get("few_shot_examples", 3)
+            for ex in json.loads(ex_path.read_text())[:n]:
+                shots += (f"\nNarrative: {ex['narrative']}\n"
+                          f"Reasoning: {ex['reasoning']}\n---\n")
+        prompt = (
+            f"End with exactly 'Answer: Yes' or 'Answer: No'.\n\n"
+            f"{shots}\nNarrative: {example.text}\n"
+        )
+        raw = self._call(prompt)
+        return BaselinePrediction(
+            case_id=example.case_id, baseline_name="few_shot",
+            decision=self._extract_decision(raw),
+            raw_response=raw, gold_label=example.label,
+        )
+
+    def run_adss_no_symbolic(
+        self, extraction: ExtractionResult, strengths: list
+    ) -> tuple[float, Decision]:
+        from src.data.models import Stance
+        if not strengths:
+            return 0.5, Decision.UNCERTAIN
+        arg_map = {a.id: a for a in extraction.arguments}
+        sup = [s.tau for s in strengths
+               if arg_map.get(s.argument_id) and
+               arg_map[s.argument_id].stance_to_claim == Stance.SUPPORT]
+        att = [s.tau for s in strengths
+               if arg_map.get(s.argument_id) and
+               arg_map[s.argument_id].stance_to_claim == Stance.ATTACK]
+        agg_s = sum(sup) / len(sup) if sup else 0.0
+        agg_a = sum(att) / len(att) if att else 0.0
+        sigma = agg_s / (agg_s + agg_a + 1e-8)
+        return max(0.0, min(1.0, sigma)), Decision(make_decision(sigma, self.cfg)[0])
+
+
+===== FILE: C:\Users\nkaran\Dropbox\work account\Diplomatikes\diplo oiko2k\app\adss_hearsay\src\pipeline\__init__.py =====
+
+
+
+===== FILE: C:\Users\nkaran\Dropbox\work account\Diplomatikes\diplo oiko2k\app\adss_hearsay\src\qbaf\graph.py =====
+"""QBAF Graph construction — unchanged logic, updated import."""
+from __future__ import annotations
+import logging
+from src.data.models import (
+    ArgumentStrength, ExtractionResult, QBAFEdge, QBAFGraph,
+    QBAFNode, RelationType, SolverType, Stance,
+)
+logger = logging.getLogger(__name__)
+
+def build_qbaf(
+    extraction:      ExtractionResult,
+    strengths:       list[ArgumentStrength],
+    phi_tau:         float      = 0.5,
+    solver_type:     SolverType = SolverType.DF_QUAD,
+    include_neutral: bool       = False,
+) -> QBAFGraph:
+    strength_map = {s.argument_id: s.tau for s in strengths}
+    nodes: dict[str, QBAFNode] = {
+        "phi": QBAFNode(
+            id="phi", text=extraction.claim.text,
+            tau=phi_tau, sigma=phi_tau, is_claim=True,
+        )
+    }
+    for arg in extraction.arguments:
+        tau = max(0.1, min(1.0, strength_map.get(arg.id, arg.confidence)))
+        nodes[arg.id] = QBAFNode(id=arg.id, text=arg.text, tau=tau, sigma=tau)
+
+    edges: list[QBAFEdge] = []
+    for rel in extraction.relations:
+        if rel.type == RelationType.NEUTRAL and not include_neutral:
+            continue
+        if rel.source not in nodes or rel.target not in nodes:
+            continue
+        edges.append(QBAFEdge(
+            source=rel.source, target=rel.target,
+            type=rel.type, confidence=rel.confidence,
+        ))
+
+    args_with_phi = {e.source for e in edges if e.target == "phi"}
+    for arg in extraction.arguments:
+        if arg.id not in args_with_phi:
+            etype = (RelationType.SUPPORT
+                     if arg.stance_to_claim == Stance.SUPPORT
+                     else RelationType.ATTACK)
+            edges.append(QBAFEdge(
+                source=arg.id, target="phi",
+                type=etype, confidence=arg.confidence,
+            ))
+
+    return QBAFGraph(nodes=nodes, edges=edges, solver_type=solver_type)
+
+
+===== FILE: C:\Users\nkaran\Dropbox\work account\Diplomatikes\diplo oiko2k\app\adss_hearsay\src\qbaf\solver.py =====
+"""
+Module C: Symbolic QBAF Engine.
+
+Two pluggable solvers:
+  - DFQuADSolver      (DF-QuAD iterative semantics – default)
+  - QESemanticsSolver (Quadratic Energy semantics)
+
+DF-QuAD equations (Baroni et al. 2019)
+────────────────────────────────────────
+  CS(x) = 1 − ∏_{s∈S(x)} (1 − σ(s))       [0 if S(x) = ∅]
+  CA(x) = 1 − ∏_{a∈A(x)} (1 − σ(a))       [0 if A(x) = ∅]
+  σ(x)  = clamp( τ(x) + (1−τ(x))·CS(x) − τ(x)·CA(x) )
+
+QE Semantics (energy-normalisation)
+────────────────────────────────────
+  σ(x) = (τ(x) + Σσ(S(x))) / (1 + Σσ(S(x)) + Σσ(A(x)))
+
+  This keeps σ ∈ (0,1], rises above τ when supporters are present,
+  and falls below τ when attackers dominate.
+
+Both iterate until ||σ_new − σ_old||_∞ < ε  (handles cyclic graphs).
+"""
+from __future__ import annotations
+
+import logging
+import math
+from abc import ABC, abstractmethod
+
+from src.data.models import QBAFGraph, SolverOutput, SolverType
+
+logger = logging.getLogger(__name__)
+
+
+def _clamp(v: float) -> float:
+    return max(0.0, min(1.0, v))
+
+
+def _topological_order(graph: QBAFGraph) -> list[str]:
+    """Kahn's algorithm; appends any remaining cycle nodes at the end."""
+    in_deg: dict[str, int] = {nid: 0 for nid in graph.nodes}
+    for e in graph.edges:
+        in_deg[e.target] = in_deg.get(e.target, 0) + 1
+
+    queue = sorted(nid for nid, d in in_deg.items() if d == 0)
+    order: list[str] = []
+    while queue:
+        nid = queue.pop(0)
+        order.append(nid)
+        for e in graph.edges:
+            if e.source == nid:
+                in_deg[e.target] -= 1
+                if in_deg[e.target] == 0:
+                    queue.append(e.target)
+
+    for nid in graph.nodes:
+        if nid not in order:
+            order.append(nid)
+    return order
+
+
+class BaseQBAFSolver(ABC):
+    def __init__(self, cfg: dict):
+        qcfg           = cfg.get("qbaf", {})
+        self.max_iters = qcfg.get("max_iterations", 50)
+        self.eps       = qcfg.get("convergence_eps", 1e-6)
+
+    @abstractmethod
+    def solve(self, graph: QBAFGraph, case_id: str = "") -> SolverOutput: ...
+
+    def _finalise(
+        self,
+        graph: QBAFGraph,
+        sigma: dict[str, float],
+        case_id: str,
+        iters: int,
+        converged: bool,
+    ) -> SolverOutput:
+        for nid, s in sigma.items():
+            if nid in graph.nodes:
+                graph.nodes[nid].sigma = s
+        phi_default = graph.nodes["phi"].tau if "phi" in graph.nodes else 0.5
+        return SolverOutput(
+            case_id=case_id,
+            graph=graph,
+            sigma_phi=sigma.get("phi", phi_default),
+            sigma_all=sigma,
+            iterations=iters,
+            converged=converged,
+            solver_type=graph.solver_type,
+        )
+
+
+class DFQuADSolver(BaseQBAFSolver):
+    """
+    Iterative DF-QuAD semantics.
+    σ(x) = clamp(τ + (1−τ)·CS − τ·CA)
+    where CS = 1−∏(1−σ(s)), CA = 1−∏(1−σ(a)).
+    """
+
+    def solve(self, graph: QBAFGraph, case_id: str = "") -> SolverOutput:
+        sigma = {nid: n.tau for nid, n in graph.nodes.items()}
+        order = _topological_order(graph)
+        converged = False
+        iters = 0
+
+        for iters in range(1, self.max_iters + 1):
+            old = dict(sigma)
+            for nid in order:
+                tau = graph.nodes[nid].tau
+                sup = graph.supporters_of(nid)
+                att = graph.attackers_of(nid)
+                cs  = 1.0 - math.prod(1.0 - sigma.get(s, 0.0) for s in sup) if sup else 0.0
+                ca  = 1.0 - math.prod(1.0 - sigma.get(a, 0.0) for a in att) if att else 0.0
+                sigma[nid] = _clamp(tau + (1.0 - tau) * cs - tau * ca)
+
+            if max(abs(sigma[k] - old[k]) for k in sigma) < self.eps:
+                converged = True
+                break
+
+        if not converged:
+            logger.warning(f"[{case_id}] DF-QuAD: no convergence after {self.max_iters} iters.")
+        return self._finalise(graph, sigma, case_id, iters, converged)
+
+
+class QESemanticsSolver(BaseQBAFSolver):
+    """
+    Quadratic Energy (normalisation) semantics.
+    σ(x) = (τ(x) + Σσ(S)) / (1 + Σσ(S) + Σσ(A))
+
+    Properties:
+      - No supporters/attackers  → σ = τ / 1 = τ  (identity)
+      - Pure support             → σ > τ  (support raises)
+      - Pure attack              → σ < τ  (attack lowers)
+      - σ always in (0, 1]
+    """
+
+    def solve(self, graph: QBAFGraph, case_id: str = "") -> SolverOutput:
+        sigma = {nid: n.tau for nid, n in graph.nodes.items()}
+        order = _topological_order(graph)
+        converged = False
+        iters = 0
+
+        for iters in range(1, self.max_iters + 1):
+            old = dict(sigma)
+            for nid in order:
+                tau   = graph.nodes[nid].tau
+                agg_s = sum(sigma.get(s, 0.0) for s in graph.supporters_of(nid))
+                agg_a = sum(sigma.get(a, 0.0) for a in graph.attackers_of(nid))
+                sigma[nid] = _clamp((tau + agg_s) / (1.0 + agg_s + agg_a))
+
+            if max(abs(sigma[k] - old[k]) for k in sigma) < self.eps:
+                converged = True
+                break
+
+        if not converged:
+            logger.warning(f"[{case_id}] QE: no convergence after {self.max_iters} iters.")
+        return self._finalise(graph, sigma, case_id, iters, converged)
+
+
+def get_solver(cfg: dict) -> BaseQBAFSolver:
+    name = cfg.get("qbaf", {}).get("solver", "df_quad")
+    if name == "qe_semantics":
+        logger.info("Solver: QE Semantics")
+        return QESemanticsSolver(cfg)
+    logger.info("Solver: DF-QuAD")
+    return DFQuADSolver(cfg)
+
+
+def make_decision(sigma_phi: float, cfg: dict) -> tuple[str, bool]:
+    """Return (label, is_uncertain). Label ∈ {'Yes','No','UNCERTAIN'}."""
+    threshold = cfg.get("qbaf", {}).get("decision_threshold", 0.5)
+    low, high = cfg.get("qbaf", {}).get("uncertainty_band", [0.45, 0.55])
+    if low <= sigma_phi <= high:
+        return "UNCERTAIN", True
+    return ("Yes" if sigma_phi >= threshold else "No"), False
+
+
+===== FILE: C:\Users\nkaran\Dropbox\work account\Diplomatikes\diplo oiko2k\app\adss_hearsay\src\qbaf\__init__.py =====
+
+
+
+===== FILE: C:\Users\nkaran\Dropbox\work account\Diplomatikes\diplo oiko2k\app\adss_hearsay\src\scoring\strength.py =====
+"""Module B: pass-through for combined call strengths."""
+from __future__ import annotations
+import logging
+from src.data.models import ArgumentStrength, ExtractionResult, RubricScore
+logger = logging.getLogger(__name__)
+
+_WEIGHTS = {
+    "legal_relevance":        0.30,
+    "factual_grounding":      0.20,
+    "specificity":            0.15,
+    "logical_coherence":      0.15,
+    "fre_801c_applicability": 0.20,
+}
+
+class StrengthAttributor:
+    def __init__(self, cfg: dict):
+        self.cfg = cfg
+
+    def score_all(
+        self,
+        extraction: ExtractionResult,
+        prefilled:  list[ArgumentStrength] | None = None,
+    ) -> list[ArgumentStrength]:
+        if prefilled:
+            return prefilled
+        logger.info("No prefilled strengths; using confidence fallback.")
+        results = []
+        for arg in extraction.arguments:
+            tau = max(0.1, min(1.0, arg.confidence))
+            results.append(ArgumentStrength(
+                argument_id=arg.id, tau=tau,
+                rubric=RubricScore(**{d: tau for d in _WEIGHTS}),
+                justification="Fallback from extraction confidence.",
+                model="fallback",
+            ))
+        return results
+
+
+===== FILE: C:\Users\nkaran\Dropbox\work account\Diplomatikes\diplo oiko2k\app\adss_hearsay\src\scoring\__init__.py =====
+
+
+
+===== FILE: C:\Users\nkaran\Dropbox\work account\Diplomatikes\diplo oiko2k\app\adss_hearsay\src\utils\gemini_client.py =====
+"""
+Gemini API client with:
+  - API key loaded from env OR set at runtime via dashboard
+  - Retry with exponential back-off honouring Gemini's retryDelay
+  - Thinking-model handling: extracts answer from non-thought parts when
+    response.text is empty (Gemini 2.5-flash / 2.5-pro are thinking models)
+  - Key diagnostics (masked display)
+"""
+from __future__ import annotations
+
+import logging
+import os
+import re
+import time
+from typing import Optional
+
+logger = logging.getLogger(__name__)
+
+_runtime_api_key: Optional[str] = None
+_client_cache: dict = {}
+
+
+# ── Key management ────────────────────────────────────────────────────────────
+
+def set_runtime_key(key: str) -> None:
+    global _runtime_api_key
+    _runtime_api_key = key.strip()
+    _client_cache.clear()
+    logger.info("Runtime API key updated.")
+
+
+def get_active_key() -> Optional[str]:
+    return _runtime_api_key or os.environ.get("GEMINI_API_KEY")
+
+
+def masked_key(key: Optional[str]) -> str:
+    if not key:
+        return "❌ NOT SET"
+    if len(key) <= 8:
+        return "****"
+    return f"{key[:4]}…{key[-4:]}"
+
+
+def get_client():
+    key = get_active_key()
+    if not key:
+        raise EnvironmentError(
+            "No Gemini API key found.\n"
+            "Either set GEMINI_API_KEY env var or paste it in the dashboard sidebar."
+        )
+    if _client_cache.get("key") != key:
+        import google.genai as genai  # type: ignore
+        _client_cache["client"] = genai.Client(api_key=key)
+        _client_cache["key"]    = key
+        logger.info(f"Gemini client initialised with key {masked_key(key)}")
+    return _client_cache["client"]
+
+
+# ── Response text extraction ──────────────────────────────────────────────────
+
+def _extract_text(response) -> str:
+    """
+    Extract the answer text from a Gemini response.
+
+    Gemini 2.5-flash and 2.5-pro are thinking models. Their response may have:
+      - response.text          → empty string when all output was thinking
+      - response.candidates[0].content.parts → list of Part objects,
+        some with thought=True (internal reasoning), some with thought=False (answer)
+
+    We prefer the non-thought parts. Fall back to response.text, then full text.
+    """
+    # 1. Try response.text (works for non-thinking models and simple responses)
+    try:
+        text = response.text
+        if text and text.strip():
+            return text.strip()
+    except Exception:
+        pass
+
+    # 2. Extract non-thought parts from candidates (thinking models)
+    try:
+        parts = response.candidates[0].content.parts
+        answer_parts = []
+        thought_parts = []
+        for part in parts:
+            is_thought = getattr(part, "thought", False)
+            part_text  = getattr(part, "text", "") or ""
+            if is_thought:
+                thought_parts.append(part_text)
+            else:
+                if part_text.strip():
+                    answer_parts.append(part_text)
+
+        if answer_parts:
+            return "\n".join(answer_parts).strip()
+
+        # If only thought parts exist, the model reasoned but produced no answer
+        if thought_parts:
+            logger.warning(
+                "Gemini returned only thinking content (no answer part). "
+                "The model may have used its full token budget on reasoning. "
+                "Consider using gemini-2.0-flash for simpler tasks, or "
+                "increase max_tokens."
+            )
+
+    except Exception as e:
+        logger.debug(f"Part extraction failed: {e}")
+
+    # 3. Last resort: str of response
+    try:
+        full = str(response)
+        if full and full.strip():
+            return full.strip()
+    except Exception:
+        pass
+
+    return ""
+
+
+# ── Retry helper ──────────────────────────────────────────────────────────────
+
+def _parse_retry_delay(exc: Exception) -> float:
+    m = re.search(r"retryDelay['\": ]+(\d+)", str(exc))
+    return float(m.group(1)) if m else 0.0
+
+
+def call_gemini(
+    prompt: str,
+    model: str = "gemini-2.5-flash",
+    max_tokens: int = 4096,
+    temperature: float = 0.0,
+    max_retries: int = 4,
+    base_delay: float = 5.0,
+) -> str:
+    from google.genai import types  # type: ignore
+
+    last_exc: Exception = RuntimeError("No attempts made.")
+    for attempt in range(1, max_retries + 1):
+        try:
+            client   = get_client()
+            response = client.models.generate_content(
+                model=model,
+                contents=prompt,
+                config=types.GenerateContentConfig(
+                    temperature=temperature,
+                    max_output_tokens=max_tokens,
+                ),
+            )
+
+            text = _extract_text(response)
+
+            if not text:
+                logger.warning(
+                    f"Gemini returned empty response (model={model}, "
+                    f"attempt={attempt}/{max_retries}). "
+                    "This can happen when the thinking budget exceeds max_tokens. "
+                    "Try gemini-2.0-flash which is not a thinking model."
+                )
+
+            return text
+
+        except Exception as exc:
+            last_exc  = exc
+            err_str   = str(exc)
+            is_429    = "429" in err_str or "RESOURCE_EXHAUSTED" in err_str
+            is_503    = "503" in err_str or "UNAVAILABLE" in err_str
+
+            if not (is_429 or is_503) or attempt == max_retries:
+                raise
+
+            retry_delay = _parse_retry_delay(exc)
+            backoff     = base_delay * (2 ** (attempt - 1))
+            wait        = max(retry_delay, backoff)
+
+            logger.warning(
+                f"Gemini {exc.__class__.__name__} attempt {attempt}/{max_retries}. "
+                f"Waiting {wait:.0f}s… (key={masked_key(get_active_key())})"
+            )
+            time.sleep(wait)
+
+    raise last_exc
+
+
+def gemini_cfg(cfg: dict) -> dict:
+    return cfg.get("gemini", {
+        "model": "gemini-2.5-flash",
+        "max_tokens": 4096,
+        "temperature": 0.0,
+    })
+
+
+===== FILE: C:\Users\nkaran\Dropbox\work account\Diplomatikes\diplo oiko2k\app\adss_hearsay\src\utils\helpers.py =====
+"""Shared utility helpers."""
+from __future__ import annotations
+
+import logging
+import os
+from pathlib import Path
+from typing import Any
+
+import yaml
+
+
+def load_config(path: str | Path = "configs/config.yaml") -> dict[str, Any]:
+    p = Path(path)
+    if not p.exists():
+        logging.warning(f"Config not found: {p}. Using defaults.")
+        return {}
+    with open(p) as f:
+        return yaml.safe_load(f) or {}
+
+
+def setup_logging(cfg: dict) -> None:
+    level = cfg.get("system", {}).get("log_level", "INFO")
+    logging.basicConfig(
+        level=getattr(logging, level, logging.INFO),
+        format="%(asctime)s [%(levelname)s] %(name)s: %(message)s",
+    )
+
+
+def ensure_api_key(cfg: dict | None = None) -> None:
+    """
+    Check the required API key is present for the configured backend.
+    - backend=gemini   → needs GEMINI_API_KEY
+    - backend=lmstudio → no key needed (local model)
+
+    On Windows PowerShell set the key with:
+        $env:GEMINI_API_KEY = "your_key_here"
+
+    On Linux/Mac:
+        export GEMINI_API_KEY=your_key_here
+    """
+    backend = (cfg or {}).get("backend", "gemini")
+
+    if backend == "lmstudio":
+        return   # no API key needed for local LM Studio
+
+    # Gemini (default)
+    if not os.environ.get("GEMINI_API_KEY"):
+        raise EnvironmentError(
+            "GEMINI_API_KEY environment variable is not set.\n\n"
+            "Windows PowerShell:\n"
+            '    $env:GEMINI_API_KEY = "your_key_here"\n\n'
+            "Linux / Mac:\n"
+            "    export GEMINI_API_KEY=your_key_here\n\n"
+            "Get a free key at: https://aistudio.google.com/app/apikey\n\n"
+            "Or switch to LM Studio backend by editing configs/config.yaml:\n"
+            '    backend: "lmstudio"'
+        )
+
+
+def flatten_report(report) -> dict[str, Any]:
+    d: dict[str, Any] = {
+        "system":      report.system_name,
+        "n":           report.n_samples,
+        "accuracy":    report.accuracy,
+        "acc_ci_lo":   report.accuracy_ci[0],
+        "acc_ci_hi":   report.accuracy_ci[1],
+        "macro_f1":    report.macro_f1,
+        "f1_ci_lo":    report.macro_f1_ci[0],
+        "f1_ci_hi":    report.macro_f1_ci[1],
+        "n_uncertain": report.n_uncertain_escalated,
+    }
+    for m in report.per_class:
+        d[f"{m.label}_P"]  = m.precision
+        d[f"{m.label}_R"]  = m.recall
+        d[f"{m.label}_F1"] = m.f1
+    return d
+
+
+===== FILE: C:\Users\nkaran\Dropbox\work account\Diplomatikes\diplo oiko2k\app\adss_hearsay\src\utils\llm_client.py =====
+"""
+Unified LLM router.
+cfg["backend"] = "gemini"   → Google Gemini API
+cfg["backend"] = "lmstudio" → Local LM Studio (OpenAI-compatible)
+"""
+from __future__ import annotations
+
+import logging
+
+logger = logging.getLogger(__name__)
+
+
+def get_backend(cfg: dict) -> str:
+    return cfg.get("backend", "gemini").lower()
+
+
+def llm_model(cfg: dict) -> str:
+    if get_backend(cfg) == "lmstudio":
+        return cfg.get("lmstudio", {}).get("model", "qwen/qwen3-30b-a3b")
+    return cfg.get("gemini", {}).get("model", "gemini-2.5-flash")
+
+
+def backend_label(cfg: dict) -> str:
+    b = get_backend(cfg)
+    if b == "lmstudio":
+        url      = cfg.get("lmstudio", {}).get("base_url", "http://127.0.0.1:1234/v1")
+        thinking = "thinking OFF" if cfg.get("lmstudio", {}).get("disable_thinking", True) else "thinking ON"
+        return f"LM Studio ({llm_model(cfg)}, {thinking} @ {url})"
+    return f"Gemini ({llm_model(cfg)})"
+
+
+def call_llm(prompt: str, cfg: dict, max_tokens: int | None = None) -> str:
+    """Route a prompt to the configured backend."""
+    b = get_backend(cfg)
+
+    if b == "lmstudio":
+        import src.utils.lmstudio_client as _ls
+        lcfg = _ls.lmstudio_cfg(cfg)
+        return _ls.call_lmstudio(
+            prompt,
+            model=lcfg.get("model", "qwen/qwen3-30b-a3b"),
+            max_tokens=max_tokens or lcfg.get("max_tokens", 4096),
+            temperature=lcfg.get("temperature", 0.0),
+            base_url=lcfg.get("base_url", "http://127.0.0.1:1234/v1"),
+            disable_thinking=lcfg.get("disable_thinking", True),
+        )
+
+    # Default: Gemini
+    import src.utils.gemini_client as _gc
+    gcfg = _gc.gemini_cfg(cfg)
+    return _gc.call_gemini(
+        prompt,
+        model=gcfg.get("model", "gemini-2.5-flash"),
+        max_tokens=max_tokens or gcfg.get("max_tokens", 4096),
+        temperature=gcfg.get("temperature", 0.0),
+    )
+
+
+===== FILE: C:\Users\nkaran\Dropbox\work account\Diplomatikes\diplo oiko2k\app\adss_hearsay\src\utils\llm_router.py =====
+from __future__ import annotations
+
+from typing import Optional
+
+import src.utils.gemini_client as gemini_client
+import src.utils.local_llm_client as local_client
+
+
+def get_provider(cfg: dict | None = None) -> str:
+    if not cfg:
+        return "gemini"
+    return cfg.get("llm", {}).get("provider", "gemini").lower()
+
+
+def call_text_generation(
+    prompt: str,
+    cfg: dict | None = None,
+    max_tokens: Optional[int] = None,
+    temperature: Optional[float] = None,
+) -> str:
+    provider = get_provider(cfg)
+
+    if provider == "local":
+        return local_client.call_local_llm(
+            prompt=prompt,
+            cfg=cfg,
+            max_tokens=max_tokens or 8192,
+            temperature=temperature if temperature is not None else 0.0,
+        )
+
+    gem = (cfg or {}).get("gemini", {})
+    return gemini_client.call_gemini(
+        prompt=prompt,
+        model=gem.get("model", "gemini-2.5-flash"),
+        max_tokens=max_tokens or gem.get("max_tokens", 8192),
+        temperature=temperature if temperature is not None else gem.get("temperature", 0.0),
+    )
+
+
+===== FILE: C:\Users\nkaran\Dropbox\work account\Diplomatikes\diplo oiko2k\app\adss_hearsay\src\utils\lmstudio_client.py =====
+"""
+LM Studio client — OpenAI-compatible local API.
+Default endpoint: http://127.0.0.1:1234/v1  (no API key needed).
+
+Token budget problem with Qwen3
+────────────────────────────────
+Qwen3.6-35B reasons internally even when thinking is "disabled".
+With 8192 context and ~674 prompt tokens, 7518 tokens are available
+for completion. If max_tokens=4096, the model spends ~3400 on reasoning
+and only ~678 on the actual JSON — not enough for 6 arguments.
+
+Fix: set max_tokens close to the full available context (e.g. 7000).
+This gives the model room for both reasoning AND the full JSON answer.
+
+Rule of thumb:
+  max_tokens = context_length - prompt_tokens - 500 (safety buffer)
+  With 8192 context: max_tokens ≈ 7000
+  With 4096 context: max_tokens ≈ 3200  (too small — upgrade context first)
+"""
+from __future__ import annotations
+
+import logging
+import time
+
+logger = logging.getLogger(__name__)
+
+_client_cache: dict = {}
+
+
+class ContextTooSmallError(Exception):
+    """Raised when context window is too small to produce a complete answer."""
+    pass
+
+
+def get_client(base_url: str = "http://127.0.0.1:1234/v1"):
+    if _client_cache.get("url") != base_url:
+        from openai import OpenAI  # type: ignore
+        _client_cache["client"] = OpenAI(base_url=base_url, api_key="lm-studio")
+        _client_cache["url"]    = base_url
+        logger.info(f"LM Studio client initialised at {base_url}")
+    return _client_cache["client"]
+
+
+def call_lmstudio(
+    prompt:           str,
+    model:            str   = "qwen/qwen3.6-35b-a3b",
+    max_tokens:       int   = 7000,
+    temperature:      float = 0.0,
+    base_url:         str   = "http://127.0.0.1:1234/v1",
+    max_retries:      int   = 3,
+    base_delay:       float = 3.0,
+    disable_thinking: bool  = True,
+) -> str:
+    """
+    Call a local LM Studio model.
+
+    Key: max_tokens should be ≈ context_length - prompt_tokens - 500.
+    For 8192 context → use 7000. For 4096 context → upgrade context first.
+    """
+    # Prompt-level thinking signals
+    if disable_thinking:
+        if "/no_think" not in prompt:
+            prompt = prompt.rstrip() + "\n\n/no_think"
+    else:
+        if "/think" not in prompt and "/no_think" not in prompt:
+            prompt = prompt.rstrip() + "\n\n/think"
+
+    client    = get_client(base_url)
+    last_exc: Exception = RuntimeError("No attempts made.")
+
+    for attempt in range(1, max_retries + 1):
+        try:
+            resp = client.chat.completions.create(
+                model=model,
+                messages=[{"role": "user", "content": prompt}],
+                max_tokens=max_tokens,
+                temperature=temperature,
+                extra_body={
+                    "chat_template_kwargs": {
+                        "enable_thinking": not disable_thinking
+                    }
+                },
+            )
+
+            choice = resp.choices[0]
+            text   = (choice.message.content or "").strip()
+
+            # ── Token diagnostics ──────────────────────────────────────────
+            usage             = getattr(resp, "usage", None)
+            prompt_tok        = getattr(usage, "prompt_tokens",     0) if usage else 0
+            completion_tok    = getattr(usage, "completion_tokens", 0) if usage else 0
+            total_tok         = getattr(usage, "total_tokens",      0) if usage else 0
+            details           = getattr(usage, "completion_tokens_details", None)
+            reasoning_tok     = getattr(details, "reasoning_tokens", 0) if details else 0
+            answer_tok        = completion_tok - reasoning_tok
+            finish_reason     = choice.finish_reason
+
+            logger.info(
+                f"Tokens — prompt: {prompt_tok} | "
+                f"reasoning: {reasoning_tok} | answer: {answer_tok} | "
+                f"total: {total_tok} | finish: {finish_reason}"
+            )
+
+            # ── Truncation detection ───────────────────────────────────────
+            # finish_reason="length" with answer_tok < 200 means the JSON
+            # was cut off — model ran out of budget.
+            if finish_reason == "length" and answer_tok < 200 and not text:
+                raise ContextTooSmallError(
+                    f"Context overflow: reasoning used {reasoning_tok} tokens, "
+                    f"leaving only {answer_tok} for the JSON answer.\n\n"
+                    f"► Fix: In LM Studio → loaded model → ⚙️ gear → "
+                    f"set Context Length to 8192 → Apply.\n"
+                    f"► Also check that max_tokens in the sidebar is set to ~7000."
+                )
+
+            # Warn if truncated but we have partial content
+            if finish_reason == "length" and text:
+                logger.warning(
+                    f"Response truncated (finish=length). "
+                    f"answer_tokens={answer_tok}, reasoning_tokens={reasoning_tok}. "
+                    f"JSON repair will attempt to recover partial output. "
+                    f"For complete output, increase context to 16384 in LM Studio."
+                )
+
+            # ── Fallback to reasoning_content if content empty ─────────────
+            if not text:
+                rc = getattr(choice.message, "reasoning_content", None)
+                if rc and rc.strip():
+                    logger.warning(
+                        f"content empty (answer_tok={answer_tok}); "
+                        "trying reasoning_content as fallback."
+                    )
+                    text = rc.strip()
+
+            return text
+
+        except ContextTooSmallError:
+            raise
+
+        except Exception as exc:
+            last_exc = exc
+            err      = str(exc)
+            is_transient = any(c in err for c in ["503", "429", "Connection", "timeout"])
+            if not is_transient or attempt == max_retries:
+                raise
+            wait = base_delay * (2 ** (attempt - 1))
+            logger.warning(
+                f"LM Studio error attempt {attempt}/{max_retries}. "
+                f"Waiting {wait:.0f}s…"
+            )
+            time.sleep(wait)
+
+    raise last_exc
+
+
+def lmstudio_cfg(cfg: dict) -> dict:
+    return cfg.get("lmstudio", {
+        "model":            "qwen/qwen3.6-35b-a3b",
+        "base_url":         "http://127.0.0.1:1234/v1",
+        "max_tokens":       7000,
+        "temperature":      0.0,
+        "disable_thinking": True,
+    })
+
+
+===== FILE: C:\Users\nkaran\Dropbox\work account\Diplomatikes\diplo oiko2k\app\adss_hearsay\src\utils\local_llm_client.py =====
+from __future__ import annotations
+
+import logging
+import os
+import time
+from typing import Optional
+
+import httpx
+
+logger = logging.getLogger(__name__)
+
+_runtime_base_url: Optional[str] = None
+_runtime_model: Optional[str] = None
+
+def set_runtime_local(base_url: str, model: str) -> None:
+    global _runtime_base_url, _runtime_model
+    _runtime_base_url = base_url.rstrip("/")
+    _runtime_model = model.strip()
+    logger.info("Local LLM runtime config updated.")
+
+def get_local_base_url(cfg: dict | None = None) -> str:
+    if _runtime_base_url:
+        return _runtime_base_url
+    if cfg:
+        return cfg.get("llm", {}).get("local", {}).get("base_url", "http://127.0.0.1:1234/v1")
+    return os.environ.get("LOCAL_LLM_BASE_URL", "http://127.0.0.1:1234/v1")
+
+def get_local_model(cfg: dict | None = None) -> str:
+    if _runtime_model:
+        return _runtime_model
+    if cfg:
+        return cfg.get("llm", {}).get("local", {}).get("model", "qwen/qwen3.6-35b-a3b")
+    return os.environ.get("LOCAL_LLM_MODEL", "qwen/qwen3.6-35b-a3b")
+
+def call_local_llm(
+    prompt: str,
+    cfg: dict | None = None,
+    max_tokens: int = 8192,
+    temperature: float = 0.0,
+    max_retries: int = 3,
+    base_delay: float = 2.0,
+    timeout: float = 180.0,
+) -> str:
+    """
+    OpenAI-compatible call to LM Studio local server.
+    """
+    base_url = get_local_base_url(cfg)
+    model = get_local_model(cfg)
+
+    url = f"{base_url}/chat/completions"
+    payload = {
+        "model": model,
+        "messages": [
+            {"role": "system", "content": "Return only the requested output. If JSON is requested, return valid JSON only."},
+            {"role": "user", "content": prompt},
+        ],
+        "temperature": temperature,
+        "max_tokens": max_tokens,
+        "stream": False,
+    }
+
+    last_exc: Exception | None = None
+
+    for attempt in range(1, max_retries + 1):
+        try:
+            with httpx.Client(timeout=timeout) as client:
+                r = client.post(url, json=payload)
+                r.raise_for_status()
+                data = r.json()
+                return data["choices"][0]["message"]["content"]
+        except Exception as exc:
+            last_exc = exc
+            if attempt >= max_retries:
+                break
+            delay = base_delay * (2 ** (attempt - 1))
+            logger.warning(
+                "Local LLM error attempt %s/%s. Waiting %.1fs… url=%s model=%s err=%s",
+                attempt, max_retries, delay, base_url, model, str(exc)[:200],
+            )
+            time.sleep(delay)
+
+    raise RuntimeError(f"Local LLM call failed after {max_retries} attempts: {last_exc}")
+
+
+===== FILE: C:\Users\nkaran\Dropbox\work account\Diplomatikes\diplo oiko2k\app\adss_hearsay\src\utils\__init__.py =====
+
+
+
+===== FILE: C:\Users\nkaran\Dropbox\work account\Diplomatikes\diplo oiko2k\app\adss_hearsay\src\__init__.py =====
+
+
+
+===== FILE: C:\Users\nkaran\Dropbox\work account\Diplomatikes\diplo oiko2k\app\adss_hearsay\tests\test_models.py =====
+"""Unit tests for Pydantic data models."""
+import pytest
+from pydantic import ValidationError
+from src.data.models import (
+    Argument, ExtractionResult, QBAFEdge, QBAFGraph, QBAFNode,
+    Relation, RelationType, RubricScore, Stance,
+)
+
+
+def test_argument_valid():
+    a = Argument(id="a1", text="Out-of-court statement.",
+                 stance_to_claim=Stance.SUPPORT,
+                 legal_rule="FRE 801(c)", confidence=0.9)
+    assert a.id == "a1"
+
+
+def test_argument_phi_reserved():
+    with pytest.raises(ValidationError):
+        Argument(id="phi", text="x", stance_to_claim=Stance.SUPPORT,
+                 legal_rule="FRE 801(c)", confidence=0.5)
+
+
+def test_extraction_duplicate_ids():
+    with pytest.raises(ValidationError):
+        ExtractionResult(
+            case_id="x", input_text="y",
+            arguments=[
+                Argument(id="a1", text="x", stance_to_claim=Stance.SUPPORT,
+                         legal_rule="r", confidence=0.5),
+                Argument(id="a1", text="y", stance_to_claim=Stance.ATTACK,
+                         legal_rule="r", confidence=0.5),
+            ],
+        )
+
+
+def test_extraction_invalid_relation_ref():
+    with pytest.raises(ValidationError):
+        ExtractionResult(
+            case_id="x", input_text="y",
+            arguments=[
+                Argument(id="a1", text="x", stance_to_claim=Stance.SUPPORT,
+                         legal_rule="r", confidence=0.5),
+            ],
+            relations=[
+                Relation(source="a99", target="a1",
+                         type=RelationType.SUPPORT, confidence=0.8),
+            ],
+        )
+
+
+def test_qbaf_graph_helpers():
+    g = QBAFGraph(
+        nodes={
+            "a1":  QBAFNode(id="a1",  text="t", tau=0.8, sigma=0.8),
+            "phi": QBAFNode(id="phi", text="c", tau=0.5, sigma=0.5, is_claim=True),
+        },
+        edges=[QBAFEdge(source="a1", target="phi",
+                        type=RelationType.SUPPORT, confidence=0.9)],
+    )
+    assert g.supporters_of("phi") == ["a1"]
+    assert g.attackers_of("phi")  == []
+
+
+def test_rubric_out_of_range():
+    with pytest.raises(ValidationError):
+        RubricScore(legal_relevance=1.5, factual_grounding=0.5,
+                    specificity=0.5, logical_coherence=0.5,
+                    fre_801c_applicability=0.5)
+
+
+===== FILE: C:\Users\nkaran\Dropbox\work account\Diplomatikes\diplo oiko2k\app\adss_hearsay\tests\test_pipeline.py =====
+"""Integration tests — single combined LLM call, mocked at module level."""
+from __future__ import annotations
+
+import json
+from unittest.mock import patch
+
+import pytest
+from src.data.models import HearsayExample, Decision
+
+_COMBINED = json.dumps({
+    "case_id": "t1",
+    "arguments": [
+        {
+            "id": "a1", "text": "Out-of-court statement.",
+            "stance_to_claim": "support", "legal_rule": "FRE 801(c)(1)",
+            "evidence_span": None, "confidence": 0.9,
+            "rubric": {"legal_relevance": 0.9, "factual_grounding": 0.8,
+                       "specificity": 0.7, "logical_coherence": 0.9,
+                       "fre_801c_applicability": 0.9},
+            "tau": 0.85, "justification": "Strong argument.",
+        },
+        {
+            "id": "a2", "text": "Offered for truth of matter asserted.",
+            "stance_to_claim": "support", "legal_rule": "FRE 801(c)(2)",
+            "evidence_span": None, "confidence": 0.85,
+            "rubric": {"legal_relevance": 0.85, "factual_grounding": 0.75,
+                       "specificity": 0.7, "logical_coherence": 0.85,
+                       "fre_801c_applicability": 0.85},
+            "tau": 0.80, "justification": "Good argument.",
+        },
+    ],
+    "relations": [
+        {"source": "a1", "target": "phi", "type": "support", "confidence": 0.9},
+        {"source": "a2", "target": "phi", "type": "support", "confidence": 0.85},
+    ],
+})
+
+_CFG = {
+    "backend": "gemini",
+    "gemini":  {"model": "gemini-2.5-flash", "max_tokens": 4096, "temperature": 0.0},
+    "mining":  {"max_arguments": 6, "min_confidence": 0.3,
+                "include_neutral_relations": False, "max_retries": 1},
+    "qbaf":    {"solver": "df_quad", "max_iterations": 50,
+                "convergence_eps": 1e-6, "decision_threshold": 0.5,
+                "uncertainty_band": [0.45, 0.55], "phi_initial_strength": 0.5},
+    "system":  {"artifact_dir": "/tmp/adss_test"},
+}
+
+# Patch at the module-level reference used by each module
+_EXT  = "src.mining.extractor._llm.call_llm"
+_ORCH = "src.pipeline.orchestrator._llm.call_llm"
+
+
+def test_full_pipeline_single_call():
+    """ONE mock call → valid prediction with strengths."""
+    call_count = 0
+    def _mock(*a, **kw):
+        nonlocal call_count
+        call_count += 1
+        return _COMBINED
+
+    from src.pipeline.orchestrator import ADSSPipeline
+    with patch(_EXT, side_effect=_mock):
+        pred = ADSSPipeline(_CFG).run_case(
+            HearsayExample(case_id="t1",
+                           text="Witness said victim told him 'car was red'.",
+                           split="test"),
+            save_artifacts=False,
+        )
+
+    assert call_count == 1, f"Expected 1 LLM call, got {call_count}"
+    assert pred.case_id == "t1"
+    assert pred.decision in Decision
+    assert 0.0 <= pred.sigma_phi <= 1.0
+    assert len(pred.extraction.arguments) == 2
+    assert len(pred.strengths) == 2
+    assert pred.strengths[0].tau > 0.1  # tau computed from rubric weights
+
+
+def test_hitl_edit_tau():
+    from src.pipeline.orchestrator import ADSSPipeline
+    from src.data.models import HITLIntervention
+
+    with patch(_EXT, return_value=_COMBINED):
+        pipeline = ADSSPipeline(_CFG)
+        pred = pipeline.run_case(
+            HearsayExample(case_id="t1", text="Witness test.", split="test"),
+            save_artifacts=False,
+        )
+
+    assert "a1" in pred.solver_output.graph.nodes
+    old_sigma = pred.sigma_phi
+
+    pred2 = pipeline.apply_hitl_intervention(pred, HITLIntervention(
+        intervention_type="edit_tau", target_id="a1",
+        old_value=0.85, new_value=0.1,
+    ))
+    assert pred2.sigma_phi != old_sigma
+    assert len(pred2.hitl_interventions) == 1
+
+
+def test_baseline_cot():
+    from src.pipeline.orchestrator import BaselineRunner
+    cot_response = "The statement is out-of-court and offered for truth.\nAnswer: Yes"
+
+    with patch(_ORCH, return_value=cot_response):
+        result = BaselineRunner(_CFG).run_cot(
+            HearsayExample(case_id="b1", text="test", split="test", label="Yes")
+        )
+    assert result.decision == Decision.YES
+
+
+def test_lmstudio_backend_routes_correctly():
+    cfg_ls = dict(_CFG, backend="lmstudio",
+                  lmstudio={"model": "qwen/qwen3-30b-a3b",
+                             "base_url": "http://127.0.0.1:1234/v1",
+                             "max_tokens": 4096, "temperature": 0.0})
+    import src.utils.lmstudio_client as _ls
+    with patch.object(_ls, "call_lmstudio", return_value=_COMBINED) as mock_ls:
+        from src.pipeline.orchestrator import ADSSPipeline
+        pred = ADSSPipeline(cfg_ls).run_case(
+            HearsayExample(case_id="t2", text="test", split="test"),
+            save_artifacts=False,
+        )
+        assert mock_ls.called
+    assert len(pred.extraction.arguments) == 2
+
+
+===== FILE: C:\Users\nkaran\Dropbox\work account\Diplomatikes\diplo oiko2k\app\adss_hearsay\tests\test_solver.py =====
+"""Unit tests for QBAF solvers (no LLM calls)."""
+import pytest
+from src.data.models import QBAFGraph, QBAFEdge, QBAFNode, RelationType
+from src.qbaf.solver import DFQuADSolver, QESemanticsSolver
+
+_CFG = {"qbaf": {"max_iterations": 100, "convergence_eps": 1e-8,
+                  "decision_threshold": 0.5, "uncertainty_band": [0.45, 0.55]}}
+
+
+def _simple():
+    return QBAFGraph(
+        nodes={
+            "a1":  QBAFNode(id="a1",  text="s", tau=0.8, sigma=0.8),
+            "a2":  QBAFNode(id="a2",  text="a", tau=0.3, sigma=0.3),
+            "phi": QBAFNode(id="phi", text="c", tau=0.5, sigma=0.5, is_claim=True),
+        },
+        edges=[
+            QBAFEdge(source="a1", target="phi", type=RelationType.SUPPORT, confidence=1.0),
+            QBAFEdge(source="a2", target="phi", type=RelationType.ATTACK,  confidence=1.0),
+        ],
+    )
+
+
+def _solo():
+    return QBAFGraph(
+        nodes={"phi": QBAFNode(id="phi", text="c", tau=0.5, sigma=0.5, is_claim=True)},
+        edges=[],
+    )
+
+
+class TestDFQuAD:
+    def test_no_edges_sigma_equals_tau(self):
+        assert abs(DFQuADSolver(_CFG).solve(_solo()).sigma_phi - 0.5) < 1e-6
+
+    def test_support_increases_sigma(self):
+        g = QBAFGraph(
+            nodes={"a1": QBAFNode(id="a1", text="s", tau=0.9, sigma=0.9),
+                   "phi": QBAFNode(id="phi", text="c", tau=0.5, sigma=0.5, is_claim=True)},
+            edges=[QBAFEdge(source="a1", target="phi", type=RelationType.SUPPORT, confidence=1.0)],
+        )
+        assert DFQuADSolver(_CFG).solve(g).sigma_phi > 0.5
+
+    def test_attack_decreases_sigma(self):
+        g = QBAFGraph(
+            nodes={"a1": QBAFNode(id="a1", text="a", tau=0.9, sigma=0.9),
+                   "phi": QBAFNode(id="phi", text="c", tau=0.5, sigma=0.5, is_claim=True)},
+            edges=[QBAFEdge(source="a1", target="phi", type=RelationType.ATTACK, confidence=1.0)],
+        )
+        assert DFQuADSolver(_CFG).solve(g).sigma_phi < 0.5
+
+    def test_sigma_in_unit_interval(self):
+        out = DFQuADSolver(_CFG).solve(_simple())
+        assert all(0.0 <= v <= 1.0 for v in out.sigma_all.values())
+
+    def test_converged(self):
+        assert DFQuADSolver(_CFG).solve(_simple()).converged
+
+
+class TestQESemantics:
+    def test_no_edges_sigma_equals_tau(self):
+        assert abs(QESemanticsSolver(_CFG).solve(_solo()).sigma_phi - 0.5) < 1e-6
+
+    def test_support_increases_sigma(self):
+        g = QBAFGraph(
+            nodes={"a1": QBAFNode(id="a1", text="s", tau=0.9, sigma=0.9),
+                   "phi": QBAFNode(id="phi", text="c", tau=0.5, sigma=0.5, is_claim=True)},
+            edges=[QBAFEdge(source="a1", target="phi", type=RelationType.SUPPORT, confidence=1.0)],
+        )
+        assert QESemanticsSolver(_CFG).solve(g).sigma_phi > 0.5
+
+    def test_sigma_in_unit_interval(self):
+        out = QESemanticsSolver(_CFG).solve(_simple())
+        assert all(0.0 <= v <= 1.0 for v in out.sigma_all.values())
+
+
+===== FILE: C:\Users\nkaran\Dropbox\work account\Diplomatikes\diplo oiko2k\app\adss_hearsay\inspect_predictions.py =====
+import pandas as pd
+from pathlib import Path
+
+path = Path("artifacts/evaluation/full_adss_predictions.csv")
+print("Exists:", path.exists())
+print("Path:", path.resolve())
+
+df = pd.read_csv(path)
+print("\nColumns:")
+print(df.columns.tolist())
+
+print("\nFirst row:")
+print(df.head(1).T)
+
+
+===== FILE: C:\Users\nkaran\Dropbox\work account\Diplomatikes\diplo oiko2k\app\adss_hearsay\instructions.txt =====
+## Setup
+
+```bash
+# 1. Clone and create venv
+python -m venv .venv && source .venv/bin/activate
+
+# 2. Install dependencies
+pip install -r requirements.txt
+
+# 3. Set API key
+export ANTHROPIC_API_KEY=your_key_here
+
+# 4. (Optional) pre-download dataset
+python -c "from src.data.loader import load_examples; from src.utils.helpers import load_config; load_examples(load_config()['dataset'], 'train')"
+```
+
+## Run the dashboard
+
+```bash
+streamlit run src/dashboard/app.py
+```
+
+## Run evaluation
+
+```bash
+# Full evaluation on test split
+python scripts/run_eval.py --split test
+
+# Quick test on 20 samples
+python scripts/run_eval.py --split test --max 20
+
+# Use QE semantics solver
+python scripts/run_eval.py --solver qe_semantics --max 50
+```
+
+## Run case studies
+
+```bash
+python scripts/case_studies.py
+# Outputs to artifacts/case_studies/
+```
+
+## Run tests
+
+```bash
+pytest tests/ -v
+```
+
+## Configuration
+
+All thresholds, model names, and solver semantics live in `configs/config.yaml`.
+Key settings:
+
+| Key | Default | Description |
+|-----|---------|-------------|
+| `qbaf.solver` | `df_quad` | `df_quad` or `qe_semantics` |
+| `qbaf.decision_threshold` | `0.5` | σ(φ) cut-off for Yes/No |
+| `qbaf.uncertainty_band` | `[0.45, 0.55]` | UAE escalation zone |
+| `mining.max_arguments` | `8` | Max arguments extracted per case |
+| `anthropic.model` | `claude-sonnet-4-20250514` | LLM for all modules |
+
+## Solvers
+
+### DF-QuAD (default)
+
+
+===== FILE: C:\Users\nkaran\Dropbox\work account\Diplomatikes\diplo oiko2k\app\adss_hearsay\README.md =====
+# ADSS-Hearsay
+**Neuro-Symbolic Argumentative Decision Support System for LegalBench Hearsay (FRE 801(c))**
+Powered by **Google Gemini**.
+
+---
+
+## Quick start
+
+```bash
+# 1. Clone & create venv
+python -m venv .venv && source .venv/bin/activate
+
+# 2. Install
+pip install -r requirements.txt
+
+# 3. Set your Gemini API key (free at https://aistudio.google.com/app/apikey)
+export GEMINI_API_KEY=your_key_here
+
+# 4. Launch the HITL dashboard
+streamlit run src/dashboard/app.py
+
+# 5. Run evaluation (test split, 20 samples)
+python scripts/run_eval.py --split test --max 20
+
+# 6. Run case studies
+python scripts/case_studies.py
+
+# 7. Run unit tests (no API key needed)
+pytest tests/ -v
+```
+
+---
+
+## Architecture
+
+```
+Input narrative
+      │
+      ▼
+┌──────────────────────┐
+│ Module A: Extraction │  Gemini → JSON arguments + relations
+└──────────┬───────────┘
+           │
+           ▼
+┌──────────────────────┐
+│ Module B: Strength   │  Gemini → τ(αᵢ) ∈ [0.1, 1.0]
+└──────────┬───────────┘
+           │
+           ▼
+┌──────────────────────┐
+│ Module C: QBAF       │  DF-QuAD or QE → σ(φ) ∈ [0,1]
+└──────────┬───────────┘
+           │
+    ┌──────┴──────┐
+    ▼             ▼
+ Yes / No      UNCERTAIN → escalation log
+           │
+           ▼
+┌──────────────────────┐
+│ Module D: HITL       │  Streamlit dashboard
+└──────────────────────┘
+```
+
+---
+
+## Solvers
+
+| Solver | Equation |
+|--------|----------|
+| **DF-QuAD** (default) | `σ(x) = τ(x) + (1−τ)·CS(x) − τ·CA(x)` where `CS = 1−∏(1−σ(s))` |
+| **QE Semantics** | `σ(x) = τ(x)·(1+Σσ(S)) / (1+Σσ(S)+Σσ(A))` |
+
+Switch via `configs/config.yaml` → `qbaf.solver: qe_semantics`
+
+---
+
+## Configuration (`configs/config.yaml`)
+
+| Key | Default | Description |
+|-----|---------|-------------|
+| `gemini.model` | `gemini-2.0-flash` | Gemini model for all LLM calls |
+| `qbaf.solver` | `df_quad` | `df_quad` or `qe_semantics` |
+| `qbaf.decision_threshold` | `0.5` | σ(φ) cut-off |
+| `qbaf.uncertainty_band` | `[0.45, 0.55]` | UAE escalation zone |
+| `mining.max_arguments` | `8` | Max args per case |
+
+---
+
+## Output artefacts
+
+```
+artifacts/
+├── <case_id>_prediction.json
+├── case_studies/
+│   ├── cs_001.json  (correct initial)
+│   ├── cs_002.json  (HITL correction)
+│   └── cs_003.json  (uncertainty escalation)
+└── evaluation/
+    ├── full_adss_report.json
+    ├── full_adss_predictions.csv
+    └── summary.csv
+```
+
+
+===== FILE: C:\Users\nkaran\Dropbox\work account\Diplomatikes\diplo oiko2k\app\adss_hearsay\requirements.txt =====
+# LLM backend
+openai>=1.0.0
+json-repair>=0.30.0
+google-genai>=1.0.0
+
+# Data / ML
+pydantic>=2.0.0
+pyyaml>=6.0
+datasets>=2.18.0
+networkx>=3.2
+pandas>=2.0.0
+numpy>=1.26.0
+scikit-learn>=1.4.0
+
+# Dashboard
+streamlit>=1.35.0
+pyvis>=0.3.2
+
+# Testing
+pytest>=8.0.0
+
+

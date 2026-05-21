@@ -1,167 +1,94 @@
-"""
-Error analysis: categorise misclassified predictions into the 4 paper categories.
-  1. Argument omission
-  2. Relation error
-  3. Strength miscalibration
-  4. Threshold / uncertainty failure
-"""
+
+"""Structured error analysis for ADSS misclassifications."""
 from __future__ import annotations
 
-import json
-import logging
-from dataclasses import dataclass
+from dataclasses import dataclass, asdict
 from pathlib import Path
+from typing import Any
+import csv
+import json
 
-from src.data.models import ADSSPrediction, Decision
-
-logger = logging.getLogger(__name__)
-
-CATEGORIES = [
+CATEGORIES = (
     "argument_omission",
     "relation_error",
     "strength_miscalibration",
     "threshold_uncertainty_failure",
-]
+)
 
 
 @dataclass
-class ErrorRecord:
-    case_id:   str
-    gold:      str
-    predicted: str
+class ErrorCase:
+    case_id: str
+    gold_label: str
+    predicted_label: str
     sigma_phi: float
-    category:  str
-    reason:    str
+    category: str
+    reason: str
 
 
-def _classify_error(pred: ADSSPrediction) -> tuple[str, str]:
-    """
-    Return (category, reason) for a misclassified prediction.
-    Categories are mutually exclusive; first matching rule wins.
-    """
-    n_args = len(pred.extraction.arguments)
-    sigma  = pred.sigma_phi
-    gold   = pred.gold_label or "?"
-
-    # 1. Argument omission — too few args extracted
-    if n_args == 0:
-        return "argument_omission", "No arguments extracted at all."
-    if n_args <= 1:
-        return "argument_omission", f"Only {n_args} argument(s) extracted; insufficient coverage."
-
-    # 2. Threshold / uncertainty failure — sigma very close to boundary
-    low, high = 0.40, 0.60   # slightly wider than UAE band for error analysis
-    if low <= sigma <= high:
-        return "threshold_uncertainty_failure", (
-            f"σ(φ)={sigma:.4f} falls in borderline zone [{low},{high}]; "
-            "escalation should have applied."
-        )
-
-    # 3. Relation error — wrong stances dominate
-    if pred.solver_output:
-        supporters = pred.solver_output.graph.supporters_of("phi")
-        attackers  = pred.solver_output.graph.attackers_of("phi")
-        if gold == "Yes" and len(attackers) > len(supporters):
-            return "relation_error", (
-                f"Gold=Yes but {len(attackers)} attack(s) > {len(supporters)} support(s); "
-                "stances likely misclassified."
-            )
-        if gold == "No" and len(supporters) > len(attackers):
-            return "relation_error", (
-                f"Gold=No but {len(supporters)} support(s) > {len(attackers)} attack(s); "
-                "stances likely misclassified."
-            )
-
-    # 4. Strength miscalibration — stances are in the right direction but sigma is wrong
-    if pred.strengths:
-        tau_map = {s.argument_id: s.tau for s in pred.strengths}
-        supporters = pred.solver_output.graph.supporters_of("phi") if pred.solver_output else []
-        attackers  = pred.solver_output.graph.attackers_of("phi")  if pred.solver_output else []
-        sup_taus   = [tau_map.get(aid, 0.5) for aid in supporters]
-        att_taus   = [tau_map.get(aid, 0.5) for aid in attackers]
-        mean_sup   = sum(sup_taus) / len(sup_taus) if sup_taus else 0.5
-        mean_att   = sum(att_taus) / len(att_taus) if att_taus else 0.5
-        if gold == "Yes" and mean_att > mean_sup:
-            return "strength_miscalibration", (
-                f"Gold=Yes but mean τ(attack)={mean_att:.3f} > mean τ(support)={mean_sup:.3f}; "
-                "attackers over-scored."
-            )
-        if gold == "No" and mean_sup > mean_att:
-            return "strength_miscalibration", (
-                f"Gold=No but mean τ(support)={mean_sup:.3f} > mean τ(attack)={mean_att:.3f}; "
-                "supporters over-scored."
-            )
-
-    # Default fallback
-    return "argument_omission", (
-        f"No specific pattern identified. n_args={n_args}, σ={sigma:.4f}."
-    )
+def _dval(d: Any) -> str:
+    return d.value if hasattr(d, "value") else str(d)
 
 
-def analyse_errors(
-    predictions: list[ADSSPrediction],
-    output_dir: str | Path | None = None,
-) -> dict[str, float]:
-    """
-    Classify each misclassified prediction and return proportions per category.
-    """
-    errors: list[ErrorRecord] = []
+def _binary(label: str) -> str:
+    return "No" if label == "UNCERTAIN" else label
 
-    for pred in predictions:
-        if pred.gold_label is None:
-            continue
-        if pred.is_correct():
-            continue   # only errors
 
-        cat, reason = _classify_error(pred)
-        dec = pred.decision.value if pred.decision != Decision.UNCERTAIN else "No"
-        errors.append(ErrorRecord(
-            case_id=pred.case_id,
-            gold=pred.gold_label,
-            predicted=dec,
-            sigma_phi=pred.sigma_phi,
-            category=cat,
-            reason=reason,
-        ))
+def categorize_error(pred: Any, band: tuple[float, float] = (0.45, 0.55)) -> ErrorCase | None:
+    gold = getattr(pred, "gold_label", None)
+    if gold not in ("Yes", "No"):
+        return None
+    predicted = _dval(pred.decision)
+    if _binary(predicted) == gold:
+        return None
 
+    extraction = getattr(pred, "extraction", None)
+    args = getattr(extraction, "arguments", []) if extraction else []
+    rels = getattr(extraction, "relations", []) if extraction else []
+    strengths = getattr(pred, "strengths", []) or []
+    sigma = float(getattr(pred, "sigma_phi", 0.5))
+
+    if band[0] <= sigma <= band[1] and predicted != "UNCERTAIN":
+        category = "threshold_uncertainty_failure"
+        reason = "Case score lies inside uncertainty band but was not flagged as uncertain."
+    elif len(args) == 0 or (hasattr(extraction, "n_raw_arguments") and extraction.n_raw_arguments > len(args)):
+        category = "argument_omission"
+        reason = "No arguments were retained, or relevant arguments were filtered out as neutral/low-confidence."
+    elif len(rels) == 0 or not any(getattr(r, "target", None) == "phi" for r in rels):
+        category = "relation_error"
+        reason = "No usable relations to phi were produced."
+    elif strengths:
+        avg_tau = sum(float(getattr(s, "tau", 0.5)) for s in strengths) / len(strengths)
+        if avg_tau < 0.35 or avg_tau > 0.9:
+            category = "strength_miscalibration"
+            reason = f"Average tau appears extreme or implausible: {avg_tau:.3f}."
+        else:
+            category = "relation_error"
+            reason = "Arguments exist with plausible strengths; relation polarity/structure is the likely failure."
+    else:
+        category = "strength_miscalibration"
+        reason = "Arguments exist but no strength scores were available."
+
+    return ErrorCase(pred.case_id, gold, predicted, sigma, category, reason)
+
+
+def analyse_errors(predictions: list[Any], band: tuple[float, float] = (0.45, 0.55)) -> tuple[list[ErrorCase], dict[str, float]]:
+    errors = [e for p in predictions if (e := categorize_error(p, band)) is not None]
     if not errors:
-        logger.info("No errors to analyse.")
-        return {c: 0.0 for c in CATEGORIES}
-
-    total = len(errors)
-    counts = {c: sum(1 for e in errors if e.category == c) for c in CATEGORIES}
-    proportions = {c: counts[c] / total for c in CATEGORIES}
-
-    logger.info(f"Error analysis: {total} errors total")
-    for c in CATEGORIES:
-        logger.info(f"  {c}: {counts[c]} ({proportions[c]:.1%})")
-
-    if output_dir:
-        out = Path(output_dir)
-        out.mkdir(parents=True, exist_ok=True)
-        with open(out / "error_analysis.json", "w", encoding="utf-8") as f:
-            json.dump({
-                "total_errors": total,
-                "counts": counts,
-                "proportions": {k: round(v, 4) for k, v in proportions.items()},
-                "records": [
-                    {"case_id": e.case_id, "gold": e.gold,
-                     "predicted": e.predicted, "sigma_phi": e.sigma_phi,
-                     "category": e.category, "reason": e.reason}
-                    for e in errors
-                ],
-            }, f, indent=2)
-
-    return proportions
+        return [], {c: 0.0 for c in CATEGORIES}
+    proportions = {c: sum(e.category == c for e in errors) / len(errors) for c in CATEGORIES}
+    return errors, proportions
 
 
-def print_error_analysis(proportions: dict[str, float]) -> None:
-    labels = {
-        "argument_omission":            "Argument omission",
-        "relation_error":               "Relation error",
-        "strength_miscalibration":      "Strength miscalibration",
-        "threshold_uncertainty_failure":"Threshold / uncertainty failure",
-    }
-    print("\n  Error Analysis")
-    for cat, prop in proportions.items():
-        print(f"    {labels.get(cat, cat):40s}  {prop:.1%}")
+def write_error_report(errors: list[ErrorCase], proportions: dict[str, float], out_dir: str | Path) -> None:
+    out = Path(out_dir)
+    out.mkdir(parents=True, exist_ok=True)
+    (out / "error_analysis.json").write_text(json.dumps({
+        "proportions": proportions,
+        "errors": [asdict(e) for e in errors],
+    }, indent=2), encoding="utf-8")
+    with (out / "error_cases.csv").open("w", newline="", encoding="utf-8") as f:
+        w = csv.DictWriter(f, fieldnames=["case_id", "gold_label", "predicted_label", "sigma_phi", "category", "reason"])
+        w.writeheader()
+        for e in errors:
+            w.writerow(asdict(e))
