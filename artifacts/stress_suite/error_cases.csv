@@ -1,0 +1,3 @@
+case_id,gold_label,predicted_label,sigma_phi,category,reason
+stress_hearsay_no_party_001,No,Yes,0.9999999980684684,argument_omission,"No arguments were retained, or relevant arguments were filtered out as neutral/low-confidence."
+stress_hearsay_no_effect_001,No,Yes,0.998686638496,argument_omission,"No arguments were retained, or relevant arguments were filtered out as neutral/low-confidence."

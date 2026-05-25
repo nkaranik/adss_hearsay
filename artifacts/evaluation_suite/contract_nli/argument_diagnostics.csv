@@ -1,0 +1,3 @@
+case_id,domain,gold_label,decision,is_correct,sigma_phi,is_uncertain,claim_text,n_raw_arguments,n_kept_arguments,n_neutral_arguments,n_relations,n_phi_edges,n_strengths,mean_tau,parse_error
+test_0000,contract_nli,Yes,Yes,True,1.0,False,Does the contract context entail the target confidentiality statement?,4,4,0,4,4,4,0.875,
+test_0001,contract_nli,Yes,Yes,True,0.9999625,False,Does the contract context entail the target confidentiality statement?,3,3,0,4,3,3,0.8666666666666667,

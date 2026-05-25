@@ -1,0 +1,184 @@
+{
+  "case_id": "test_0058",
+  "input_text": "To prove that Michael was in charge of the group, the plaintiffs introduce evidence of Michael stating, \"I am the boss here.\"",
+  "phi_text": "",
+  "gold_label": "Yes",
+  "extraction": {
+    "case_id": "test_0058",
+    "input_text": "To prove that Michael was in charge of the group, the plaintiffs introduce evidence of Michael stating, \"I am the boss here.\"",
+    "claim": {
+      "id": "phi",
+      "text": "Is the statement described in this narrative hearsay under FRE 801(c)?"
+    },
+    "arguments": [
+      {
+        "id": "a1",
+        "text": "The statement \"I am the boss here\" was made by Michael outside of the current trial or hearing.",
+        "stance_to_claim": "support",
+        "legal_rule": "FRE 801(c)(1) - Statement not made while testifying at the current trial or hearing.",
+        "evidence_span": "the plaintiffs introduce evidence of Michael stating",
+        "confidence": 0.9
+      },
+      {
+        "id": "a2",
+        "text": "Michael's statement \"I am the boss here\" constitutes a clear assertion of fact regarding his authority and role.",
+        "stance_to_claim": "support",
+        "legal_rule": "FRE 801(c)(2) - The declarant asserts the matter.",
+        "evidence_span": "Michael stating, \"I am the boss here.\"",
+        "confidence": 0.95
+      },
+      {
+        "id": "a3",
+        "text": "The plaintiffs are introducing the statement specifically to prove that Michael was in charge of the group, which is the truth of the matter asserted.",
+        "stance_to_claim": "support",
+        "legal_rule": "FRE 801(c)(3) - Offered to prove the truth of the matter asserted.",
+        "evidence_span": "To prove that Michael was in charge of the group",
+        "confidence": 0.95
+      }
+    ],
+    "relations": [
+      {
+        "source": "a1",
+        "target": "phi",
+        "type": "support",
+        "confidence": 0.9
+      },
+      {
+        "source": "a2",
+        "target": "phi",
+        "type": "support",
+        "confidence": 0.95
+      },
+      {
+        "source": "a3",
+        "target": "phi",
+        "type": "support",
+        "confidence": 0.95
+      }
+    ],
+    "extraction_model": "",
+    "raw_llm_response": "{\n  \"case_id\": \"test_0058\",\n  \"phi\": \"Is the statement described in this narrative hearsay under FRE 801(c)?\",\n  \"arguments\": [\n    {\n      \"id\": \"a1\",\n      \"text\": \"The statement \\\"I am the boss here\\\" was made by Michael outside of the current trial or hearing.\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"FRE 801(c)(1) - Statement not made while testifying at the current trial or hearing.\",\n      \"evidence_span\": \"the plaintiffs introduce evidence of Michael stating\",\n      \"confidence\": 0.90,\n      \"tau\": 0.85,\n      \"rubric\": {\n        \"relevance\": 0.90,\n        \"factual_grounding\": 0.85,\n        \"specificity\": 0.80,\n        \"logical_coherence\": 0.90,\n        \"applicability\": 0.90\n      },\n      \"justification\": \"Directly addresses the out-of-court requirement for hearsay under FRE 801(c). The narrative indicates the statement is being introduced as evidence, implying it was made outside the current proceedings.\"\n    },\n    {\n      \"id\": \"a2\",\n      \"text\": \"Michael's statement \\\"I am the boss here\\\" constitutes a clear assertion of fact regarding his authority and role.\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"FRE 801(c)(2) - The declarant asserts the matter.\",\n      \"evidence_span\": \"Michael stating, \\\"I am the boss here.\\\"\",\n      \"confidence\": 0.95,\n      \"tau\": 0.90,\n      \"rubric\": {\n        \"relevance\": 0.90,\n        \"factual_grounding\": 0.95,\n        \"specificity\": 0.90,\n        \"logical_coherence\": 0.95,\n        \"applicability\": 0.90\n      },\n      \"justification\": \"Directly addresses the assertion requirement. The explicit use of 'stating' and the declarative nature of the quote confirm it is an assertion.\"\n    },\n    {\n      \"id\": \"a3\",\n      \"text\": \"The plaintiffs are introducing the statement specifically to prove that Michael was in charge of the group, which is the truth of the matter asserted.\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"FRE 801(c)(3) - Offered to prove the truth of the matter asserted.\",\n      \"evidence_span\": \"To prove that Michael was in charge of the group\",\n      \"confidence\": 0.95,\n      \"tau\": 0.95,\n      \"rubric\": {\n        \"relevance\": 0.95,\n        \"factual_grounding\": 0.95,\n        \"specificity\": 0.90,\n        \"logical_coherence\": 0.95,\n        \"applicability\": 0.95\n      },\n      \"justification\": \"Directly addresses the offered-for-truth requirement, which is the core trigger for hearsay classification. The narrative explicitly states the purpose matches the content of the statement.\"\n    }\n  ],\n  \"relations\": [\n    {\n      \"source\": \"a1\",\n      \"target\": \"phi\",\n      \"type\": \"support\",\n      \"confidence\": 0.90\n    },\n    {\n      \"source\": \"a2\",\n      \"target\": \"phi\",\n      \"type\": \"support\",\n      \"confidence\": 0.95\n    },\n    {\n      \"source\": \"a3\",\n      \"target\": \"phi\",\n      \"type\": \"support\",\n      \"confidence\": 0.95\n    }\n  ]\n}",
+    "parse_error": null,
+    "n_raw_arguments": 3
+  },
+  "strengths": [
+    {
+      "argument_id": "a1",
+      "tau": 0.85,
+      "rubric": {
+        "legal_relevance": 0.9,
+        "factual_grounding": 0.85,
+        "specificity": 0.8,
+        "logical_coherence": 0.9,
+        "fre_801c_applicability": 0.9
+      },
+      "justification": "Directly addresses the out-of-court requirement for hearsay under FRE 801(c). The narrative indicates the statement is being introduced as evidence, implying it was made outside the current proceedings.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a2",
+      "tau": 0.9,
+      "rubric": {
+        "legal_relevance": 0.9,
+        "factual_grounding": 0.95,
+        "specificity": 0.9,
+        "logical_coherence": 0.95,
+        "fre_801c_applicability": 0.9
+      },
+      "justification": "Directly addresses the assertion requirement. The explicit use of 'stating' and the declarative nature of the quote confirm it is an assertion.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a3",
+      "tau": 0.95,
+      "rubric": {
+        "legal_relevance": 0.95,
+        "factual_grounding": 0.95,
+        "specificity": 0.9,
+        "logical_coherence": 0.95,
+        "fre_801c_applicability": 0.95
+      },
+      "justification": "Directly addresses the offered-for-truth requirement, which is the core trigger for hearsay classification. The narrative explicitly states the purpose matches the content of the statement.",
+      "model": "combined"
+    }
+  ],
+  "solver_output": {
+    "case_id": "test_0058",
+    "graph": {
+      "nodes": {
+        "phi": {
+          "id": "phi",
+          "text": "Is the statement described in this narrative hearsay under FRE 801(c)?",
+          "tau": 0.5,
+          "sigma": 0.999625,
+          "is_claim": true
+        },
+        "a1": {
+          "id": "a1",
+          "text": "The statement \"I am the boss here\" was made by Michael outside of the current trial or hearing.",
+          "tau": 0.85,
+          "sigma": 0.85,
+          "is_claim": false
+        },
+        "a2": {
+          "id": "a2",
+          "text": "Michael's statement \"I am the boss here\" constitutes a clear assertion of fact regarding his authority and role.",
+          "tau": 0.9,
+          "sigma": 0.9,
+          "is_claim": false
+        },
+        "a3": {
+          "id": "a3",
+          "text": "The plaintiffs are introducing the statement specifically to prove that Michael was in charge of the group, which is the truth of the matter asserted.",
+          "tau": 0.95,
+          "sigma": 0.95,
+          "is_claim": false
+        }
+      },
+      "edges": [
+        {
+          "source": "a1",
+          "target": "phi",
+          "type": "support",
+          "confidence": 0.9
+        },
+        {
+          "source": "a2",
+          "target": "phi",
+          "type": "support",
+          "confidence": 0.95
+        },
+        {
+          "source": "a3",
+          "target": "phi",
+          "type": "support",
+          "confidence": 0.95
+        }
+      ],
+      "solver_type": "df_quad"
+    },
+    "sigma_phi": 0.999625,
+    "sigma_all": {
+      "phi": 0.999625,
+      "a1": 0.85,
+      "a2": 0.9,
+      "a3": 0.95
+    },
+    "iterations": 2,
+    "converged": true,
+    "solver_type": "df_quad"
+  },
+  "sigma_phi": 0.999625,
+  "decision": "Yes",
+  "uncertainty": {
+    "is_uncertain": false,
+    "sigma_phi": 0.999625,
+    "threshold_low": 0.45,
+    "threshold_high": 0.55,
+    "escalation_triggered": false,
+    "escalation_actions": [],
+    "escalation_log": []
+  },
+  "hitl_interventions": [],
+  "pre_hitl_decision": null
+}

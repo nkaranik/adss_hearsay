@@ -1,0 +1,184 @@
+{
+  "case_id": "test_0012",
+  "input_text": "On the issue of whether Jessica was aware she was trespassing, the fact that Jessica had been diagnosed as near-sighted by her ophthalmologist.",
+  "phi_text": "",
+  "gold_label": "No",
+  "extraction": {
+    "case_id": "test_0012",
+    "input_text": "On the issue of whether Jessica was aware she was trespassing, the fact that Jessica had been diagnosed as near-sighted by her ophthalmologist.",
+    "claim": {
+      "id": "phi",
+      "text": "Is the statement described in this narrative hearsay under FRE 801(c)?"
+    },
+    "arguments": [
+      {
+        "id": "a1",
+        "text": "The narrative refers to 'the fact that Jessica had been diagnosed as near-sighted,' which describes a medical circumstance rather than an out-of-court assertion by a declarant.",
+        "stance_to_claim": "attack",
+        "legal_rule": "FRE 801(c) defines hearsay as an out-of-court statement offered to prove the truth of the matter asserted. Non-assertive facts or circumstances do not qualify as hearsay.",
+        "evidence_span": "the fact that Jessica had been diagnosed as near-sighted by her ophthalmologist.",
+        "confidence": 0.9
+      },
+      {
+        "id": "a2",
+        "text": "The evidence is introduced 'on the issue of whether Jessica was aware she was trespassing,' indicating it is offered to prove her state of mind or circumstantial awareness rather than the truth of an asserted proposition.",
+        "stance_to_claim": "attack",
+        "legal_rule": "FRE 801(c) requires evidence be offered to prove the truth of the matter asserted. Evidence offered for another purpose, such as proving a party's state of mind or circumstantial awareness, falls outside the hearsay definition.",
+        "evidence_span": "On the issue of whether Jessica was aware she was trespassing",
+        "confidence": 0.85
+      },
+      {
+        "id": "a3",
+        "text": "The narrative contains no indication of a declarant making an explicit assertion; it merely cites a medical diagnosis fact, failing to meet the foundational requirement for FRE 801(c) hearsay.",
+        "stance_to_claim": "attack",
+        "legal_rule": "FRE 801(c) hearsay requires an out-of-court statement. Without a declarant or an assertion, the hearsay rule is inapplicable.",
+        "evidence_span": "the fact that Jessica had been diagnosed as near-sighted by her ophthalmologist.",
+        "confidence": 0.8
+      }
+    ],
+    "relations": [
+      {
+        "source": "a1",
+        "target": "phi",
+        "type": "attack",
+        "confidence": 0.9
+      },
+      {
+        "source": "a2",
+        "target": "phi",
+        "type": "attack",
+        "confidence": 0.85
+      },
+      {
+        "source": "a3",
+        "target": "phi",
+        "type": "attack",
+        "confidence": 0.8
+      }
+    ],
+    "extraction_model": "",
+    "raw_llm_response": "{\n  \"case_id\": \"test_0012\",\n  \"phi\": \"Is the statement described in this narrative hearsay under FRE 801(c)?\",\n  \"arguments\": [\n    {\n      \"id\": \"a1\",\n      \"text\": \"The narrative refers to 'the fact that Jessica had been diagnosed as near-sighted,' which describes a medical circumstance rather than an out-of-court assertion by a declarant.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"FRE 801(c) defines hearsay as an out-of-court statement offered to prove the truth of the matter asserted. Non-assertive facts or circumstances do not qualify as hearsay.\",\n      \"evidence_span\": \"the fact that Jessica had been diagnosed as near-sighted by her ophthalmologist.\",\n      \"confidence\": 0.9,\n      \"tau\": 0.85,\n      \"rubric\": {\n        \"relevance\": 0.9,\n        \"factual_grounding\": 0.9,\n        \"specificity\": 0.8,\n        \"logical_coherence\": 0.9,\n        \"applicability\": 0.9\n      },\n      \"justification\": \"Directly addresses the assertion requirement of FRE 801(c). The narrative explicitly frames the evidence as a 'fact' of diagnosis, indicating non-assertive conduct/circumstance, which attacks the hearsay classification.\"\n    },\n    {\n      \"id\": \"a2\",\n      \"text\": \"The evidence is introduced 'on the issue of whether Jessica was aware she was trespassing,' indicating it is offered to prove her state of mind or circumstantial awareness rather than the truth of an asserted proposition.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"FRE 801(c) requires evidence be offered to prove the truth of the matter asserted. Evidence offered for another purpose, such as proving a party's state of mind or circumstantial awareness, falls outside the hearsay definition.\",\n      \"evidence_span\": \"On the issue of whether Jessica was aware she was trespassing\",\n      \"confidence\": 0.85,\n      \"tau\": 0.8,\n      \"rubric\": {\n        \"relevance\": 0.85,\n        \"factual_grounding\": 0.85,\n        \"specificity\": 0.7,\n        \"logical_coherence\": 0.85,\n        \"applicability\": 0.85\n      },\n      \"justification\": \"Addresses the 'offered to prove the truth' prong of FRE 801(c). The stated purpose is to prove awareness (state of mind/circumstance), which attacks the hearsay claim by showing an alternative, non-hearsay purpose.\"\n    },\n    {\n      \"id\": \"a3\",\n      \"text\": \"The narrative contains no indication of a declarant making an explicit assertion; it merely cites a medical diagnosis fact, failing to meet the foundational requirement for FRE 801(c) hearsay.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"FRE 801(c) hearsay requires an out-of-court statement. Without a declarant or an assertion, the hearsay rule is inapplicable.\",\n      \"evidence_span\": \"the fact that Jessica had been diagnosed as near-sighted by her ophthalmologist.\",\n      \"confidence\": 0.8,\n      \"tau\": 0.75,\n      \"rubric\": {\n        \"relevance\": 0.8,\n        \"factual_grounding\": 0.75,\n        \"specificity\": 0.6,\n        \"logical_coherence\": 0.8,\n        \"applicability\": 0.8\n      },\n      \"justification\": \"Addresses the 'out-of-court statement' requirement. The absence of a declarant or explicit assertion in the narrative directly attacks the applicability of the hearsay rule.\"\n    }\n  ],\n  \"relations\": [\n    {\n      \"source\": \"a1\",\n      \"target\": \"phi\",\n      \"type\": \"attack\",\n      \"confidence\": 0.9\n    },\n    {\n      \"source\": \"a2\",\n      \"target\": \"phi\",\n      \"type\": \"attack\",\n      \"confidence\": 0.85\n    },\n    {\n      \"source\": \"a3\",\n      \"target\": \"phi\",\n      \"type\": \"attack\",\n      \"confidence\": 0.8\n    }\n  ]\n}",
+    "parse_error": null,
+    "n_raw_arguments": 3
+  },
+  "strengths": [
+    {
+      "argument_id": "a1",
+      "tau": 0.85,
+      "rubric": {
+        "legal_relevance": 0.9,
+        "factual_grounding": 0.9,
+        "specificity": 0.8,
+        "logical_coherence": 0.9,
+        "fre_801c_applicability": 0.9
+      },
+      "justification": "Directly addresses the assertion requirement of FRE 801(c). The narrative explicitly frames the evidence as a 'fact' of diagnosis, indicating non-assertive conduct/circumstance, which attacks the hearsay classification.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a2",
+      "tau": 0.8,
+      "rubric": {
+        "legal_relevance": 0.85,
+        "factual_grounding": 0.85,
+        "specificity": 0.7,
+        "logical_coherence": 0.85,
+        "fre_801c_applicability": 0.85
+      },
+      "justification": "Addresses the 'offered to prove the truth' prong of FRE 801(c). The stated purpose is to prove awareness (state of mind/circumstance), which attacks the hearsay claim by showing an alternative, non-hearsay purpose.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a3",
+      "tau": 0.75,
+      "rubric": {
+        "legal_relevance": 0.8,
+        "factual_grounding": 0.75,
+        "specificity": 0.6,
+        "logical_coherence": 0.8,
+        "fre_801c_applicability": 0.8
+      },
+      "justification": "Addresses the 'out-of-court statement' requirement. The absence of a declarant or explicit assertion in the narrative directly attacks the applicability of the hearsay rule.",
+      "model": "combined"
+    }
+  ],
+  "solver_output": {
+    "case_id": "test_0012",
+    "graph": {
+      "nodes": {
+        "phi": {
+          "id": "phi",
+          "text": "Is the statement described in this narrative hearsay under FRE 801(c)?",
+          "tau": 0.5,
+          "sigma": 0.0037499999999999756,
+          "is_claim": true
+        },
+        "a1": {
+          "id": "a1",
+          "text": "The narrative refers to 'the fact that Jessica had been diagnosed as near-sighted,' which describes a medical circumstance rather than an out-of-court assertion by a declarant.",
+          "tau": 0.85,
+          "sigma": 0.85,
+          "is_claim": false
+        },
+        "a2": {
+          "id": "a2",
+          "text": "The evidence is introduced 'on the issue of whether Jessica was aware she was trespassing,' indicating it is offered to prove her state of mind or circumstantial awareness rather than the truth of an asserted proposition.",
+          "tau": 0.8,
+          "sigma": 0.8,
+          "is_claim": false
+        },
+        "a3": {
+          "id": "a3",
+          "text": "The narrative contains no indication of a declarant making an explicit assertion; it merely cites a medical diagnosis fact, failing to meet the foundational requirement for FRE 801(c) hearsay.",
+          "tau": 0.75,
+          "sigma": 0.75,
+          "is_claim": false
+        }
+      },
+      "edges": [
+        {
+          "source": "a1",
+          "target": "phi",
+          "type": "attack",
+          "confidence": 0.9
+        },
+        {
+          "source": "a2",
+          "target": "phi",
+          "type": "attack",
+          "confidence": 0.85
+        },
+        {
+          "source": "a3",
+          "target": "phi",
+          "type": "attack",
+          "confidence": 0.8
+        }
+      ],
+      "solver_type": "df_quad"
+    },
+    "sigma_phi": 0.0037499999999999756,
+    "sigma_all": {
+      "phi": 0.0037499999999999756,
+      "a1": 0.85,
+      "a2": 0.8,
+      "a3": 0.75
+    },
+    "iterations": 2,
+    "converged": true,
+    "solver_type": "df_quad"
+  },
+  "sigma_phi": 0.0037499999999999756,
+  "decision": "No",
+  "uncertainty": {
+    "is_uncertain": false,
+    "sigma_phi": 0.0037499999999999756,
+    "threshold_low": 0.45,
+    "threshold_high": 0.55,
+    "escalation_triggered": false,
+    "escalation_actions": [],
+    "escalation_log": []
+  },
+  "hitl_interventions": [],
+  "pre_hitl_decision": null
+}

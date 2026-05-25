@@ -1,0 +1,225 @@
+{
+  "case_id": "test_0073",
+  "input_text": "On the issue of whether Albert liked Taylor Swift, a social media post written by Albert describing Taylor as his favorite artist.",
+  "phi_text": "",
+  "gold_label": "Yes",
+  "extraction": {
+    "case_id": "test_0073",
+    "input_text": "On the issue of whether Albert liked Taylor Swift, a social media post written by Albert describing Taylor as his favorite artist.",
+    "claim": {
+      "id": "phi",
+      "text": "Is the statement described in this narrative hearsay under FRE 801(c)?"
+    },
+    "arguments": [
+      {
+        "id": "a1",
+        "text": "The narrative identifies the evidence as a social media post written by Albert, which qualifies as a statement made outside of the current trial or hearing.",
+        "stance_to_claim": "support",
+        "legal_rule": "FRE 801(c) requires the statement to be made out of court to constitute hearsay.",
+        "evidence_span": "a social media post written by Albert",
+        "confidence": 0.95
+      },
+      {
+        "id": "a2",
+        "text": "The post describes Taylor Swift as Albert's favorite artist, which constitutes a clear assertion of fact or opinion regarding Albert's personal preference.",
+        "stance_to_claim": "support",
+        "legal_rule": "FRE 801(a) defines a statement as an oral or written assertion intended by the person as an assertion.",
+        "evidence_span": "describing Taylor as his favorite artist",
+        "confidence": 0.95
+      },
+      {
+        "id": "a3",
+        "text": "The post is introduced specifically on the issue of whether Albert liked Taylor Swift, indicating it is being offered to prove the truth of that preference.",
+        "stance_to_claim": "support",
+        "legal_rule": "FRE 801(c) defines hearsay as a statement offered to prove the truth of the matter asserted in the statement.",
+        "evidence_span": "On the issue of whether Albert liked Taylor Swift",
+        "confidence": 0.95
+      },
+      {
+        "id": "a4",
+        "text": "The narrative does not indicate the post is offered for any non-hearsay purpose (e.g., notice, effect on listener, impeachment) nor does it fall under a FRE 801(d)(2) exclusion.",
+        "stance_to_claim": "support",
+        "legal_rule": "FRE 801(c) applies only when a statement is offered for its truth and does not fall under an exclusion or exception.",
+        "evidence_span": null,
+        "confidence": 0.8
+      }
+    ],
+    "relations": [
+      {
+        "source": "a1",
+        "target": "phi",
+        "type": "support",
+        "confidence": 0.95
+      },
+      {
+        "source": "a2",
+        "target": "phi",
+        "type": "support",
+        "confidence": 0.95
+      },
+      {
+        "source": "a3",
+        "target": "phi",
+        "type": "support",
+        "confidence": 0.95
+      },
+      {
+        "source": "a4",
+        "target": "phi",
+        "type": "support",
+        "confidence": 0.8
+      }
+    ],
+    "extraction_model": "",
+    "raw_llm_response": "{\n  \"case_id\": \"test_0073\",\n  \"phi\": \"Is the statement described in this narrative hearsay under FRE 801(c)?\",\n  \"arguments\": [\n    {\n      \"id\": \"a1\",\n      \"text\": \"The narrative identifies the evidence as a social media post written by Albert, which qualifies as a statement made outside of the current trial or hearing.\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"FRE 801(c) requires the statement to be made out of court to constitute hearsay.\",\n      \"evidence_span\": \"a social media post written by Albert\",\n      \"confidence\": 0.95,\n      \"tau\": 0.90,\n      \"rubric\": {\n        \"relevance\": 1.0,\n        \"factual_grounding\": 1.0,\n        \"specificity\": 0.9,\n        \"logical_coherence\": 1.0,\n        \"applicability\": 1.0\n      },\n      \"justification\": \"Directly satisfies the first prong of the hearsay definition. The text explicitly states the post was written, implying it occurred outside the courtroom.\"\n    },\n    {\n      \"id\": \"a2\",\n      \"text\": \"The post describes Taylor Swift as Albert's favorite artist, which constitutes a clear assertion of fact or opinion regarding Albert's personal preference.\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"FRE 801(a) defines a statement as an oral or written assertion intended by the person as an assertion.\",\n      \"evidence_span\": \"describing Taylor as his favorite artist\",\n      \"confidence\": 0.95,\n      \"tau\": 0.85,\n      \"rubric\": {\n        \"relevance\": 1.0,\n        \"factual_grounding\": 1.0,\n        \"specificity\": 0.8,\n        \"logical_coherence\": 1.0,\n        \"applicability\": 1.0\n      },\n      \"justification\": \"The narrative explicitly notes the post describes Taylor as his favorite artist, meeting the assertion requirement for hearsay analysis.\"\n    },\n    {\n      \"id\": \"a3\",\n      \"text\": \"The post is introduced specifically on the issue of whether Albert liked Taylor Swift, indicating it is being offered to prove the truth of that preference.\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"FRE 801(c) defines hearsay as a statement offered to prove the truth of the matter asserted in the statement.\",\n      \"evidence_span\": \"On the issue of whether Albert liked Taylor Swift\",\n      \"confidence\": 0.95,\n      \"tau\": 0.90,\n      \"rubric\": {\n        \"relevance\": 1.0,\n        \"factual_grounding\": 1.0,\n        \"specificity\": 0.9,\n        \"logical_coherence\": 1.0,\n        \"applicability\": 1.0\n      },\n      \"justification\": \"The narrative directly links the introduction of the post to proving the truth of Albert's preference, satisfying the third prong of the hearsay definition.\"\n    },\n    {\n      \"id\": \"a4\",\n      \"text\": \"The narrative does not indicate the post is offered for any non-hearsay purpose (e.g., notice, effect on listener, impeachment) nor does it fall under a FRE 801(d)(2) exclusion.\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"FRE 801(c) applies only when a statement is offered for its truth and does not fall under an exclusion or exception.\",\n      \"evidence_span\": null,\n      \"confidence\": 0.80,\n      \"tau\": 0.70,\n      \"rubric\": {\n        \"relevance\": 0.8,\n        \"factual_grounding\": 0.7,\n        \"specificity\": 0.6,\n        \"logical_coherence\": 0.8,\n        \"applicability\": 0.9\n      },\n      \"justification\": \"The absence of any indicated alternative purpose or exclusion in the brief narrative supports the conclusion that the hearsay definition is met without rebuttal.\"\n    }\n  ],\n  \"relations\": [\n    {\n      \"source\": \"a1\",\n      \"target\": \"phi\",\n      \"type\": \"support\",\n      \"confidence\": 0.95\n    },\n    {\n      \"source\": \"a2\",\n      \"target\": \"phi\",\n      \"type\": \"support\",\n      \"confidence\": 0.95\n    },\n    {\n      \"source\": \"a3\",\n      \"target\": \"phi\",\n      \"type\": \"support\",\n      \"confidence\": 0.95\n    },\n    {\n      \"source\": \"a4\",\n      \"target\": \"phi\",\n      \"type\": \"support\",\n      \"confidence\": 0.80\n    }\n  ]\n}",
+    "parse_error": null,
+    "n_raw_arguments": 4
+  },
+  "strengths": [
+    {
+      "argument_id": "a1",
+      "tau": 0.9,
+      "rubric": {
+        "legal_relevance": 1.0,
+        "factual_grounding": 1.0,
+        "specificity": 0.9,
+        "logical_coherence": 1.0,
+        "fre_801c_applicability": 1.0
+      },
+      "justification": "Directly satisfies the first prong of the hearsay definition. The text explicitly states the post was written, implying it occurred outside the courtroom.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a2",
+      "tau": 0.85,
+      "rubric": {
+        "legal_relevance": 1.0,
+        "factual_grounding": 1.0,
+        "specificity": 0.8,
+        "logical_coherence": 1.0,
+        "fre_801c_applicability": 1.0
+      },
+      "justification": "The narrative explicitly notes the post describes Taylor as his favorite artist, meeting the assertion requirement for hearsay analysis.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a3",
+      "tau": 0.9,
+      "rubric": {
+        "legal_relevance": 1.0,
+        "factual_grounding": 1.0,
+        "specificity": 0.9,
+        "logical_coherence": 1.0,
+        "fre_801c_applicability": 1.0
+      },
+      "justification": "The narrative directly links the introduction of the post to proving the truth of Albert's preference, satisfying the third prong of the hearsay definition.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a4",
+      "tau": 0.7,
+      "rubric": {
+        "legal_relevance": 0.8,
+        "factual_grounding": 0.7,
+        "specificity": 0.6,
+        "logical_coherence": 0.8,
+        "fre_801c_applicability": 0.9
+      },
+      "justification": "The absence of any indicated alternative purpose or exclusion in the brief narrative supports the conclusion that the hearsay definition is met without rebuttal.",
+      "model": "combined"
+    }
+  ],
+  "solver_output": {
+    "case_id": "test_0073",
+    "graph": {
+      "nodes": {
+        "phi": {
+          "id": "phi",
+          "text": "Is the statement described in this narrative hearsay under FRE 801(c)?",
+          "tau": 0.5,
+          "sigma": 0.9997750000000001,
+          "is_claim": true
+        },
+        "a1": {
+          "id": "a1",
+          "text": "The narrative identifies the evidence as a social media post written by Albert, which qualifies as a statement made outside of the current trial or hearing.",
+          "tau": 0.9,
+          "sigma": 0.9,
+          "is_claim": false
+        },
+        "a2": {
+          "id": "a2",
+          "text": "The post describes Taylor Swift as Albert's favorite artist, which constitutes a clear assertion of fact or opinion regarding Albert's personal preference.",
+          "tau": 0.85,
+          "sigma": 0.85,
+          "is_claim": false
+        },
+        "a3": {
+          "id": "a3",
+          "text": "The post is introduced specifically on the issue of whether Albert liked Taylor Swift, indicating it is being offered to prove the truth of that preference.",
+          "tau": 0.9,
+          "sigma": 0.9,
+          "is_claim": false
+        },
+        "a4": {
+          "id": "a4",
+          "text": "The narrative does not indicate the post is offered for any non-hearsay purpose (e.g., notice, effect on listener, impeachment) nor does it fall under a FRE 801(d)(2) exclusion.",
+          "tau": 0.7,
+          "sigma": 0.7,
+          "is_claim": false
+        }
+      },
+      "edges": [
+        {
+          "source": "a1",
+          "target": "phi",
+          "type": "support",
+          "confidence": 0.95
+        },
+        {
+          "source": "a2",
+          "target": "phi",
+          "type": "support",
+          "confidence": 0.95
+        },
+        {
+          "source": "a3",
+          "target": "phi",
+          "type": "support",
+          "confidence": 0.95
+        },
+        {
+          "source": "a4",
+          "target": "phi",
+          "type": "support",
+          "confidence": 0.8
+        }
+      ],
+      "solver_type": "df_quad"
+    },
+    "sigma_phi": 0.9997750000000001,
+    "sigma_all": {
+      "phi": 0.9997750000000001,
+      "a1": 0.9,
+      "a2": 0.85,
+      "a3": 0.9,
+      "a4": 0.7
+    },
+    "iterations": 2,
+    "converged": true,
+    "solver_type": "df_quad"
+  },
+  "sigma_phi": 0.9997750000000001,
+  "decision": "Yes",
+  "uncertainty": {
+    "is_uncertain": false,
+    "sigma_phi": 0.9997750000000001,
+    "threshold_low": 0.45,
+    "threshold_high": 0.55,
+    "escalation_triggered": false,
+    "escalation_actions": [],
+    "escalation_log": []
+  },
+  "hitl_interventions": [],
+  "pre_hitl_decision": null
+}

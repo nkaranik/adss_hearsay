@@ -13,141 +13,105 @@
     "arguments": [
       {
         "id": "a1",
-        "text": "Narrative cites past employment fact, not an out-of-court assertion.",
+        "text": "The narrative explicitly identifies the evidence as a \"fact\" regarding Sarah's employment duration, not an out-of-court statement, which is a prerequisite for FRE 801(c).",
         "stance_to_claim": "attack",
-        "legal_rule": "FRE 801(c) requires an assertion.",
-        "evidence_span": null,
+        "legal_rule": "FRE 801(c) defines hearsay as an out-of-court statement; non-statements fall outside its scope.",
+        "evidence_span": "the fact that Sarah had worked there previously for four years",
         "confidence": 0.9
       },
       {
         "id": "a2",
-        "text": "Prior tenure duration is historical fact, not a declarant's statement.",
+        "text": "The evidence consists of circumstantial facts about employment duration used to prove agency status, which does not rely on an out-of-court assertion offered for its truth.",
         "stance_to_claim": "attack",
-        "legal_rule": "FRE 801(c) definition of hearsay.",
-        "evidence_span": null,
+        "legal_rule": "FRE 801(c) does not apply to non-assertive conduct or circumstantial evidence offered for its direct probative value.",
+        "evidence_span": "On the issue of whether Sarah was acting as an agent for the corporation",
         "confidence": 0.85
       },
       {
         "id": "a3",
-        "text": "Agency status proven by conduct or records avoids hearsay classification.",
+        "text": "Because the narrative describes a factual circumstance rather than an utterance, writing, or nonverbal conduct intended as an assertion, the hearsay inquiry under FRE 801(c) is inapplicable.",
         "stance_to_claim": "attack",
-        "legal_rule": "FRE 801(c) non-applicability to conduct.",
-        "evidence_span": null,
+        "legal_rule": "FRE 801(c) requires an assertion; mere facts or circumstances lacking assertive intent are not hearsay.",
+        "evidence_span": "the fact that Sarah had worked there previously for four years",
         "confidence": 0.8
-      },
-      {
-        "id": "a4",
-        "text": "If tenure proven via witness recounting Sarah's words, it may be hearsay.",
-        "stance_to_claim": "support",
-        "legal_rule": "FRE 801(c) statement offered for truth.",
-        "evidence_span": null,
-        "confidence": 0.7
-      },
-      {
-        "id": "a5",
-        "text": "Fragment lacks clear declarant or asserted proposition for analysis.",
-        "stance_to_claim": "attack",
-        "legal_rule": "FRE 801(c) assertion requirement.",
-        "evidence_span": null,
-        "confidence": 0.85
       }
     ],
     "relations": [
       {
         "source": "a1",
-        "target": "a2",
-        "type": "support",
+        "target": "phi",
+        "type": "attack",
         "confidence": 0.9
       },
       {
+        "source": "a2",
+        "target": "phi",
+        "type": "attack",
+        "confidence": 0.85
+      },
+      {
+        "source": "a3",
+        "target": "phi",
+        "type": "attack",
+        "confidence": 0.8
+      },
+      {
         "source": "a1",
-        "target": "a3",
+        "target": "a2",
         "type": "support",
         "confidence": 0.85
       },
       {
-        "source": "a4",
-        "target": "a1",
-        "type": "attack",
-        "confidence": 0.7
-      },
-      {
-        "source": "a5",
-        "target": "a1",
+        "source": "a2",
+        "target": "a3",
         "type": "support",
         "confidence": 0.8
       }
     ],
     "extraction_model": "",
-    "raw_llm_response": "{\n  \"case_id\": \"test_0013\",\n  \"arguments\": [\n    {\n      \"id\": \"a1\",\n      \"text\": \"Narrative cites past employment fact, not an out-of-court assertion.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"FRE 801(c) requires an assertion.\",\n      \"evidence_span\": null,\n      \"confidence\": 0.9,\n      \"rubric\": {\n        \"legal_relevance\": 0.9,\n        \"factual_grounding\": 0.8,\n        \"specificity\": 0.7,\n        \"logical_coherence\": 0.9,\n        \"fre_801c_applicability\": 0.9\n      },\n      \"tau\": 0.84,\n      \"justification\": \"The fragment describes a historical circumstance rather than a declarant's statement, defeating the hearsay definition.\"\n    },\n    {\n      \"id\": \"a2\",\n      \"text\": \"Prior tenure duration is historical fact, not a declarant's statement.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"FRE 801(c) definition of hearsay.\",\n      \"evidence_span\": null,\n      \"confidence\": 0.85,\n      \"rubric\": {\n        \"legal_relevance\": 0.9,\n        \"factual_grounding\": 0.8,\n        \"specificity\": 0.7,\n        \"logical_coherence\": 0.9,\n        \"fre_801c_applicability\": 0.9\n      },\n      \"tau\": 0.84,\n      \"justification\": \"Employment length is an objective timeline, not an out-of-court assertion offered for truth.\"\n    },\n    {\n      \"id\": \"a3\",\n      \"text\": \"Agency status proven by conduct or records avoids hearsay classification.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"FRE 801(c) non-applicability to conduct.\",\n      \"evidence_span\": null,\n      \"confidence\": 0.8,\n      \"rubric\": {\n        \"legal_relevance\": 0.8,\n        \"factual_grounding\": 0.7,\n        \"specificity\": 0.6,\n        \"logical_coherence\": 0.8,\n        \"fre_801c_applicability\": 0.8\n      },\n      \"tau\": 0.74,\n      \"justification\": \"Proving agency through past employment records relies on non-assertive evidence, bypassing hearsay rules.\"\n    },\n    {\n      \"id\": \"a4\",\n      \"text\": \"If tenure proven via witness recounting Sarah's words, it may be hearsay.\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"FRE 801(c) statement offered for truth.\",\n      \"evidence_span\": null,\n      \"confidence\": 0.7,\n      \"rubric\": {\n        \"legal_relevance\": 0.7,\n        \"factual_grounding\": 0.5,\n        \"specificity\": 0.5,\n        \"logical_coherence\": 0.7,\n        \"fre_801c_applicability\": 0.6\n      },\n      \"tau\": 0.6,\n      \"justification\": \"Conditional scenario where a witness repeats Sarah's own assertion about her tenure would trigger hearsay.\"\n    },\n    {\n      \"id\": \"a5\",\n      \"text\": \"Fragment lacks clear declarant or asserted proposition for analysis.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"FRE 801(c) assertion requirement.\",\n      \"evidence_span\": null,\n      \"confidence\": 0.85,\n      \"rubric\": {\n        \"legal_relevance\": 0.8,\n        \"factual_grounding\": 0.6,\n        \"specificity\": 0.6,\n        \"logical_coherence\": 0.8,\n        \"fre_801c_applicability\": 0.7\n      },\n      \"tau\": 0.7,\n      \"justification\": \"Without identifying a specific declarant or their explicit assertion, FRE 801(c) cannot be applied.\"\n    }\n  ],\n  \"relations\": [\n    {\"source\": \"a1\", \"target\": \"a2\", \"type\": \"support\", \"confidence\": 0.9},\n    {\"source\": \"a1\", \"target\": \"a3\", \"type\": \"support\", \"confidence\": 0.85},\n    {\"source\": \"a4\", \"target\": \"a1\", \"type\": \"attack\", \"confidence\": 0.7},\n    {\"source\": \"a5\", \"target\": \"a1\", \"type\": \"support\", \"confidence\": 0.8}\n  ]\n}",
+    "raw_llm_response": "{\n  \"case_id\": \"test_0013\",\n  \"phi\": \"Is the statement described in this narrative hearsay under FRE 801(c)?\",\n  \"arguments\": [\n    {\n      \"id\": \"a1\",\n      \"text\": \"The narrative explicitly identifies the evidence as a \\\"fact\\\" regarding Sarah's employment duration, not an out-of-court statement, which is a prerequisite for FRE 801(c).\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"FRE 801(c) defines hearsay as an out-of-court statement; non-statements fall outside its scope.\",\n      \"evidence_span\": \"the fact that Sarah had worked there previously for four years\",\n      \"confidence\": 0.9,\n      \"tau\": 0.90,\n      \"rubric\": {\n        \"relevance\": 0.9,\n        \"factual_grounding\": 0.9,\n        \"specificity\": 0.8,\n        \"logical_coherence\": 0.9,\n        \"applicability\": 0.9\n      },\n      \"justification\": \"Directly addresses the threshold requirement for hearsay by noting the narrative labels the evidence as a fact, not a statement.\"\n    },\n    {\n      \"id\": \"a2\",\n      \"text\": \"The evidence consists of circumstantial facts about employment duration used to prove agency status, which does not rely on an out-of-court assertion offered for its truth.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"FRE 801(c) does not apply to non-assertive conduct or circumstantial evidence offered for its direct probative value.\",\n      \"evidence_span\": \"On the issue of whether Sarah was acting as an agent for the corporation\",\n      \"confidence\": 0.85,\n      \"tau\": 0.85,\n      \"rubric\": {\n        \"relevance\": 0.8,\n        \"factual_grounding\": 0.8,\n        \"specificity\": 0.7,\n        \"logical_coherence\": 0.8,\n        \"applicability\": 0.8\n      },\n      \"justification\": \"Demonstrates that the evidence is circumstantial and offered directly for agency, negating the hearsay classification.\"\n    },\n    {\n      \"id\": \"a3\",\n      \"text\": \"Because the narrative describes a factual circumstance rather than an utterance, writing, or nonverbal conduct intended as an assertion, the hearsay inquiry under FRE 801(c) is inapplicable.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"FRE 801(c) requires an assertion; mere facts or circumstances lacking assertive intent are not hearsay.\",\n      \"evidence_span\": \"the fact that Sarah had worked there previously for four years\",\n      \"confidence\": 0.8,\n      \"tau\": 0.80,\n      \"rubric\": {\n        \"relevance\": 0.7,\n        \"factual_grounding\": 0.8,\n        \"specificity\": 0.6,\n        \"logical_coherence\": 0.7,\n        \"applicability\": 0.8\n      },\n      \"justification\": \"Reinforces the threshold analysis by emphasizing the lack of assertive intent, which is necessary for hearsay.\"\n    }\n  ],\n  \"relations\": [\n    {\n      \"source\": \"a1\",\n      \"target\": \"phi\",\n      \"type\": \"attack\",\n      \"confidence\": 0.9\n    },\n    {\n      \"source\": \"a2\",\n      \"target\": \"phi\",\n      \"type\": \"attack\",\n      \"confidence\": 0.85\n    },\n    {\n      \"source\": \"a3\",\n      \"target\": \"phi\",\n      \"type\": \"attack\",\n      \"confidence\": 0.8\n    },\n    {\n      \"source\": \"a1\",\n      \"target\": \"a2\",\n      \"type\": \"support\",\n      \"confidence\": 0.85\n    },\n    {\n      \"source\": \"a2\",\n      \"target\": \"a3\",\n      \"type\": \"support\",\n      \"confidence\": 0.8\n    }\n  ]\n}",
     "parse_error": null,
-    "n_raw_arguments": 5
+    "n_raw_arguments": 3
   },
   "strengths": [
     {
       "argument_id": "a1",
       "tau": 0.9,
       "rubric": {
-        "relevance": 0.9,
+        "legal_relevance": 0.9,
         "factual_grounding": 0.9,
-        "specificity": 0.9,
+        "specificity": 0.8,
         "logical_coherence": 0.9,
-        "applicability": 0.9
+        "fre_801c_applicability": 0.9
       },
-      "justification": "Fallback from extraction confidence.",
-      "model": "fallback"
+      "justification": "Directly addresses the threshold requirement for hearsay by noting the narrative labels the evidence as a fact, not a statement.",
+      "model": "combined"
     },
     {
       "argument_id": "a2",
       "tau": 0.85,
       "rubric": {
-        "relevance": 0.85,
-        "factual_grounding": 0.85,
-        "specificity": 0.85,
-        "logical_coherence": 0.85,
-        "applicability": 0.85
+        "legal_relevance": 0.8,
+        "factual_grounding": 0.8,
+        "specificity": 0.7,
+        "logical_coherence": 0.8,
+        "fre_801c_applicability": 0.8
       },
-      "justification": "Fallback from extraction confidence.",
-      "model": "fallback"
+      "justification": "Demonstrates that the evidence is circumstantial and offered directly for agency, negating the hearsay classification.",
+      "model": "combined"
     },
     {
       "argument_id": "a3",
       "tau": 0.8,
       "rubric": {
-        "relevance": 0.8,
+        "legal_relevance": 0.7,
         "factual_grounding": 0.8,
-        "specificity": 0.8,
-        "logical_coherence": 0.8,
-        "applicability": 0.8
-      },
-      "justification": "Fallback from extraction confidence.",
-      "model": "fallback"
-    },
-    {
-      "argument_id": "a4",
-      "tau": 0.7,
-      "rubric": {
-        "relevance": 0.7,
-        "factual_grounding": 0.7,
-        "specificity": 0.7,
+        "specificity": 0.6,
         "logical_coherence": 0.7,
-        "applicability": 0.7
+        "fre_801c_applicability": 0.8
       },
-      "justification": "Fallback from extraction confidence.",
-      "model": "fallback"
-    },
-    {
-      "argument_id": "a5",
-      "tau": 0.85,
-      "rubric": {
-        "relevance": 0.85,
-        "factual_grounding": 0.85,
-        "specificity": 0.85,
-        "logical_coherence": 0.85,
-        "applicability": 0.85
-      },
-      "justification": "Fallback from extraction confidence.",
-      "model": "fallback"
+      "justification": "Reinforces the threshold analysis by emphasizing the lack of assertive intent, which is necessary for hearsay.",
+      "model": "combined"
     }
   ],
   "solver_output": {
@@ -158,70 +122,32 @@
           "id": "phi",
           "text": "Is the statement described in this narrative hearsay under FRE 801(c)?",
           "tau": 0.5,
-          "sigma": 0.35060375628124996,
+          "sigma": 2.2499999999814335e-6,
           "is_claim": true
         },
         "a1": {
           "id": "a1",
-          "text": "Narrative cites past employment fact, not an out-of-court assertion.",
+          "text": "The narrative explicitly identifies the evidence as a \"fact\" regarding Sarah's employment duration, not an out-of-court statement, which is a prerequisite for FRE 801(c).",
           "tau": 0.9,
-          "sigma": 0.355,
+          "sigma": 0.9,
           "is_claim": false
         },
         "a2": {
           "id": "a2",
-          "text": "Prior tenure duration is historical fact, not a declarant's statement.",
+          "text": "The evidence consists of circumstantial facts about employment duration used to prove agency status, which does not rely on an out-of-court assertion offered for its truth.",
           "tau": 0.85,
-          "sigma": 0.90325,
+          "sigma": 0.985,
           "is_claim": false
         },
         "a3": {
           "id": "a3",
-          "text": "Agency status proven by conduct or records avoids hearsay classification.",
+          "text": "Because the narrative describes a factual circumstance rather than an utterance, writing, or nonverbal conduct intended as an assertion, the hearsay inquiry under FRE 801(c) is inapplicable.",
           "tau": 0.8,
-          "sigma": 0.871,
-          "is_claim": false
-        },
-        "a4": {
-          "id": "a4",
-          "text": "If tenure proven via witness recounting Sarah's words, it may be hearsay.",
-          "tau": 0.7,
-          "sigma": 0.7,
-          "is_claim": false
-        },
-        "a5": {
-          "id": "a5",
-          "text": "Fragment lacks clear declarant or asserted proposition for analysis.",
-          "tau": 0.85,
-          "sigma": 0.85,
+          "sigma": 0.997,
           "is_claim": false
         }
       },
       "edges": [
-        {
-          "source": "a1",
-          "target": "a2",
-          "type": "support",
-          "confidence": 0.9
-        },
-        {
-          "source": "a1",
-          "target": "a3",
-          "type": "support",
-          "confidence": 0.85
-        },
-        {
-          "source": "a4",
-          "target": "a1",
-          "type": "attack",
-          "confidence": 0.7
-        },
-        {
-          "source": "a5",
-          "target": "a1",
-          "type": "support",
-          "confidence": 0.8
-        },
         {
           "source": "a1",
           "target": "phi",
@@ -241,38 +167,36 @@
           "confidence": 0.8
         },
         {
-          "source": "a4",
-          "target": "phi",
+          "source": "a1",
+          "target": "a2",
           "type": "support",
-          "confidence": 0.7
+          "confidence": 0.85
         },
         {
-          "source": "a5",
-          "target": "phi",
-          "type": "attack",
-          "confidence": 0.85
+          "source": "a2",
+          "target": "a3",
+          "type": "support",
+          "confidence": 0.8
         }
       ],
       "solver_type": "df_quad"
     },
-    "sigma_phi": 0.35060375628124996,
+    "sigma_phi": 2.2499999999814335e-6,
     "sigma_all": {
-      "phi": 0.35060375628124996,
-      "a1": 0.355,
-      "a2": 0.90325,
-      "a3": 0.871,
-      "a4": 0.7,
-      "a5": 0.85
+      "phi": 2.2499999999814335e-6,
+      "a1": 0.9,
+      "a2": 0.985,
+      "a3": 0.997
     },
     "iterations": 2,
     "converged": true,
     "solver_type": "df_quad"
   },
-  "sigma_phi": 0.35060375628124996,
+  "sigma_phi": 2.2499999999814335e-6,
   "decision": "No",
   "uncertainty": {
     "is_uncertain": false,
-    "sigma_phi": 0.35060375628124996,
+    "sigma_phi": 2.2499999999814335e-6,
     "threshold_low": 0.45,
     "threshold_high": 0.55,
     "escalation_triggered": false,

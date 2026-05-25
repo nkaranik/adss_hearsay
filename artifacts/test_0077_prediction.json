@@ -1,0 +1,225 @@
+{
+  "case_id": "test_0077",
+  "input_text": "On the issue of whether Kayla knew she was ill, the fact that Philip told him she was unwell.",
+  "phi_text": "",
+  "gold_label": "No",
+  "extraction": {
+    "case_id": "test_0077",
+    "input_text": "On the issue of whether Kayla knew she was ill, the fact that Philip told him she was unwell.",
+    "claim": {
+      "id": "phi",
+      "text": "Is the statement described in this narrative hearsay under FRE 801(c)?"
+    },
+    "arguments": [
+      {
+        "id": "a1",
+        "text": "The statement was made out of court, as Philip communicated to 'him' outside of the current trial or hearing testimony.",
+        "stance_to_claim": "support",
+        "legal_rule": "FRE 801(c)(1) - Out-of-court statement",
+        "evidence_span": "Philip told him she was unwell",
+        "confidence": 0.95
+      },
+      {
+        "id": "a2",
+        "text": "The statement contains a factual assertion, specifically that 'she was unwell,' which asserts a condition about Kayla.",
+        "stance_to_claim": "support",
+        "legal_rule": "FRE 801(c)(2) - Assertion",
+        "evidence_span": "she was unwell",
+        "confidence": 0.95
+      },
+      {
+        "id": "a3",
+        "text": "The statement is offered to prove the truth of the matter asserted, as it is introduced 'On the issue of whether Kayla knew she was ill,' relying on Philip's assertion to establish her condition.",
+        "stance_to_claim": "support",
+        "legal_rule": "FRE 801(c)(3) - Offered to prove truth",
+        "evidence_span": "On the issue of whether Kayla knew she was ill, the fact that Philip told him she was unwell.",
+        "confidence": 0.85
+      },
+      {
+        "id": "a4",
+        "text": "The statement may be offered for a non-hearsay purpose, such as to show notice to the listener or to prove Kayla's state of mind, which would exclude it from the hearsay definition.",
+        "stance_to_claim": "attack",
+        "legal_rule": "FRE 801(c) - Non-hearsay purposes (notice, effect on listener, state of mind)",
+        "evidence_span": "On the issue of whether Kayla knew she was ill",
+        "confidence": 0.75
+      }
+    ],
+    "relations": [
+      {
+        "source": "a1",
+        "target": "phi",
+        "type": "support",
+        "confidence": 0.95
+      },
+      {
+        "source": "a2",
+        "target": "phi",
+        "type": "support",
+        "confidence": 0.95
+      },
+      {
+        "source": "a3",
+        "target": "phi",
+        "type": "support",
+        "confidence": 0.85
+      },
+      {
+        "source": "a4",
+        "target": "phi",
+        "type": "attack",
+        "confidence": 0.75
+      }
+    ],
+    "extraction_model": "",
+    "raw_llm_response": "{\n  \"case_id\": \"test_0077\",\n  \"phi\": \"Is the statement described in this narrative hearsay under FRE 801(c)?\",\n  \"arguments\": [\n    {\n      \"id\": \"a1\",\n      \"text\": \"The statement was made out of court, as Philip communicated to 'him' outside of the current trial or hearing testimony.\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"FRE 801(c)(1) - Out-of-court statement\",\n      \"evidence_span\": \"Philip told him she was unwell\",\n      \"confidence\": 0.95,\n      \"tau\": 0.90,\n      \"rubric\": {\n        \"relevance\": 0.9,\n        \"factual_grounding\": 0.95,\n        \"specificity\": 0.8,\n        \"logical_coherence\": 0.9,\n        \"applicability\": 0.9\n      },\n      \"justification\": \"Directly satisfies the first prong of the hearsay definition. The narrative explicitly notes an out-of-court communication.\"\n    },\n    {\n      \"id\": \"a2\",\n      \"text\": \"The statement contains a factual assertion, specifically that 'she was unwell,' which asserts a condition about Kayla.\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"FRE 801(c)(2) - Assertion\",\n      \"evidence_span\": \"she was unwell\",\n      \"confidence\": 0.95,\n      \"tau\": 0.90,\n      \"rubric\": {\n        \"relevance\": 0.9,\n        \"factual_grounding\": 0.95,\n        \"specificity\": 0.8,\n        \"logical_coherence\": 0.9,\n        \"applicability\": 0.9\n      },\n      \"justification\": \"Directly satisfies the second prong. The words 'she was unwell' constitute a factual assertion rather than mere conduct or non-assertive behavior.\"\n    },\n    {\n      \"id\": \"a3\",\n      \"text\": \"The statement is offered to prove the truth of the matter asserted, as it is introduced 'On the issue of whether Kayla knew she was ill,' relying on Philip's assertion to establish her condition.\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"FRE 801(c)(3) - Offered to prove truth\",\n      \"evidence_span\": \"On the issue of whether Kayla knew she was ill, the fact that Philip told him she was unwell.\",\n      \"confidence\": 0.85,\n      \"tau\": 0.80,\n      \"rubric\": {\n        \"relevance\": 0.9,\n        \"factual_grounding\": 0.8,\n        \"specificity\": 0.7,\n        \"logical_coherence\": 0.85,\n        \"applicability\": 0.85\n      },\n      \"justification\": \"The narrative links the statement directly to proving the underlying fact (Kayla's illness), which typically supports a finding of hearsay under FRE 801(c).\"\n    },\n    {\n      \"id\": \"a4\",\n      \"text\": \"The statement may be offered for a non-hearsay purpose, such as to show notice to the listener or to prove Kayla's state of mind, which would exclude it from the hearsay definition.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"FRE 801(c) - Non-hearsay purposes (notice, effect on listener, state of mind)\",\n      \"evidence_span\": \"On the issue of whether Kayla knew she was ill\",\n      \"confidence\": 0.75,\n      \"tau\": 0.65,\n      \"rubric\": {\n        \"relevance\": 0.8,\n        \"factual_grounding\": 0.6,\n        \"specificity\": 0.5,\n        \"logical_coherence\": 0.7,\n        \"applicability\": 0.75\n      },\n      \"justification\": \"The phrase 'On the issue of whether Kayla knew she was ill' suggests an alternative purpose (notice or state of mind) that could defeat the hearsay classification, thus attacking φ.\"\n    }\n  ],\n  \"relations\": [\n    {\n      \"source\": \"a1\",\n      \"target\": \"phi\",\n      \"type\": \"support\",\n      \"confidence\": 0.95\n    },\n    {\n      \"source\": \"a2\",\n      \"target\": \"phi\",\n      \"type\": \"support\",\n      \"confidence\": 0.95\n    },\n    {\n      \"source\": \"a3\",\n      \"target\": \"phi\",\n      \"type\": \"support\",\n      \"confidence\": 0.85\n    },\n    {\n      \"source\": \"a4\",\n      \"target\": \"phi\",\n      \"type\": \"attack\",\n      \"confidence\": 0.75\n    }\n  ]\n}",
+    "parse_error": null,
+    "n_raw_arguments": 4
+  },
+  "strengths": [
+    {
+      "argument_id": "a1",
+      "tau": 0.9,
+      "rubric": {
+        "legal_relevance": 0.9,
+        "factual_grounding": 0.95,
+        "specificity": 0.8,
+        "logical_coherence": 0.9,
+        "fre_801c_applicability": 0.9
+      },
+      "justification": "Directly satisfies the first prong of the hearsay definition. The narrative explicitly notes an out-of-court communication.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a2",
+      "tau": 0.9,
+      "rubric": {
+        "legal_relevance": 0.9,
+        "factual_grounding": 0.95,
+        "specificity": 0.8,
+        "logical_coherence": 0.9,
+        "fre_801c_applicability": 0.9
+      },
+      "justification": "Directly satisfies the second prong. The words 'she was unwell' constitute a factual assertion rather than mere conduct or non-assertive behavior.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a3",
+      "tau": 0.8,
+      "rubric": {
+        "legal_relevance": 0.9,
+        "factual_grounding": 0.8,
+        "specificity": 0.7,
+        "logical_coherence": 0.85,
+        "fre_801c_applicability": 0.85
+      },
+      "justification": "The narrative links the statement directly to proving the underlying fact (Kayla's illness), which typically supports a finding of hearsay under FRE 801(c).",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a4",
+      "tau": 0.65,
+      "rubric": {
+        "legal_relevance": 0.8,
+        "factual_grounding": 0.6,
+        "specificity": 0.5,
+        "logical_coherence": 0.7,
+        "fre_801c_applicability": 0.75
+      },
+      "justification": "The phrase 'On the issue of whether Kayla knew she was ill' suggests an alternative purpose (notice or state of mind) that could defeat the hearsay classification, thus attacking φ.",
+      "model": "combined"
+    }
+  ],
+  "solver_output": {
+    "case_id": "test_0077",
+    "graph": {
+      "nodes": {
+        "phi": {
+          "id": "phi",
+          "text": "Is the statement described in this narrative hearsay under FRE 801(c)?",
+          "tau": 0.5,
+          "sigma": 0.6739999999999999,
+          "is_claim": true
+        },
+        "a1": {
+          "id": "a1",
+          "text": "The statement was made out of court, as Philip communicated to 'him' outside of the current trial or hearing testimony.",
+          "tau": 0.9,
+          "sigma": 0.9,
+          "is_claim": false
+        },
+        "a2": {
+          "id": "a2",
+          "text": "The statement contains a factual assertion, specifically that 'she was unwell,' which asserts a condition about Kayla.",
+          "tau": 0.9,
+          "sigma": 0.9,
+          "is_claim": false
+        },
+        "a3": {
+          "id": "a3",
+          "text": "The statement is offered to prove the truth of the matter asserted, as it is introduced 'On the issue of whether Kayla knew she was ill,' relying on Philip's assertion to establish her condition.",
+          "tau": 0.8,
+          "sigma": 0.8,
+          "is_claim": false
+        },
+        "a4": {
+          "id": "a4",
+          "text": "The statement may be offered for a non-hearsay purpose, such as to show notice to the listener or to prove Kayla's state of mind, which would exclude it from the hearsay definition.",
+          "tau": 0.65,
+          "sigma": 0.65,
+          "is_claim": false
+        }
+      },
+      "edges": [
+        {
+          "source": "a1",
+          "target": "phi",
+          "type": "support",
+          "confidence": 0.95
+        },
+        {
+          "source": "a2",
+          "target": "phi",
+          "type": "support",
+          "confidence": 0.95
+        },
+        {
+          "source": "a3",
+          "target": "phi",
+          "type": "support",
+          "confidence": 0.85
+        },
+        {
+          "source": "a4",
+          "target": "phi",
+          "type": "attack",
+          "confidence": 0.75
+        }
+      ],
+      "solver_type": "df_quad"
+    },
+    "sigma_phi": 0.6739999999999999,
+    "sigma_all": {
+      "phi": 0.6739999999999999,
+      "a1": 0.9,
+      "a2": 0.9,
+      "a3": 0.8,
+      "a4": 0.65
+    },
+    "iterations": 2,
+    "converged": true,
+    "solver_type": "df_quad"
+  },
+  "sigma_phi": 0.6739999999999999,
+  "decision": "Yes",
+  "uncertainty": {
+    "is_uncertain": false,
+    "sigma_phi": 0.6739999999999999,
+    "threshold_low": 0.45,
+    "threshold_high": 0.55,
+    "escalation_triggered": false,
+    "escalation_actions": [],
+    "escalation_log": []
+  },
+  "hitl_interventions": [],
+  "pre_hitl_decision": null
+}

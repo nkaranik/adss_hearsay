@@ -1,0 +1,184 @@
+{
+  "case_id": "test_0022",
+  "input_text": "On the issue of whether Ana lied to Jim, Jim's statement on cross-examination that he did not believe Ana to be an honest individual.",
+  "phi_text": "",
+  "gold_label": "No",
+  "extraction": {
+    "case_id": "test_0022",
+    "input_text": "On the issue of whether Ana lied to Jim, Jim's statement on cross-examination that he did not believe Ana to be an honest individual.",
+    "claim": {
+      "id": "phi",
+      "text": "Is the statement described in this narrative hearsay under FRE 801(c)?"
+    },
+    "arguments": [
+      {
+        "id": "a1",
+        "text": "Jim's statement was made on cross-examination, meaning it was delivered in court rather than out of court. Under FRE 801(c), hearsay requires an out-of-court statement; thus, this element is not met.",
+        "stance_to_claim": "attack",
+        "legal_rule": "FRE 801(c) definition of hearsay requires an out-of-court statement.",
+        "evidence_span": "Jim's statement on cross-examination",
+        "confidence": 0.95
+      },
+      {
+        "id": "a2",
+        "text": "The statement asserts Jim's personal belief that Ana was not an honest individual, which constitutes an assertion of a declarant's then-existing state of mind or belief. This satisfies the assertion prong of the hearsay definition.",
+        "stance_to_claim": "support",
+        "legal_rule": "FRE 801(c) requires the statement to be an assertion by the declarant.",
+        "evidence_span": "that he did not believe Ana to be an honest individual",
+        "confidence": 0.9
+      },
+      {
+        "id": "a3",
+        "text": "The statement is offered on the issue of whether Ana lied to Jim, indicating it is likely introduced to demonstrate Jim's state of mind, notice, or the effect on him rather than to prove the truth of Ana's dishonesty. Non-truth purposes fall outside the hearsay rule.",
+        "stance_to_claim": "attack",
+        "legal_rule": "FRE 801(c) excludes statements offered for purposes other than proving the truth of the matter asserted (e.g., state of mind, notice).",
+        "evidence_span": "On the issue of whether Ana lied to Jim",
+        "confidence": 0.85
+      }
+    ],
+    "relations": [
+      {
+        "source": "a1",
+        "target": "phi",
+        "type": "attack",
+        "confidence": 0.95
+      },
+      {
+        "source": "a2",
+        "target": "phi",
+        "type": "support",
+        "confidence": 0.9
+      },
+      {
+        "source": "a3",
+        "target": "phi",
+        "type": "attack",
+        "confidence": 0.85
+      }
+    ],
+    "extraction_model": "",
+    "raw_llm_response": "{\n  \"case_id\": \"test_0022\",\n  \"phi\": \"Is the statement described in this narrative hearsay under FRE 801(c)?\",\n  \"arguments\": [\n    {\n      \"id\": \"a1\",\n      \"text\": \"Jim's statement was made on cross-examination, meaning it was delivered in court rather than out of court. Under FRE 801(c), hearsay requires an out-of-court statement; thus, this element is not met.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"FRE 801(c) definition of hearsay requires an out-of-court statement.\",\n      \"evidence_span\": \"Jim's statement on cross-examination\",\n      \"confidence\": 0.95,\n      \"tau\": 0.90,\n      \"rubric\": {\n        \"relevance\": 1.0,\n        \"factual_grounding\": 1.0,\n        \"specificity\": 1.0,\n        \"logical_coherence\": 1.0,\n        \"applicability\": 1.0\n      },\n      \"justification\": \"Directly addresses the out-of-court requirement of FRE 801(c) using explicit narrative text. Strong legal grounding.\"\n    },\n    {\n      \"id\": \"a2\",\n      \"text\": \"The statement asserts Jim's personal belief that Ana was not an honest individual, which constitutes an assertion of a declarant's then-existing state of mind or belief. This satisfies the assertion prong of the hearsay definition.\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"FRE 801(c) requires the statement to be an assertion by the declarant.\",\n      \"evidence_span\": \"that he did not believe Ana to be an honest individual\",\n      \"confidence\": 0.90,\n      \"tau\": 0.75,\n      \"rubric\": {\n        \"relevance\": 0.8,\n        \"factual_grounding\": 1.0,\n        \"specificity\": 0.9,\n        \"logical_coherence\": 0.8,\n        \"applicability\": 0.8\n      },\n      \"justification\": \"Identifies the assertion element of hearsay. While it supports the definitional threshold, it is outweighed by the in-court nature and non-truth purpose.\"\n    },\n    {\n      \"id\": \"a3\",\n      \"text\": \"The statement is offered on the issue of whether Ana lied to Jim, indicating it is likely introduced to demonstrate Jim's state of mind, notice, or the effect on him rather than to prove the truth of Ana's dishonesty. Non-truth purposes fall outside the hearsay rule.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"FRE 801(c) excludes statements offered for purposes other than proving the truth of the matter asserted (e.g., state of mind, notice).\",\n      \"evidence_span\": \"On the issue of whether Ana lied to Jim\",\n      \"confidence\": 0.85,\n      \"tau\": 0.80,\n      \"rubric\": {\n        \"relevance\": 0.9,\n        \"factual_grounding\": 0.8,\n        \"specificity\": 0.8,\n        \"logical_coherence\": 0.8,\n        \"applicability\": 0.9\n      },\n      \"justification\": \"Highlights the purpose of the statement, which is a key determinant for hearsay. The phrasing strongly suggests a non-hearsay purpose.\"\n    }\n  ],\n  \"relations\": [\n    {\n      \"source\": \"a1\",\n      \"target\": \"phi\",\n      \"type\": \"attack\",\n      \"confidence\": 0.95\n    },\n    {\n      \"source\": \"a2\",\n      \"target\": \"phi\",\n      \"type\": \"support\",\n      \"confidence\": 0.90\n    },\n    {\n      \"source\": \"a3\",\n      \"target\": \"phi\",\n      \"type\": \"attack\",\n      \"confidence\": 0.85\n    }\n  ]\n}",
+    "parse_error": null,
+    "n_raw_arguments": 3
+  },
+  "strengths": [
+    {
+      "argument_id": "a1",
+      "tau": 0.9,
+      "rubric": {
+        "legal_relevance": 1.0,
+        "factual_grounding": 1.0,
+        "specificity": 1.0,
+        "logical_coherence": 1.0,
+        "fre_801c_applicability": 1.0
+      },
+      "justification": "Directly addresses the out-of-court requirement of FRE 801(c) using explicit narrative text. Strong legal grounding.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a2",
+      "tau": 0.75,
+      "rubric": {
+        "legal_relevance": 0.8,
+        "factual_grounding": 1.0,
+        "specificity": 0.9,
+        "logical_coherence": 0.8,
+        "fre_801c_applicability": 0.8
+      },
+      "justification": "Identifies the assertion element of hearsay. While it supports the definitional threshold, it is outweighed by the in-court nature and non-truth purpose.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a3",
+      "tau": 0.8,
+      "rubric": {
+        "legal_relevance": 0.9,
+        "factual_grounding": 0.8,
+        "specificity": 0.8,
+        "logical_coherence": 0.8,
+        "fre_801c_applicability": 0.9
+      },
+      "justification": "Highlights the purpose of the statement, which is a key determinant for hearsay. The phrasing strongly suggests a non-hearsay purpose.",
+      "model": "combined"
+    }
+  ],
+  "solver_output": {
+    "case_id": "test_0022",
+    "graph": {
+      "nodes": {
+        "phi": {
+          "id": "phi",
+          "text": "Is the statement described in this narrative hearsay under FRE 801(c)?",
+          "tau": 0.5,
+          "sigma": 0.385,
+          "is_claim": true
+        },
+        "a1": {
+          "id": "a1",
+          "text": "Jim's statement was made on cross-examination, meaning it was delivered in court rather than out of court. Under FRE 801(c), hearsay requires an out-of-court statement; thus, this element is not met.",
+          "tau": 0.9,
+          "sigma": 0.9,
+          "is_claim": false
+        },
+        "a2": {
+          "id": "a2",
+          "text": "The statement asserts Jim's personal belief that Ana was not an honest individual, which constitutes an assertion of a declarant's then-existing state of mind or belief. This satisfies the assertion prong of the hearsay definition.",
+          "tau": 0.75,
+          "sigma": 0.75,
+          "is_claim": false
+        },
+        "a3": {
+          "id": "a3",
+          "text": "The statement is offered on the issue of whether Ana lied to Jim, indicating it is likely introduced to demonstrate Jim's state of mind, notice, or the effect on him rather than to prove the truth of Ana's dishonesty. Non-truth purposes fall outside the hearsay rule.",
+          "tau": 0.8,
+          "sigma": 0.8,
+          "is_claim": false
+        }
+      },
+      "edges": [
+        {
+          "source": "a1",
+          "target": "phi",
+          "type": "attack",
+          "confidence": 0.95
+        },
+        {
+          "source": "a2",
+          "target": "phi",
+          "type": "support",
+          "confidence": 0.9
+        },
+        {
+          "source": "a3",
+          "target": "phi",
+          "type": "attack",
+          "confidence": 0.85
+        }
+      ],
+      "solver_type": "df_quad"
+    },
+    "sigma_phi": 0.385,
+    "sigma_all": {
+      "phi": 0.385,
+      "a1": 0.9,
+      "a2": 0.75,
+      "a3": 0.8
+    },
+    "iterations": 2,
+    "converged": true,
+    "solver_type": "df_quad"
+  },
+  "sigma_phi": 0.385,
+  "decision": "No",
+  "uncertainty": {
+    "is_uncertain": false,
+    "sigma_phi": 0.385,
+    "threshold_low": 0.45,
+    "threshold_high": 0.55,
+    "escalation_triggered": false,
+    "escalation_actions": [],
+    "escalation_log": []
+  },
+  "hitl_interventions": [],
+  "pre_hitl_decision": null
+}

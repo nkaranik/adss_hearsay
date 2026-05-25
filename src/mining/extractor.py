@@ -1,7 +1,13 @@
 """
 Module A+B combined: single LLM call extracts arguments AND scores strength.
-Domain-generic version: the decision problem (phi) is passed through the
-pipeline, and if the LLM returns a better `phi` field, that value is adopted.
+
+This version supports two modes:
+1. Paper / LegalBench hearsay evaluation with a fixed phi.
+   - If a fixed decision_problem is provided, the extractor uses it exactly.
+   - The LLM is NOT allowed to replace it with an inferred phi.
+2. Generic dashboard mode.
+   - If decision_problem is blank or a generic fallback instruction, the extractor
+     may adopt the LLM-returned `phi` field.
 """
 from __future__ import annotations
 
@@ -12,8 +18,13 @@ from pathlib import Path
 from typing import Any
 
 from src.data.models import (
-    Argument, ArgumentStrength, ClaimNode,
-    ExtractionResult, Relation, RelationType, RubricScore,
+    Argument,
+    ArgumentStrength,
+    ClaimNode,
+    ExtractionResult,
+    Relation,
+    RelationType,
+    RubricScore,
 )
 import src.utils.llm_client as _llm
 
@@ -23,8 +34,19 @@ _GENERIC_COMBINED_PATH = Path("prompts/generic_combined.txt")
 _COMBINED_PATH = Path("prompts/combined.txt")
 _EXTRACT_PATH = Path("prompts/extraction.txt")
 
-# Generic conceptual weights. These are mapped to whatever RubricScore fields
-# your current src.data.models.RubricScore actually defines.
+_DEFAULT_DECISION = ""
+_GENERIC_FALLBACK_DECISION = "Infer the main yes/no decision from the case."
+_GENERIC_FALLBACKS = {
+    "",
+    "Infer the main yes/no decision from the case.",
+    "What is the main yes/no decision in this case?",
+    "Infer the main yes/no decision from the case",
+    "What is the main yes/no decision in this case",
+}
+
+# Generic conceptual rubric weights. These are mapped to the actual RubricScore
+# model fields below, whether the model still uses the old FRE/hearsay names or
+# the newer generic names.
 _WEIGHTS = {
     "relevance": 0.30,
     "factual_grounding": 0.20,
@@ -33,42 +55,45 @@ _WEIGHTS = {
     "applicability": 0.20,
 }
 
-_DEFAULT_DECISION = ""
-_GENERIC_FALLBACK_DECISION = "Infer the main yes/no decision from the case."
-
 
 def _load_template() -> str:
-    """Prefer the domain-generic prompt, but keep old prompts as fallback."""
+    """Prefer the generic prompt, but keep old prompts as fallback."""
     for p in (_GENERIC_COMBINED_PATH, _COMBINED_PATH, _EXTRACT_PATH):
         if p.exists():
             return p.read_text(encoding="utf-8")
+
     return (
         "You are a generic decision-support assistant.\n"
         "Decision question: {decision_problem}\n"
+        "If the decision question is provided, use it exactly as phi.\n"
+        "Only infer phi if the decision question is blank or explicitly asks you to infer it.\n"
         "Case ID: {case_id}\n"
-        "Case text:\n{narrative}\n"
-        "Extract up to {max_arguments} arguments as JSON.\n"
-        "Return a JSON object with fields: case_id, phi, arguments, relations."
+        "Case text:\n{narrative}\n\n"
+        "Extract up to {max_arguments} arguments as one JSON object with fields: "
+        "case_id, phi, arguments, relations."
     )
 
 
-def _render(template: str, case_id: str, narrative: str,
-            max_arguments: int, decision_problem: str) -> str:
-    r = template.replace("{case_id}", case_id)
-    r = r.replace("{narrative}", narrative)
-    r = r.replace("{max_arguments}", str(max_arguments))
-    r = r.replace("{decision_problem}", decision_problem)
-    return r
+def _render(template: str, case_id: str, narrative: str, max_arguments: int, decision_problem: str) -> str:
+    return (
+        template
+        .replace("{case_id}", case_id)
+        .replace("{narrative}", narrative)
+        .replace("{max_arguments}", str(max_arguments))
+        .replace("{decision_problem}", decision_problem)
+    )
 
 
 def _strip_fences(text: str) -> str:
-    text = re.sub(r"^```(?:json)?\s*", "", text.strip(), flags=re.IGNORECASE)
+    text = text.strip()
+    text = re.sub(r"^```(?:json)?\s*", "", text, flags=re.IGNORECASE)
     text = re.sub(r"\s*```\s*$", "", text)
     return text.strip()
 
 
 def _repair_json(raw: str) -> dict[str, Any] | None:
     cleaned = _strip_fences(raw)
+
     try:
         return json.loads(cleaned)
     except Exception:
@@ -82,11 +107,11 @@ def _repair_json(raw: str) -> dict[str, Any] | None:
         if isinstance(repaired, list) and repaired and isinstance(repaired[0], dict):
             return repaired[0]
     except Exception as e:
-        logger.debug(f"json_repair failed on full text: {e}")
+        logger.debug(f"json_repair failed on full response: {e}")
 
-    m = re.search(r"\{.*\}", cleaned, re.DOTALL)
-    if m:
-        snippet = m.group(0)
+    match = re.search(r"\{.*\}", cleaned, re.DOTALL)
+    if match:
+        snippet = match.group(0)
         try:
             return json.loads(snippet)
         except Exception:
@@ -103,27 +128,25 @@ def _repair_json(raw: str) -> dict[str, Any] | None:
 
 
 def _normalise_stance(v: str) -> str | None:
-    """
-    Return support/attack/None.
-    The LLM often emits variants such as yes/no/pro/con/favor/against.
-    """
-    v = (v or "").lower().strip()
-    if not v:
+    """Normalize stance variants to support/attack/None."""
+    value = (v or "").lower().strip()
+    if not value:
         return None
-    if any(x in v for x in ("support", "yes", "favor", "favour", "pro", "for", "positive")):
+
+    if any(x in value for x in ("support", "yes", "favor", "favour", "pro", "positive", "for the claim")):
         return "support"
-    if any(x in v for x in ("attack", "no", "oppose", "against", "con", "negative", "undermine")):
+    if any(x in value for x in ("attack", "no", "oppose", "against", "con", "negative", "undermine")):
         return "attack"
-    if "neutral" in v or "irrelevant" in v or "background" in v:
+    if any(x in value for x in ("neutral", "irrelevant", "background")):
         return None
     return None
 
 
 def _normalise_rel_type(v: str) -> str:
-    v = (v or "").lower()
-    if "support" in v or v in {"yes", "for", "pro"}:
+    value = (v or "").lower().strip()
+    if "support" in value or value in {"yes", "for", "pro", "+"}:
         return "support"
-    if "attack" in v or "oppose" in v or "against" in v or v in {"no", "con"}:
+    if "attack" in value or "oppose" in value or "against" in value or value in {"no", "con", "-"}:
         return "attack"
     return "neutral"
 
@@ -142,7 +165,6 @@ def _clean_key(k: str) -> str:
 
 
 def _generic_rubric_values(rubric_data: dict[str, Any] | None, confidence: float) -> dict[str, float]:
-    """Normalise LLM rubric output to generic conceptual keys."""
     values = {k: float(confidence) for k in _WEIGHTS}
     if not isinstance(rubric_data, dict):
         return values
@@ -158,6 +180,7 @@ def _generic_rubric_values(rubric_data: dict[str, Any] | None, confidence: float
         "coherence": "logical_coherence",
         "applicability": "applicability",
         "legalapplicability": "applicability",
+        "domainapplicability": "applicability",
         "fre801capplicability": "applicability",
         "freapplicability": "applicability",
     }
@@ -173,39 +196,40 @@ def _generic_rubric_values(rubric_data: dict[str, Any] | None, confidence: float
 
 
 def _make_rubric_score(generic_values: dict[str, float]) -> RubricScore:
-    """
-    Build RubricScore even if your data model still has the old hearsay-specific
-    fields. This keeps the generic prompt compatible with the existing model.
-    """
+    """Create RubricScore for either generic or old hearsay-specific model fields."""
     fields = _model_fields(RubricScore)
+
     relevance = generic_values.get("relevance", 0.5)
     factual = generic_values.get("factual_grounding", 0.5)
     specificity = generic_values.get("specificity", 0.5)
     coherence = generic_values.get("logical_coherence", 0.5)
     applicability = generic_values.get("applicability", 0.5)
 
-    if fields and {"relevance", "factual_grounding", "specificity", "logical_coherence", "applicability"}.issubset(fields):
-        payload = {
-            "relevance": relevance,
-            "factual_grounding": factual,
-            "specificity": specificity,
-            "logical_coherence": coherence,
-            "applicability": applicability,
-        }
-    elif fields and {"legal_relevance", "factual_grounding", "specificity", "logical_coherence", "fre_801c_applicability"}.issubset(fields):
-        # Backward compatibility with the original hearsay model names.
-        payload = {
-            "legal_relevance": relevance,
-            "factual_grounding": factual,
-            "specificity": specificity,
-            "logical_coherence": coherence,
-            "fre_801c_applicability": applicability,
-        }
-    else:
-        # Last resort: try generic names.
-        payload = generic_values
+    generic_payload = {
+        "relevance": relevance,
+        "factual_grounding": factual,
+        "specificity": specificity,
+        "logical_coherence": coherence,
+        "applicability": applicability,
+    }
+    hearsay_payload = {
+        "legal_relevance": relevance,
+        "factual_grounding": factual,
+        "specificity": specificity,
+        "logical_coherence": coherence,
+        "fre_801c_applicability": applicability,
+    }
 
-    return RubricScore(**payload)
+    if fields and set(generic_payload).issubset(fields):
+        return RubricScore(**generic_payload)
+    if fields and set(hearsay_payload).issubset(fields):
+        return RubricScore(**hearsay_payload)
+
+    # Last resort: try generic payload first, then hearsay payload.
+    try:
+        return RubricScore(**generic_payload)
+    except Exception:
+        return RubricScore(**hearsay_payload)
 
 
 def _tau_from_generic_rubric(values: dict[str, float]) -> float:
@@ -213,36 +237,49 @@ def _tau_from_generic_rubric(values: dict[str, float]) -> float:
 
 
 def _ensure_argument_schema(raw_arg: dict[str, Any]) -> dict[str, Any]:
-    """
-    Make generic LLM outputs compatible with the existing Argument model.
-    If the LLM returns `principle`, `rule`, or `reasoning_principle`, map it to
-    `legal_rule` because the original model likely still expects legal_rule.
-    """
+    """Map generic LLM fields to the existing Argument model fields."""
     raw_arg = dict(raw_arg)
+
     if "legal_rule" not in raw_arg:
         for alt in ("principle", "rule", "reasoning_principle", "domain_rule", "applicable_principle"):
             if raw_arg.get(alt):
                 raw_arg["legal_rule"] = raw_arg[alt]
                 break
+
     if "legal_rule" not in raw_arg:
         raw_arg["legal_rule"] = "Relevant decision principle"
     if "evidence_span" not in raw_arg:
         raw_arg["evidence_span"] = None
     if "confidence" not in raw_arg:
         raw_arg["confidence"] = 0.8
+    if "id" not in raw_arg:
+        raw_arg["id"] = "a1"
+    if "text" not in raw_arg:
+        raw_arg["text"] = "Extracted argument"
+
     return raw_arg
 
 
 def _infer_stance_from_text(raw_arg: dict[str, Any], decision_problem: str) -> str | None:
     """
-    Conservative fallback for cases where the LLM labels a real listed argument as neutral.
-    If the text clearly contains liability/compensation/breach/damage language, treat it
-    as support. If it clearly denies the claim, treat it as attack.
+    Conservative fallback for generic cases where the LLM labels real arguments as neutral.
+    For fixed hearsay/legal evaluation, we avoid over-aggressive inference and rely mostly on the LLM stance.
     """
-    joined = " ".join(str(raw_arg.get(k, "")) for k in ("text", "legal_rule", "principle", "justification"))
-    t = joined.lower()
+    text = " ".join(str(raw_arg.get(k, "")) for k in ("text", "legal_rule", "principle", "justification"))
+    t = text.lower()
     dp = decision_problem.lower()
 
+    # Hearsay-specific light fallback.
+    if "hearsay" in dp or "fre 801" in dp:
+        support_markers = ["out-of-court", "offered for truth", "truth of the matter", "statement offered to prove"]
+        attack_markers = ["not offered for truth", "effect on listener", "verbal act", "party opponent", "801(d)", "not hearsay"]
+        if any(m in t for m in attack_markers):
+            return "attack"
+        if any(m in t for m in support_markers):
+            return "support"
+        return None
+
+    # Generic fallback, useful for dashboard/case-study mode.
     attack_markers = [
         "not liable", "no liability", "no compensation", "does not deserve",
         "did not breach", "properly performed", "no damage", "not caused",
@@ -253,18 +290,19 @@ def _infer_stance_from_text(raw_arg: dict[str, Any], decision_problem: str) -> s
         "failed", "not finish", "late", "damage", "damaged", "leaked", "poor service",
         "did not perform", "paid as agreed", "caused", "loss", "harm", "defective",
     ]
-
     if any(m in t for m in attack_markers):
         return "attack"
     if any(m in t for m in support_markers):
         return "support"
-
-    # If the decision itself is a compensation/liability question and the input
-    # explicitly calls this item an argument, default to support rather than dropping it.
     if any(m in dp for m in ("compensation", "liable", "liability", "breach", "damages")):
         return "support"
-
     return None
+
+
+def _should_adopt_llm_phi(decision_problem: str, llm_phi: str) -> bool:
+    """Only adopt LLM phi when caller did not provide a concrete/fixed phi."""
+    dp = (decision_problem or "").strip()
+    return bool(llm_phi.strip()) and dp in _GENERIC_FALLBACKS
 
 
 def _parse_combined(
@@ -280,7 +318,8 @@ def _parse_combined(
         logger.warning(f"[{case_id}] JSON repair failed. Snippet: {raw[:300]!r}")
         return (
             ExtractionResult(
-                case_id=case_id, input_text=input_text,
+                case_id=case_id,
+                input_text=input_text,
                 claim=ClaimNode(text=decision_problem),
                 raw_llm_response=raw,
                 parse_error=f"JSON repair failed. Raw: {raw[:400]}",
@@ -288,11 +327,12 @@ def _parse_combined(
             [],
         )
 
-    # IMPORTANT: If the generic prompt asked the LLM to infer phi, adopt it.
     llm_phi = str(data.get("phi", "")).strip()
-    if llm_phi:
+    if _should_adopt_llm_phi(decision_problem, llm_phi):
         decision_problem = llm_phi
         logger.info(f"[{case_id}] Adopted LLM phi: {decision_problem}")
+    else:
+        logger.info(f"[{case_id}] Using fixed phi: {decision_problem}")
 
     args: list[Argument] = []
     strengths: list[ArgumentStrength] = []
@@ -304,6 +344,7 @@ def _parse_combined(
         try:
             if not isinstance(raw_arg_in, dict):
                 continue
+
             raw_arg = dict(raw_arg_in)
             rubric_data = raw_arg.pop("rubric", None)
             tau_val = raw_arg.pop("tau", None)
@@ -317,7 +358,7 @@ def _parse_combined(
 
             if normalised is None:
                 neutral_ids.add(str(raw_arg.get("id", f"arg_{n_raw_arguments}")))
-                logger.debug(f"[{case_id}] '{raw_arg.get('id','?')}' stance='{raw_stance}' is neutral — excluded.")
+                logger.debug(f"[{case_id}] '{raw_arg.get('id', '?')}' stance='{raw_stance}' is neutral — excluded.")
                 continue
 
             raw_arg["stance_to_claim"] = normalised
@@ -328,6 +369,7 @@ def _parse_combined(
             except Exception:
                 conf = 1.0
                 raw_arg["confidence"] = conf
+
             if conf < min_confidence:
                 continue
 
@@ -352,12 +394,12 @@ def _parse_combined(
         except Exception as e:
             logger.debug(f"[{case_id}] Skipping malformed argument: {e}")
 
-    n_neutral = len(neutral_ids)
-    if n_neutral > 0:
-        logger.info(f"[{case_id}] {n_neutral}/{n_raw_arguments} argument(s) were neutral and excluded from the graph.")
+    if neutral_ids:
+        logger.info(f"[{case_id}] {len(neutral_ids)}/{n_raw_arguments} argument(s) were neutral and excluded from the graph.")
 
     valid = {a.id for a in args} | {"phi"}
     rels: list[Relation] = []
+
     for raw_rel_in in data.get("relations", []):
         try:
             if not isinstance(raw_rel_in, dict):
@@ -374,8 +416,8 @@ def _parse_combined(
         except Exception as e:
             logger.debug(f"[{case_id}] Skipping malformed relation: {e}")
 
-    # Ensure every argument has a direct stance edge to phi. This makes the QBAF
-    # useful even when the LLM omits relations or only gives arg-arg relations.
+    # Ensure every kept argument has a direct stance edge to phi. This prevents
+    # empty or disconnected QBAF graphs when the LLM omits direct phi relations.
     existing = {(r.source, r.target) for r in rels}
     for arg in args:
         if (arg.id, "phi") not in existing:
@@ -449,13 +491,18 @@ class ArgumentExtractor:
         logger.info(f"[{case_id}] Extractor decision problem: {decision_problem}")
         prompt = self._prompt(case_id, narrative, decision_problem)
         raw = ""
+
         for attempt in range(1, self.max_retries + 1):
             try:
                 raw = _llm.call_llm(prompt, self.cfg)
                 logger.debug(f"[{case_id}] Raw LLM response (first 400): {raw[:400]}")
                 extraction, strengths = _parse_combined(
-                    raw, case_id, narrative, decision_problem,
-                    self.min_conf, self.inc_neutral,
+                    raw,
+                    case_id,
+                    narrative,
+                    decision_problem,
+                    self.min_conf,
+                    self.inc_neutral,
                 )
                 if extraction.parse_error and attempt < self.max_retries:
                     logger.warning(f"[{case_id}] Parse failed, retrying…")

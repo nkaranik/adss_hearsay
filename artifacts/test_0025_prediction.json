@@ -1,0 +1,230 @@
+{
+  "case_id": "test_0025",
+  "input_text": "On the issue of whether Nancy knew who attacked her, Nancy's statement in court, \"I was attacked by Sandra.\"",
+  "phi_text": "",
+  "gold_label": "No",
+  "extraction": {
+    "case_id": "test_0025",
+    "input_text": "On the issue of whether Nancy knew who attacked her, Nancy's statement in court, \"I was attacked by Sandra.\"",
+    "claim": {
+      "id": "phi",
+      "text": "Is the statement described in this narrative hearsay under FRE 801(c)?"
+    },
+    "arguments": [
+      {
+        "id": "a1",
+        "text": "The statement was made 'in court,' which fails the out-of-court requirement of FRE 801(c).",
+        "stance_to_claim": "attack",
+        "legal_rule": "FRE 801(c) defines hearsay as a statement made out of court.",
+        "evidence_span": "Nancy's statement in court",
+        "confidence": 0.95
+      },
+      {
+        "id": "a2",
+        "text": "The statement is offered to prove the truth of the matter asserted (that Sandra attacked Nancy).",
+        "stance_to_claim": "support",
+        "legal_rule": "FRE 801(c) requires the statement to be offered to prove the truth of the matter asserted.",
+        "evidence_span": "On the issue of whether Nancy knew who attacked her, Nancy's statement in court, 'I was attacked by Sandra.'",
+        "confidence": 0.9
+      },
+      {
+        "id": "a3",
+        "text": "The statement constitutes an assertion of fact regarding the identity of the attacker.",
+        "stance_to_claim": "support",
+        "legal_rule": "FRE 801(c) requires the statement to be an 'assertion.'",
+        "evidence_span": "'I was attacked by Sandra.'",
+        "confidence": 0.9
+      },
+      {
+        "id": "a4",
+        "text": "In-court testimony is inherently non-hearsay because it is made under oath and subject to cross-examination.",
+        "stance_to_claim": "attack",
+        "legal_rule": "Policy rationale behind FRE 801(c) excludes in-court statements due to procedural safeguards.",
+        "evidence_span": "statement in court",
+        "confidence": 0.85
+      }
+    ],
+    "relations": [
+      {
+        "source": "a1",
+        "target": "phi",
+        "type": "attack",
+        "confidence": 0.95
+      },
+      {
+        "source": "a2",
+        "target": "phi",
+        "type": "support",
+        "confidence": 0.9
+      },
+      {
+        "source": "a3",
+        "target": "phi",
+        "type": "support",
+        "confidence": 0.9
+      },
+      {
+        "source": "a4",
+        "target": "phi",
+        "type": "attack",
+        "confidence": 0.85
+      }
+    ],
+    "extraction_model": "",
+    "raw_llm_response": "{\n  \"case_id\": \"test_0025\",\n  \"phi\": \"Is the statement described in this narrative hearsay under FRE 801(c)?\",\n  \"arguments\": [\n    {\n      \"id\": \"a1\",\n      \"text\": \"The statement was made 'in court,' which fails the out-of-court requirement of FRE 801(c).\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"FRE 801(c) defines hearsay as a statement made out of court.\",\n      \"evidence_span\": \"Nancy's statement in court\",\n      \"confidence\": 0.95,\n      \"tau\": 0.95,\n      \"rubric\": {\n        \"relevance\": 1.0,\n        \"factual_grounding\": 1.0,\n        \"specificity\": 1.0,\n        \"logical_coherence\": 1.0,\n        \"applicability\": 1.0\n      },\n      \"justification\": \"Directly negates a necessary element of the hearsay definition. In-court statements are categorically excluded from the hearsay definition.\"\n    },\n    {\n      \"id\": \"a2\",\n      \"text\": \"The statement is offered to prove the truth of the matter asserted (that Sandra attacked Nancy).\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"FRE 801(c) requires the statement to be offered to prove the truth of the matter asserted.\",\n      \"evidence_span\": \"On the issue of whether Nancy knew who attacked her, Nancy's statement in court, 'I was attacked by Sandra.'\",\n      \"confidence\": 0.9,\n      \"tau\": 0.85,\n      \"rubric\": {\n        \"relevance\": 0.9,\n        \"factual_grounding\": 1.0,\n        \"specificity\": 0.8,\n        \"logical_coherence\": 0.9,\n        \"applicability\": 0.9\n      },\n      \"justification\": \"Satisfies the purpose prong of the hearsay definition, though insufficient alone to establish hearsay.\"\n    },\n    {\n      \"id\": \"a3\",\n      \"text\": \"The statement constitutes an assertion of fact regarding the identity of the attacker.\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"FRE 801(c) requires the statement to be an 'assertion.'\",\n      \"evidence_span\": \"'I was attacked by Sandra.'\",\n      \"confidence\": 0.9,\n      \"tau\": 0.8,\n      \"rubric\": {\n        \"relevance\": 0.8,\n        \"factual_grounding\": 1.0,\n        \"specificity\": 0.7,\n        \"logical_coherence\": 0.9,\n        \"applicability\": 0.9\n      },\n      \"justification\": \"Satisfies the assertion prong of the hearsay definition, but does not overcome the in-court nature of the statement.\"\n    },\n    {\n      \"id\": \"a4\",\n      \"text\": \"In-court testimony is inherently non-hearsay because it is made under oath and subject to cross-examination.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"Policy rationale behind FRE 801(c) excludes in-court statements due to procedural safeguards.\",\n      \"evidence_span\": \"statement in court\",\n      \"confidence\": 0.85,\n      \"tau\": 0.75,\n      \"rubric\": {\n        \"relevance\": 0.8,\n        \"factual_grounding\": 0.8,\n        \"specificity\": 0.6,\n        \"logical_coherence\": 0.9,\n        \"applicability\": 0.9\n      },\n      \"justification\": \"Reinforces why in-court statements are excluded from the hearsay definition by highlighting the underlying rationale.\"\n    }\n  ],\n  \"relations\": [\n    {\n      \"source\": \"a1\",\n      \"target\": \"phi\",\n      \"type\": \"attack\",\n      \"confidence\": 0.95\n    },\n    {\n      \"source\": \"a2\",\n      \"target\": \"phi\",\n      \"type\": \"support\",\n      \"confidence\": 0.9\n    },\n    {\n      \"source\": \"a3\",\n      \"target\": \"phi\",\n      \"type\": \"support\",\n      \"confidence\": 0.9\n    },\n    {\n      \"source\": \"a4\",\n      \"target\": \"phi\",\n      \"type\": \"attack\",\n      \"confidence\": 0.85\n    }\n  ]\n}",
+    "parse_error": null,
+    "n_raw_arguments": 4
+  },
+  "strengths": [
+    {
+      "argument_id": "a1",
+      "tau": 0.95,
+      "rubric": {
+        "legal_relevance": 1.0,
+        "factual_grounding": 1.0,
+        "specificity": 1.0,
+        "logical_coherence": 1.0,
+        "fre_801c_applicability": 1.0
+      },
+      "justification": "Directly negates a necessary element of the hearsay definition. In-court statements are categorically excluded from the hearsay definition.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a2",
+      "tau": 0.85,
+      "rubric": {
+        "legal_relevance": 0.9,
+        "factual_grounding": 1.0,
+        "specificity": 0.8,
+        "logical_coherence": 0.9,
+        "fre_801c_applicability": 0.9
+      },
+      "justification": "Satisfies the purpose prong of the hearsay definition, though insufficient alone to establish hearsay.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a3",
+      "tau": 0.8,
+      "rubric": {
+        "legal_relevance": 0.8,
+        "factual_grounding": 1.0,
+        "specificity": 0.7,
+        "logical_coherence": 0.9,
+        "fre_801c_applicability": 0.9
+      },
+      "justification": "Satisfies the assertion prong of the hearsay definition, but does not overcome the in-court nature of the statement.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a4",
+      "tau": 0.75,
+      "rubric": {
+        "legal_relevance": 0.8,
+        "factual_grounding": 0.8,
+        "specificity": 0.6,
+        "logical_coherence": 0.9,
+        "fre_801c_applicability": 0.9
+      },
+      "justification": "Reinforces why in-court statements are excluded from the hearsay definition by highlighting the underlying rationale.",
+      "model": "combined"
+    }
+  ],
+  "solver_output": {
+    "case_id": "test_0025",
+    "graph": {
+      "nodes": {
+        "phi": {
+          "id": "phi",
+          "text": "Is the statement described in this narrative hearsay under FRE 801(c)?",
+          "tau": 0.5,
+          "sigma": 0.49124999999999996,
+          "is_claim": true
+        },
+        "a1": {
+          "id": "a1",
+          "text": "The statement was made 'in court,' which fails the out-of-court requirement of FRE 801(c).",
+          "tau": 0.95,
+          "sigma": 0.95,
+          "is_claim": false
+        },
+        "a2": {
+          "id": "a2",
+          "text": "The statement is offered to prove the truth of the matter asserted (that Sandra attacked Nancy).",
+          "tau": 0.85,
+          "sigma": 0.85,
+          "is_claim": false
+        },
+        "a3": {
+          "id": "a3",
+          "text": "The statement constitutes an assertion of fact regarding the identity of the attacker.",
+          "tau": 0.8,
+          "sigma": 0.8,
+          "is_claim": false
+        },
+        "a4": {
+          "id": "a4",
+          "text": "In-court testimony is inherently non-hearsay because it is made under oath and subject to cross-examination.",
+          "tau": 0.75,
+          "sigma": 0.75,
+          "is_claim": false
+        }
+      },
+      "edges": [
+        {
+          "source": "a1",
+          "target": "phi",
+          "type": "attack",
+          "confidence": 0.95
+        },
+        {
+          "source": "a2",
+          "target": "phi",
+          "type": "support",
+          "confidence": 0.9
+        },
+        {
+          "source": "a3",
+          "target": "phi",
+          "type": "support",
+          "confidence": 0.9
+        },
+        {
+          "source": "a4",
+          "target": "phi",
+          "type": "attack",
+          "confidence": 0.85
+        }
+      ],
+      "solver_type": "df_quad"
+    },
+    "sigma_phi": 0.49124999999999996,
+    "sigma_all": {
+      "phi": 0.49124999999999996,
+      "a1": 0.95,
+      "a2": 0.85,
+      "a3": 0.8,
+      "a4": 0.75
+    },
+    "iterations": 2,
+    "converged": true,
+    "solver_type": "df_quad"
+  },
+  "sigma_phi": 0.49124999999999996,
+  "decision": "UNCERTAIN",
+  "uncertainty": {
+    "is_uncertain": true,
+    "sigma_phi": 0.49124999999999996,
+    "threshold_low": 0.45,
+    "threshold_high": 0.55,
+    "escalation_triggered": true,
+    "escalation_actions": [
+      "rerun_extraction",
+      "human_review"
+    ],
+    "escalation_log": [
+      "[test_0025] UNCERTAIN σ(φ)=0.4912 ∈ [0.45,0.55]. Human review recommended."
+    ]
+  },
+  "hitl_interventions": [],
+  "pre_hitl_decision": null
+}

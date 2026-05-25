@@ -1,0 +1,72 @@
+[
+  {
+    "case_id": "stress_hearsay_yes_001",
+    "domain": "legal_hearsay",
+    "decision_problem": "Is the statement described in this narrative hearsay under FRE 801(c)?",
+    "label": "Yes",
+    "text": "In a civil fraud trial, the plaintiff offers testimony from Officer Reed that a customer told him at the station, 'The advisor instructed me to wire the money to that account.' The statement is offered to prove that the advisor gave the instruction. Arguments to consider: 1) The customer made the statement outside the current trial. 2) The statement asserts that the advisor gave an instruction. 3) The plaintiff offers the statement to prove the instruction occurred. 4) The customer is not testifying and cannot be cross-examined. 5) No party-opponent exclusion appears to apply. 6) The statement is central to proving the disputed fact.",
+    "expected_arguments": [
+      "Out-of-court customer statement supports hearsay.",
+      "Statement is offered for truth of the asserted instruction.",
+      "Declarant is unavailable for cross-examination.",
+      "No exclusion is apparent.",
+      "Statement is used to prove a central disputed fact."
+    ]
+  },
+  {
+    "case_id": "stress_hearsay_no_party_001",
+    "domain": "legal_hearsay",
+    "decision_problem": "Is the statement described in this narrative hearsay under FRE 801(c)?",
+    "label": "No",
+    "text": "In a breach of contract trial, the plaintiff offers the defendant's signed email stating, 'I failed to deliver the equipment by the agreed deadline.' The email is offered against the defendant to prove breach. Arguments to consider: 1) The statement was made outside court. 2) The statement is offered for the truth of the missed deadline. 3) The statement was made by the opposing party. 4) FRE 801(d)(2) excludes party-opponent statements from hearsay. 5) The email is authenticated as the defendant's own message. 6) The statement is offered against the party who made it.",
+    "expected_arguments": [
+      "Out-of-court statement supports hearsay definition.",
+      "Offered for truth supports hearsay definition.",
+      "Party-opponent exclusion attacks hearsay classification.",
+      "Statement is offered against its maker.",
+      "Authentication supports applying party-opponent exclusion."
+    ]
+  },
+  {
+    "case_id": "stress_hearsay_no_effect_001",
+    "domain": "legal_hearsay",
+    "decision_problem": "Is the statement described in this narrative hearsay under FRE 801(c)?",
+    "label": "No",
+    "text": "In a negligence case, the plaintiff offers testimony that a pedestrian shouted, 'The floor is slippery!' moments before the defendant placed warning cones. The statement is offered to show the defendant heard the warning and had notice, not to prove the floor actually was slippery. Arguments to consider: 1) The statement was made outside court. 2) The words assert that the floor was slippery. 3) The offered purpose is notice to the defendant. 4) Effect on listener is not offered for truth. 5) The defendant's later placement of cones makes notice relevant. 6) The actual slipperiness can be proved by other evidence.",
+    "expected_arguments": [
+      "Out-of-court statement supports hearsay definition.",
+      "Assertive content supports hearsay concern.",
+      "Notice purpose attacks hearsay classification.",
+      "Effect on listener is not truth use.",
+      "Defendant's conduct makes notice legally relevant."
+    ]
+  },
+  {
+    "case_id": "stress_contract_mia_001",
+    "domain": "contract_compensation",
+    "decision_problem": "Is Mia Brown entitled to compensation from QuickFix Repairs?",
+    "label": "Yes",
+    "text": "Mia Brown hired QuickFix Repairs to fix her kitchen sink and water pipes for €500. The company promised completion in 2 days, but the work took 1 week. After the repair, the sink still leaked and caused water damage to the kitchen floor. Mia asks the court for compensation. Arguments to consider: 1) QuickFix did not finish on time. 2) The repair was not done properly. 3) The bad repair caused floor damage. 4) Mia paid the agreed €500. 5) A repair company should fix the problem rather than leave it worse. 6) Compensation would address the defective repair and resulting damage.",
+    "expected_arguments": [
+      "Late completion supports breach.",
+      "Defective repair supports liability.",
+      "Water damage supports compensable loss.",
+      "Payment shows plaintiff performed obligation.",
+      "Service duty supports compensation."
+    ]
+  },
+  {
+    "case_id": "stress_policy_park_001",
+    "domain": "policy_decision",
+    "decision_problem": "Should the city approve the proposed community park renovation?",
+    "label": "Yes",
+    "text": "A city council considers renovating an old community park. The renovation would add lighting, repair unsafe paths, include accessible playground equipment, and use funds already allocated for public spaces. Some residents worry about temporary construction noise and maintenance costs. Arguments to consider: 1) Broken paths create safety concerns. 2) Lighting may improve evening usability. 3) Accessible equipment supports inclusion. 4) Funds are already allocated for public spaces. 5) Construction noise is temporary. 6) Maintenance costs may increase after renovation.",
+    "expected_arguments": [
+      "Safety repairs support approval.",
+      "Lighting supports public usability.",
+      "Accessibility supports inclusion.",
+      "Allocated funds support feasibility.",
+      "Maintenance cost attacks approval."
+    ]
+  }
+]

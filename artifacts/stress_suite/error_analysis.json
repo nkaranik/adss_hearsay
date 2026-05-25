@@ -1,0 +1,26 @@
+{
+  "proportions": {
+    "argument_omission": 1.0,
+    "relation_error": 0.0,
+    "strength_miscalibration": 0.0,
+    "threshold_uncertainty_failure": 0.0
+  },
+  "errors": [
+    {
+      "case_id": "stress_hearsay_no_party_001",
+      "gold_label": "No",
+      "predicted_label": "Yes",
+      "sigma_phi": 0.9999999980684684,
+      "category": "argument_omission",
+      "reason": "No arguments were retained, or relevant arguments were filtered out as neutral/low-confidence."
+    },
+    {
+      "case_id": "stress_hearsay_no_effect_001",
+      "gold_label": "No",
+      "predicted_label": "Yes",
+      "sigma_phi": 0.998686638496,
+      "category": "argument_omission",
+      "reason": "No arguments were retained, or relevant arguments were filtered out as neutral/low-confidence."
+    }
+  ]
+}

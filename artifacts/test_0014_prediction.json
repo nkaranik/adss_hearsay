@@ -13,120 +13,99 @@
     "arguments": [
       {
         "id": "a1",
-        "text": "Site visits lack assertive intent, failing FRE 801(a)(2) statement requirement.",
+        "text": "The narrative describes Charles's conduct of visiting a website, which constitutes non-assertive behavior rather than an out-of-court statement or assertion.",
         "stance_to_claim": "attack",
-        "legal_rule": "FRE 801(a)(2) requires intent to assert",
-        "evidence_span": null,
-        "confidence": 0.9
+        "legal_rule": "FRE 801(a) defines a 'statement' as an oral or written assertion or nonverbal conduct intended as an assertion.",
+        "evidence_span": "the fact that Charles had visited the website responsible for the article multiple times in the past year.",
+        "confidence": 0.95
       },
       {
         "id": "a2",
-        "text": "No declarant or assertion is identified, making the hearsay inquiry premature.",
+        "text": "Because the evidence is purely circumstantial conduct, it does not rely on the credibility of a declarant's out-of-court assertion, which is the core concern of the hearsay rule.",
         "stance_to_claim": "attack",
-        "legal_rule": "FRE 801(c) requires an out-of-court statement",
-        "evidence_span": null,
-        "confidence": 0.85
+        "legal_rule": "FRE 801(c) hearsay definition applies only to assertions; circumstantial evidence of conduct is evaluated under FRE 401/403 rather than hearsay rules.",
+        "evidence_span": "the fact that Charles had visited the website responsible for the article multiple times in the past year.",
+        "confidence": 0.9
       },
       {
         "id": "a3",
-        "text": "Digital logs may be implied assertions, triggering hearsay classification.",
-        "stance_to_claim": "support",
-        "legal_rule": "FRE 801(a)(2) covers implied assertions",
-        "evidence_span": null,
-        "confidence": 0.7
-      },
-      {
-        "id": "a4",
-        "text": "Visit frequency is circumstantial evidence, not a statement offered for truth.",
+        "text": "The evidence is offered to prove Charles's access to and familiarity with the website, not to prove the truth of any matter asserted by a declarant.",
         "stance_to_claim": "attack",
-        "legal_rule": "FRE 801(c) excludes circumstantial evidence",
-        "evidence_span": null,
-        "confidence": 0.88
+        "legal_rule": "FRE 801(c) requires the evidence to be offered to prove the truth of the matter asserted; evidence offered for a non-truth purpose or as circumstantial proof of conduct is not hearsay.",
+        "evidence_span": "On the issue of whether Charles was responsible for the defamatory article published online, the fact that Charles had visited the website responsible for the article multiple times in the past year.",
+        "confidence": 0.85
       }
     ],
     "relations": [
       {
         "source": "a1",
-        "target": "a2",
-        "type": "support",
-        "confidence": 0.85
+        "target": "phi",
+        "type": "attack",
+        "confidence": 0.95
       },
       {
-        "source": "a4",
-        "target": "a1",
-        "type": "support",
-        "confidence": 0.85
+        "source": "a2",
+        "target": "phi",
+        "type": "attack",
+        "confidence": 0.9
       },
       {
         "source": "a3",
-        "target": "a1",
+        "target": "phi",
         "type": "attack",
-        "confidence": 0.8
+        "confidence": 0.85
       },
       {
-        "source": "a3",
+        "source": "a1",
         "target": "a2",
-        "type": "attack",
+        "type": "support",
         "confidence": 0.8
       }
     ],
     "extraction_model": "",
-    "raw_llm_response": "{\n  \"case_id\": \"test_0014\",\n  \"arguments\": [\n    {\n      \"id\": \"a1\",\n      \"text\": \"Site visits lack assertive intent, failing FRE 801(a)(2) statement requirement.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"FRE 801(a)(2) requires intent to assert\",\n      \"evidence_span\": null,\n      \"confidence\": 0.9,\n      \"rubric\": {\n        \"legal_relevance\": 0.9,\n        \"factual_grounding\": 0.8,\n        \"specificity\": 0.7,\n        \"logical_coherence\": 0.9,\n        \"fre_801c_applicability\": 0.8\n      },\n      \"tau\": 0.85,\n      \"justification\": \"Website visits are non-assertive conduct, so FRE 801(c) does not apply.\"\n    },\n    {\n      \"id\": \"a2\",\n      \"text\": \"No declarant or assertion is identified, making the hearsay inquiry premature.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"FRE 801(c) requires an out-of-court statement\",\n      \"evidence_span\": null,\n      \"confidence\": 0.85,\n      \"rubric\": {\n        \"legal_relevance\": 0.8,\n        \"factual_grounding\": 0.9,\n        \"specificity\": 0.6,\n        \"logical_coherence\": 0.8,\n        \"fre_801c_applicability\": 0.7\n      },\n      \"tau\": 0.8,\n      \"justification\": \"Absence of a declarant prevents application of the hearsay definition.\"\n    },\n    {\n      \"id\": \"a3\",\n      \"text\": \"Digital logs may be implied assertions, triggering hearsay classification.\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"FRE 801(a)(2) covers implied assertions\",\n      \"evidence_span\": null,\n      \"confidence\": 0.7,\n      \"rubric\": {\n        \"legal_relevance\": 0.7,\n        \"factual_grounding\": 0.6,\n        \"specificity\": 0.5,\n        \"logical_coherence\": 0.7,\n        \"fre_801c_applicability\": 0.6\n      },\n      \"tau\": 0.65,\n      \"justification\": \"Some courts treat digital access records as statements if offered for implied content.\"\n    },\n    {\n      \"id\": \"a4\",\n      \"text\": \"Visit frequency is circumstantial evidence, not a statement offered for truth.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"FRE 801(c) excludes circumstantial evidence\",\n      \"evidence_span\": null,\n      \"confidence\": 0.88,\n      \"rubric\": {\n        \"legal_relevance\": 0.9,\n        \"factual_grounding\": 0.8,\n        \"specificity\": 0.7,\n        \"logical_coherence\": 0.9,\n        \"fre_801c_applicability\": 0.8\n      },\n      \"tau\": 0.82,\n      \"justification\": \"Circumstantial facts do not meet the hearsay definition under FRE 801(c).\"\n    }\n  ],\n  \"relations\": [\n    {\"source\": \"a1\", \"target\": \"a2\", \"type\": \"support\", \"confidence\": 0.85},\n    {\"source\": \"a4\", \"target\": \"a1\", \"type\": \"support\", \"confidence\": 0.85},\n    {\"source\": \"a3\", \"target\": \"a1\", \"type\": \"attack\", \"confidence\": 0.8},\n    {\"source\": \"a3\", \"target\": \"a2\", \"type\": \"attack\", \"confidence\": 0.8}\n  ]\n}",
+    "raw_llm_response": "{\n  \"case_id\": \"test_0014\",\n  \"phi\": \"Is the statement described in this narrative hearsay under FRE 801(c)?\",\n  \"arguments\": [\n    {\n      \"id\": \"a1\",\n      \"text\": \"The narrative describes Charles's conduct of visiting a website, which constitutes non-assertive behavior rather than an out-of-court statement or assertion.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"FRE 801(a) defines a 'statement' as an oral or written assertion or nonverbal conduct intended as an assertion.\",\n      \"evidence_span\": \"the fact that Charles had visited the website responsible for the article multiple times in the past year.\",\n      \"confidence\": 0.95,\n      \"tau\": 0.85,\n      \"rubric\": {\n        \"relevance\": 0.9,\n        \"factual_grounding\": 0.9,\n        \"specificity\": 0.8,\n        \"logical_coherence\": 0.9,\n        \"applicability\": 0.9\n      },\n      \"justification\": \"Directly addresses the threshold requirement of an 'assertion' under FRE 801(c). Visiting a website is non-assertive conduct, so it fails the definition of hearsay.\"\n    },\n    {\n      \"id\": \"a2\",\n      \"text\": \"Because the evidence is purely circumstantial conduct, it does not rely on the credibility of a declarant's out-of-court assertion, which is the core concern of the hearsay rule.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"FRE 801(c) hearsay definition applies only to assertions; circumstantial evidence of conduct is evaluated under FRE 401/403 rather than hearsay rules.\",\n      \"evidence_span\": \"the fact that Charles had visited the website responsible for the article multiple times in the past year.\",\n      \"confidence\": 0.9,\n      \"tau\": 0.8,\n      \"rubric\": {\n        \"relevance\": 0.8,\n        \"factual_grounding\": 0.9,\n        \"specificity\": 0.7,\n        \"logical_coherence\": 0.8,\n        \"applicability\": 0.8\n      },\n      \"justification\": \"Highlights the policy rationale and definitional boundary: hearsay targets assertions, not circumstantial facts like website visits.\"\n    },\n    {\n      \"id\": \"a3\",\n      \"text\": \"The evidence is offered to prove Charles's access to and familiarity with the website, not to prove the truth of any matter asserted by a declarant.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"FRE 801(c) requires the evidence to be offered to prove the truth of the matter asserted; evidence offered for a non-truth purpose or as circumstantial proof of conduct is not hearsay.\",\n      \"evidence_span\": \"On the issue of whether Charles was responsible for the defamatory article published online, the fact that Charles had visited the website responsible for the article multiple times in the past year.\",\n      \"confidence\": 0.85,\n      \"tau\": 0.75,\n      \"rubric\": {\n        \"relevance\": 0.8,\n        \"factual_grounding\": 0.8,\n        \"specificity\": 0.7,\n        \"logical_coherence\": 0.8,\n        \"applicability\": 0.8\n      },\n      \"justification\": \"Addresses the third prong of the hearsay definition (offered for truth). The conduct is relevant for its circumstantial value regarding responsibility, not for any asserted proposition.\"\n    }\n  ],\n  \"relations\": [\n    {\n      \"source\": \"a1\",\n      \"target\": \"phi\",\n      \"type\": \"attack\",\n      \"confidence\": 0.95\n    },\n    {\n      \"source\": \"a2\",\n      \"target\": \"phi\",\n      \"type\": \"attack\",\n      \"confidence\": 0.9\n    },\n    {\n      \"source\": \"a3\",\n      \"target\": \"phi\",\n      \"type\": \"attack\",\n      \"confidence\": 0.85\n    },\n    {\n      \"source\": \"a1\",\n      \"target\": \"a2\",\n      \"type\": \"support\",\n      \"confidence\": 0.8\n    }\n  ]\n}",
     "parse_error": null,
-    "n_raw_arguments": 4
+    "n_raw_arguments": 3
   },
   "strengths": [
     {
       "argument_id": "a1",
-      "tau": 0.9,
+      "tau": 0.85,
       "rubric": {
-        "relevance": 0.9,
+        "legal_relevance": 0.9,
         "factual_grounding": 0.9,
-        "specificity": 0.9,
+        "specificity": 0.8,
         "logical_coherence": 0.9,
-        "applicability": 0.9
+        "fre_801c_applicability": 0.9
       },
-      "justification": "Fallback from extraction confidence.",
-      "model": "fallback"
+      "justification": "Directly addresses the threshold requirement of an 'assertion' under FRE 801(c). Visiting a website is non-assertive conduct, so it fails the definition of hearsay.",
+      "model": "combined"
     },
     {
       "argument_id": "a2",
-      "tau": 0.85,
+      "tau": 0.8,
       "rubric": {
-        "relevance": 0.85,
-        "factual_grounding": 0.85,
-        "specificity": 0.85,
-        "logical_coherence": 0.85,
-        "applicability": 0.85
+        "legal_relevance": 0.8,
+        "factual_grounding": 0.9,
+        "specificity": 0.7,
+        "logical_coherence": 0.8,
+        "fre_801c_applicability": 0.8
       },
-      "justification": "Fallback from extraction confidence.",
-      "model": "fallback"
+      "justification": "Highlights the policy rationale and definitional boundary: hearsay targets assertions, not circumstantial facts like website visits.",
+      "model": "combined"
     },
     {
       "argument_id": "a3",
-      "tau": 0.7,
+      "tau": 0.75,
       "rubric": {
-        "relevance": 0.7,
-        "factual_grounding": 0.7,
+        "legal_relevance": 0.8,
+        "factual_grounding": 0.8,
         "specificity": 0.7,
-        "logical_coherence": 0.7,
-        "applicability": 0.7
+        "logical_coherence": 0.8,
+        "fre_801c_applicability": 0.8
       },
-      "justification": "Fallback from extraction confidence.",
-      "model": "fallback"
-    },
-    {
-      "argument_id": "a4",
-      "tau": 0.88,
-      "rubric": {
-        "relevance": 0.88,
-        "factual_grounding": 0.88,
-        "specificity": 0.88,
-        "logical_coherence": 0.88,
-        "applicability": 0.88
-      },
-      "justification": "Fallback from extraction confidence.",
-      "model": "fallback"
+      "justification": "Addresses the third prong of the hearsay definition (offered for truth). The conduct is relevant for its circumstantial value regarding responsibility, not for any asserted proposition.",
+      "model": "combined"
     }
   ],
   "solver_output": {
@@ -137,107 +116,75 @@
           "id": "phi",
           "text": "Is the statement described in this narrative hearsay under FRE 801(c)?",
           "tau": 0.5,
-          "sigma": 0.376628876,
+          "sigma": 0.0005625000000000213,
           "is_claim": true
         },
         "a1": {
           "id": "a1",
-          "text": "Site visits lack assertive intent, failing FRE 801(a)(2) statement requirement.",
-          "tau": 0.9,
-          "sigma": 0.358,
+          "text": "The narrative describes Charles's conduct of visiting a website, which constitutes non-assertive behavior rather than an out-of-court statement or assertion.",
+          "tau": 0.85,
+          "sigma": 0.85,
           "is_claim": false
         },
         "a2": {
           "id": "a2",
-          "text": "No declarant or assertion is identified, making the hearsay inquiry premature.",
-          "tau": 0.85,
-          "sigma": 0.3087,
+          "text": "Because the evidence is purely circumstantial conduct, it does not rely on the credibility of a declarant's out-of-court assertion, which is the core concern of the hearsay rule.",
+          "tau": 0.8,
+          "sigma": 0.97,
           "is_claim": false
         },
         "a3": {
           "id": "a3",
-          "text": "Digital logs may be implied assertions, triggering hearsay classification.",
-          "tau": 0.7,
-          "sigma": 0.7,
-          "is_claim": false
-        },
-        "a4": {
-          "id": "a4",
-          "text": "Visit frequency is circumstantial evidence, not a statement offered for truth.",
-          "tau": 0.88,
-          "sigma": 0.88,
+          "text": "The evidence is offered to prove Charles's access to and familiarity with the website, not to prove the truth of any matter asserted by a declarant.",
+          "tau": 0.75,
+          "sigma": 0.75,
           "is_claim": false
         }
       },
       "edges": [
         {
           "source": "a1",
-          "target": "a2",
-          "type": "support",
-          "confidence": 0.85
-        },
-        {
-          "source": "a4",
-          "target": "a1",
-          "type": "support",
-          "confidence": 0.85
-        },
-        {
-          "source": "a3",
-          "target": "a1",
-          "type": "attack",
-          "confidence": 0.8
-        },
-        {
-          "source": "a3",
-          "target": "a2",
-          "type": "attack",
-          "confidence": 0.8
-        },
-        {
-          "source": "a1",
           "target": "phi",
           "type": "attack",
-          "confidence": 0.9
+          "confidence": 0.95
         },
         {
           "source": "a2",
           "target": "phi",
           "type": "attack",
-          "confidence": 0.85
+          "confidence": 0.9
         },
         {
           "source": "a3",
           "target": "phi",
-          "type": "support",
-          "confidence": 0.7
+          "type": "attack",
+          "confidence": 0.85
         },
         {
-          "source": "a4",
-          "target": "phi",
-          "type": "attack",
-          "confidence": 0.88
+          "source": "a1",
+          "target": "a2",
+          "type": "support",
+          "confidence": 0.8
         }
       ],
       "solver_type": "df_quad"
     },
-    "sigma_phi": 0.376628876,
+    "sigma_phi": 0.0005625000000000213,
     "sigma_all": {
-      "phi": 0.376628876,
-      "a1": 0.358,
-      "a2": 0.3087,
-      "a3": 0.7,
-      "a4": 0.88
+      "phi": 0.0005625000000000213,
+      "a1": 0.85,
+      "a2": 0.97,
+      "a3": 0.75
     },
     "iterations": 2,
     "converged": true,
     "solver_type": "df_quad"
   },
-  "sigma_phi": 0.376628876,
+  "sigma_phi": 0.0005625000000000213,
   "decision": "No",
   "uncertainty": {
     "is_uncertain": false,
-    "sigma_phi": 0.376628876,
+    "sigma_phi": 0.0005625000000000213,
     "threshold_low": 0.45,
     "threshold_high": 0.55,
     "escalation_triggered": false,

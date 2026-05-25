@@ -1,0 +1,208 @@
+{
+  "case_id": "test_0068",
+  "input_text": "On the issue of whether Albert supported environmental reform, the fact that his car has many stickers with environmental slogans.",
+  "phi_text": "",
+  "gold_label": "Yes",
+  "extraction": {
+    "case_id": "test_0068",
+    "input_text": "On the issue of whether Albert supported environmental reform, the fact that his car has many stickers with environmental slogans.",
+    "claim": {
+      "id": "phi",
+      "text": "Is the statement described in this narrative hearsay under FRE 801(c)?"
+    },
+    "arguments": [
+      {
+        "id": "a1",
+        "text": "The evidence consists of physical stickers on a car, which constitutes circumstantial evidence rather than an out-of-court statement.",
+        "stance_to_claim": "attack",
+        "legal_rule": "FRE 801(c) defines hearsay as an out-of-court statement; circumstantial evidence falls outside this definition.",
+        "evidence_span": "the fact that his car has many stickers with environmental slogans.",
+        "confidence": 0.95
+      },
+      {
+        "id": "a2",
+        "text": "There is no identifiable declarant who made an assertion regarding environmental reform.",
+        "stance_to_claim": "attack",
+        "legal_rule": "FRE 801(c)(1) requires a declarant's assertion for evidence to qualify as hearsay.",
+        "evidence_span": "the fact that his car has many stickers with environmental slogans.",
+        "confidence": 0.9
+      },
+      {
+        "id": "a3",
+        "text": "Although the evidence is offered to prove the truth of the matter asserted (Albert's support), this purpose alone does not trigger hearsay without an underlying assertion.",
+        "stance_to_claim": "attack",
+        "legal_rule": "FRE 801(c)(2) requires the statement to be offered for the truth, but the threshold requirement of a statement is unmet.",
+        "evidence_span": "On the issue of whether Albert supported environmental reform",
+        "confidence": 0.85
+      }
+    ],
+    "relations": [
+      {
+        "source": "a1",
+        "target": "phi",
+        "type": "attack",
+        "confidence": 0.95
+      },
+      {
+        "source": "a2",
+        "target": "phi",
+        "type": "attack",
+        "confidence": 0.9
+      },
+      {
+        "source": "a3",
+        "target": "phi",
+        "type": "attack",
+        "confidence": 0.85
+      },
+      {
+        "source": "a1",
+        "target": "a2",
+        "type": "support",
+        "confidence": 0.8
+      },
+      {
+        "source": "a2",
+        "target": "a3",
+        "type": "support",
+        "confidence": 0.75
+      }
+    ],
+    "extraction_model": "",
+    "raw_llm_response": "{\n  \"case_id\": \"test_0068\",\n  \"phi\": \"Is the statement described in this narrative hearsay under FRE 801(c)?\",\n  \"arguments\": [\n    {\n      \"id\": \"a1\",\n      \"text\": \"The evidence consists of physical stickers on a car, which constitutes circumstantial evidence rather than an out-of-court statement.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"FRE 801(c) defines hearsay as an out-of-court statement; circumstantial evidence falls outside this definition.\",\n      \"evidence_span\": \"the fact that his car has many stickers with environmental slogans.\",\n      \"confidence\": 0.95,\n      \"tau\": 0.90,\n      \"rubric\": {\n        \"relevance\": 0.90,\n        \"factual_grounding\": 0.95,\n        \"specificity\": 0.85,\n        \"logical_coherence\": 0.90,\n        \"applicability\": 0.90\n      },\n      \"justification\": \"Directly addresses the definitional requirement of an 'out-of-court statement' under FRE 801(c). Circumstantial evidence is not hearsay.\"\n    },\n    {\n      \"id\": \"a2\",\n      \"text\": \"There is no identifiable declarant who made an assertion regarding environmental reform.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"FRE 801(c)(1) requires a declarant's assertion for evidence to qualify as hearsay.\",\n      \"evidence_span\": \"the fact that his car has many stickers with environmental slogans.\",\n      \"confidence\": 0.90,\n      \"tau\": 0.85,\n      \"rubric\": {\n        \"relevance\": 0.85,\n        \"factual_grounding\": 0.90,\n        \"specificity\": 0.75,\n        \"logical_coherence\": 0.85,\n        \"applicability\": 0.85\n      },\n      \"justification\": \"Highlights the absence of a human declarant, a necessary element for hearsay. Stickers cannot be declarants.\"\n    },\n    {\n      \"id\": \"a3\",\n      \"text\": \"Although the evidence is offered to prove the truth of the matter asserted (Albert's support), this purpose alone does not trigger hearsay without an underlying assertion.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"FRE 801(c)(2) requires the statement to be offered for the truth, but the threshold requirement of a statement is unmet.\",\n      \"evidence_span\": \"On the issue of whether Albert supported environmental reform\",\n      \"confidence\": 0.85,\n      \"tau\": 0.75,\n      \"rubric\": {\n        \"relevance\": 0.75,\n        \"factual_grounding\": 0.80,\n        \"specificity\": 0.65,\n        \"logical_coherence\": 0.75,\n        \"applicability\": 0.75\n      },\n      \"justification\": \"Addresses the 'offered to prove the truth' prong while clarifying that it cannot override the lack of a statement.\"\n    }\n  ],\n  \"relations\": [\n    {\n      \"source\": \"a1\",\n      \"target\": \"phi\",\n      \"type\": \"attack\",\n      \"confidence\": 0.95\n    },\n    {\n      \"source\": \"a2\",\n      \"target\": \"phi\",\n      \"type\": \"attack\",\n      \"confidence\": 0.90\n    },\n    {\n      \"source\": \"a3\",\n      \"target\": \"phi\",\n      \"type\": \"attack\",\n      \"confidence\": 0.85\n    },\n    {\n      \"source\": \"a1\",\n      \"target\": \"a2\",\n      \"type\": \"support\",\n      \"confidence\": 0.80\n    },\n    {\n      \"source\": \"a2\",\n      \"target\": \"a3\",\n      \"type\": \"support\",\n      \"confidence\": 0.75\n    }\n  ]\n}",
+    "parse_error": null,
+    "n_raw_arguments": 3
+  },
+  "strengths": [
+    {
+      "argument_id": "a1",
+      "tau": 0.9,
+      "rubric": {
+        "legal_relevance": 0.9,
+        "factual_grounding": 0.95,
+        "specificity": 0.85,
+        "logical_coherence": 0.9,
+        "fre_801c_applicability": 0.9
+      },
+      "justification": "Directly addresses the definitional requirement of an 'out-of-court statement' under FRE 801(c). Circumstantial evidence is not hearsay.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a2",
+      "tau": 0.85,
+      "rubric": {
+        "legal_relevance": 0.85,
+        "factual_grounding": 0.9,
+        "specificity": 0.75,
+        "logical_coherence": 0.85,
+        "fre_801c_applicability": 0.85
+      },
+      "justification": "Highlights the absence of a human declarant, a necessary element for hearsay. Stickers cannot be declarants.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a3",
+      "tau": 0.75,
+      "rubric": {
+        "legal_relevance": 0.75,
+        "factual_grounding": 0.8,
+        "specificity": 0.65,
+        "logical_coherence": 0.75,
+        "fre_801c_applicability": 0.75
+      },
+      "justification": "Addresses the 'offered to prove the truth' prong while clarifying that it cannot override the lack of a statement.",
+      "model": "combined"
+    }
+  ],
+  "solver_output": {
+    "case_id": "test_0068",
+    "graph": {
+      "nodes": {
+        "phi": {
+          "id": "phi",
+          "text": "Is the statement described in this narrative hearsay under FRE 801(c)?",
+          "tau": 0.5,
+          "sigma": 2.8125000000045475e-6,
+          "is_claim": true
+        },
+        "a1": {
+          "id": "a1",
+          "text": "The evidence consists of physical stickers on a car, which constitutes circumstantial evidence rather than an out-of-court statement.",
+          "tau": 0.9,
+          "sigma": 0.9,
+          "is_claim": false
+        },
+        "a2": {
+          "id": "a2",
+          "text": "There is no identifiable declarant who made an assertion regarding environmental reform.",
+          "tau": 0.85,
+          "sigma": 0.985,
+          "is_claim": false
+        },
+        "a3": {
+          "id": "a3",
+          "text": "Although the evidence is offered to prove the truth of the matter asserted (Albert's support), this purpose alone does not trigger hearsay without an underlying assertion.",
+          "tau": 0.75,
+          "sigma": 0.99625,
+          "is_claim": false
+        }
+      },
+      "edges": [
+        {
+          "source": "a1",
+          "target": "phi",
+          "type": "attack",
+          "confidence": 0.95
+        },
+        {
+          "source": "a2",
+          "target": "phi",
+          "type": "attack",
+          "confidence": 0.9
+        },
+        {
+          "source": "a3",
+          "target": "phi",
+          "type": "attack",
+          "confidence": 0.85
+        },
+        {
+          "source": "a1",
+          "target": "a2",
+          "type": "support",
+          "confidence": 0.8
+        },
+        {
+          "source": "a2",
+          "target": "a3",
+          "type": "support",
+          "confidence": 0.75
+        }
+      ],
+      "solver_type": "df_quad"
+    },
+    "sigma_phi": 2.8125000000045475e-6,
+    "sigma_all": {
+      "phi": 2.8125000000045475e-6,
+      "a1": 0.9,
+      "a2": 0.985,
+      "a3": 0.99625
+    },
+    "iterations": 2,
+    "converged": true,
+    "solver_type": "df_quad"
+  },
+  "sigma_phi": 2.8125000000045475e-6,
+  "decision": "No",
+  "uncertainty": {
+    "is_uncertain": false,
+    "sigma_phi": 2.8125000000045475e-6,
+    "threshold_low": 0.45,
+    "threshold_high": 0.55,
+    "escalation_triggered": false,
+    "escalation_actions": [],
+    "escalation_log": []
+  },
+  "hitl_interventions": [],
+  "pre_hitl_decision": null
+}

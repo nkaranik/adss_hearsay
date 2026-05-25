@@ -13,162 +13,93 @@
     "arguments": [
       {
         "id": "a1",
-        "text": "Hearsay requires an out-of-court assertion by a person, not a factual event.",
+        "text": "The narrative describes the fact that Robert fell asleep while driving, which is circumstantial evidence of negligence rather than an out-of-court statement.",
         "stance_to_claim": "attack",
-        "legal_rule": "FRE 801(c) statement requirement",
-        "evidence_span": null,
-        "confidence": 0.95
-      },
-      {
-        "id": "a2",
-        "text": "Robert falling asleep is a direct fact, not an assertion offered for truth.",
-        "stance_to_claim": "attack",
-        "legal_rule": "FRE 801(c) truth-of-matter requirement",
-        "evidence_span": null,
+        "legal_rule": "FRE 801(c) defines hearsay as an out-of-court statement offered to prove the truth of the matter asserted; circumstantial evidence does not qualify.",
+        "evidence_span": "the fact that Robert fell asleep while driving",
         "confidence": 0.9
       },
       {
-        "id": "a3",
-        "text": "Testimony about an observed event is direct evidence, not hearsay.",
+        "id": "a2",
+        "text": "There is no indication in the narrative of any oral or written declaration made by Robert or another person out of court.",
         "stance_to_claim": "attack",
-        "legal_rule": "FRE 801(c) direct observation rule",
-        "evidence_span": null,
-        "confidence": 0.85
-      },
-      {
-        "id": "a4",
-        "text": "If derived from a report, it might qualify as hearsay when offered for truth.",
-        "stance_to_claim": "support",
-        "legal_rule": "FRE 801(c) out-of-court statement definition",
-        "evidence_span": null,
-        "confidence": 0.6
-      },
-      {
-        "id": "a5",
-        "text": "Negligence claims rely on conduct, not out-of-court assertions.",
-        "stance_to_claim": "attack",
-        "legal_rule": "FRE 801(c) conduct vs statement rule",
+        "legal_rule": "FRE 801(c) requires an 'out-of-court statement' (oral, written, or nonverbal assertion) to trigger hearsay analysis.",
         "evidence_span": null,
         "confidence": 0.8
       },
       {
-        "id": "a6",
-        "text": "The fact is offered to prove negligence, satisfying the truth requirement.",
-        "stance_to_claim": "support",
-        "legal_rule": "FRE 801(c) truth-of-matter prong",
-        "evidence_span": null,
-        "confidence": 0.7
+        "id": "a3",
+        "text": "The fact of falling asleep is offered to prove negligence directly through conduct, not through an assertion.",
+        "stance_to_claim": "attack",
+        "legal_rule": "Conduct offered to prove a fact it tends to prove is not hearsay unless it is intended as an assertion.",
+        "evidence_span": "On the issue of whether Robert negligently drove, the fact that Robert fell asleep while driving.",
+        "confidence": 0.85
       }
     ],
     "relations": [
       {
         "source": "a1",
-        "target": "a2",
-        "type": "support",
-        "confidence": 0.85
+        "target": "phi",
+        "type": "attack",
+        "confidence": 0.9
       },
       {
         "source": "a2",
-        "target": "a5",
-        "type": "support",
+        "target": "phi",
+        "type": "attack",
         "confidence": 0.8
       },
       {
-        "source": "a4",
-        "target": "a6",
-        "type": "support",
-        "confidence": 0.75
-      },
-      {
-        "source": "a1",
-        "target": "a4",
+        "source": "a3",
+        "target": "phi",
         "type": "attack",
-        "confidence": 0.88
+        "confidence": 0.85
       }
     ],
     "extraction_model": "",
-    "raw_llm_response": "{\n  \"case_id\": \"test_0001\",\n  \"arguments\": [\n    {\n      \"id\": \"a1\",\n      \"text\": \"Hearsay requires an out-of-court assertion by a person, not a factual event.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"FRE 801(c) statement requirement\",\n      \"evidence_span\": null,\n      \"confidence\": 0.95,\n      \"rubric\": {\n        \"legal_relevance\": 0.95,\n        \"factual_grounding\": 0.9,\n        \"specificity\": 0.8,\n        \"logical_coherence\": 0.95,\n        \"fre_801c_applicability\": 0.95\n      },\n      \"tau\": 0.92,\n      \"justification\": \"The narrative describes a physical event, not a declarant's assertion.\"\n    },\n    {\n      \"id\": \"a2\",\n      \"text\": \"Robert falling asleep is a direct fact, not an assertion offered for truth.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"FRE 801(c) truth-of-matter requirement\",\n      \"evidence_span\": null,\n      \"confidence\": 0.9,\n      \"rubric\": {\n        \"legal_relevance\": 0.9,\n        \"factual_grounding\": 0.85,\n        \"specificity\": 0.8,\n        \"logical_coherence\": 0.9,\n        \"fre_801c_applicability\": 0.9\n      },\n      \"tau\": 0.88,\n      \"justification\": \"Events lack the requisite intent to assert, excluding them from hearsay.\"\n    },\n    {\n      \"id\": \"a3\",\n      \"text\": \"Testimony about an observed event is direct evidence, not hearsay.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"FRE 801(c) direct observation rule\",\n      \"evidence_span\": null,\n      \"confidence\": 0.85,\n      \"rubric\": {\n        \"legal_relevance\": 0.85,\n        \"factual_grounding\": 0.8,\n        \"specificity\": 0.75,\n        \"logical_coherence\": 0.85,\n        \"fre_801c_applicability\": 0.85\n      },\n      \"tau\": 0.82,\n      \"justification\": \"Observing and reporting a fact bypasses the hearsay rule entirely.\"\n    },\n    {\n      \"id\": \"a4\",\n      \"text\": \"If derived from a report, it might qualify as hearsay when offered for truth.\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"FRE 801(c) out-of-court statement definition\",\n      \"evidence_span\": null,\n      \"confidence\": 0.6,\n      \"rubric\": {\n        \"legal_relevance\": 0.7,\n        \"factual_grounding\": 0.5,\n        \"specificity\": 0.6,\n        \"logical_coherence\": 0.7,\n        \"fre_801c_applicability\": 0.65\n      },\n      \"tau\": 0.62,\n      \"justification\": \"Without knowing the source, a reported fact could meet the hearsay definition.\"\n    },\n    {\n      \"id\": \"a5\",\n      \"text\": \"Negligence claims rely on conduct, not out-of-court assertions.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"FRE 801(c) conduct vs statement rule\",\n      \"evidence_span\": null,\n      \"confidence\": 0.8,\n      \"rubric\": {\n        \"legal_relevance\": 0.8,\n        \"factual_grounding\": 0.75,\n        \"specificity\": 0.7,\n        \"logical_coherence\": 0.8,\n        \"fre_801c_applicability\": 0.8\n      },\n      \"tau\": 0.78,\n      \"justification\": \"The rule targets assertions, not physical conduct or its direct effects.\"\n    },\n    {\n      \"id\": \"a6\",\n      \"text\": \"The fact is offered to prove negligence, satisfying the truth requirement.\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"FRE 801(c) truth-of-matter prong\",\n      \"evidence_span\": null,\n      \"confidence\": 0.7,\n      \"rubric\": {\n        \"legal_relevance\": 0.75,\n        \"factual_grounding\": 0.7,\n        \"specificity\": 0.65,\n        \"logical_coherence\": 0.75,\n        \"fre_801c_applicability\": 0.7\n      },\n      \"tau\": 0.72,\n      \"justification\": \"While offered for truth, this prong alone does not establish hearsay.\"\n    }\n  ],\n  \"relations\": [\n    {\"source\": \"a1\", \"target\": \"a2\", \"type\": \"support\", \"confidence\": 0.85},\n    {\"source\": \"a2\", \"target\": \"a5\", \"type\": \"support\", \"confidence\": 0.8},\n    {\"source\": \"a4\", \"target\": \"a6\", \"type\": \"support\", \"confidence\": 0.75},\n    {\"source\": \"a1\", \"target\": \"a4\", \"type\": \"attack\", \"confidence\": 0.88}\n  ]\n}",
+    "raw_llm_response": "{\n  \"case_id\": \"test_0001\",\n  \"phi\": \"Is the statement described in this narrative hearsay under FRE 801(c)?\",\n  \"arguments\": [\n    {\n      \"id\": \"a1\",\n      \"text\": \"The narrative describes the fact that Robert fell asleep while driving, which is circumstantial evidence of negligence rather than an out-of-court statement.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"FRE 801(c) defines hearsay as an out-of-court statement offered to prove the truth of the matter asserted; circumstantial evidence does not qualify.\",\n      \"evidence_span\": \"the fact that Robert fell asleep while driving\",\n      \"confidence\": 0.9,\n      \"tau\": 0.85,\n      \"rubric\": {\n        \"relevance\": 0.9,\n        \"factual_grounding\": 0.9,\n        \"specificity\": 0.8,\n        \"logical_coherence\": 0.9,\n        \"applicability\": 0.9\n      },\n      \"justification\": \"Directly addresses the hearsay definition by noting the evidence is circumstantial fact, not an assertion, thus attacking the claim that it is hearsay.\"\n    },\n    {\n      \"id\": \"a2\",\n      \"text\": \"There is no indication in the narrative of any oral or written declaration made by Robert or another person out of court.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"FRE 801(c) requires an 'out-of-court statement' (oral, written, or nonverbal assertion) to trigger hearsay analysis.\",\n      \"evidence_span\": null,\n      \"confidence\": 0.8,\n      \"tau\": 0.75,\n      \"rubric\": {\n        \"relevance\": 0.8,\n        \"factual_grounding\": 0.7,\n        \"specificity\": 0.6,\n        \"logical_coherence\": 0.8,\n        \"applicability\": 0.8\n      },\n      \"justification\": \"Highlights the absence of a prerequisite element for hearsay, weakening the applicability of FRE 801(c).\"\n    },\n    {\n      \"id\": \"a3\",\n      \"text\": \"The fact of falling asleep is offered to prove negligence directly through conduct, not through an assertion.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"Conduct offered to prove a fact it tends to prove is not hearsay unless it is intended as an assertion.\",\n      \"evidence_span\": \"On the issue of whether Robert negligently drove, the fact that Robert fell asleep while driving.\",\n      \"confidence\": 0.85,\n      \"tau\": 0.8,\n      \"rubric\": {\n        \"relevance\": 0.85,\n        \"factual_grounding\": 0.85,\n        \"specificity\": 0.7,\n        \"logical_coherence\": 0.85,\n        \"applicability\": 0.85\n      },\n      \"justification\": \"Clarifies the purpose of the evidence (proving negligence via conduct) which falls outside the hearsay rule's scope.\"\n    }\n  ],\n  \"relations\": [\n    {\n      \"source\": \"a1\",\n      \"target\": \"phi\",\n      \"type\": \"attack\",\n      \"confidence\": 0.9\n    },\n    {\n      \"source\": \"a2\",\n      \"target\": \"phi\",\n      \"type\": \"attack\",\n      \"confidence\": 0.8\n    },\n    {\n      \"source\": \"a3\",\n      \"target\": \"phi\",\n      \"type\": \"attack\",\n      \"confidence\": 0.85\n    }\n  ]\n}",
     "parse_error": null,
-    "n_raw_arguments": 6
+    "n_raw_arguments": 3
   },
   "strengths": [
     {
       "argument_id": "a1",
-      "tau": 0.95,
+      "tau": 0.85,
       "rubric": {
-        "relevance": 0.95,
-        "factual_grounding": 0.95,
-        "specificity": 0.95,
-        "logical_coherence": 0.95,
-        "applicability": 0.95
+        "legal_relevance": 0.9,
+        "factual_grounding": 0.9,
+        "specificity": 0.8,
+        "logical_coherence": 0.9,
+        "fre_801c_applicability": 0.9
       },
-      "justification": "Fallback from extraction confidence.",
-      "model": "fallback"
+      "justification": "Directly addresses the hearsay definition by noting the evidence is circumstantial fact, not an assertion, thus attacking the claim that it is hearsay.",
+      "model": "combined"
     },
     {
       "argument_id": "a2",
-      "tau": 0.9,
+      "tau": 0.75,
       "rubric": {
-        "relevance": 0.9,
-        "factual_grounding": 0.9,
-        "specificity": 0.9,
-        "logical_coherence": 0.9,
-        "applicability": 0.9
+        "legal_relevance": 0.8,
+        "factual_grounding": 0.7,
+        "specificity": 0.6,
+        "logical_coherence": 0.8,
+        "fre_801c_applicability": 0.8
       },
-      "justification": "Fallback from extraction confidence.",
-      "model": "fallback"
+      "justification": "Highlights the absence of a prerequisite element for hearsay, weakening the applicability of FRE 801(c).",
+      "model": "combined"
     },
     {
       "argument_id": "a3",
-      "tau": 0.85,
-      "rubric": {
-        "relevance": 0.85,
-        "factual_grounding": 0.85,
-        "specificity": 0.85,
-        "logical_coherence": 0.85,
-        "applicability": 0.85
-      },
-      "justification": "Fallback from extraction confidence.",
-      "model": "fallback"
-    },
-    {
-      "argument_id": "a4",
-      "tau": 0.6,
-      "rubric": {
-        "relevance": 0.6,
-        "factual_grounding": 0.6,
-        "specificity": 0.6,
-        "logical_coherence": 0.6,
-        "applicability": 0.6
-      },
-      "justification": "Fallback from extraction confidence.",
-      "model": "fallback"
-    },
-    {
-      "argument_id": "a5",
       "tau": 0.8,
       "rubric": {
-        "relevance": 0.8,
-        "factual_grounding": 0.8,
-        "specificity": 0.8,
-        "logical_coherence": 0.8,
-        "applicability": 0.8
-      },
-      "justification": "Fallback from extraction confidence.",
-      "model": "fallback"
-    },
-    {
-      "argument_id": "a6",
-      "tau": 0.7,
-      "rubric": {
-        "relevance": 0.7,
-        "factual_grounding": 0.7,
+        "legal_relevance": 0.85,
+        "factual_grounding": 0.85,
         "specificity": 0.7,
-        "logical_coherence": 0.7,
-        "applicability": 0.7
+        "logical_coherence": 0.85,
+        "fre_801c_applicability": 0.85
       },
-      "justification": "Fallback from extraction confidence.",
-      "model": "fallback"
+      "justification": "Clarifies the purpose of the evidence (proving negligence via conduct) which falls outside the hearsay rule's scope.",
+      "model": "combined"
     }
   ],
   "solver_output": {
@@ -179,135 +110,69 @@
           "id": "phi",
           "text": "Is the statement described in this narrative hearsay under FRE 801(c)?",
           "tau": 0.5,
-          "sigma": 0.35886501875,
+          "sigma": 0.0037499999999999756,
           "is_claim": true
         },
         "a1": {
           "id": "a1",
-          "text": "Hearsay requires an out-of-court assertion by a person, not a factual event.",
-          "tau": 0.95,
-          "sigma": 0.95,
-          "is_claim": false
-        },
-        "a2": {
-          "id": "a2",
-          "text": "Robert falling asleep is a direct fact, not an assertion offered for truth.",
-          "tau": 0.9,
-          "sigma": 0.995,
-          "is_claim": false
-        },
-        "a3": {
-          "id": "a3",
-          "text": "Testimony about an observed event is direct evidence, not hearsay.",
+          "text": "The narrative describes the fact that Robert fell asleep while driving, which is circumstantial evidence of negligence rather than an out-of-court statement.",
           "tau": 0.85,
           "sigma": 0.85,
           "is_claim": false
         },
-        "a4": {
-          "id": "a4",
-          "text": "If derived from a report, it might qualify as hearsay when offered for truth.",
-          "tau": 0.6,
-          "sigma": 0.030000000000000027,
+        "a2": {
+          "id": "a2",
+          "text": "There is no indication in the narrative of any oral or written declaration made by Robert or another person out of court.",
+          "tau": 0.75,
+          "sigma": 0.75,
           "is_claim": false
         },
-        "a5": {
-          "id": "a5",
-          "text": "Negligence claims rely on conduct, not out-of-court assertions.",
+        "a3": {
+          "id": "a3",
+          "text": "The fact of falling asleep is offered to prove negligence directly through conduct, not through an assertion.",
           "tau": 0.8,
-          "sigma": 0.999,
-          "is_claim": false
-        },
-        "a6": {
-          "id": "a6",
-          "text": "The fact is offered to prove negligence, satisfying the truth requirement.",
-          "tau": 0.7,
-          "sigma": 0.709,
+          "sigma": 0.8,
           "is_claim": false
         }
       },
       "edges": [
         {
           "source": "a1",
-          "target": "a2",
-          "type": "support",
-          "confidence": 0.85
-        },
-        {
-          "source": "a2",
-          "target": "a5",
-          "type": "support",
-          "confidence": 0.8
-        },
-        {
-          "source": "a4",
-          "target": "a6",
-          "type": "support",
-          "confidence": 0.75
-        },
-        {
-          "source": "a1",
-          "target": "a4",
-          "type": "attack",
-          "confidence": 0.88
-        },
-        {
-          "source": "a1",
-          "target": "phi",
-          "type": "attack",
-          "confidence": 0.95
-        },
-        {
-          "source": "a2",
           "target": "phi",
           "type": "attack",
           "confidence": 0.9
+        },
+        {
+          "source": "a2",
+          "target": "phi",
+          "type": "attack",
+          "confidence": 0.8
         },
         {
           "source": "a3",
           "target": "phi",
           "type": "attack",
           "confidence": 0.85
-        },
-        {
-          "source": "a4",
-          "target": "phi",
-          "type": "support",
-          "confidence": 0.6
-        },
-        {
-          "source": "a5",
-          "target": "phi",
-          "type": "attack",
-          "confidence": 0.8
-        },
-        {
-          "source": "a6",
-          "target": "phi",
-          "type": "support",
-          "confidence": 0.7
         }
       ],
       "solver_type": "df_quad"
     },
-    "sigma_phi": 0.35886501875,
+    "sigma_phi": 0.0037499999999999756,
     "sigma_all": {
-      "phi": 0.35886501875,
-      "a1": 0.95,
-      "a2": 0.995,
-      "a3": 0.85,
-      "a4": 0.030000000000000027,
-      "a5": 0.999,
-      "a6": 0.709
+      "phi": 0.0037499999999999756,
+      "a1": 0.85,
+      "a2": 0.75,
+      "a3": 0.8
     },
     "iterations": 2,
     "converged": true,
     "solver_type": "df_quad"
   },
-  "sigma_phi": 0.35886501875,
+  "sigma_phi": 0.0037499999999999756,
   "decision": "No",
   "uncertainty": {
     "is_uncertain": false,
-    "sigma_phi": 0.35886501875,
+    "sigma_phi": 0.0037499999999999756,
     "threshold_low": 0.45,
     "threshold_high": 0.55,
     "escalation_triggered": false,

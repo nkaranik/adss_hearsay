@@ -1,0 +1,4 @@
+category,n,share_of_cases,accuracy,macro_f1
+Certain / non-abstained cases,70,0.7446808511,0.8285714285714286,0.8273026315789473
+Borderline / abstained cases,24,0.2553191489,N/A - abstained,N/A - abstained
+"All cases, abstention counted wrong",94,1.0000000000,0.6170212765957447,0.7073170731707317

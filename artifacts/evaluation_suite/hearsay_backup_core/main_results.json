@@ -1,0 +1,46 @@
+[
+  {
+    "system_name": "ADSS w/o Symbolic Solver",
+    "n": 94,
+    "n_uncertain": 37,
+    "accuracy": {
+      "score": 0.776595744680851,
+      "ci_low": 0.6914893617021277,
+      "ci_high": 0.8617021276595744
+    },
+    "macro_f1": {
+      "score": 0.7648600357355568,
+      "ci_low": 0.6680063329679699,
+      "ci_high": 0.8466200466200466
+    },
+    "false_certainty_rate": 0.0851063829787234,
+    "certain_n": 57,
+    "certain_accuracy": 0.8596491228070176,
+    "certain_macro_f1": 0.8592592592592593,
+    "borderline_n": 37,
+    "borderline_accuracy": 0.6486486486486487,
+    "borderline_macro_f1": 0.39344262295081966
+  },
+  {
+    "system_name": "Full ADSS",
+    "n": 94,
+    "n_uncertain": 24,
+    "accuracy": {
+      "score": 0.8085106382978723,
+      "ci_low": 0.723404255319149,
+      "ci_high": 0.8829787234042553
+    },
+    "macro_f1": {
+      "score": 0.8053382420616659,
+      "ci_low": 0.7229024943310658,
+      "ci_high": 0.8779941002949853
+    },
+    "false_certainty_rate": 0.1276595744680851,
+    "certain_n": 70,
+    "certain_accuracy": 0.8285714285714286,
+    "certain_macro_f1": 0.8273026315789473,
+    "borderline_n": 24,
+    "borderline_accuracy": 0.75,
+    "borderline_macro_f1": 0.42857142857142855
+  }
+]

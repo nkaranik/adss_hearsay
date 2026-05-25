@@ -1,0 +1,143 @@
+{
+  "case_id": "test_0060",
+  "input_text": "On the issue of whether the brakes were faulty, Amy testifies that she heard Arthur claim that he thought something was wrong with the car.",
+  "phi_text": "",
+  "gold_label": "Yes",
+  "extraction": {
+    "case_id": "test_0060",
+    "input_text": "On the issue of whether the brakes were faulty, Amy testifies that she heard Arthur claim that he thought something was wrong with the car.",
+    "claim": {
+      "id": "phi",
+      "text": "Is the statement described in this narrative hearsay under FRE 801(c)?"
+    },
+    "arguments": [
+      {
+        "id": "a1",
+        "text": "Arthur's statement was made outside of the current trial proceedings, as it is being recounted by Amy's testimony rather than made under oath in court.",
+        "stance_to_claim": "support",
+        "legal_rule": "FRE 801(c)(1) - Hearsay requires a statement made outside of current testimony.",
+        "evidence_span": "Amy testifies that she heard Arthur claim that he thought something was wrong with the car.",
+        "confidence": 0.95
+      },
+      {
+        "id": "a2",
+        "text": "The statement is offered to prove the truth of the matter asserted, specifically that the brakes or car were faulty, as indicated by the context of the trial issue.",
+        "stance_to_claim": "support",
+        "legal_rule": "FRE 801(c)(2) - Hearsay requires the statement to be offered to prove the truth of the matter asserted.",
+        "evidence_span": "On the issue of whether the brakes were faulty, Amy testifies that she heard Arthur claim that he thought something was wrong with the car.",
+        "confidence": 0.95
+      }
+    ],
+    "relations": [
+      {
+        "source": "a1",
+        "target": "phi",
+        "type": "support",
+        "confidence": 0.95
+      },
+      {
+        "source": "a2",
+        "target": "phi",
+        "type": "support",
+        "confidence": 0.95
+      }
+    ],
+    "extraction_model": "",
+    "raw_llm_response": "{\n  \"case_id\": \"test_0060\",\n  \"phi\": \"Is the statement described in this narrative hearsay under FRE 801(c)?\",\n  \"arguments\": [\n    {\n      \"id\": \"a1\",\n      \"text\": \"Arthur's statement was made outside of the current trial proceedings, as it is being recounted by Amy's testimony rather than made under oath in court.\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"FRE 801(c)(1) - Hearsay requires a statement made outside of current testimony.\",\n      \"evidence_span\": \"Amy testifies that she heard Arthur claim that he thought something was wrong with the car.\",\n      \"confidence\": 0.95,\n      \"tau\": 0.90,\n      \"rubric\": {\n        \"relevance\": 0.95,\n        \"factual_grounding\": 0.95,\n        \"specificity\": 0.90,\n        \"logical_coherence\": 0.95,\n        \"applicability\": 0.95\n      },\n      \"justification\": \"Directly satisfies the out-of-court requirement for hearsay under FRE 801(c).\"\n    },\n    {\n      \"id\": \"a2\",\n      \"text\": \"The statement is offered to prove the truth of the matter asserted, specifically that the brakes or car were faulty, as indicated by the context of the trial issue.\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"FRE 801(c)(2) - Hearsay requires the statement to be offered to prove the truth of the matter asserted.\",\n      \"evidence_span\": \"On the issue of whether the brakes were faulty, Amy testifies that she heard Arthur claim that he thought something was wrong with the car.\",\n      \"confidence\": 0.95,\n      \"tau\": 0.90,\n      \"rubric\": {\n        \"relevance\": 0.95,\n        \"factual_grounding\": 0.95,\n        \"specificity\": 0.90,\n        \"logical_coherence\": 0.95,\n        \"applicability\": 0.95\n      },\n      \"justification\": \"Directly satisfies the 'truth of the matter asserted' element, as the statement's purpose is to establish the car's mechanical condition.\"\n    },\n    {\n      \"id\": \"a3\",\n      \"text\": \"The statement explicitly references Arthur's subjective belief ('he thought'), which may implicate the state-of-mind exception under FRE 803(3), but this does not negate the initial classification as hearsay under FRE 801(c).\",\n      \"stance_to_claim\": \"neutral\",\n      \"legal_rule\": \"FRE 803(3) - Exception for statements of then-existing mental, emotional, or physical condition.\",\n      \"evidence_span\": \"he thought something was wrong with the car\",\n      \"confidence\": 0.80,\n      \"tau\": 0.60,\n      \"rubric\": {\n        \"relevance\": 0.70,\n        \"factual_grounding\": 0.90,\n        \"specificity\": 0.80,\n        \"logical_coherence\": 0.75,\n        \"applicability\": 0.60\n      },\n      \"justification\": \"Acknowledges a potential admissibility exception but correctly notes it does not defeat the hearsay definition itself, thus remaining neutral to the target claim.\"\n    }\n  ],\n  \"relations\": [\n    {\n      \"source\": \"a1\",\n      \"target\": \"phi\",\n      \"type\": \"support\",\n      \"confidence\": 0.95\n    },\n    {\n      \"source\": \"a2\",\n      \"target\": \"phi\",\n      \"type\": \"support\",\n      \"confidence\": 0.95\n    },\n    {\n      \"source\": \"a3\",\n      \"target\": \"phi\",\n      \"type\": \"neutral\",\n      \"confidence\": 0.80\n    }\n  ]\n}",
+    "parse_error": null,
+    "n_raw_arguments": 3
+  },
+  "strengths": [
+    {
+      "argument_id": "a1",
+      "tau": 0.9,
+      "rubric": {
+        "legal_relevance": 0.95,
+        "factual_grounding": 0.95,
+        "specificity": 0.9,
+        "logical_coherence": 0.95,
+        "fre_801c_applicability": 0.95
+      },
+      "justification": "Directly satisfies the out-of-court requirement for hearsay under FRE 801(c).",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a2",
+      "tau": 0.9,
+      "rubric": {
+        "legal_relevance": 0.95,
+        "factual_grounding": 0.95,
+        "specificity": 0.9,
+        "logical_coherence": 0.95,
+        "fre_801c_applicability": 0.95
+      },
+      "justification": "Directly satisfies the 'truth of the matter asserted' element, as the statement's purpose is to establish the car's mechanical condition.",
+      "model": "combined"
+    }
+  ],
+  "solver_output": {
+    "case_id": "test_0060",
+    "graph": {
+      "nodes": {
+        "phi": {
+          "id": "phi",
+          "text": "Is the statement described in this narrative hearsay under FRE 801(c)?",
+          "tau": 0.5,
+          "sigma": 0.995,
+          "is_claim": true
+        },
+        "a1": {
+          "id": "a1",
+          "text": "Arthur's statement was made outside of the current trial proceedings, as it is being recounted by Amy's testimony rather than made under oath in court.",
+          "tau": 0.9,
+          "sigma": 0.9,
+          "is_claim": false
+        },
+        "a2": {
+          "id": "a2",
+          "text": "The statement is offered to prove the truth of the matter asserted, specifically that the brakes or car were faulty, as indicated by the context of the trial issue.",
+          "tau": 0.9,
+          "sigma": 0.9,
+          "is_claim": false
+        }
+      },
+      "edges": [
+        {
+          "source": "a1",
+          "target": "phi",
+          "type": "support",
+          "confidence": 0.95
+        },
+        {
+          "source": "a2",
+          "target": "phi",
+          "type": "support",
+          "confidence": 0.95
+        }
+      ],
+      "solver_type": "df_quad"
+    },
+    "sigma_phi": 0.995,
+    "sigma_all": {
+      "phi": 0.995,
+      "a1": 0.9,
+      "a2": 0.9
+    },
+    "iterations": 2,
+    "converged": true,
+    "solver_type": "df_quad"
+  },
+  "sigma_phi": 0.995,
+  "decision": "Yes",
+  "uncertainty": {
+    "is_uncertain": false,
+    "sigma_phi": 0.995,
+    "threshold_low": 0.45,
+    "threshold_high": 0.55,
+    "escalation_triggered": false,
+    "escalation_actions": [],
+    "escalation_log": []
+  },
+  "hitl_interventions": [],
+  "pre_hitl_decision": null
+}

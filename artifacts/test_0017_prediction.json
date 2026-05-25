@@ -1,0 +1,143 @@
+{
+  "case_id": "test_0017",
+  "input_text": "On the issue of whether Christopher acted with malice, the fact that Christopher was often moody and had a large temper.",
+  "phi_text": "",
+  "gold_label": "No",
+  "extraction": {
+    "case_id": "test_0017",
+    "input_text": "On the issue of whether Christopher acted with malice, the fact that Christopher was often moody and had a large temper.",
+    "claim": {
+      "id": "phi",
+      "text": "Is the statement described in this narrative hearsay under FRE 801(c)?"
+    },
+    "arguments": [
+      {
+        "id": "a1",
+        "text": "The narrative describes Christopher's temperament ('often moody and had a large temper') rather than an out-of-court assertion. Under FRE 801(c), hearsay requires a 'statement,' defined as an oral or written assertion. Because the evidence is circumstantial or direct evidence of state of mind/character and lacks an assertion, it cannot be hearsay.",
+        "stance_to_claim": "attack",
+        "legal_rule": "FRE 801(c) definition of hearsay requires an out-of-court statement (assertion).",
+        "evidence_span": "the fact that Christopher was often moody and had a large temper",
+        "confidence": 0.9
+      },
+      {
+        "id": "a2",
+        "text": "The evidence is introduced on the issue of whether Christopher acted with malice, indicating it is offered to prove his state of mind or character directly, not to prove the truth of an asserted proposition. This non-assertive use further negates the hearsay classification.",
+        "stance_to_claim": "attack",
+        "legal_rule": "FRE 801(c) hearsay analysis requires the evidence to be offered to prove the truth of the matter asserted; non-assertive circumstantial evidence or state-of-mind evidence is not hearsay.",
+        "evidence_span": "On the issue of whether Christopher acted with malice",
+        "confidence": 0.85
+      }
+    ],
+    "relations": [
+      {
+        "source": "a1",
+        "target": "phi",
+        "type": "attack",
+        "confidence": 0.9
+      },
+      {
+        "source": "a2",
+        "target": "phi",
+        "type": "attack",
+        "confidence": 0.85
+      }
+    ],
+    "extraction_model": "",
+    "raw_llm_response": "{\n  \"case_id\": \"test_0017\",\n  \"phi\": \"Is the statement described in this narrative hearsay under FRE 801(c)?\",\n  \"arguments\": [\n    {\n      \"id\": \"a1\",\n      \"text\": \"The narrative describes Christopher's temperament ('often moody and had a large temper') rather than an out-of-court assertion. Under FRE 801(c), hearsay requires a 'statement,' defined as an oral or written assertion. Because the evidence is circumstantial or direct evidence of state of mind/character and lacks an assertion, it cannot be hearsay.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"FRE 801(c) definition of hearsay requires an out-of-court statement (assertion).\",\n      \"evidence_span\": \"the fact that Christopher was often moody and had a large temper\",\n      \"confidence\": 0.9,\n      \"tau\": 0.85,\n      \"rubric\": {\n        \"relevance\": 0.9,\n        \"factual_grounding\": 0.9,\n        \"specificity\": 0.8,\n        \"logical_coherence\": 0.9,\n        \"applicability\": 0.9\n      },\n      \"justification\": \"Directly addresses the definitional requirement of hearsay (an assertion) and shows the narrative lacks it, thereby attacking the claim that it is hearsay.\"\n    },\n    {\n      \"id\": \"a2\",\n      \"text\": \"The evidence is introduced on the issue of whether Christopher acted with malice, indicating it is offered to prove his state of mind or character directly, not to prove the truth of an asserted proposition. This non-assertive use further negates the hearsay classification.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"FRE 801(c) hearsay analysis requires the evidence to be offered to prove the truth of the matter asserted; non-assertive circumstantial evidence or state-of-mind evidence is not hearsay.\",\n      \"evidence_span\": \"On the issue of whether Christopher acted with malice\",\n      \"confidence\": 0.85,\n      \"tau\": 0.75,\n      \"rubric\": {\n        \"relevance\": 0.8,\n        \"factual_grounding\": 0.8,\n        \"specificity\": 0.7,\n        \"logical_coherence\": 0.8,\n        \"applicability\": 0.8\n      },\n      \"justification\": \"Highlights the purpose/context of the evidence, reinforcing that it is not offered for its truth but for its direct probative value regarding malice/state of mind, attacking the hearsay claim.\"\n    }\n  ],\n  \"relations\": [\n    {\n      \"source\": \"a1\",\n      \"target\": \"phi\",\n      \"type\": \"attack\",\n      \"confidence\": 0.9\n    },\n    {\n      \"source\": \"a2\",\n      \"target\": \"phi\",\n      \"type\": \"attack\",\n      \"confidence\": 0.85\n    }\n  ]\n}",
+    "parse_error": null,
+    "n_raw_arguments": 2
+  },
+  "strengths": [
+    {
+      "argument_id": "a1",
+      "tau": 0.85,
+      "rubric": {
+        "legal_relevance": 0.9,
+        "factual_grounding": 0.9,
+        "specificity": 0.8,
+        "logical_coherence": 0.9,
+        "fre_801c_applicability": 0.9
+      },
+      "justification": "Directly addresses the definitional requirement of hearsay (an assertion) and shows the narrative lacks it, thereby attacking the claim that it is hearsay.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a2",
+      "tau": 0.75,
+      "rubric": {
+        "legal_relevance": 0.8,
+        "factual_grounding": 0.8,
+        "specificity": 0.7,
+        "logical_coherence": 0.8,
+        "fre_801c_applicability": 0.8
+      },
+      "justification": "Highlights the purpose/context of the evidence, reinforcing that it is not offered for its truth but for its direct probative value regarding malice/state of mind, attacking the hearsay claim.",
+      "model": "combined"
+    }
+  ],
+  "solver_output": {
+    "case_id": "test_0017",
+    "graph": {
+      "nodes": {
+        "phi": {
+          "id": "phi",
+          "text": "Is the statement described in this narrative hearsay under FRE 801(c)?",
+          "tau": 0.5,
+          "sigma": 0.01874999999999999,
+          "is_claim": true
+        },
+        "a1": {
+          "id": "a1",
+          "text": "The narrative describes Christopher's temperament ('often moody and had a large temper') rather than an out-of-court assertion. Under FRE 801(c), hearsay requires a 'statement,' defined as an oral or written assertion. Because the evidence is circumstantial or direct evidence of state of mind/character and lacks an assertion, it cannot be hearsay.",
+          "tau": 0.85,
+          "sigma": 0.85,
+          "is_claim": false
+        },
+        "a2": {
+          "id": "a2",
+          "text": "The evidence is introduced on the issue of whether Christopher acted with malice, indicating it is offered to prove his state of mind or character directly, not to prove the truth of an asserted proposition. This non-assertive use further negates the hearsay classification.",
+          "tau": 0.75,
+          "sigma": 0.75,
+          "is_claim": false
+        }
+      },
+      "edges": [
+        {
+          "source": "a1",
+          "target": "phi",
+          "type": "attack",
+          "confidence": 0.9
+        },
+        {
+          "source": "a2",
+          "target": "phi",
+          "type": "attack",
+          "confidence": 0.85
+        }
+      ],
+      "solver_type": "df_quad"
+    },
+    "sigma_phi": 0.01874999999999999,
+    "sigma_all": {
+      "phi": 0.01874999999999999,
+      "a1": 0.85,
+      "a2": 0.75
+    },
+    "iterations": 2,
+    "converged": true,
+    "solver_type": "df_quad"
+  },
+  "sigma_phi": 0.01874999999999999,
+  "decision": "No",
+  "uncertainty": {
+    "is_uncertain": false,
+    "sigma_phi": 0.01874999999999999,
+    "threshold_low": 0.45,
+    "threshold_high": 0.55,
+    "escalation_triggered": false,
+    "escalation_actions": [],
+    "escalation_log": []
+  },
+  "hitl_interventions": [],
+  "pre_hitl_decision": null
+}

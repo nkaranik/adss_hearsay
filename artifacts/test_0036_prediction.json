@@ -1,0 +1,225 @@
+{
+  "case_id": "test_0036",
+  "input_text": "To prove that Shirley committed fraud, the fact that she told her neighbor she was planning on tricking the defendant by selling them a fake handbag.",
+  "phi_text": "",
+  "gold_label": "Yes",
+  "extraction": {
+    "case_id": "test_0036",
+    "input_text": "To prove that Shirley committed fraud, the fact that she told her neighbor she was planning on tricking the defendant by selling them a fake handbag.",
+    "claim": {
+      "id": "phi",
+      "text": "Is the statement described in this narrative hearsay under FRE 801(c)?"
+    },
+    "arguments": [
+      {
+        "id": "a1",
+        "text": "The statement was made outside of a courtroom or formal proceeding, as Shirley communicated it directly to her neighbor.",
+        "stance_to_claim": "support",
+        "legal_rule": "FRE 801(c)(1) requires the statement to be made out of court.",
+        "evidence_span": "she told her neighbor",
+        "confidence": 0.95
+      },
+      {
+        "id": "a2",
+        "text": "The statement constitutes an assertion because Shirley explicitly declared her intent to deceive the defendant regarding a transaction.",
+        "stance_to_claim": "support",
+        "legal_rule": "FRE 801(c)(2) requires the declarant to intend the statement as an assertion of fact or belief.",
+        "evidence_span": "she was planning on tricking the defendant by selling them a fake handbag",
+        "confidence": 0.95
+      },
+      {
+        "id": "a3",
+        "text": "The statement is offered to prove the truth of the matter asserted, specifically Shirley's fraudulent intent and plan.",
+        "stance_to_claim": "support",
+        "legal_rule": "FRE 801(c)(3) requires the statement to be offered in evidence to prove the truth of the matter asserted.",
+        "evidence_span": "To prove that Shirley committed fraud",
+        "confidence": 0.95
+      },
+      {
+        "id": "a4",
+        "text": "Shirley's statement may qualify as a party-opponent admission under FRE 801(d)(2)(A), which would exclude it from the hearsay definition entirely.",
+        "stance_to_claim": "attack",
+        "legal_rule": "FRE 801(d)(2)(A) excludes statements made by a party-opponent in their individual or representative capacity from the hearsay definition.",
+        "evidence_span": "To prove that Shirley committed fraud",
+        "confidence": 0.7
+      }
+    ],
+    "relations": [
+      {
+        "source": "a1",
+        "target": "phi",
+        "type": "support",
+        "confidence": 0.95
+      },
+      {
+        "source": "a2",
+        "target": "phi",
+        "type": "support",
+        "confidence": 0.95
+      },
+      {
+        "source": "a3",
+        "target": "phi",
+        "type": "support",
+        "confidence": 0.95
+      },
+      {
+        "source": "a4",
+        "target": "phi",
+        "type": "attack",
+        "confidence": 0.7
+      }
+    ],
+    "extraction_model": "",
+    "raw_llm_response": "{\n  \"case_id\": \"test_0036\",\n  \"phi\": \"Is the statement described in this narrative hearsay under FRE 801(c)?\",\n  \"arguments\": [\n    {\n      \"id\": \"a1\",\n      \"text\": \"The statement was made outside of a courtroom or formal proceeding, as Shirley communicated it directly to her neighbor.\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"FRE 801(c)(1) requires the statement to be made out of court.\",\n      \"evidence_span\": \"she told her neighbor\",\n      \"confidence\": 0.95,\n      \"tau\": 0.90,\n      \"rubric\": {\n        \"relevance\": 0.9,\n        \"factual_grounding\": 1.0,\n        \"specificity\": 0.8,\n        \"logical_coherence\": 0.9,\n        \"applicability\": 0.9\n      },\n      \"justification\": \"Directly satisfies the out-of-court requirement of FRE 801(c). The narrative explicitly places the communication outside a trial setting, strongly supporting the hearsay classification.\"\n    },\n    {\n      \"id\": \"a2\",\n      \"text\": \"The statement constitutes an assertion because Shirley explicitly declared her intent to deceive the defendant regarding a transaction.\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"FRE 801(c)(2) requires the declarant to intend the statement as an assertion of fact or belief.\",\n      \"evidence_span\": \"she was planning on tricking the defendant by selling them a fake handbag\",\n      \"confidence\": 0.95,\n      \"tau\": 0.90,\n      \"rubric\": {\n        \"relevance\": 0.9,\n        \"factual_grounding\": 1.0,\n        \"specificity\": 0.8,\n        \"logical_coherence\": 0.9,\n        \"applicability\": 0.9\n      },\n      \"justification\": \"The narrative describes a clear declaration of intent and plan, which functions as an assertion under the hearsay definition rather than mere conduct or non-assertive behavior.\"\n    },\n    {\n      \"id\": \"a3\",\n      \"text\": \"The statement is offered to prove the truth of the matter asserted, specifically Shirley's fraudulent intent and plan.\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"FRE 801(c)(3) requires the statement to be offered in evidence to prove the truth of the matter asserted.\",\n      \"evidence_span\": \"To prove that Shirley committed fraud\",\n      \"confidence\": 0.95,\n      \"tau\": 0.95,\n      \"rubric\": {\n        \"relevance\": 1.0,\n        \"factual_grounding\": 1.0,\n        \"specificity\": 0.9,\n        \"logical_coherence\": 1.0,\n        \"applicability\": 1.0\n      },\n      \"justification\": \"The narrative explicitly states the purpose of introducing the statement is to prove fraud. This directly relies on the truth of Shirley's admission, satisfying the core hearsay trigger.\"\n    },\n    {\n      \"id\": \"a4\",\n      \"text\": \"Shirley's statement may qualify as a party-opponent admission under FRE 801(d)(2)(A), which would exclude it from the hearsay definition entirely.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"FRE 801(d)(2)(A) excludes statements made by a party-opponent in their individual or representative capacity from the hearsay definition.\",\n      \"evidence_span\": \"To prove that Shirley committed fraud\",\n      \"confidence\": 0.70,\n      \"tau\": 0.60,\n      \"rubric\": {\n        \"relevance\": 0.8,\n        \"factual_grounding\": 0.6,\n        \"specificity\": 0.5,\n        \"logical_coherence\": 0.7,\n        \"applicability\": 0.8\n      },\n      \"justification\": \"While the narrative focuses on proving fraud, Shirley's status as the accused party suggests her statement might be treated as a non-hearsay admission. This introduces a potential legal exclusion that attacks the hearsay classification, though it requires inferring her party status from the context.\"\n    }\n  ],\n  \"relations\": [\n    {\n      \"source\": \"a1\",\n      \"target\": \"phi\",\n      \"type\": \"support\",\n      \"confidence\": 0.95\n    },\n    {\n      \"source\": \"a2\",\n      \"target\": \"phi\",\n      \"type\": \"support\",\n      \"confidence\": 0.95\n    },\n    {\n      \"source\": \"a3\",\n      \"target\": \"phi\",\n      \"type\": \"support\",\n      \"confidence\": 0.95\n    },\n    {\n      \"source\": \"a4\",\n      \"target\": \"phi\",\n      \"type\": \"attack\",\n      \"confidence\": 0.70\n    }\n  ]\n}",
+    "parse_error": null,
+    "n_raw_arguments": 4
+  },
+  "strengths": [
+    {
+      "argument_id": "a1",
+      "tau": 0.9,
+      "rubric": {
+        "legal_relevance": 0.9,
+        "factual_grounding": 1.0,
+        "specificity": 0.8,
+        "logical_coherence": 0.9,
+        "fre_801c_applicability": 0.9
+      },
+      "justification": "Directly satisfies the out-of-court requirement of FRE 801(c). The narrative explicitly places the communication outside a trial setting, strongly supporting the hearsay classification.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a2",
+      "tau": 0.9,
+      "rubric": {
+        "legal_relevance": 0.9,
+        "factual_grounding": 1.0,
+        "specificity": 0.8,
+        "logical_coherence": 0.9,
+        "fre_801c_applicability": 0.9
+      },
+      "justification": "The narrative describes a clear declaration of intent and plan, which functions as an assertion under the hearsay definition rather than mere conduct or non-assertive behavior.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a3",
+      "tau": 0.95,
+      "rubric": {
+        "legal_relevance": 1.0,
+        "factual_grounding": 1.0,
+        "specificity": 0.9,
+        "logical_coherence": 1.0,
+        "fre_801c_applicability": 1.0
+      },
+      "justification": "The narrative explicitly states the purpose of introducing the statement is to prove fraud. This directly relies on the truth of Shirley's admission, satisfying the core hearsay trigger.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a4",
+      "tau": 0.6,
+      "rubric": {
+        "legal_relevance": 0.8,
+        "factual_grounding": 0.6,
+        "specificity": 0.5,
+        "logical_coherence": 0.7,
+        "fre_801c_applicability": 0.8
+      },
+      "justification": "While the narrative focuses on proving fraud, Shirley's status as the accused party suggests her statement might be treated as a non-hearsay admission. This introduces a potential legal exclusion that attacks the hearsay classification, though it requires inferring her party status from the context.",
+      "model": "combined"
+    }
+  ],
+  "solver_output": {
+    "case_id": "test_0036",
+    "graph": {
+      "nodes": {
+        "phi": {
+          "id": "phi",
+          "text": "Is the statement described in this narrative hearsay under FRE 801(c)?",
+          "tau": 0.5,
+          "sigma": 0.6997500000000001,
+          "is_claim": true
+        },
+        "a1": {
+          "id": "a1",
+          "text": "The statement was made outside of a courtroom or formal proceeding, as Shirley communicated it directly to her neighbor.",
+          "tau": 0.9,
+          "sigma": 0.9,
+          "is_claim": false
+        },
+        "a2": {
+          "id": "a2",
+          "text": "The statement constitutes an assertion because Shirley explicitly declared her intent to deceive the defendant regarding a transaction.",
+          "tau": 0.9,
+          "sigma": 0.9,
+          "is_claim": false
+        },
+        "a3": {
+          "id": "a3",
+          "text": "The statement is offered to prove the truth of the matter asserted, specifically Shirley's fraudulent intent and plan.",
+          "tau": 0.95,
+          "sigma": 0.95,
+          "is_claim": false
+        },
+        "a4": {
+          "id": "a4",
+          "text": "Shirley's statement may qualify as a party-opponent admission under FRE 801(d)(2)(A), which would exclude it from the hearsay definition entirely.",
+          "tau": 0.6,
+          "sigma": 0.6,
+          "is_claim": false
+        }
+      },
+      "edges": [
+        {
+          "source": "a1",
+          "target": "phi",
+          "type": "support",
+          "confidence": 0.95
+        },
+        {
+          "source": "a2",
+          "target": "phi",
+          "type": "support",
+          "confidence": 0.95
+        },
+        {
+          "source": "a3",
+          "target": "phi",
+          "type": "support",
+          "confidence": 0.95
+        },
+        {
+          "source": "a4",
+          "target": "phi",
+          "type": "attack",
+          "confidence": 0.7
+        }
+      ],
+      "solver_type": "df_quad"
+    },
+    "sigma_phi": 0.6997500000000001,
+    "sigma_all": {
+      "phi": 0.6997500000000001,
+      "a1": 0.9,
+      "a2": 0.9,
+      "a3": 0.95,
+      "a4": 0.6
+    },
+    "iterations": 2,
+    "converged": true,
+    "solver_type": "df_quad"
+  },
+  "sigma_phi": 0.6997500000000001,
+  "decision": "Yes",
+  "uncertainty": {
+    "is_uncertain": false,
+    "sigma_phi": 0.6997500000000001,
+    "threshold_low": 0.45,
+    "threshold_high": 0.55,
+    "escalation_triggered": false,
+    "escalation_actions": [],
+    "escalation_log": []
+  },
+  "hitl_interventions": [],
+  "pre_hitl_decision": null
+}

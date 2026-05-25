@@ -1,0 +1,230 @@
+{
+  "case_id": "test_0082",
+  "input_text": "On the issue of whether Patty knew Dave, the prosecution introduces evidence that Patty told Arthur, \"Dave is really dishonest.\"",
+  "phi_text": "",
+  "gold_label": "No",
+  "extraction": {
+    "case_id": "test_0082",
+    "input_text": "On the issue of whether Patty knew Dave, the prosecution introduces evidence that Patty told Arthur, \"Dave is really dishonest.\"",
+    "claim": {
+      "id": "phi",
+      "text": "Is the statement described in this narrative hearsay under FRE 801(c)?"
+    },
+    "arguments": [
+      {
+        "id": "a1",
+        "text": "Patty's statement 'Dave is really dishonest' was made outside of court.",
+        "stance_to_claim": "support",
+        "legal_rule": "FRE 801(c)(1)",
+        "evidence_span": "Patty told Arthur, 'Dave is really dishonest.'",
+        "confidence": 0.95
+      },
+      {
+        "id": "a2",
+        "text": "The statement contains a factual assertion regarding Dave's character.",
+        "stance_to_claim": "support",
+        "legal_rule": "FRE 801(c)(2)",
+        "evidence_span": "Dave is really dishonest.",
+        "confidence": 0.95
+      },
+      {
+        "id": "a3",
+        "text": "The statement is offered on the issue of whether Patty knew Dave, not to prove the truth of Dave's dishonesty.",
+        "stance_to_claim": "attack",
+        "legal_rule": "FRE 801(c)(3)",
+        "evidence_span": "On the issue of whether Patty knew Dave, the prosecution introduces evidence that...",
+        "confidence": 0.9
+      },
+      {
+        "id": "a4",
+        "text": "The statement serves a non-hearsay purpose, such as showing Patty's state of mind or knowledge of Dave, or acting as a verbal act.",
+        "stance_to_claim": "attack",
+        "legal_rule": "FRE 801(c) and related case law on non-hearsay purposes",
+        "evidence_span": "On the issue of whether Patty knew Dave...",
+        "confidence": 0.85
+      }
+    ],
+    "relations": [
+      {
+        "source": "a1",
+        "target": "phi",
+        "type": "support",
+        "confidence": 0.95
+      },
+      {
+        "source": "a2",
+        "target": "phi",
+        "type": "support",
+        "confidence": 0.95
+      },
+      {
+        "source": "a3",
+        "target": "phi",
+        "type": "attack",
+        "confidence": 0.9
+      },
+      {
+        "source": "a4",
+        "target": "phi",
+        "type": "attack",
+        "confidence": 0.85
+      }
+    ],
+    "extraction_model": "",
+    "raw_llm_response": "{\n  \"case_id\": \"test_0082\",\n  \"phi\": \"Is the statement described in this narrative hearsay under FRE 801(c)?\",\n  \"arguments\": [\n    {\n      \"id\": \"a1\",\n      \"text\": \"Patty's statement 'Dave is really dishonest' was made outside of court.\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"FRE 801(c)(1)\",\n      \"evidence_span\": \"Patty told Arthur, 'Dave is really dishonest.'\",\n      \"confidence\": 0.95,\n      \"tau\": 0.95,\n      \"rubric\": {\n        \"relevance\": 0.9,\n        \"factual_grounding\": 1.0,\n        \"specificity\": 0.9,\n        \"logical_coherence\": 1.0,\n        \"applicability\": 0.9\n      },\n      \"justification\": \"Directly satisfies the out-of-court requirement of FRE 801(c), supporting the hearsay classification.\"\n    },\n    {\n      \"id\": \"a2\",\n      \"text\": \"The statement contains a factual assertion regarding Dave's character.\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"FRE 801(c)(2)\",\n      \"evidence_span\": \"Dave is really dishonest.\",\n      \"confidence\": 0.95,\n      \"tau\": 0.90,\n      \"rubric\": {\n        \"relevance\": 0.9,\n        \"factual_grounding\": 1.0,\n        \"specificity\": 0.9,\n        \"logical_coherence\": 1.0,\n        \"applicability\": 0.9\n      },\n      \"justification\": \"Directly satisfies the assertion requirement of FRE 801(c), supporting the hearsay classification.\"\n    },\n    {\n      \"id\": \"a3\",\n      \"text\": \"The statement is offered on the issue of whether Patty knew Dave, not to prove the truth of Dave's dishonesty.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"FRE 801(c)(3)\",\n      \"evidence_span\": \"On the issue of whether Patty knew Dave, the prosecution introduces evidence that...\",\n      \"confidence\": 0.90,\n      \"tau\": 0.85,\n      \"rubric\": {\n        \"relevance\": 0.9,\n        \"factual_grounding\": 1.0,\n        \"specificity\": 0.9,\n        \"logical_coherence\": 1.0,\n        \"applicability\": 0.9\n      },\n      \"justification\": \"Fails the 'offered to prove the truth' prong of FRE 801(c) because the prosecution introduces it to establish Patty's knowledge of Dave, attacking the hearsay classification.\"\n    },\n    {\n      \"id\": \"a4\",\n      \"text\": \"The statement serves a non-hearsay purpose, such as showing Patty's state of mind or knowledge of Dave, or acting as a verbal act.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"FRE 801(c) and related case law on non-hearsay purposes\",\n      \"evidence_span\": \"On the issue of whether Patty knew Dave...\",\n      \"confidence\": 0.85,\n      \"tau\": 0.80,\n      \"rubric\": {\n        \"relevance\": 0.8,\n        \"factual_grounding\": 0.9,\n        \"specificity\": 0.8,\n        \"logical_coherence\": 0.9,\n        \"applicability\": 0.8\n      },\n      \"justification\": \"Identifies a recognized non-hearsay purpose (state of mind/knowledge) that falls outside FRE 801(c), further attacking the hearsay classification.\"\n    }\n  ],\n  \"relations\": [\n    {\n      \"source\": \"a1\",\n      \"target\": \"phi\",\n      \"type\": \"support\",\n      \"confidence\": 0.95\n    },\n    {\n      \"source\": \"a2\",\n      \"target\": \"phi\",\n      \"type\": \"support\",\n      \"confidence\": 0.95\n    },\n    {\n      \"source\": \"a3\",\n      \"target\": \"phi\",\n      \"type\": \"attack\",\n      \"confidence\": 0.90\n    },\n    {\n      \"source\": \"a4\",\n      \"target\": \"phi\",\n      \"type\": \"attack\",\n      \"confidence\": 0.85\n    }\n  ]\n}",
+    "parse_error": null,
+    "n_raw_arguments": 4
+  },
+  "strengths": [
+    {
+      "argument_id": "a1",
+      "tau": 0.95,
+      "rubric": {
+        "legal_relevance": 0.9,
+        "factual_grounding": 1.0,
+        "specificity": 0.9,
+        "logical_coherence": 1.0,
+        "fre_801c_applicability": 0.9
+      },
+      "justification": "Directly satisfies the out-of-court requirement of FRE 801(c), supporting the hearsay classification.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a2",
+      "tau": 0.9,
+      "rubric": {
+        "legal_relevance": 0.9,
+        "factual_grounding": 1.0,
+        "specificity": 0.9,
+        "logical_coherence": 1.0,
+        "fre_801c_applicability": 0.9
+      },
+      "justification": "Directly satisfies the assertion requirement of FRE 801(c), supporting the hearsay classification.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a3",
+      "tau": 0.85,
+      "rubric": {
+        "legal_relevance": 0.9,
+        "factual_grounding": 1.0,
+        "specificity": 0.9,
+        "logical_coherence": 1.0,
+        "fre_801c_applicability": 0.9
+      },
+      "justification": "Fails the 'offered to prove the truth' prong of FRE 801(c) because the prosecution introduces it to establish Patty's knowledge of Dave, attacking the hearsay classification.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a4",
+      "tau": 0.8,
+      "rubric": {
+        "legal_relevance": 0.8,
+        "factual_grounding": 0.9,
+        "specificity": 0.8,
+        "logical_coherence": 0.9,
+        "fre_801c_applicability": 0.8
+      },
+      "justification": "Identifies a recognized non-hearsay purpose (state of mind/knowledge) that falls outside FRE 801(c), further attacking the hearsay classification.",
+      "model": "combined"
+    }
+  ],
+  "solver_output": {
+    "case_id": "test_0082",
+    "graph": {
+      "nodes": {
+        "phi": {
+          "id": "phi",
+          "text": "Is the statement described in this narrative hearsay under FRE 801(c)?",
+          "tau": 0.5,
+          "sigma": 0.5125000000000001,
+          "is_claim": true
+        },
+        "a1": {
+          "id": "a1",
+          "text": "Patty's statement 'Dave is really dishonest' was made outside of court.",
+          "tau": 0.95,
+          "sigma": 0.95,
+          "is_claim": false
+        },
+        "a2": {
+          "id": "a2",
+          "text": "The statement contains a factual assertion regarding Dave's character.",
+          "tau": 0.9,
+          "sigma": 0.9,
+          "is_claim": false
+        },
+        "a3": {
+          "id": "a3",
+          "text": "The statement is offered on the issue of whether Patty knew Dave, not to prove the truth of Dave's dishonesty.",
+          "tau": 0.85,
+          "sigma": 0.85,
+          "is_claim": false
+        },
+        "a4": {
+          "id": "a4",
+          "text": "The statement serves a non-hearsay purpose, such as showing Patty's state of mind or knowledge of Dave, or acting as a verbal act.",
+          "tau": 0.8,
+          "sigma": 0.8,
+          "is_claim": false
+        }
+      },
+      "edges": [
+        {
+          "source": "a1",
+          "target": "phi",
+          "type": "support",
+          "confidence": 0.95
+        },
+        {
+          "source": "a2",
+          "target": "phi",
+          "type": "support",
+          "confidence": 0.95
+        },
+        {
+          "source": "a3",
+          "target": "phi",
+          "type": "attack",
+          "confidence": 0.9
+        },
+        {
+          "source": "a4",
+          "target": "phi",
+          "type": "attack",
+          "confidence": 0.85
+        }
+      ],
+      "solver_type": "df_quad"
+    },
+    "sigma_phi": 0.5125000000000001,
+    "sigma_all": {
+      "phi": 0.5125000000000001,
+      "a1": 0.95,
+      "a2": 0.9,
+      "a3": 0.85,
+      "a4": 0.8
+    },
+    "iterations": 2,
+    "converged": true,
+    "solver_type": "df_quad"
+  },
+  "sigma_phi": 0.5125000000000001,
+  "decision": "UNCERTAIN",
+  "uncertainty": {
+    "is_uncertain": true,
+    "sigma_phi": 0.5125000000000001,
+    "threshold_low": 0.45,
+    "threshold_high": 0.55,
+    "escalation_triggered": true,
+    "escalation_actions": [
+      "rerun_extraction",
+      "human_review"
+    ],
+    "escalation_log": [
+      "[test_0082] UNCERTAIN σ(φ)=0.5125 ∈ [0.45,0.55]. Human review recommended."
+    ]
+  },
+  "hitl_interventions": [],
+  "pre_hitl_decision": null
+}

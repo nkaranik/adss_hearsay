@@ -1,0 +1,38 @@
+[
+  {
+    "case_id": "test_0000",
+    "domain": "contract_nli",
+    "gold_label": "Yes",
+    "decision": "Yes",
+    "is_correct": true,
+    "sigma_phi": 1.0,
+    "is_uncertain": false,
+    "claim_text": "Does the contract context entail the target confidentiality statement?",
+    "n_raw_arguments": 4,
+    "n_kept_arguments": 4,
+    "n_neutral_arguments": 0,
+    "n_relations": 4,
+    "n_phi_edges": 4,
+    "n_strengths": 4,
+    "mean_tau": 0.875,
+    "parse_error": ""
+  },
+  {
+    "case_id": "test_0001",
+    "domain": "contract_nli",
+    "gold_label": "Yes",
+    "decision": "Yes",
+    "is_correct": true,
+    "sigma_phi": 0.9999625,
+    "is_uncertain": false,
+    "claim_text": "Does the contract context entail the target confidentiality statement?",
+    "n_raw_arguments": 3,
+    "n_kept_arguments": 3,
+    "n_neutral_arguments": 0,
+    "n_relations": 4,
+    "n_phi_edges": 3,
+    "n_strengths": 3,
+    "mean_tau": 0.8666666666666667,
+    "parse_error": ""
+  }
+]

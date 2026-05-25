@@ -1,0 +1,86 @@
+[
+  {
+    "system_name": "Full ADSS",
+    "n": 2,
+    "n_uncertain": 0,
+    "accuracy": 1.0,
+    "accuracy_ci_low": 1.0,
+    "accuracy_ci_high": 1.0,
+    "macro_f1": 0.5,
+    "macro_f1_ci_low": 0.5,
+    "macro_f1_ci_high": 0.5,
+    "false_certainty_rate": 0.0
+  },
+  {
+    "system_name": "No Symbolic Solver",
+    "n": 2,
+    "n_uncertain": 0,
+    "accuracy": 1.0,
+    "accuracy_ci_low": 1.0,
+    "accuracy_ci_high": 1.0,
+    "macro_f1": 0.5,
+    "macro_f1_ci_low": 0.5,
+    "macro_f1_ci_high": 0.5,
+    "false_certainty_rate": 0.0
+  },
+  {
+    "system_name": "No Relation Extraction",
+    "n": 2,
+    "n_uncertain": 0,
+    "accuracy": 1.0,
+    "accuracy_ci_low": 1.0,
+    "accuracy_ci_high": 1.0,
+    "macro_f1": 0.5,
+    "macro_f1_ci_low": 0.5,
+    "macro_f1_ci_high": 0.5,
+    "false_certainty_rate": 0.0
+  },
+  {
+    "system_name": "No HITL",
+    "n": 2,
+    "n_uncertain": 0,
+    "accuracy": 1.0,
+    "accuracy_ci_low": 1.0,
+    "accuracy_ci_high": 1.0,
+    "macro_f1": 0.5,
+    "macro_f1_ci_low": 0.5,
+    "macro_f1_ci_high": 0.5,
+    "false_certainty_rate": 0.0
+  },
+  {
+    "system_name": "No UAE",
+    "n": 2,
+    "n_uncertain": 0,
+    "accuracy": 1.0,
+    "accuracy_ci_low": 1.0,
+    "accuracy_ci_high": 1.0,
+    "macro_f1": 0.5,
+    "macro_f1_ci_low": 0.5,
+    "macro_f1_ci_high": 0.5,
+    "false_certainty_rate": 0.0
+  },
+  {
+    "system_name": "Fallback Solver",
+    "n": 2,
+    "n_uncertain": 0,
+    "accuracy": 1.0,
+    "accuracy_ci_low": 1.0,
+    "accuracy_ci_high": 1.0,
+    "macro_f1": 0.5,
+    "macro_f1_ci_low": 0.5,
+    "macro_f1_ci_high": 0.5,
+    "false_certainty_rate": 0.0
+  },
+  {
+    "system_name": "QE Solver",
+    "n": 2,
+    "n_uncertain": 0,
+    "accuracy": 1.0,
+    "accuracy_ci_low": 1.0,
+    "accuracy_ci_high": 1.0,
+    "macro_f1": 0.5,
+    "macro_f1_ci_low": 0.5,
+    "macro_f1_ci_high": 0.5,
+    "false_certainty_rate": 0.0
+  }
+]

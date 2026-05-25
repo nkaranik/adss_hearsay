@@ -1,0 +1,249 @@
+{
+  "case_id": "test_0002",
+  "input_text": "YOU AGREE WITH US: A) that the Confidential Information shall comprise all information (in whatever form, including written, oral or electronic and including material created from such information provided to us by you such as notes, reports or analyses) provided by us to you or any third party on our behalf in connection with the Proposed Transaction, including the fact that discussions relating to the Proposed Transaction are taking place between us. ",
+  "phi_text": "",
+  "gold_label": "Yes",
+  "extraction": {
+    "case_id": "test_0002",
+    "input_text": "YOU AGREE WITH US: A) that the Confidential Information shall comprise all information (in whatever form, including written, oral or electronic and including material created from such information provided to us by you such as notes, reports or analyses) provided by us to you or any third party on our behalf in connection with the Proposed Transaction, including the fact that discussions relating to the Proposed Transaction are taking place between us. ",
+    "claim": {
+      "id": "phi",
+      "text": "Does the contract context entail the target confidentiality statement?"
+    },
+    "arguments": [
+      {
+        "id": "a1",
+        "text": "The narrative explicitly contains a contractual clause defining 'Confidential Information,' which establishes a formal confidentiality framework within the agreement.",
+        "stance_to_claim": "support",
+        "legal_rule": "Contract interpretation principles regarding explicit confidentiality clauses.",
+        "evidence_span": "YOU AGREE WITH US: A) that the Confidential Information shall comprise",
+        "confidence": 0.95
+      },
+      {
+        "id": "a2",
+        "text": "The clause explicitly applies to information provided by the disclosing party to the recipient in connection with the 'Proposed Transaction,' confirming the clause covers the relevant parties and subject matter.",
+        "stance_to_claim": "support",
+        "legal_rule": "Scope of confidentiality obligations in contract contexts.",
+        "evidence_span": "provided by us to you or any third party on our behalf in connection with the Proposed Transaction",
+        "confidence": 0.95
+      },
+      {
+        "id": "a3",
+        "text": "The definition explicitly includes 'the fact that discussions relating to the Proposed Transaction are taking place between us' as part of the Confidential Information, directly entailing confidentiality over such discussions.",
+        "stance_to_claim": "support",
+        "legal_rule": "Definitional entailment in contract NLI.",
+        "evidence_span": "including the fact that discussions relating to the Proposed Transaction are taking place between us.",
+        "confidence": 0.95
+      },
+      {
+        "id": "a4",
+        "text": "The contract employs mandatory language ('YOU AGREE WITH US... shall comprise'), indicating a binding obligation that strengthens the logical entailment of the confidentiality statement.",
+        "stance_to_claim": "support",
+        "legal_rule": "Interpretation of mandatory contractual language ('shall').",
+        "evidence_span": "YOU AGREE WITH US... shall comprise",
+        "confidence": 0.95
+      }
+    ],
+    "relations": [
+      {
+        "source": "a1",
+        "target": "phi",
+        "type": "support",
+        "confidence": 0.95
+      },
+      {
+        "source": "a2",
+        "target": "phi",
+        "type": "support",
+        "confidence": 0.95
+      },
+      {
+        "source": "a3",
+        "target": "phi",
+        "type": "support",
+        "confidence": 0.95
+      },
+      {
+        "source": "a4",
+        "target": "phi",
+        "type": "support",
+        "confidence": 0.95
+      },
+      {
+        "source": "a3",
+        "target": "a2",
+        "type": "support",
+        "confidence": 0.9
+      },
+      {
+        "source": "a3",
+        "target": "a1",
+        "type": "support",
+        "confidence": 0.9
+      }
+    ],
+    "extraction_model": "",
+    "raw_llm_response": "{\n  \"case_id\": \"test_0002\",\n  \"phi\": \"Does the contract context entail the target confidentiality statement?\",\n  \"arguments\": [\n    {\n      \"id\": \"a1\",\n      \"text\": \"The narrative explicitly contains a contractual clause defining 'Confidential Information,' which establishes a formal confidentiality framework within the agreement.\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"Contract interpretation principles regarding explicit confidentiality clauses.\",\n      \"evidence_span\": \"YOU AGREE WITH US: A) that the Confidential Information shall comprise\",\n      \"confidence\": 0.95,\n      \"tau\": 0.9,\n      \"rubric\": {\n        \"relevance\": 0.9,\n        \"factual_grounding\": 1.0,\n        \"specificity\": 0.8,\n        \"logical_coherence\": 0.9,\n        \"applicability\": 0.9\n      },\n      \"justification\": \"Directly establishes the presence of a binding confidentiality clause, which is foundational to the entailment of the target statement.\"\n    },\n    {\n      \"id\": \"a2\",\n      \"text\": \"The clause explicitly applies to information provided by the disclosing party to the recipient in connection with the 'Proposed Transaction,' confirming the clause covers the relevant parties and subject matter.\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"Scope of confidentiality obligations in contract contexts.\",\n      \"evidence_span\": \"provided by us to you or any third party on our behalf in connection with the Proposed Transaction\",\n      \"confidence\": 0.95,\n      \"tau\": 0.85,\n      \"rubric\": {\n        \"relevance\": 0.9,\n        \"factual_grounding\": 1.0,\n        \"specificity\": 0.7,\n        \"logical_coherence\": 0.9,\n        \"applicability\": 0.8\n      },\n      \"justification\": \"Clarifies the scope of the obligation, showing it directly applies to the transaction context relevant to the target claim.\"\n    },\n    {\n      \"id\": \"a3\",\n      \"text\": \"The definition explicitly includes 'the fact that discussions relating to the Proposed Transaction are taking place between us' as part of the Confidential Information, directly entailing confidentiality over such discussions.\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"Definitional entailment in contract NLI.\",\n      \"evidence_span\": \"including the fact that discussions relating to the Proposed Transaction are taking place between us.\",\n      \"confidence\": 0.95,\n      \"tau\": 0.95,\n      \"rubric\": {\n        \"relevance\": 1.0,\n        \"factual_grounding\": 1.0,\n        \"specificity\": 0.9,\n        \"logical_coherence\": 1.0,\n        \"applicability\": 0.9\n      },\n      \"justification\": \"Explicitly incorporates the target confidentiality subject matter into the contractual definition, providing direct textual entailment.\"\n    },\n    {\n      \"id\": \"a4\",\n      \"text\": \"The contract employs mandatory language ('YOU AGREE WITH US... shall comprise'), indicating a binding obligation that strengthens the logical entailment of the confidentiality statement.\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"Interpretation of mandatory contractual language ('shall').\",\n      \"evidence_span\": \"YOU AGREE WITH US... shall comprise\",\n      \"confidence\": 0.95,\n      \"tau\": 0.8,\n      \"rubric\": {\n        \"relevance\": 0.8,\n        \"factual_grounding\": 0.9,\n        \"specificity\": 0.6,\n        \"logical_coherence\": 0.9,\n        \"applicability\": 0.8\n      },\n      \"justification\": \"Mandatory phrasing confirms the obligation is not merely descriptive but legally binding, reinforcing the entailment.\"\n    }\n  ],\n  \"relations\": [\n    {\n      \"source\": \"a1\",\n      \"target\": \"phi\",\n      \"type\": \"support\",\n      \"confidence\": 0.95\n    },\n    {\n      \"source\": \"a2\",\n      \"target\": \"phi\",\n      \"type\": \"support\",\n      \"confidence\": 0.95\n    },\n    {\n      \"source\": \"a3\",\n      \"target\": \"phi\",\n      \"type\": \"support\",\n      \"confidence\": 0.95\n    },\n    {\n      \"source\": \"a4\",\n      \"target\": \"phi\",\n      \"type\": \"support\",\n      \"confidence\": 0.95\n    },\n    {\n      \"source\": \"a3\",\n      \"target\": \"a2\",\n      \"type\": \"support\",\n      \"confidence\": 0.9\n    },\n    {\n      \"source\": \"a3\",\n      \"target\": \"a1\",\n      \"type\": \"support\",\n      \"confidence\": 0.9\n    }\n  ]\n}",
+    "parse_error": null,
+    "n_raw_arguments": 4
+  },
+  "strengths": [
+    {
+      "argument_id": "a1",
+      "tau": 0.9,
+      "rubric": {
+        "legal_relevance": 0.9,
+        "factual_grounding": 1.0,
+        "specificity": 0.8,
+        "logical_coherence": 0.9,
+        "fre_801c_applicability": 0.9
+      },
+      "justification": "Directly establishes the presence of a binding confidentiality clause, which is foundational to the entailment of the target statement.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a2",
+      "tau": 0.85,
+      "rubric": {
+        "legal_relevance": 0.9,
+        "factual_grounding": 1.0,
+        "specificity": 0.7,
+        "logical_coherence": 0.9,
+        "fre_801c_applicability": 0.8
+      },
+      "justification": "Clarifies the scope of the obligation, showing it directly applies to the transaction context relevant to the target claim.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a3",
+      "tau": 0.95,
+      "rubric": {
+        "legal_relevance": 1.0,
+        "factual_grounding": 1.0,
+        "specificity": 0.9,
+        "logical_coherence": 1.0,
+        "fre_801c_applicability": 0.9
+      },
+      "justification": "Explicitly incorporates the target confidentiality subject matter into the contractual definition, providing direct textual entailment.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a4",
+      "tau": 0.8,
+      "rubric": {
+        "legal_relevance": 0.8,
+        "factual_grounding": 0.9,
+        "specificity": 0.6,
+        "logical_coherence": 0.9,
+        "fre_801c_applicability": 0.8
+      },
+      "justification": "Mandatory phrasing confirms the obligation is not merely descriptive but legally binding, reinforcing the entailment.",
+      "model": "combined"
+    }
+  ],
+  "solver_output": {
+    "case_id": "test_0002",
+    "graph": {
+      "nodes": {
+        "phi": {
+          "id": "phi",
+          "text": "Does the contract context entail the target confidentiality statement?",
+          "tau": 0.5,
+          "sigma": 0.9999998125,
+          "is_claim": true
+        },
+        "a1": {
+          "id": "a1",
+          "text": "The narrative explicitly contains a contractual clause defining 'Confidential Information,' which establishes a formal confidentiality framework within the agreement.",
+          "tau": 0.9,
+          "sigma": 0.995,
+          "is_claim": false
+        },
+        "a2": {
+          "id": "a2",
+          "text": "The clause explicitly applies to information provided by the disclosing party to the recipient in connection with the 'Proposed Transaction,' confirming the clause covers the relevant parties and subject matter.",
+          "tau": 0.85,
+          "sigma": 0.9924999999999999,
+          "is_claim": false
+        },
+        "a3": {
+          "id": "a3",
+          "text": "The definition explicitly includes 'the fact that discussions relating to the Proposed Transaction are taking place between us' as part of the Confidential Information, directly entailing confidentiality over such discussions.",
+          "tau": 0.95,
+          "sigma": 0.95,
+          "is_claim": false
+        },
+        "a4": {
+          "id": "a4",
+          "text": "The contract employs mandatory language ('YOU AGREE WITH US... shall comprise'), indicating a binding obligation that strengthens the logical entailment of the confidentiality statement.",
+          "tau": 0.8,
+          "sigma": 0.8,
+          "is_claim": false
+        }
+      },
+      "edges": [
+        {
+          "source": "a1",
+          "target": "phi",
+          "type": "support",
+          "confidence": 0.95
+        },
+        {
+          "source": "a2",
+          "target": "phi",
+          "type": "support",
+          "confidence": 0.95
+        },
+        {
+          "source": "a3",
+          "target": "phi",
+          "type": "support",
+          "confidence": 0.95
+        },
+        {
+          "source": "a4",
+          "target": "phi",
+          "type": "support",
+          "confidence": 0.95
+        },
+        {
+          "source": "a3",
+          "target": "a2",
+          "type": "support",
+          "confidence": 0.9
+        },
+        {
+          "source": "a3",
+          "target": "a1",
+          "type": "support",
+          "confidence": 0.9
+        }
+      ],
+      "solver_type": "df_quad"
+    },
+    "sigma_phi": 0.9999998125,
+    "sigma_all": {
+      "phi": 0.9999998125,
+      "a1": 0.995,
+      "a2": 0.9924999999999999,
+      "a3": 0.95,
+      "a4": 0.8
+    },
+    "iterations": 2,
+    "converged": true,
+    "solver_type": "df_quad"
+  },
+  "sigma_phi": 0.9999998125,
+  "decision": "Yes",
+  "uncertainty": {
+    "is_uncertain": false,
+    "sigma_phi": 0.9999998125,
+    "threshold_low": 0.45,
+    "threshold_high": 0.55,
+    "escalation_triggered": false,
+    "escalation_actions": [],
+    "escalation_log": []
+  },
+  "hitl_interventions": [],
+  "pre_hitl_decision": null
+}

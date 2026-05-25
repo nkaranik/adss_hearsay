@@ -1,0 +1,196 @@
+{
+  "case_id": "test_0078",
+  "input_text": "On the issue of damage to Mason's reputation as a sober individual, Lori's public statement, \"I have never seen Mason drink.\"",
+  "phi_text": "",
+  "gold_label": "No",
+  "extraction": {
+    "case_id": "test_0078",
+    "input_text": "On the issue of damage to Mason's reputation as a sober individual, Lori's public statement, \"I have never seen Mason drink.\"",
+    "claim": {
+      "id": "phi",
+      "text": "Is the statement described in this narrative hearsay under FRE 801(c)?"
+    },
+    "arguments": [
+      {
+        "id": "a1",
+        "text": "Lori's public statement, 'I have never seen Mason drink,' constitutes an out-of-court assertion by a declarant.",
+        "stance_to_claim": "support",
+        "legal_rule": "FRE 801(c)(1) - Hearsay requires a statement asserted by a declarant.",
+        "evidence_span": "Lori's public statement, \"I have never seen Mason drink.\"",
+        "confidence": 0.95
+      },
+      {
+        "id": "a2",
+        "text": "The statement is offered 'on the issue of damage to Mason's reputation as a sober individual,' indicating it is proffered to prove the truth of the matter asserted (that Mason does not drink).",
+        "stance_to_claim": "support",
+        "legal_rule": "FRE 801(c)(2) - Hearsay requires the statement to be offered to prove the truth of the matter asserted.",
+        "evidence_span": "On the issue of damage to Mason's reputation as a sober individual",
+        "confidence": 0.9
+      },
+      {
+        "id": "a3",
+        "text": "There is no indication in the narrative that the statement is offered for a non-hearsay purpose (e.g., effect on listener, notice, or state of mind) or falls under a party-opponent exclusion, reinforcing its classification as hearsay.",
+        "stance_to_claim": "support",
+        "legal_rule": "FRE 801(c) & 801(d)(2) - Absence of non-hearsay purpose or exclusion supports hearsay classification.",
+        "evidence_span": null,
+        "confidence": 0.75
+      }
+    ],
+    "relations": [
+      {
+        "source": "a1",
+        "target": "phi",
+        "type": "support",
+        "confidence": 0.95
+      },
+      {
+        "source": "a2",
+        "target": "phi",
+        "type": "support",
+        "confidence": 0.9
+      },
+      {
+        "source": "a3",
+        "target": "phi",
+        "type": "support",
+        "confidence": 0.75
+      },
+      {
+        "source": "a1",
+        "target": "a2",
+        "type": "support",
+        "confidence": 0.85
+      }
+    ],
+    "extraction_model": "",
+    "raw_llm_response": "{\n  \"case_id\": \"test_0078\",\n  \"phi\": \"Is the statement described in this narrative hearsay under FRE 801(c)?\",\n  \"arguments\": [\n    {\n      \"id\": \"a1\",\n      \"text\": \"Lori's public statement, 'I have never seen Mason drink,' constitutes an out-of-court assertion by a declarant.\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"FRE 801(c)(1) - Hearsay requires a statement asserted by a declarant.\",\n      \"evidence_span\": \"Lori's public statement, \\\"I have never seen Mason drink.\\\"\",\n      \"confidence\": 0.95,\n      \"tau\": 0.90,\n      \"rubric\": {\n        \"relevance\": 0.95,\n        \"factual_grounding\": 0.95,\n        \"specificity\": 0.90,\n        \"logical_coherence\": 0.95,\n        \"applicability\": 0.95\n      },\n      \"justification\": \"Directly satisfies the first prong of the hearsay definition by identifying an explicit out-of-court assertion.\"\n    },\n    {\n      \"id\": \"a2\",\n      \"text\": \"The statement is offered 'on the issue of damage to Mason's reputation as a sober individual,' indicating it is proffered to prove the truth of the matter asserted (that Mason does not drink).\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"FRE 801(c)(2) - Hearsay requires the statement to be offered to prove the truth of the matter asserted.\",\n      \"evidence_span\": \"On the issue of damage to Mason's reputation as a sober individual\",\n      \"confidence\": 0.90,\n      \"tau\": 0.85,\n      \"rubric\": {\n        \"relevance\": 0.90,\n        \"factual_grounding\": 0.90,\n        \"specificity\": 0.85,\n        \"logical_coherence\": 0.90,\n        \"applicability\": 0.90\n      },\n      \"justification\": \"Directly satisfies the second prong of the hearsay definition by linking the proffered purpose to the truth of the asserted fact.\"\n    },\n    {\n      \"id\": \"a3\",\n      \"text\": \"There is no indication in the narrative that the statement is offered for a non-hearsay purpose (e.g., effect on listener, notice, or state of mind) or falls under a party-opponent exclusion, reinforcing its classification as hearsay.\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"FRE 801(c) & 801(d)(2) - Absence of non-hearsay purpose or exclusion supports hearsay classification.\",\n      \"evidence_span\": null,\n      \"confidence\": 0.75,\n      \"tau\": 0.60,\n      \"rubric\": {\n        \"relevance\": 0.70,\n        \"factual_grounding\": 0.60,\n        \"specificity\": 0.50,\n        \"logical_coherence\": 0.80,\n        \"applicability\": 0.75\n      },\n      \"justification\": \"Rules out common hearsay exceptions or non-hearsay purposes based on the limited narrative, strengthening the affirmative hearsay finding.\"\n    }\n  ],\n  \"relations\": [\n    {\n      \"source\": \"a1\",\n      \"target\": \"phi\",\n      \"type\": \"support\",\n      \"confidence\": 0.95\n    },\n    {\n      \"source\": \"a2\",\n      \"target\": \"phi\",\n      \"type\": \"support\",\n      \"confidence\": 0.90\n    },\n    {\n      \"source\": \"a3\",\n      \"target\": \"phi\",\n      \"type\": \"support\",\n      \"confidence\": 0.75\n    },\n    {\n      \"source\": \"a1\",\n      \"target\": \"a2\",\n      \"type\": \"support\",\n      \"confidence\": 0.85\n    }\n  ]\n}",
+    "parse_error": null,
+    "n_raw_arguments": 3
+  },
+  "strengths": [
+    {
+      "argument_id": "a1",
+      "tau": 0.9,
+      "rubric": {
+        "legal_relevance": 0.95,
+        "factual_grounding": 0.95,
+        "specificity": 0.9,
+        "logical_coherence": 0.95,
+        "fre_801c_applicability": 0.95
+      },
+      "justification": "Directly satisfies the first prong of the hearsay definition by identifying an explicit out-of-court assertion.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a2",
+      "tau": 0.85,
+      "rubric": {
+        "legal_relevance": 0.9,
+        "factual_grounding": 0.9,
+        "specificity": 0.85,
+        "logical_coherence": 0.9,
+        "fre_801c_applicability": 0.9
+      },
+      "justification": "Directly satisfies the second prong of the hearsay definition by linking the proffered purpose to the truth of the asserted fact.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a3",
+      "tau": 0.6,
+      "rubric": {
+        "legal_relevance": 0.7,
+        "factual_grounding": 0.6,
+        "specificity": 0.5,
+        "logical_coherence": 0.8,
+        "fre_801c_applicability": 0.75
+      },
+      "justification": "Rules out common hearsay exceptions or non-hearsay purposes based on the limited narrative, strengthening the affirmative hearsay finding.",
+      "model": "combined"
+    }
+  ],
+  "solver_output": {
+    "case_id": "test_0078",
+    "graph": {
+      "nodes": {
+        "phi": {
+          "id": "phi",
+          "text": "Is the statement described in this narrative hearsay under FRE 801(c)?",
+          "tau": 0.5,
+          "sigma": 0.9997,
+          "is_claim": true
+        },
+        "a1": {
+          "id": "a1",
+          "text": "Lori's public statement, 'I have never seen Mason drink,' constitutes an out-of-court assertion by a declarant.",
+          "tau": 0.9,
+          "sigma": 0.9,
+          "is_claim": false
+        },
+        "a2": {
+          "id": "a2",
+          "text": "The statement is offered 'on the issue of damage to Mason's reputation as a sober individual,' indicating it is proffered to prove the truth of the matter asserted (that Mason does not drink).",
+          "tau": 0.85,
+          "sigma": 0.985,
+          "is_claim": false
+        },
+        "a3": {
+          "id": "a3",
+          "text": "There is no indication in the narrative that the statement is offered for a non-hearsay purpose (e.g., effect on listener, notice, or state of mind) or falls under a party-opponent exclusion, reinforcing its classification as hearsay.",
+          "tau": 0.6,
+          "sigma": 0.6,
+          "is_claim": false
+        }
+      },
+      "edges": [
+        {
+          "source": "a1",
+          "target": "phi",
+          "type": "support",
+          "confidence": 0.95
+        },
+        {
+          "source": "a2",
+          "target": "phi",
+          "type": "support",
+          "confidence": 0.9
+        },
+        {
+          "source": "a3",
+          "target": "phi",
+          "type": "support",
+          "confidence": 0.75
+        },
+        {
+          "source": "a1",
+          "target": "a2",
+          "type": "support",
+          "confidence": 0.85
+        }
+      ],
+      "solver_type": "df_quad"
+    },
+    "sigma_phi": 0.9997,
+    "sigma_all": {
+      "phi": 0.9997,
+      "a1": 0.9,
+      "a2": 0.985,
+      "a3": 0.6
+    },
+    "iterations": 2,
+    "converged": true,
+    "solver_type": "df_quad"
+  },
+  "sigma_phi": 0.9997,
+  "decision": "Yes",
+  "uncertainty": {
+    "is_uncertain": false,
+    "sigma_phi": 0.9997,
+    "threshold_low": 0.45,
+    "threshold_high": 0.55,
+    "escalation_triggered": false,
+    "escalation_actions": [],
+    "escalation_log": []
+  },
+  "hitl_interventions": [],
+  "pre_hitl_decision": null
+}

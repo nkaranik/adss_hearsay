@@ -1,0 +1,46 @@
+[
+  {
+    "system_name": "ADSS w/o Symbolic Solver",
+    "n": 2,
+    "n_uncertain": 0,
+    "accuracy": {
+      "score": 1.0,
+      "ci_low": 1.0,
+      "ci_high": 1.0
+    },
+    "macro_f1": {
+      "score": 0.5,
+      "ci_low": 0.5,
+      "ci_high": 0.5
+    },
+    "false_certainty_rate": 0.0,
+    "certain_n": 2,
+    "certain_accuracy": 1.0,
+    "certain_macro_f1": 0.5,
+    "borderline_n": 0,
+    "borderline_accuracy": 0.0,
+    "borderline_macro_f1": 0.0
+  },
+  {
+    "system_name": "Full ADSS",
+    "n": 2,
+    "n_uncertain": 0,
+    "accuracy": {
+      "score": 1.0,
+      "ci_low": 1.0,
+      "ci_high": 1.0
+    },
+    "macro_f1": {
+      "score": 0.5,
+      "ci_low": 0.5,
+      "ci_high": 0.5
+    },
+    "false_certainty_rate": 0.0,
+    "certain_n": 2,
+    "certain_accuracy": 1.0,
+    "certain_macro_f1": 0.5,
+    "borderline_n": 0,
+    "borderline_accuracy": 0.0,
+    "borderline_macro_f1": 0.0
+  }
+]

@@ -1,0 +1,184 @@
+{
+  "case_id": "test_0059",
+  "input_text": "On the issue of whether Sandy knew that the cash belonged to Michael, Amy testifies that Sandy told her he thought he had Michael's cash.",
+  "phi_text": "",
+  "gold_label": "Yes",
+  "extraction": {
+    "case_id": "test_0059",
+    "input_text": "On the issue of whether Sandy knew that the cash belonged to Michael, Amy testifies that Sandy told her he thought he had Michael's cash.",
+    "claim": {
+      "id": "phi",
+      "text": "Is the statement described in this narrative hearsay under FRE 801(c)?"
+    },
+    "arguments": [
+      {
+        "id": "a1",
+        "text": "Sandy's statement to Amy was made outside of the current trial proceedings.",
+        "stance_to_claim": "support",
+        "legal_rule": "FRE 801(c) defines hearsay as a statement made out of court.",
+        "evidence_span": "Amy testifies that Sandy told her",
+        "confidence": 0.95
+      },
+      {
+        "id": "a2",
+        "text": "Sandy's statement constitutes an assertion of his state of mind regarding the cash.",
+        "stance_to_claim": "support",
+        "legal_rule": "FRE 801(a) defines a statement as an oral or written assertion.",
+        "evidence_span": "Sandy told her he thought he had Michael's cash",
+        "confidence": 0.95
+      },
+      {
+        "id": "a3",
+        "text": "The statement is offered to prove the truth of the matter asserted, namely that Sandy knew the cash belonged to Michael.",
+        "stance_to_claim": "support",
+        "legal_rule": "FRE 801(c) defines hearsay as a statement offered to prove the truth of the matter asserted.",
+        "evidence_span": "On the issue of whether Sandy knew that the cash belonged to Michael",
+        "confidence": 0.95
+      }
+    ],
+    "relations": [
+      {
+        "source": "a1",
+        "target": "phi",
+        "type": "support",
+        "confidence": 0.95
+      },
+      {
+        "source": "a2",
+        "target": "phi",
+        "type": "support",
+        "confidence": 0.95
+      },
+      {
+        "source": "a3",
+        "target": "phi",
+        "type": "support",
+        "confidence": 0.95
+      }
+    ],
+    "extraction_model": "",
+    "raw_llm_response": "{\n  \"case_id\": \"test_0059\",\n  \"phi\": \"Is the statement described in this narrative hearsay under FRE 801(c)?\",\n  \"arguments\": [\n    {\n      \"id\": \"a1\",\n      \"text\": \"Sandy's statement to Amy was made outside of the current trial proceedings.\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"FRE 801(c) defines hearsay as a statement made out of court.\",\n      \"evidence_span\": \"Amy testifies that Sandy told her\",\n      \"confidence\": 0.95,\n      \"tau\": 0.90,\n      \"rubric\": {\n        \"relevance\": 0.9,\n        \"factual_grounding\": 1.0,\n        \"specificity\": 0.8,\n        \"logical_coherence\": 0.9,\n        \"applicability\": 0.9\n      },\n      \"justification\": \"Directly satisfies the out-of-court requirement of the hearsay definition based on the narrative's framing of Amy's trial testimony.\"\n    },\n    {\n      \"id\": \"a2\",\n      \"text\": \"Sandy's statement constitutes an assertion of his state of mind regarding the cash.\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"FRE 801(a) defines a statement as an oral or written assertion.\",\n      \"evidence_span\": \"Sandy told her he thought he had Michael's cash\",\n      \"confidence\": 0.95,\n      \"tau\": 0.85,\n      \"rubric\": {\n        \"relevance\": 0.9,\n        \"factual_grounding\": 1.0,\n        \"specificity\": 0.8,\n        \"logical_coherence\": 0.9,\n        \"applicability\": 0.9\n      },\n      \"justification\": \"The narrative explicitly describes Sandy's words as conveying his belief, which functions as an assertion under the rule.\"\n    },\n    {\n      \"id\": \"a3\",\n      \"text\": \"The statement is offered to prove the truth of the matter asserted, namely that Sandy knew the cash belonged to Michael.\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"FRE 801(c) defines hearsay as a statement offered to prove the truth of the matter asserted.\",\n      \"evidence_span\": \"On the issue of whether Sandy knew that the cash belonged to Michael\",\n      \"confidence\": 0.95,\n      \"tau\": 0.90,\n      \"rubric\": {\n        \"relevance\": 1.0,\n        \"factual_grounding\": 1.0,\n        \"specificity\": 0.9,\n        \"logical_coherence\": 1.0,\n        \"applicability\": 1.0\n      },\n      \"justification\": \"The purpose of introducing the testimony directly aligns with proving the content of Sandy's statement, satisfying the core hearsay trigger.\"\n    }\n  ],\n  \"relations\": [\n    {\n      \"source\": \"a1\",\n      \"target\": \"phi\",\n      \"type\": \"support\",\n      \"confidence\": 0.95\n    },\n    {\n      \"source\": \"a2\",\n      \"target\": \"phi\",\n      \"type\": \"support\",\n      \"confidence\": 0.95\n    },\n    {\n      \"source\": \"a3\",\n      \"target\": \"phi\",\n      \"type\": \"support\",\n      \"confidence\": 0.95\n    }\n  ]\n}",
+    "parse_error": null,
+    "n_raw_arguments": 3
+  },
+  "strengths": [
+    {
+      "argument_id": "a1",
+      "tau": 0.9,
+      "rubric": {
+        "legal_relevance": 0.9,
+        "factual_grounding": 1.0,
+        "specificity": 0.8,
+        "logical_coherence": 0.9,
+        "fre_801c_applicability": 0.9
+      },
+      "justification": "Directly satisfies the out-of-court requirement of the hearsay definition based on the narrative's framing of Amy's trial testimony.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a2",
+      "tau": 0.85,
+      "rubric": {
+        "legal_relevance": 0.9,
+        "factual_grounding": 1.0,
+        "specificity": 0.8,
+        "logical_coherence": 0.9,
+        "fre_801c_applicability": 0.9
+      },
+      "justification": "The narrative explicitly describes Sandy's words as conveying his belief, which functions as an assertion under the rule.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a3",
+      "tau": 0.9,
+      "rubric": {
+        "legal_relevance": 1.0,
+        "factual_grounding": 1.0,
+        "specificity": 0.9,
+        "logical_coherence": 1.0,
+        "fre_801c_applicability": 1.0
+      },
+      "justification": "The purpose of introducing the testimony directly aligns with proving the content of Sandy's statement, satisfying the core hearsay trigger.",
+      "model": "combined"
+    }
+  ],
+  "solver_output": {
+    "case_id": "test_0059",
+    "graph": {
+      "nodes": {
+        "phi": {
+          "id": "phi",
+          "text": "Is the statement described in this narrative hearsay under FRE 801(c)?",
+          "tau": 0.5,
+          "sigma": 0.99925,
+          "is_claim": true
+        },
+        "a1": {
+          "id": "a1",
+          "text": "Sandy's statement to Amy was made outside of the current trial proceedings.",
+          "tau": 0.9,
+          "sigma": 0.9,
+          "is_claim": false
+        },
+        "a2": {
+          "id": "a2",
+          "text": "Sandy's statement constitutes an assertion of his state of mind regarding the cash.",
+          "tau": 0.85,
+          "sigma": 0.85,
+          "is_claim": false
+        },
+        "a3": {
+          "id": "a3",
+          "text": "The statement is offered to prove the truth of the matter asserted, namely that Sandy knew the cash belonged to Michael.",
+          "tau": 0.9,
+          "sigma": 0.9,
+          "is_claim": false
+        }
+      },
+      "edges": [
+        {
+          "source": "a1",
+          "target": "phi",
+          "type": "support",
+          "confidence": 0.95
+        },
+        {
+          "source": "a2",
+          "target": "phi",
+          "type": "support",
+          "confidence": 0.95
+        },
+        {
+          "source": "a3",
+          "target": "phi",
+          "type": "support",
+          "confidence": 0.95
+        }
+      ],
+      "solver_type": "df_quad"
+    },
+    "sigma_phi": 0.99925,
+    "sigma_all": {
+      "phi": 0.99925,
+      "a1": 0.9,
+      "a2": 0.85,
+      "a3": 0.9
+    },
+    "iterations": 2,
+    "converged": true,
+    "solver_type": "df_quad"
+  },
+  "sigma_phi": 0.99925,
+  "decision": "Yes",
+  "uncertainty": {
+    "is_uncertain": false,
+    "sigma_phi": 0.99925,
+    "threshold_low": 0.45,
+    "threshold_high": 0.55,
+    "escalation_triggered": false,
+    "escalation_actions": [],
+    "escalation_log": []
+  },
+  "hitl_interventions": [],
+  "pre_hitl_decision": null
+}

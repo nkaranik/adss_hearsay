@@ -1,0 +1,261 @@
+{
+  "case_id": "test_0062",
+  "input_text": "On the issue of whether the defendant knew he was trespassing, the fact that he shook his head when asked by a passing security guard about whether he knew he was on private property.",
+  "phi_text": "",
+  "gold_label": "Yes",
+  "extraction": {
+    "case_id": "test_0062",
+    "input_text": "On the issue of whether the defendant knew he was trespassing, the fact that he shook his head when asked by a passing security guard about whether he knew he was on private property.",
+    "claim": {
+      "id": "phi",
+      "text": "Is the statement described in this narrative hearsay under FRE 801(c)?"
+    },
+    "arguments": [
+      {
+        "id": "a1",
+        "text": "The head shake occurred when asked by a passing security guard, making it an out-of-court communication rather than trial testimony.",
+        "stance_to_claim": "support",
+        "legal_rule": "FRE 801(b) - A statement is one that is made other than while testifying at the current trial or hearing.",
+        "evidence_span": "when asked by a passing security guard",
+        "confidence": 0.95
+      },
+      {
+        "id": "a2",
+        "text": "Shaking one's head in response to a direct question demonstrates an intent to communicate, satisfying the assertion requirement under FRE 801(a)(2).",
+        "stance_to_claim": "support",
+        "legal_rule": "FRE 801(a)(2) - Conduct of a person, if it is the person's intent to communicate, constitutes a statement.",
+        "evidence_span": "the fact that he shook his head when asked",
+        "confidence": 0.9
+      },
+      {
+        "id": "a3",
+        "text": "The evidence is offered to prove the truth of the matter asserted—specifically, that the defendant knew he was on private property—to establish his knowledge for the trespassing charge.",
+        "stance_to_claim": "support",
+        "legal_rule": "FRE 801(c)(1) - A statement is hearsay if offered in evidence to prove the truth of the matter asserted in the statement.",
+        "evidence_span": "On the issue of whether the defendant knew he was trespassing",
+        "confidence": 0.95
+      },
+      {
+        "id": "a4",
+        "text": "The evidence meets all three definitional prongs of FRE 801(c) (out-of-court, assertion, offered for truth), thereby classifying it as hearsay.",
+        "stance_to_claim": "support",
+        "legal_rule": "FRE 801(c) - Definition of hearsay requiring all three prongs to be satisfied.",
+        "evidence_span": null,
+        "confidence": 0.9
+      }
+    ],
+    "relations": [
+      {
+        "source": "a1",
+        "target": "phi",
+        "type": "support",
+        "confidence": 0.95
+      },
+      {
+        "source": "a2",
+        "target": "phi",
+        "type": "support",
+        "confidence": 0.9
+      },
+      {
+        "source": "a3",
+        "target": "phi",
+        "type": "support",
+        "confidence": 0.95
+      },
+      {
+        "source": "a4",
+        "target": "phi",
+        "type": "support",
+        "confidence": 0.9
+      },
+      {
+        "source": "a1",
+        "target": "a2",
+        "type": "support",
+        "confidence": 0.85
+      },
+      {
+        "source": "a2",
+        "target": "a3",
+        "type": "support",
+        "confidence": 0.85
+      },
+      {
+        "source": "a3",
+        "target": "a4",
+        "type": "support",
+        "confidence": 0.9
+      }
+    ],
+    "extraction_model": "",
+    "raw_llm_response": "{\n  \"case_id\": \"test_0062\",\n  \"phi\": \"Is the statement described in this narrative hearsay under FRE 801(c)?\",\n  \"arguments\": [\n    {\n      \"id\": \"a1\",\n      \"text\": \"The head shake occurred when asked by a passing security guard, making it an out-of-court communication rather than trial testimony.\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"FRE 801(b) - A statement is one that is made other than while testifying at the current trial or hearing.\",\n      \"evidence_span\": \"when asked by a passing security guard\",\n      \"confidence\": 0.95,\n      \"tau\": 0.90,\n      \"rubric\": {\n        \"relevance\": 0.9,\n        \"factual_grounding\": 1.0,\n        \"specificity\": 0.9,\n        \"logical_coherence\": 0.9,\n        \"applicability\": 0.9\n      },\n      \"justification\": \"Directly addresses the out-of-court prong of the hearsay definition. The narrative explicitly places the communication outside of court proceedings.\"\n    },\n    {\n      \"id\": \"a2\",\n      \"text\": \"Shaking one's head in response to a direct question demonstrates an intent to communicate, satisfying the assertion requirement under FRE 801(a)(2).\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"FRE 801(a)(2) - Conduct of a person, if it is the person's intent to communicate, constitutes a statement.\",\n      \"evidence_span\": \"the fact that he shook his head when asked\",\n      \"confidence\": 0.90,\n      \"tau\": 0.85,\n      \"rubric\": {\n        \"relevance\": 0.9,\n        \"factual_grounding\": 0.9,\n        \"specificity\": 0.8,\n        \"logical_coherence\": 0.9,\n        \"applicability\": 0.9\n      },\n      \"justification\": \"Addresses the assertion prong. Non-verbal conduct intended as a response to a question is legally treated as an assertion under the FRE.\"\n    },\n    {\n      \"id\": \"a3\",\n      \"text\": \"The evidence is offered to prove the truth of the matter asserted—specifically, that the defendant knew he was on private property—to establish his knowledge for the trespassing charge.\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"FRE 801(c)(1) - A statement is hearsay if offered in evidence to prove the truth of the matter asserted in the statement.\",\n      \"evidence_span\": \"On the issue of whether the defendant knew he was trespassing\",\n      \"confidence\": 0.95,\n      \"tau\": 0.90,\n      \"rubric\": {\n        \"relevance\": 1.0,\n        \"factual_grounding\": 0.9,\n        \"specificity\": 0.9,\n        \"logical_coherence\": 0.9,\n        \"applicability\": 0.9\n      },\n      \"justification\": \"Directly addresses the offered-for-truth prong. The narrative explicitly links the head shake to proving the defendant's knowledge of being on private property, which is central to the trespassing issue.\"\n    },\n    {\n      \"id\": \"a4\",\n      \"text\": \"The evidence meets all three definitional prongs of FRE 801(c) (out-of-court, assertion, offered for truth), thereby classifying it as hearsay.\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"FRE 801(c) - Definition of hearsay requiring all three prongs to be satisfied.\",\n      \"evidence_span\": null,\n      \"confidence\": 0.90,\n      \"tau\": 0.85,\n      \"rubric\": {\n        \"relevance\": 1.0,\n        \"factual_grounding\": 0.8,\n        \"specificity\": 0.7,\n        \"logical_coherence\": 0.9,\n        \"applicability\": 0.9\n      },\n      \"justification\": \"Synthesizes the prior components to conclude that the evidence falls within the hearsay definition. Strength is slightly lower due to its synthetic nature, but logically sound.\"\n    }\n  ],\n  \"relations\": [\n    {\n      \"source\": \"a1\",\n      \"target\": \"phi\",\n      \"type\": \"support\",\n      \"confidence\": 0.95\n    },\n    {\n      \"source\": \"a2\",\n      \"target\": \"phi\",\n      \"type\": \"support\",\n      \"confidence\": 0.90\n    },\n    {\n      \"source\": \"a3\",\n      \"target\": \"phi\",\n      \"type\": \"support\",\n      \"confidence\": 0.95\n    },\n    {\n      \"source\": \"a4\",\n      \"target\": \"phi\",\n      \"type\": \"support\",\n      \"confidence\": 0.90\n    },\n    {\n      \"source\": \"a1\",\n      \"target\": \"a2\",\n      \"type\": \"support\",\n      \"confidence\": 0.85\n    },\n    {\n      \"source\": \"a2\",\n      \"target\": \"a3\",\n      \"type\": \"support\",\n      \"confidence\": 0.85\n    },\n    {\n      \"source\": \"a3\",\n      \"target\": \"a4\",\n      \"type\": \"support\",\n      \"confidence\": 0.90\n    }\n  ]\n}",
+    "parse_error": null,
+    "n_raw_arguments": 4
+  },
+  "strengths": [
+    {
+      "argument_id": "a1",
+      "tau": 0.9,
+      "rubric": {
+        "legal_relevance": 0.9,
+        "factual_grounding": 1.0,
+        "specificity": 0.9,
+        "logical_coherence": 0.9,
+        "fre_801c_applicability": 0.9
+      },
+      "justification": "Directly addresses the out-of-court prong of the hearsay definition. The narrative explicitly places the communication outside of court proceedings.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a2",
+      "tau": 0.85,
+      "rubric": {
+        "legal_relevance": 0.9,
+        "factual_grounding": 0.9,
+        "specificity": 0.8,
+        "logical_coherence": 0.9,
+        "fre_801c_applicability": 0.9
+      },
+      "justification": "Addresses the assertion prong. Non-verbal conduct intended as a response to a question is legally treated as an assertion under the FRE.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a3",
+      "tau": 0.9,
+      "rubric": {
+        "legal_relevance": 1.0,
+        "factual_grounding": 0.9,
+        "specificity": 0.9,
+        "logical_coherence": 0.9,
+        "fre_801c_applicability": 0.9
+      },
+      "justification": "Directly addresses the offered-for-truth prong. The narrative explicitly links the head shake to proving the defendant's knowledge of being on private property, which is central to the trespassing issue.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a4",
+      "tau": 0.85,
+      "rubric": {
+        "legal_relevance": 1.0,
+        "factual_grounding": 0.8,
+        "specificity": 0.7,
+        "logical_coherence": 0.9,
+        "fre_801c_applicability": 0.9
+      },
+      "justification": "Synthesizes the prior components to conclude that the evidence falls within the hearsay definition. Strength is slightly lower due to its synthetic nature, but logically sound.",
+      "model": "combined"
+    }
+  ],
+  "solver_output": {
+    "case_id": "test_0062",
+    "graph": {
+      "nodes": {
+        "phi": {
+          "id": "phi",
+          "text": "Is the statement described in this narrative hearsay under FRE 801(c)?",
+          "tau": 0.5,
+          "sigma": 0.9999999997468749,
+          "is_claim": true
+        },
+        "a1": {
+          "id": "a1",
+          "text": "The head shake occurred when asked by a passing security guard, making it an out-of-court communication rather than trial testimony.",
+          "tau": 0.9,
+          "sigma": 0.9,
+          "is_claim": false
+        },
+        "a2": {
+          "id": "a2",
+          "text": "Shaking one's head in response to a direct question demonstrates an intent to communicate, satisfying the assertion requirement under FRE 801(a)(2).",
+          "tau": 0.85,
+          "sigma": 0.985,
+          "is_claim": false
+        },
+        "a3": {
+          "id": "a3",
+          "text": "The evidence is offered to prove the truth of the matter asserted—specifically, that the defendant knew he was on private property—to establish his knowledge for the trespassing charge.",
+          "tau": 0.9,
+          "sigma": 0.9984999999999999,
+          "is_claim": false
+        },
+        "a4": {
+          "id": "a4",
+          "text": "The evidence meets all three definitional prongs of FRE 801(c) (out-of-court, assertion, offered for truth), thereby classifying it as hearsay.",
+          "tau": 0.85,
+          "sigma": 0.999775,
+          "is_claim": false
+        }
+      },
+      "edges": [
+        {
+          "source": "a1",
+          "target": "phi",
+          "type": "support",
+          "confidence": 0.95
+        },
+        {
+          "source": "a2",
+          "target": "phi",
+          "type": "support",
+          "confidence": 0.9
+        },
+        {
+          "source": "a3",
+          "target": "phi",
+          "type": "support",
+          "confidence": 0.95
+        },
+        {
+          "source": "a4",
+          "target": "phi",
+          "type": "support",
+          "confidence": 0.9
+        },
+        {
+          "source": "a1",
+          "target": "a2",
+          "type": "support",
+          "confidence": 0.85
+        },
+        {
+          "source": "a2",
+          "target": "a3",
+          "type": "support",
+          "confidence": 0.85
+        },
+        {
+          "source": "a3",
+          "target": "a4",
+          "type": "support",
+          "confidence": 0.9
+        }
+      ],
+      "solver_type": "df_quad"
+    },
+    "sigma_phi": 0.9999999997468749,
+    "sigma_all": {
+      "phi": 0.9999999997468749,
+      "a1": 0.9,
+      "a2": 0.985,
+      "a3": 0.9984999999999999,
+      "a4": 0.999775
+    },
+    "iterations": 2,
+    "converged": true,
+    "solver_type": "df_quad"
+  },
+  "sigma_phi": 0.9999999997468749,
+  "decision": "Yes",
+  "uncertainty": {
+    "is_uncertain": false,
+    "sigma_phi": 0.9999999997468749,
+    "threshold_low": 0.45,
+    "threshold_high": 0.55,
+    "escalation_triggered": false,
+    "escalation_actions": [],
+    "escalation_log": []
+  },
+  "hitl_interventions": [],
+  "pre_hitl_decision": null
+}

@@ -1,0 +1,184 @@
+{
+  "case_id": "test_0056",
+  "input_text": "To prove that Albert likes ice cream, the prosecution introduces evidence that Albert told Jim that \"he wanted an ice cream.\"",
+  "phi_text": "",
+  "gold_label": "Yes",
+  "extraction": {
+    "case_id": "test_0056",
+    "input_text": "To prove that Albert likes ice cream, the prosecution introduces evidence that Albert told Jim that \"he wanted an ice cream.\"",
+    "claim": {
+      "id": "phi",
+      "text": "Is the statement described in this narrative hearsay under FRE 801(c)?"
+    },
+    "arguments": [
+      {
+        "id": "a1",
+        "text": "The statement was made out of court, as Albert communicated it to Jim prior to the trial proceedings.",
+        "stance_to_claim": "support",
+        "legal_rule": "FRE 801(c)(B) excludes statements made while testifying at the trial or hearing from the hearsay definition; thus, an out-of-court statement supports a finding of hearsay.",
+        "evidence_span": "Albert told Jim that \"he wanted an ice cream.\"",
+        "confidence": 0.95
+      },
+      {
+        "id": "a2",
+        "text": "The statement contains a clear assertion of fact regarding Albert's past desire for ice cream.",
+        "stance_to_claim": "support",
+        "legal_rule": "FRE 801(c)(A) requires the declarant to assert the matter for the statement to qualify as hearsay.",
+        "evidence_span": "\"he wanted an ice cream\"",
+        "confidence": 0.95
+      },
+      {
+        "id": "a3",
+        "text": "The prosecution offers the statement specifically to prove that Albert likes ice cream, which relies on the truth of the statement itself.",
+        "stance_to_claim": "support",
+        "legal_rule": "FRE 801(c) defines hearsay as a statement offered to prove the truth of the matter asserted.",
+        "evidence_span": "To prove that Albert likes ice cream",
+        "confidence": 0.95
+      }
+    ],
+    "relations": [
+      {
+        "source": "a1",
+        "target": "phi",
+        "type": "support",
+        "confidence": 0.95
+      },
+      {
+        "source": "a2",
+        "target": "phi",
+        "type": "support",
+        "confidence": 0.95
+      },
+      {
+        "source": "a3",
+        "target": "phi",
+        "type": "support",
+        "confidence": 0.95
+      }
+    ],
+    "extraction_model": "",
+    "raw_llm_response": "{\n  \"case_id\": \"test_0056\",\n  \"phi\": \"Is the statement described in this narrative hearsay under FRE 801(c)?\",\n  \"arguments\": [\n    {\n      \"id\": \"a1\",\n      \"text\": \"The statement was made out of court, as Albert communicated it to Jim prior to the trial proceedings.\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"FRE 801(c)(B) excludes statements made while testifying at the trial or hearing from the hearsay definition; thus, an out-of-court statement supports a finding of hearsay.\",\n      \"evidence_span\": \"Albert told Jim that \\\"he wanted an ice cream.\\\"\",\n      \"confidence\": 0.95,\n      \"tau\": 0.90,\n      \"rubric\": {\n        \"relevance\": 0.90,\n        \"factual_grounding\": 0.90,\n        \"specificity\": 0.85,\n        \"logical_coherence\": 0.90,\n        \"applicability\": 0.90\n      },\n      \"justification\": \"Directly addresses the out-of-court requirement of FRE 801(c). The narrative explicitly states Albert told Jim, implying a prior, out-of-court communication.\"\n    },\n    {\n      \"id\": \"a2\",\n      \"text\": \"The statement contains a clear assertion of fact regarding Albert's past desire for ice cream.\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"FRE 801(c)(A) requires the declarant to assert the matter for the statement to qualify as hearsay.\",\n      \"evidence_span\": \"\\\"he wanted an ice cream\\\"\",\n      \"confidence\": 0.95,\n      \"tau\": 0.90,\n      \"rubric\": {\n        \"relevance\": 0.90,\n        \"factual_grounding\": 0.90,\n        \"specificity\": 0.85,\n        \"logical_coherence\": 0.90,\n        \"applicability\": 0.90\n      },\n      \"justification\": \"The quoted words constitute an explicit assertion of a past state of mind/desire, satisfying the assertion element of the hearsay definition.\"\n    },\n    {\n      \"id\": \"a3\",\n      \"text\": \"The prosecution offers the statement specifically to prove that Albert likes ice cream, which relies on the truth of the statement itself.\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"FRE 801(c) defines hearsay as a statement offered to prove the truth of the matter asserted.\",\n      \"evidence_span\": \"To prove that Albert likes ice cream\",\n      \"confidence\": 0.95,\n      \"tau\": 0.95,\n      \"rubric\": {\n        \"relevance\": 0.95,\n        \"factual_grounding\": 0.95,\n        \"specificity\": 0.90,\n        \"logical_coherence\": 0.95,\n        \"applicability\": 0.95\n      },\n      \"justification\": \"Directly maps to the 'offered for truth' prong of FRE 801(c). The prosecution's stated purpose confirms the statement is used to establish the fact asserted.\"\n    }\n  ],\n  \"relations\": [\n    {\n      \"source\": \"a1\",\n      \"target\": \"phi\",\n      \"type\": \"support\",\n      \"confidence\": 0.95\n    },\n    {\n      \"source\": \"a2\",\n      \"target\": \"phi\",\n      \"type\": \"support\",\n      \"confidence\": 0.95\n    },\n    {\n      \"source\": \"a3\",\n      \"target\": \"phi\",\n      \"type\": \"support\",\n      \"confidence\": 0.95\n    }\n  ]\n}",
+    "parse_error": null,
+    "n_raw_arguments": 3
+  },
+  "strengths": [
+    {
+      "argument_id": "a1",
+      "tau": 0.9,
+      "rubric": {
+        "legal_relevance": 0.9,
+        "factual_grounding": 0.9,
+        "specificity": 0.85,
+        "logical_coherence": 0.9,
+        "fre_801c_applicability": 0.9
+      },
+      "justification": "Directly addresses the out-of-court requirement of FRE 801(c). The narrative explicitly states Albert told Jim, implying a prior, out-of-court communication.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a2",
+      "tau": 0.9,
+      "rubric": {
+        "legal_relevance": 0.9,
+        "factual_grounding": 0.9,
+        "specificity": 0.85,
+        "logical_coherence": 0.9,
+        "fre_801c_applicability": 0.9
+      },
+      "justification": "The quoted words constitute an explicit assertion of a past state of mind/desire, satisfying the assertion element of the hearsay definition.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a3",
+      "tau": 0.95,
+      "rubric": {
+        "legal_relevance": 0.95,
+        "factual_grounding": 0.95,
+        "specificity": 0.9,
+        "logical_coherence": 0.95,
+        "fre_801c_applicability": 0.95
+      },
+      "justification": "Directly maps to the 'offered for truth' prong of FRE 801(c). The prosecution's stated purpose confirms the statement is used to establish the fact asserted.",
+      "model": "combined"
+    }
+  ],
+  "solver_output": {
+    "case_id": "test_0056",
+    "graph": {
+      "nodes": {
+        "phi": {
+          "id": "phi",
+          "text": "Is the statement described in this narrative hearsay under FRE 801(c)?",
+          "tau": 0.5,
+          "sigma": 0.99975,
+          "is_claim": true
+        },
+        "a1": {
+          "id": "a1",
+          "text": "The statement was made out of court, as Albert communicated it to Jim prior to the trial proceedings.",
+          "tau": 0.9,
+          "sigma": 0.9,
+          "is_claim": false
+        },
+        "a2": {
+          "id": "a2",
+          "text": "The statement contains a clear assertion of fact regarding Albert's past desire for ice cream.",
+          "tau": 0.9,
+          "sigma": 0.9,
+          "is_claim": false
+        },
+        "a3": {
+          "id": "a3",
+          "text": "The prosecution offers the statement specifically to prove that Albert likes ice cream, which relies on the truth of the statement itself.",
+          "tau": 0.95,
+          "sigma": 0.95,
+          "is_claim": false
+        }
+      },
+      "edges": [
+        {
+          "source": "a1",
+          "target": "phi",
+          "type": "support",
+          "confidence": 0.95
+        },
+        {
+          "source": "a2",
+          "target": "phi",
+          "type": "support",
+          "confidence": 0.95
+        },
+        {
+          "source": "a3",
+          "target": "phi",
+          "type": "support",
+          "confidence": 0.95
+        }
+      ],
+      "solver_type": "df_quad"
+    },
+    "sigma_phi": 0.99975,
+    "sigma_all": {
+      "phi": 0.99975,
+      "a1": 0.9,
+      "a2": 0.9,
+      "a3": 0.95
+    },
+    "iterations": 2,
+    "converged": true,
+    "solver_type": "df_quad"
+  },
+  "sigma_phi": 0.99975,
+  "decision": "Yes",
+  "uncertainty": {
+    "is_uncertain": false,
+    "sigma_phi": 0.99975,
+    "threshold_low": 0.45,
+    "threshold_high": 0.55,
+    "escalation_triggered": false,
+    "escalation_actions": [],
+    "escalation_log": []
+  },
+  "hitl_interventions": [],
+  "pre_hitl_decision": null
+}

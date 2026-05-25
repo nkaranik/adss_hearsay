@@ -1,0 +1,10 @@
+[
+  {
+    "system_a": "Full ADSS",
+    "system_b": "ADSS w/o Symbolic Solver",
+    "n01": 3,
+    "n10": 6,
+    "statistic": 0.4444444444444444,
+    "p_value": 0.5078125
+  }
+]

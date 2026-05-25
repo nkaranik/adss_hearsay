@@ -1,0 +1,237 @@
+{
+  "case_id": "test_0085",
+  "input_text": "To prove that Mary was at the mall on January 2nd, a mall employee testifies that on January 2nd, Mary told him she was planning on purchasing several diamonds.",
+  "phi_text": "",
+  "gold_label": "No",
+  "extraction": {
+    "case_id": "test_0085",
+    "input_text": "To prove that Mary was at the mall on January 2nd, a mall employee testifies that on January 2nd, Mary told him she was planning on purchasing several diamonds.",
+    "claim": {
+      "id": "phi",
+      "text": "Is the statement described in this narrative hearsay under FRE 801(c)?"
+    },
+    "arguments": [
+      {
+        "id": "a1",
+        "text": "The statement was made out of court, as Mary told the mall employee her plans on January 2nd prior to testifying.",
+        "stance_to_claim": "support",
+        "legal_rule": "FRE 801(c)(1) - hearsay requires an out-of-court statement.",
+        "evidence_span": "Mary told him on January 2nd",
+        "confidence": 0.95
+      },
+      {
+        "id": "a2",
+        "text": "The statement contains a clear assertion, specifically Mary's declaration that she was planning to purchase diamonds.",
+        "stance_to_claim": "support",
+        "legal_rule": "FRE 801(c)(2) - hearsay requires an assertion by the declarant.",
+        "evidence_span": "she was planning on purchasing several diamonds",
+        "confidence": 0.95
+      },
+      {
+        "id": "a3",
+        "text": "The statement is offered to prove the truth of the matter asserted, as it is introduced to establish that Mary was at the mall on January 2nd.",
+        "stance_to_claim": "support",
+        "legal_rule": "FRE 801(c)(3) - hearsay requires the statement be offered to prove the truth of the matter asserted.",
+        "evidence_span": "To prove that Mary was at the mall on January 2nd",
+        "confidence": 0.85
+      },
+      {
+        "id": "a4",
+        "text": "The statement may be offered for a non-hearsay purpose as circumstantial evidence of Mary's presence at the mall, independent of the truth of her plans.",
+        "stance_to_claim": "attack",
+        "legal_rule": "Circumstantial evidence / non-assertive use does not constitute hearsay under FRE 801(c).",
+        "evidence_span": "To prove that Mary was at the mall on January 2nd",
+        "confidence": 0.75
+      }
+    ],
+    "relations": [
+      {
+        "source": "a1",
+        "target": "phi",
+        "type": "support",
+        "confidence": 0.95
+      },
+      {
+        "source": "a2",
+        "target": "phi",
+        "type": "support",
+        "confidence": 0.95
+      },
+      {
+        "source": "a3",
+        "target": "phi",
+        "type": "support",
+        "confidence": 0.85
+      },
+      {
+        "source": "a4",
+        "target": "phi",
+        "type": "attack",
+        "confidence": 0.75
+      },
+      {
+        "source": "a3",
+        "target": "a4",
+        "type": "attack",
+        "confidence": 0.8
+      }
+    ],
+    "extraction_model": "",
+    "raw_llm_response": "{\n  \"case_id\": \"test_0085\",\n  \"phi\": \"Is the statement described in this narrative hearsay under FRE 801(c)?\",\n  \"arguments\": [\n    {\n      \"id\": \"a1\",\n      \"text\": \"The statement was made out of court, as Mary told the mall employee her plans on January 2nd prior to testifying.\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"FRE 801(c)(1) - hearsay requires an out-of-court statement.\",\n      \"evidence_span\": \"Mary told him on January 2nd\",\n      \"confidence\": 0.95,\n      \"tau\": 0.90,\n      \"rubric\": {\n        \"relevance\": 0.9,\n        \"factual_grounding\": 1.0,\n        \"specificity\": 0.9,\n        \"logical_coherence\": 0.9,\n        \"applicability\": 0.9\n      },\n      \"justification\": \"Directly satisfies the out-of-court requirement of the hearsay definition based on the explicit timeline in the narrative.\"\n    },\n    {\n      \"id\": \"a2\",\n      \"text\": \"The statement contains a clear assertion, specifically Mary's declaration that she was planning to purchase diamonds.\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"FRE 801(c)(2) - hearsay requires an assertion by the declarant.\",\n      \"evidence_span\": \"she was planning on purchasing several diamonds\",\n      \"confidence\": 0.95,\n      \"tau\": 0.90,\n      \"rubric\": {\n        \"relevance\": 0.9,\n        \"factual_grounding\": 1.0,\n        \"specificity\": 0.9,\n        \"logical_coherence\": 0.9,\n        \"applicability\": 0.9\n      },\n      \"justification\": \"Directly satisfies the assertion requirement of the hearsay definition, as Mary's statement conveys a factual claim about her intentions.\"\n    },\n    {\n      \"id\": \"a3\",\n      \"text\": \"The statement is offered to prove the truth of the matter asserted, as it is introduced to establish that Mary was at the mall on January 2nd.\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"FRE 801(c)(3) - hearsay requires the statement be offered to prove the truth of the matter asserted.\",\n      \"evidence_span\": \"To prove that Mary was at the mall on January 2nd\",\n      \"confidence\": 0.85,\n      \"tau\": 0.85,\n      \"rubric\": {\n        \"relevance\": 0.9,\n        \"factual_grounding\": 0.8,\n        \"specificity\": 0.8,\n        \"logical_coherence\": 0.9,\n        \"applicability\": 0.9\n      },\n      \"justification\": \"The narrative explicitly states the purpose is to prove Mary's presence, implying reliance on the truth of her statement to establish that fact, which supports the hearsay classification.\"\n    },\n    {\n      \"id\": \"a4\",\n      \"text\": \"The statement may be offered for a non-hearsay purpose as circumstantial evidence of Mary's presence at the mall, independent of the truth of her plans.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"Circumstantial evidence / non-assertive use does not constitute hearsay under FRE 801(c).\",\n      \"evidence_span\": \"To prove that Mary was at the mall on January 2nd\",\n      \"confidence\": 0.75,\n      \"tau\": 0.70,\n      \"rubric\": {\n        \"relevance\": 0.8,\n        \"factual_grounding\": 0.7,\n        \"specificity\": 0.7,\n        \"logical_coherence\": 0.8,\n        \"applicability\": 0.8\n      },\n      \"justification\": \"If the statement is used merely to show Mary was at the mall (e.g., a mall employee hearing a customer say they plan to shop there implies presence), it functions as circumstantial evidence rather than hearsay, attacking the classification.\"\n    }\n  ],\n  \"relations\": [\n    {\n      \"source\": \"a1\",\n      \"target\": \"phi\",\n      \"type\": \"support\",\n      \"confidence\": 0.95\n    },\n    {\n      \"source\": \"a2\",\n      \"target\": \"phi\",\n      \"type\": \"support\",\n      \"confidence\": 0.95\n    },\n    {\n      \"source\": \"a3\",\n      \"target\": \"phi\",\n      \"type\": \"support\",\n      \"confidence\": 0.85\n    },\n    {\n      \"source\": \"a4\",\n      \"target\": \"phi\",\n      \"type\": \"attack\",\n      \"confidence\": 0.75\n    },\n    {\n      \"source\": \"a3\",\n      \"target\": \"a4\",\n      \"type\": \"attack\",\n      \"confidence\": 0.80\n    }\n  ]\n}",
+    "parse_error": null,
+    "n_raw_arguments": 4
+  },
+  "strengths": [
+    {
+      "argument_id": "a1",
+      "tau": 0.9,
+      "rubric": {
+        "legal_relevance": 0.9,
+        "factual_grounding": 1.0,
+        "specificity": 0.9,
+        "logical_coherence": 0.9,
+        "fre_801c_applicability": 0.9
+      },
+      "justification": "Directly satisfies the out-of-court requirement of the hearsay definition based on the explicit timeline in the narrative.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a2",
+      "tau": 0.9,
+      "rubric": {
+        "legal_relevance": 0.9,
+        "factual_grounding": 1.0,
+        "specificity": 0.9,
+        "logical_coherence": 0.9,
+        "fre_801c_applicability": 0.9
+      },
+      "justification": "Directly satisfies the assertion requirement of the hearsay definition, as Mary's statement conveys a factual claim about her intentions.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a3",
+      "tau": 0.85,
+      "rubric": {
+        "legal_relevance": 0.9,
+        "factual_grounding": 0.8,
+        "specificity": 0.8,
+        "logical_coherence": 0.9,
+        "fre_801c_applicability": 0.9
+      },
+      "justification": "The narrative explicitly states the purpose is to prove Mary's presence, implying reliance on the truth of her statement to establish that fact, which supports the hearsay classification.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a4",
+      "tau": 0.7,
+      "rubric": {
+        "legal_relevance": 0.8,
+        "factual_grounding": 0.7,
+        "specificity": 0.7,
+        "logical_coherence": 0.8,
+        "fre_801c_applicability": 0.8
+      },
+      "justification": "If the statement is used merely to show Mary was at the mall (e.g., a mall employee hearing a customer say they plan to shop there implies presence), it functions as circumstantial evidence rather than hearsay, attacking the classification.",
+      "model": "combined"
+    }
+  ],
+  "solver_output": {
+    "case_id": "test_0085",
+    "graph": {
+      "nodes": {
+        "phi": {
+          "id": "phi",
+          "text": "Is the statement described in this narrative hearsay under FRE 801(c)?",
+          "tau": 0.5,
+          "sigma": 0.94675,
+          "is_claim": true
+        },
+        "a1": {
+          "id": "a1",
+          "text": "The statement was made out of court, as Mary told the mall employee her plans on January 2nd prior to testifying.",
+          "tau": 0.9,
+          "sigma": 0.9,
+          "is_claim": false
+        },
+        "a2": {
+          "id": "a2",
+          "text": "The statement contains a clear assertion, specifically Mary's declaration that she was planning to purchase diamonds.",
+          "tau": 0.9,
+          "sigma": 0.9,
+          "is_claim": false
+        },
+        "a3": {
+          "id": "a3",
+          "text": "The statement is offered to prove the truth of the matter asserted, as it is introduced to establish that Mary was at the mall on January 2nd.",
+          "tau": 0.85,
+          "sigma": 0.85,
+          "is_claim": false
+        },
+        "a4": {
+          "id": "a4",
+          "text": "The statement may be offered for a non-hearsay purpose as circumstantial evidence of Mary's presence at the mall, independent of the truth of her plans.",
+          "tau": 0.7,
+          "sigma": 0.10499999999999998,
+          "is_claim": false
+        }
+      },
+      "edges": [
+        {
+          "source": "a1",
+          "target": "phi",
+          "type": "support",
+          "confidence": 0.95
+        },
+        {
+          "source": "a2",
+          "target": "phi",
+          "type": "support",
+          "confidence": 0.95
+        },
+        {
+          "source": "a3",
+          "target": "phi",
+          "type": "support",
+          "confidence": 0.85
+        },
+        {
+          "source": "a4",
+          "target": "phi",
+          "type": "attack",
+          "confidence": 0.75
+        },
+        {
+          "source": "a3",
+          "target": "a4",
+          "type": "attack",
+          "confidence": 0.8
+        }
+      ],
+      "solver_type": "df_quad"
+    },
+    "sigma_phi": 0.94675,
+    "sigma_all": {
+      "phi": 0.94675,
+      "a1": 0.9,
+      "a2": 0.9,
+      "a3": 0.85,
+      "a4": 0.10499999999999998
+    },
+    "iterations": 2,
+    "converged": true,
+    "solver_type": "df_quad"
+  },
+  "sigma_phi": 0.94675,
+  "decision": "Yes",
+  "uncertainty": {
+    "is_uncertain": false,
+    "sigma_phi": 0.94675,
+    "threshold_low": 0.45,
+    "threshold_high": 0.55,
+    "escalation_triggered": false,
+    "escalation_actions": [],
+    "escalation_log": []
+  },
+  "hitl_interventions": [],
+  "pre_hitl_decision": null
+}

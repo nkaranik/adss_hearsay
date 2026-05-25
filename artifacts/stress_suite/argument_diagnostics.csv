@@ -1,0 +1,4 @@
+case_id,domain,gold_label,decision,is_correct,sigma_phi,is_uncertain,claim_text,n_raw_arguments,n_kept_arguments,n_neutral_arguments,n_support_arguments,n_attack_arguments,n_relations,n_phi_edges,n_support_edges,n_attack_edges,n_strengths,mean_tau,min_tau,max_tau,parse_error
+stress_hearsay_yes_001,legal_hearsay,Yes,Yes,True,0.9999999720206133,False,Is the statement described in this narrative hearsay under FRE 801(c)?,6,4,2,4,0,7,4,7,0,4,0.825,0.76,0.88,
+stress_hearsay_no_party_001,legal_hearsay,No,Yes,False,0.9999999980684684,False,Is the statement described in this narrative hearsay under FRE 801(c)?,6,5,1,5,0,9,5,9,0,5,0.8,0.7,0.88,
+stress_hearsay_no_effect_001,legal_hearsay,No,Yes,False,0.998686638496,False,Is the statement described in this narrative hearsay under FRE 801(c)?,6,4,2,3,1,7,4,5,2,4,0.82,0.74,0.86,

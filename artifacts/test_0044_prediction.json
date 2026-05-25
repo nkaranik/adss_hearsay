@@ -1,0 +1,208 @@
+{
+  "case_id": "test_0044",
+  "input_text": "To prove that Alex owned a red car, the fact that she sent an email to her mother explaining how she was planning on purchasing a red car.",
+  "phi_text": "",
+  "gold_label": "Yes",
+  "extraction": {
+    "case_id": "test_0044",
+    "input_text": "To prove that Alex owned a red car, the fact that she sent an email to her mother explaining how she was planning on purchasing a red car.",
+    "claim": {
+      "id": "phi",
+      "text": "Is the statement described in this narrative hearsay under FRE 801(c)?"
+    },
+    "arguments": [
+      {
+        "id": "a1",
+        "text": "The email sent by Alex to her mother constitutes an out-of-court statement.",
+        "stance_to_claim": "support",
+        "legal_rule": "FRE 801(a) & (b) - Definition of a statement",
+        "evidence_span": "she sent an email to her mother",
+        "confidence": 0.95
+      },
+      {
+        "id": "a2",
+        "text": "The email contains an explicit assertion regarding Alex's intent to purchase a red car.",
+        "stance_to_claim": "support",
+        "legal_rule": "FRE 801(c)(1) - Assertion requirement",
+        "evidence_span": "explaining how she was planning on purchasing a red car",
+        "confidence": 0.95
+      },
+      {
+        "id": "a3",
+        "text": "The statement is offered to prove the truth of the matter asserted (that she planned to purchase a red car, which is used to infer ownership).",
+        "stance_to_claim": "support",
+        "legal_rule": "FRE 801(c)(2) - Offered to prove truth of matter asserted",
+        "evidence_span": "To prove that Alex owned a red car",
+        "confidence": 0.9
+      }
+    ],
+    "relations": [
+      {
+        "source": "a1",
+        "target": "phi",
+        "type": "support",
+        "confidence": 0.95
+      },
+      {
+        "source": "a2",
+        "target": "phi",
+        "type": "support",
+        "confidence": 0.95
+      },
+      {
+        "source": "a3",
+        "target": "phi",
+        "type": "support",
+        "confidence": 0.9
+      },
+      {
+        "source": "a1",
+        "target": "a2",
+        "type": "support",
+        "confidence": 0.9
+      },
+      {
+        "source": "a2",
+        "target": "a3",
+        "type": "support",
+        "confidence": 0.9
+      }
+    ],
+    "extraction_model": "",
+    "raw_llm_response": "{\n  \"case_id\": \"test_0044\",\n  \"phi\": \"Is the statement described in this narrative hearsay under FRE 801(c)?\",\n  \"arguments\": [\n    {\n      \"id\": \"a1\",\n      \"text\": \"The email sent by Alex to her mother constitutes an out-of-court statement.\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"FRE 801(a) & (b) - Definition of a statement\",\n      \"evidence_span\": \"she sent an email to her mother\",\n      \"confidence\": 0.95,\n      \"tau\": 0.95,\n      \"rubric\": {\n        \"relevance\": 0.90,\n        \"factual_grounding\": 1.00,\n        \"specificity\": 0.85,\n        \"logical_coherence\": 0.95,\n        \"applicability\": 0.90\n      },\n      \"justification\": \"Directly establishes the first prong of the hearsay definition: the statement was made outside of the current proceeding.\"\n    },\n    {\n      \"id\": \"a2\",\n      \"text\": \"The email contains an explicit assertion regarding Alex's intent to purchase a red car.\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"FRE 801(c)(1) - Assertion requirement\",\n      \"evidence_span\": \"explaining how she was planning on purchasing a red car\",\n      \"confidence\": 0.95,\n      \"tau\": 0.95,\n      \"rubric\": {\n        \"relevance\": 0.90,\n        \"factual_grounding\": 1.00,\n        \"specificity\": 0.85,\n        \"logical_coherence\": 0.95,\n        \"applicability\": 0.90\n      },\n      \"justification\": \"Establishes that the out-of-court communication is an assertion, satisfying the second prong of the hearsay definition.\"\n    },\n    {\n      \"id\": \"a3\",\n      \"text\": \"The statement is offered to prove the truth of the matter asserted (that she planned to purchase a red car, which is used to infer ownership).\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"FRE 801(c)(2) - Offered to prove truth of matter asserted\",\n      \"evidence_span\": \"To prove that Alex owned a red car\",\n      \"confidence\": 0.90,\n      \"tau\": 0.90,\n      \"rubric\": {\n        \"relevance\": 0.95,\n        \"factual_grounding\": 0.90,\n        \"specificity\": 0.85,\n        \"logical_coherence\": 0.90,\n        \"applicability\": 0.95\n      },\n      \"justification\": \"Directly links the statement's purpose to proving the truth of its assertion, satisfying the third prong and strongly supporting the hearsay classification.\"\n    },\n    {\n      \"id\": \"a4\",\n      \"text\": \"The statement reflects Alex's then-existing state of mind or intent, which may implicate the state of mind exception under FRE 803(3).\",\n      \"stance_to_claim\": \"neutral\",\n      \"legal_rule\": \"FRE 803(3) - State of mind exception\",\n      \"evidence_span\": \"planning on purchasing a red car\",\n      \"confidence\": 0.80,\n      \"tau\": 0.70,\n      \"rubric\": {\n        \"relevance\": 0.60,\n        \"factual_grounding\": 0.80,\n        \"specificity\": 0.70,\n        \"logical_coherence\": 0.70,\n        \"applicability\": 0.80\n      },\n      \"justification\": \"Identifies a potential admissibility exception that does not alter the definitional hearsay status under FRE 801(c), thus remaining neutral to the target claim.\"\n    }\n  ],\n  \"relations\": [\n    {\n      \"source\": \"a1\",\n      \"target\": \"phi\",\n      \"type\": \"support\",\n      \"confidence\": 0.95\n    },\n    {\n      \"source\": \"a2\",\n      \"target\": \"phi\",\n      \"type\": \"support\",\n      \"confidence\": 0.95\n    },\n    {\n      \"source\": \"a3\",\n      \"target\": \"phi\",\n      \"type\": \"support\",\n      \"confidence\": 0.90\n    },\n    {\n      \"source\": \"a4\",\n      \"target\": \"phi\",\n      \"type\": \"neutral\",\n      \"confidence\": 0.80\n    },\n    {\n      \"source\": \"a1\",\n      \"target\": \"a2\",\n      \"type\": \"support\",\n      \"confidence\": 0.90\n    },\n    {\n      \"source\": \"a2\",\n      \"target\": \"a3\",\n      \"type\": \"support\",\n      \"confidence\": 0.90\n    }\n  ]\n}",
+    "parse_error": null,
+    "n_raw_arguments": 4
+  },
+  "strengths": [
+    {
+      "argument_id": "a1",
+      "tau": 0.95,
+      "rubric": {
+        "legal_relevance": 0.9,
+        "factual_grounding": 1.0,
+        "specificity": 0.85,
+        "logical_coherence": 0.95,
+        "fre_801c_applicability": 0.9
+      },
+      "justification": "Directly establishes the first prong of the hearsay definition: the statement was made outside of the current proceeding.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a2",
+      "tau": 0.95,
+      "rubric": {
+        "legal_relevance": 0.9,
+        "factual_grounding": 1.0,
+        "specificity": 0.85,
+        "logical_coherence": 0.95,
+        "fre_801c_applicability": 0.9
+      },
+      "justification": "Establishes that the out-of-court communication is an assertion, satisfying the second prong of the hearsay definition.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a3",
+      "tau": 0.9,
+      "rubric": {
+        "legal_relevance": 0.95,
+        "factual_grounding": 0.9,
+        "specificity": 0.85,
+        "logical_coherence": 0.9,
+        "fre_801c_applicability": 0.95
+      },
+      "justification": "Directly links the statement's purpose to proving the truth of its assertion, satisfying the third prong and strongly supporting the hearsay classification.",
+      "model": "combined"
+    }
+  ],
+  "solver_output": {
+    "case_id": "test_0044",
+    "graph": {
+      "nodes": {
+        "phi": {
+          "id": "phi",
+          "text": "Is the statement described in this narrative hearsay under FRE 801(c)?",
+          "tau": 0.5,
+          "sigma": 0.999999984375,
+          "is_claim": true
+        },
+        "a1": {
+          "id": "a1",
+          "text": "The email sent by Alex to her mother constitutes an out-of-court statement.",
+          "tau": 0.95,
+          "sigma": 0.95,
+          "is_claim": false
+        },
+        "a2": {
+          "id": "a2",
+          "text": "The email contains an explicit assertion regarding Alex's intent to purchase a red car.",
+          "tau": 0.95,
+          "sigma": 0.9975,
+          "is_claim": false
+        },
+        "a3": {
+          "id": "a3",
+          "text": "The statement is offered to prove the truth of the matter asserted (that she planned to purchase a red car, which is used to infer ownership).",
+          "tau": 0.9,
+          "sigma": 0.99975,
+          "is_claim": false
+        }
+      },
+      "edges": [
+        {
+          "source": "a1",
+          "target": "phi",
+          "type": "support",
+          "confidence": 0.95
+        },
+        {
+          "source": "a2",
+          "target": "phi",
+          "type": "support",
+          "confidence": 0.95
+        },
+        {
+          "source": "a3",
+          "target": "phi",
+          "type": "support",
+          "confidence": 0.9
+        },
+        {
+          "source": "a1",
+          "target": "a2",
+          "type": "support",
+          "confidence": 0.9
+        },
+        {
+          "source": "a2",
+          "target": "a3",
+          "type": "support",
+          "confidence": 0.9
+        }
+      ],
+      "solver_type": "df_quad"
+    },
+    "sigma_phi": 0.999999984375,
+    "sigma_all": {
+      "phi": 0.999999984375,
+      "a1": 0.95,
+      "a2": 0.9975,
+      "a3": 0.99975
+    },
+    "iterations": 2,
+    "converged": true,
+    "solver_type": "df_quad"
+  },
+  "sigma_phi": 0.999999984375,
+  "decision": "Yes",
+  "uncertainty": {
+    "is_uncertain": false,
+    "sigma_phi": 0.999999984375,
+    "threshold_low": 0.45,
+    "threshold_high": 0.55,
+    "escalation_triggered": false,
+    "escalation_actions": [],
+    "escalation_log": []
+  },
+  "hitl_interventions": [],
+  "pre_hitl_decision": null
+}

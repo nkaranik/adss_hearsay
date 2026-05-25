@@ -1,0 +1,189 @@
+{
+  "case_id": "test_0029",
+  "input_text": "On the issue of the defendant's guilt, Alex told the jury that he believed the defendant was guilty.",
+  "phi_text": "",
+  "gold_label": "No",
+  "extraction": {
+    "case_id": "test_0029",
+    "input_text": "On the issue of the defendant's guilt, Alex told the jury that he believed the defendant was guilty.",
+    "claim": {
+      "id": "phi",
+      "text": "Is the statement described in this narrative hearsay under FRE 801(c)?"
+    },
+    "arguments": [
+      {
+        "id": "a1",
+        "text": "The statement was made in court to the jury, not out of court, failing the threshold requirement for hearsay under FRE 801(c).",
+        "stance_to_claim": "attack",
+        "legal_rule": "FRE 801(c) requires a statement made by a declarant while testifying at the current trial or hearing to be excluded from the hearsay definition; only out-of-court statements qualify.",
+        "evidence_span": "Alex told the jury",
+        "confidence": 0.95
+      },
+      {
+        "id": "a2",
+        "text": "The statement contains a clear assertion of fact regarding the declarant's belief about the defendant's guilt.",
+        "stance_to_claim": "support",
+        "legal_rule": "FRE 801(c)(1) defines hearsay as a statement that the declarant asserts.",
+        "evidence_span": "that he believed the defendant was guilty",
+        "confidence": 0.95
+      },
+      {
+        "id": "a3",
+        "text": "The statement is offered to prove the truth of the matter asserted, specifically the defendant's guilt.",
+        "stance_to_claim": "support",
+        "legal_rule": "FRE 801(c)(3) requires the statement to be offered in evidence to prove the truth of the matter asserted.",
+        "evidence_span": "On the issue of the defendant's guilt",
+        "confidence": 0.9
+      }
+    ],
+    "relations": [
+      {
+        "source": "a1",
+        "target": "phi",
+        "type": "attack",
+        "confidence": 0.95
+      },
+      {
+        "source": "a2",
+        "target": "phi",
+        "type": "support",
+        "confidence": 0.95
+      },
+      {
+        "source": "a3",
+        "target": "phi",
+        "type": "support",
+        "confidence": 0.9
+      }
+    ],
+    "extraction_model": "",
+    "raw_llm_response": "{\n  \"case_id\": \"test_0029\",\n  \"phi\": \"Is the statement described in this narrative hearsay under FRE 801(c)?\",\n  \"arguments\": [\n    {\n      \"id\": \"a1\",\n      \"text\": \"The statement was made in court to the jury, not out of court, failing the threshold requirement for hearsay under FRE 801(c).\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"FRE 801(c) requires a statement made by a declarant while testifying at the current trial or hearing to be excluded from the hearsay definition; only out-of-court statements qualify.\",\n      \"evidence_span\": \"Alex told the jury\",\n      \"confidence\": 0.95,\n      \"tau\": 0.90,\n      \"rubric\": {\n        \"relevance\": 0.95,\n        \"factual_grounding\": 0.95,\n        \"specificity\": 0.85,\n        \"logical_coherence\": 0.90,\n        \"applicability\": 0.90\n      },\n      \"justification\": \"Directly addresses the out-of-court element. Since Alex testified before the jury, the statement is not out-of-court, which attacks the hearsay claim.\"\n    },\n    {\n      \"id\": \"a2\",\n      \"text\": \"The statement contains a clear assertion of fact regarding the declarant's belief about the defendant's guilt.\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"FRE 801(c)(1) defines hearsay as a statement that the declarant asserts.\",\n      \"evidence_span\": \"that he believed the defendant was guilty\",\n      \"confidence\": 0.95,\n      \"tau\": 0.85,\n      \"rubric\": {\n        \"relevance\": 0.85,\n        \"factual_grounding\": 0.95,\n        \"specificity\": 0.80,\n        \"logical_coherence\": 0.90,\n        \"applicability\": 0.85\n      },\n      \"justification\": \"Satisfies the assertion element of the hearsay definition, supporting the claim that the statement qualifies as hearsay if other elements are met.\"\n    },\n    {\n      \"id\": \"a3\",\n      \"text\": \"The statement is offered to prove the truth of the matter asserted, specifically the defendant's guilt.\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"FRE 801(c)(3) requires the statement to be offered in evidence to prove the truth of the matter asserted.\",\n      \"evidence_span\": \"On the issue of the defendant's guilt\",\n      \"confidence\": 0.90,\n      \"tau\": 0.80,\n      \"rubric\": {\n        \"relevance\": 0.85,\n        \"factual_grounding\": 0.90,\n        \"specificity\": 0.75,\n        \"logical_coherence\": 0.85,\n        \"applicability\": 0.80\n      },\n      \"justification\": \"Indicates the proponent's purpose is to prove guilt, satisfying the hearsay purpose element and supporting the claim.\"\n    },\n    {\n      \"id\": \"a4\",\n      \"text\": \"The statement reflects the declarant's state of mind (belief), which may be admissible under the state-of-mind exception or as non-hearsay, but does not negate the definitional elements of hearsay.\",\n      \"stance_to_claim\": \"neutral\",\n      \"legal_rule\": \"FRE 803(3) state of mind exception; distinction between hearsay definition and admissibility exceptions.\",\n      \"evidence_span\": \"he believed the defendant was guilty\",\n      \"confidence\": 0.70,\n      \"tau\": 0.50,\n      \"rubric\": {\n        \"relevance\": 0.50,\n        \"factual_grounding\": 0.70,\n        \"specificity\": 0.60,\n        \"logical_coherence\": 0.60,\n        \"applicability\": 0.50\n      },\n      \"justification\": \"Addresses exception-like considerations but remains neutral to the definitional hearsay question, as exceptions apply only after a statement is classified as hearsay.\"\n    }\n  ],\n  \"relations\": [\n    {\n      \"source\": \"a1\",\n      \"target\": \"phi\",\n      \"type\": \"attack\",\n      \"confidence\": 0.95\n    },\n    {\n      \"source\": \"a2\",\n      \"target\": \"phi\",\n      \"type\": \"support\",\n      \"confidence\": 0.95\n    },\n    {\n      \"source\": \"a3\",\n      \"target\": \"phi\",\n      \"type\": \"support\",\n      \"confidence\": 0.90\n    },\n    {\n      \"source\": \"a4\",\n      \"target\": \"phi\",\n      \"type\": \"neutral\",\n      \"confidence\": 0.70\n    }\n  ]\n}",
+    "parse_error": null,
+    "n_raw_arguments": 4
+  },
+  "strengths": [
+    {
+      "argument_id": "a1",
+      "tau": 0.9,
+      "rubric": {
+        "legal_relevance": 0.95,
+        "factual_grounding": 0.95,
+        "specificity": 0.85,
+        "logical_coherence": 0.9,
+        "fre_801c_applicability": 0.9
+      },
+      "justification": "Directly addresses the out-of-court element. Since Alex testified before the jury, the statement is not out-of-court, which attacks the hearsay claim.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a2",
+      "tau": 0.85,
+      "rubric": {
+        "legal_relevance": 0.85,
+        "factual_grounding": 0.95,
+        "specificity": 0.8,
+        "logical_coherence": 0.9,
+        "fre_801c_applicability": 0.85
+      },
+      "justification": "Satisfies the assertion element of the hearsay definition, supporting the claim that the statement qualifies as hearsay if other elements are met.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a3",
+      "tau": 0.8,
+      "rubric": {
+        "legal_relevance": 0.85,
+        "factual_grounding": 0.9,
+        "specificity": 0.75,
+        "logical_coherence": 0.85,
+        "fre_801c_applicability": 0.8
+      },
+      "justification": "Indicates the proponent's purpose is to prove guilt, satisfying the hearsay purpose element and supporting the claim.",
+      "model": "combined"
+    }
+  ],
+  "solver_output": {
+    "case_id": "test_0029",
+    "graph": {
+      "nodes": {
+        "phi": {
+          "id": "phi",
+          "text": "Is the statement described in this narrative hearsay under FRE 801(c)?",
+          "tau": 0.5,
+          "sigma": 0.5349999999999999,
+          "is_claim": true
+        },
+        "a1": {
+          "id": "a1",
+          "text": "The statement was made in court to the jury, not out of court, failing the threshold requirement for hearsay under FRE 801(c).",
+          "tau": 0.9,
+          "sigma": 0.9,
+          "is_claim": false
+        },
+        "a2": {
+          "id": "a2",
+          "text": "The statement contains a clear assertion of fact regarding the declarant's belief about the defendant's guilt.",
+          "tau": 0.85,
+          "sigma": 0.85,
+          "is_claim": false
+        },
+        "a3": {
+          "id": "a3",
+          "text": "The statement is offered to prove the truth of the matter asserted, specifically the defendant's guilt.",
+          "tau": 0.8,
+          "sigma": 0.8,
+          "is_claim": false
+        }
+      },
+      "edges": [
+        {
+          "source": "a1",
+          "target": "phi",
+          "type": "attack",
+          "confidence": 0.95
+        },
+        {
+          "source": "a2",
+          "target": "phi",
+          "type": "support",
+          "confidence": 0.95
+        },
+        {
+          "source": "a3",
+          "target": "phi",
+          "type": "support",
+          "confidence": 0.9
+        }
+      ],
+      "solver_type": "df_quad"
+    },
+    "sigma_phi": 0.5349999999999999,
+    "sigma_all": {
+      "phi": 0.5349999999999999,
+      "a1": 0.9,
+      "a2": 0.85,
+      "a3": 0.8
+    },
+    "iterations": 2,
+    "converged": true,
+    "solver_type": "df_quad"
+  },
+  "sigma_phi": 0.5349999999999999,
+  "decision": "UNCERTAIN",
+  "uncertainty": {
+    "is_uncertain": true,
+    "sigma_phi": 0.5349999999999999,
+    "threshold_low": 0.45,
+    "threshold_high": 0.55,
+    "escalation_triggered": true,
+    "escalation_actions": [
+      "rerun_extraction",
+      "human_review"
+    ],
+    "escalation_log": [
+      "[test_0029] UNCERTAIN σ(φ)=0.5350 ∈ [0.45,0.55]. Human review recommended."
+    ]
+  },
+  "hitl_interventions": [],
+  "pre_hitl_decision": null
+}

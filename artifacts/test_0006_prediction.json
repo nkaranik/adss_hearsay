@@ -13,141 +13,105 @@
     "arguments": [
       {
         "id": "a1",
-        "text": "Poster is physical evidence, not an out-of-court statement by a declarant.",
+        "text": "The evidence is a poster with lyrics on a bedroom wall, which constitutes circumstantial evidence rather than an out-of-court statement.",
         "stance_to_claim": "attack",
-        "legal_rule": "FRE 801(a) physical evidence exclusion",
-        "evidence_span": null,
+        "legal_rule": "FRE 801(a) & circumstantial evidence doctrine",
+        "evidence_span": "the fact that she had a poster with the lyrics of \"Viva la Vida\" on her bedroom wall",
         "confidence": 0.95
       },
       {
         "id": "a2",
-        "text": "Displaying a poster is nonverbal conduct lacking assertion intent.",
+        "text": "A static poster lacks the requisite intent to assert Patricia's fandom, failing the assertion requirement under FRE 801(a).",
         "stance_to_claim": "attack",
-        "legal_rule": "FRE 801(a) assertion intent requirement",
-        "evidence_span": null,
-        "confidence": 0.92
-      },
-      {
-        "id": "a3",
-        "text": "Lyrics constitute a written assertion by the author, implying endorsement.",
-        "stance_to_claim": "support",
-        "legal_rule": "FRE 801(c) out-of-court statement rule",
-        "evidence_span": null,
-        "confidence": 0.65
-      },
-      {
-        "id": "a4",
-        "text": "Evidence proves state of mind circumstantially, bypassing hearsay rules.",
-        "stance_to_claim": "attack",
-        "legal_rule": "FRE 801(c) circumstantial proof exclusion",
-        "evidence_span": null,
+        "legal_rule": "FRE 801(a)(2) - nonverbal conduct intended as an assertion",
+        "evidence_span": "the fact that she had a poster with the lyrics of \"Viva la Vida\" on her bedroom wall",
         "confidence": 0.9
       },
       {
-        "id": "a5",
-        "text": "No declarant is offered against the party, failing FRE 801(c) threshold.",
+        "id": "a3",
+        "text": "The poster is offered to demonstrate Patricia's state of mind or preference (that she is a fan), not to prove the truth of the matter asserted in the lyrics.",
         "stance_to_claim": "attack",
-        "legal_rule": "FRE 801(c) declarant and offer requirement",
-        "evidence_span": null,
-        "confidence": 0.93
+        "legal_rule": "FRE 801(c) - offered to prove the truth of the matter asserted",
+        "evidence_span": "On the issue of whether Patricia was a fan of Coldplay",
+        "confidence": 0.85
       }
     ],
     "relations": [
       {
         "source": "a1",
-        "target": "a2",
-        "type": "support",
+        "target": "phi",
+        "type": "attack",
+        "confidence": 0.95
+      },
+      {
+        "source": "a2",
+        "target": "phi",
+        "type": "attack",
+        "confidence": 0.9
+      },
+      {
+        "source": "a3",
+        "target": "phi",
+        "type": "attack",
         "confidence": 0.85
       },
       {
         "source": "a2",
-        "target": "a4",
+        "target": "a1",
         "type": "support",
-        "confidence": 0.88
+        "confidence": 0.85
       },
       {
         "source": "a3",
-        "target": "a4",
-        "type": "attack",
-        "confidence": 0.75
-      },
-      {
-        "source": "a4",
-        "target": "a5",
+        "target": "a1",
         "type": "support",
-        "confidence": 0.9
+        "confidence": 0.8
       }
     ],
     "extraction_model": "",
-    "raw_llm_response": "{\n  \"case_id\": \"test_0006\",\n  \"arguments\": [\n    {\n      \"id\": \"a1\",\n      \"text\": \"Poster is physical evidence, not an out-of-court statement by a declarant.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"FRE 801(a) physical evidence exclusion\",\n      \"evidence_span\": null,\n      \"confidence\": 0.95,\n      \"rubric\": {\n        \"legal_relevance\": 0.9,\n        \"factual_grounding\": 0.8,\n        \"specificity\": 0.7,\n        \"logical_coherence\": 0.9,\n        \"fre_801c_applicability\": 0.9\n      },\n      \"tau\": 0.88,\n      \"justification\": \"Physical objects lack the requisite declarant intent for hearsay classification.\"\n    },\n    {\n      \"id\": \"a2\",\n      \"text\": \"Displaying a poster is nonverbal conduct lacking assertion intent.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"FRE 801(a) assertion intent requirement\",\n      \"evidence_span\": null,\n      \"confidence\": 0.92,\n      \"rubric\": {\n        \"legal_relevance\": 0.85,\n        \"factual_grounding\": 0.8,\n        \"specificity\": 0.75,\n        \"logical_coherence\": 0.9,\n        \"fre_801c_applicability\": 0.85\n      },\n      \"tau\": 0.86,\n      \"justification\": \"Nonverbal conduct only qualifies as a statement if intended as an assertion.\"\n    },\n    {\n      \"id\": \"a3\",\n      \"text\": \"Lyrics constitute a written assertion by the author, implying endorsement.\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"FRE 801(c) out-of-court statement rule\",\n      \"evidence_span\": null,\n      \"confidence\": 0.65,\n      \"rubric\": {\n        \"legal_relevance\": 0.6,\n        \"factual_grounding\": 0.5,\n        \"specificity\": 0.6,\n        \"logical_coherence\": 0.7,\n        \"fre_801c_applicability\": 0.6\n      },\n      \"tau\": 0.62,\n      \"justification\": \"The songwriter's lyrics are an out-of-court assertion whose truth is implied.\"\n    },\n    {\n      \"id\": \"a4\",\n      \"text\": \"Evidence proves state of mind circumstantially, bypassing hearsay rules.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"FRE 801(c) circumstantial proof exclusion\",\n      \"evidence_span\": null,\n      \"confidence\": 0.9,\n      \"rubric\": {\n        \"legal_relevance\": 0.9,\n        \"factual_grounding\": 0.85,\n        \"specificity\": 0.8,\n        \"logical_coherence\": 0.95,\n        \"fre_801c_applicability\": 0.9\n      },\n      \"tau\": 0.89,\n      \"justification\": \"Circumstantial inference of preference does not trigger hearsay protections.\"\n    },\n    {\n      \"id\": \"a5\",\n      \"text\": \"No declarant is offered against the party, failing FRE 801(c) threshold.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"FRE 801(c) declarant and offer requirement\",\n      \"evidence_span\": null,\n      \"confidence\": 0.93,\n      \"rubric\": {\n        \"legal_relevance\": 0.9,\n        \"factual_grounding\": 0.85,\n        \"specificity\": 0.75,\n        \"logical_coherence\": 0.9,\n        \"fre_801c_applicability\": 0.9\n      },\n      \"tau\": 0.87,\n      \"justification\": \"Hearsay requires a specific declarant whose statement is offered for its truth.\"\n    }\n  ],\n  \"relations\": [\n    {\"source\": \"a1\", \"target\": \"a2\", \"type\": \"support\", \"confidence\": 0.85},\n    {\"source\": \"a2\", \"target\": \"a4\", \"type\": \"support\", \"confidence\": 0.88},\n    {\"source\": \"a3\", \"target\": \"a4\", \"type\": \"attack\", \"confidence\": 0.75},\n    {\"source\": \"a4\", \"target\": \"a5\", \"type\": \"support\", \"confidence\": 0.9}\n  ]\n}",
+    "raw_llm_response": "{\n  \"case_id\": \"test_0006\",\n  \"phi\": \"Is the statement described in this narrative hearsay under FRE 801(c)?\",\n  \"arguments\": [\n    {\n      \"id\": \"a1\",\n      \"text\": \"The evidence is a poster with lyrics on a bedroom wall, which constitutes circumstantial evidence rather than an out-of-court statement.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"FRE 801(a) & circumstantial evidence doctrine\",\n      \"evidence_span\": \"the fact that she had a poster with the lyrics of \\\"Viva la Vida\\\" on her bedroom wall\",\n      \"confidence\": 0.95,\n      \"tau\": 0.90,\n      \"rubric\": {\n        \"relevance\": 0.95,\n        \"factual_grounding\": 0.95,\n        \"specificity\": 0.90,\n        \"logical_coherence\": 0.90,\n        \"applicability\": 0.95\n      },\n      \"justification\": \"Directly addresses the hearsay threshold by classifying the poster as circumstantial evidence, which attacks the claim that it is hearsay.\"\n    },\n    {\n      \"id\": \"a2\",\n      \"text\": \"A static poster lacks the requisite intent to assert Patricia's fandom, failing the assertion requirement under FRE 801(a).\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"FRE 801(a)(2) - nonverbal conduct intended as an assertion\",\n      \"evidence_span\": \"the fact that she had a poster with the lyrics of \\\"Viva la Vida\\\" on her bedroom wall\",\n      \"confidence\": 0.90,\n      \"tau\": 0.85,\n      \"rubric\": {\n        \"relevance\": 0.90,\n        \"factual_grounding\": 0.90,\n        \"specificity\": 0.85,\n        \"logical_coherence\": 0.90,\n        \"applicability\": 0.90\n      },\n      \"justification\": \"Focuses on the lack of assertive intent in displaying a poster, which is a necessary component for hearsay, thus attacking φ.\"\n    },\n    {\n      \"id\": \"a3\",\n      \"text\": \"The poster is offered to demonstrate Patricia's state of mind or preference (that she is a fan), not to prove the truth of the matter asserted in the lyrics.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"FRE 801(c) - offered to prove the truth of the matter asserted\",\n      \"evidence_span\": \"On the issue of whether Patricia was a fan of Coldplay\",\n      \"confidence\": 0.85,\n      \"tau\": 0.80,\n      \"rubric\": {\n        \"relevance\": 0.85,\n        \"factual_grounding\": 0.85,\n        \"specificity\": 0.80,\n        \"logical_coherence\": 0.85,\n        \"applicability\": 0.85\n      },\n      \"justification\": \"Addresses the purpose prong of the hearsay definition. Offering evidence to show state of mind/preference attacks the claim that it is offered for the truth of the assertion.\"\n    },\n    {\n      \"id\": \"a4\",\n      \"text\": \"The narrative identifies the substantive issue as whether Patricia was a fan of Coldplay, providing context for the evidence's relevance but not resolving the hearsay classification.\",\n      \"stance_to_claim\": \"neutral\",\n      \"legal_rule\": \"Relevance under FRE 401\",\n      \"evidence_span\": \"On the issue of whether Patricia was a fan of Coldplay\",\n      \"confidence\": 0.90,\n      \"tau\": 0.50,\n      \"rubric\": {\n        \"relevance\": 0.60,\n        \"factual_grounding\": 0.90,\n        \"specificity\": 0.70,\n        \"logical_coherence\": 0.80,\n        \"applicability\": 0.50\n      },\n      \"justification\": \"Background fact establishing the case context. It does not directly determine the hearsay status, so it is marked neutral.\"\n    }\n  ],\n  \"relations\": [\n    {\n      \"source\": \"a1\",\n      \"target\": \"phi\",\n      \"type\": \"attack\",\n      \"confidence\": 0.95\n    },\n    {\n      \"source\": \"a2\",\n      \"target\": \"phi\",\n      \"type\": \"attack\",\n      \"confidence\": 0.90\n    },\n    {\n      \"source\": \"a3\",\n      \"target\": \"phi\",\n      \"type\": \"attack\",\n      \"confidence\": 0.85\n    },\n    {\n      \"source\": \"a4\",\n      \"target\": \"phi\",\n      \"type\": \"neutral\",\n      \"confidence\": 0.90\n    },\n    {\n      \"source\": \"a2\",\n      \"target\": \"a1\",\n      \"type\": \"support\",\n      \"confidence\": 0.85\n    },\n    {\n      \"source\": \"a3\",\n      \"target\": \"a1\",\n      \"type\": \"support\",\n      \"confidence\": 0.80\n    }\n  ]\n}",
     "parse_error": null,
-    "n_raw_arguments": 5
+    "n_raw_arguments": 4
   },
   "strengths": [
     {
       "argument_id": "a1",
-      "tau": 0.95,
+      "tau": 0.9,
       "rubric": {
-        "relevance": 0.95,
+        "legal_relevance": 0.95,
         "factual_grounding": 0.95,
-        "specificity": 0.95,
-        "logical_coherence": 0.95,
-        "applicability": 0.95
+        "specificity": 0.9,
+        "logical_coherence": 0.9,
+        "fre_801c_applicability": 0.95
       },
-      "justification": "Fallback from extraction confidence.",
-      "model": "fallback"
+      "justification": "Directly addresses the hearsay threshold by classifying the poster as circumstantial evidence, which attacks the claim that it is hearsay.",
+      "model": "combined"
     },
     {
       "argument_id": "a2",
-      "tau": 0.92,
+      "tau": 0.85,
       "rubric": {
-        "relevance": 0.92,
-        "factual_grounding": 0.92,
-        "specificity": 0.92,
-        "logical_coherence": 0.92,
-        "applicability": 0.92
+        "legal_relevance": 0.9,
+        "factual_grounding": 0.9,
+        "specificity": 0.85,
+        "logical_coherence": 0.9,
+        "fre_801c_applicability": 0.9
       },
-      "justification": "Fallback from extraction confidence.",
-      "model": "fallback"
+      "justification": "Focuses on the lack of assertive intent in displaying a poster, which is a necessary component for hearsay, thus attacking φ.",
+      "model": "combined"
     },
     {
       "argument_id": "a3",
-      "tau": 0.65,
+      "tau": 0.8,
       "rubric": {
-        "relevance": 0.65,
-        "factual_grounding": 0.65,
-        "specificity": 0.65,
-        "logical_coherence": 0.65,
-        "applicability": 0.65
+        "legal_relevance": 0.85,
+        "factual_grounding": 0.85,
+        "specificity": 0.8,
+        "logical_coherence": 0.85,
+        "fre_801c_applicability": 0.85
       },
-      "justification": "Fallback from extraction confidence.",
-      "model": "fallback"
-    },
-    {
-      "argument_id": "a4",
-      "tau": 0.9,
-      "rubric": {
-        "relevance": 0.9,
-        "factual_grounding": 0.9,
-        "specificity": 0.9,
-        "logical_coherence": 0.9,
-        "applicability": 0.9
-      },
-      "justification": "Fallback from extraction confidence.",
-      "model": "fallback"
-    },
-    {
-      "argument_id": "a5",
-      "tau": 0.93,
-      "rubric": {
-        "relevance": 0.93,
-        "factual_grounding": 0.93,
-        "specificity": 0.93,
-        "logical_coherence": 0.93,
-        "applicability": 0.93
-      },
-      "justification": "Fallback from extraction confidence.",
-      "model": "fallback"
+      "justification": "Addresses the purpose prong of the hearsay definition. Offering evidence to show state of mind/preference attacks the claim that it is offered for the truth of the assertion.",
+      "model": "combined"
     }
   ],
   "solver_output": {
@@ -158,70 +122,32 @@
           "id": "phi",
           "text": "Is the statement described in this narrative hearsay under FRE 801(c)?",
           "tau": 0.5,
-          "sigma": 0.32500239885211996,
+          "sigma": 0.00004500000000001725,
           "is_claim": true
         },
         "a1": {
           "id": "a1",
-          "text": "Poster is physical evidence, not an out-of-court statement by a declarant.",
-          "tau": 0.95,
-          "sigma": 0.95,
+          "text": "The evidence is a poster with lyrics on a bedroom wall, which constitutes circumstantial evidence rather than an out-of-court statement.",
+          "tau": 0.9,
+          "sigma": 0.997,
           "is_claim": false
         },
         "a2": {
           "id": "a2",
-          "text": "Displaying a poster is nonverbal conduct lacking assertion intent.",
-          "tau": 0.92,
-          "sigma": 0.996,
+          "text": "A static poster lacks the requisite intent to assert Patricia's fandom, failing the assertion requirement under FRE 801(a).",
+          "tau": 0.85,
+          "sigma": 0.85,
           "is_claim": false
         },
         "a3": {
           "id": "a3",
-          "text": "Lyrics constitute a written assertion by the author, implying endorsement.",
-          "tau": 0.65,
-          "sigma": 0.65,
-          "is_claim": false
-        },
-        "a4": {
-          "id": "a4",
-          "text": "Evidence proves state of mind circumstantially, bypassing hearsay rules.",
-          "tau": 0.9,
-          "sigma": 0.41459999999999997,
-          "is_claim": false
-        },
-        "a5": {
-          "id": "a5",
-          "text": "No declarant is offered against the party, failing FRE 801(c) threshold.",
-          "tau": 0.93,
-          "sigma": 0.959022,
+          "text": "The poster is offered to demonstrate Patricia's state of mind or preference (that she is a fan), not to prove the truth of the matter asserted in the lyrics.",
+          "tau": 0.8,
+          "sigma": 0.8,
           "is_claim": false
         }
       },
       "edges": [
-        {
-          "source": "a1",
-          "target": "a2",
-          "type": "support",
-          "confidence": 0.85
-        },
-        {
-          "source": "a2",
-          "target": "a4",
-          "type": "support",
-          "confidence": 0.88
-        },
-        {
-          "source": "a3",
-          "target": "a4",
-          "type": "attack",
-          "confidence": 0.75
-        },
-        {
-          "source": "a4",
-          "target": "a5",
-          "type": "support",
-          "confidence": 0.9
-        },
         {
           "source": "a1",
           "target": "phi",
@@ -232,47 +158,45 @@
           "source": "a2",
           "target": "phi",
           "type": "attack",
-          "confidence": 0.92
+          "confidence": 0.9
         },
         {
           "source": "a3",
           "target": "phi",
+          "type": "attack",
+          "confidence": 0.85
+        },
+        {
+          "source": "a2",
+          "target": "a1",
           "type": "support",
-          "confidence": 0.65
+          "confidence": 0.85
         },
         {
-          "source": "a4",
-          "target": "phi",
-          "type": "attack",
-          "confidence": 0.9
-        },
-        {
-          "source": "a5",
-          "target": "phi",
-          "type": "attack",
-          "confidence": 0.93
+          "source": "a3",
+          "target": "a1",
+          "type": "support",
+          "confidence": 0.8
         }
       ],
       "solver_type": "df_quad"
     },
-    "sigma_phi": 0.32500239885211996,
+    "sigma_phi": 0.00004500000000001725,
     "sigma_all": {
-      "phi": 0.32500239885211996,
-      "a1": 0.95,
-      "a2": 0.996,
-      "a3": 0.65,
-      "a4": 0.41459999999999997,
-      "a5": 0.959022
+      "phi": 0.00004500000000001725,
+      "a1": 0.997,
+      "a2": 0.85,
+      "a3": 0.8
     },
     "iterations": 2,
     "converged": true,
     "solver_type": "df_quad"
   },
-  "sigma_phi": 0.32500239885211996,
+  "sigma_phi": 0.00004500000000001725,
   "decision": "No",
   "uncertainty": {
     "is_uncertain": false,
-    "sigma_phi": 0.32500239885211996,
+    "sigma_phi": 0.00004500000000001725,
     "threshold_low": 0.45,
     "threshold_high": 0.55,
     "escalation_triggered": false,

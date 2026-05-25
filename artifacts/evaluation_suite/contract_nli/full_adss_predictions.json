@@ -1,0 +1,423 @@
+[
+  {
+    "case_id": "test_0000",
+    "input_text": "Confidential Information: means all confidential information (however recorded, preserved or disclosed) disclosed by a Party or its Representatives to the other Party and that Party's Representatives including but not limited to: (a) the fact that discussions and negotiations are taking place concerning the Purpose and the status of those discussions and negotiations; (b) the existence and terms of this Agreement; ",
+    "phi_text": "",
+    "gold_label": "Yes",
+    "extraction": {
+      "case_id": "test_0000",
+      "input_text": "Confidential Information: means all confidential information (however recorded, preserved or disclosed) disclosed by a Party or its Representatives to the other Party and that Party's Representatives including but not limited to: (a) the fact that discussions and negotiations are taking place concerning the Purpose and the status of those discussions and negotiations; (b) the existence and terms of this Agreement; ",
+      "claim": {
+        "id": "phi",
+        "text": "Does the contract context entail the target confidentiality statement?"
+      },
+      "arguments": [
+        {
+          "id": "a1",
+          "text": "The contract explicitly defines 'Confidential Information,' establishing a foundational confidentiality clause relevant to the target claim.",
+          "stance_to_claim": "support",
+          "legal_rule": "Contract interpretation principles regarding explicit definitions and scope of confidentiality obligations.",
+          "evidence_span": "Confidential Information: means all confidential information (however recorded, preserved or disclosed)",
+          "confidence": 0.95
+        },
+        {
+          "id": "a2",
+          "text": "The definition expressly includes 'the existence and terms of this Agreement' within the scope of Confidential Information, directly entailing the target confidentiality statement.",
+          "stance_to_claim": "support",
+          "legal_rule": "Express inclusion in a contractual definition entails confidentiality for the listed items.",
+          "evidence_span": "including but not limited to: ... (b) the existence and terms of this Agreement;",
+          "confidence": 0.98
+        },
+        {
+          "id": "a3",
+          "text": "The clause applies to information disclosed by 'a Party or its Representatives to the other Party,' confirming the mutual scope of the confidentiality obligation.",
+          "stance_to_claim": "support",
+          "legal_rule": "Mutual disclosure obligations in contracts establish reciprocal confidentiality duties.",
+          "evidence_span": "disclosed by a Party or its Representatives to the other Party and that Party's Representatives",
+          "confidence": 0.9
+        },
+        {
+          "id": "a4",
+          "text": "The narrative contains no exceptions, carve-outs, or duration limits that would narrow or negate the confidentiality obligation for the defined items.",
+          "stance_to_claim": "support",
+          "legal_rule": "Absence of limiting language in a confidentiality definition supports a broad interpretation of the obligation.",
+          "evidence_span": null,
+          "confidence": 0.85
+        }
+      ],
+      "relations": [
+        {
+          "source": "a1",
+          "target": "phi",
+          "type": "support",
+          "confidence": 0.9
+        },
+        {
+          "source": "a2",
+          "target": "phi",
+          "type": "support",
+          "confidence": 1.0
+        },
+        {
+          "source": "a3",
+          "target": "phi",
+          "type": "support",
+          "confidence": 0.85
+        },
+        {
+          "source": "a4",
+          "target": "phi",
+          "type": "support",
+          "confidence": 0.75
+        }
+      ],
+      "extraction_model": "",
+      "raw_llm_response": "{\n  \"case_id\": \"test_0000\",\n  \"phi\": \"Does the contract context entail the target confidentiality statement?\",\n  \"arguments\": [\n    {\n      \"id\": \"a1\",\n      \"text\": \"The contract explicitly defines 'Confidential Information,' establishing a foundational confidentiality clause relevant to the target claim.\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"Contract interpretation principles regarding explicit definitions and scope of confidentiality obligations.\",\n      \"evidence_span\": \"Confidential Information: means all confidential information (however recorded, preserved or disclosed)\",\n      \"confidence\": 0.95,\n      \"tau\": 0.90,\n      \"rubric\": {\n        \"relevance\": 0.90,\n        \"factual_grounding\": 1.00,\n        \"specificity\": 0.80,\n        \"logical_coherence\": 0.90,\n        \"applicability\": 0.90\n      },\n      \"justification\": \"Directly addresses the presence of a confidentiality definition, which is a prerequisite for entailing the target statement.\"\n    },\n    {\n      \"id\": \"a2\",\n      \"text\": \"The definition expressly includes 'the existence and terms of this Agreement' within the scope of Confidential Information, directly entailing the target confidentiality statement.\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"Express inclusion in a contractual definition entails confidentiality for the listed items.\",\n      \"evidence_span\": \"including but not limited to: ... (b) the existence and terms of this Agreement;\",\n      \"confidence\": 0.98,\n      \"tau\": 1.00,\n      \"rubric\": {\n        \"relevance\": 1.00,\n        \"factual_grounding\": 1.00,\n        \"specificity\": 1.00,\n        \"logical_coherence\": 1.00,\n        \"applicability\": 1.00\n      },\n      \"justification\": \"Provides the strongest direct textual support for the target claim by explicitly listing the agreement's existence and terms as confidential.\"\n    },\n    {\n      \"id\": \"a3\",\n      \"text\": \"The clause applies to information disclosed by 'a Party or its Representatives to the other Party,' confirming the mutual scope of the confidentiality obligation.\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"Mutual disclosure obligations in contracts establish reciprocal confidentiality duties.\",\n      \"evidence_span\": \"disclosed by a Party or its Representatives to the other Party and that Party's Representatives\",\n      \"confidence\": 0.90,\n      \"tau\": 0.85,\n      \"rubric\": {\n        \"relevance\": 0.80,\n        \"factual_grounding\": 1.00,\n        \"specificity\": 0.80,\n        \"logical_coherence\": 0.90,\n        \"applicability\": 0.80\n      },\n      \"justification\": \"Clarifies the parties bound by the obligation, reinforcing that the target statement applies within the contractual relationship.\"\n    },\n    {\n      \"id\": \"a4\",\n      \"text\": \"The narrative contains no exceptions, carve-outs, or duration limits that would narrow or negate the confidentiality obligation for the defined items.\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"Absence of limiting language in a confidentiality definition supports a broad interpretation of the obligation.\",\n      \"evidence_span\": null,\n      \"confidence\": 0.85,\n      \"tau\": 0.75,\n      \"rubric\": {\n        \"relevance\": 0.70,\n        \"factual_grounding\": 0.80,\n        \"specificity\": 0.60,\n        \"logical_coherence\": 0.70,\n        \"applicability\": 0.70\n      },\n      \"justification\": \"The lack of restrictions in the provided text prevents any weakening of the confidentiality entailment, supporting the target claim by default.\"\n    }\n  ],\n  \"relations\": [\n    {\n      \"source\": \"a1\",\n      \"target\": \"phi\",\n      \"type\": \"support\",\n      \"confidence\": 0.90\n    },\n    {\n      \"source\": \"a2\",\n      \"target\": \"phi\",\n      \"type\": \"support\",\n      \"confidence\": 1.00\n    },\n    {\n      \"source\": \"a3\",\n      \"target\": \"phi\",\n      \"type\": \"support\",\n      \"confidence\": 0.85\n    },\n    {\n      \"source\": \"a4\",\n      \"target\": \"phi\",\n      \"type\": \"support\",\n      \"confidence\": 0.75\n    }\n  ]\n}",
+      "parse_error": null,
+      "n_raw_arguments": 4
+    },
+    "strengths": [
+      {
+        "argument_id": "a1",
+        "tau": 0.9,
+        "rubric": {
+          "legal_relevance": 0.9,
+          "factual_grounding": 1.0,
+          "specificity": 0.8,
+          "logical_coherence": 0.9,
+          "fre_801c_applicability": 0.9
+        },
+        "justification": "Directly addresses the presence of a confidentiality definition, which is a prerequisite for entailing the target statement.",
+        "model": "combined"
+      },
+      {
+        "argument_id": "a2",
+        "tau": 1.0,
+        "rubric": {
+          "legal_relevance": 1.0,
+          "factual_grounding": 1.0,
+          "specificity": 1.0,
+          "logical_coherence": 1.0,
+          "fre_801c_applicability": 1.0
+        },
+        "justification": "Provides the strongest direct textual support for the target claim by explicitly listing the agreement's existence and terms as confidential.",
+        "model": "combined"
+      },
+      {
+        "argument_id": "a3",
+        "tau": 0.85,
+        "rubric": {
+          "legal_relevance": 0.8,
+          "factual_grounding": 1.0,
+          "specificity": 0.8,
+          "logical_coherence": 0.9,
+          "fre_801c_applicability": 0.8
+        },
+        "justification": "Clarifies the parties bound by the obligation, reinforcing that the target statement applies within the contractual relationship.",
+        "model": "combined"
+      },
+      {
+        "argument_id": "a4",
+        "tau": 0.75,
+        "rubric": {
+          "legal_relevance": 0.7,
+          "factual_grounding": 0.8,
+          "specificity": 0.6,
+          "logical_coherence": 0.7,
+          "fre_801c_applicability": 0.7
+        },
+        "justification": "The lack of restrictions in the provided text prevents any weakening of the confidentiality entailment, supporting the target claim by default.",
+        "model": "combined"
+      }
+    ],
+    "solver_output": {
+      "case_id": "test_0000",
+      "graph": {
+        "nodes": {
+          "phi": {
+            "id": "phi",
+            "text": "Does the contract context entail the target confidentiality statement?",
+            "tau": 0.5,
+            "sigma": 1.0,
+            "is_claim": true
+          },
+          "a1": {
+            "id": "a1",
+            "text": "The contract explicitly defines 'Confidential Information,' establishing a foundational confidentiality clause relevant to the target claim.",
+            "tau": 0.9,
+            "sigma": 0.9,
+            "is_claim": false
+          },
+          "a2": {
+            "id": "a2",
+            "text": "The definition expressly includes 'the existence and terms of this Agreement' within the scope of Confidential Information, directly entailing the target confidentiality statement.",
+            "tau": 1.0,
+            "sigma": 1.0,
+            "is_claim": false
+          },
+          "a3": {
+            "id": "a3",
+            "text": "The clause applies to information disclosed by 'a Party or its Representatives to the other Party,' confirming the mutual scope of the confidentiality obligation.",
+            "tau": 0.85,
+            "sigma": 0.85,
+            "is_claim": false
+          },
+          "a4": {
+            "id": "a4",
+            "text": "The narrative contains no exceptions, carve-outs, or duration limits that would narrow or negate the confidentiality obligation for the defined items.",
+            "tau": 0.75,
+            "sigma": 0.75,
+            "is_claim": false
+          }
+        },
+        "edges": [
+          {
+            "source": "a1",
+            "target": "phi",
+            "type": "support",
+            "confidence": 0.9
+          },
+          {
+            "source": "a2",
+            "target": "phi",
+            "type": "support",
+            "confidence": 1.0
+          },
+          {
+            "source": "a3",
+            "target": "phi",
+            "type": "support",
+            "confidence": 0.85
+          },
+          {
+            "source": "a4",
+            "target": "phi",
+            "type": "support",
+            "confidence": 0.75
+          }
+        ],
+        "solver_type": "df_quad"
+      },
+      "sigma_phi": 1.0,
+      "sigma_all": {
+        "phi": 1.0,
+        "a1": 0.9,
+        "a2": 1.0,
+        "a3": 0.85,
+        "a4": 0.75
+      },
+      "iterations": 2,
+      "converged": true,
+      "solver_type": "df_quad"
+    },
+    "sigma_phi": 1.0,
+    "decision": "Yes",
+    "uncertainty": {
+      "is_uncertain": false,
+      "sigma_phi": 1.0,
+      "threshold_low": 0.45,
+      "threshold_high": 0.55,
+      "escalation_triggered": false,
+      "escalation_actions": [],
+      "escalation_log": []
+    },
+    "hitl_interventions": [],
+    "pre_hitl_decision": null
+  },
+  {
+    "case_id": "test_0001",
+    "input_text": "\u201cInformation\u201d means any and all confidential information or data exchanged, submitted or otherwise disclosed in respect of or further to the Purpose or prepared for or in relation to the Purpose, including but not limited to written Submission documentation, due diligence materials, contractual documentation, reports, and the fact that the Parties have entered into this Agreement and are discussing and considering a business relationship; Other than as set out in this clause, none of the Parties will make any public announcements, statements or otherwise publicise the subject matter of this Agreement (or its existence) without the prior written consent of the other Parties and no Party will use the business names or trade marks of any other Party in any way without that Party\u2019s prior written consent. ",
+    "phi_text": "",
+    "gold_label": "Yes",
+    "extraction": {
+      "case_id": "test_0001",
+      "input_text": "\u201cInformation\u201d means any and all confidential information or data exchanged, submitted or otherwise disclosed in respect of or further to the Purpose or prepared for or in relation to the Purpose, including but not limited to written Submission documentation, due diligence materials, contractual documentation, reports, and the fact that the Parties have entered into this Agreement and are discussing and considering a business relationship; Other than as set out in this clause, none of the Parties will make any public announcements, statements or otherwise publicise the subject matter of this Agreement (or its existence) without the prior written consent of the other Parties and no Party will use the business names or trade marks of any other Party in any way without that Party\u2019s prior written consent. ",
+      "claim": {
+        "id": "phi",
+        "text": "Does the contract context entail the target confidentiality statement?"
+      },
+      "arguments": [
+        {
+          "id": "a1",
+          "text": "The contract explicitly defines Information to encompass any and all confidential information or data exchanged, submitted or otherwise disclosed in respect of or further to the Purpose, establishing a foundational confidentiality obligation.",
+          "stance_to_claim": "support",
+          "legal_rule": "Contractual definitions of confidential information establish the scope of confidentiality obligations.",
+          "evidence_span": "\u201cInformation\u201d means any and all confidential information or data exchanged, submitted or otherwise disclosed in respect of or further to the Purpose",
+          "confidence": 0.95
+        },
+        {
+          "id": "a2",
+          "text": "The narrative contains a direct non-disclosure provision stating that none of the Parties will make any public announcements, statements or otherwise publicise the subject matter of this Agreement or its existence without the prior written consent of the other Parties, which directly entails the target confidentiality statement.",
+          "stance_to_claim": "support",
+          "legal_rule": "Explicit contractual prohibitions on public disclosure directly entail confidentiality obligations.",
+          "evidence_span": "none of the Parties will make any public announcements, statements or otherwise publicise the subject matter of this Agreement (or its existence) without the prior written consent of the other Parties",
+          "confidence": 0.98
+        },
+        {
+          "id": "a3",
+          "text": "The confidentiality scope is explicitly broadened to cover the fact that the Parties have entered into this Agreement and are discussing and considering a business relationship, reinforcing the contractual entailment of confidentiality obligations.",
+          "stance_to_claim": "support",
+          "legal_rule": "Contractual clauses that explicitly extend confidentiality to the fact of the agreement and related discussions strengthen the entailment of confidentiality obligations.",
+          "evidence_span": "including but not limited to ... the fact that the Parties have entered into this Agreement and are discussing and considering a business relationship",
+          "confidence": 0.9
+        }
+      ],
+      "relations": [
+        {
+          "source": "a1",
+          "target": "phi",
+          "type": "support",
+          "confidence": 0.9
+        },
+        {
+          "source": "a2",
+          "target": "phi",
+          "type": "support",
+          "confidence": 0.98
+        },
+        {
+          "source": "a3",
+          "target": "phi",
+          "type": "support",
+          "confidence": 0.85
+        },
+        {
+          "source": "a2",
+          "target": "a3",
+          "type": "support",
+          "confidence": 0.8
+        }
+      ],
+      "extraction_model": "",
+      "raw_llm_response": "{\n  \"case_id\": \"test_0001\",\n  \"phi\": \"Does the contract context entail the target confidentiality statement?\",\n  \"arguments\": [\n    {\n      \"id\": \"a1\",\n      \"text\": \"The contract explicitly defines Information to encompass any and all confidential information or data exchanged, submitted or otherwise disclosed in respect of or further to the Purpose, establishing a foundational confidentiality obligation.\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"Contractual definitions of confidential information establish the scope of confidentiality obligations.\",\n      \"evidence_span\": \"\u201cInformation\u201d means any and all confidential information or data exchanged, submitted or otherwise disclosed in respect of or further to the Purpose\",\n      \"confidence\": 0.95,\n      \"tau\": 0.85,\n      \"rubric\": {\n        \"relevance\": 0.9,\n        \"factual_grounding\": 0.9,\n        \"specificity\": 0.8,\n        \"logical_coherence\": 0.9,\n        \"applicability\": 0.9\n      },\n      \"justification\": \"Defines the core subject matter as confidential, directly supporting the existence of a confidentiality obligation.\"\n    },\n    {\n      \"id\": \"a2\",\n      \"text\": \"The narrative contains a direct non-disclosure provision stating that none of the Parties will make any public announcements, statements or otherwise publicise the subject matter of this Agreement or its existence without the prior written consent of the other Parties, which directly entails the target confidentiality statement.\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"Explicit contractual prohibitions on public disclosure directly entail confidentiality obligations.\",\n      \"evidence_span\": \"none of the Parties will make any public announcements, statements or otherwise publicise the subject matter of this Agreement (or its existence) without the prior written consent of the other Parties\",\n      \"confidence\": 0.98,\n      \"tau\": 0.95,\n      \"rubric\": {\n        \"relevance\": 1.0,\n        \"factual_grounding\": 1.0,\n        \"specificity\": 0.9,\n        \"logical_coherence\": 1.0,\n        \"applicability\": 1.0\n      },\n      \"justification\": \"Explicitly prohibits publicizing the agreement's existence, directly entailing the target confidentiality statement.\"\n    },\n    {\n      \"id\": \"a3\",\n      \"text\": \"The confidentiality scope is explicitly broadened to cover the fact that the Parties have entered into this Agreement and are discussing and considering a business relationship, reinforcing the contractual entailment of confidentiality obligations.\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"Contractual clauses that explicitly extend confidentiality to the fact of the agreement and related discussions strengthen the entailment of confidentiality obligations.\",\n      \"evidence_span\": \"including but not limited to ... the fact that the Parties have entered into this Agreement and are discussing and considering a business relationship\",\n      \"confidence\": 0.9,\n      \"tau\": 0.8,\n      \"rubric\": {\n        \"relevance\": 0.8,\n        \"factual_grounding\": 0.9,\n        \"specificity\": 0.8,\n        \"logical_coherence\": 0.8,\n        \"applicability\": 0.8\n      },\n      \"justification\": \"Expands the confidentiality scope to include the fact of the agreement and discussions, further supporting the entailment.\"\n    }\n  ],\n  \"relations\": [\n    {\n      \"source\": \"a1\",\n      \"target\": \"phi\",\n      \"type\": \"support\",\n      \"confidence\": 0.9\n    },\n    {\n      \"source\": \"a2\",\n      \"target\": \"phi\",\n      \"type\": \"support\",\n      \"confidence\": 0.98\n    },\n    {\n      \"source\": \"a3\",\n      \"target\": \"phi\",\n      \"type\": \"support\",\n      \"confidence\": 0.85\n    },\n    {\n      \"source\": \"a2\",\n      \"target\": \"a3\",\n      \"type\": \"support\",\n      \"confidence\": 0.8\n    }\n  ]\n}",
+      "parse_error": null,
+      "n_raw_arguments": 3
+    },
+    "strengths": [
+      {
+        "argument_id": "a1",
+        "tau": 0.85,
+        "rubric": {
+          "legal_relevance": 0.9,
+          "factual_grounding": 0.9,
+          "specificity": 0.8,
+          "logical_coherence": 0.9,
+          "fre_801c_applicability": 0.9
+        },
+        "justification": "Defines the core subject matter as confidential, directly supporting the existence of a confidentiality obligation.",
+        "model": "combined"
+      },
+      {
+        "argument_id": "a2",
+        "tau": 0.95,
+        "rubric": {
+          "legal_relevance": 1.0,
+          "factual_grounding": 1.0,
+          "specificity": 0.9,
+          "logical_coherence": 1.0,
+          "fre_801c_applicability": 1.0
+        },
+        "justification": "Explicitly prohibits publicizing the agreement's existence, directly entailing the target confidentiality statement.",
+        "model": "combined"
+      },
+      {
+        "argument_id": "a3",
+        "tau": 0.8,
+        "rubric": {
+          "legal_relevance": 0.8,
+          "factual_grounding": 0.9,
+          "specificity": 0.8,
+          "logical_coherence": 0.8,
+          "fre_801c_applicability": 0.8
+        },
+        "justification": "Expands the confidentiality scope to include the fact of the agreement and discussions, further supporting the entailment.",
+        "model": "combined"
+      }
+    ],
+    "solver_output": {
+      "case_id": "test_0001",
+      "graph": {
+        "nodes": {
+          "phi": {
+            "id": "phi",
+            "text": "Does the contract context entail the target confidentiality statement?",
+            "tau": 0.5,
+            "sigma": 0.9999625,
+            "is_claim": true
+          },
+          "a1": {
+            "id": "a1",
+            "text": "The contract explicitly defines Information to encompass any and all confidential information or data exchanged, submitted or otherwise disclosed in respect of or further to the Purpose, establishing a foundational confidentiality obligation.",
+            "tau": 0.85,
+            "sigma": 0.85,
+            "is_claim": false
+          },
+          "a2": {
+            "id": "a2",
+            "text": "The narrative contains a direct non-disclosure provision stating that none of the Parties will make any public announcements, statements or otherwise publicise the subject matter of this Agreement or its existence without the prior written consent of the other Parties, which directly entails the target confidentiality statement.",
+            "tau": 0.95,
+            "sigma": 0.95,
+            "is_claim": false
+          },
+          "a3": {
+            "id": "a3",
+            "text": "The confidentiality scope is explicitly broadened to cover the fact that the Parties have entered into this Agreement and are discussing and considering a business relationship, reinforcing the contractual entailment of confidentiality obligations.",
+            "tau": 0.8,
+            "sigma": 0.99,
+            "is_claim": false
+          }
+        },
+        "edges": [
+          {
+            "source": "a1",
+            "target": "phi",
+            "type": "support",
+            "confidence": 0.9
+          },
+          {
+            "source": "a2",
+            "target": "phi",
+            "type": "support",
+            "confidence": 0.98
+          },
+          {
+            "source": "a3",
+            "target": "phi",
+            "type": "support",
+            "confidence": 0.85
+          },
+          {
+            "source": "a2",
+            "target": "a3",
+            "type": "support",
+            "confidence": 0.8
+          }
+        ],
+        "solver_type": "df_quad"
+      },
+      "sigma_phi": 0.9999625,
+      "sigma_all": {
+        "phi": 0.9999625,
+        "a1": 0.85,
+        "a2": 0.95,
+        "a3": 0.99
+      },
+      "iterations": 2,
+      "converged": true,
+      "solver_type": "df_quad"
+    },
+    "sigma_phi": 0.9999625,
+    "decision": "Yes",
+    "uncertainty": {
+      "is_uncertain": false,
+      "sigma_phi": 0.9999625,
+      "threshold_low": 0.45,
+      "threshold_high": 0.55,
+      "escalation_triggered": false,
+      "escalation_actions": [],
+      "escalation_log": []
+    },
+    "hitl_interventions": [],
+    "pre_hitl_decision": null
+  }
+]

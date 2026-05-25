@@ -1,0 +1,230 @@
+{
+  "case_id": "test_0039",
+  "input_text": "On the issue of whether Sean knew he was going to die, the fact that he called his lawyer wanting to make final changes to his will.",
+  "phi_text": "",
+  "gold_label": "Yes",
+  "extraction": {
+    "case_id": "test_0039",
+    "input_text": "On the issue of whether Sean knew he was going to die, the fact that he called his lawyer wanting to make final changes to his will.",
+    "claim": {
+      "id": "phi",
+      "text": "Is the statement described in this narrative hearsay under FRE 801(c)?"
+    },
+    "arguments": [
+      {
+        "id": "a1",
+        "text": "Sean's call to his lawyer constitutes an out-of-court statement, satisfying the first prong of the FRE 801(c) hearsay definition.",
+        "stance_to_claim": "support",
+        "legal_rule": "FRE 801(c) defines hearsay as a statement made outside of the current trial or hearing.",
+        "evidence_span": "he called his lawyer",
+        "confidence": 0.95
+      },
+      {
+        "id": "a2",
+        "text": "The call is offered to prove the truth of the matter asserted, namely that Sean knew he was going to die, satisfying the second prong of FRE 801(c).",
+        "stance_to_claim": "support",
+        "legal_rule": "FRE 801(c) requires the statement to be offered to prove the truth of the matter asserted.",
+        "evidence_span": "On the issue of whether Sean knew he was going to die",
+        "confidence": 0.9
+      },
+      {
+        "id": "a3",
+        "text": "The evidence is circumstantial conduct (calling a lawyer to change a will) rather than a direct assertion of impending death. Non-assertive conduct offered to prove state of mind is not hearsay under FRE 801(a)(2).",
+        "stance_to_claim": "attack",
+        "legal_rule": "FRE 801(a)(2) excludes conduct not intended as an assertion from the definition of a statement.",
+        "evidence_span": "the fact that he called his lawyer wanting to make final changes to his will",
+        "confidence": 0.85
+      },
+      {
+        "id": "a4",
+        "text": "The statement may be offered for a non-hearsay purpose, such as to show the effect on the listener or as a verbal act in will drafting, rather than to prove the truth of the matter asserted.",
+        "stance_to_claim": "attack",
+        "legal_rule": "Statements offered for purposes other than proving the truth of the matter asserted (e.g., effect on listener, verbal act) fall outside FRE 801(c).",
+        "evidence_span": "wanting to make final changes to his will",
+        "confidence": 0.8
+      }
+    ],
+    "relations": [
+      {
+        "source": "a1",
+        "target": "phi",
+        "type": "support",
+        "confidence": 0.95
+      },
+      {
+        "source": "a2",
+        "target": "phi",
+        "type": "support",
+        "confidence": 0.9
+      },
+      {
+        "source": "a3",
+        "target": "phi",
+        "type": "attack",
+        "confidence": 0.85
+      },
+      {
+        "source": "a4",
+        "target": "phi",
+        "type": "attack",
+        "confidence": 0.8
+      }
+    ],
+    "extraction_model": "",
+    "raw_llm_response": "{\n  \"case_id\": \"test_0039\",\n  \"phi\": \"Is the statement described in this narrative hearsay under FRE 801(c)?\",\n  \"arguments\": [\n    {\n      \"id\": \"a1\",\n      \"text\": \"Sean's call to his lawyer constitutes an out-of-court statement, satisfying the first prong of the FRE 801(c) hearsay definition.\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"FRE 801(c) defines hearsay as a statement made outside of the current trial or hearing.\",\n      \"evidence_span\": \"he called his lawyer\",\n      \"confidence\": 0.95,\n      \"tau\": 0.90,\n      \"rubric\": {\n        \"relevance\": 0.9,\n        \"factual_grounding\": 1.0,\n        \"specificity\": 0.8,\n        \"logical_coherence\": 0.9,\n        \"applicability\": 0.9\n      },\n      \"justification\": \"Directly addresses the out-of-court requirement of FRE 801(c) based on explicit narrative facts.\"\n    },\n    {\n      \"id\": \"a2\",\n      \"text\": \"The call is offered to prove the truth of the matter asserted, namely that Sean knew he was going to die, satisfying the second prong of FRE 801(c).\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"FRE 801(c) requires the statement to be offered to prove the truth of the matter asserted.\",\n      \"evidence_span\": \"On the issue of whether Sean knew he was going to die\",\n      \"confidence\": 0.90,\n      \"tau\": 0.85,\n      \"rubric\": {\n        \"relevance\": 0.9,\n        \"factual_grounding\": 0.9,\n        \"specificity\": 0.8,\n        \"logical_coherence\": 0.9,\n        \"applicability\": 0.9\n      },\n      \"justification\": \"Directly links the offered purpose to the truth of the asserted matter, fulfilling the hearsay definition.\"\n    },\n    {\n      \"id\": \"a3\",\n      \"text\": \"The evidence is circumstantial conduct (calling a lawyer to change a will) rather than a direct assertion of impending death. Non-assertive conduct offered to prove state of mind is not hearsay under FRE 801(a)(2).\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"FRE 801(a)(2) excludes conduct not intended as an assertion from the definition of a statement.\",\n      \"evidence_span\": \"the fact that he called his lawyer wanting to make final changes to his will\",\n      \"confidence\": 0.85,\n      \"tau\": 0.75,\n      \"rubric\": {\n        \"relevance\": 0.8,\n        \"factual_grounding\": 0.8,\n        \"specificity\": 0.7,\n        \"logical_coherence\": 0.8,\n        \"applicability\": 0.8\n      },\n      \"justification\": \"Challenges the hearsay classification by framing the call as non-assertive circumstantial evidence of state of mind.\"\n    },\n    {\n      \"id\": \"a4\",\n      \"text\": \"The statement may be offered for a non-hearsay purpose, such as to show the effect on the listener or as a verbal act in will drafting, rather than to prove the truth of the matter asserted.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"Statements offered for purposes other than proving the truth of the matter asserted (e.g., effect on listener, verbal act) fall outside FRE 801(c).\",\n      \"evidence_span\": \"wanting to make final changes to his will\",\n      \"confidence\": 0.80,\n      \"tau\": 0.70,\n      \"rubric\": {\n        \"relevance\": 0.7,\n        \"factual_grounding\": 0.7,\n        \"specificity\": 0.6,\n        \"logical_coherence\": 0.7,\n        \"applicability\": 0.7\n      },\n      \"justification\": \"Introduces alternative non-hearsay purposes that weaken the claim that the statement is hearsay.\"\n    }\n  ],\n  \"relations\": [\n    {\n      \"source\": \"a1\",\n      \"target\": \"phi\",\n      \"type\": \"support\",\n      \"confidence\": 0.95\n    },\n    {\n      \"source\": \"a2\",\n      \"target\": \"phi\",\n      \"type\": \"support\",\n      \"confidence\": 0.90\n    },\n    {\n      \"source\": \"a3\",\n      \"target\": \"phi\",\n      \"type\": \"attack\",\n      \"confidence\": 0.85\n    },\n    {\n      \"source\": \"a4\",\n      \"target\": \"phi\",\n      \"type\": \"attack\",\n      \"confidence\": 0.80\n    }\n  ]\n}",
+    "parse_error": null,
+    "n_raw_arguments": 4
+  },
+  "strengths": [
+    {
+      "argument_id": "a1",
+      "tau": 0.9,
+      "rubric": {
+        "legal_relevance": 0.9,
+        "factual_grounding": 1.0,
+        "specificity": 0.8,
+        "logical_coherence": 0.9,
+        "fre_801c_applicability": 0.9
+      },
+      "justification": "Directly addresses the out-of-court requirement of FRE 801(c) based on explicit narrative facts.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a2",
+      "tau": 0.85,
+      "rubric": {
+        "legal_relevance": 0.9,
+        "factual_grounding": 0.9,
+        "specificity": 0.8,
+        "logical_coherence": 0.9,
+        "fre_801c_applicability": 0.9
+      },
+      "justification": "Directly links the offered purpose to the truth of the asserted matter, fulfilling the hearsay definition.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a3",
+      "tau": 0.75,
+      "rubric": {
+        "legal_relevance": 0.8,
+        "factual_grounding": 0.8,
+        "specificity": 0.7,
+        "logical_coherence": 0.8,
+        "fre_801c_applicability": 0.8
+      },
+      "justification": "Challenges the hearsay classification by framing the call as non-assertive circumstantial evidence of state of mind.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a4",
+      "tau": 0.7,
+      "rubric": {
+        "legal_relevance": 0.7,
+        "factual_grounding": 0.7,
+        "specificity": 0.6,
+        "logical_coherence": 0.7,
+        "fre_801c_applicability": 0.7
+      },
+      "justification": "Introduces alternative non-hearsay purposes that weaken the claim that the statement is hearsay.",
+      "model": "combined"
+    }
+  ],
+  "solver_output": {
+    "case_id": "test_0039",
+    "graph": {
+      "nodes": {
+        "phi": {
+          "id": "phi",
+          "text": "Is the statement described in this narrative hearsay under FRE 801(c)?",
+          "tau": 0.5,
+          "sigma": 0.5299999999999999,
+          "is_claim": true
+        },
+        "a1": {
+          "id": "a1",
+          "text": "Sean's call to his lawyer constitutes an out-of-court statement, satisfying the first prong of the FRE 801(c) hearsay definition.",
+          "tau": 0.9,
+          "sigma": 0.9,
+          "is_claim": false
+        },
+        "a2": {
+          "id": "a2",
+          "text": "The call is offered to prove the truth of the matter asserted, namely that Sean knew he was going to die, satisfying the second prong of FRE 801(c).",
+          "tau": 0.85,
+          "sigma": 0.85,
+          "is_claim": false
+        },
+        "a3": {
+          "id": "a3",
+          "text": "The evidence is circumstantial conduct (calling a lawyer to change a will) rather than a direct assertion of impending death. Non-assertive conduct offered to prove state of mind is not hearsay under FRE 801(a)(2).",
+          "tau": 0.75,
+          "sigma": 0.75,
+          "is_claim": false
+        },
+        "a4": {
+          "id": "a4",
+          "text": "The statement may be offered for a non-hearsay purpose, such as to show the effect on the listener or as a verbal act in will drafting, rather than to prove the truth of the matter asserted.",
+          "tau": 0.7,
+          "sigma": 0.7,
+          "is_claim": false
+        }
+      },
+      "edges": [
+        {
+          "source": "a1",
+          "target": "phi",
+          "type": "support",
+          "confidence": 0.95
+        },
+        {
+          "source": "a2",
+          "target": "phi",
+          "type": "support",
+          "confidence": 0.9
+        },
+        {
+          "source": "a3",
+          "target": "phi",
+          "type": "attack",
+          "confidence": 0.85
+        },
+        {
+          "source": "a4",
+          "target": "phi",
+          "type": "attack",
+          "confidence": 0.8
+        }
+      ],
+      "solver_type": "df_quad"
+    },
+    "sigma_phi": 0.5299999999999999,
+    "sigma_all": {
+      "phi": 0.5299999999999999,
+      "a1": 0.9,
+      "a2": 0.85,
+      "a3": 0.75,
+      "a4": 0.7
+    },
+    "iterations": 2,
+    "converged": true,
+    "solver_type": "df_quad"
+  },
+  "sigma_phi": 0.5299999999999999,
+  "decision": "UNCERTAIN",
+  "uncertainty": {
+    "is_uncertain": true,
+    "sigma_phi": 0.5299999999999999,
+    "threshold_low": 0.45,
+    "threshold_high": 0.55,
+    "escalation_triggered": true,
+    "escalation_actions": [
+      "rerun_extraction",
+      "human_review"
+    ],
+    "escalation_log": [
+      "[test_0039] UNCERTAIN σ(φ)=0.5300 ∈ [0.45,0.55]. Human review recommended."
+    ]
+  },
+  "hitl_interventions": [],
+  "pre_hitl_decision": null
+}

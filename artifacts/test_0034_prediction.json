@@ -1,0 +1,184 @@
+{
+  "case_id": "test_0034",
+  "input_text": "On the issue of whether Joshua's friend was attacked by Ashley, the fact that Joshua's friend told Joshua that he was just attacked by Ashley.",
+  "phi_text": "",
+  "gold_label": "Yes",
+  "extraction": {
+    "case_id": "test_0034",
+    "input_text": "On the issue of whether Joshua's friend was attacked by Ashley, the fact that Joshua's friend told Joshua that he was just attacked by Ashley.",
+    "claim": {
+      "id": "phi",
+      "text": "Is the statement described in this narrative hearsay under FRE 801(c)?"
+    },
+    "arguments": [
+      {
+        "id": "a1",
+        "text": "The statement was made out of court.",
+        "stance_to_claim": "support",
+        "legal_rule": "FRE 801(c) requires the statement to be made outside of current testimony.",
+        "evidence_span": "Joshua's friend told Joshua",
+        "confidence": 0.95
+      },
+      {
+        "id": "a2",
+        "text": "The statement contains a factual assertion.",
+        "stance_to_claim": "support",
+        "legal_rule": "FRE 801(c) requires the statement to assert a matter.",
+        "evidence_span": "he was just attacked by Ashley",
+        "confidence": 0.95
+      },
+      {
+        "id": "a3",
+        "text": "The statement is offered to prove the truth of the matter asserted.",
+        "stance_to_claim": "support",
+        "legal_rule": "FRE 801(c) defines hearsay when offered to prove the truth of the matter asserted.",
+        "evidence_span": "On the issue of whether Joshua's friend was attacked by Ashley",
+        "confidence": 0.95
+      }
+    ],
+    "relations": [
+      {
+        "source": "a1",
+        "target": "phi",
+        "type": "support",
+        "confidence": 0.95
+      },
+      {
+        "source": "a2",
+        "target": "phi",
+        "type": "support",
+        "confidence": 0.95
+      },
+      {
+        "source": "a3",
+        "target": "phi",
+        "type": "support",
+        "confidence": 0.95
+      }
+    ],
+    "extraction_model": "",
+    "raw_llm_response": "{\n  \"case_id\": \"test_0034\",\n  \"phi\": \"Is the statement described in this narrative hearsay under FRE 801(c)?\",\n  \"arguments\": [\n    {\n      \"id\": \"a1\",\n      \"text\": \"The statement was made out of court.\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"FRE 801(c) requires the statement to be made outside of current testimony.\",\n      \"evidence_span\": \"Joshua's friend told Joshua\",\n      \"confidence\": 0.95,\n      \"tau\": 0.90,\n      \"rubric\": {\n        \"relevance\": 0.90,\n        \"factual_grounding\": 0.90,\n        \"specificity\": 0.85,\n        \"logical_coherence\": 0.90,\n        \"applicability\": 0.90\n      },\n      \"justification\": \"The narrative explicitly states the friend communicated with Joshua, satisfying the out-of-court requirement for hearsay analysis.\"\n    },\n    {\n      \"id\": \"a2\",\n      \"text\": \"The statement contains a factual assertion.\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"FRE 801(c) requires the statement to assert a matter.\",\n      \"evidence_span\": \"he was just attacked by Ashley\",\n      \"confidence\": 0.95,\n      \"tau\": 0.90,\n      \"rubric\": {\n        \"relevance\": 0.90,\n        \"factual_grounding\": 0.90,\n        \"specificity\": 0.85,\n        \"logical_coherence\": 0.90,\n        \"applicability\": 0.90\n      },\n      \"justification\": \"The friend's words explicitly assert a past event (the attack), meeting the assertion prong of the hearsay definition.\"\n    },\n    {\n      \"id\": \"a3\",\n      \"text\": \"The statement is offered to prove the truth of the matter asserted.\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"FRE 801(c) defines hearsay when offered to prove the truth of the matter asserted.\",\n      \"evidence_span\": \"On the issue of whether Joshua's friend was attacked by Ashley\",\n      \"confidence\": 0.95,\n      \"tau\": 0.95,\n      \"rubric\": {\n        \"relevance\": 0.95,\n        \"factual_grounding\": 0.90,\n        \"specificity\": 0.90,\n        \"logical_coherence\": 0.95,\n        \"applicability\": 0.95\n      },\n      \"justification\": \"The narrative directly links the introduction of the statement to proving the factual dispute of whether the attack occurred, satisfying the core hearsay trigger.\"\n    }\n  ],\n  \"relations\": [\n    {\n      \"source\": \"a1\",\n      \"target\": \"phi\",\n      \"type\": \"support\",\n      \"confidence\": 0.95\n    },\n    {\n      \"source\": \"a2\",\n      \"target\": \"phi\",\n      \"type\": \"support\",\n      \"confidence\": 0.95\n    },\n    {\n      \"source\": \"a3\",\n      \"target\": \"phi\",\n      \"type\": \"support\",\n      \"confidence\": 0.95\n    }\n  ]\n}",
+    "parse_error": null,
+    "n_raw_arguments": 3
+  },
+  "strengths": [
+    {
+      "argument_id": "a1",
+      "tau": 0.9,
+      "rubric": {
+        "legal_relevance": 0.9,
+        "factual_grounding": 0.9,
+        "specificity": 0.85,
+        "logical_coherence": 0.9,
+        "fre_801c_applicability": 0.9
+      },
+      "justification": "The narrative explicitly states the friend communicated with Joshua, satisfying the out-of-court requirement for hearsay analysis.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a2",
+      "tau": 0.9,
+      "rubric": {
+        "legal_relevance": 0.9,
+        "factual_grounding": 0.9,
+        "specificity": 0.85,
+        "logical_coherence": 0.9,
+        "fre_801c_applicability": 0.9
+      },
+      "justification": "The friend's words explicitly assert a past event (the attack), meeting the assertion prong of the hearsay definition.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a3",
+      "tau": 0.95,
+      "rubric": {
+        "legal_relevance": 0.95,
+        "factual_grounding": 0.9,
+        "specificity": 0.9,
+        "logical_coherence": 0.95,
+        "fre_801c_applicability": 0.95
+      },
+      "justification": "The narrative directly links the introduction of the statement to proving the factual dispute of whether the attack occurred, satisfying the core hearsay trigger.",
+      "model": "combined"
+    }
+  ],
+  "solver_output": {
+    "case_id": "test_0034",
+    "graph": {
+      "nodes": {
+        "phi": {
+          "id": "phi",
+          "text": "Is the statement described in this narrative hearsay under FRE 801(c)?",
+          "tau": 0.5,
+          "sigma": 0.99975,
+          "is_claim": true
+        },
+        "a1": {
+          "id": "a1",
+          "text": "The statement was made out of court.",
+          "tau": 0.9,
+          "sigma": 0.9,
+          "is_claim": false
+        },
+        "a2": {
+          "id": "a2",
+          "text": "The statement contains a factual assertion.",
+          "tau": 0.9,
+          "sigma": 0.9,
+          "is_claim": false
+        },
+        "a3": {
+          "id": "a3",
+          "text": "The statement is offered to prove the truth of the matter asserted.",
+          "tau": 0.95,
+          "sigma": 0.95,
+          "is_claim": false
+        }
+      },
+      "edges": [
+        {
+          "source": "a1",
+          "target": "phi",
+          "type": "support",
+          "confidence": 0.95
+        },
+        {
+          "source": "a2",
+          "target": "phi",
+          "type": "support",
+          "confidence": 0.95
+        },
+        {
+          "source": "a3",
+          "target": "phi",
+          "type": "support",
+          "confidence": 0.95
+        }
+      ],
+      "solver_type": "df_quad"
+    },
+    "sigma_phi": 0.99975,
+    "sigma_all": {
+      "phi": 0.99975,
+      "a1": 0.9,
+      "a2": 0.9,
+      "a3": 0.95
+    },
+    "iterations": 2,
+    "converged": true,
+    "solver_type": "df_quad"
+  },
+  "sigma_phi": 0.99975,
+  "decision": "Yes",
+  "uncertainty": {
+    "is_uncertain": false,
+    "sigma_phi": 0.99975,
+    "threshold_low": 0.45,
+    "threshold_high": 0.55,
+    "escalation_triggered": false,
+    "escalation_actions": [],
+    "escalation_log": []
+  },
+  "hitl_interventions": [],
+  "pre_hitl_decision": null
+}

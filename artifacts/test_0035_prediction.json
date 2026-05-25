@@ -1,0 +1,225 @@
+{
+  "case_id": "test_0035",
+  "input_text": "To prove that Tom was in town, a witness testifies that her friend Susan told her Tom was in town.",
+  "phi_text": "",
+  "gold_label": "Yes",
+  "extraction": {
+    "case_id": "test_0035",
+    "input_text": "To prove that Tom was in town, a witness testifies that her friend Susan told her Tom was in town.",
+    "claim": {
+      "id": "phi",
+      "text": "Is the statement described in this narrative hearsay under FRE 801(c)?"
+    },
+    "arguments": [
+      {
+        "id": "a1",
+        "text": "The statement was made out of court, as Susan communicated to the witness outside of the current trial proceeding.",
+        "stance_to_claim": "support",
+        "legal_rule": "FRE 801(a) & (c): Hearsay requires a statement made by a declarant outside of the current testimony.",
+        "evidence_span": "her friend Susan told her",
+        "confidence": 0.95
+      },
+      {
+        "id": "a2",
+        "text": "The statement contains a factual assertion, as Susan explicitly stated that Tom was in town.",
+        "stance_to_claim": "support",
+        "legal_rule": "FRE 801(a): A statement is defined as an assertion intended to convey information.",
+        "evidence_span": "Susan told her Tom was in town",
+        "confidence": 0.95
+      },
+      {
+        "id": "a3",
+        "text": "The statement is offered to prove the truth of the matter asserted, as the witness's testimony is explicitly introduced for that purpose.",
+        "stance_to_claim": "support",
+        "legal_rule": "FRE 801(c): Hearsay is a statement offered in evidence to prove the truth of the matter asserted.",
+        "evidence_span": "To prove that Tom was in town",
+        "confidence": 0.98
+      },
+      {
+        "id": "a4",
+        "text": "No hearsay exclusion or exception applies to remove the statement from the hearsay definition.",
+        "stance_to_claim": "support",
+        "legal_rule": "FRE 801(d)(2) & FRE 803/804: Exclusions and exceptions must be explicitly present to negate hearsay classification.",
+        "evidence_span": null,
+        "confidence": 0.8
+      }
+    ],
+    "relations": [
+      {
+        "source": "a1",
+        "target": "phi",
+        "type": "support",
+        "confidence": 0.95
+      },
+      {
+        "source": "a2",
+        "target": "phi",
+        "type": "support",
+        "confidence": 0.95
+      },
+      {
+        "source": "a3",
+        "target": "phi",
+        "type": "support",
+        "confidence": 0.98
+      },
+      {
+        "source": "a4",
+        "target": "phi",
+        "type": "support",
+        "confidence": 0.8
+      }
+    ],
+    "extraction_model": "",
+    "raw_llm_response": "{\n  \"case_id\": \"test_0035\",\n  \"phi\": \"Is the statement described in this narrative hearsay under FRE 801(c)?\",\n  \"arguments\": [\n    {\n      \"id\": \"a1\",\n      \"text\": \"The statement was made out of court, as Susan communicated to the witness outside of the current trial proceeding.\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"FRE 801(a) & (c): Hearsay requires a statement made by a declarant outside of the current testimony.\",\n      \"evidence_span\": \"her friend Susan told her\",\n      \"confidence\": 0.95,\n      \"tau\": 0.90,\n      \"rubric\": {\n        \"relevance\": 0.90,\n        \"factual_grounding\": 0.95,\n        \"specificity\": 0.80,\n        \"logical_coherence\": 0.90,\n        \"applicability\": 0.90\n      },\n      \"justification\": \"Directly satisfies the out-of-court requirement for hearsay classification under FRE 801(c).\"\n    },\n    {\n      \"id\": \"a2\",\n      \"text\": \"The statement contains a factual assertion, as Susan explicitly stated that Tom was in town.\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"FRE 801(a): A statement is defined as an assertion intended to convey information.\",\n      \"evidence_span\": \"Susan told her Tom was in town\",\n      \"confidence\": 0.95,\n      \"tau\": 0.90,\n      \"rubric\": {\n        \"relevance\": 0.90,\n        \"factual_grounding\": 0.95,\n        \"specificity\": 0.80,\n        \"logical_coherence\": 0.90,\n        \"applicability\": 0.90\n      },\n      \"justification\": \"Satisfies the assertion element required for a communication to qualify as a hearsay statement.\"\n    },\n    {\n      \"id\": \"a3\",\n      \"text\": \"The statement is offered to prove the truth of the matter asserted, as the witness's testimony is explicitly introduced for that purpose.\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"FRE 801(c): Hearsay is a statement offered in evidence to prove the truth of the matter asserted.\",\n      \"evidence_span\": \"To prove that Tom was in town\",\n      \"confidence\": 0.98,\n      \"tau\": 0.95,\n      \"rubric\": {\n        \"relevance\": 1.00,\n        \"factual_grounding\": 1.00,\n        \"specificity\": 0.90,\n        \"logical_coherence\": 1.00,\n        \"applicability\": 1.00\n      },\n      \"justification\": \"Directly triggers the core hearsay definition under FRE 801(c) by matching the offered purpose to the asserted fact.\"\n    },\n    {\n      \"id\": \"a4\",\n      \"text\": \"No hearsay exclusion or exception applies to remove the statement from the hearsay definition.\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"FRE 801(d)(2) & FRE 803/804: Exclusions and exceptions must be explicitly present to negate hearsay classification.\",\n      \"evidence_span\": null,\n      \"confidence\": 0.80,\n      \"tau\": 0.75,\n      \"rubric\": {\n        \"relevance\": 0.70,\n        \"factual_grounding\": 0.60,\n        \"specificity\": 0.50,\n        \"logical_coherence\": 0.80,\n        \"applicability\": 0.80\n      },\n      \"justification\": \"The absence of party-opponent admission, state-of-mind, or other recognized exclusions/exceptions supports the conclusion that the statement remains hearsay.\"\n    }\n  ],\n  \"relations\": [\n    {\n      \"source\": \"a1\",\n      \"target\": \"phi\",\n      \"type\": \"support\",\n      \"confidence\": 0.95\n    },\n    {\n      \"source\": \"a2\",\n      \"target\": \"phi\",\n      \"type\": \"support\",\n      \"confidence\": 0.95\n    },\n    {\n      \"source\": \"a3\",\n      \"target\": \"phi\",\n      \"type\": \"support\",\n      \"confidence\": 0.98\n    },\n    {\n      \"source\": \"a4\",\n      \"target\": \"phi\",\n      \"type\": \"support\",\n      \"confidence\": 0.80\n    }\n  ]\n}",
+    "parse_error": null,
+    "n_raw_arguments": 4
+  },
+  "strengths": [
+    {
+      "argument_id": "a1",
+      "tau": 0.9,
+      "rubric": {
+        "legal_relevance": 0.9,
+        "factual_grounding": 0.95,
+        "specificity": 0.8,
+        "logical_coherence": 0.9,
+        "fre_801c_applicability": 0.9
+      },
+      "justification": "Directly satisfies the out-of-court requirement for hearsay classification under FRE 801(c).",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a2",
+      "tau": 0.9,
+      "rubric": {
+        "legal_relevance": 0.9,
+        "factual_grounding": 0.95,
+        "specificity": 0.8,
+        "logical_coherence": 0.9,
+        "fre_801c_applicability": 0.9
+      },
+      "justification": "Satisfies the assertion element required for a communication to qualify as a hearsay statement.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a3",
+      "tau": 0.95,
+      "rubric": {
+        "legal_relevance": 1.0,
+        "factual_grounding": 1.0,
+        "specificity": 0.9,
+        "logical_coherence": 1.0,
+        "fre_801c_applicability": 1.0
+      },
+      "justification": "Directly triggers the core hearsay definition under FRE 801(c) by matching the offered purpose to the asserted fact.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a4",
+      "tau": 0.75,
+      "rubric": {
+        "legal_relevance": 0.7,
+        "factual_grounding": 0.6,
+        "specificity": 0.5,
+        "logical_coherence": 0.8,
+        "fre_801c_applicability": 0.8
+      },
+      "justification": "The absence of party-opponent admission, state-of-mind, or other recognized exclusions/exceptions supports the conclusion that the statement remains hearsay.",
+      "model": "combined"
+    }
+  ],
+  "solver_output": {
+    "case_id": "test_0035",
+    "graph": {
+      "nodes": {
+        "phi": {
+          "id": "phi",
+          "text": "Is the statement described in this narrative hearsay under FRE 801(c)?",
+          "tau": 0.5,
+          "sigma": 0.9999374999999999,
+          "is_claim": true
+        },
+        "a1": {
+          "id": "a1",
+          "text": "The statement was made out of court, as Susan communicated to the witness outside of the current trial proceeding.",
+          "tau": 0.9,
+          "sigma": 0.9,
+          "is_claim": false
+        },
+        "a2": {
+          "id": "a2",
+          "text": "The statement contains a factual assertion, as Susan explicitly stated that Tom was in town.",
+          "tau": 0.9,
+          "sigma": 0.9,
+          "is_claim": false
+        },
+        "a3": {
+          "id": "a3",
+          "text": "The statement is offered to prove the truth of the matter asserted, as the witness's testimony is explicitly introduced for that purpose.",
+          "tau": 0.95,
+          "sigma": 0.95,
+          "is_claim": false
+        },
+        "a4": {
+          "id": "a4",
+          "text": "No hearsay exclusion or exception applies to remove the statement from the hearsay definition.",
+          "tau": 0.75,
+          "sigma": 0.75,
+          "is_claim": false
+        }
+      },
+      "edges": [
+        {
+          "source": "a1",
+          "target": "phi",
+          "type": "support",
+          "confidence": 0.95
+        },
+        {
+          "source": "a2",
+          "target": "phi",
+          "type": "support",
+          "confidence": 0.95
+        },
+        {
+          "source": "a3",
+          "target": "phi",
+          "type": "support",
+          "confidence": 0.98
+        },
+        {
+          "source": "a4",
+          "target": "phi",
+          "type": "support",
+          "confidence": 0.8
+        }
+      ],
+      "solver_type": "df_quad"
+    },
+    "sigma_phi": 0.9999374999999999,
+    "sigma_all": {
+      "phi": 0.9999374999999999,
+      "a1": 0.9,
+      "a2": 0.9,
+      "a3": 0.95,
+      "a4": 0.75
+    },
+    "iterations": 2,
+    "converged": true,
+    "solver_type": "df_quad"
+  },
+  "sigma_phi": 0.9999374999999999,
+  "decision": "Yes",
+  "uncertainty": {
+    "is_uncertain": false,
+    "sigma_phi": 0.9999374999999999,
+    "threshold_low": 0.45,
+    "threshold_high": 0.55,
+    "escalation_triggered": false,
+    "escalation_actions": [],
+    "escalation_log": []
+  },
+  "hitl_interventions": [],
+  "pre_hitl_decision": null
+}

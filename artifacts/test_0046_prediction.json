@@ -1,0 +1,266 @@
+{
+  "case_id": "test_0046",
+  "input_text": "On the issue of whether Henry committed insider trading, Alice's statement to Bob that Henry told her he had a \"great tip about what a certain stock was going to do.\"",
+  "phi_text": "",
+  "gold_label": "Yes",
+  "extraction": {
+    "case_id": "test_0046",
+    "input_text": "On the issue of whether Henry committed insider trading, Alice's statement to Bob that Henry told her he had a \"great tip about what a certain stock was going to do.\"",
+    "claim": {
+      "id": "phi",
+      "text": "Is the statement described in this narrative hearsay under FRE 801(c)?"
+    },
+    "arguments": [
+      {
+        "id": "a1",
+        "text": "Alice made a statement to Bob outside of the current trial or hearing context.",
+        "stance_to_claim": "support",
+        "legal_rule": "FRE 801(c) requires the statement to be made by the declarant while not testifying at the current trial or hearing.",
+        "evidence_span": "Alice's statement to Bob",
+        "confidence": 0.95
+      },
+      {
+        "id": "a2",
+        "text": "The statement asserts that Henry told Alice he had a \"great tip about what a certain stock was going to do,\" constituting a factual assertion.",
+        "stance_to_claim": "support",
+        "legal_rule": "FRE 801(c) requires the statement to be one that the declarant asserts.",
+        "evidence_span": "that Henry told her he had a \"great tip about what a certain stock was going to do.\"",
+        "confidence": 0.95
+      },
+      {
+        "id": "a3",
+        "text": "The statement is introduced on the issue of whether Henry committed insider trading, indicating it is offered to prove the truth of Henry's alleged tip.",
+        "stance_to_claim": "support",
+        "legal_rule": "FRE 801(c) defines hearsay as a statement offered to prove the truth of the matter asserted.",
+        "evidence_span": "On the issue of whether Henry committed insider trading, Alice's statement to Bob that Henry told her...",
+        "confidence": 0.9
+      },
+      {
+        "id": "a4",
+        "text": "There is no indication the statement is offered for a non-hearsay purpose such as notice, effect on listener, or impeachment.",
+        "stance_to_claim": "support",
+        "legal_rule": "FRE 801(c) hearsay analysis requires confirming the statement is not offered for a non-hearsay purpose.",
+        "evidence_span": null,
+        "confidence": 0.7
+      },
+      {
+        "id": "a5",
+        "text": "If Henry is a party to the case, his statement might be admissible as a party-opponent admission under FRE 801(d)(2), which would treat it as non-hearsay.",
+        "stance_to_claim": "attack",
+        "legal_rule": "FRE 801(d)(2) excludes party-opponent admissions from the definition of hearsay.",
+        "evidence_span": "On the issue of whether Henry committed insider trading",
+        "confidence": 0.6
+      }
+    ],
+    "relations": [
+      {
+        "source": "a1",
+        "target": "phi",
+        "type": "support",
+        "confidence": 0.95
+      },
+      {
+        "source": "a2",
+        "target": "phi",
+        "type": "support",
+        "confidence": 0.95
+      },
+      {
+        "source": "a3",
+        "target": "phi",
+        "type": "support",
+        "confidence": 0.9
+      },
+      {
+        "source": "a4",
+        "target": "phi",
+        "type": "support",
+        "confidence": 0.7
+      },
+      {
+        "source": "a5",
+        "target": "phi",
+        "type": "attack",
+        "confidence": 0.6
+      }
+    ],
+    "extraction_model": "",
+    "raw_llm_response": "{\n  \"case_id\": \"test_0046\",\n  \"phi\": \"Is the statement described in this narrative hearsay under FRE 801(c)?\",\n  \"arguments\": [\n    {\n      \"id\": \"a1\",\n      \"text\": \"Alice made a statement to Bob outside of the current trial or hearing context.\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"FRE 801(c) requires the statement to be made by the declarant while not testifying at the current trial or hearing.\",\n      \"evidence_span\": \"Alice's statement to Bob\",\n      \"confidence\": 0.95,\n      \"tau\": 0.90,\n      \"rubric\": {\n        \"relevance\": 0.9,\n        \"factual_grounding\": 1.0,\n        \"specificity\": 0.8,\n        \"logical_coherence\": 0.9,\n        \"applicability\": 0.9\n      },\n      \"justification\": \"Directly satisfies the out-of-court requirement of FRE 801(c) based on the explicit description of Alice's communication to Bob.\"\n    },\n    {\n      \"id\": \"a2\",\n      \"text\": \"The statement asserts that Henry told Alice he had a \\\"great tip about what a certain stock was going to do,\\\" constituting a factual assertion.\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"FRE 801(c) requires the statement to be one that the declarant asserts.\",\n      \"evidence_span\": \"that Henry told her he had a \\\"great tip about what a certain stock was going to do.\\\"\",\n      \"confidence\": 0.95,\n      \"tau\": 0.90,\n      \"rubric\": {\n        \"relevance\": 0.9,\n        \"factual_grounding\": 1.0,\n        \"specificity\": 0.8,\n        \"logical_coherence\": 0.9,\n        \"applicability\": 0.9\n      },\n      \"justification\": \"The narrative explicitly describes a reported assertion regarding a stock tip, meeting the assertion requirement for hearsay.\"\n    },\n    {\n      \"id\": \"a3\",\n      \"text\": \"The statement is introduced on the issue of whether Henry committed insider trading, indicating it is offered to prove the truth of Henry's alleged tip.\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"FRE 801(c) defines hearsay as a statement offered to prove the truth of the matter asserted.\",\n      \"evidence_span\": \"On the issue of whether Henry committed insider trading, Alice's statement to Bob that Henry told her...\",\n      \"confidence\": 0.90,\n      \"tau\": 0.85,\n      \"rubric\": {\n        \"relevance\": 0.9,\n        \"factual_grounding\": 0.8,\n        \"specificity\": 0.8,\n        \"logical_coherence\": 0.9,\n        \"applicability\": 0.9\n      },\n      \"justification\": \"The context explicitly ties the statement to proving Henry's insider trading, satisfying the \\\"truth of the matter asserted\\\" prong.\"\n    },\n    {\n      \"id\": \"a4\",\n      \"text\": \"There is no indication the statement is offered for a non-hearsay purpose such as notice, effect on listener, or impeachment.\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"FRE 801(c) hearsay analysis requires confirming the statement is not offered for a non-hearsay purpose.\",\n      \"evidence_span\": null,\n      \"confidence\": 0.70,\n      \"tau\": 0.60,\n      \"rubric\": {\n        \"relevance\": 0.7,\n        \"factual_grounding\": 0.5,\n        \"specificity\": 0.6,\n        \"logical_coherence\": 0.8,\n        \"applicability\": 0.8\n      },\n      \"justification\": \"The absence of an alternative purpose in the narrative supports the conclusion that it is offered for its truth rather than for another relevant purpose.\"\n    },\n    {\n      \"id\": \"a5\",\n      \"text\": \"If Henry is a party to the case, his statement might be admissible as a party-opponent admission under FRE 801(d)(2), which would treat it as non-hearsay.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"FRE 801(d)(2) excludes party-opponent admissions from the definition of hearsay.\",\n      \"evidence_span\": \"On the issue of whether Henry committed insider trading\",\n      \"confidence\": 0.60,\n      \"tau\": 0.50,\n      \"rubric\": {\n        \"relevance\": 0.6,\n        \"factual_grounding\": 0.5,\n        \"specificity\": 0.5,\n        \"logical_coherence\": 0.6,\n        \"applicability\": 0.7\n      },\n      \"justification\": \"The narrative implies Henry is the defendant, raising a potential exclusion, but the facts are insufficient to confirm party status or admission applicability.\"\n    }\n  ],\n  \"relations\": [\n    {\n      \"source\": \"a1\",\n      \"target\": \"phi\",\n      \"type\": \"support\",\n      \"confidence\": 0.95\n    },\n    {\n      \"source\": \"a2\",\n      \"target\": \"phi\",\n      \"type\": \"support\",\n      \"confidence\": 0.95\n    },\n    {\n      \"source\": \"a3\",\n      \"target\": \"phi\",\n      \"type\": \"support\",\n      \"confidence\": 0.90\n    },\n    {\n      \"source\": \"a4\",\n      \"target\": \"phi\",\n      \"type\": \"support\",\n      \"confidence\": 0.70\n    },\n    {\n      \"source\": \"a5\",\n      \"target\": \"phi\",\n      \"type\": \"attack\",\n      \"confidence\": 0.60\n    }\n  ]\n}",
+    "parse_error": null,
+    "n_raw_arguments": 5
+  },
+  "strengths": [
+    {
+      "argument_id": "a1",
+      "tau": 0.9,
+      "rubric": {
+        "legal_relevance": 0.9,
+        "factual_grounding": 1.0,
+        "specificity": 0.8,
+        "logical_coherence": 0.9,
+        "fre_801c_applicability": 0.9
+      },
+      "justification": "Directly satisfies the out-of-court requirement of FRE 801(c) based on the explicit description of Alice's communication to Bob.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a2",
+      "tau": 0.9,
+      "rubric": {
+        "legal_relevance": 0.9,
+        "factual_grounding": 1.0,
+        "specificity": 0.8,
+        "logical_coherence": 0.9,
+        "fre_801c_applicability": 0.9
+      },
+      "justification": "The narrative explicitly describes a reported assertion regarding a stock tip, meeting the assertion requirement for hearsay.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a3",
+      "tau": 0.85,
+      "rubric": {
+        "legal_relevance": 0.9,
+        "factual_grounding": 0.8,
+        "specificity": 0.8,
+        "logical_coherence": 0.9,
+        "fre_801c_applicability": 0.9
+      },
+      "justification": "The context explicitly ties the statement to proving Henry's insider trading, satisfying the \"truth of the matter asserted\" prong.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a4",
+      "tau": 0.6,
+      "rubric": {
+        "legal_relevance": 0.7,
+        "factual_grounding": 0.5,
+        "specificity": 0.6,
+        "logical_coherence": 0.8,
+        "fre_801c_applicability": 0.8
+      },
+      "justification": "The absence of an alternative purpose in the narrative supports the conclusion that it is offered for its truth rather than for another relevant purpose.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a5",
+      "tau": 0.5,
+      "rubric": {
+        "legal_relevance": 0.6,
+        "factual_grounding": 0.5,
+        "specificity": 0.5,
+        "logical_coherence": 0.6,
+        "fre_801c_applicability": 0.7
+      },
+      "justification": "The narrative implies Henry is the defendant, raising a potential exclusion, but the facts are insufficient to confirm party status or admission applicability.",
+      "model": "combined"
+    }
+  ],
+  "solver_output": {
+    "case_id": "test_0046",
+    "graph": {
+      "nodes": {
+        "phi": {
+          "id": "phi",
+          "text": "Is the statement described in this narrative hearsay under FRE 801(c)?",
+          "tau": 0.5,
+          "sigma": 0.7497,
+          "is_claim": true
+        },
+        "a1": {
+          "id": "a1",
+          "text": "Alice made a statement to Bob outside of the current trial or hearing context.",
+          "tau": 0.9,
+          "sigma": 0.9,
+          "is_claim": false
+        },
+        "a2": {
+          "id": "a2",
+          "text": "The statement asserts that Henry told Alice he had a \"great tip about what a certain stock was going to do,\" constituting a factual assertion.",
+          "tau": 0.9,
+          "sigma": 0.9,
+          "is_claim": false
+        },
+        "a3": {
+          "id": "a3",
+          "text": "The statement is introduced on the issue of whether Henry committed insider trading, indicating it is offered to prove the truth of Henry's alleged tip.",
+          "tau": 0.85,
+          "sigma": 0.85,
+          "is_claim": false
+        },
+        "a4": {
+          "id": "a4",
+          "text": "There is no indication the statement is offered for a non-hearsay purpose such as notice, effect on listener, or impeachment.",
+          "tau": 0.6,
+          "sigma": 0.6,
+          "is_claim": false
+        },
+        "a5": {
+          "id": "a5",
+          "text": "If Henry is a party to the case, his statement might be admissible as a party-opponent admission under FRE 801(d)(2), which would treat it as non-hearsay.",
+          "tau": 0.5,
+          "sigma": 0.5,
+          "is_claim": false
+        }
+      },
+      "edges": [
+        {
+          "source": "a1",
+          "target": "phi",
+          "type": "support",
+          "confidence": 0.95
+        },
+        {
+          "source": "a2",
+          "target": "phi",
+          "type": "support",
+          "confidence": 0.95
+        },
+        {
+          "source": "a3",
+          "target": "phi",
+          "type": "support",
+          "confidence": 0.9
+        },
+        {
+          "source": "a4",
+          "target": "phi",
+          "type": "support",
+          "confidence": 0.7
+        },
+        {
+          "source": "a5",
+          "target": "phi",
+          "type": "attack",
+          "confidence": 0.6
+        }
+      ],
+      "solver_type": "df_quad"
+    },
+    "sigma_phi": 0.7497,
+    "sigma_all": {
+      "phi": 0.7497,
+      "a1": 0.9,
+      "a2": 0.9,
+      "a3": 0.85,
+      "a4": 0.6,
+      "a5": 0.5
+    },
+    "iterations": 2,
+    "converged": true,
+    "solver_type": "df_quad"
+  },
+  "sigma_phi": 0.7497,
+  "decision": "Yes",
+  "uncertainty": {
+    "is_uncertain": false,
+    "sigma_phi": 0.7497,
+    "threshold_low": 0.45,
+    "threshold_high": 0.55,
+    "escalation_triggered": false,
+    "escalation_actions": [],
+    "escalation_log": []
+  },
+  "hitl_interventions": [],
+  "pre_hitl_decision": null
+}

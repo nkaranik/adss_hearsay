@@ -1,0 +1,196 @@
+{
+  "case_id": "test_0003",
+  "input_text": "All such confidential information shall be referred to hereinafter as \" \". Information shall also include the identity of the Parties, the contents of this agreement and the fact that they have entered into this Agreement. ",
+  "phi_text": "",
+  "gold_label": "Yes",
+  "extraction": {
+    "case_id": "test_0003",
+    "input_text": "All such confidential information shall be referred to hereinafter as \" \". Information shall also include the identity of the Parties, the contents of this agreement and the fact that they have entered into this Agreement. ",
+    "claim": {
+      "id": "phi",
+      "text": "Does the contract context entail the target confidentiality statement?"
+    },
+    "arguments": [
+      {
+        "id": "a1",
+        "text": "The contract narrative explicitly establishes a definition for 'Confidential Information,' creating a clear contractual basis for confidentiality obligations.",
+        "stance_to_claim": "support",
+        "legal_rule": "Contract interpretation principles dictate that explicit definitions govern the scope and existence of contractual obligations.",
+        "evidence_span": "All such confidential information shall be referred to hereinafter as \" \"",
+        "confidence": 0.9
+      },
+      {
+        "id": "a2",
+        "text": "The definition explicitly enumerates specific items, including the identity of the Parties, the contents of the agreement, and the fact of entering into it, as included within the scope of confidential information.",
+        "stance_to_claim": "support",
+        "legal_rule": "Express inclusion in a contract definition expands the scope of the defined term and directly supports entailment of obligations for those items.",
+        "evidence_span": "Information shall also include the identity of the Parties, the contents of this agreement and the fact that they have entered into this Agreement.",
+        "confidence": 0.95
+      },
+      {
+        "id": "a3",
+        "text": "The narrative contains no language limiting, excluding, carving out, or imposing duration limits on the defined confidential information.",
+        "stance_to_claim": "support",
+        "legal_rule": "In contract NLI, the absence of limiting clauses or exceptions when explicit inclusion is present strengthens the entailment of the stated obligation.",
+        "evidence_span": null,
+        "confidence": 0.8
+      }
+    ],
+    "relations": [
+      {
+        "source": "a1",
+        "target": "phi",
+        "type": "support",
+        "confidence": 0.9
+      },
+      {
+        "source": "a2",
+        "target": "phi",
+        "type": "support",
+        "confidence": 0.95
+      },
+      {
+        "source": "a3",
+        "target": "phi",
+        "type": "support",
+        "confidence": 0.8
+      },
+      {
+        "source": "a2",
+        "target": "a1",
+        "type": "support",
+        "confidence": 0.85
+      }
+    ],
+    "extraction_model": "",
+    "raw_llm_response": "{\n  \"case_id\": \"test_0003\",\n  \"phi\": \"Does the contract context entail the target confidentiality statement?\",\n  \"arguments\": [\n    {\n      \"id\": \"a1\",\n      \"text\": \"The contract narrative explicitly establishes a definition for 'Confidential Information,' creating a clear contractual basis for confidentiality obligations.\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"Contract interpretation principles dictate that explicit definitions govern the scope and existence of contractual obligations.\",\n      \"evidence_span\": \"All such confidential information shall be referred to hereinafter as \\\" \\\"\",\n      \"confidence\": 0.9,\n      \"tau\": 0.85,\n      \"rubric\": {\n        \"relevance\": 0.9,\n        \"factual_grounding\": 0.9,\n        \"specificity\": 0.8,\n        \"logical_coherence\": 0.9,\n        \"applicability\": 0.9\n      },\n      \"justification\": \"Directly addresses the presence of an explicit confidentiality clause/definition, which is a prerequisite for entailing confidentiality obligations.\"\n    },\n    {\n      \"id\": \"a2\",\n      \"text\": \"The definition explicitly enumerates specific items, including the identity of the Parties, the contents of the agreement, and the fact of entering into it, as included within the scope of confidential information.\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"Express inclusion in a contract definition expands the scope of the defined term and directly supports entailment of obligations for those items.\",\n      \"evidence_span\": \"Information shall also include the identity of the Parties, the contents of this agreement and the fact that they have entered into this Agreement.\",\n      \"confidence\": 0.95,\n      \"tau\": 0.9,\n      \"rubric\": {\n        \"relevance\": 0.95,\n        \"factual_grounding\": 0.95,\n        \"specificity\": 0.9,\n        \"logical_coherence\": 0.95,\n        \"applicability\": 0.9\n      },\n      \"justification\": \"Directly supports the target claim by showing the contract explicitly covers the relevant information types, making entailment highly probable.\"\n    },\n    {\n      \"id\": \"a3\",\n      \"text\": \"The narrative contains no language limiting, excluding, carving out, or imposing duration limits on the defined confidential information.\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"In contract NLI, the absence of limiting clauses or exceptions when explicit inclusion is present strengthens the entailment of the stated obligation.\",\n      \"evidence_span\": null,\n      \"confidence\": 0.8,\n      \"tau\": 0.75,\n      \"rubric\": {\n        \"relevance\": 0.8,\n        \"factual_grounding\": 0.7,\n        \"specificity\": 0.6,\n        \"logical_coherence\": 0.8,\n        \"applicability\": 0.8\n      },\n      \"justification\": \"The lack of exceptions or limitations reinforces the breadth and enforceability of the confidentiality obligation, supporting the target claim.\"\n    }\n  ],\n  \"relations\": [\n    {\n      \"source\": \"a1\",\n      \"target\": \"phi\",\n      \"type\": \"support\",\n      \"confidence\": 0.9\n    },\n    {\n      \"source\": \"a2\",\n      \"target\": \"phi\",\n      \"type\": \"support\",\n      \"confidence\": 0.95\n    },\n    {\n      \"source\": \"a3\",\n      \"target\": \"phi\",\n      \"type\": \"support\",\n      \"confidence\": 0.8\n    },\n    {\n      \"source\": \"a2\",\n      \"target\": \"a1\",\n      \"type\": \"support\",\n      \"confidence\": 0.85\n    }\n  ]\n}",
+    "parse_error": null,
+    "n_raw_arguments": 3
+  },
+  "strengths": [
+    {
+      "argument_id": "a1",
+      "tau": 0.85,
+      "rubric": {
+        "legal_relevance": 0.9,
+        "factual_grounding": 0.9,
+        "specificity": 0.8,
+        "logical_coherence": 0.9,
+        "fre_801c_applicability": 0.9
+      },
+      "justification": "Directly addresses the presence of an explicit confidentiality clause/definition, which is a prerequisite for entailing confidentiality obligations.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a2",
+      "tau": 0.9,
+      "rubric": {
+        "legal_relevance": 0.95,
+        "factual_grounding": 0.95,
+        "specificity": 0.9,
+        "logical_coherence": 0.95,
+        "fre_801c_applicability": 0.9
+      },
+      "justification": "Directly supports the target claim by showing the contract explicitly covers the relevant information types, making entailment highly probable.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a3",
+      "tau": 0.75,
+      "rubric": {
+        "legal_relevance": 0.8,
+        "factual_grounding": 0.7,
+        "specificity": 0.6,
+        "logical_coherence": 0.8,
+        "fre_801c_applicability": 0.8
+      },
+      "justification": "The lack of exceptions or limitations reinforces the breadth and enforceability of the confidentiality obligation, supporting the target claim.",
+      "model": "combined"
+    }
+  ],
+  "solver_output": {
+    "case_id": "test_0003",
+    "graph": {
+      "nodes": {
+        "phi": {
+          "id": "phi",
+          "text": "Does the contract context entail the target confidentiality statement?",
+          "tau": 0.5,
+          "sigma": 0.9998125,
+          "is_claim": true
+        },
+        "a1": {
+          "id": "a1",
+          "text": "The contract narrative explicitly establishes a definition for 'Confidential Information,' creating a clear contractual basis for confidentiality obligations.",
+          "tau": 0.85,
+          "sigma": 0.985,
+          "is_claim": false
+        },
+        "a2": {
+          "id": "a2",
+          "text": "The definition explicitly enumerates specific items, including the identity of the Parties, the contents of the agreement, and the fact of entering into it, as included within the scope of confidential information.",
+          "tau": 0.9,
+          "sigma": 0.9,
+          "is_claim": false
+        },
+        "a3": {
+          "id": "a3",
+          "text": "The narrative contains no language limiting, excluding, carving out, or imposing duration limits on the defined confidential information.",
+          "tau": 0.75,
+          "sigma": 0.75,
+          "is_claim": false
+        }
+      },
+      "edges": [
+        {
+          "source": "a1",
+          "target": "phi",
+          "type": "support",
+          "confidence": 0.9
+        },
+        {
+          "source": "a2",
+          "target": "phi",
+          "type": "support",
+          "confidence": 0.95
+        },
+        {
+          "source": "a3",
+          "target": "phi",
+          "type": "support",
+          "confidence": 0.8
+        },
+        {
+          "source": "a2",
+          "target": "a1",
+          "type": "support",
+          "confidence": 0.85
+        }
+      ],
+      "solver_type": "df_quad"
+    },
+    "sigma_phi": 0.9998125,
+    "sigma_all": {
+      "phi": 0.9998125,
+      "a1": 0.985,
+      "a2": 0.9,
+      "a3": 0.75
+    },
+    "iterations": 2,
+    "converged": true,
+    "solver_type": "df_quad"
+  },
+  "sigma_phi": 0.9998125,
+  "decision": "Yes",
+  "uncertainty": {
+    "is_uncertain": false,
+    "sigma_phi": 0.9998125,
+    "threshold_low": 0.45,
+    "threshold_high": 0.55,
+    "escalation_triggered": false,
+    "escalation_actions": [],
+    "escalation_log": []
+  },
+  "hitl_interventions": [],
+  "pre_hitl_decision": null
+}

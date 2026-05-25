@@ -1,0 +1,62 @@
+{
+  "case_id": "test_0031",
+  "input_text": "When asked if he was remorseful by his attorney, Adam testified that \"he regretted his actions.\"",
+  "phi_text": "",
+  "gold_label": "No",
+  "extraction": {
+    "case_id": "test_0031",
+    "input_text": "When asked if he was remorseful by his attorney, Adam testified that \"he regretted his actions.\"",
+    "claim": {
+      "id": "phi",
+      "text": "Is the statement described in this narrative hearsay under FRE 801(c)?"
+    },
+    "arguments": [],
+    "relations": [],
+    "extraction_model": "",
+    "raw_llm_response": "",
+    "parse_error": "Request timed out.",
+    "n_raw_arguments": 0
+  },
+  "strengths": [],
+  "solver_output": {
+    "case_id": "test_0031",
+    "graph": {
+      "nodes": {
+        "phi": {
+          "id": "phi",
+          "text": "Is the statement described in this narrative hearsay under FRE 801(c)?",
+          "tau": 0.5,
+          "sigma": 0.5,
+          "is_claim": true
+        }
+      },
+      "edges": [],
+      "solver_type": "df_quad"
+    },
+    "sigma_phi": 0.5,
+    "sigma_all": {
+      "phi": 0.5
+    },
+    "iterations": 1,
+    "converged": true,
+    "solver_type": "df_quad"
+  },
+  "sigma_phi": 0.5,
+  "decision": "UNCERTAIN",
+  "uncertainty": {
+    "is_uncertain": true,
+    "sigma_phi": 0.5,
+    "threshold_low": 0.45,
+    "threshold_high": 0.55,
+    "escalation_triggered": true,
+    "escalation_actions": [
+      "rerun_extraction",
+      "human_review"
+    ],
+    "escalation_log": [
+      "[test_0031] UNCERTAIN σ(φ)=0.5000 ∈ [0.45,0.55]. Human review recommended."
+    ]
+  },
+  "hitl_interventions": [],
+  "pre_hitl_decision": null
+}

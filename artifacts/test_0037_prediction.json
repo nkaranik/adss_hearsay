@@ -1,0 +1,184 @@
+{
+  "case_id": "test_0037",
+  "input_text": "To prove that Stephen drove his car through a stoplight, the fact that Stephen told his wife on the phone that he was not paying attention to the road.",
+  "phi_text": "",
+  "gold_label": "Yes",
+  "extraction": {
+    "case_id": "test_0037",
+    "input_text": "To prove that Stephen drove his car through a stoplight, the fact that Stephen told his wife on the phone that he was not paying attention to the road.",
+    "claim": {
+      "id": "phi",
+      "text": "Is the statement described in this narrative hearsay under FRE 801(c)?"
+    },
+    "arguments": [
+      {
+        "id": "a1",
+        "text": "The statement was made out of court because Stephen communicated it to his wife via a phone call, rather than during testimony at trial.",
+        "stance_to_claim": "support",
+        "legal_rule": "FRE 801(a)(1) defines a statement as out-of-court if it is made outside the current trial or hearing.",
+        "evidence_span": "Stephen told his wife on the phone",
+        "confidence": 0.95
+      },
+      {
+        "id": "a2",
+        "text": "The statement contains a clear assertion, as Stephen explicitly declared that he was not paying attention to the road.",
+        "stance_to_claim": "support",
+        "legal_rule": "FRE 801(a)(2) requires the out-of-court statement to be an assertion or non-assertive conduct intended as an assertion.",
+        "evidence_span": "he was not paying attention to the road",
+        "confidence": 0.95
+      },
+      {
+        "id": "a3",
+        "text": "The statement is offered to prove the truth of the matter asserted, as it is introduced specifically to establish that Stephen drove through a stoplight by proving his lack of attention.",
+        "stance_to_claim": "support",
+        "legal_rule": "FRE 801(c) defines hearsay as a statement offered in evidence to prove the truth of the matter asserted.",
+        "evidence_span": "To prove that Stephen drove his car through a stoplight",
+        "confidence": 0.95
+      }
+    ],
+    "relations": [
+      {
+        "source": "a1",
+        "target": "phi",
+        "type": "support",
+        "confidence": 0.95
+      },
+      {
+        "source": "a2",
+        "target": "phi",
+        "type": "support",
+        "confidence": 0.95
+      },
+      {
+        "source": "a3",
+        "target": "phi",
+        "type": "support",
+        "confidence": 0.95
+      }
+    ],
+    "extraction_model": "",
+    "raw_llm_response": "{\n  \"case_id\": \"test_0037\",\n  \"phi\": \"Is the statement described in this narrative hearsay under FRE 801(c)?\",\n  \"arguments\": [\n    {\n      \"id\": \"a1\",\n      \"text\": \"The statement was made out of court because Stephen communicated it to his wife via a phone call, rather than during testimony at trial.\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"FRE 801(a)(1) defines a statement as out-of-court if it is made outside the current trial or hearing.\",\n      \"evidence_span\": \"Stephen told his wife on the phone\",\n      \"confidence\": 0.95,\n      \"tau\": 0.90,\n      \"rubric\": {\n        \"relevance\": 0.9,\n        \"factual_grounding\": 1.0,\n        \"specificity\": 0.9,\n        \"logical_coherence\": 1.0,\n        \"applicability\": 0.9\n      },\n      \"justification\": \"Directly satisfies the out-of-court requirement for hearsay under FRE 801. The phone call constitutes a statement made outside the courtroom context.\"\n    },\n    {\n      \"id\": \"a2\",\n      \"text\": \"The statement contains a clear assertion, as Stephen explicitly declared that he was not paying attention to the road.\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"FRE 801(a)(2) requires the out-of-court statement to be an assertion or non-assertive conduct intended as an assertion.\",\n      \"evidence_span\": \"he was not paying attention to the road\",\n      \"confidence\": 0.95,\n      \"tau\": 0.90,\n      \"rubric\": {\n        \"relevance\": 0.9,\n        \"factual_grounding\": 1.0,\n        \"specificity\": 0.9,\n        \"logical_coherence\": 1.0,\n        \"applicability\": 0.9\n      },\n      \"justification\": \"Directly satisfies the assertion requirement for hearsay under FRE 801. The declarant's words are intended to convey a specific fact about his mental state.\"\n    },\n    {\n      \"id\": \"a3\",\n      \"text\": \"The statement is offered to prove the truth of the matter asserted, as it is introduced specifically to establish that Stephen drove through a stoplight by proving his lack of attention.\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"FRE 801(c) defines hearsay as a statement offered in evidence to prove the truth of the matter asserted.\",\n      \"evidence_span\": \"To prove that Stephen drove his car through a stoplight\",\n      \"confidence\": 0.95,\n      \"tau\": 0.90,\n      \"rubric\": {\n        \"relevance\": 0.9,\n        \"factual_grounding\": 1.0,\n        \"specificity\": 0.9,\n        \"logical_coherence\": 1.0,\n        \"applicability\": 0.9\n      },\n      \"justification\": \"Directly satisfies the 'offered for truth' requirement, which is the core trigger for hearsay classification under FRE 801(c). The proponent relies on the accuracy of Stephen's statement to prove the underlying fact.\"\n    }\n  ],\n  \"relations\": [\n    {\n      \"source\": \"a1\",\n      \"target\": \"phi\",\n      \"type\": \"support\",\n      \"confidence\": 0.95\n    },\n    {\n      \"source\": \"a2\",\n      \"target\": \"phi\",\n      \"type\": \"support\",\n      \"confidence\": 0.95\n    },\n    {\n      \"source\": \"a3\",\n      \"target\": \"phi\",\n      \"type\": \"support\",\n      \"confidence\": 0.95\n    }\n  ]\n}",
+    "parse_error": null,
+    "n_raw_arguments": 3
+  },
+  "strengths": [
+    {
+      "argument_id": "a1",
+      "tau": 0.9,
+      "rubric": {
+        "legal_relevance": 0.9,
+        "factual_grounding": 1.0,
+        "specificity": 0.9,
+        "logical_coherence": 1.0,
+        "fre_801c_applicability": 0.9
+      },
+      "justification": "Directly satisfies the out-of-court requirement for hearsay under FRE 801. The phone call constitutes a statement made outside the courtroom context.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a2",
+      "tau": 0.9,
+      "rubric": {
+        "legal_relevance": 0.9,
+        "factual_grounding": 1.0,
+        "specificity": 0.9,
+        "logical_coherence": 1.0,
+        "fre_801c_applicability": 0.9
+      },
+      "justification": "Directly satisfies the assertion requirement for hearsay under FRE 801. The declarant's words are intended to convey a specific fact about his mental state.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a3",
+      "tau": 0.9,
+      "rubric": {
+        "legal_relevance": 0.9,
+        "factual_grounding": 1.0,
+        "specificity": 0.9,
+        "logical_coherence": 1.0,
+        "fre_801c_applicability": 0.9
+      },
+      "justification": "Directly satisfies the 'offered for truth' requirement, which is the core trigger for hearsay classification under FRE 801(c). The proponent relies on the accuracy of Stephen's statement to prove the underlying fact.",
+      "model": "combined"
+    }
+  ],
+  "solver_output": {
+    "case_id": "test_0037",
+    "graph": {
+      "nodes": {
+        "phi": {
+          "id": "phi",
+          "text": "Is the statement described in this narrative hearsay under FRE 801(c)?",
+          "tau": 0.5,
+          "sigma": 0.9995,
+          "is_claim": true
+        },
+        "a1": {
+          "id": "a1",
+          "text": "The statement was made out of court because Stephen communicated it to his wife via a phone call, rather than during testimony at trial.",
+          "tau": 0.9,
+          "sigma": 0.9,
+          "is_claim": false
+        },
+        "a2": {
+          "id": "a2",
+          "text": "The statement contains a clear assertion, as Stephen explicitly declared that he was not paying attention to the road.",
+          "tau": 0.9,
+          "sigma": 0.9,
+          "is_claim": false
+        },
+        "a3": {
+          "id": "a3",
+          "text": "The statement is offered to prove the truth of the matter asserted, as it is introduced specifically to establish that Stephen drove through a stoplight by proving his lack of attention.",
+          "tau": 0.9,
+          "sigma": 0.9,
+          "is_claim": false
+        }
+      },
+      "edges": [
+        {
+          "source": "a1",
+          "target": "phi",
+          "type": "support",
+          "confidence": 0.95
+        },
+        {
+          "source": "a2",
+          "target": "phi",
+          "type": "support",
+          "confidence": 0.95
+        },
+        {
+          "source": "a3",
+          "target": "phi",
+          "type": "support",
+          "confidence": 0.95
+        }
+      ],
+      "solver_type": "df_quad"
+    },
+    "sigma_phi": 0.9995,
+    "sigma_all": {
+      "phi": 0.9995,
+      "a1": 0.9,
+      "a2": 0.9,
+      "a3": 0.9
+    },
+    "iterations": 2,
+    "converged": true,
+    "solver_type": "df_quad"
+  },
+  "sigma_phi": 0.9995,
+  "decision": "Yes",
+  "uncertainty": {
+    "is_uncertain": false,
+    "sigma_phi": 0.9995,
+    "threshold_low": 0.45,
+    "threshold_high": 0.55,
+    "escalation_triggered": false,
+    "escalation_actions": [],
+    "escalation_log": []
+  },
+  "hitl_interventions": [],
+  "pre_hitl_decision": null
+}

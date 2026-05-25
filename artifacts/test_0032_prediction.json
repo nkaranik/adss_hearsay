@@ -1,0 +1,189 @@
+{
+  "case_id": "test_0032",
+  "input_text": "On the issue of whether Donna was ill, the fact that Margaret testified during trial that she thought Donna was unwell.",
+  "phi_text": "",
+  "gold_label": "No",
+  "extraction": {
+    "case_id": "test_0032",
+    "input_text": "On the issue of whether Donna was ill, the fact that Margaret testified during trial that she thought Donna was unwell.",
+    "claim": {
+      "id": "phi",
+      "text": "Is the statement described in this narrative hearsay under FRE 801(c)?"
+    },
+    "arguments": [
+      {
+        "id": "a1",
+        "text": "The statement was made in court during trial testimony, not out of court.",
+        "stance_to_claim": "attack",
+        "legal_rule": "FRE 801(c) defines hearsay as an out-of-court statement; in-court testimony is explicitly excluded from the hearsay rule.",
+        "evidence_span": "Margaret testified during trial",
+        "confidence": 0.95
+      },
+      {
+        "id": "a2",
+        "text": "The statement is offered to prove the truth of the matter asserted (that Donna was ill).",
+        "stance_to_claim": "support",
+        "legal_rule": "FRE 801(c) requires that the statement be offered in evidence to prove the truth of the matter asserted.",
+        "evidence_span": "On the issue of whether Donna was ill",
+        "confidence": 0.85
+      },
+      {
+        "id": "a3",
+        "text": "The statement contains an assertion regarding Donna's physical condition.",
+        "stance_to_claim": "support",
+        "legal_rule": "FRE 801(c) requires the statement to be an assertion.",
+        "evidence_span": "she thought Donna was unwell",
+        "confidence": 0.85
+      }
+    ],
+    "relations": [
+      {
+        "source": "a1",
+        "target": "phi",
+        "type": "attack",
+        "confidence": 0.95
+      },
+      {
+        "source": "a2",
+        "target": "phi",
+        "type": "support",
+        "confidence": 0.85
+      },
+      {
+        "source": "a3",
+        "target": "phi",
+        "type": "support",
+        "confidence": 0.85
+      }
+    ],
+    "extraction_model": "",
+    "raw_llm_response": "{\n  \"case_id\": \"test_0032\",\n  \"phi\": \"Is the statement described in this narrative hearsay under FRE 801(c)?\",\n  \"arguments\": [\n    {\n      \"id\": \"a1\",\n      \"text\": \"The statement was made in court during trial testimony, not out of court.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"FRE 801(c) defines hearsay as an out-of-court statement; in-court testimony is explicitly excluded from the hearsay rule.\",\n      \"evidence_span\": \"Margaret testified during trial\",\n      \"confidence\": 0.95,\n      \"tau\": 0.95,\n      \"rubric\": {\n        \"relevance\": 0.95,\n        \"factual_grounding\": 1.0,\n        \"specificity\": 0.9,\n        \"logical_coherence\": 0.95,\n        \"applicability\": 0.95\n      },\n      \"justification\": \"Directly negates the 'out-of-court' requirement of FRE 801(c). The narrative explicitly places the statement within trial testimony, which definitively attacks the hearsay classification.\"\n    },\n    {\n      \"id\": \"a2\",\n      \"text\": \"The statement is offered to prove the truth of the matter asserted (that Donna was ill).\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"FRE 801(c) requires that the statement be offered in evidence to prove the truth of the matter asserted.\",\n      \"evidence_span\": \"On the issue of whether Donna was ill\",\n      \"confidence\": 0.85,\n      \"tau\": 0.80,\n      \"rubric\": {\n        \"relevance\": 0.8,\n        \"factual_grounding\": 0.9,\n        \"specificity\": 0.7,\n        \"logical_coherence\": 0.8,\n        \"applicability\": 0.85\n      },\n      \"justification\": \"Satisfies the 'offered for truth' element of the hearsay definition. While it supports the hearsay classification, it is only one of three necessary conditions and is overridden by the in-court nature of the statement.\"\n    },\n    {\n      \"id\": \"a3\",\n      \"text\": \"The statement contains an assertion regarding Donna's physical condition.\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"FRE 801(c) requires the statement to be an assertion.\",\n      \"evidence_span\": \"she thought Donna was unwell\",\n      \"confidence\": 0.85,\n      \"tau\": 0.75,\n      \"rubric\": {\n        \"relevance\": 0.75,\n        \"factual_grounding\": 0.9,\n        \"specificity\": 0.7,\n        \"logical_coherence\": 0.8,\n        \"applicability\": 0.8\n      },\n      \"justification\": \"Satisfies the 'assertion' element of the hearsay definition. The narrative indicates Margaret's statement asserts a fact about Donna's condition, supporting the hearsay classification.\"\n    }\n  ],\n  \"relations\": [\n    {\n      \"source\": \"a1\",\n      \"target\": \"phi\",\n      \"type\": \"attack\",\n      \"confidence\": 0.95\n    },\n    {\n      \"source\": \"a2\",\n      \"target\": \"phi\",\n      \"type\": \"support\",\n      \"confidence\": 0.85\n    },\n    {\n      \"source\": \"a3\",\n      \"target\": \"phi\",\n      \"type\": \"support\",\n      \"confidence\": 0.85\n    }\n  ]\n}",
+    "parse_error": null,
+    "n_raw_arguments": 3
+  },
+  "strengths": [
+    {
+      "argument_id": "a1",
+      "tau": 0.95,
+      "rubric": {
+        "legal_relevance": 0.95,
+        "factual_grounding": 1.0,
+        "specificity": 0.9,
+        "logical_coherence": 0.95,
+        "fre_801c_applicability": 0.95
+      },
+      "justification": "Directly negates the 'out-of-court' requirement of FRE 801(c). The narrative explicitly places the statement within trial testimony, which definitively attacks the hearsay classification.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a2",
+      "tau": 0.8,
+      "rubric": {
+        "legal_relevance": 0.8,
+        "factual_grounding": 0.9,
+        "specificity": 0.7,
+        "logical_coherence": 0.8,
+        "fre_801c_applicability": 0.85
+      },
+      "justification": "Satisfies the 'offered for truth' element of the hearsay definition. While it supports the hearsay classification, it is only one of three necessary conditions and is overridden by the in-court nature of the statement.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a3",
+      "tau": 0.75,
+      "rubric": {
+        "legal_relevance": 0.75,
+        "factual_grounding": 0.9,
+        "specificity": 0.7,
+        "logical_coherence": 0.8,
+        "fre_801c_applicability": 0.8
+      },
+      "justification": "Satisfies the 'assertion' element of the hearsay definition. The narrative indicates Margaret's statement asserts a fact about Donna's condition, supporting the hearsay classification.",
+      "model": "combined"
+    }
+  ],
+  "solver_output": {
+    "case_id": "test_0032",
+    "graph": {
+      "nodes": {
+        "phi": {
+          "id": "phi",
+          "text": "Is the statement described in this narrative hearsay under FRE 801(c)?",
+          "tau": 0.5,
+          "sigma": 0.5,
+          "is_claim": true
+        },
+        "a1": {
+          "id": "a1",
+          "text": "The statement was made in court during trial testimony, not out of court.",
+          "tau": 0.95,
+          "sigma": 0.95,
+          "is_claim": false
+        },
+        "a2": {
+          "id": "a2",
+          "text": "The statement is offered to prove the truth of the matter asserted (that Donna was ill).",
+          "tau": 0.8,
+          "sigma": 0.8,
+          "is_claim": false
+        },
+        "a3": {
+          "id": "a3",
+          "text": "The statement contains an assertion regarding Donna's physical condition.",
+          "tau": 0.75,
+          "sigma": 0.75,
+          "is_claim": false
+        }
+      },
+      "edges": [
+        {
+          "source": "a1",
+          "target": "phi",
+          "type": "attack",
+          "confidence": 0.95
+        },
+        {
+          "source": "a2",
+          "target": "phi",
+          "type": "support",
+          "confidence": 0.85
+        },
+        {
+          "source": "a3",
+          "target": "phi",
+          "type": "support",
+          "confidence": 0.85
+        }
+      ],
+      "solver_type": "df_quad"
+    },
+    "sigma_phi": 0.5,
+    "sigma_all": {
+      "phi": 0.5,
+      "a1": 0.95,
+      "a2": 0.8,
+      "a3": 0.75
+    },
+    "iterations": 1,
+    "converged": true,
+    "solver_type": "df_quad"
+  },
+  "sigma_phi": 0.5,
+  "decision": "UNCERTAIN",
+  "uncertainty": {
+    "is_uncertain": true,
+    "sigma_phi": 0.5,
+    "threshold_low": 0.45,
+    "threshold_high": 0.55,
+    "escalation_triggered": true,
+    "escalation_actions": [
+      "rerun_extraction",
+      "human_review"
+    ],
+    "escalation_log": [
+      "[test_0032] UNCERTAIN σ(φ)=0.5000 ∈ [0.45,0.55]. Human review recommended."
+    ]
+  },
+  "hitl_interventions": [],
+  "pre_hitl_decision": null
+}

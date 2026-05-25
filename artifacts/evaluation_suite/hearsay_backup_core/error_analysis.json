@@ -1,0 +1,156 @@
+{
+  "proportions": {
+    "argument_omission": 0.05555555555555555,
+    "relation_error": 0.8333333333333334,
+    "strength_miscalibration": 0.1111111111111111,
+    "alternative_claim_alignment_error": 0.0,
+    "threshold_uncertainty_failure": 0.0,
+    "task_transfer_failure": 0.0
+  },
+  "errors": [
+    {
+      "case_id": "test_0008",
+      "gold_label": "No",
+      "predicted_label": "Yes",
+      "sigma_phi": 0.5920000000000001,
+      "category": "relation_error",
+      "reason": "Arguments exist with non-extreme strengths; relation polarity or graph structure is the likely failure."
+    },
+    {
+      "case_id": "test_0018",
+      "gold_label": "No",
+      "predicted_label": "Yes",
+      "sigma_phi": 0.6355,
+      "category": "strength_miscalibration",
+      "reason": "Average tau appears extreme for a misclassified case: 0.100."
+    },
+    {
+      "case_id": "test_0023",
+      "gold_label": "No",
+      "predicted_label": "Yes",
+      "sigma_phi": 0.6210625000000001,
+      "category": "relation_error",
+      "reason": "Arguments exist with non-extreme strengths; relation polarity or graph structure is the likely failure."
+    },
+    {
+      "case_id": "test_0039",
+      "gold_label": "Yes",
+      "predicted_label": "UNCERTAIN",
+      "sigma_phi": 0.5299999999999999,
+      "category": "relation_error",
+      "reason": "Arguments exist with non-extreme strengths; relation polarity or graph structure is the likely failure."
+    },
+    {
+      "case_id": "test_0052",
+      "gold_label": "Yes",
+      "predicted_label": "No",
+      "sigma_phi": 0.09328293124999992,
+      "category": "relation_error",
+      "reason": "Arguments exist with non-extreme strengths; relation polarity or graph structure is the likely failure."
+    },
+    {
+      "case_id": "test_0055",
+      "gold_label": "Yes",
+      "predicted_label": "UNCERTAIN",
+      "sigma_phi": 0.524946546875,
+      "category": "strength_miscalibration",
+      "reason": "Average tau appears extreme for a misclassified case: 0.938."
+    },
+    {
+      "case_id": "test_0064",
+      "gold_label": "Yes",
+      "predicted_label": "No",
+      "sigma_phi": 0.355,
+      "category": "relation_error",
+      "reason": "Arguments exist with non-extreme strengths; relation polarity or graph structure is the likely failure."
+    },
+    {
+      "case_id": "test_0068",
+      "gold_label": "Yes",
+      "predicted_label": "No",
+      "sigma_phi": 2.8125000000045475e-06,
+      "category": "relation_error",
+      "reason": "Arguments exist with non-extreme strengths; relation polarity or graph structure is the likely failure."
+    },
+    {
+      "case_id": "test_0069",
+      "gold_label": "Yes",
+      "predicted_label": "UNCERTAIN",
+      "sigma_phi": 0.45612499999999995,
+      "category": "relation_error",
+      "reason": "Arguments exist with non-extreme strengths; relation polarity or graph structure is the likely failure."
+    },
+    {
+      "case_id": "test_0071",
+      "gold_label": "Yes",
+      "predicted_label": "UNCERTAIN",
+      "sigma_phi": 0.52425,
+      "category": "relation_error",
+      "reason": "Arguments exist with non-extreme strengths; relation polarity or graph structure is the likely failure."
+    },
+    {
+      "case_id": "test_0072",
+      "gold_label": "No",
+      "predicted_label": "Yes",
+      "sigma_phi": 0.675,
+      "category": "relation_error",
+      "reason": "Arguments exist with non-extreme strengths; relation polarity or graph structure is the likely failure."
+    },
+    {
+      "case_id": "test_0075",
+      "gold_label": "Yes",
+      "predicted_label": "UNCERTAIN",
+      "sigma_phi": 0.49549999999999994,
+      "category": "relation_error",
+      "reason": "Arguments exist with non-extreme strengths; relation polarity or graph structure is the likely failure."
+    },
+    {
+      "case_id": "test_0076",
+      "gold_label": "No",
+      "predicted_label": "Yes",
+      "sigma_phi": 0.5700000000000001,
+      "category": "relation_error",
+      "reason": "Arguments exist with non-extreme strengths; relation polarity or graph structure is the likely failure."
+    },
+    {
+      "case_id": "test_0077",
+      "gold_label": "No",
+      "predicted_label": "Yes",
+      "sigma_phi": 0.6739999999999999,
+      "category": "relation_error",
+      "reason": "Arguments exist with non-extreme strengths; relation polarity or graph structure is the likely failure."
+    },
+    {
+      "case_id": "test_0078",
+      "gold_label": "No",
+      "predicted_label": "Yes",
+      "sigma_phi": 0.9997,
+      "category": "relation_error",
+      "reason": "Arguments exist with non-extreme strengths; relation polarity or graph structure is the likely failure."
+    },
+    {
+      "case_id": "test_0079",
+      "gold_label": "No",
+      "predicted_label": "Yes",
+      "sigma_phi": 0.99925,
+      "category": "relation_error",
+      "reason": "Arguments exist with non-extreme strengths; relation polarity or graph structure is the likely failure."
+    },
+    {
+      "case_id": "test_0084",
+      "gold_label": "Yes",
+      "predicted_label": "UNCERTAIN",
+      "sigma_phi": 0.5,
+      "category": "argument_omission",
+      "reason": "No relevant arguments were retained for the target claim."
+    },
+    {
+      "case_id": "test_0085",
+      "gold_label": "No",
+      "predicted_label": "Yes",
+      "sigma_phi": 0.94675,
+      "category": "relation_error",
+      "reason": "Arguments exist with non-extreme strengths; relation polarity or graph structure is the likely failure."
+    }
+  ]
+}

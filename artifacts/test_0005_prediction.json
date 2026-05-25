@@ -13,114 +13,120 @@
     "arguments": [
       {
         "id": "a1",
-        "text": "Narrative describes conduct, not an out-of-court statement.",
+        "text": "The narrative describes Mary's conduct (going to the bank in disguise), not an out-of-court statement. Under FRE 801(a), hearsay requires a statement defined as an oral, written, or other assertion; conduct alone does not qualify.",
         "stance_to_claim": "attack",
-        "legal_rule": "FRE 801(c) requires a statement to qualify as hearsay.",
-        "evidence_span": null,
-        "confidence": 0.92
+        "legal_rule": "FRE 801(a) definition of statement",
+        "evidence_span": "the fact that Mary went to the bank in disguise",
+        "confidence": 0.95
       },
       {
         "id": "a2",
-        "text": "No declarant is identified making an assertion about the robbery.",
+        "text": "The described conduct is non-assertive and does not communicate a fact. The hearsay rule only applies to assertions, and circumstantial evidence of conduct does not trigger it.",
         "stance_to_claim": "attack",
-        "legal_rule": "Hearsay analysis requires a specific declarant and assertion.",
-        "evidence_span": null,
-        "confidence": 0.88
+        "legal_rule": "FRE 801(a) requirement of an assertion",
+        "evidence_span": "the fact that Mary went to the bank in disguise",
+        "confidence": 0.9
       },
       {
         "id": "a3",
-        "text": "Visiting a bank in disguise is non-assertive circumstantial evidence.",
+        "text": "The evidence is offered circumstantially to show Mary's presence and intent regarding the robbery, not to prove the truth of any out-of-court assertion.",
         "stance_to_claim": "attack",
-        "legal_rule": "Non-assertive conduct falls outside FRE 801(c) hearsay definition.",
-        "evidence_span": null,
-        "confidence": 0.93
+        "legal_rule": "FRE 801(c) requirement that hearsay be offered to prove the truth of the matter asserted",
+        "evidence_span": "On the issue of whether Mary robbed the bank",
+        "confidence": 0.85
       },
       {
         "id": "a4",
-        "text": "The narrative explicitly frames the item as a fact, not a statement.",
+        "text": "The narrative lacks any indication of a declarant or communicative act, which are prerequisites for applying the hearsay rule.",
         "stance_to_claim": "attack",
-        "legal_rule": "FRE 801(c) applies only to statements, not mere facts or conduct.",
+        "legal_rule": "FRE 801(c) hearsay framework prerequisites",
         "evidence_span": null,
-        "confidence": 0.89
+        "confidence": 0.8
       }
     ],
     "relations": [
       {
         "source": "a1",
-        "target": "a2",
-        "type": "support",
-        "confidence": 0.85
+        "target": "phi",
+        "type": "attack",
+        "confidence": 0.95
       },
       {
         "source": "a2",
-        "target": "a3",
-        "type": "support",
-        "confidence": 0.8
+        "target": "phi",
+        "type": "attack",
+        "confidence": 0.9
       },
       {
         "source": "a3",
-        "target": "a4",
-        "type": "support",
+        "target": "phi",
+        "type": "attack",
         "confidence": 0.85
+      },
+      {
+        "source": "a4",
+        "target": "phi",
+        "type": "attack",
+        "confidence": 0.8
       }
     ],
     "extraction_model": "",
-    "raw_llm_response": "{\n  \"case_id\": \"test_0005\",\n  \"arguments\": [\n    {\n      \"id\": \"a1\",\n      \"text\": \"Narrative describes conduct, not an out-of-court statement.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"FRE 801(c) requires a statement to qualify as hearsay.\",\n      \"evidence_span\": null,\n      \"confidence\": 0.92,\n      \"rubric\": {\n        \"legal_relevance\": 0.95,\n        \"factual_grounding\": 0.9,\n        \"specificity\": 0.85,\n        \"logical_coherence\": 0.95,\n        \"fre_801c_applicability\": 0.95\n      },\n      \"tau\": 0.91,\n      \"justification\": \"Conduct alone cannot constitute hearsay without an assertive statement.\"\n    },\n    {\n      \"id\": \"a2\",\n      \"text\": \"No declarant is identified making an assertion about the robbery.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"Hearsay analysis requires a specific declarant and assertion.\",\n      \"evidence_span\": null,\n      \"confidence\": 0.88,\n      \"rubric\": {\n        \"legal_relevance\": 0.9,\n        \"factual_grounding\": 0.85,\n        \"specificity\": 0.8,\n        \"logical_coherence\": 0.9,\n        \"fre_801c_applicability\": 0.9\n      },\n      \"tau\": 0.87,\n      \"justification\": \"Absence of a declarant and assertion precludes hearsay classification.\"\n    },\n    {\n      \"id\": \"a3\",\n      \"text\": \"Visiting a bank in disguise is non-assertive circumstantial evidence.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"Non-assertive conduct falls outside FRE 801(c) hearsay definition.\",\n      \"evidence_span\": null,\n      \"confidence\": 0.93,\n      \"rubric\": {\n        \"legal_relevance\": 0.95,\n        \"factual_grounding\": 0.9,\n        \"specificity\": 0.85,\n        \"logical_coherence\": 0.95,\n        \"fre_801c_applicability\": 0.95\n      },\n      \"tau\": 0.92,\n      \"justification\": \"The evidence proves presence and preparation, not truth of an assertion.\"\n    },\n    {\n      \"id\": \"a4\",\n      \"text\": \"The narrative explicitly frames the item as a fact, not a statement.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"FRE 801(c) applies only to statements, not mere facts or conduct.\",\n      \"evidence_span\": null,\n      \"confidence\": 0.89,\n      \"rubric\": {\n        \"legal_relevance\": 0.9,\n        \"factual_grounding\": 0.9,\n        \"specificity\": 0.8,\n        \"logical_coherence\": 0.9,\n        \"fre_801c_applicability\": 0.9\n      },\n      \"tau\": 0.88,\n      \"justification\": \"Labeling the item as a fact confirms it lacks the requisite assertive nature.\"\n    }\n  ],\n  \"relations\": [\n    {\"source\": \"a1\", \"target\": \"a2\", \"type\": \"support\", \"confidence\": 0.85},\n    {\"source\": \"a2\", \"target\": \"a3\", \"type\": \"support\", \"confidence\": 0.8},\n    {\"source\": \"a3\", \"target\": \"a4\", \"type\": \"support\", \"confidence\": 0.85}\n  ]\n}",
+    "raw_llm_response": "{\n  \"case_id\": \"test_0005\",\n  \"phi\": \"Is the statement described in this narrative hearsay under FRE 801(c)?\",\n  \"arguments\": [\n    {\n      \"id\": \"a1\",\n      \"text\": \"The narrative describes Mary's conduct (going to the bank in disguise), not an out-of-court statement. Under FRE 801(a), hearsay requires a statement defined as an oral, written, or other assertion; conduct alone does not qualify.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"FRE 801(a) definition of statement\",\n      \"evidence_span\": \"the fact that Mary went to the bank in disguise\",\n      \"confidence\": 0.95,\n      \"tau\": 0.90,\n      \"rubric\": {\n        \"relevance\": 0.90,\n        \"factual_grounding\": 0.90,\n        \"specificity\": 0.80,\n        \"logical_coherence\": 0.90,\n        \"applicability\": 0.90\n      },\n      \"justification\": \"Directly addresses the statement prerequisite for hearsay. The narrative explicitly describes conduct, not speech or writing, which attacks the hearsay claim.\"\n    },\n    {\n      \"id\": \"a2\",\n      \"text\": \"The described conduct is non-assertive and does not communicate a fact. The hearsay rule only applies to assertions, and circumstantial evidence of conduct does not trigger it.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"FRE 801(a) requirement of an assertion\",\n      \"evidence_span\": \"the fact that Mary went to the bank in disguise\",\n      \"confidence\": 0.90,\n      \"tau\": 0.85,\n      \"rubric\": {\n        \"relevance\": 0.80,\n        \"factual_grounding\": 0.90,\n        \"specificity\": 0.70,\n        \"logical_coherence\": 0.90,\n        \"applicability\": 0.80\n      },\n      \"justification\": \"Addresses the assertion component. Conduct like going to a bank in disguise is typically treated as circumstantial evidence rather than an assertion, attacking the hearsay classification.\"\n    },\n    {\n      \"id\": \"a3\",\n      \"text\": \"The evidence is offered circumstantially to show Mary's presence and intent regarding the robbery, not to prove the truth of any out-of-court assertion.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"FRE 801(c) requirement that hearsay be offered to prove the truth of the matter asserted\",\n      \"evidence_span\": \"On the issue of whether Mary robbed the bank\",\n      \"confidence\": 0.85,\n      \"tau\": 0.80,\n      \"rubric\": {\n        \"relevance\": 0.80,\n        \"factual_grounding\": 0.80,\n        \"specificity\": 0.70,\n        \"logical_coherence\": 0.80,\n        \"applicability\": 0.80\n      },\n      \"justification\": \"Addresses the offered-for-truth component. The context indicates the fact is used circumstantially to establish presence/intent, which attacks the hearsay claim.\"\n    },\n    {\n      \"id\": \"a4\",\n      \"text\": \"The narrative lacks any indication of a declarant or communicative act, which are prerequisites for applying the hearsay rule.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"FRE 801(c) hearsay framework prerequisites\",\n      \"evidence_span\": null,\n      \"confidence\": 0.80,\n      \"tau\": 0.75,\n      \"rubric\": {\n        \"relevance\": 0.70,\n        \"factual_grounding\": 0.60,\n        \"specificity\": 0.50,\n        \"logical_coherence\": 0.80,\n        \"applicability\": 0.70\n      },\n      \"justification\": \"Highlights the absence of a declarant, reinforcing that the hearsay rule is inapplicable. It attacks the target claim by showing a missing element.\"\n    }\n  ],\n  \"relations\": [\n    {\n      \"source\": \"a1\",\n      \"target\": \"phi\",\n      \"type\": \"attack\",\n      \"confidence\": 0.95\n    },\n    {\n      \"source\": \"a2\",\n      \"target\": \"phi\",\n      \"type\": \"attack\",\n      \"confidence\": 0.90\n    },\n    {\n      \"source\": \"a3\",\n      \"target\": \"phi\",\n      \"type\": \"attack\",\n      \"confidence\": 0.85\n    },\n    {\n      \"source\": \"a4\",\n      \"target\": \"phi\",\n      \"type\": \"attack\",\n      \"confidence\": 0.80\n    }\n  ]\n}",
     "parse_error": null,
     "n_raw_arguments": 4
   },
   "strengths": [
     {
       "argument_id": "a1",
-      "tau": 0.92,
+      "tau": 0.9,
       "rubric": {
-        "relevance": 0.92,
-        "factual_grounding": 0.92,
-        "specificity": 0.92,
-        "logical_coherence": 0.92,
-        "applicability": 0.92
+        "legal_relevance": 0.9,
+        "factual_grounding": 0.9,
+        "specificity": 0.8,
+        "logical_coherence": 0.9,
+        "fre_801c_applicability": 0.9
       },
-      "justification": "Fallback from extraction confidence.",
-      "model": "fallback"
+      "justification": "Directly addresses the statement prerequisite for hearsay. The narrative explicitly describes conduct, not speech or writing, which attacks the hearsay claim.",
+      "model": "combined"
     },
     {
       "argument_id": "a2",
-      "tau": 0.88,
+      "tau": 0.85,
       "rubric": {
-        "relevance": 0.88,
-        "factual_grounding": 0.88,
-        "specificity": 0.88,
-        "logical_coherence": 0.88,
-        "applicability": 0.88
+        "legal_relevance": 0.8,
+        "factual_grounding": 0.9,
+        "specificity": 0.7,
+        "logical_coherence": 0.9,
+        "fre_801c_applicability": 0.8
       },
-      "justification": "Fallback from extraction confidence.",
-      "model": "fallback"
+      "justification": "Addresses the assertion component. Conduct like going to a bank in disguise is typically treated as circumstantial evidence rather than an assertion, attacking the hearsay classification.",
+      "model": "combined"
     },
     {
       "argument_id": "a3",
-      "tau": 0.93,
+      "tau": 0.8,
       "rubric": {
-        "relevance": 0.93,
-        "factual_grounding": 0.93,
-        "specificity": 0.93,
-        "logical_coherence": 0.93,
-        "applicability": 0.93
+        "legal_relevance": 0.8,
+        "factual_grounding": 0.8,
+        "specificity": 0.7,
+        "logical_coherence": 0.8,
+        "fre_801c_applicability": 0.8
       },
-      "justification": "Fallback from extraction confidence.",
-      "model": "fallback"
+      "justification": "Addresses the offered-for-truth component. The context indicates the fact is used circumstantially to establish presence/intent, which attacks the hearsay claim.",
+      "model": "combined"
     },
     {
       "argument_id": "a4",
-      "tau": 0.89,
+      "tau": 0.75,
       "rubric": {
-        "relevance": 0.89,
-        "factual_grounding": 0.89,
-        "specificity": 0.89,
-        "logical_coherence": 0.89,
-        "applicability": 0.89
+        "legal_relevance": 0.7,
+        "factual_grounding": 0.6,
+        "specificity": 0.5,
+        "logical_coherence": 0.8,
+        "fre_801c_applicability": 0.7
       },
-      "justification": "Fallback from extraction confidence.",
-      "model": "fallback"
+      "justification": "Highlights the absence of a declarant, reinforcing that the hearsay rule is inapplicable. It attacks the target claim by showing a missing element.",
+      "model": "combined"
     }
   ],
   "solver_output": {
@@ -131,101 +137,83 @@
           "id": "phi",
           "text": "Is the statement described in this narrative hearsay under FRE 801(c)?",
           "tau": 0.5,
-          "sigma": 1.9074908319538508e-11,
+          "sigma": 0.0003750000000000142,
           "is_claim": true
         },
         "a1": {
           "id": "a1",
-          "text": "Narrative describes conduct, not an out-of-court statement.",
-          "tau": 0.92,
-          "sigma": 0.92,
+          "text": "The narrative describes Mary's conduct (going to the bank in disguise), not an out-of-court statement. Under FRE 801(a), hearsay requires a statement defined as an oral, written, or other assertion; conduct alone does not qualify.",
+          "tau": 0.9,
+          "sigma": 0.9,
           "is_claim": false
         },
         "a2": {
           "id": "a2",
-          "text": "No declarant is identified making an assertion about the robbery.",
-          "tau": 0.88,
-          "sigma": 0.9904,
+          "text": "The described conduct is non-assertive and does not communicate a fact. The hearsay rule only applies to assertions, and circumstantial evidence of conduct does not trigger it.",
+          "tau": 0.85,
+          "sigma": 0.85,
           "is_claim": false
         },
         "a3": {
           "id": "a3",
-          "text": "Visiting a bank in disguise is non-assertive circumstantial evidence.",
-          "tau": 0.93,
-          "sigma": 0.999328,
+          "text": "The evidence is offered circumstantially to show Mary's presence and intent regarding the robbery, not to prove the truth of any out-of-court assertion.",
+          "tau": 0.8,
+          "sigma": 0.8,
           "is_claim": false
         },
         "a4": {
           "id": "a4",
-          "text": "The narrative explicitly frames the item as a fact, not a statement.",
-          "tau": 0.89,
-          "sigma": 0.99992608,
+          "text": "The narrative lacks any indication of a declarant or communicative act, which are prerequisites for applying the hearsay rule.",
+          "tau": 0.75,
+          "sigma": 0.75,
           "is_claim": false
         }
       },
       "edges": [
         {
           "source": "a1",
-          "target": "a2",
-          "type": "support",
-          "confidence": 0.85
-        },
-        {
-          "source": "a2",
-          "target": "a3",
-          "type": "support",
-          "confidence": 0.8
-        },
-        {
-          "source": "a3",
-          "target": "a4",
-          "type": "support",
-          "confidence": 0.85
-        },
-        {
-          "source": "a1",
           "target": "phi",
           "type": "attack",
-          "confidence": 0.92
+          "confidence": 0.95
         },
         {
           "source": "a2",
           "target": "phi",
           "type": "attack",
-          "confidence": 0.88
+          "confidence": 0.9
         },
         {
           "source": "a3",
           "target": "phi",
           "type": "attack",
-          "confidence": 0.93
+          "confidence": 0.85
         },
         {
           "source": "a4",
           "target": "phi",
           "type": "attack",
-          "confidence": 0.89
+          "confidence": 0.8
         }
       ],
       "solver_type": "df_quad"
     },
-    "sigma_phi": 1.9074908319538508e-11,
+    "sigma_phi": 0.0003750000000000142,
     "sigma_all": {
-      "phi": 1.9074908319538508e-11,
-      "a1": 0.92,
-      "a2": 0.9904,
-      "a3": 0.999328,
-      "a4": 0.99992608
+      "phi": 0.0003750000000000142,
+      "a1": 0.9,
+      "a2": 0.85,
+      "a3": 0.8,
+      "a4": 0.75
     },
     "iterations": 2,
     "converged": true,
     "solver_type": "df_quad"
   },
-  "sigma_phi": 1.9074908319538508e-11,
+  "sigma_phi": 0.0003750000000000142,
   "decision": "No",
   "uncertainty": {
     "is_uncertain": false,
-    "sigma_phi": 1.9074908319538508e-11,
+    "sigma_phi": 0.0003750000000000142,
     "threshold_low": 0.45,
     "threshold_high": 0.55,
     "escalation_triggered": false,

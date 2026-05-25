@@ -1,0 +1,242 @@
+{
+  "case_id": "test_0087",
+  "input_text": "To prove that Daniel was sad upon hearing the news, the fact he exlaimed \"the world was ending\" and \"nothing mattered anymore.\"",
+  "phi_text": "",
+  "gold_label": "No",
+  "extraction": {
+    "case_id": "test_0087",
+    "input_text": "To prove that Daniel was sad upon hearing the news, the fact he exlaimed \"the world was ending\" and \"nothing mattered anymore.\"",
+    "claim": {
+      "id": "phi",
+      "text": "Is the statement described in this narrative hearsay under FRE 801(c)?"
+    },
+    "arguments": [
+      {
+        "id": "a1",
+        "text": "Daniel's exclamation of 'the world was ending' and 'nothing mattered anymore' constitutes an out-of-court statement.",
+        "stance_to_claim": "support",
+        "legal_rule": "FRE 801(c) defines hearsay as an out-of-court statement.",
+        "evidence_span": "the fact he exlaimed \"the world was ending\" and \"nothing mattered anymore.\"",
+        "confidence": 0.95
+      },
+      {
+        "id": "a2",
+        "text": "The exclamation contains explicit assertions regarding the state of the world and personal significance, rather than mere non-assertive conduct.",
+        "stance_to_claim": "support",
+        "legal_rule": "FRE 801(c) requires the out-of-court statement to be an assertion.",
+        "evidence_span": "the fact he exlaimed \"the world was ending\" and \"nothing mattered anymore.\"",
+        "confidence": 0.9
+      },
+      {
+        "id": "a3",
+        "text": "The statement is offered to prove Daniel's emotional state (sadness) upon hearing the news, not to prove the truth of the asserted facts.",
+        "stance_to_claim": "attack",
+        "legal_rule": "FRE 801(c) excludes statements not offered for the truth of the matter asserted from the definition of hearsay.",
+        "evidence_span": "To prove that Daniel was sad upon hearing the news",
+        "confidence": 0.95
+      },
+      {
+        "id": "a4",
+        "text": "Offering a statement to demonstrate the declarant's state of mind constitutes a recognized non-hearsay purpose, rendering the statement inadmissible as hearsay.",
+        "stance_to_claim": "attack",
+        "legal_rule": "FRE 801(c) and FRE 803(3) distinguish between hearsay and state-of-mind evidence; statements offered to show the declarant's condition are not hearsay.",
+        "evidence_span": "To prove that Daniel was sad upon hearing the news",
+        "confidence": 0.9
+      }
+    ],
+    "relations": [
+      {
+        "source": "a1",
+        "target": "phi",
+        "type": "support",
+        "confidence": 0.9
+      },
+      {
+        "source": "a2",
+        "target": "phi",
+        "type": "support",
+        "confidence": 0.9
+      },
+      {
+        "source": "a3",
+        "target": "phi",
+        "type": "attack",
+        "confidence": 0.95
+      },
+      {
+        "source": "a4",
+        "target": "phi",
+        "type": "attack",
+        "confidence": 0.9
+      },
+      {
+        "source": "a4",
+        "target": "a3",
+        "type": "support",
+        "confidence": 0.85
+      }
+    ],
+    "extraction_model": "",
+    "raw_llm_response": "{\n  \"case_id\": \"test_0087\",\n  \"phi\": \"Is the statement described in this narrative hearsay under FRE 801(c)?\",\n  \"arguments\": [\n    {\n      \"id\": \"a1\",\n      \"text\": \"Daniel's exclamation of 'the world was ending' and 'nothing mattered anymore' constitutes an out-of-court statement.\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"FRE 801(c) defines hearsay as an out-of-court statement.\",\n      \"evidence_span\": \"the fact he exlaimed \\\"the world was ending\\\" and \\\"nothing mattered anymore.\\\"\",\n      \"confidence\": 0.95,\n      \"tau\": 0.85,\n      \"rubric\": {\n        \"relevance\": 0.9,\n        \"factual_grounding\": 0.95,\n        \"specificity\": 0.8,\n        \"logical_coherence\": 0.9,\n        \"applicability\": 0.9\n      },\n      \"justification\": \"Directly establishes the first prong of the hearsay definition by identifying the statement as made outside the current proceeding.\"\n    },\n    {\n      \"id\": \"a2\",\n      \"text\": \"The exclamation contains explicit assertions regarding the state of the world and personal significance, rather than mere non-assertive conduct.\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"FRE 801(c) requires the out-of-court statement to be an assertion.\",\n      \"evidence_span\": \"the fact he exlaimed \\\"the world was ending\\\" and \\\"nothing mattered anymore.\\\"\",\n      \"confidence\": 0.9,\n      \"tau\": 0.80,\n      \"rubric\": {\n        \"relevance\": 0.85,\n        \"factual_grounding\": 0.9,\n        \"specificity\": 0.75,\n        \"logical_coherence\": 0.85,\n        \"applicability\": 0.85\n      },\n      \"justification\": \"Establishes the second prong of the hearsay definition by confirming the statement is assertive in nature.\"\n    },\n    {\n      \"id\": \"a3\",\n      \"text\": \"The statement is offered to prove Daniel's emotional state (sadness) upon hearing the news, not to prove the truth of the asserted facts.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"FRE 801(c) excludes statements not offered for the truth of the matter asserted from the definition of hearsay.\",\n      \"evidence_span\": \"To prove that Daniel was sad upon hearing the news\",\n      \"confidence\": 0.95,\n      \"tau\": 0.90,\n      \"rubric\": {\n        \"relevance\": 0.95,\n        \"factual_grounding\": 0.95,\n        \"specificity\": 0.9,\n        \"logical_coherence\": 0.95,\n        \"applicability\": 0.95\n      },\n      \"justification\": \"Directly negates the 'offered for truth' prong, which is dispositive for defeating a hearsay classification under FRE 801(c).\"\n    },\n    {\n      \"id\": \"a4\",\n      \"text\": \"Offering a statement to demonstrate the declarant's state of mind constitutes a recognized non-hearsay purpose, rendering the statement inadmissible as hearsay.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"FRE 801(c) and FRE 803(3) distinguish between hearsay and state-of-mind evidence; statements offered to show the declarant's condition are not hearsay.\",\n      \"evidence_span\": \"To prove that Daniel was sad upon hearing the news\",\n      \"confidence\": 0.90,\n      \"tau\": 0.85,\n      \"rubric\": {\n        \"relevance\": 0.9,\n        \"factual_grounding\": 0.85,\n        \"specificity\": 0.8,\n        \"logical_coherence\": 0.9,\n        \"applicability\": 0.9\n      },\n      \"justification\": \"Reinforces a3 by identifying the specific legal category (state of mind) that defeats the hearsay claim and supports admissibility.\"\n    }\n  ],\n  \"relations\": [\n    {\n      \"source\": \"a1\",\n      \"target\": \"phi\",\n      \"type\": \"support\",\n      \"confidence\": 0.9\n    },\n    {\n      \"source\": \"a2\",\n      \"target\": \"phi\",\n      \"type\": \"support\",\n      \"confidence\": 0.9\n    },\n    {\n      \"source\": \"a3\",\n      \"target\": \"phi\",\n      \"type\": \"attack\",\n      \"confidence\": 0.95\n    },\n    {\n      \"source\": \"a4\",\n      \"target\": \"phi\",\n      \"type\": \"attack\",\n      \"confidence\": 0.9\n    },\n    {\n      \"source\": \"a4\",\n      \"target\": \"a3\",\n      \"type\": \"support\",\n      \"confidence\": 0.85\n    }\n  ]\n}",
+    "parse_error": null,
+    "n_raw_arguments": 4
+  },
+  "strengths": [
+    {
+      "argument_id": "a1",
+      "tau": 0.85,
+      "rubric": {
+        "legal_relevance": 0.9,
+        "factual_grounding": 0.95,
+        "specificity": 0.8,
+        "logical_coherence": 0.9,
+        "fre_801c_applicability": 0.9
+      },
+      "justification": "Directly establishes the first prong of the hearsay definition by identifying the statement as made outside the current proceeding.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a2",
+      "tau": 0.8,
+      "rubric": {
+        "legal_relevance": 0.85,
+        "factual_grounding": 0.9,
+        "specificity": 0.75,
+        "logical_coherence": 0.85,
+        "fre_801c_applicability": 0.85
+      },
+      "justification": "Establishes the second prong of the hearsay definition by confirming the statement is assertive in nature.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a3",
+      "tau": 0.9,
+      "rubric": {
+        "legal_relevance": 0.95,
+        "factual_grounding": 0.95,
+        "specificity": 0.9,
+        "logical_coherence": 0.95,
+        "fre_801c_applicability": 0.95
+      },
+      "justification": "Directly negates the 'offered for truth' prong, which is dispositive for defeating a hearsay classification under FRE 801(c).",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a4",
+      "tau": 0.85,
+      "rubric": {
+        "legal_relevance": 0.9,
+        "factual_grounding": 0.85,
+        "specificity": 0.8,
+        "logical_coherence": 0.9,
+        "fre_801c_applicability": 0.9
+      },
+      "justification": "Reinforces a3 by identifying the specific legal category (state of mind) that defeats the hearsay claim and supports admissibility.",
+      "model": "combined"
+    }
+  ],
+  "solver_output": {
+    "case_id": "test_0087",
+    "graph": {
+      "nodes": {
+        "phi": {
+          "id": "phi",
+          "text": "Is the statement described in this narrative hearsay under FRE 801(c)?",
+          "tau": 0.5,
+          "sigma": 0.486125,
+          "is_claim": true
+        },
+        "a1": {
+          "id": "a1",
+          "text": "Daniel's exclamation of 'the world was ending' and 'nothing mattered anymore' constitutes an out-of-court statement.",
+          "tau": 0.85,
+          "sigma": 0.85,
+          "is_claim": false
+        },
+        "a2": {
+          "id": "a2",
+          "text": "The exclamation contains explicit assertions regarding the state of the world and personal significance, rather than mere non-assertive conduct.",
+          "tau": 0.8,
+          "sigma": 0.8,
+          "is_claim": false
+        },
+        "a3": {
+          "id": "a3",
+          "text": "The statement is offered to prove Daniel's emotional state (sadness) upon hearing the news, not to prove the truth of the asserted facts.",
+          "tau": 0.9,
+          "sigma": 0.985,
+          "is_claim": false
+        },
+        "a4": {
+          "id": "a4",
+          "text": "Offering a statement to demonstrate the declarant's state of mind constitutes a recognized non-hearsay purpose, rendering the statement inadmissible as hearsay.",
+          "tau": 0.85,
+          "sigma": 0.85,
+          "is_claim": false
+        }
+      },
+      "edges": [
+        {
+          "source": "a1",
+          "target": "phi",
+          "type": "support",
+          "confidence": 0.9
+        },
+        {
+          "source": "a2",
+          "target": "phi",
+          "type": "support",
+          "confidence": 0.9
+        },
+        {
+          "source": "a3",
+          "target": "phi",
+          "type": "attack",
+          "confidence": 0.95
+        },
+        {
+          "source": "a4",
+          "target": "phi",
+          "type": "attack",
+          "confidence": 0.9
+        },
+        {
+          "source": "a4",
+          "target": "a3",
+          "type": "support",
+          "confidence": 0.85
+        }
+      ],
+      "solver_type": "df_quad"
+    },
+    "sigma_phi": 0.486125,
+    "sigma_all": {
+      "phi": 0.486125,
+      "a1": 0.85,
+      "a2": 0.8,
+      "a3": 0.985,
+      "a4": 0.85
+    },
+    "iterations": 2,
+    "converged": true,
+    "solver_type": "df_quad"
+  },
+  "sigma_phi": 0.486125,
+  "decision": "UNCERTAIN",
+  "uncertainty": {
+    "is_uncertain": true,
+    "sigma_phi": 0.486125,
+    "threshold_low": 0.45,
+    "threshold_high": 0.55,
+    "escalation_triggered": true,
+    "escalation_actions": [
+      "rerun_extraction",
+      "human_review"
+    ],
+    "escalation_log": [
+      "[test_0087] UNCERTAIN σ(φ)=0.4861 ∈ [0.45,0.55]. Human review recommended."
+    ]
+  },
+  "hitl_interventions": [],
+  "pre_hitl_decision": null
+}

@@ -1,0 +1,184 @@
+{
+  "case_id": "test_0065",
+  "input_text": "To prove that the defendant was present at the scene of the crime, a forensics report describing traces of the defendant's DNA that was found by investigators.",
+  "phi_text": "",
+  "gold_label": "Yes",
+  "extraction": {
+    "case_id": "test_0065",
+    "input_text": "To prove that the defendant was present at the scene of the crime, a forensics report describing traces of the defendant's DNA that was found by investigators.",
+    "claim": {
+      "id": "phi",
+      "text": "Is the statement described in this narrative hearsay under FRE 801(c)?"
+    },
+    "arguments": [
+      {
+        "id": "a1",
+        "text": "The evidence is a forensics report, which qualifies as an out-of-court statement under FRE 801(c).",
+        "stance_to_claim": "support",
+        "legal_rule": "FRE 801(c)(1) - Out-of-court statement",
+        "evidence_span": "a forensics report",
+        "confidence": 0.9
+      },
+      {
+        "id": "a2",
+        "text": "The forensics report contains an assertion, specifically describing traces of the defendant's DNA found by investigators.",
+        "stance_to_claim": "support",
+        "legal_rule": "FRE 801(c)(2) - Assertion",
+        "evidence_span": "describing traces of the defendant's DNA that was found by investigators",
+        "confidence": 0.9
+      },
+      {
+        "id": "a3",
+        "text": "The report is offered to prove the truth of the matter asserted, namely that the defendant was present at the scene of the crime.",
+        "stance_to_claim": "support",
+        "legal_rule": "FRE 801(c)(3) - Offered to prove the truth of the matter asserted",
+        "evidence_span": "To prove that the defendant was present at the scene of the crime",
+        "confidence": 0.95
+      }
+    ],
+    "relations": [
+      {
+        "source": "a1",
+        "target": "phi",
+        "type": "support",
+        "confidence": 0.9
+      },
+      {
+        "source": "a2",
+        "target": "phi",
+        "type": "support",
+        "confidence": 0.9
+      },
+      {
+        "source": "a3",
+        "target": "phi",
+        "type": "support",
+        "confidence": 0.95
+      }
+    ],
+    "extraction_model": "",
+    "raw_llm_response": "{\n  \"case_id\": \"test_0065\",\n  \"phi\": \"Is the statement described in this narrative hearsay under FRE 801(c)?\",\n  \"arguments\": [\n    {\n      \"id\": \"a1\",\n      \"text\": \"The evidence is a forensics report, which qualifies as an out-of-court statement under FRE 801(c).\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"FRE 801(c)(1) - Out-of-court statement\",\n      \"evidence_span\": \"a forensics report\",\n      \"confidence\": 0.9,\n      \"tau\": 0.85,\n      \"rubric\": {\n        \"relevance\": 0.9,\n        \"factual_grounding\": 0.9,\n        \"specificity\": 0.8,\n        \"logical_coherence\": 0.9,\n        \"applicability\": 0.9\n      },\n      \"justification\": \"The narrative explicitly identifies the evidence as a forensics report, which is inherently an out-of-court statement relevant to the hearsay definition.\"\n    },\n    {\n      \"id\": \"a2\",\n      \"text\": \"The forensics report contains an assertion, specifically describing traces of the defendant's DNA found by investigators.\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"FRE 801(c)(2) - Assertion\",\n      \"evidence_span\": \"describing traces of the defendant's DNA that was found by investigators\",\n      \"confidence\": 0.9,\n      \"tau\": 0.85,\n      \"rubric\": {\n        \"relevance\": 0.9,\n        \"factual_grounding\": 0.9,\n        \"specificity\": 0.8,\n        \"logical_coherence\": 0.9,\n        \"applicability\": 0.9\n      },\n      \"justification\": \"The report's description of DNA traces constitutes a factual assertion, satisfying the assertion prong of the hearsay definition.\"\n    },\n    {\n      \"id\": \"a3\",\n      \"text\": \"The report is offered to prove the truth of the matter asserted, namely that the defendant was present at the scene of the crime.\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"FRE 801(c)(3) - Offered to prove the truth of the matter asserted\",\n      \"evidence_span\": \"To prove that the defendant was present at the scene of the crime\",\n      \"confidence\": 0.95,\n      \"tau\": 0.9,\n      \"rubric\": {\n        \"relevance\": 1.0,\n        \"factual_grounding\": 0.95,\n        \"specificity\": 0.9,\n        \"logical_coherence\": 0.95,\n        \"applicability\": 0.95\n      },\n      \"justification\": \"The narrative explicitly states the purpose of introducing the report is to prove the defendant's presence, directly triggering the truth-of-the-matter-asserted prong.\"\n    }\n  ],\n  \"relations\": [\n    {\n      \"source\": \"a1\",\n      \"target\": \"phi\",\n      \"type\": \"support\",\n      \"confidence\": 0.9\n    },\n    {\n      \"source\": \"a2\",\n      \"target\": \"phi\",\n      \"type\": \"support\",\n      \"confidence\": 0.9\n    },\n    {\n      \"source\": \"a3\",\n      \"target\": \"phi\",\n      \"type\": \"support\",\n      \"confidence\": 0.95\n    }\n  ]\n}",
+    "parse_error": null,
+    "n_raw_arguments": 3
+  },
+  "strengths": [
+    {
+      "argument_id": "a1",
+      "tau": 0.85,
+      "rubric": {
+        "legal_relevance": 0.9,
+        "factual_grounding": 0.9,
+        "specificity": 0.8,
+        "logical_coherence": 0.9,
+        "fre_801c_applicability": 0.9
+      },
+      "justification": "The narrative explicitly identifies the evidence as a forensics report, which is inherently an out-of-court statement relevant to the hearsay definition.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a2",
+      "tau": 0.85,
+      "rubric": {
+        "legal_relevance": 0.9,
+        "factual_grounding": 0.9,
+        "specificity": 0.8,
+        "logical_coherence": 0.9,
+        "fre_801c_applicability": 0.9
+      },
+      "justification": "The report's description of DNA traces constitutes a factual assertion, satisfying the assertion prong of the hearsay definition.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a3",
+      "tau": 0.9,
+      "rubric": {
+        "legal_relevance": 1.0,
+        "factual_grounding": 0.95,
+        "specificity": 0.9,
+        "logical_coherence": 0.95,
+        "fre_801c_applicability": 0.95
+      },
+      "justification": "The narrative explicitly states the purpose of introducing the report is to prove the defendant's presence, directly triggering the truth-of-the-matter-asserted prong.",
+      "model": "combined"
+    }
+  ],
+  "solver_output": {
+    "case_id": "test_0065",
+    "graph": {
+      "nodes": {
+        "phi": {
+          "id": "phi",
+          "text": "Is the statement described in this narrative hearsay under FRE 801(c)?",
+          "tau": 0.5,
+          "sigma": 0.998875,
+          "is_claim": true
+        },
+        "a1": {
+          "id": "a1",
+          "text": "The evidence is a forensics report, which qualifies as an out-of-court statement under FRE 801(c).",
+          "tau": 0.85,
+          "sigma": 0.85,
+          "is_claim": false
+        },
+        "a2": {
+          "id": "a2",
+          "text": "The forensics report contains an assertion, specifically describing traces of the defendant's DNA found by investigators.",
+          "tau": 0.85,
+          "sigma": 0.85,
+          "is_claim": false
+        },
+        "a3": {
+          "id": "a3",
+          "text": "The report is offered to prove the truth of the matter asserted, namely that the defendant was present at the scene of the crime.",
+          "tau": 0.9,
+          "sigma": 0.9,
+          "is_claim": false
+        }
+      },
+      "edges": [
+        {
+          "source": "a1",
+          "target": "phi",
+          "type": "support",
+          "confidence": 0.9
+        },
+        {
+          "source": "a2",
+          "target": "phi",
+          "type": "support",
+          "confidence": 0.9
+        },
+        {
+          "source": "a3",
+          "target": "phi",
+          "type": "support",
+          "confidence": 0.95
+        }
+      ],
+      "solver_type": "df_quad"
+    },
+    "sigma_phi": 0.998875,
+    "sigma_all": {
+      "phi": 0.998875,
+      "a1": 0.85,
+      "a2": 0.85,
+      "a3": 0.9
+    },
+    "iterations": 2,
+    "converged": true,
+    "solver_type": "df_quad"
+  },
+  "sigma_phi": 0.998875,
+  "decision": "Yes",
+  "uncertainty": {
+    "is_uncertain": false,
+    "sigma_phi": 0.998875,
+    "threshold_low": 0.45,
+    "threshold_high": 0.55,
+    "escalation_triggered": false,
+    "escalation_actions": [],
+    "escalation_log": []
+  },
+  "hitl_interventions": [],
+  "pre_hitl_decision": null
+}

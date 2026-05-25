@@ -1,0 +1,237 @@
+{
+  "case_id": "test_0054",
+  "input_text": "Corporation A decides to sue Corporation B for stealing trade secrets. To prove that B did it, lawyers for A introduce as evidence a statement made by B's CEO to one of his friends that B \"would soon have the ability to compete with A.\"",
+  "phi_text": "",
+  "gold_label": "Yes",
+  "extraction": {
+    "case_id": "test_0054",
+    "input_text": "Corporation A decides to sue Corporation B for stealing trade secrets. To prove that B did it, lawyers for A introduce as evidence a statement made by B's CEO to one of his friends that B \"would soon have the ability to compete with A.\"",
+    "claim": {
+      "id": "phi",
+      "text": "Is the statement described in this narrative hearsay under FRE 801(c)?"
+    },
+    "arguments": [
+      {
+        "id": "a1",
+        "text": "The statement was made out of court by B's CEO to a friend.",
+        "stance_to_claim": "support",
+        "legal_rule": "FRE 801(a) and 801(c) require an out-of-court statement for hearsay analysis.",
+        "evidence_span": "statement made by B's CEO to one of his friends",
+        "confidence": 0.95
+      },
+      {
+        "id": "a2",
+        "text": "The statement contains an assertion that B \"would soon have the ability to compete with A.\"",
+        "stance_to_claim": "support",
+        "legal_rule": "FRE 801(c) requires the statement to be one that the declarant asserts.",
+        "evidence_span": "statement made by B's CEO to one of his friends that B \"would soon have the ability to compete with A.\"",
+        "confidence": 0.95
+      },
+      {
+        "id": "a3",
+        "text": "The statement is offered to prove the truth of the matter asserted, specifically to establish B's capability to steal trade secrets.",
+        "stance_to_claim": "support",
+        "legal_rule": "FRE 801(c) requires the statement to be offered to prove the truth of the matter asserted.",
+        "evidence_span": "To prove that B did it, lawyers for A introduce as evidence a statement",
+        "confidence": 0.9
+      },
+      {
+        "id": "a4",
+        "text": "The statement qualifies as a party-opponent admission under FRE 801(d)(2) because it was made by B's CEO, an agent of Corporation B.",
+        "stance_to_claim": "attack",
+        "legal_rule": "FRE 801(d)(2) excludes statements made by a party's agent or employee concerning a matter within the scope of that relationship from the definition of hearsay.",
+        "evidence_span": "statement made by B's CEO",
+        "confidence": 0.85
+      }
+    ],
+    "relations": [
+      {
+        "source": "a1",
+        "target": "phi",
+        "type": "support",
+        "confidence": 0.95
+      },
+      {
+        "source": "a2",
+        "target": "phi",
+        "type": "support",
+        "confidence": 0.95
+      },
+      {
+        "source": "a3",
+        "target": "phi",
+        "type": "support",
+        "confidence": 0.9
+      },
+      {
+        "source": "a4",
+        "target": "phi",
+        "type": "attack",
+        "confidence": 0.85
+      },
+      {
+        "source": "a4",
+        "target": "a3",
+        "type": "attack",
+        "confidence": 0.85
+      }
+    ],
+    "extraction_model": "",
+    "raw_llm_response": "{\n  \"case_id\": \"test_0054\",\n  \"phi\": \"Is the statement described in this narrative hearsay under FRE 801(c)?\",\n  \"arguments\": [\n    {\n      \"id\": \"a1\",\n      \"text\": \"The statement was made out of court by B's CEO to a friend.\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"FRE 801(a) and 801(c) require an out-of-court statement for hearsay analysis.\",\n      \"evidence_span\": \"statement made by B's CEO to one of his friends\",\n      \"confidence\": 0.95,\n      \"tau\": 0.95,\n      \"rubric\": {\n        \"relevance\": 0.95,\n        \"factual_grounding\": 0.95,\n        \"specificity\": 0.95,\n        \"logical_coherence\": 0.95,\n        \"applicability\": 0.95\n      },\n      \"justification\": \"Directly satisfies the out-of-court prerequisite for a hearsay determination.\"\n    },\n    {\n      \"id\": \"a2\",\n      \"text\": \"The statement contains an assertion that B \\\"would soon have the ability to compete with A.\\\"\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"FRE 801(c) requires the statement to be one that the declarant asserts.\",\n      \"evidence_span\": \"statement made by B's CEO to one of his friends that B \\\"would soon have the ability to compete with A.\\\"\",\n      \"confidence\": 0.95,\n      \"tau\": 0.95,\n      \"rubric\": {\n        \"relevance\": 0.95,\n        \"factual_grounding\": 0.95,\n        \"specificity\": 0.95,\n        \"logical_coherence\": 0.95,\n        \"applicability\": 0.95\n      },\n      \"justification\": \"Directly satisfies the assertion requirement for hearsay classification.\"\n    },\n    {\n      \"id\": \"a3\",\n      \"text\": \"The statement is offered to prove the truth of the matter asserted, specifically to establish B's capability to steal trade secrets.\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"FRE 801(c) requires the statement to be offered to prove the truth of the matter asserted.\",\n      \"evidence_span\": \"To prove that B did it, lawyers for A introduce as evidence a statement\",\n      \"confidence\": 0.90,\n      \"tau\": 0.90,\n      \"rubric\": {\n        \"relevance\": 0.90,\n        \"factual_grounding\": 0.90,\n        \"specificity\": 0.90,\n        \"logical_coherence\": 0.90,\n        \"applicability\": 0.90\n      },\n      \"justification\": \"Directly satisfies the offered-for-truth requirement, completing the hearsay definition.\"\n    },\n    {\n      \"id\": \"a4\",\n      \"text\": \"The statement qualifies as a party-opponent admission under FRE 801(d)(2) because it was made by B's CEO, an agent of Corporation B.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"FRE 801(d)(2) excludes statements made by a party's agent or employee concerning a matter within the scope of that relationship from the definition of hearsay.\",\n      \"evidence_span\": \"statement made by B's CEO\",\n      \"confidence\": 0.85,\n      \"tau\": 0.85,\n      \"rubric\": {\n        \"relevance\": 0.85,\n        \"factual_grounding\": 0.85,\n        \"specificity\": 0.85,\n        \"logical_coherence\": 0.85,\n        \"applicability\": 0.85\n      },\n      \"justification\": \"Strongly attacks the hearsay classification by invoking a specific statutory exclusion that overrides the hearsay prongs.\"\n    },\n    {\n      \"id\": \"a5\",\n      \"text\": \"The narrative mentions the underlying lawsuit for stealing trade secrets, which provides context but does not directly affect the hearsay analysis.\",\n      \"stance_to_claim\": \"neutral\",\n      \"legal_rule\": \"N/A\",\n      \"evidence_span\": \"Corporation A decides to sue Corporation B for stealing trade secrets.\",\n      \"confidence\": 0.90,\n      \"tau\": 0.10,\n      \"rubric\": {\n        \"relevance\": 0.20,\n        \"factual_grounding\": 0.90,\n        \"specificity\": 0.50,\n        \"logical_coherence\": 0.50,\n        \"applicability\": 0.10\n      },\n      \"justification\": \"Background fact irrelevant to the legal test for hearsay under FRE 801(c).\"\n    }\n  ],\n  \"relations\": [\n    {\n      \"source\": \"a1\",\n      \"target\": \"phi\",\n      \"type\": \"support\",\n      \"confidence\": 0.95\n    },\n    {\n      \"source\": \"a2\",\n      \"target\": \"phi\",\n      \"type\": \"support\",\n      \"confidence\": 0.95\n    },\n    {\n      \"source\": \"a3\",\n      \"target\": \"phi\",\n      \"type\": \"support\",\n      \"confidence\": 0.90\n    },\n    {\n      \"source\": \"a4\",\n      \"target\": \"phi\",\n      \"type\": \"attack\",\n      \"confidence\": 0.85\n    },\n    {\n      \"source\": \"a5\",\n      \"target\": \"phi\",\n      \"type\": \"neutral\",\n      \"confidence\": 0.90\n    },\n    {\n      \"source\": \"a4\",\n      \"target\": \"a3\",\n      \"type\": \"attack\",\n      \"confidence\": 0.85\n    }\n  ]\n}",
+    "parse_error": null,
+    "n_raw_arguments": 5
+  },
+  "strengths": [
+    {
+      "argument_id": "a1",
+      "tau": 0.95,
+      "rubric": {
+        "legal_relevance": 0.95,
+        "factual_grounding": 0.95,
+        "specificity": 0.95,
+        "logical_coherence": 0.95,
+        "fre_801c_applicability": 0.95
+      },
+      "justification": "Directly satisfies the out-of-court prerequisite for a hearsay determination.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a2",
+      "tau": 0.95,
+      "rubric": {
+        "legal_relevance": 0.95,
+        "factual_grounding": 0.95,
+        "specificity": 0.95,
+        "logical_coherence": 0.95,
+        "fre_801c_applicability": 0.95
+      },
+      "justification": "Directly satisfies the assertion requirement for hearsay classification.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a3",
+      "tau": 0.9,
+      "rubric": {
+        "legal_relevance": 0.9,
+        "factual_grounding": 0.9,
+        "specificity": 0.9,
+        "logical_coherence": 0.9,
+        "fre_801c_applicability": 0.9
+      },
+      "justification": "Directly satisfies the offered-for-truth requirement, completing the hearsay definition.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a4",
+      "tau": 0.85,
+      "rubric": {
+        "legal_relevance": 0.85,
+        "factual_grounding": 0.85,
+        "specificity": 0.85,
+        "logical_coherence": 0.85,
+        "fre_801c_applicability": 0.85
+      },
+      "justification": "Strongly attacks the hearsay classification by invoking a specific statutory exclusion that overrides the hearsay prongs.",
+      "model": "combined"
+    }
+  ],
+  "solver_output": {
+    "case_id": "test_0054",
+    "graph": {
+      "nodes": {
+        "phi": {
+          "id": "phi",
+          "text": "Is the statement described in this narrative hearsay under FRE 801(c)?",
+          "tau": 0.5,
+          "sigma": 0.57391875,
+          "is_claim": true
+        },
+        "a1": {
+          "id": "a1",
+          "text": "The statement was made out of court by B's CEO to a friend.",
+          "tau": 0.95,
+          "sigma": 0.95,
+          "is_claim": false
+        },
+        "a2": {
+          "id": "a2",
+          "text": "The statement contains an assertion that B \"would soon have the ability to compete with A.\"",
+          "tau": 0.95,
+          "sigma": 0.95,
+          "is_claim": false
+        },
+        "a3": {
+          "id": "a3",
+          "text": "The statement is offered to prove the truth of the matter asserted, specifically to establish B's capability to steal trade secrets.",
+          "tau": 0.9,
+          "sigma": 0.135,
+          "is_claim": false
+        },
+        "a4": {
+          "id": "a4",
+          "text": "The statement qualifies as a party-opponent admission under FRE 801(d)(2) because it was made by B's CEO, an agent of Corporation B.",
+          "tau": 0.85,
+          "sigma": 0.85,
+          "is_claim": false
+        }
+      },
+      "edges": [
+        {
+          "source": "a1",
+          "target": "phi",
+          "type": "support",
+          "confidence": 0.95
+        },
+        {
+          "source": "a2",
+          "target": "phi",
+          "type": "support",
+          "confidence": 0.95
+        },
+        {
+          "source": "a3",
+          "target": "phi",
+          "type": "support",
+          "confidence": 0.9
+        },
+        {
+          "source": "a4",
+          "target": "phi",
+          "type": "attack",
+          "confidence": 0.85
+        },
+        {
+          "source": "a4",
+          "target": "a3",
+          "type": "attack",
+          "confidence": 0.85
+        }
+      ],
+      "solver_type": "df_quad"
+    },
+    "sigma_phi": 0.57391875,
+    "sigma_all": {
+      "phi": 0.57391875,
+      "a1": 0.95,
+      "a2": 0.95,
+      "a3": 0.135,
+      "a4": 0.85
+    },
+    "iterations": 2,
+    "converged": true,
+    "solver_type": "df_quad"
+  },
+  "sigma_phi": 0.57391875,
+  "decision": "Yes",
+  "uncertainty": {
+    "is_uncertain": false,
+    "sigma_phi": 0.57391875,
+    "threshold_low": 0.45,
+    "threshold_high": 0.55,
+    "escalation_triggered": false,
+    "escalation_actions": [],
+    "escalation_log": []
+  },
+  "hitl_interventions": [],
+  "pre_hitl_decision": null
+}

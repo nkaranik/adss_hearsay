@@ -1,0 +1,46 @@
+[
+  {
+    "system_name": "Full ADSS",
+    "n": 3,
+    "n_uncertain": 0,
+    "accuracy": {
+      "score": 0.3333333333333333,
+      "ci_low": 0.0,
+      "ci_high": 1.0
+    },
+    "macro_f1": {
+      "score": 0.25,
+      "ci_low": 0.0,
+      "ci_high": 0.5
+    },
+    "false_certainty_rate": 0.6666666666666666,
+    "certain_n": 3,
+    "certain_accuracy": 0.3333333333333333,
+    "certain_macro_f1": 0.25,
+    "borderline_n": 0,
+    "borderline_accuracy": 0.0,
+    "borderline_macro_f1": 0.0
+  },
+  {
+    "system_name": "Non-Symbolic ADSS",
+    "n": 3,
+    "n_uncertain": 1,
+    "accuracy": {
+      "score": 0.6666666666666666,
+      "ci_low": 0.0,
+      "ci_high": 1.0
+    },
+    "macro_f1": {
+      "score": 0.6666666666666666,
+      "ci_low": 0.0,
+      "ci_high": 1.0
+    },
+    "false_certainty_rate": 0.3333333333333333,
+    "certain_n": 2,
+    "certain_accuracy": 0.5,
+    "certain_macro_f1": 0.3333333333333333,
+    "borderline_n": 1,
+    "borderline_accuracy": 1.0,
+    "borderline_macro_f1": 0.5
+  }
+]

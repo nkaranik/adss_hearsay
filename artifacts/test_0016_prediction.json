@@ -1,0 +1,143 @@
+{
+  "case_id": "test_0016",
+  "input_text": "On the issue of whether the patent was infringed, the fact that the corporation's chief scientist was known to cheat at card games.",
+  "phi_text": "",
+  "gold_label": "No",
+  "extraction": {
+    "case_id": "test_0016",
+    "input_text": "On the issue of whether the patent was infringed, the fact that the corporation's chief scientist was known to cheat at card games.",
+    "claim": {
+      "id": "phi",
+      "text": "Is the statement described in this narrative hearsay under FRE 801(c)?"
+    },
+    "arguments": [
+      {
+        "id": "a1",
+        "text": "The narrative references a fact about the chief scientist's reputation for cheating at cards, but contains no out-of-court statement. Under FRE 801(c), the absence of a statement precludes a hearsay finding.",
+        "stance_to_claim": "attack",
+        "legal_rule": "FRE 801(c) defines hearsay as an out-of-court statement offered to prove the truth of the matter asserted.",
+        "evidence_span": "the fact that the corporation's chief scientist was known to cheat at card games",
+        "confidence": 0.9
+      },
+      {
+        "id": "a2",
+        "text": "The fact is introduced on the issue of patent infringement without any indication that an assertion is being offered to prove the truth of the matter asserted. This lack of assertive purpose attacks the hearsay target claim.",
+        "stance_to_claim": "attack",
+        "legal_rule": "FRE 801(c) requires the evidence to be offered to prove the truth of the matter asserted to qualify as hearsay.",
+        "evidence_span": "On the issue of whether the patent was infringed, the fact that...",
+        "confidence": 0.85
+      }
+    ],
+    "relations": [
+      {
+        "source": "a1",
+        "target": "phi",
+        "type": "attack",
+        "confidence": 0.9
+      },
+      {
+        "source": "a2",
+        "target": "phi",
+        "type": "attack",
+        "confidence": 0.85
+      }
+    ],
+    "extraction_model": "",
+    "raw_llm_response": "{\n  \"case_id\": \"test_0016\",\n  \"phi\": \"Is the statement described in this narrative hearsay under FRE 801(c)?\",\n  \"arguments\": [\n    {\n      \"id\": \"a1\",\n      \"text\": \"The narrative references a fact about the chief scientist's reputation for cheating at cards, but contains no out-of-court statement. Under FRE 801(c), the absence of a statement precludes a hearsay finding.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"FRE 801(c) defines hearsay as an out-of-court statement offered to prove the truth of the matter asserted.\",\n      \"evidence_span\": \"the fact that the corporation's chief scientist was known to cheat at card games\",\n      \"confidence\": 0.9,\n      \"tau\": 0.85,\n      \"rubric\": {\n        \"relevance\": 0.9,\n        \"factual_grounding\": 0.9,\n        \"specificity\": 0.8,\n        \"logical_coherence\": 0.9,\n        \"applicability\": 0.9\n      },\n      \"justification\": \"Directly addresses the definitional requirement of an out-of-court statement under FRE 801(c). The narrative only cites a fact, not a statement, thus attacking the hearsay claim.\"\n    },\n    {\n      \"id\": \"a2\",\n      \"text\": \"The fact is introduced on the issue of patent infringement without any indication that an assertion is being offered to prove the truth of the matter asserted. This lack of assertive purpose attacks the hearsay target claim.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"FRE 801(c) requires the evidence to be offered to prove the truth of the matter asserted to qualify as hearsay.\",\n      \"evidence_span\": \"On the issue of whether the patent was infringed, the fact that...\",\n      \"confidence\": 0.85,\n      \"tau\": 0.75,\n      \"rubric\": {\n        \"relevance\": 0.8,\n        \"factual_grounding\": 0.8,\n        \"specificity\": 0.7,\n        \"logical_coherence\": 0.8,\n        \"applicability\": 0.8\n      },\n      \"justification\": \"FRE 801(c) requires the evidence to be offered to prove the truth of the matter asserted. The narrative frames the fact around patent infringement, not truth-assertion, weakening the hearsay applicability.\"\n    },\n    {\n      \"id\": \"a3\",\n      \"text\": \"The content regarding card cheating is factually irrelevant to the patent infringement dispute and provides no basis for a hearsay analysis, rendering it neutral to the target claim.\",\n      \"stance_to_claim\": \"neutral\",\n      \"legal_rule\": \"Relevance and hearsay analysis require a logical connection between the evidence and the issue or an assertive purpose.\",\n      \"evidence_span\": \"the fact that the corporation's chief scientist was known to cheat at card games\",\n      \"confidence\": 0.9,\n      \"tau\": 0.5,\n      \"rubric\": {\n        \"relevance\": 0.3,\n        \"factual_grounding\": 0.9,\n        \"specificity\": 0.8,\n        \"logical_coherence\": 0.6,\n        \"applicability\": 0.4\n      },\n      \"justification\": \"The narrative explicitly ties the fact to patent infringement, but the content has no logical or legal bearing on either the infringement issue or the hearsay determination, warranting a neutral stance.\"\n    }\n  ],\n  \"relations\": [\n    {\n      \"source\": \"a1\",\n      \"target\": \"phi\",\n      \"type\": \"attack\",\n      \"confidence\": 0.9\n    },\n    {\n      \"source\": \"a2\",\n      \"target\": \"phi\",\n      \"type\": \"attack\",\n      \"confidence\": 0.85\n    },\n    {\n      \"source\": \"a3\",\n      \"target\": \"phi\",\n      \"type\": \"neutral\",\n      \"confidence\": 0.9\n    }\n  ]\n}",
+    "parse_error": null,
+    "n_raw_arguments": 3
+  },
+  "strengths": [
+    {
+      "argument_id": "a1",
+      "tau": 0.85,
+      "rubric": {
+        "legal_relevance": 0.9,
+        "factual_grounding": 0.9,
+        "specificity": 0.8,
+        "logical_coherence": 0.9,
+        "fre_801c_applicability": 0.9
+      },
+      "justification": "Directly addresses the definitional requirement of an out-of-court statement under FRE 801(c). The narrative only cites a fact, not a statement, thus attacking the hearsay claim.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a2",
+      "tau": 0.75,
+      "rubric": {
+        "legal_relevance": 0.8,
+        "factual_grounding": 0.8,
+        "specificity": 0.7,
+        "logical_coherence": 0.8,
+        "fre_801c_applicability": 0.8
+      },
+      "justification": "FRE 801(c) requires the evidence to be offered to prove the truth of the matter asserted. The narrative frames the fact around patent infringement, not truth-assertion, weakening the hearsay applicability.",
+      "model": "combined"
+    }
+  ],
+  "solver_output": {
+    "case_id": "test_0016",
+    "graph": {
+      "nodes": {
+        "phi": {
+          "id": "phi",
+          "text": "Is the statement described in this narrative hearsay under FRE 801(c)?",
+          "tau": 0.5,
+          "sigma": 0.01874999999999999,
+          "is_claim": true
+        },
+        "a1": {
+          "id": "a1",
+          "text": "The narrative references a fact about the chief scientist's reputation for cheating at cards, but contains no out-of-court statement. Under FRE 801(c), the absence of a statement precludes a hearsay finding.",
+          "tau": 0.85,
+          "sigma": 0.85,
+          "is_claim": false
+        },
+        "a2": {
+          "id": "a2",
+          "text": "The fact is introduced on the issue of patent infringement without any indication that an assertion is being offered to prove the truth of the matter asserted. This lack of assertive purpose attacks the hearsay target claim.",
+          "tau": 0.75,
+          "sigma": 0.75,
+          "is_claim": false
+        }
+      },
+      "edges": [
+        {
+          "source": "a1",
+          "target": "phi",
+          "type": "attack",
+          "confidence": 0.9
+        },
+        {
+          "source": "a2",
+          "target": "phi",
+          "type": "attack",
+          "confidence": 0.85
+        }
+      ],
+      "solver_type": "df_quad"
+    },
+    "sigma_phi": 0.01874999999999999,
+    "sigma_all": {
+      "phi": 0.01874999999999999,
+      "a1": 0.85,
+      "a2": 0.75
+    },
+    "iterations": 2,
+    "converged": true,
+    "solver_type": "df_quad"
+  },
+  "sigma_phi": 0.01874999999999999,
+  "decision": "No",
+  "uncertainty": {
+    "is_uncertain": false,
+    "sigma_phi": 0.01874999999999999,
+    "threshold_low": 0.45,
+    "threshold_high": 0.55,
+    "escalation_triggered": false,
+    "escalation_actions": [],
+    "escalation_log": []
+  },
+  "hitl_interventions": [],
+  "pre_hitl_decision": null
+}

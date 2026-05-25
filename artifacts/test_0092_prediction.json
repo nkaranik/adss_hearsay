@@ -1,0 +1,242 @@
+{
+  "case_id": "test_0092",
+  "input_text": "To prove that Arthur and Mary had a conversation, the fact that Arthur told Mary that the weather the following week would be terrible.",
+  "phi_text": "",
+  "gold_label": "No",
+  "extraction": {
+    "case_id": "test_0092",
+    "input_text": "To prove that Arthur and Mary had a conversation, the fact that Arthur told Mary that the weather the following week would be terrible.",
+    "claim": {
+      "id": "phi",
+      "text": "Is the statement described in this narrative hearsay under FRE 801(c)?"
+    },
+    "arguments": [
+      {
+        "id": "a1",
+        "text": "The statement was made out of court, satisfying the first prong of the hearsay definition.",
+        "stance_to_claim": "support",
+        "legal_rule": "FRE 801(c)(1)",
+        "evidence_span": "Arthur told Mary that the weather the following week would be terrible.",
+        "confidence": 0.95
+      },
+      {
+        "id": "a2",
+        "text": "The statement contains an assertion, as predicting the weather constitutes a factual claim.",
+        "stance_to_claim": "support",
+        "legal_rule": "FRE 801(a)",
+        "evidence_span": "the weather the following week would be terrible",
+        "confidence": 0.9
+      },
+      {
+        "id": "a3",
+        "text": "The statement is not offered to prove the truth of the matter asserted, but rather to prove that a conversation occurred.",
+        "stance_to_claim": "attack",
+        "legal_rule": "FRE 801(c)(3)",
+        "evidence_span": "To prove that Arthur and Mary had a conversation",
+        "confidence": 0.95
+      },
+      {
+        "id": "a4",
+        "text": "The statement is offered for a non-hearsay purpose (notice/effect on listener) to establish that a conversation took place.",
+        "stance_to_claim": "attack",
+        "legal_rule": "FRE 801(c) / Non-hearsay purposes doctrine",
+        "evidence_span": "To prove that Arthur and Mary had a conversation",
+        "confidence": 0.9
+      }
+    ],
+    "relations": [
+      {
+        "source": "a1",
+        "target": "phi",
+        "type": "support",
+        "confidence": 0.95
+      },
+      {
+        "source": "a2",
+        "target": "phi",
+        "type": "support",
+        "confidence": 0.9
+      },
+      {
+        "source": "a3",
+        "target": "phi",
+        "type": "attack",
+        "confidence": 0.95
+      },
+      {
+        "source": "a4",
+        "target": "phi",
+        "type": "attack",
+        "confidence": 0.9
+      },
+      {
+        "source": "a3",
+        "target": "a4",
+        "type": "support",
+        "confidence": 0.9
+      }
+    ],
+    "extraction_model": "",
+    "raw_llm_response": "{\n  \"case_id\": \"test_0092\",\n  \"phi\": \"Is the statement described in this narrative hearsay under FRE 801(c)?\",\n  \"arguments\": [\n    {\n      \"id\": \"a1\",\n      \"text\": \"The statement was made out of court, satisfying the first prong of the hearsay definition.\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"FRE 801(c)(1)\",\n      \"evidence_span\": \"Arthur told Mary that the weather the following week would be terrible.\",\n      \"confidence\": 0.95,\n      \"tau\": 0.9,\n      \"rubric\": {\n        \"relevance\": 0.9,\n        \"factual_grounding\": 1.0,\n        \"specificity\": 0.8,\n        \"logical_coherence\": 0.9,\n        \"applicability\": 0.9\n      },\n      \"justification\": \"Directly satisfies the out-of-court requirement for hearsay under FRE 801(c).\"\n    },\n    {\n      \"id\": \"a2\",\n      \"text\": \"The statement contains an assertion, as predicting the weather constitutes a factual claim.\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"FRE 801(a)\",\n      \"evidence_span\": \"the weather the following week would be terrible\",\n      \"confidence\": 0.9,\n      \"tau\": 0.85,\n      \"rubric\": {\n        \"relevance\": 0.8,\n        \"factual_grounding\": 0.9,\n        \"specificity\": 0.7,\n        \"logical_coherence\": 0.9,\n        \"applicability\": 0.9\n      },\n      \"justification\": \"Predictions of future events are generally treated as assertions under the Federal Rules, satisfying the second prong of the hearsay definition.\"\n    },\n    {\n      \"id\": \"a3\",\n      \"text\": \"The statement is not offered to prove the truth of the matter asserted, but rather to prove that a conversation occurred.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"FRE 801(c)(3)\",\n      \"evidence_span\": \"To prove that Arthur and Mary had a conversation\",\n      \"confidence\": 0.95,\n      \"tau\": 0.95,\n      \"rubric\": {\n        \"relevance\": 1.0,\n        \"factual_grounding\": 1.0,\n        \"specificity\": 0.9,\n        \"logical_coherence\": 1.0,\n        \"applicability\": 1.0\n      },\n      \"justification\": \"Directly negates the third prong of the hearsay definition by explicitly stating an alternative purpose for the evidence.\"\n    },\n    {\n      \"id\": \"a4\",\n      \"text\": \"The statement is offered for a non-hearsay purpose (notice/effect on listener) to establish that a conversation took place.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"FRE 801(c) / Non-hearsay purposes doctrine\",\n      \"evidence_span\": \"To prove that Arthur and Mary had a conversation\",\n      \"confidence\": 0.9,\n      \"tau\": 0.9,\n      \"rubric\": {\n        \"relevance\": 0.9,\n        \"factual_grounding\": 0.9,\n        \"specificity\": 0.8,\n        \"logical_coherence\": 0.9,\n        \"applicability\": 0.9\n      },\n      \"justification\": \"Offering a statement to show that words were spoken or to provide notice defeats the hearsay classification, as it does not rely on the declarant's credibility for its probative value.\"\n    }\n  ],\n  \"relations\": [\n    {\n      \"source\": \"a1\",\n      \"target\": \"phi\",\n      \"type\": \"support\",\n      \"confidence\": 0.95\n    },\n    {\n      \"source\": \"a2\",\n      \"target\": \"phi\",\n      \"type\": \"support\",\n      \"confidence\": 0.9\n    },\n    {\n      \"source\": \"a3\",\n      \"target\": \"phi\",\n      \"type\": \"attack\",\n      \"confidence\": 0.95\n    },\n    {\n      \"source\": \"a4\",\n      \"target\": \"phi\",\n      \"type\": \"attack\",\n      \"confidence\": 0.9\n    },\n    {\n      \"source\": \"a3\",\n      \"target\": \"a4\",\n      \"type\": \"support\",\n      \"confidence\": 0.9\n    }\n  ]\n}",
+    "parse_error": null,
+    "n_raw_arguments": 4
+  },
+  "strengths": [
+    {
+      "argument_id": "a1",
+      "tau": 0.9,
+      "rubric": {
+        "legal_relevance": 0.9,
+        "factual_grounding": 1.0,
+        "specificity": 0.8,
+        "logical_coherence": 0.9,
+        "fre_801c_applicability": 0.9
+      },
+      "justification": "Directly satisfies the out-of-court requirement for hearsay under FRE 801(c).",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a2",
+      "tau": 0.85,
+      "rubric": {
+        "legal_relevance": 0.8,
+        "factual_grounding": 0.9,
+        "specificity": 0.7,
+        "logical_coherence": 0.9,
+        "fre_801c_applicability": 0.9
+      },
+      "justification": "Predictions of future events are generally treated as assertions under the Federal Rules, satisfying the second prong of the hearsay definition.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a3",
+      "tau": 0.95,
+      "rubric": {
+        "legal_relevance": 1.0,
+        "factual_grounding": 1.0,
+        "specificity": 0.9,
+        "logical_coherence": 1.0,
+        "fre_801c_applicability": 1.0
+      },
+      "justification": "Directly negates the third prong of the hearsay definition by explicitly stating an alternative purpose for the evidence.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a4",
+      "tau": 0.9,
+      "rubric": {
+        "legal_relevance": 0.9,
+        "factual_grounding": 0.9,
+        "specificity": 0.8,
+        "logical_coherence": 0.9,
+        "fre_801c_applicability": 0.9
+      },
+      "justification": "Offering a statement to show that words were spoken or to provide notice defeats the hearsay classification, as it does not rely on the declarant's credibility for its probative value.",
+      "model": "combined"
+    }
+  ],
+  "solver_output": {
+    "case_id": "test_0092",
+    "graph": {
+      "nodes": {
+        "phi": {
+          "id": "phi",
+          "text": "Is the statement described in this narrative hearsay under FRE 801(c)?",
+          "tau": 0.5,
+          "sigma": 0.4926249999999999,
+          "is_claim": true
+        },
+        "a1": {
+          "id": "a1",
+          "text": "The statement was made out of court, satisfying the first prong of the hearsay definition.",
+          "tau": 0.9,
+          "sigma": 0.9,
+          "is_claim": false
+        },
+        "a2": {
+          "id": "a2",
+          "text": "The statement contains an assertion, as predicting the weather constitutes a factual claim.",
+          "tau": 0.85,
+          "sigma": 0.85,
+          "is_claim": false
+        },
+        "a3": {
+          "id": "a3",
+          "text": "The statement is not offered to prove the truth of the matter asserted, but rather to prove that a conversation occurred.",
+          "tau": 0.95,
+          "sigma": 0.95,
+          "is_claim": false
+        },
+        "a4": {
+          "id": "a4",
+          "text": "The statement is offered for a non-hearsay purpose (notice/effect on listener) to establish that a conversation took place.",
+          "tau": 0.9,
+          "sigma": 0.995,
+          "is_claim": false
+        }
+      },
+      "edges": [
+        {
+          "source": "a1",
+          "target": "phi",
+          "type": "support",
+          "confidence": 0.95
+        },
+        {
+          "source": "a2",
+          "target": "phi",
+          "type": "support",
+          "confidence": 0.9
+        },
+        {
+          "source": "a3",
+          "target": "phi",
+          "type": "attack",
+          "confidence": 0.95
+        },
+        {
+          "source": "a4",
+          "target": "phi",
+          "type": "attack",
+          "confidence": 0.9
+        },
+        {
+          "source": "a3",
+          "target": "a4",
+          "type": "support",
+          "confidence": 0.9
+        }
+      ],
+      "solver_type": "df_quad"
+    },
+    "sigma_phi": 0.4926249999999999,
+    "sigma_all": {
+      "phi": 0.4926249999999999,
+      "a1": 0.9,
+      "a2": 0.85,
+      "a3": 0.95,
+      "a4": 0.995
+    },
+    "iterations": 2,
+    "converged": true,
+    "solver_type": "df_quad"
+  },
+  "sigma_phi": 0.4926249999999999,
+  "decision": "UNCERTAIN",
+  "uncertainty": {
+    "is_uncertain": true,
+    "sigma_phi": 0.4926249999999999,
+    "threshold_low": 0.45,
+    "threshold_high": 0.55,
+    "escalation_triggered": true,
+    "escalation_actions": [
+      "rerun_extraction",
+      "human_review"
+    ],
+    "escalation_log": [
+      "[test_0092] UNCERTAIN σ(φ)=0.4926 ∈ [0.45,0.55]. Human review recommended."
+    ]
+  },
+  "hitl_interventions": [],
+  "pre_hitl_decision": null
+}

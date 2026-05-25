@@ -12,142 +12,106 @@
     },
     "arguments": [
       {
-        "id": "a1",
-        "text": "Narrative describes conduct or omission, not an out-of-court assertion.",
-        "stance_to_claim": "attack",
-        "legal_rule": "FRE 801(c) requires an assertion offered for truth.",
-        "evidence_span": null,
-        "confidence": 0.9
-      },
-      {
         "id": "a2",
-        "text": "FRE 801(c) mandates a declarant's assertion for hearsay classification.",
+        "text": "The narrative cites the fact that Barbara did not consult her usual charts during the assessment, which describes conduct rather than an explicit out-of-court assertion, potentially attacking the threshold requirement for hearsay.",
         "stance_to_claim": "attack",
-        "legal_rule": "Federal Rules of Evidence 801(c) definition.",
-        "evidence_span": null,
-        "confidence": 0.88
+        "legal_rule": "FRE 801(c) requires an out-of-court statement; mere conduct or circumstantial facts without intent to assert may not qualify as hearsay.",
+        "evidence_span": "the fact that Barbara didn't consult with her usual charts while assessing Elizabethg.",
+        "confidence": 0.7
       },
       {
         "id": "a3",
-        "text": "Medical assessment omissions lack the requisite assertive intent.",
-        "stance_to_claim": "attack",
-        "legal_rule": "Non-assertive conduct falls outside hearsay scope.",
-        "evidence_span": null,
-        "confidence": 0.85
+        "text": "If the cited fact regarding the charts is construed as an assertion of Barbara's deviation from standard practice, it is offered to prove the truth of that matter (i.e., that the assessment was flawed), supporting a hearsay classification.",
+        "stance_to_claim": "support",
+        "legal_rule": "FRE 801(c) defines hearsay as an out-of-court statement offered to prove the truth of the matter asserted.",
+        "evidence_span": "the fact that Barbara didn't consult with her usual charts while assessing Elizabethg.",
+        "confidence": 0.8
       },
       {
         "id": "a4",
-        "text": "The fragment lacks a clear declarant making a testimonial claim.",
-        "stance_to_claim": "attack",
-        "legal_rule": "Hearsay requires identifiable declarant and assertion.",
-        "evidence_span": null,
-        "confidence": 0.82
-      },
-      {
-        "id": "a5",
-        "text": "Hearsay doctrine targets verbal assertions, not procedural failures.",
-        "stance_to_claim": "attack",
-        "legal_rule": "FRE 801(c) excludes non-assertive conduct.",
-        "evidence_span": null,
-        "confidence": 0.84
+        "text": "The narrative does not suggest the fact is offered for a non-hearsay purpose such as notice, effect on the listener, or impeachment, reinforcing the inference that it is offered for its truth.",
+        "stance_to_claim": "support",
+        "legal_rule": "FRE 801(c) hearsay analysis hinges on the purpose for which the evidence is offered; absence of non-hearsay purpose supports truth-offering inference.",
+        "evidence_span": "On the issue of whether Elizabeth was misdiagnosed by Barbara, the fact that Barbara didn't consult with her usual charts while assessing Elizabethg.",
+        "confidence": 0.8
       }
     ],
     "relations": [
       {
-        "source": "a1",
-        "target": "a2",
-        "type": "support",
-        "confidence": 0.85
-      },
-      {
-        "source": "a1",
-        "target": "a3",
-        "type": "support",
-        "confidence": 0.82
-      },
-      {
         "source": "a2",
-        "target": "a4",
+        "target": "phi",
+        "type": "attack",
+        "confidence": 0.7
+      },
+      {
+        "source": "a3",
+        "target": "phi",
         "type": "support",
         "confidence": 0.8
       },
       {
-        "source": "a3",
-        "target": "a5",
+        "source": "a4",
+        "target": "phi",
         "type": "support",
-        "confidence": 0.78
+        "confidence": 0.8
+      },
+      {
+        "source": "a2",
+        "target": "a3",
+        "type": "attack",
+        "confidence": 0.7
+      },
+      {
+        "source": "a4",
+        "target": "a3",
+        "type": "support",
+        "confidence": 0.8
       }
     ],
     "extraction_model": "",
-    "raw_llm_response": "{\n  \"case_id\": \"test_0008\",\n  \"arguments\": [\n    {\n      \"id\": \"a1\",\n      \"text\": \"Narrative describes conduct or omission, not an out-of-court assertion.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"FRE 801(c) requires an assertion offered for truth.\",\n      \"evidence_span\": null,\n      \"confidence\": 0.9,\n      \"rubric\": {\n        \"legal_relevance\": 0.9,\n        \"factual_grounding\": 0.8,\n        \"specificity\": 0.7,\n        \"logical_coherence\": 0.9,\n        \"fre_801c_applicability\": 0.9\n      },\n      \"tau\": 0.85,\n      \"justification\": \"Fails to meet the assertion requirement of FRE 801(c).\"\n    },\n    {\n      \"id\": \"a2\",\n      \"text\": \"FRE 801(c) mandates a declarant's assertion for hearsay classification.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"Federal Rules of Evidence 801(c) definition.\",\n      \"evidence_span\": null,\n      \"confidence\": 0.88,\n      \"rubric\": {\n        \"legal_relevance\": 0.9,\n        \"factual_grounding\": 0.85,\n        \"specificity\": 0.8,\n        \"logical_coherence\": 0.9,\n        \"fre_801c_applicability\": 0.9\n      },\n      \"tau\": 0.87,\n      \"justification\": \"Directly applies the statutory definition to refute hearsay status.\"\n    },\n    {\n      \"id\": \"a3\",\n      \"text\": \"Medical assessment omissions lack the requisite assertive intent.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"Non-assertive conduct falls outside hearsay scope.\",\n      \"evidence_span\": null,\n      \"confidence\": 0.85,\n      \"rubric\": {\n        \"legal_relevance\": 0.85,\n        \"factual_grounding\": 0.8,\n        \"specificity\": 0.75,\n        \"logical_coherence\": 0.85,\n        \"fre_801c_applicability\": 0.85\n      },\n      \"tau\": 0.82,\n      \"justification\": \"Conduct without assertive intent cannot constitute hearsay.\"\n    },\n    {\n      \"id\": \"a4\",\n      \"text\": \"The fragment lacks a clear declarant making a testimonial claim.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"Hearsay requires identifiable declarant and assertion.\",\n      \"evidence_span\": null,\n      \"confidence\": 0.82,\n      \"rubric\": {\n        \"legal_relevance\": 0.8,\n        \"factual_grounding\": 0.75,\n        \"specificity\": 0.7,\n        \"logical_coherence\": 0.8,\n        \"fre_801c_applicability\": 0.8\n      },\n      \"tau\": 0.78,\n      \"justification\": \"Absence of a declarant precludes hearsay classification.\"\n    },\n    {\n      \"id\": \"a5\",\n      \"text\": \"Hearsay doctrine targets verbal assertions, not procedural failures.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"FRE 801(c) excludes non-assertive conduct.\",\n      \"evidence_span\": null,\n      \"confidence\": 0.84,\n      \"rubric\": {\n        \"legal_relevance\": 0.85,\n        \"factual_grounding\": 0.8,\n        \"specificity\": 0.75,\n        \"logical_coherence\": 0.85,\n        \"fre_801c_applicability\": 0.85\n      },\n      \"tau\": 0.81,\n      \"justification\": \"Procedural omissions do not trigger hearsay rules.\"\n    }\n  ],\n  \"relations\": [\n    {\"source\": \"a1\", \"target\": \"a2\", \"type\": \"support\", \"confidence\": 0.85},\n    {\"source\": \"a1\", \"target\": \"a3\", \"type\": \"support\", \"confidence\": 0.82},\n    {\"source\": \"a2\", \"target\": \"a4\", \"type\": \"support\", \"confidence\": 0.8},\n    {\"source\": \"a3\", \"target\": \"a5\", \"type\": \"support\", \"confidence\": 0.78}\n  ]\n}",
+    "raw_llm_response": "{\n  \"case_id\": \"test_0008\",\n  \"phi\": \"Is the statement described in this narrative hearsay under FRE 801(c)?\",\n  \"arguments\": [\n    {\n      \"id\": \"a1\",\n      \"text\": \"The narrative frames the substantive dispute as whether Elizabeth was misdiagnosed by Barbara, providing the context for the evidence but not directly resolving the hearsay question.\",\n      \"stance_to_claim\": \"neutral\",\n      \"legal_rule\": \"FRE 801(c) hearsay analysis focuses on the nature and purpose of the evidence, not the underlying substantive dispute.\",\n      \"evidence_span\": \"On the issue of whether Elizabeth was misdiagnosed by Barbara\",\n      \"confidence\": 0.9,\n      \"tau\": 0.5,\n      \"rubric\": {\n        \"relevance\": 0.3,\n        \"factual_grounding\": 0.9,\n        \"specificity\": 0.4,\n        \"logical_coherence\": 0.8,\n        \"applicability\": 0.5\n      },\n      \"justification\": \"Background context; does not directly determine hearsay status under FRE 801(c).\"\n    },\n    {\n      \"id\": \"a2\",\n      \"text\": \"The narrative cites the fact that Barbara did not consult her usual charts during the assessment, which describes conduct rather than an explicit out-of-court assertion, potentially attacking the threshold requirement for hearsay.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"FRE 801(c) requires an out-of-court statement; mere conduct or circumstantial facts without intent to assert may not qualify as hearsay.\",\n      \"evidence_span\": \"the fact that Barbara didn't consult with her usual charts while assessing Elizabethg.\",\n      \"confidence\": 0.7,\n      \"tau\": 0.6,\n      \"rubric\": {\n        \"relevance\": 0.7,\n        \"factual_grounding\": 0.8,\n        \"specificity\": 0.6,\n        \"logical_coherence\": 0.7,\n        \"applicability\": 0.8\n      },\n      \"justification\": \"Conduct may not meet the assertion requirement for hearsay, weakening the claim that FRE 801(c) applies.\"\n    },\n    {\n      \"id\": \"a3\",\n      \"text\": \"If the cited fact regarding the charts is construed as an assertion of Barbara's deviation from standard practice, it is offered to prove the truth of that matter (i.e., that the assessment was flawed), supporting a hearsay classification.\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"FRE 801(c) defines hearsay as an out-of-court statement offered to prove the truth of the matter asserted.\",\n      \"evidence_span\": \"the fact that Barbara didn't consult with her usual charts while assessing Elizabethg.\",\n      \"confidence\": 0.8,\n      \"tau\": 0.7,\n      \"rubric\": {\n        \"relevance\": 0.8,\n        \"factual_grounding\": 0.7,\n        \"specificity\": 0.5,\n        \"logical_coherence\": 0.8,\n        \"applicability\": 0.9\n      },\n      \"justification\": \"If treated as an assertion, offering it to prove flawed assessment aligns with the truth-of-the-matter asserted prong.\"\n    },\n    {\n      \"id\": \"a4\",\n      \"text\": \"The narrative does not suggest the fact is offered for a non-hearsay purpose such as notice, effect on the listener, or impeachment, reinforcing the inference that it is offered for its truth.\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"FRE 801(c) hearsay analysis hinges on the purpose for which the evidence is offered; absence of non-hearsay purpose supports truth-offering inference.\",\n      \"evidence_span\": \"On the issue of whether Elizabeth was misdiagnosed by Barbara, the fact that Barbara didn't consult with her usual charts while assessing Elizabethg.\",\n      \"confidence\": 0.8,\n      \"tau\": 0.6,\n      \"rubric\": {\n        \"relevance\": 0.6,\n        \"factual_grounding\": 0.5,\n        \"specificity\": 0.4,\n        \"logical_coherence\": 0.7,\n        \"applicability\": 0.8\n      },\n      \"justification\": \"Absence of alternative purpose language supports the inference that the evidence is offered for its truth.\"\n    }\n  ],\n  \"relations\": [\n    {\n      \"source\": \"a1\",\n      \"target\": \"phi\",\n      \"type\": \"neutral\",\n      \"confidence\": 0.9\n    },\n    {\n      \"source\": \"a2\",\n      \"target\": \"phi\",\n      \"type\": \"attack\",\n      \"confidence\": 0.7\n    },\n    {\n      \"source\": \"a3\",\n      \"target\": \"phi\",\n      \"type\": \"support\",\n      \"confidence\": 0.8\n    },\n    {\n      \"source\": \"a4\",\n      \"target\": \"phi\",\n      \"type\": \"support\",\n      \"confidence\": 0.8\n    },\n    {\n      \"source\": \"a2\",\n      \"target\": \"a3\",\n      \"type\": \"attack\",\n      \"confidence\": 0.7\n    },\n    {\n      \"source\": \"a4\",\n      \"target\": \"a3\",\n      \"type\": \"support\",\n      \"confidence\": 0.8\n    }\n  ]\n}",
     "parse_error": null,
-    "n_raw_arguments": 5
+    "n_raw_arguments": 4
   },
   "strengths": [
     {
-      "argument_id": "a1",
-      "tau": 0.9,
-      "rubric": {
-        "relevance": 0.9,
-        "factual_grounding": 0.9,
-        "specificity": 0.9,
-        "logical_coherence": 0.9,
-        "applicability": 0.9
-      },
-      "justification": "Fallback from extraction confidence.",
-      "model": "fallback"
-    },
-    {
       "argument_id": "a2",
-      "tau": 0.88,
+      "tau": 0.6,
       "rubric": {
-        "relevance": 0.88,
-        "factual_grounding": 0.88,
-        "specificity": 0.88,
-        "logical_coherence": 0.88,
-        "applicability": 0.88
+        "legal_relevance": 0.7,
+        "factual_grounding": 0.8,
+        "specificity": 0.6,
+        "logical_coherence": 0.7,
+        "fre_801c_applicability": 0.8
       },
-      "justification": "Fallback from extraction confidence.",
-      "model": "fallback"
+      "justification": "Conduct may not meet the assertion requirement for hearsay, weakening the claim that FRE 801(c) applies.",
+      "model": "combined"
     },
     {
       "argument_id": "a3",
-      "tau": 0.85,
+      "tau": 0.7,
       "rubric": {
-        "relevance": 0.85,
-        "factual_grounding": 0.85,
-        "specificity": 0.85,
-        "logical_coherence": 0.85,
-        "applicability": 0.85
+        "legal_relevance": 0.8,
+        "factual_grounding": 0.7,
+        "specificity": 0.5,
+        "logical_coherence": 0.8,
+        "fre_801c_applicability": 0.9
       },
-      "justification": "Fallback from extraction confidence.",
-      "model": "fallback"
+      "justification": "If treated as an assertion, offering it to prove flawed assessment aligns with the truth-of-the-matter asserted prong.",
+      "model": "combined"
     },
     {
       "argument_id": "a4",
-      "tau": 0.82,
+      "tau": 0.6,
       "rubric": {
-        "relevance": 0.82,
-        "factual_grounding": 0.82,
-        "specificity": 0.82,
-        "logical_coherence": 0.82,
-        "applicability": 0.82
+        "legal_relevance": 0.6,
+        "factual_grounding": 0.5,
+        "specificity": 0.4,
+        "logical_coherence": 0.7,
+        "fre_801c_applicability": 0.8
       },
-      "justification": "Fallback from extraction confidence.",
-      "model": "fallback"
-    },
-    {
-      "argument_id": "a5",
-      "tau": 0.84,
-      "rubric": {
-        "relevance": 0.84,
-        "factual_grounding": 0.84,
-        "specificity": 0.84,
-        "logical_coherence": 0.84,
-        "applicability": 0.84
-      },
-      "justification": "Fallback from extraction confidence.",
-      "model": "fallback"
+      "justification": "Absence of alternative purpose language supports the inference that the evidence is offered for its truth.",
+      "model": "combined"
     }
   ],
   "solver_output": {
@@ -158,121 +122,81 @@
           "id": "phi",
           "text": "Is the statement described in this narrative hearsay under FRE 801(c)?",
           "tau": 0.5,
-          "sigma": 4.665601238684758e-11,
+          "sigma": 0.5920000000000001,
           "is_claim": true
-        },
-        "a1": {
-          "id": "a1",
-          "text": "Narrative describes conduct or omission, not an out-of-court assertion.",
-          "tau": 0.9,
-          "sigma": 0.9,
-          "is_claim": false
         },
         "a2": {
           "id": "a2",
-          "text": "FRE 801(c) mandates a declarant's assertion for hearsay classification.",
-          "tau": 0.88,
-          "sigma": 0.988,
+          "text": "The narrative cites the fact that Barbara did not consult her usual charts during the assessment, which describes conduct rather than an explicit out-of-court assertion, potentially attacking the threshold requirement for hearsay.",
+          "tau": 0.6,
+          "sigma": 0.6,
           "is_claim": false
         },
         "a3": {
           "id": "a3",
-          "text": "Medical assessment omissions lack the requisite assertive intent.",
-          "tau": 0.85,
-          "sigma": 0.985,
+          "text": "If the cited fact regarding the charts is construed as an assertion of Barbara's deviation from standard practice, it is offered to prove the truth of that matter (i.e., that the assessment was flawed), supporting a hearsay classification.",
+          "tau": 0.7,
+          "sigma": 0.46,
           "is_claim": false
         },
         "a4": {
           "id": "a4",
-          "text": "The fragment lacks a clear declarant making a testimonial claim.",
-          "tau": 0.82,
-          "sigma": 0.9978400000000001,
-          "is_claim": false
-        },
-        "a5": {
-          "id": "a5",
-          "text": "Hearsay doctrine targets verbal assertions, not procedural failures.",
-          "tau": 0.84,
-          "sigma": 0.9976,
+          "text": "The narrative does not suggest the fact is offered for a non-hearsay purpose such as notice, effect on the listener, or impeachment, reinforcing the inference that it is offered for its truth.",
+          "tau": 0.6,
+          "sigma": 0.6,
           "is_claim": false
         }
       },
       "edges": [
         {
-          "source": "a1",
-          "target": "a2",
-          "type": "support",
-          "confidence": 0.85
-        },
-        {
-          "source": "a1",
-          "target": "a3",
-          "type": "support",
-          "confidence": 0.82
-        },
-        {
           "source": "a2",
-          "target": "a4",
+          "target": "phi",
+          "type": "attack",
+          "confidence": 0.7
+        },
+        {
+          "source": "a3",
+          "target": "phi",
           "type": "support",
           "confidence": 0.8
         },
         {
-          "source": "a3",
-          "target": "a5",
-          "type": "support",
-          "confidence": 0.78
-        },
-        {
-          "source": "a1",
+          "source": "a4",
           "target": "phi",
-          "type": "attack",
-          "confidence": 0.9
+          "type": "support",
+          "confidence": 0.8
         },
         {
           "source": "a2",
-          "target": "phi",
+          "target": "a3",
           "type": "attack",
-          "confidence": 0.88
-        },
-        {
-          "source": "a3",
-          "target": "phi",
-          "type": "attack",
-          "confidence": 0.85
+          "confidence": 0.7
         },
         {
           "source": "a4",
-          "target": "phi",
-          "type": "attack",
-          "confidence": 0.82
-        },
-        {
-          "source": "a5",
-          "target": "phi",
-          "type": "attack",
-          "confidence": 0.84
+          "target": "a3",
+          "type": "support",
+          "confidence": 0.8
         }
       ],
       "solver_type": "df_quad"
     },
-    "sigma_phi": 4.665601238684758e-11,
+    "sigma_phi": 0.5920000000000001,
     "sigma_all": {
-      "phi": 4.665601238684758e-11,
-      "a1": 0.9,
-      "a2": 0.988,
-      "a3": 0.985,
-      "a4": 0.9978400000000001,
-      "a5": 0.9976
+      "phi": 0.5920000000000001,
+      "a2": 0.6,
+      "a3": 0.46,
+      "a4": 0.6
     },
     "iterations": 2,
     "converged": true,
     "solver_type": "df_quad"
   },
-  "sigma_phi": 4.665601238684758e-11,
-  "decision": "No",
+  "sigma_phi": 0.5920000000000001,
+  "decision": "Yes",
   "uncertainty": {
     "is_uncertain": false,
-    "sigma_phi": 4.665601238684758e-11,
+    "sigma_phi": 0.5920000000000001,
     "threshold_low": 0.45,
     "threshold_high": 0.55,
     "escalation_triggered": false,

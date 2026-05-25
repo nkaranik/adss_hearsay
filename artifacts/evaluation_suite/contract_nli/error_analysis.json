@@ -1,0 +1,11 @@
+{
+  "proportions": {
+    "argument_omission": 0.0,
+    "relation_error": 0.0,
+    "strength_miscalibration": 0.0,
+    "alternative_claim_alignment_error": 0.0,
+    "threshold_uncertainty_failure": 0.0,
+    "task_transfer_failure": 0.0
+  },
+  "errors": []
+}

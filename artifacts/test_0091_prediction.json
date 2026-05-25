@@ -1,0 +1,242 @@
+{
+  "case_id": "test_0091",
+  "input_text": "To prove that Michael knew of the existing patent, the fact that he told his friend that the patent was poorly written.",
+  "phi_text": "",
+  "gold_label": "No",
+  "extraction": {
+    "case_id": "test_0091",
+    "input_text": "To prove that Michael knew of the existing patent, the fact that he told his friend that the patent was poorly written.",
+    "claim": {
+      "id": "phi",
+      "text": "Is the statement described in this narrative hearsay under FRE 801(c)?"
+    },
+    "arguments": [
+      {
+        "id": "a1",
+        "text": "Michael made an out-of-court statement to his friend.",
+        "stance_to_claim": "support",
+        "legal_rule": "FRE 801(c) requires a statement made out of court.",
+        "evidence_span": "he told his friend",
+        "confidence": 0.95
+      },
+      {
+        "id": "a2",
+        "text": "The statement contains an assertion that the patent was poorly written.",
+        "stance_to_claim": "support",
+        "legal_rule": "FRE 801(c) requires the statement to contain an assertion.",
+        "evidence_span": "that the patent was poorly written",
+        "confidence": 0.95
+      },
+      {
+        "id": "a3",
+        "text": "The statement is offered to prove Michael's knowledge of the patent, not the truth of the matter asserted.",
+        "stance_to_claim": "attack",
+        "legal_rule": "FRE 801(c) defines hearsay only when offered to prove the truth of the matter asserted.",
+        "evidence_span": "To prove that Michael knew of the existing patent",
+        "confidence": 0.95
+      },
+      {
+        "id": "a4",
+        "text": "Because the statement is offered to show the declarant's state of mind (knowledge), it falls outside the definition of hearsay under FRE 801(c).",
+        "stance_to_claim": "attack",
+        "legal_rule": "FRE 801(c) hearsay analysis focuses on the purpose for which the statement is offered.",
+        "evidence_span": "To prove that Michael knew of the existing patent",
+        "confidence": 0.95
+      }
+    ],
+    "relations": [
+      {
+        "source": "a1",
+        "target": "phi",
+        "type": "support",
+        "confidence": 0.95
+      },
+      {
+        "source": "a2",
+        "target": "phi",
+        "type": "support",
+        "confidence": 0.95
+      },
+      {
+        "source": "a3",
+        "target": "phi",
+        "type": "attack",
+        "confidence": 0.95
+      },
+      {
+        "source": "a4",
+        "target": "phi",
+        "type": "attack",
+        "confidence": 0.95
+      },
+      {
+        "source": "a3",
+        "target": "a4",
+        "type": "support",
+        "confidence": 0.95
+      }
+    ],
+    "extraction_model": "",
+    "raw_llm_response": "{\n  \"case_id\": \"test_0091\",\n  \"phi\": \"Is the statement described in this narrative hearsay under FRE 801(c)?\",\n  \"arguments\": [\n    {\n      \"id\": \"a1\",\n      \"text\": \"Michael made an out-of-court statement to his friend.\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"FRE 801(c) requires a statement made out of court.\",\n      \"evidence_span\": \"he told his friend\",\n      \"confidence\": 0.95,\n      \"tau\": 0.90,\n      \"rubric\": {\n        \"relevance\": 0.80,\n        \"factual_grounding\": 1.00,\n        \"specificity\": 0.80,\n        \"logical_coherence\": 0.90,\n        \"applicability\": 0.90\n      },\n      \"justification\": \"Establishes the first element of the hearsay definition: an out-of-court statement.\"\n    },\n    {\n      \"id\": \"a2\",\n      \"text\": \"The statement contains an assertion that the patent was poorly written.\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"FRE 801(c) requires the statement to contain an assertion.\",\n      \"evidence_span\": \"that the patent was poorly written\",\n      \"confidence\": 0.95,\n      \"tau\": 0.90,\n      \"rubric\": {\n        \"relevance\": 0.80,\n        \"factual_grounding\": 1.00,\n        \"specificity\": 0.80,\n        \"logical_coherence\": 0.90,\n        \"applicability\": 0.90\n      },\n      \"justification\": \"Establishes the second element of the hearsay definition: an assertion.\"\n    },\n    {\n      \"id\": \"a3\",\n      \"text\": \"The statement is offered to prove Michael's knowledge of the patent, not the truth of the matter asserted.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"FRE 801(c) defines hearsay only when offered to prove the truth of the matter asserted.\",\n      \"evidence_span\": \"To prove that Michael knew of the existing patent\",\n      \"confidence\": 0.95,\n      \"tau\": 0.95,\n      \"rubric\": {\n        \"relevance\": 1.00,\n        \"factual_grounding\": 1.00,\n        \"specificity\": 1.00,\n        \"logical_coherence\": 1.00,\n        \"applicability\": 1.00\n      },\n      \"justification\": \"Directly addresses the purpose for which the statement is offered, which is the decisive factor in the hearsay analysis.\"\n    },\n    {\n      \"id\": \"a4\",\n      \"text\": \"Because the statement is offered to show the declarant's state of mind (knowledge), it falls outside the definition of hearsay under FRE 801(c).\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"FRE 801(c) hearsay analysis focuses on the purpose for which the statement is offered.\",\n      \"evidence_span\": \"To prove that Michael knew of the existing patent\",\n      \"confidence\": 0.95,\n      \"tau\": 0.90,\n      \"rubric\": {\n        \"relevance\": 1.00,\n        \"factual_grounding\": 0.90,\n        \"specificity\": 0.90,\n        \"logical_coherence\": 1.00,\n        \"applicability\": 1.00\n      },\n      \"justification\": \"Synthesizes the purpose of the evidence with the legal rule to conclude it is not hearsay.\"\n    }\n  ],\n  \"relations\": [\n    {\n      \"source\": \"a1\",\n      \"target\": \"phi\",\n      \"type\": \"support\",\n      \"confidence\": 0.95\n    },\n    {\n      \"source\": \"a2\",\n      \"target\": \"phi\",\n      \"type\": \"support\",\n      \"confidence\": 0.95\n    },\n    {\n      \"source\": \"a3\",\n      \"target\": \"phi\",\n      \"type\": \"attack\",\n      \"confidence\": 0.95\n    },\n    {\n      \"source\": \"a4\",\n      \"target\": \"phi\",\n      \"type\": \"attack\",\n      \"confidence\": 0.95\n    },\n    {\n      \"source\": \"a3\",\n      \"target\": \"a4\",\n      \"type\": \"support\",\n      \"confidence\": 0.95\n    }\n  ]\n}",
+    "parse_error": null,
+    "n_raw_arguments": 4
+  },
+  "strengths": [
+    {
+      "argument_id": "a1",
+      "tau": 0.9,
+      "rubric": {
+        "legal_relevance": 0.8,
+        "factual_grounding": 1.0,
+        "specificity": 0.8,
+        "logical_coherence": 0.9,
+        "fre_801c_applicability": 0.9
+      },
+      "justification": "Establishes the first element of the hearsay definition: an out-of-court statement.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a2",
+      "tau": 0.9,
+      "rubric": {
+        "legal_relevance": 0.8,
+        "factual_grounding": 1.0,
+        "specificity": 0.8,
+        "logical_coherence": 0.9,
+        "fre_801c_applicability": 0.9
+      },
+      "justification": "Establishes the second element of the hearsay definition: an assertion.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a3",
+      "tau": 0.95,
+      "rubric": {
+        "legal_relevance": 1.0,
+        "factual_grounding": 1.0,
+        "specificity": 1.0,
+        "logical_coherence": 1.0,
+        "fre_801c_applicability": 1.0
+      },
+      "justification": "Directly addresses the purpose for which the statement is offered, which is the decisive factor in the hearsay analysis.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a4",
+      "tau": 0.9,
+      "rubric": {
+        "legal_relevance": 1.0,
+        "factual_grounding": 0.9,
+        "specificity": 0.9,
+        "logical_coherence": 1.0,
+        "fre_801c_applicability": 1.0
+      },
+      "justification": "Synthesizes the purpose of the evidence with the legal rule to conclude it is not hearsay.",
+      "model": "combined"
+    }
+  ],
+  "solver_output": {
+    "case_id": "test_0091",
+    "graph": {
+      "nodes": {
+        "phi": {
+          "id": "phi",
+          "text": "Is the statement described in this narrative hearsay under FRE 801(c)?",
+          "tau": 0.5,
+          "sigma": 0.495125,
+          "is_claim": true
+        },
+        "a1": {
+          "id": "a1",
+          "text": "Michael made an out-of-court statement to his friend.",
+          "tau": 0.9,
+          "sigma": 0.9,
+          "is_claim": false
+        },
+        "a2": {
+          "id": "a2",
+          "text": "The statement contains an assertion that the patent was poorly written.",
+          "tau": 0.9,
+          "sigma": 0.9,
+          "is_claim": false
+        },
+        "a3": {
+          "id": "a3",
+          "text": "The statement is offered to prove Michael's knowledge of the patent, not the truth of the matter asserted.",
+          "tau": 0.95,
+          "sigma": 0.95,
+          "is_claim": false
+        },
+        "a4": {
+          "id": "a4",
+          "text": "Because the statement is offered to show the declarant's state of mind (knowledge), it falls outside the definition of hearsay under FRE 801(c).",
+          "tau": 0.9,
+          "sigma": 0.995,
+          "is_claim": false
+        }
+      },
+      "edges": [
+        {
+          "source": "a1",
+          "target": "phi",
+          "type": "support",
+          "confidence": 0.95
+        },
+        {
+          "source": "a2",
+          "target": "phi",
+          "type": "support",
+          "confidence": 0.95
+        },
+        {
+          "source": "a3",
+          "target": "phi",
+          "type": "attack",
+          "confidence": 0.95
+        },
+        {
+          "source": "a4",
+          "target": "phi",
+          "type": "attack",
+          "confidence": 0.95
+        },
+        {
+          "source": "a3",
+          "target": "a4",
+          "type": "support",
+          "confidence": 0.95
+        }
+      ],
+      "solver_type": "df_quad"
+    },
+    "sigma_phi": 0.495125,
+    "sigma_all": {
+      "phi": 0.495125,
+      "a1": 0.9,
+      "a2": 0.9,
+      "a3": 0.95,
+      "a4": 0.995
+    },
+    "iterations": 2,
+    "converged": true,
+    "solver_type": "df_quad"
+  },
+  "sigma_phi": 0.495125,
+  "decision": "UNCERTAIN",
+  "uncertainty": {
+    "is_uncertain": true,
+    "sigma_phi": 0.495125,
+    "threshold_low": 0.45,
+    "threshold_high": 0.55,
+    "escalation_triggered": true,
+    "escalation_actions": [
+      "rerun_extraction",
+      "human_review"
+    ],
+    "escalation_log": [
+      "[test_0091] UNCERTAIN σ(φ)=0.4951 ∈ [0.45,0.55]. Human review recommended."
+    ]
+  },
+  "hitl_interventions": [],
+  "pre_hitl_decision": null
+}

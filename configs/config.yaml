@@ -2,12 +2,9 @@ system:
   name: "ADSS-Hearsay"
   version: "1.0.0"
   log_level: "INFO"
-  artifact_dir: "artifacts"
+  artifact_dir: "artifacts/contract_nli_predictions"
   seed: 42
 
-# ── Backend selection ─────────────────────────────────────────────────────────
-# "gemini"    → Google Gemini API  (needs GEMINI_API_KEY)
-# "lmstudio"  → Local LM Studio   (needs LM Studio running on localhost)
 backend: "gemini"
 
 gemini:
@@ -16,12 +13,14 @@ gemini:
   temperature: 0.0
 
 lmstudio:
-  base_url:    "http://127.0.0.1:1234/v1"
-  model:       "qwen/qwen3.6-35b-a3b"   # must match model loaded in LM Studio
-  max_tokens:  260000    # for 262144 context: 262144 - 700 (prompt) - 1444 (buffer)
+  base_url: "http://127.0.0.1:1234/v1"
+  model: "qwen/qwen3.6-35b-a3b"
+  max_tokens: 260000
   temperature: 0.0
-  disable_thinking: true   # appends /no_think for Qwen3 reasoning models
+  disable_thinking: true
 
+# Backward-compatible default dataset block.
+# Existing code that expects cfg["dataset"] will still work.
 dataset:
   source: "huggingface"
   hf_repo: "nguha/legalbench"
@@ -31,8 +30,30 @@ dataset:
   max_samples: null
   local_cache: "data/hearsay_cache.json"
 
+# New multi-benchmark configuration used by scripts/run_evaluation_suite.py.
+datasets:
+  hearsay:
+    source: "huggingface"
+    hf_repo: "nguha/legalbench"
+    hf_config: "hearsay"
+    train_split: "train"
+    test_split: "test"
+    max_samples: null
+    local_cache: "data/hearsay_cache.json"
+    decision_problem: "Is the statement described in this narrative hearsay under FRE 801(c)?"
+
+  contract_nli:
+    source: "huggingface"
+    hf_repo: "nguha/legalbench"
+    hf_config: "contract_nli_confidentiality_of_agreement"
+    train_split: "train"
+    test_split: "test"
+    max_samples: null
+    local_cache: "data/contract_nli_confidentiality_cache.json"
+    decision_problem: "Does the contract context entail the target confidentiality statement?"
+
 mining:
-  max_arguments: 6          # fewer args = faster + fewer tokens
+  max_arguments: 6
   min_confidence: 0.3
   include_neutral_relations: false
   max_retries: 2
@@ -52,7 +73,7 @@ qbaf:
 evaluation:
   bootstrap_samples: 1000
   confidence_level: 0.95
-  output_dir: "artifacts/evaluation"
+  output_dir: "artifacts/evaluation_suite"
 
 baselines:
   few_shot_examples: 3

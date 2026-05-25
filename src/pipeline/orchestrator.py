@@ -1,6 +1,18 @@
 """
-End-to-end ADSS pipeline orchestrator — generic decision support.
-Supports any decision problem, not just FRE hearsay.
+End-to-end ADSS pipeline orchestrator.
+
+This module coordinates:
+- LLM argument extraction + strength attribution
+- QBAF graph construction
+- symbolic solving
+- uncertainty handling
+- HITL interventions
+- baseline runners
+
+Important evaluation behavior:
+- run_case accepts an explicit decision_problem.
+- For LegalBench hearsay evaluation, scripts should pass the fixed FRE 801(c) phi.
+- For generic dashboard use, decision_problem may be omitted and the extractor may infer phi.
 """
 from __future__ import annotations
 
@@ -10,10 +22,17 @@ from datetime import datetime, timezone
 from pathlib import Path
 
 from src.data.models import (
-    ADSSPrediction, BaselinePrediction, Decision,
-    EscalationAction, ExtractionResult, HearsayExample,
-    HITLIntervention, QBAFEdge, RelationType,
-    SolverType, UncertaintyFlags,
+    ADSSPrediction,
+    BaselinePrediction,
+    Decision,
+    EscalationAction,
+    ExtractionResult,
+    HearsayExample,
+    HITLIntervention,
+    QBAFEdge,
+    RelationType,
+    SolverType,
+    UncertaintyFlags,
 )
 from src.mining.extractor import ArgumentExtractor, _DEFAULT_DECISION
 from src.scoring.strength import StrengthAttributor
@@ -22,6 +41,7 @@ from src.qbaf.solver import get_solver, make_decision
 import src.utils.llm_client as _llm
 
 logger = logging.getLogger(__name__)
+
 _GENERIC_FALLBACK_DECISION = "Infer the main yes/no decision from the case."
 
 
@@ -34,21 +54,25 @@ def _uncertainty_flags(sigma_phi: float, cfg: dict, case_id: str) -> Uncertainty
         threshold_low=low,
         threshold_high=high,
     )
+
     if is_uncertain:
         flags.escalation_triggered = True
         flags.escalation_actions = [
             EscalationAction.RERUN_EXTRACTION,
             EscalationAction.HUMAN_REVIEW,
         ]
-        msg = (f"[{case_id}] UNCERTAIN σ(φ)={sigma_phi:.4f} ∈ [{low},{high}]. "
-               "Human review recommended.")
+        msg = (
+            f"[{case_id}] UNCERTAIN σ(φ)={sigma_phi:.4f} ∈ "
+            f"[{low},{high}]. Human review recommended."
+        )
         flags.escalation_log.append(msg)
         logger.warning(msg)
+
     return flags
 
 
 class ADSSPipeline:
-    """Generic ADSS pipeline — one LLM call per case for any decision problem."""
+    """Generic ADSS pipeline — one LLM extraction call per case."""
 
     def __init__(self, cfg: dict):
         self.cfg = cfg
@@ -67,7 +91,7 @@ class ADSSPipeline:
     ) -> ADSSPrediction:
         cid = example.case_id
 
-        # Priority: explicit parameter > example.decision_problem > fallback.
+        # Priority: explicit argument > example.decision_problem > module default > generic fallback.
         from_example = getattr(example, "decision_problem", None)
         decision_problem = (decision_problem or from_example or _DEFAULT_DECISION or "").strip()
         if not decision_problem:
@@ -82,19 +106,19 @@ class ADSSPipeline:
             decision_problem=decision_problem,
         )
         logger.info(
-            f" {len(extraction.arguments)} args extracted, "
+            f"  {len(extraction.arguments)} args extracted, "
             f"{len(prefilled_strengths)} strengths."
         )
 
         strengths = self.attributor.score_all(extraction, prefilled_strengths)
         solver_type = SolverType(self.cfg.get("qbaf", {}).get("solver", "df_quad"))
         phi_tau = self.cfg.get("qbaf", {}).get("phi_initial_strength", 0.5)
+
         graph = build_qbaf(extraction, strengths, phi_tau, solver_type)
         solver_out = self.solver.solve(graph, cid)
         sigma_phi = solver_out.sigma_phi
         dec_str, _ = make_decision(sigma_phi, self.cfg)
         uncertainty = _uncertainty_flags(sigma_phi, self.cfg, cid)
-        decision = Decision(dec_str)
 
         pred = ADSSPrediction(
             case_id=cid,
@@ -104,36 +128,47 @@ class ADSSPipeline:
             strengths=strengths,
             solver_output=solver_out,
             sigma_phi=sigma_phi,
-            decision=decision,
+            decision=Decision(dec_str),
             uncertainty=uncertainty,
         )
+
         if save_artifacts:
             self._save(pred)
+
         return pred
 
     def run_batch(
         self,
         examples: list[HearsayExample],
+        decision_problem: str | None = None,
         save_artifacts: bool = True,
     ) -> list[ADSSPrediction]:
         results: list[ADSSPrediction] = []
         for ex in examples:
             try:
-                results.append(self.run_case(ex, save_artifacts=save_artifacts))
+                results.append(
+                    self.run_case(
+                        ex,
+                        decision_problem=decision_problem,
+                        save_artifacts=save_artifacts,
+                    )
+                )
             except Exception as e:
                 logger.error(f"[{ex.case_id}] Pipeline error: {e}")
-                results.append(ADSSPrediction(
-                    case_id=ex.case_id,
-                    input_text=ex.text,
-                    gold_label=ex.label,
-                    extraction=ExtractionResult(
+                results.append(
+                    ADSSPrediction(
                         case_id=ex.case_id,
                         input_text=ex.text,
-                        parse_error=str(e),
-                    ),
-                    sigma_phi=0.5,
-                    decision=Decision.UNCERTAIN,
-                ))
+                        gold_label=ex.label,
+                        extraction=ExtractionResult(
+                            case_id=ex.case_id,
+                            input_text=ex.text,
+                            parse_error=str(e),
+                        ),
+                        sigma_phi=0.5,
+                        decision=Decision.UNCERTAIN,
+                    )
+                )
         return results
 
     def _save(self, pred: ADSSPrediction) -> None:
@@ -147,6 +182,7 @@ class ADSSPipeline:
     ) -> ADSSPrediction:
         intervention.timestamp = datetime.now(timezone.utc).isoformat()
         pred.pre_hitl_decision = pred.pre_hitl_decision or pred.decision
+
         if pred.solver_output is None:
             logger.warning("No solver output for HITL.")
             return pred
@@ -160,6 +196,7 @@ class ADSSPipeline:
                 intervention.old_value = graph.nodes[tid].tau
                 graph.nodes[tid].tau = max(0.1, min(1.0, float(intervention.new_value)))
                 graph.nodes[tid].sigma = graph.nodes[tid].tau
+
         elif itype == "flip_edge":
             src, tgt = (tid.split("→") + [""])[:2]
             for edge in graph.edges:
@@ -171,11 +208,16 @@ class ADSSPipeline:
                         else RelationType.SUPPORT
                     )
                     break
+
         elif itype == "delete_edge":
             src, tgt = (tid.split("→") + [""])[:2]
             before = len(graph.edges)
-            graph.edges = [e for e in graph.edges if not (e.source == src and e.target == tgt)]
+            graph.edges = [
+                e for e in graph.edges
+                if not (e.source == src and e.target == tgt)
+            ]
             intervention.old_value = before - len(graph.edges)
+
         elif itype == "add_edge":
             try:
                 graph.edges.append(QBAFEdge(**dict(intervention.new_value)))
@@ -185,8 +227,10 @@ class ADSSPipeline:
         new_out = self.solver.solve(graph, pred.case_id)
         new_sig = new_out.sigma_phi
         new_dec = Decision(make_decision(new_sig, self.cfg)[0])
+
         intervention.recomputed_sigma_phi = new_sig
         intervention.recomputed_decision = new_dec
+
         pred.solver_output = new_out
         pred.sigma_phi = new_sig
         pred.decision = new_dec
@@ -200,16 +244,38 @@ class BaselineRunner:
         self.cfg = cfg
 
     def _call(self, prompt: str) -> str:
-        return _llm.call_llm(prompt, self.cfg, max_tokens=1024)
+        """
+        Baseline LLM call.
+
+        LM Studio/Qwen reasoning models can consume many completion tokens before
+        producing the final answer. Therefore, do not force a small 1024-token cap.
+        With a 262144-token LM Studio context, we use a large budget with a small
+        safety buffer.
+        """
+        backend = self.cfg.get("backend", "gemini").lower()
+
+        if backend == "lmstudio":
+            configured = int(self.cfg.get("lmstudio", {}).get("max_tokens", 260000))
+            max_tokens = min(configured, 260000)
+        else:
+            max_tokens = min(int(self.cfg.get("gemini", {}).get("max_tokens", 4096)), 1024)
+
+        return _llm.call_llm(prompt, self.cfg, max_tokens=max_tokens)
 
     @staticmethod
     def _extract_decision(text: str) -> Decision:
         import re
-        m = re.search(r"Answer:\s*(Yes|No)", text, re.IGNORECASE)
+
+        m = re.search(r"Answer:\s*(Yes|No)\b", text, re.IGNORECASE)
         if m:
             return Decision.YES if m.group(1).lower() == "yes" else Decision.NO
+
         low = text.lower()
-        if "not hearsay" in low or "no hearsay" in low:
+        if "answer: yes" in low:
+            return Decision.YES
+        if "answer: no" in low:
+            return Decision.NO
+        if "not hearsay" in low or "non-hearsay" in low or "no hearsay" in low:
             return Decision.NO
         if "hearsay" in low:
             return Decision.YES
@@ -217,11 +283,15 @@ class BaselineRunner:
 
     def run_cot(self, example: HearsayExample) -> BaselinePrediction:
         tmpl = Path("prompts/cot_baseline.txt")
-        prompt = (
-            tmpl.read_text(encoding="utf-8").replace("{narrative}", example.text)
-            if tmpl.exists()
-            else f"Analyse this case. End with 'Answer: Yes' or 'Answer: No'.\n\n{example.text}"
-        )
+        if tmpl.exists():
+            prompt = tmpl.read_text(encoding="utf-8").replace("{narrative}", example.text)
+        else:
+            prompt = (
+                "You are an expert in evidence law. Decide whether the statement "
+                "is HEARSAY under FRE 801(c). End with exactly 'Answer: Yes' or "
+                f"'Answer: No'.\n\nNarrative:\n{example.text}"
+            )
+
         raw = self._call(prompt)
         return BaselinePrediction(
             case_id=example.case_id,
@@ -237,11 +307,15 @@ class BaselineRunner:
         if ex_path.exists():
             n = self.cfg.get("baselines", {}).get("few_shot_examples", 3)
             for ex in json.loads(ex_path.read_text(encoding="utf-8"))[:n]:
-                shots += (f"\nNarrative: {ex['narrative']}\n"
-                          f"Reasoning: {ex['reasoning']}\n---\n")
+                shots += (
+                    f"\nNarrative: {ex['narrative']}\n"
+                    f"Reasoning: {ex['reasoning']}\n---\n"
+                )
+
         prompt = (
-            "End with exactly 'Answer: Yes' or 'Answer: No'.\n\n"
-            f"{shots}\nNarrative: {example.text}\n"
+            "You are an expert in evidence law. Decide whether the statement is "
+            "HEARSAY under FRE 801(c). End with exactly 'Answer: Yes' or "
+            f"'Answer: No'.\n\n{shots}\nNarrative: {example.text}\n"
         )
         raw = self._call(prompt)
         return BaselinePrediction(
@@ -258,16 +332,24 @@ class BaselineRunner:
         strengths: list,
     ) -> tuple[float, Decision]:
         from src.data.models import Stance
+
         if not strengths:
             return 0.5, Decision.UNCERTAIN
+
         arg_map = {a.id: a for a in extraction.arguments}
-        sup = [s.tau for s in strengths
-               if arg_map.get(s.argument_id) and
-               arg_map[s.argument_id].stance_to_claim == Stance.SUPPORT]
-        att = [s.tau for s in strengths
-               if arg_map.get(s.argument_id) and
-               arg_map[s.argument_id].stance_to_claim == Stance.ATTACK]
+        sup = [
+            s.tau for s in strengths
+            if arg_map.get(s.argument_id)
+            and arg_map[s.argument_id].stance_to_claim == Stance.SUPPORT
+        ]
+        att = [
+            s.tau for s in strengths
+            if arg_map.get(s.argument_id)
+            and arg_map[s.argument_id].stance_to_claim == Stance.ATTACK
+        ]
+
         agg_s = sum(sup) / len(sup) if sup else 0.0
         agg_a = sum(att) / len(att) if att else 0.0
         sigma = agg_s / (agg_s + agg_a + 1e-8)
-        return max(0.0, min(1.0, sigma)), Decision(make_decision(sigma, self.cfg)[0])
+        sigma = max(0.0, min(1.0, sigma))
+        return sigma, Decision(make_decision(sigma, self.cfg)[0])

@@ -1,0 +1,290 @@
+{
+  "case_id": "test_0093",
+  "input_text": "On the issue of whether Melissa was the agent of Mark, Melissa's statement to Tim that her offer was being made as an agent of Mark.",
+  "phi_text": "",
+  "gold_label": "Yes",
+  "extraction": {
+    "case_id": "test_0093",
+    "input_text": "On the issue of whether Melissa was the agent of Mark, Melissa's statement to Tim that her offer was being made as an agent of Mark.",
+    "claim": {
+      "id": "phi",
+      "text": "Is the statement described in this narrative hearsay under FRE 801(c)?"
+    },
+    "arguments": [
+      {
+        "id": "a1",
+        "text": "Melissa's statement to Tim was made outside of court proceedings.",
+        "stance_to_claim": "support",
+        "legal_rule": "FRE 801(c)(1) - statement not made while testifying at current trial or hearing.",
+        "evidence_span": "Melissa's statement to Tim",
+        "confidence": 0.95
+      },
+      {
+        "id": "a2",
+        "text": "The statement explicitly asserts that Melissa's offer was made as an agent of Mark.",
+        "stance_to_claim": "support",
+        "legal_rule": "FRE 801(c)(2) - declarant asserts the matter.",
+        "evidence_span": "that her offer was being made as an agent of Mark",
+        "confidence": 0.95
+      },
+      {
+        "id": "a3",
+        "text": "The statement is offered to prove the truth of the matter asserted, specifically to establish whether Melissa was acting as Mark's agent.",
+        "stance_to_claim": "support",
+        "legal_rule": "FRE 801(c)(3) - offered to prove the truth of the matter asserted.",
+        "evidence_span": "On the issue of whether Melissa was the agent of Mark",
+        "confidence": 0.95
+      },
+      {
+        "id": "a4",
+        "text": "There is no indication the statement is offered for a non-hearsay purpose such as notice, effect on listener, or as a verbal act.",
+        "stance_to_claim": "support",
+        "legal_rule": "FRE 801(c) hearsay definition excludes non-assertive or non-truth-purpose uses.",
+        "evidence_span": null,
+        "confidence": 0.8
+      },
+      {
+        "id": "a5",
+        "text": "The potential exclusion for party-opponent admissions under FRE 801(d)(2)(D) is relevant but hinges on independent proof of agency, which is disputed.",
+        "stance_to_claim": "attack",
+        "legal_rule": "FRE 801(d)(2)(D) - statement by party's agent on matter within scope.",
+        "evidence_span": null,
+        "confidence": 0.7
+      }
+    ],
+    "relations": [
+      {
+        "source": "a1",
+        "target": "phi",
+        "type": "support",
+        "confidence": 0.95
+      },
+      {
+        "source": "a2",
+        "target": "phi",
+        "type": "support",
+        "confidence": 0.95
+      },
+      {
+        "source": "a3",
+        "target": "phi",
+        "type": "support",
+        "confidence": 0.95
+      },
+      {
+        "source": "a4",
+        "target": "phi",
+        "type": "support",
+        "confidence": 0.8
+      },
+      {
+        "source": "a1",
+        "target": "a2",
+        "type": "support",
+        "confidence": 0.9
+      },
+      {
+        "source": "a2",
+        "target": "a3",
+        "type": "support",
+        "confidence": 0.9
+      },
+      {
+        "source": "a5",
+        "target": "phi",
+        "type": "attack",
+        "confidence": 0.7
+      }
+    ],
+    "extraction_model": "",
+    "raw_llm_response": "{\n  \"case_id\": \"test_0093\",\n  \"phi\": \"Is the statement described in this narrative hearsay under FRE 801(c)?\",\n  \"arguments\": [\n    {\n      \"id\": \"a1\",\n      \"text\": \"Melissa's statement to Tim was made outside of court proceedings.\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"FRE 801(c)(1) - statement not made while testifying at current trial or hearing.\",\n      \"evidence_span\": \"Melissa's statement to Tim\",\n      \"confidence\": 0.95,\n      \"tau\": 0.9,\n      \"rubric\": {\n        \"relevance\": 0.9,\n        \"factual_grounding\": 1.0,\n        \"specificity\": 0.8,\n        \"logical_coherence\": 0.9,\n        \"applicability\": 0.9\n      },\n      \"justification\": \"Directly satisfies the out-of-court requirement for hearsay under FRE 801(c).\"\n    },\n    {\n      \"id\": \"a2\",\n      \"text\": \"The statement explicitly asserts that Melissa's offer was made as an agent of Mark.\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"FRE 801(c)(2) - declarant asserts the matter.\",\n      \"evidence_span\": \"that her offer was being made as an agent of Mark\",\n      \"confidence\": 0.95,\n      \"tau\": 0.9,\n      \"rubric\": {\n        \"relevance\": 0.9,\n        \"factual_grounding\": 1.0,\n        \"specificity\": 0.8,\n        \"logical_coherence\": 0.9,\n        \"applicability\": 0.9\n      },\n      \"justification\": \"Directly satisfies the assertion requirement for hearsay.\"\n    },\n    {\n      \"id\": \"a3\",\n      \"text\": \"The statement is offered to prove the truth of the matter asserted, specifically to establish whether Melissa was acting as Mark's agent.\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"FRE 801(c)(3) - offered to prove the truth of the matter asserted.\",\n      \"evidence_span\": \"On the issue of whether Melissa was the agent of Mark\",\n      \"confidence\": 0.95,\n      \"tau\": 0.95,\n      \"rubric\": {\n        \"relevance\": 1.0,\n        \"factual_grounding\": 0.9,\n        \"specificity\": 0.9,\n        \"logical_coherence\": 1.0,\n        \"applicability\": 1.0\n      },\n      \"justification\": \"Directly satisfies the purpose requirement for hearsay, as the statement's relevance depends on its truth.\"\n    },\n    {\n      \"id\": \"a4\",\n      \"text\": \"There is no indication the statement is offered for a non-hearsay purpose such as notice, effect on listener, or as a verbal act.\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"FRE 801(c) hearsay definition excludes non-assertive or non-truth-purpose uses.\",\n      \"evidence_span\": null,\n      \"confidence\": 0.8,\n      \"tau\": 0.7,\n      \"rubric\": {\n        \"relevance\": 0.7,\n        \"factual_grounding\": 0.6,\n        \"specificity\": 0.5,\n        \"logical_coherence\": 0.8,\n        \"applicability\": 0.7\n      },\n      \"justification\": \"Eliminates common non-hearsay alternatives, reinforcing the hearsay classification.\"\n    },\n    {\n      \"id\": \"a5\",\n      \"text\": \"The potential exclusion for party-opponent admissions under FRE 801(d)(2)(D) is relevant but hinges on independent proof of agency, which is disputed.\",\n      \"stance_to_claim\": \"neutral\",\n      \"legal_rule\": \"FRE 801(d)(2)(D) - statement by party's agent on matter within scope.\",\n      \"evidence_span\": null,\n      \"confidence\": 0.7,\n      \"tau\": 0.6,\n      \"rubric\": {\n        \"relevance\": 0.6,\n        \"factual_grounding\": 0.5,\n        \"specificity\": 0.4,\n        \"logical_coherence\": 0.6,\n        \"applicability\": 0.7\n      },\n      \"justification\": \"Represents a definitional/exclusionary consideration that does not definitively resolve the hearsay status without additional facts.\"\n    }\n  ],\n  \"relations\": [\n    {\n      \"source\": \"a1\",\n      \"target\": \"phi\",\n      \"type\": \"support\",\n      \"confidence\": 0.95\n    },\n    {\n      \"source\": \"a2\",\n      \"target\": \"phi\",\n      \"type\": \"support\",\n      \"confidence\": 0.95\n    },\n    {\n      \"source\": \"a3\",\n      \"target\": \"phi\",\n      \"type\": \"support\",\n      \"confidence\": 0.95\n    },\n    {\n      \"source\": \"a4\",\n      \"target\": \"phi\",\n      \"type\": \"support\",\n      \"confidence\": 0.8\n    },\n    {\n      \"source\": \"a5\",\n      \"target\": \"phi\",\n      \"type\": \"neutral\",\n      \"confidence\": 0.7\n    },\n    {\n      \"source\": \"a1\",\n      \"target\": \"a2\",\n      \"type\": \"support\",\n      \"confidence\": 0.9\n    },\n    {\n      \"source\": \"a2\",\n      \"target\": \"a3\",\n      \"type\": \"support\",\n      \"confidence\": 0.9\n    }\n  ]\n}",
+    "parse_error": null,
+    "n_raw_arguments": 5
+  },
+  "strengths": [
+    {
+      "argument_id": "a1",
+      "tau": 0.9,
+      "rubric": {
+        "legal_relevance": 0.9,
+        "factual_grounding": 1.0,
+        "specificity": 0.8,
+        "logical_coherence": 0.9,
+        "fre_801c_applicability": 0.9
+      },
+      "justification": "Directly satisfies the out-of-court requirement for hearsay under FRE 801(c).",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a2",
+      "tau": 0.9,
+      "rubric": {
+        "legal_relevance": 0.9,
+        "factual_grounding": 1.0,
+        "specificity": 0.8,
+        "logical_coherence": 0.9,
+        "fre_801c_applicability": 0.9
+      },
+      "justification": "Directly satisfies the assertion requirement for hearsay.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a3",
+      "tau": 0.95,
+      "rubric": {
+        "legal_relevance": 1.0,
+        "factual_grounding": 0.9,
+        "specificity": 0.9,
+        "logical_coherence": 1.0,
+        "fre_801c_applicability": 1.0
+      },
+      "justification": "Directly satisfies the purpose requirement for hearsay, as the statement's relevance depends on its truth.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a4",
+      "tau": 0.7,
+      "rubric": {
+        "legal_relevance": 0.7,
+        "factual_grounding": 0.6,
+        "specificity": 0.5,
+        "logical_coherence": 0.8,
+        "fre_801c_applicability": 0.7
+      },
+      "justification": "Eliminates common non-hearsay alternatives, reinforcing the hearsay classification.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a5",
+      "tau": 0.6,
+      "rubric": {
+        "legal_relevance": 0.6,
+        "factual_grounding": 0.5,
+        "specificity": 0.4,
+        "logical_coherence": 0.6,
+        "fre_801c_applicability": 0.7
+      },
+      "justification": "Represents a definitional/exclusionary consideration that does not definitively resolve the hearsay status without additional facts.",
+      "model": "combined"
+    }
+  ],
+  "solver_output": {
+    "case_id": "test_0093",
+    "graph": {
+      "nodes": {
+        "phi": {
+          "id": "phi",
+          "text": "Is the statement described in this narrative hearsay under FRE 801(c)?",
+          "tau": 0.5,
+          "sigma": 0.699999925,
+          "is_claim": true
+        },
+        "a1": {
+          "id": "a1",
+          "text": "Melissa's statement to Tim was made outside of court proceedings.",
+          "tau": 0.9,
+          "sigma": 0.9,
+          "is_claim": false
+        },
+        "a2": {
+          "id": "a2",
+          "text": "The statement explicitly asserts that Melissa's offer was made as an agent of Mark.",
+          "tau": 0.9,
+          "sigma": 0.99,
+          "is_claim": false
+        },
+        "a3": {
+          "id": "a3",
+          "text": "The statement is offered to prove the truth of the matter asserted, specifically to establish whether Melissa was acting as Mark's agent.",
+          "tau": 0.95,
+          "sigma": 0.9995,
+          "is_claim": false
+        },
+        "a4": {
+          "id": "a4",
+          "text": "There is no indication the statement is offered for a non-hearsay purpose such as notice, effect on listener, or as a verbal act.",
+          "tau": 0.7,
+          "sigma": 0.7,
+          "is_claim": false
+        },
+        "a5": {
+          "id": "a5",
+          "text": "The potential exclusion for party-opponent admissions under FRE 801(d)(2)(D) is relevant but hinges on independent proof of agency, which is disputed.",
+          "tau": 0.6,
+          "sigma": 0.6,
+          "is_claim": false
+        }
+      },
+      "edges": [
+        {
+          "source": "a1",
+          "target": "phi",
+          "type": "support",
+          "confidence": 0.95
+        },
+        {
+          "source": "a2",
+          "target": "phi",
+          "type": "support",
+          "confidence": 0.95
+        },
+        {
+          "source": "a3",
+          "target": "phi",
+          "type": "support",
+          "confidence": 0.95
+        },
+        {
+          "source": "a4",
+          "target": "phi",
+          "type": "support",
+          "confidence": 0.8
+        },
+        {
+          "source": "a1",
+          "target": "a2",
+          "type": "support",
+          "confidence": 0.9
+        },
+        {
+          "source": "a2",
+          "target": "a3",
+          "type": "support",
+          "confidence": 0.9
+        },
+        {
+          "source": "a5",
+          "target": "phi",
+          "type": "attack",
+          "confidence": 0.7
+        }
+      ],
+      "solver_type": "df_quad"
+    },
+    "sigma_phi": 0.699999925,
+    "sigma_all": {
+      "phi": 0.699999925,
+      "a1": 0.9,
+      "a2": 0.99,
+      "a3": 0.9995,
+      "a4": 0.7,
+      "a5": 0.6
+    },
+    "iterations": 2,
+    "converged": true,
+    "solver_type": "df_quad"
+  },
+  "sigma_phi": 0.699999925,
+  "decision": "Yes",
+  "uncertainty": {
+    "is_uncertain": false,
+    "sigma_phi": 0.699999925,
+    "threshold_low": 0.45,
+    "threshold_high": 0.55,
+    "escalation_triggered": false,
+    "escalation_actions": [],
+    "escalation_log": []
+  },
+  "hitl_interventions": [],
+  "pre_hitl_decision": null
+}

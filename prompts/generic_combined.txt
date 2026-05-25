@@ -1,68 +1,146 @@
-You are an expert decision analyst and argumentation specialist.
+You are an expert legal argument-mining and decision-support assistant.
 
-CASE ID: {case_id}
+Your task is to extract a structured argumentative representation from the case narrative for a Quantitative Bipolar Argumentation Framework (QBAF).
 
-DECISION QUESTION (phi):
-{phi}
+You MUST return exactly one valid JSON object and nothing else.
+Do not wrap the JSON in markdown fences.
+Do not include explanatory prose outside the JSON.
 
-If the decision question above is blank or unclear, infer the most important binary YES/NO decision from the case text, and use that as phi.
+CASE ID:
+{case_id}
 
-YOUR TASK:
-1. Identify or confirm the central claim phi (the decision question as a YES/NO statement).
-2. Extract up to {max_arguments} arguments from the case that are relevant to phi.
-3. Assign each argument a stance:
-   - "support" = this argument favors answering phi with YES
-   - "attack"  = this argument favors answering phi with NO
-   - "neutral" = factual background only, does not favor YES or NO
-4. Score each argument on 5 dimensions (0.0 to 1.0).
-5. Identify relations between argument pairs.
+DECISION PROBLEM / TARGET CLAIM φ:
+{decision_problem}
 
-STANCE ASSIGNMENT — be decisive:
-- Most arguments will be "support" or "attack". Only use "neutral" for purely factual background with no argumentative force.
-- If an argument could go either way, pick the stronger direction.
+IMPORTANT RULE ABOUT φ:
+- If the decision problem above is concrete and non-empty, use it exactly as the field "phi".
+- Do NOT replace it with another inferred question.
+- Only infer a new phi if the decision problem is blank or says exactly: "Infer the main yes/no decision from the case."
 
-SCORING DIMENSIONS:
-- relevance: how directly does this address phi?
-- factual_grounding: is it grounded in specific case facts?
-- specificity: how precise and non-generic?
-- logical_coherence: is the reasoning internally sound?
-- applicability: how strongly does it favor the assigned stance?
+CASE NARRATIVE:
+{narrative}
 
-tau = weighted mean of rubric scores, clamped to [0.1, 1.0].
+MAX ARGUMENTS:
+{max_arguments}
 
-OUTPUT: ONE JSON object only. No markdown. No preamble. No explanation.
+GENERAL OBJECTIVE
+Extract all distinct argumentative components that are genuinely relevant to deciding φ.
+The goal is not to summarize the case as one argument. The goal is to decompose the reasoning into multiple legally or decision-relevant components whenever the case supports such decomposition.
 
+For LegalBench hearsay / FRE 801(c) cases, decompose the reasoning into components such as:
+1. whether the statement was made out of court;
+2. whether the statement contains an assertion;
+3. whether the statement is offered to prove the truth of the matter asserted;
+4. whether the statement is offered for another purpose, such as notice, effect on listener, impeachment, verbal act, or state of mind;
+5. whether an exclusion such as party-opponent admission under FRE 801(d)(2) appears relevant;
+6. whether an exception-like consideration is present, while keeping the distinction between definitional hearsay and admissibility exceptions clear;
+7. whether the evidence is merely circumstantial/non-assertive rather than an out-of-court statement;
+8. whether the narrative contains facts that are irrelevant to the hearsay target claim.
+
+For LegalBench contract NLI / confidentiality-of-agreement cases, decompose the reasoning into components such as:
+1. whether the contract context contains an explicit confidentiality clause;
+2. whether the clause applies to the relevant party or information type;
+3. whether the target confidentiality statement is directly entailed by the contract text;
+4. whether the target statement is contradicted by the contract text;
+5. whether the target statement is merely not mentioned or not inferable from the contract;
+6. whether exceptions, carve-outs, duration limits, scope limitations, or permitted disclosures affect the confidentiality obligation;
+7. whether definitions such as Confidential Information, Recipient, Disclosing Party, or Agreement scope support or weaken the target statement.
+
+For generic non-legal decision problems, decompose the reasoning into components such as:
+1. facts supporting the target claim;
+2. facts attacking the target claim;
+3. causal links;
+4. rule/principle applicability;
+5. exceptions, defenses, counterarguments, or alternative explanations;
+6. evidence of harm, benefit, liability, feasibility, risk, preference, or uncertainty.
+
+DO NOT INVENT FACTS
+- Use only facts contained in the narrative.
+- You may make legally or logically necessary inferences from the narrative, but do not introduce new evidence.
+- If the case truly contains only one relevant component, return only one argument.
+- However, if multiple legal reasoning components are implicit in the text, separate them into distinct arguments.
+
+ARGUMENT REQUIREMENTS
+Each argument must be a distinct reasoning component.
+Avoid duplicate arguments.
+Avoid generic boilerplate unless it is tied to the case facts.
+Neutral or irrelevant components may be included with stance_to_claim = "neutral", but they will be excluded from the QBAF graph.
+Prefer 3-6 arguments when the narrative supports that many distinct components.
+Do not force the number of arguments to reach {max_arguments}.
+
+STANCE DEFINITIONS
+- "support": the argument increases the acceptability of φ.
+- "attack": the argument decreases the acceptability of φ.
+- "neutral": the component is background or irrelevant to φ.
+
+For hearsay cases:
+- Out-of-court + assertion + offered for truth usually SUPPORTS φ.
+- Offered for notice/effect on listener/verbal act/impeachment usually ATTACKS φ.
+- Party-opponent exclusion under FRE 801(d)(2) usually ATTACKS φ because the statement is treated as non-hearsay.
+- Pure circumstantial evidence that does not depend on an out-of-court assertion usually ATTACKS φ.
+- Irrelevant facts should be marked NEUTRAL.
+
+For contract NLI cases:
+- A clause or definition that directly entails the target confidentiality statement SUPPORTS φ.
+- A clause that contradicts, narrows, excludes, or limits the target statement ATTACKS φ.
+- Absence of relevant contractual support should usually ATTACK φ if the task is entailment.
+- Unrelated contractual provisions should be marked NEUTRAL.
+
+RELATION REQUIREMENTS
+Create relations among arguments and φ.
+Every non-neutral argument should have at least one direct relation to "phi".
+Also add argument-to-argument relations when one argument reinforces or weakens another.
+Use relation type: "support", "attack", or "neutral".
+
+STRENGTH / TAU REQUIREMENTS
+For each non-neutral argument, assign tau in [0.1, 1.0].
+Tau reflects intrinsic strength before QBAF propagation.
+Use this rubric:
+- relevance: direct relevance to φ;
+- factual_grounding: support from the narrative text;
+- specificity: case-specific detail;
+- logical_coherence: clear inference from fact to claim;
+- applicability: fit with the relevant legal/domain principle.
+
+OUTPUT JSON SCHEMA
+Return exactly this structure:
 {
   "case_id": "{case_id}",
-  "phi": "the decision question as a complete sentence",
+  "phi": "{decision_problem}",
   "arguments": [
     {
       "id": "a1",
-      "text": "concise argument under 100 chars",
-      "stance_to_claim": "support",
-      "principle": "relevant rule, policy, obligation, fact, or norm",
-      "evidence_span": null,
-      "confidence": 0.9,
+      "text": "Concise argument text grounded in the narrative.",
+      "stance_to_claim": "support|attack|neutral",
+      "legal_rule": "Relevant legal/domain rule or reasoning principle.",
+      "evidence_span": "Exact or near-exact text span from the narrative, or null if not available.",
+      "confidence": 0.0,
+      "tau": 0.0,
       "rubric": {
-        "relevance": 0.9,
-        "factual_grounding": 0.8,
-        "specificity": 0.7,
-        "logical_coherence": 0.9,
-        "applicability": 0.9
+        "relevance": 0.0,
+        "factual_grounding": 0.0,
+        "specificity": 0.0,
+        "logical_coherence": 0.0,
+        "applicability": 0.0
       },
-      "tau": 0.85,
-      "justification": "one sentence explaining the stance"
+      "justification": "Brief explanation of why this argument has this stance and strength."
     }
   ],
   "relations": [
     {
       "source": "a1",
-      "target": "a2",
-      "type": "support",
-      "confidence": 0.8
+      "target": "phi",
+      "type": "support|attack|neutral",
+      "confidence": 0.0
     }
   ]
 }
 
-CASE TEXT:
-{narrative}
+VALIDATION RULES
+- The JSON must be parseable by Python json.loads.
+- Argument ids must be unique: a1, a2, a3, ...
+- Relation source and target must refer to existing argument ids or "phi".
+- Use "phi" exactly for the target claim node.
+- Do not output more than {max_arguments} arguments.
+- Do not omit tau for non-neutral arguments.
+- Do not omit direct relations from non-neutral arguments to "phi".
