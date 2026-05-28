@@ -1,0 +1,143 @@
+{
+  "case_id": "test_0058",
+  "input_text": "CONTRACT CONTEXT:\nPersonnel means any and all staﬀ, employees, directors, oﬃcers and professional advisors of a Party 4.1 A Receiving Party shall only disclose or reveal any Conﬁdential Information disclosed to it to those of its Personnel who are required in the course of their duties to receive and consider the same in so far as is necessary to fulﬁl the Purpose. \n\nTARGET STATEMENT:\nThe contract entails that the relevant party must keep confidential the existence, terms, subject matter, or status of the agreement, negotiations, discussions, or transaction between the parties.\n\nDECISION TASK:\nDetermine whether the contract context entails the target statement.",
+  "phi_text": "",
+  "gold_label": "No",
+  "extraction": {
+    "case_id": "test_0058",
+    "input_text": "CONTRACT CONTEXT:\nPersonnel means any and all staﬀ, employees, directors, oﬃcers and professional advisors of a Party 4.1 A Receiving Party shall only disclose or reveal any Conﬁdential Information disclosed to it to those of its Personnel who are required in the course of their duties to receive and consider the same in so far as is necessary to fulﬁl the Purpose. \n\nTARGET STATEMENT:\nThe contract entails that the relevant party must keep confidential the existence, terms, subject matter, or status of the agreement, negotiations, discussions, or transaction between the parties.\n\nDECISION TASK:\nDetermine whether the contract context entails the target statement.",
+    "claim": {
+      "id": "phi",
+      "text": "Does the CONTRACT CONTEXT logically entail the EXACT TARGET STATEMENT, with every material element matched and no missing limitation, exception, party-scope mismatch, information-type mismatch, purpose limitation, recipient-scope mismatch, or disclosure carve-out?"
+    },
+    "arguments": [
+      {
+        "id": "a3",
+        "text": "The contract context lacks any explicit or implicit provision extending confidentiality obligations to the agreement itself, its negotiations, or its status.",
+        "stance_to_claim": "attack",
+        "legal_rule": "Principle of contractual interpretation: obligations are limited to express terms unless clearly implied.",
+        "evidence_span": null,
+        "confidence": 0.9
+      },
+      {
+        "id": "a4",
+        "text": "Because the contract only regulates disclosure of 'Confidential Information' to personnel and does not define or protect the agreement's existence or terms, the target statement is not entailed.",
+        "stance_to_claim": "attack",
+        "legal_rule": "Entailment requires every material element of the target to be supported by the premise.",
+        "evidence_span": null,
+        "confidence": 0.95
+      }
+    ],
+    "relations": [
+      {
+        "source": "a3",
+        "target": "phi",
+        "type": "attack",
+        "confidence": 0.9
+      },
+      {
+        "source": "a4",
+        "target": "phi",
+        "type": "attack",
+        "confidence": 0.95
+      }
+    ],
+    "extraction_model": "",
+    "raw_llm_response": "{\n  \"case_id\": \"test_0058\",\n  \"phi\": \"Does the CONTRACT CONTEXT logically entail the EXACT TARGET STATEMENT, with every material element matched and no missing limitation, exception, party-scope mismatch, information-type mismatch, purpose limitation, recipient-scope mismatch, or disclosure carve-out?\",\n  \"arguments\": [\n    {\n      \"id\": \"a1\",\n      \"text\": \"The contract context defines 'Personnel' and restricts disclosure of 'Confidential Information' to those personnel required for the Purpose.\",\n      \"stance_to_claim\": \"neutral\",\n      \"legal_rule\": \"Contractual scope of confidentiality obligations.\",\n      \"evidence_span\": \"Personnel means any and all staﬀ, employees, directors, oﬃcers and professional advisors of a Party 4.1 A Receiving Party shall only disclose or reveal any Conﬁdential Information disclosed to it to those of its Personnel who are required in the course of their duties to receive and consider the same in so far as is necessary to fulﬁl the Purpose.\",\n      \"confidence\": 1.0,\n      \"tau\": 0.0,\n      \"rubric\": {\n        \"relevance\": 0.5,\n        \"factual_grounding\": 1.0,\n        \"specificity\": 0.8,\n        \"logical_coherence\": 0.9,\n        \"applicability\": 0.7\n      },\n      \"justification\": \"Establishes the actual scope of the confidentiality clause in the text, which is limited to 'Confidential Information' and personnel, not the agreement itself.\"\n    },\n    {\n      \"id\": \"a2\",\n      \"text\": \"The target statement asserts a confidentiality obligation specifically regarding the existence, terms, subject matter, or status of the agreement and negotiations.\",\n      \"stance_to_claim\": \"neutral\",\n      \"legal_rule\": \"Definition of target claim scope.\",\n      \"evidence_span\": \"The contract entails that the relevant party must keep confidential the existence, terms, subject matter, or status of the agreement, negotiations, discussions, or transaction between the parties.\",\n      \"confidence\": 1.0,\n      \"tau\": 0.0,\n      \"rubric\": {\n        \"relevance\": 0.8,\n        \"factual_grounding\": 1.0,\n        \"specificity\": 1.0,\n        \"logical_coherence\": 1.0,\n        \"applicability\": 0.5\n      },\n      \"justification\": \"Clearly delineates the specific subject matter of the target claim for comparison against the contract text.\"\n    },\n    {\n      \"id\": \"a3\",\n      \"text\": \"The contract context lacks any explicit or implicit provision extending confidentiality obligations to the agreement itself, its negotiations, or its status.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"Principle of contractual interpretation: obligations are limited to express terms unless clearly implied.\",\n      \"evidence_span\": null,\n      \"confidence\": 0.9,\n      \"tau\": 0.9,\n      \"rubric\": {\n        \"relevance\": 0.9,\n        \"factual_grounding\": 0.8,\n        \"specificity\": 0.9,\n        \"logical_coherence\": 0.9,\n        \"applicability\": 0.9\n      },\n      \"justification\": \"Directly addresses the gap between the contract's actual text and the target claim, showing the target is not supported.\"\n    },\n    {\n      \"id\": \"a4\",\n      \"text\": \"Because the contract only regulates disclosure of 'Confidential Information' to personnel and does not define or protect the agreement's existence or terms, the target statement is not entailed.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"Entailment requires every material element of the target to be supported by the premise.\",\n      \"evidence_span\": null,\n      \"confidence\": 0.95,\n      \"tau\": 0.95,\n      \"rubric\": {\n        \"relevance\": 1.0,\n        \"factual_grounding\": 0.9,\n        \"specificity\": 0.9,\n        \"logical_coherence\": 1.0,\n        \"applicability\": 1.0\n      },\n      \"justification\": \"Synthesizes the mismatch between the contract's scope and the target claim, concluding non-entailment.\"\n    }\n  ],\n  \"relations\": [\n    {\n      \"source\": \"a1\",\n      \"target\": \"phi\",\n      \"type\": \"neutral\",\n      \"confidence\": 1.0\n    },\n    {\n      \"source\": \"a2\",\n      \"target\": \"phi\",\n      \"type\": \"neutral\",\n      \"confidence\": 1.0\n    },\n    {\n      \"source\": \"a3\",\n      \"target\": \"phi\",\n      \"type\": \"attack\",\n      \"confidence\": 0.9\n    },\n    {\n      \"source\": \"a4\",\n      \"target\": \"phi\",\n      \"type\": \"attack\",\n      \"confidence\": 0.95\n    }\n  ]\n}",
+    "parse_error": null,
+    "n_raw_arguments": 4
+  },
+  "strengths": [
+    {
+      "argument_id": "a3",
+      "tau": 0.9,
+      "rubric": {
+        "legal_relevance": 0.9,
+        "factual_grounding": 0.8,
+        "specificity": 0.9,
+        "logical_coherence": 0.9,
+        "fre_801c_applicability": 0.9
+      },
+      "justification": "Directly addresses the gap between the contract's actual text and the target claim, showing the target is not supported.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a4",
+      "tau": 0.95,
+      "rubric": {
+        "legal_relevance": 1.0,
+        "factual_grounding": 0.9,
+        "specificity": 0.9,
+        "logical_coherence": 1.0,
+        "fre_801c_applicability": 1.0
+      },
+      "justification": "Synthesizes the mismatch between the contract's scope and the target claim, concluding non-entailment.",
+      "model": "combined"
+    }
+  ],
+  "solver_output": {
+    "case_id": "test_0058",
+    "graph": {
+      "nodes": {
+        "phi": {
+          "id": "phi",
+          "text": "Does the CONTRACT CONTEXT logically entail the EXACT TARGET STATEMENT, with every material element matched and no missing limitation, exception, party-scope mismatch, information-type mismatch, purpose limitation, recipient-scope mismatch, or disclosure carve-out?",
+          "tau": 0.5,
+          "sigma": 0.0025000000000000022,
+          "is_claim": true
+        },
+        "a3": {
+          "id": "a3",
+          "text": "The contract context lacks any explicit or implicit provision extending confidentiality obligations to the agreement itself, its negotiations, or its status.",
+          "tau": 0.9,
+          "sigma": 0.9,
+          "is_claim": false
+        },
+        "a4": {
+          "id": "a4",
+          "text": "Because the contract only regulates disclosure of 'Confidential Information' to personnel and does not define or protect the agreement's existence or terms, the target statement is not entailed.",
+          "tau": 0.95,
+          "sigma": 0.95,
+          "is_claim": false
+        }
+      },
+      "edges": [
+        {
+          "source": "a3",
+          "target": "phi",
+          "type": "attack",
+          "confidence": 0.9
+        },
+        {
+          "source": "a4",
+          "target": "phi",
+          "type": "attack",
+          "confidence": 0.95
+        }
+      ],
+      "solver_type": "df_quad"
+    },
+    "sigma_phi": 0.0025000000000000022,
+    "sigma_all": {
+      "phi": 0.0025000000000000022,
+      "a3": 0.9,
+      "a4": 0.95
+    },
+    "iterations": 2,
+    "converged": true,
+    "solver_type": "df_quad"
+  },
+  "sigma_phi": 0.0025000000000000022,
+  "decision": "No",
+  "uncertainty": {
+    "is_uncertain": false,
+    "sigma_phi": 0.0025000000000000022,
+    "threshold_low": 0.45,
+    "threshold_high": 0.55,
+    "escalation_triggered": false,
+    "escalation_actions": [],
+    "escalation_log": []
+  },
+  "hitl_interventions": [],
+  "pre_hitl_decision": null
+}

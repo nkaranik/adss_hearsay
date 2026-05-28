@@ -1,0 +1,237 @@
+{
+  "case_id": "test_0051",
+  "input_text": "CONTRACT CONTEXT:\n5. Confidential Information shall not be reproduced by Company in any form except as required to accomplish the intent of this Agreement.  \n\nTARGET STATEMENT:\nThe contract entails that the relevant party must keep confidential the existence, terms, subject matter, or status of the agreement, negotiations, discussions, or transaction between the parties.\n\nDECISION TASK:\nDetermine whether the contract context entails the target statement.",
+  "phi_text": "",
+  "gold_label": "No",
+  "extraction": {
+    "case_id": "test_0051",
+    "input_text": "CONTRACT CONTEXT:\n5. Confidential Information shall not be reproduced by Company in any form except as required to accomplish the intent of this Agreement.  \n\nTARGET STATEMENT:\nThe contract entails that the relevant party must keep confidential the existence, terms, subject matter, or status of the agreement, negotiations, discussions, or transaction between the parties.\n\nDECISION TASK:\nDetermine whether the contract context entails the target statement.",
+    "claim": {
+      "id": "phi",
+      "text": "Does the CONTRACT CONTEXT logically entail the EXACT TARGET STATEMENT, with every material element matched and no missing limitation, exception, party-scope mismatch, information-type mismatch, purpose limitation, recipient-scope mismatch, or disclosure carve-out?"
+    },
+    "arguments": [
+      {
+        "id": "a1",
+        "text": "The contract context restricts the reproduction of \"Confidential Information\" but lacks a definition for that term, preventing direct application to the agreement's existence or terms.",
+        "stance_to_claim": "attack",
+        "legal_rule": "Contract interpretation requires explicit definitions or clear scope to extend confidentiality obligations to specific information types.",
+        "evidence_span": "Confidential Information shall not be reproduced by Company in any form",
+        "confidence": 0.9
+      },
+      {
+        "id": "a2",
+        "text": "The target statement requires confidentiality over the existence, terms, subject matter, or status of the agreement, which is a distinct information type from the undefined \"Confidential Information\" in the text.",
+        "stance_to_claim": "attack",
+        "legal_rule": "Information-type mismatch prevents entailment when the target claim covers categories not addressed by the contractual clause.",
+        "evidence_span": "Confidential Information shall not be reproduced by Company in any form",
+        "confidence": 0.95
+      },
+      {
+        "id": "a3",
+        "text": "The contractual duty is explicitly limited to non-reproduction rather than a general duty to maintain confidentiality, creating a scope mismatch with the target statement.",
+        "stance_to_claim": "attack",
+        "legal_rule": "A narrow operative verb (e.g., \"shall not be reproduced\") does not entail a broader substantive obligation (e.g., \"keep confidential\") without additional contractual language.",
+        "evidence_span": "shall not be reproduced by Company in any form",
+        "confidence": 0.9
+      },
+      {
+        "id": "a4",
+        "text": "The exception clause (\"except as required to accomplish the intent of this Agreement\") carves out permitted reproductions, which contradicts the strict or absolute confidentiality entailment proposed in φ.",
+        "stance_to_claim": "attack",
+        "legal_rule": "Carve-outs and exceptions limit the scope of contractual obligations and weaken claims of absolute or broad entailment.",
+        "evidence_span": "except as required to accomplish the intent of this Agreement.",
+        "confidence": 0.85
+      }
+    ],
+    "relations": [
+      {
+        "source": "a1",
+        "target": "phi",
+        "type": "attack",
+        "confidence": 0.9
+      },
+      {
+        "source": "a2",
+        "target": "phi",
+        "type": "attack",
+        "confidence": 0.95
+      },
+      {
+        "source": "a3",
+        "target": "phi",
+        "type": "attack",
+        "confidence": 0.9
+      },
+      {
+        "source": "a4",
+        "target": "phi",
+        "type": "attack",
+        "confidence": 0.85
+      },
+      {
+        "source": "a4",
+        "target": "a3",
+        "type": "support",
+        "confidence": 0.8
+      }
+    ],
+    "extraction_model": "",
+    "raw_llm_response": "{\n  \"case_id\": \"test_0051\",\n  \"phi\": \"Does the CONTRACT CONTEXT logically entail the EXACT TARGET STATEMENT, with every material element matched and no missing limitation, exception, party-scope mismatch, information-type mismatch, purpose limitation, recipient-scope mismatch, or disclosure carve-out?\",\n  \"arguments\": [\n    {\n      \"id\": \"a1\",\n      \"text\": \"The contract context restricts the reproduction of \\\"Confidential Information\\\" but lacks a definition for that term, preventing direct application to the agreement's existence or terms.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"Contract interpretation requires explicit definitions or clear scope to extend confidentiality obligations to specific information types.\",\n      \"evidence_span\": \"Confidential Information shall not be reproduced by Company in any form\",\n      \"confidence\": 0.9,\n      \"tau\": 0.8,\n      \"rubric\": {\n        \"relevance\": 0.9,\n        \"factual_grounding\": 0.9,\n        \"specificity\": 0.7,\n        \"logical_coherence\": 0.8,\n        \"applicability\": 0.8\n      },\n      \"justification\": \"The absence of a definition for \\\"Confidential Information\\\" means the clause cannot logically entail a confidentiality obligation over the agreement's existence or terms as claimed in φ.\"\n    },\n    {\n      \"id\": \"a2\",\n      \"text\": \"The target statement requires confidentiality over the existence, terms, subject matter, or status of the agreement, which is a distinct information type from the undefined \\\"Confidential Information\\\" in the text.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"Information-type mismatch prevents entailment when the target claim covers categories not addressed by the contractual clause.\",\n      \"evidence_span\": \"Confidential Information shall not be reproduced by Company in any form\",\n      \"confidence\": 0.95,\n      \"tau\": 0.9,\n      \"rubric\": {\n        \"relevance\": 0.95,\n        \"factual_grounding\": 0.95,\n        \"specificity\": 0.8,\n        \"logical_coherence\": 0.9,\n        \"applicability\": 0.9\n      },\n      \"justification\": \"The contract addresses reproduction of a specific (undefined) category, while φ claims a broader confidentiality duty over the agreement itself, creating a clear information-type mismatch.\"\n    },\n    {\n      \"id\": \"a3\",\n      \"text\": \"The contractual duty is explicitly limited to non-reproduction rather than a general duty to maintain confidentiality, creating a scope mismatch with the target statement.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"A narrow operative verb (e.g., \\\"shall not be reproduced\\\") does not entail a broader substantive obligation (e.g., \\\"keep confidential\\\") without additional contractual language.\",\n      \"evidence_span\": \"shall not be reproduced by Company in any form\",\n      \"confidence\": 0.9,\n      \"tau\": 0.85,\n      \"rubric\": {\n        \"relevance\": 0.9,\n        \"factual_grounding\": 0.9,\n        \"specificity\": 0.8,\n        \"logical_coherence\": 0.9,\n        \"applicability\": 0.85\n      },\n      \"justification\": \"Restricting reproduction is a narrower action than maintaining confidentiality; thus, the text does not support the broader entailment in φ.\"\n    },\n    {\n      \"id\": \"a4\",\n      \"text\": \"The exception clause (\\\"except as required to accomplish the intent of this Agreement\\\") carves out permitted reproductions, which contradicts the strict or absolute confidentiality entailment proposed in φ.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"Carve-outs and exceptions limit the scope of contractual obligations and weaken claims of absolute or broad entailment.\",\n      \"evidence_span\": \"except as required to accomplish the intent of this Agreement.\",\n      \"confidence\": 0.85,\n      \"tau\": 0.75,\n      \"rubric\": {\n        \"relevance\": 0.85,\n        \"factual_grounding\": 0.9,\n        \"specificity\": 0.7,\n        \"logical_coherence\": 0.8,\n        \"applicability\": 0.8\n      },\n      \"justification\": \"The explicit exception demonstrates that the obligation is not absolute, further undermining the claim that the contract entails a strict confidentiality duty over the agreement's status.\"\n    }\n  ],\n  \"relations\": [\n    {\n      \"source\": \"a1\",\n      \"target\": \"phi\",\n      \"type\": \"attack\",\n      \"confidence\": 0.9\n    },\n    {\n      \"source\": \"a2\",\n      \"target\": \"phi\",\n      \"type\": \"attack\",\n      \"confidence\": 0.95\n    },\n    {\n      \"source\": \"a3\",\n      \"target\": \"phi\",\n      \"type\": \"attack\",\n      \"confidence\": 0.9\n    },\n    {\n      \"source\": \"a4\",\n      \"target\": \"phi\",\n      \"type\": \"attack\",\n      \"confidence\": 0.85\n    },\n    {\n      \"source\": \"a4\",\n      \"target\": \"a3\",\n      \"type\": \"support\",\n      \"confidence\": 0.8\n    }\n  ]\n}",
+    "parse_error": null,
+    "n_raw_arguments": 4
+  },
+  "strengths": [
+    {
+      "argument_id": "a1",
+      "tau": 0.8,
+      "rubric": {
+        "legal_relevance": 0.9,
+        "factual_grounding": 0.9,
+        "specificity": 0.7,
+        "logical_coherence": 0.8,
+        "fre_801c_applicability": 0.8
+      },
+      "justification": "The absence of a definition for \"Confidential Information\" means the clause cannot logically entail a confidentiality obligation over the agreement's existence or terms as claimed in φ.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a2",
+      "tau": 0.9,
+      "rubric": {
+        "legal_relevance": 0.95,
+        "factual_grounding": 0.95,
+        "specificity": 0.8,
+        "logical_coherence": 0.9,
+        "fre_801c_applicability": 0.9
+      },
+      "justification": "The contract addresses reproduction of a specific (undefined) category, while φ claims a broader confidentiality duty over the agreement itself, creating a clear information-type mismatch.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a3",
+      "tau": 0.85,
+      "rubric": {
+        "legal_relevance": 0.9,
+        "factual_grounding": 0.9,
+        "specificity": 0.8,
+        "logical_coherence": 0.9,
+        "fre_801c_applicability": 0.85
+      },
+      "justification": "Restricting reproduction is a narrower action than maintaining confidentiality; thus, the text does not support the broader entailment in φ.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a4",
+      "tau": 0.75,
+      "rubric": {
+        "legal_relevance": 0.85,
+        "factual_grounding": 0.9,
+        "specificity": 0.7,
+        "logical_coherence": 0.8,
+        "fre_801c_applicability": 0.8
+      },
+      "justification": "The explicit exception demonstrates that the obligation is not absolute, further undermining the claim that the contract entails a strict confidentiality duty over the agreement's status.",
+      "model": "combined"
+    }
+  ],
+  "solver_output": {
+    "case_id": "test_0051",
+    "graph": {
+      "nodes": {
+        "phi": {
+          "id": "phi",
+          "text": "Does the CONTRACT CONTEXT logically entail the EXACT TARGET STATEMENT, with every material element matched and no missing limitation, exception, party-scope mismatch, information-type mismatch, purpose limitation, recipient-scope mismatch, or disclosure carve-out?",
+          "tau": 0.5,
+          "sigma": 0.00009375000000000355,
+          "is_claim": true
+        },
+        "a1": {
+          "id": "a1",
+          "text": "The contract context restricts the reproduction of \"Confidential Information\" but lacks a definition for that term, preventing direct application to the agreement's existence or terms.",
+          "tau": 0.8,
+          "sigma": 0.8,
+          "is_claim": false
+        },
+        "a2": {
+          "id": "a2",
+          "text": "The target statement requires confidentiality over the existence, terms, subject matter, or status of the agreement, which is a distinct information type from the undefined \"Confidential Information\" in the text.",
+          "tau": 0.9,
+          "sigma": 0.9,
+          "is_claim": false
+        },
+        "a3": {
+          "id": "a3",
+          "text": "The contractual duty is explicitly limited to non-reproduction rather than a general duty to maintain confidentiality, creating a scope mismatch with the target statement.",
+          "tau": 0.85,
+          "sigma": 0.9625,
+          "is_claim": false
+        },
+        "a4": {
+          "id": "a4",
+          "text": "The exception clause (\"except as required to accomplish the intent of this Agreement\") carves out permitted reproductions, which contradicts the strict or absolute confidentiality entailment proposed in φ.",
+          "tau": 0.75,
+          "sigma": 0.75,
+          "is_claim": false
+        }
+      },
+      "edges": [
+        {
+          "source": "a1",
+          "target": "phi",
+          "type": "attack",
+          "confidence": 0.9
+        },
+        {
+          "source": "a2",
+          "target": "phi",
+          "type": "attack",
+          "confidence": 0.95
+        },
+        {
+          "source": "a3",
+          "target": "phi",
+          "type": "attack",
+          "confidence": 0.9
+        },
+        {
+          "source": "a4",
+          "target": "phi",
+          "type": "attack",
+          "confidence": 0.85
+        },
+        {
+          "source": "a4",
+          "target": "a3",
+          "type": "support",
+          "confidence": 0.8
+        }
+      ],
+      "solver_type": "df_quad"
+    },
+    "sigma_phi": 0.00009375000000000355,
+    "sigma_all": {
+      "phi": 0.00009375000000000355,
+      "a1": 0.8,
+      "a2": 0.9,
+      "a3": 0.9625,
+      "a4": 0.75
+    },
+    "iterations": 2,
+    "converged": true,
+    "solver_type": "df_quad"
+  },
+  "sigma_phi": 0.00009375000000000355,
+  "decision": "No",
+  "uncertainty": {
+    "is_uncertain": false,
+    "sigma_phi": 0.00009375000000000355,
+    "threshold_low": 0.45,
+    "threshold_high": 0.55,
+    "escalation_triggered": false,
+    "escalation_actions": [],
+    "escalation_log": []
+  },
+  "hitl_interventions": [],
+  "pre_hitl_decision": null
+}

@@ -1,47 +1,47 @@
 {
   "case_id": "test_0006",
-  "input_text": "Except as may be required by applicable law, without the prior written consent of the respective Disclosing Party, the Receiving Party shall not:  (b) disclose to any person the fact that Confidential Information and/or CEII/CII have been made available to it;  (c) confirm that any investigations, discussions or negotiations are taking place; or  (d) disclose any of the terms or conditions with respect to same.  ",
+  "input_text": "CONTRACT CONTEXT:\nExcept as may be required by applicable law, without the prior written consent of the respective Disclosing Party, the Receiving Party shall not:  (b) disclose to any person the fact that Confidential Information and/or CEII/CII have been made available to it;  (c) confirm that any investigations, discussions or negotiations are taking place; or  (d) disclose any of the terms or conditions with respect to same.  \n\nTARGET STATEMENT:\nThe contract entails that the relevant party must keep confidential the existence, terms, subject matter, or status of the agreement, negotiations, discussions, or transaction between the parties.\n\nDECISION TASK:\nDetermine whether the contract context entails the target statement.",
   "phi_text": "",
   "gold_label": "Yes",
   "extraction": {
     "case_id": "test_0006",
-    "input_text": "Except as may be required by applicable law, without the prior written consent of the respective Disclosing Party, the Receiving Party shall not:  (b) disclose to any person the fact that Confidential Information and/or CEII/CII have been made available to it;  (c) confirm that any investigations, discussions or negotiations are taking place; or  (d) disclose any of the terms or conditions with respect to same.  ",
+    "input_text": "CONTRACT CONTEXT:\nExcept as may be required by applicable law, without the prior written consent of the respective Disclosing Party, the Receiving Party shall not:  (b) disclose to any person the fact that Confidential Information and/or CEII/CII have been made available to it;  (c) confirm that any investigations, discussions or negotiations are taking place; or  (d) disclose any of the terms or conditions with respect to same.  \n\nTARGET STATEMENT:\nThe contract entails that the relevant party must keep confidential the existence, terms, subject matter, or status of the agreement, negotiations, discussions, or transaction between the parties.\n\nDECISION TASK:\nDetermine whether the contract context entails the target statement.",
     "claim": {
       "id": "phi",
-      "text": "Does the contract context entail the target confidentiality statement?"
+      "text": "Does the CONTRACT CONTEXT logically entail the EXACT TARGET STATEMENT, with every material element matched and no missing limitation, exception, party-scope mismatch, information-type mismatch, purpose limitation, recipient-scope mismatch, or disclosure carve-out?"
     },
     "arguments": [
       {
         "id": "a1",
-        "text": "The narrative explicitly contains a confidentiality clause imposing obligations on the Receiving Party.",
+        "text": "The contract context explicitly imposes a confidentiality obligation on the Receiving Party, prohibiting disclosure of the fact that Confidential Information has been made available, confirmation of ongoing negotiations, or disclosure of terms and conditions.",
         "stance_to_claim": "support",
-        "legal_rule": "Contract interpretation principles require identifying explicit clauses that establish party obligations.",
-        "evidence_span": "the Receiving Party shall not: (b) disclose... (c) confirm... or (d) disclose...",
+        "legal_rule": "Contract interpretation principles require that explicit prohibitions on disclosure constitute a confidentiality obligation.",
+        "evidence_span": "the Receiving Party shall not: (b) disclose to any person the fact that Confidential Information and/or CEII/CII have been made available to it; (c) confirm that any investigations, discussions or negotiations are taking place; or (d) disclose any of the terms or conditions with respect to same.",
         "confidence": 0.95
       },
       {
         "id": "a2",
-        "text": "The clause specifically applies to the Receiving Party and covers Confidential Information, CEII/CII, and ongoing negotiations.",
+        "text": "The target statement's reference to 'existence, terms, subject matter, or status of the agreement, negotiations, discussions, or transaction' closely aligns with the contract's prohibition on disclosing 'the fact that Confidential Information... have been made available', 'investigations, discussions or negotiations', and 'terms or conditions'. This demonstrates a strong material element match.",
         "stance_to_claim": "support",
-        "legal_rule": "Scope of confidentiality obligations is determined by the defined terms and subjects of restriction in the contract.",
-        "evidence_span": "Confidential Information and/or CEII/CII",
-        "confidence": 0.95
-      },
-      {
-        "id": "a4",
-        "text": "The clause mandates prior written consent from the Disclosing Party as a condition for any disclosure, reinforcing the confidentiality framework.",
-        "stance_to_claim": "support",
-        "legal_rule": "Procedural conditions for disclosure strengthen the enforceability and clarity of confidentiality obligations.",
-        "evidence_span": "without the prior written consent of the respective Disclosing Party",
+        "legal_rule": "Entailment in contract NLI requires that the target statement's scope and terminology are substantively covered by the contract text.",
+        "evidence_span": "the fact that Confidential Information and/or CEII/CII have been made available to it; (c) confirm that any investigations, discussions or negotiations are taking place; or (d) disclose any of the terms or conditions with respect to same.",
         "confidence": 0.9
       },
       {
-        "id": "a5",
-        "text": "The narrative text itself constitutes the target confidentiality statement, meaning the contract context directly entails it without requiring external inference.",
+        "id": "a3",
+        "text": "The confidentiality obligation is qualified by the phrase 'Except as may be required by applicable law, without the prior written consent of the respective Disclosing Party'. These carve-outs mean the duty is not absolute, which technically prevents a strict logical entailment of an unconditional confidentiality requirement.",
+        "stance_to_claim": "attack",
+        "legal_rule": "Contractual exceptions and conditions limit the scope of obligations; entailment must account for these limitations to be strictly valid.",
+        "evidence_span": "Except as may be required by applicable law, without the prior written consent of the respective Disclosing Party",
+        "confidence": 0.85
+      },
+      {
+        "id": "a4",
+        "text": "The contract explicitly assigns the duty to the 'Receiving Party' regarding information from the 'Disclosing Party'. The target statement refers to 'the relevant party', which accurately captures this bilateral confidentiality structure without introducing a party-scope mismatch.",
         "stance_to_claim": "support",
-        "legal_rule": "Direct textual match between the contract provision and the target claim establishes entailment.",
-        "evidence_span": "Except as may be required by applicable law, without the prior written consent of the respective Disclosing Party, the Receiving Party shall not: (b) disclose to any person the fact that Confidential Information and/or CEII/CII have been made available to it; (c) confirm that any investigations, discussions or negotiations are taking place; or (d) disclose any of the terms or conditions with respect to same.",
-        "confidence": 1.0
+        "legal_rule": "Entailment requires that the parties bound by the obligation in the contract match those referenced in the target statement.",
+        "evidence_span": "the Receiving Party shall not... without the prior written consent of the respective Disclosing Party",
+        "confidence": 0.9
       }
     ],
     "relations": [
@@ -55,7 +55,13 @@
         "source": "a2",
         "target": "phi",
         "type": "support",
-        "confidence": 0.95
+        "confidence": 0.9
+      },
+      {
+        "source": "a3",
+        "target": "phi",
+        "type": "attack",
+        "confidence": 0.85
       },
       {
         "source": "a4",
@@ -64,16 +70,22 @@
         "confidence": 0.9
       },
       {
-        "source": "a5",
-        "target": "phi",
+        "source": "a1",
+        "target": "a2",
         "type": "support",
-        "confidence": 1.0
+        "confidence": 0.8
+      },
+      {
+        "source": "a3",
+        "target": "a1",
+        "type": "attack",
+        "confidence": 0.75
       }
     ],
     "extraction_model": "",
-    "raw_llm_response": "{\n  \"case_id\": \"test_0006\",\n  \"phi\": \"Does the contract context entail the target confidentiality statement?\",\n  \"arguments\": [\n    {\n      \"id\": \"a1\",\n      \"text\": \"The narrative explicitly contains a confidentiality clause imposing obligations on the Receiving Party.\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"Contract interpretation principles require identifying explicit clauses that establish party obligations.\",\n      \"evidence_span\": \"the Receiving Party shall not: (b) disclose... (c) confirm... or (d) disclose...\",\n      \"confidence\": 0.95,\n      \"tau\": 0.9,\n      \"rubric\": {\n        \"relevance\": 0.9,\n        \"factual_grounding\": 1.0,\n        \"specificity\": 0.8,\n        \"logical_coherence\": 0.9,\n        \"applicability\": 0.9\n      },\n      \"justification\": \"Directly identifies the presence of a confidentiality obligation in the text, which is the primary basis for entailment.\"\n    },\n    {\n      \"id\": \"a2\",\n      \"text\": \"The clause specifically applies to the Receiving Party and covers Confidential Information, CEII/CII, and ongoing negotiations.\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"Scope of confidentiality obligations is determined by the defined terms and subjects of restriction in the contract.\",\n      \"evidence_span\": \"Confidential Information and/or CEII/CII\",\n      \"confidence\": 0.95,\n      \"tau\": 0.9,\n      \"rubric\": {\n        \"relevance\": 0.9,\n        \"factual_grounding\": 1.0,\n        \"specificity\": 0.9,\n        \"logical_coherence\": 0.9,\n        \"applicability\": 0.9\n      },\n      \"justification\": \"Demonstrates that the clause's scope aligns with standard confidentiality targets, reinforcing the entailment.\"\n    },\n    {\n      \"id\": \"a3\",\n      \"text\": \"The clause includes a carve-out for disclosures required by applicable law, which limits the absolute scope of the confidentiality obligation.\",\n      \"stance_to_claim\": \"neutral\",\n      \"legal_rule\": \"Standard contractual exceptions for legal compliance do not negate the existence of a confidentiality obligation but qualify its scope.\",\n      \"evidence_span\": \"Except as may be required by applicable law\",\n      \"confidence\": 0.8,\n      \"tau\": 0.6,\n      \"rubric\": {\n        \"relevance\": 0.7,\n        \"factual_grounding\": 1.0,\n        \"specificity\": 0.8,\n        \"logical_coherence\": 0.8,\n        \"applicability\": 0.7\n      },\n      \"justification\": \"Acts as a qualifying condition rather than a direct supporter or attacker of the core entailment claim.\"\n    },\n    {\n      \"id\": \"a4\",\n      \"text\": \"The clause mandates prior written consent from the Disclosing Party as a condition for any disclosure, reinforcing the confidentiality framework.\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"Procedural conditions for disclosure strengthen the enforceability and clarity of confidentiality obligations.\",\n      \"evidence_span\": \"without the prior written consent of the respective Disclosing Party\",\n      \"confidence\": 0.9,\n      \"tau\": 0.85,\n      \"rubric\": {\n        \"relevance\": 0.8,\n        \"factual_grounding\": 1.0,\n        \"specificity\": 0.8,\n        \"logical_coherence\": 0.9,\n        \"applicability\": 0.8\n      },\n      \"justification\": \"Highlights a key mechanism that upholds the confidentiality obligation, supporting the claim that the context entails it.\"\n    },\n    {\n      \"id\": \"a5\",\n      \"text\": \"The narrative text itself constitutes the target confidentiality statement, meaning the contract context directly entails it without requiring external inference.\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"Direct textual match between the contract provision and the target claim establishes entailment.\",\n      \"evidence_span\": \"Except as may be required by applicable law, without the prior written consent of the respective Disclosing Party, the Receiving Party shall not: (b) disclose to any person the fact that Confidential Information and/or CEII/CII have been made available to it; (c) confirm that any investigations, discussions or negotiations are taking place; or (d) disclose any of the terms or conditions with respect to same.\",\n      \"confidence\": 1.0,\n      \"tau\": 0.95,\n      \"rubric\": {\n        \"relevance\": 1.0,\n        \"factual_grounding\": 1.0,\n        \"specificity\": 1.0,\n        \"logical_coherence\": 1.0,\n        \"applicability\": 1.0\n      },\n      \"justification\": \"The narrative is the clause itself, making entailment direct and unambiguous.\"\n    }\n  ],\n  \"relations\": [\n    {\n      \"source\": \"a1\",\n      \"target\": \"phi\",\n      \"type\": \"support\",\n      \"confidence\": 0.95\n    },\n    {\n      \"source\": \"a2\",\n      \"target\": \"phi\",\n      \"type\": \"support\",\n      \"confidence\": 0.95\n    },\n    {\n      \"source\": \"a3\",\n      \"target\": \"phi\",\n      \"type\": \"neutral\",\n      \"confidence\": 0.8\n    },\n    {\n      \"source\": \"a4\",\n      \"target\": \"phi\",\n      \"type\": \"support\",\n      \"confidence\": 0.9\n    },\n    {\n      \"source\": \"a5\",\n      \"target\": \"phi\",\n      \"type\": \"support\",\n      \"confidence\": 1.0\n    }\n  ]\n}",
+    "raw_llm_response": "{\n  \"case_id\": \"test_0006\",\n  \"phi\": \"Does the CONTRACT CONTEXT logically entail the EXACT TARGET STATEMENT, with every material element matched and no missing limitation, exception, party-scope mismatch, information-type mismatch, purpose limitation, recipient-scope mismatch, or disclosure carve-out?\",\n  \"arguments\": [\n    {\n      \"id\": \"a1\",\n      \"text\": \"The contract context explicitly imposes a confidentiality obligation on the Receiving Party, prohibiting disclosure of the fact that Confidential Information has been made available, confirmation of ongoing negotiations, or disclosure of terms and conditions.\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"Contract interpretation principles require that explicit prohibitions on disclosure constitute a confidentiality obligation.\",\n      \"evidence_span\": \"the Receiving Party shall not: (b) disclose to any person the fact that Confidential Information and/or CEII/CII have been made available to it; (c) confirm that any investigations, discussions or negotiations are taking place; or (d) disclose any of the terms or conditions with respect to same.\",\n      \"confidence\": 0.95,\n      \"tau\": 0.9,\n      \"rubric\": {\n        \"relevance\": 0.9,\n        \"factual_grounding\": 1.0,\n        \"specificity\": 0.9,\n        \"logical_coherence\": 0.9,\n        \"applicability\": 0.9\n      },\n      \"justification\": \"Directly establishes the core confidentiality duty referenced in the target statement.\"\n    },\n    {\n      \"id\": \"a2\",\n      \"text\": \"The target statement's reference to 'existence, terms, subject matter, or status of the agreement, negotiations, discussions, or transaction' closely aligns with the contract's prohibition on disclosing 'the fact that Confidential Information... have been made available', 'investigations, discussions or negotiations', and 'terms or conditions'. This demonstrates a strong material element match.\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"Entailment in contract NLI requires that the target statement's scope and terminology are substantively covered by the contract text.\",\n      \"evidence_span\": \"the fact that Confidential Information and/or CEII/CII have been made available to it; (c) confirm that any investigations, discussions or negotiations are taking place; or (d) disclose any of the terms or conditions with respect to same.\",\n      \"confidence\": 0.9,\n      \"tau\": 0.85,\n      \"rubric\": {\n        \"relevance\": 0.9,\n        \"factual_grounding\": 0.9,\n        \"specificity\": 0.8,\n        \"logical_coherence\": 0.9,\n        \"applicability\": 0.9\n      },\n      \"justification\": \"Bridges the gap between the contract's specific prohibitions and the target statement's broader phrasing, showing they cover the same ground.\"\n    },\n    {\n      \"id\": \"a3\",\n      \"text\": \"The confidentiality obligation is qualified by the phrase 'Except as may be required by applicable law, without the prior written consent of the respective Disclosing Party'. These carve-outs mean the duty is not absolute, which technically prevents a strict logical entailment of an unconditional confidentiality requirement.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"Contractual exceptions and conditions limit the scope of obligations; entailment must account for these limitations to be strictly valid.\",\n      \"evidence_span\": \"Except as may be required by applicable law, without the prior written consent of the respective Disclosing Party\",\n      \"confidence\": 0.85,\n      \"tau\": 0.7,\n      \"rubric\": {\n        \"relevance\": 0.8,\n        \"factual_grounding\": 1.0,\n        \"specificity\": 0.8,\n        \"logical_coherence\": 0.8,\n        \"applicability\": 0.8\n      },\n      \"justification\": \"Highlights that the target statement implies a blanket duty, whereas the contract explicitly permits disclosures under legal compulsion or consent, weakening strict entailment.\"\n    },\n    {\n      \"id\": \"a4\",\n      \"text\": \"The contract explicitly assigns the duty to the 'Receiving Party' regarding information from the 'Disclosing Party'. The target statement refers to 'the relevant party', which accurately captures this bilateral confidentiality structure without introducing a party-scope mismatch.\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"Entailment requires that the parties bound by the obligation in the contract match those referenced in the target statement.\",\n      \"evidence_span\": \"the Receiving Party shall not... without the prior written consent of the respective Disclosing Party\",\n      \"confidence\": 0.9,\n      \"tau\": 0.8,\n      \"rubric\": {\n        \"relevance\": 0.8,\n        \"factual_grounding\": 0.9,\n        \"specificity\": 0.7,\n        \"logical_coherence\": 0.9,\n        \"applicability\": 0.8\n      },\n      \"justification\": \"Confirms that the obligation's recipient matches the target's reference, supporting the overall entailment claim.\"\n    }\n  ],\n  \"relations\": [\n    {\n      \"source\": \"a1\",\n      \"target\": \"phi\",\n      \"type\": \"support\",\n      \"confidence\": 0.95\n    },\n    {\n      \"source\": \"a2\",\n      \"target\": \"phi\",\n      \"type\": \"support\",\n      \"confidence\": 0.9\n    },\n    {\n      \"source\": \"a3\",\n      \"target\": \"phi\",\n      \"type\": \"attack\",\n      \"confidence\": 0.85\n    },\n    {\n      \"source\": \"a4\",\n      \"target\": \"phi\",\n      \"type\": \"support\",\n      \"confidence\": 0.9\n    },\n    {\n      \"source\": \"a1\",\n      \"target\": \"a2\",\n      \"type\": \"support\",\n      \"confidence\": 0.8\n    },\n    {\n      \"source\": \"a3\",\n      \"target\": \"a1\",\n      \"type\": \"attack\",\n      \"confidence\": 0.75\n    }\n  ]\n}",
     "parse_error": null,
-    "n_raw_arguments": 5
+    "n_raw_arguments": 4
   },
   "strengths": [
     {
@@ -82,50 +94,50 @@
       "rubric": {
         "legal_relevance": 0.9,
         "factual_grounding": 1.0,
-        "specificity": 0.8,
-        "logical_coherence": 0.9,
-        "fre_801c_applicability": 0.9
-      },
-      "justification": "Directly identifies the presence of a confidentiality obligation in the text, which is the primary basis for entailment.",
-      "model": "combined"
-    },
-    {
-      "argument_id": "a2",
-      "tau": 0.9,
-      "rubric": {
-        "legal_relevance": 0.9,
-        "factual_grounding": 1.0,
         "specificity": 0.9,
         "logical_coherence": 0.9,
         "fre_801c_applicability": 0.9
       },
-      "justification": "Demonstrates that the clause's scope aligns with standard confidentiality targets, reinforcing the entailment.",
+      "justification": "Directly establishes the core confidentiality duty referenced in the target statement.",
       "model": "combined"
     },
     {
-      "argument_id": "a4",
+      "argument_id": "a2",
       "tau": 0.85,
+      "rubric": {
+        "legal_relevance": 0.9,
+        "factual_grounding": 0.9,
+        "specificity": 0.8,
+        "logical_coherence": 0.9,
+        "fre_801c_applicability": 0.9
+      },
+      "justification": "Bridges the gap between the contract's specific prohibitions and the target statement's broader phrasing, showing they cover the same ground.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a3",
+      "tau": 0.7,
       "rubric": {
         "legal_relevance": 0.8,
         "factual_grounding": 1.0,
         "specificity": 0.8,
-        "logical_coherence": 0.9,
+        "logical_coherence": 0.8,
         "fre_801c_applicability": 0.8
       },
-      "justification": "Highlights a key mechanism that upholds the confidentiality obligation, supporting the claim that the context entails it.",
+      "justification": "Highlights that the target statement implies a blanket duty, whereas the contract explicitly permits disclosures under legal compulsion or consent, weakening strict entailment.",
       "model": "combined"
     },
     {
-      "argument_id": "a5",
-      "tau": 0.95,
+      "argument_id": "a4",
+      "tau": 0.8,
       "rubric": {
-        "legal_relevance": 1.0,
-        "factual_grounding": 1.0,
-        "specificity": 1.0,
-        "logical_coherence": 1.0,
-        "fre_801c_applicability": 1.0
+        "legal_relevance": 0.8,
+        "factual_grounding": 0.9,
+        "specificity": 0.7,
+        "logical_coherence": 0.9,
+        "fre_801c_applicability": 0.8
       },
-      "justification": "The narrative is the clause itself, making entailment direct and unambiguous.",
+      "justification": "Confirms that the obligation's recipient matches the target's reference, supporting the overall entailment claim.",
       "model": "combined"
     }
   ],
@@ -135,37 +147,37 @@
       "nodes": {
         "phi": {
           "id": "phi",
-          "text": "Does the contract context entail the target confidentiality statement?",
+          "text": "Does the CONTRACT CONTEXT logically entail the EXACT TARGET STATEMENT, with every material element matched and no missing limitation, exception, party-scope mismatch, information-type mismatch, purpose limitation, recipient-scope mismatch, or disclosure carve-out?",
           "tau": 0.5,
-          "sigma": 0.9999625,
+          "sigma": 0.6420065,
           "is_claim": true
         },
         "a1": {
           "id": "a1",
-          "text": "The narrative explicitly contains a confidentiality clause imposing obligations on the Receiving Party.",
+          "text": "The contract context explicitly imposes a confidentiality obligation on the Receiving Party, prohibiting disclosure of the fact that Confidential Information has been made available, confirmation of ongoing negotiations, or disclosure of terms and conditions.",
           "tau": 0.9,
-          "sigma": 0.9,
+          "sigma": 0.27,
           "is_claim": false
         },
         "a2": {
           "id": "a2",
-          "text": "The clause specifically applies to the Receiving Party and covers Confidential Information, CEII/CII, and ongoing negotiations.",
-          "tau": 0.9,
-          "sigma": 0.9,
+          "text": "The target statement's reference to 'existence, terms, subject matter, or status of the agreement, negotiations, discussions, or transaction' closely aligns with the contract's prohibition on disclosing 'the fact that Confidential Information... have been made available', 'investigations, discussions or negotiations', and 'terms or conditions'. This demonstrates a strong material element match.",
+          "tau": 0.85,
+          "sigma": 0.8905,
+          "is_claim": false
+        },
+        "a3": {
+          "id": "a3",
+          "text": "The confidentiality obligation is qualified by the phrase 'Except as may be required by applicable law, without the prior written consent of the respective Disclosing Party'. These carve-outs mean the duty is not absolute, which technically prevents a strict logical entailment of an unconditional confidentiality requirement.",
+          "tau": 0.7,
+          "sigma": 0.7,
           "is_claim": false
         },
         "a4": {
           "id": "a4",
-          "text": "The clause mandates prior written consent from the Disclosing Party as a condition for any disclosure, reinforcing the confidentiality framework.",
-          "tau": 0.85,
-          "sigma": 0.85,
-          "is_claim": false
-        },
-        "a5": {
-          "id": "a5",
-          "text": "The narrative text itself constitutes the target confidentiality statement, meaning the contract context directly entails it without requiring external inference.",
-          "tau": 0.95,
-          "sigma": 0.95,
+          "text": "The contract explicitly assigns the duty to the 'Receiving Party' regarding information from the 'Disclosing Party'. The target statement refers to 'the relevant party', which accurately captures this bilateral confidentiality structure without introducing a party-scope mismatch.",
+          "tau": 0.8,
+          "sigma": 0.8,
           "is_claim": false
         }
       },
@@ -180,7 +192,13 @@
           "source": "a2",
           "target": "phi",
           "type": "support",
-          "confidence": 0.95
+          "confidence": 0.9
+        },
+        {
+          "source": "a3",
+          "target": "phi",
+          "type": "attack",
+          "confidence": 0.85
         },
         {
           "source": "a4",
@@ -189,31 +207,37 @@
           "confidence": 0.9
         },
         {
-          "source": "a5",
-          "target": "phi",
+          "source": "a1",
+          "target": "a2",
           "type": "support",
-          "confidence": 1.0
+          "confidence": 0.8
+        },
+        {
+          "source": "a3",
+          "target": "a1",
+          "type": "attack",
+          "confidence": 0.75
         }
       ],
       "solver_type": "df_quad"
     },
-    "sigma_phi": 0.9999625,
+    "sigma_phi": 0.6420065,
     "sigma_all": {
-      "phi": 0.9999625,
-      "a1": 0.9,
-      "a2": 0.9,
-      "a4": 0.85,
-      "a5": 0.95
+      "phi": 0.6420065,
+      "a1": 0.27,
+      "a2": 0.8905,
+      "a3": 0.7,
+      "a4": 0.8
     },
     "iterations": 2,
     "converged": true,
     "solver_type": "df_quad"
   },
-  "sigma_phi": 0.9999625,
+  "sigma_phi": 0.6420065,
   "decision": "Yes",
   "uncertainty": {
     "is_uncertain": false,
-    "sigma_phi": 0.9999625,
+    "sigma_phi": 0.6420065,
     "threshold_low": 0.45,
     "threshold_high": 0.55,
     "escalation_triggered": false,

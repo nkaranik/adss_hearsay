@@ -1,0 +1,225 @@
+{
+  "case_id": "test_0079",
+  "input_text": "CONTRACT CONTEXT:\n5. The Confidential Information shall remain at all times the property of the Company.  No rights to use, license, or otherwise exploit the Confidential Information are granted to the Recipient, by implication or otherwise, by virtue of Confidential Information being made available to the Recipient or any of the Recipient’s Representatives. \n\nTARGET STATEMENT:\nThe contract entails that the relevant party must keep confidential the existence, terms, subject matter, or status of the agreement, negotiations, discussions, or transaction between the parties.\n\nDECISION TASK:\nDetermine whether the contract context entails the target statement.",
+  "phi_text": "",
+  "gold_label": "No",
+  "extraction": {
+    "case_id": "test_0079",
+    "input_text": "CONTRACT CONTEXT:\n5. The Confidential Information shall remain at all times the property of the Company.  No rights to use, license, or otherwise exploit the Confidential Information are granted to the Recipient, by implication or otherwise, by virtue of Confidential Information being made available to the Recipient or any of the Recipient’s Representatives. \n\nTARGET STATEMENT:\nThe contract entails that the relevant party must keep confidential the existence, terms, subject matter, or status of the agreement, negotiations, discussions, or transaction between the parties.\n\nDECISION TASK:\nDetermine whether the contract context entails the target statement.",
+    "claim": {
+      "id": "phi",
+      "text": "Does the CONTRACT CONTEXT logically entail the EXACT TARGET STATEMENT, with every material element matched and no missing limitation, exception, party-scope mismatch, information-type mismatch, purpose limitation, recipient-scope mismatch, or disclosure carve-out?"
+    },
+    "arguments": [
+      {
+        "id": "a1",
+        "text": "The contract context lacks an explicit confidentiality clause regarding the existence, terms, or status of the agreement.",
+        "stance_to_claim": "attack",
+        "legal_rule": "Contract entailment requires the target claim to be directly supported or logically necessitated by the contract text.",
+        "evidence_span": "The Confidential Information shall remain at all times the property of the Company.",
+        "confidence": 0.95
+      },
+      {
+        "id": "a2",
+        "text": "The provided text only addresses ownership and exploitation rights of 'Confidential Information,' which does not match the information type in the target statement.",
+        "stance_to_claim": "attack",
+        "legal_rule": "Scope and information-type mismatches between the contract text and the target claim weaken logical entailment.",
+        "evidence_span": "No rights to use, license, or otherwise exploit the Confidential Information are granted to the Recipient",
+        "confidence": 0.9
+      },
+      {
+        "id": "a3",
+        "text": "The target statement requires a confidentiality obligation that is neither explicitly stated nor reasonably inferable from the contract context.",
+        "stance_to_claim": "attack",
+        "legal_rule": "Entailment in contract NLI requires direct textual support or necessary inference; mere possibility or absence of contradiction does not suffice.",
+        "evidence_span": null,
+        "confidence": 0.95
+      },
+      {
+        "id": "a4",
+        "text": "The contract context's limitation on rights to use or exploit 'Confidential Information' does not logically extend to a duty to keep the agreement's existence confidential.",
+        "stance_to_claim": "attack",
+        "legal_rule": "Logical entailment requires a direct inferential link; restricting exploitation rights does not imply confidentiality of the agreement's terms.",
+        "evidence_span": "No rights to use, license, or otherwise exploit the Confidential Information are granted to the Recipient",
+        "confidence": 0.9
+      }
+    ],
+    "relations": [
+      {
+        "source": "a1",
+        "target": "phi",
+        "type": "attack",
+        "confidence": 0.95
+      },
+      {
+        "source": "a2",
+        "target": "phi",
+        "type": "attack",
+        "confidence": 0.9
+      },
+      {
+        "source": "a3",
+        "target": "phi",
+        "type": "attack",
+        "confidence": 0.95
+      },
+      {
+        "source": "a4",
+        "target": "phi",
+        "type": "attack",
+        "confidence": 0.9
+      }
+    ],
+    "extraction_model": "",
+    "raw_llm_response": "{\n  \"case_id\": \"test_0079\",\n  \"phi\": \"Does the CONTRACT CONTEXT logically entail the EXACT TARGET STATEMENT, with every material element matched and no missing limitation, exception, party-scope mismatch, information-type mismatch, purpose limitation, recipient-scope mismatch, or disclosure carve-out?\",\n  \"arguments\": [\n    {\n      \"id\": \"a1\",\n      \"text\": \"The contract context lacks an explicit confidentiality clause regarding the existence, terms, or status of the agreement.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"Contract entailment requires the target claim to be directly supported or logically necessitated by the contract text.\",\n      \"evidence_span\": \"The Confidential Information shall remain at all times the property of the Company.\",\n      \"confidence\": 0.95,\n      \"tau\": 0.9,\n      \"rubric\": {\n        \"relevance\": 0.9,\n        \"factual_grounding\": 0.95,\n        \"specificity\": 0.8,\n        \"logical_coherence\": 0.9,\n        \"applicability\": 0.9\n      },\n      \"justification\": \"The absence of a confidentiality provision directly attacks the entailment of a confidentiality obligation.\"\n    },\n    {\n      \"id\": \"a2\",\n      \"text\": \"The provided text only addresses ownership and exploitation rights of 'Confidential Information,' which does not match the information type in the target statement.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"Scope and information-type mismatches between the contract text and the target claim weaken logical entailment.\",\n      \"evidence_span\": \"No rights to use, license, or otherwise exploit the Confidential Information are granted to the Recipient\",\n      \"confidence\": 0.9,\n      \"tau\": 0.85,\n      \"rubric\": {\n        \"relevance\": 0.85,\n        \"factual_grounding\": 0.9,\n        \"specificity\": 0.8,\n        \"logical_coherence\": 0.85,\n        \"applicability\": 0.9\n      },\n      \"justification\": \"The contract focuses on property rights and exploitation, not confidentiality of the agreement itself, creating an information-type mismatch.\"\n    },\n    {\n      \"id\": \"a3\",\n      \"text\": \"The target statement requires a confidentiality obligation that is neither explicitly stated nor reasonably inferable from the contract context.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"Entailment in contract NLI requires direct textual support or necessary inference; mere possibility or absence of contradiction does not suffice.\",\n      \"evidence_span\": null,\n      \"confidence\": 0.95,\n      \"tau\": 0.9,\n      \"rubric\": {\n        \"relevance\": 0.9,\n        \"factual_grounding\": 0.9,\n        \"specificity\": 0.85,\n        \"logical_coherence\": 0.95,\n        \"applicability\": 0.9\n      },\n      \"justification\": \"Since the obligation is absent and not inferable, the target statement cannot be entailed.\"\n    },\n    {\n      \"id\": \"a4\",\n      \"text\": \"The contract context's limitation on rights to use or exploit 'Confidential Information' does not logically extend to a duty to keep the agreement's existence confidential.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"Logical entailment requires a direct inferential link; restricting exploitation rights does not imply confidentiality of the agreement's terms.\",\n      \"evidence_span\": \"No rights to use, license, or otherwise exploit the Confidential Information are granted to the Recipient\",\n      \"confidence\": 0.9,\n      \"tau\": 0.85,\n      \"rubric\": {\n        \"relevance\": 0.85,\n        \"factual_grounding\": 0.9,\n        \"specificity\": 0.8,\n        \"logical_coherence\": 0.9,\n        \"applicability\": 0.85\n      },\n      \"justification\": \"The logical gap between exploitation restrictions and confidentiality obligations attacks the entailment claim.\"\n    }\n  ],\n  \"relations\": [\n    {\n      \"source\": \"a1\",\n      \"target\": \"phi\",\n      \"type\": \"attack\",\n      \"confidence\": 0.95\n    },\n    {\n      \"source\": \"a2\",\n      \"target\": \"phi\",\n      \"type\": \"attack\",\n      \"confidence\": 0.9\n    },\n    {\n      \"source\": \"a3\",\n      \"target\": \"phi\",\n      \"type\": \"attack\",\n      \"confidence\": 0.95\n    },\n    {\n      \"source\": \"a4\",\n      \"target\": \"phi\",\n      \"type\": \"attack\",\n      \"confidence\": 0.9\n    }\n  ]\n}",
+    "parse_error": null,
+    "n_raw_arguments": 4
+  },
+  "strengths": [
+    {
+      "argument_id": "a1",
+      "tau": 0.9,
+      "rubric": {
+        "legal_relevance": 0.9,
+        "factual_grounding": 0.95,
+        "specificity": 0.8,
+        "logical_coherence": 0.9,
+        "fre_801c_applicability": 0.9
+      },
+      "justification": "The absence of a confidentiality provision directly attacks the entailment of a confidentiality obligation.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a2",
+      "tau": 0.85,
+      "rubric": {
+        "legal_relevance": 0.85,
+        "factual_grounding": 0.9,
+        "specificity": 0.8,
+        "logical_coherence": 0.85,
+        "fre_801c_applicability": 0.9
+      },
+      "justification": "The contract focuses on property rights and exploitation, not confidentiality of the agreement itself, creating an information-type mismatch.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a3",
+      "tau": 0.9,
+      "rubric": {
+        "legal_relevance": 0.9,
+        "factual_grounding": 0.9,
+        "specificity": 0.85,
+        "logical_coherence": 0.95,
+        "fre_801c_applicability": 0.9
+      },
+      "justification": "Since the obligation is absent and not inferable, the target statement cannot be entailed.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a4",
+      "tau": 0.85,
+      "rubric": {
+        "legal_relevance": 0.85,
+        "factual_grounding": 0.9,
+        "specificity": 0.8,
+        "logical_coherence": 0.9,
+        "fre_801c_applicability": 0.85
+      },
+      "justification": "The logical gap between exploitation restrictions and confidentiality obligations attacks the entailment claim.",
+      "model": "combined"
+    }
+  ],
+  "solver_output": {
+    "case_id": "test_0079",
+    "graph": {
+      "nodes": {
+        "phi": {
+          "id": "phi",
+          "text": "Does the CONTRACT CONTEXT logically entail the EXACT TARGET STATEMENT, with every material element matched and no missing limitation, exception, party-scope mismatch, information-type mismatch, purpose limitation, recipient-scope mismatch, or disclosure carve-out?",
+          "tau": 0.5,
+          "sigma": 0.00011250000000001537,
+          "is_claim": true
+        },
+        "a1": {
+          "id": "a1",
+          "text": "The contract context lacks an explicit confidentiality clause regarding the existence, terms, or status of the agreement.",
+          "tau": 0.9,
+          "sigma": 0.9,
+          "is_claim": false
+        },
+        "a2": {
+          "id": "a2",
+          "text": "The provided text only addresses ownership and exploitation rights of 'Confidential Information,' which does not match the information type in the target statement.",
+          "tau": 0.85,
+          "sigma": 0.85,
+          "is_claim": false
+        },
+        "a3": {
+          "id": "a3",
+          "text": "The target statement requires a confidentiality obligation that is neither explicitly stated nor reasonably inferable from the contract context.",
+          "tau": 0.9,
+          "sigma": 0.9,
+          "is_claim": false
+        },
+        "a4": {
+          "id": "a4",
+          "text": "The contract context's limitation on rights to use or exploit 'Confidential Information' does not logically extend to a duty to keep the agreement's existence confidential.",
+          "tau": 0.85,
+          "sigma": 0.85,
+          "is_claim": false
+        }
+      },
+      "edges": [
+        {
+          "source": "a1",
+          "target": "phi",
+          "type": "attack",
+          "confidence": 0.95
+        },
+        {
+          "source": "a2",
+          "target": "phi",
+          "type": "attack",
+          "confidence": 0.9
+        },
+        {
+          "source": "a3",
+          "target": "phi",
+          "type": "attack",
+          "confidence": 0.95
+        },
+        {
+          "source": "a4",
+          "target": "phi",
+          "type": "attack",
+          "confidence": 0.9
+        }
+      ],
+      "solver_type": "df_quad"
+    },
+    "sigma_phi": 0.00011250000000001537,
+    "sigma_all": {
+      "phi": 0.00011250000000001537,
+      "a1": 0.9,
+      "a2": 0.85,
+      "a3": 0.9,
+      "a4": 0.85
+    },
+    "iterations": 2,
+    "converged": true,
+    "solver_type": "df_quad"
+  },
+  "sigma_phi": 0.00011250000000001537,
+  "decision": "No",
+  "uncertainty": {
+    "is_uncertain": false,
+    "sigma_phi": 0.00011250000000001537,
+    "threshold_low": 0.45,
+    "threshold_high": 0.55,
+    "escalation_triggered": false,
+    "escalation_actions": [],
+    "escalation_log": []
+  },
+  "hitl_interventions": [],
+  "pre_hitl_decision": null
+}

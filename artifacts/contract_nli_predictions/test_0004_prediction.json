@@ -1,31 +1,31 @@
 {
   "case_id": "test_0004",
-  "input_text": "“Information” means any and all confidential information or data exchanged, submitted or otherwise disclosed in respect of or further to the Purpose or prepared for or in relation to the Purpose, including but not limited to written proposal documentation, due diligence materials, contractual documentation, reports, and the fact that the Parties have entered into this Agreement and are discussing and considering a business relationship; Other than as set out in this clause, none of the Parties will make any public announcements, statements or otherwise publicise the subject matter of this Agreement (or its existence) without the prior written consent of the other Parties and no Party will use the business names or trade marks of any other Party in any way without that Party’s prior written consent. ",
+  "input_text": "CONTRACT CONTEXT:\n“Information” means any and all confidential information or data exchanged, submitted or otherwise disclosed in respect of or further to the Purpose or prepared for or in relation to the Purpose, including but not limited to written proposal documentation, due diligence materials, contractual documentation, reports, and the fact that the Parties have entered into this Agreement and are discussing and considering a business relationship; Other than as set out in this clause, none of the Parties will make any public announcements, statements or otherwise publicise the subject matter of this Agreement (or its existence) without the prior written consent of the other Parties and no Party will use the business names or trade marks of any other Party in any way without that Party’s prior written consent. \n\nTARGET STATEMENT:\nThe contract entails that the relevant party must keep confidential the existence, terms, subject matter, or status of the agreement, negotiations, discussions, or transaction between the parties.\n\nDECISION TASK:\nDetermine whether the contract context entails the target statement.",
   "phi_text": "",
   "gold_label": "Yes",
   "extraction": {
     "case_id": "test_0004",
-    "input_text": "“Information” means any and all confidential information or data exchanged, submitted or otherwise disclosed in respect of or further to the Purpose or prepared for or in relation to the Purpose, including but not limited to written proposal documentation, due diligence materials, contractual documentation, reports, and the fact that the Parties have entered into this Agreement and are discussing and considering a business relationship; Other than as set out in this clause, none of the Parties will make any public announcements, statements or otherwise publicise the subject matter of this Agreement (or its existence) without the prior written consent of the other Parties and no Party will use the business names or trade marks of any other Party in any way without that Party’s prior written consent. ",
+    "input_text": "CONTRACT CONTEXT:\n“Information” means any and all confidential information or data exchanged, submitted or otherwise disclosed in respect of or further to the Purpose or prepared for or in relation to the Purpose, including but not limited to written proposal documentation, due diligence materials, contractual documentation, reports, and the fact that the Parties have entered into this Agreement and are discussing and considering a business relationship; Other than as set out in this clause, none of the Parties will make any public announcements, statements or otherwise publicise the subject matter of this Agreement (or its existence) without the prior written consent of the other Parties and no Party will use the business names or trade marks of any other Party in any way without that Party’s prior written consent. \n\nTARGET STATEMENT:\nThe contract entails that the relevant party must keep confidential the existence, terms, subject matter, or status of the agreement, negotiations, discussions, or transaction between the parties.\n\nDECISION TASK:\nDetermine whether the contract context entails the target statement.",
     "claim": {
       "id": "phi",
-      "text": "Does the contract context entail the target confidentiality statement?"
+      "text": "Does the CONTRACT CONTEXT logically entail the EXACT TARGET STATEMENT, with every material element matched and no missing limitation, exception, party-scope mismatch, information-type mismatch, purpose limitation, recipient-scope mismatch, or disclosure carve-out?"
     },
     "arguments": [
       {
         "id": "a1",
-        "text": "The contract explicitly prohibits parties from making public announcements or publicizing the subject matter or existence of the Agreement without prior written consent.",
+        "text": "The contract explicitly defines \"Information\" to encompass \"the fact that the Parties have entered into this Agreement and are discussing and considering a business relationship,\" which directly supports the target claim regarding confidentiality of the agreement's existence and negotiations.",
         "stance_to_claim": "support",
-        "legal_rule": "Contractual interpretation of explicit confidentiality clauses establishes binding non-disclosure obligations.",
-        "evidence_span": "none of the Parties will make any public announcements, statements or otherwise publicise the subject matter of this Agreement (or its existence) without the prior written consent of the other Parties",
+        "legal_rule": "Contract definitions that explicitly include the existence of an agreement or ongoing negotiations within the scope of confidential information support entailment of a confidentiality obligation.",
+        "evidence_span": "“Information” means any and all confidential information or data exchanged... including but not limited to... the fact that the Parties have entered into this Agreement and are discussing and considering a business relationship",
         "confidence": 0.95
       },
       {
         "id": "a2",
-        "text": "The definition of Information explicitly encompasses confidential data and specifically covers the fact that the parties have entered into the Agreement and are discussing a business relationship.",
+        "text": "The contract contains a clear non-disclosure provision stating that \"none of the Parties will make any public announcements, statements or otherwise publicise the subject matter of this Agreement (or its existence) without the prior written consent of the other Parties,\" which directly entails the obligation to keep the agreement confidential.",
         "stance_to_claim": "support",
-        "legal_rule": "Contractual definition scope determines the breadth of confidentiality obligations and protected information types.",
-        "evidence_span": "“Information” means any and all confidential information or data exchanged, submitted or otherwise disclosed in respect of or further to the Purpose or prepared for or in relation to the Purpose, including but not limited to written proposal documentation, due diligence materials, contractual documentation, reports, and the fact that the Parties have entered into this Agreement and are discussing and considering a business relationship;",
-        "confidence": 0.9
+        "legal_rule": "Explicit contractual prohibitions on publicizing an agreement's existence or subject matter constitute a direct confidentiality obligation.",
+        "evidence_span": "none of the Parties will make any public announcements, statements or otherwise publicise the subject matter of this Agreement (or its existence) without the prior written consent of the other Parties",
+        "confidence": 0.95
       }
     ],
     "relations": [
@@ -39,39 +39,39 @@
         "source": "a2",
         "target": "phi",
         "type": "support",
-        "confidence": 0.9
+        "confidence": 0.95
       }
     ],
     "extraction_model": "",
-    "raw_llm_response": "{\n  \"case_id\": \"test_0004\",\n  \"phi\": \"Does the contract context entail the target confidentiality statement?\",\n  \"arguments\": [\n    {\n      \"id\": \"a1\",\n      \"text\": \"The contract explicitly prohibits parties from making public announcements or publicizing the subject matter or existence of the Agreement without prior written consent.\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"Contractual interpretation of explicit confidentiality clauses establishes binding non-disclosure obligations.\",\n      \"evidence_span\": \"none of the Parties will make any public announcements, statements or otherwise publicise the subject matter of this Agreement (or its existence) without the prior written consent of the other Parties\",\n      \"confidence\": 0.95,\n      \"tau\": 0.9,\n      \"rubric\": {\n        \"relevance\": 0.9,\n        \"factual_grounding\": 1.0,\n        \"specificity\": 0.8,\n        \"logical_coherence\": 0.9,\n        \"applicability\": 0.9\n      },\n      \"justification\": \"Directly establishes a confidentiality obligation by restricting public disclosure of the agreement's existence and subject matter, which strongly supports the target claim.\"\n    },\n    {\n      \"id\": \"a2\",\n      \"text\": \"The definition of Information explicitly encompasses confidential data and specifically covers the fact that the parties have entered into the Agreement and are discussing a business relationship.\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"Contractual definition scope determines the breadth of confidentiality obligations and protected information types.\",\n      \"evidence_span\": \"“Information” means any and all confidential information or data exchanged, submitted or otherwise disclosed in respect of or further to the Purpose or prepared for or in relation to the Purpose, including but not limited to written proposal documentation, due diligence materials, contractual documentation, reports, and the fact that the Parties have entered into this Agreement and are discussing and considering a business relationship;\",\n      \"confidence\": 0.9,\n      \"tau\": 0.85,\n      \"rubric\": {\n        \"relevance\": 0.85,\n        \"factual_grounding\": 1.0,\n        \"specificity\": 0.8,\n        \"logical_coherence\": 0.85,\n        \"applicability\": 0.85\n      },\n      \"justification\": \"Broadens the scope of protected information to explicitly include the agreement's existence and related discussions, providing direct definitional support for the confidentiality statement.\"\n    },\n    {\n      \"id\": \"a3\",\n      \"text\": \"The clause contains a standard qualifier indicating that permitted disclosures or exceptions may exist elsewhere in the agreement.\",\n      \"stance_to_claim\": \"neutral\",\n      \"legal_rule\": \"Contractual qualifiers and carve-outs do not negate primary obligations but define their boundaries and permissible exceptions.\",\n      \"evidence_span\": \"Other than as set out in this clause,\",\n      \"confidence\": 0.7,\n      \"tau\": 0.5,\n      \"rubric\": {\n        \"relevance\": 0.6,\n        \"factual_grounding\": 1.0,\n        \"specificity\": 0.5,\n        \"logical_coherence\": 0.6,\n        \"applicability\": 0.6\n      },\n      \"justification\": \"While relevant to understanding the obligation's limits, it functions as a scope qualifier rather than a direct supporter or attacker of the core confidentiality entailment.\"\n    }\n  ],\n  \"relations\": [\n    {\n      \"source\": \"a1\",\n      \"target\": \"phi\",\n      \"type\": \"support\",\n      \"confidence\": 0.95\n    },\n    {\n      \"source\": \"a2\",\n      \"target\": \"phi\",\n      \"type\": \"support\",\n      \"confidence\": 0.9\n    }\n  ]\n}",
+    "raw_llm_response": "{\n  \"case_id\": \"test_0004\",\n  \"phi\": \"Does the CONTRACT CONTEXT logically entail the EXACT TARGET STATEMENT, with every material element matched and no missing limitation, exception, party-scope mismatch, information-type mismatch, purpose limitation, recipient-scope mismatch, or disclosure carve-out?\",\n  \"arguments\": [\n    {\n      \"id\": \"a1\",\n      \"text\": \"The contract explicitly defines \\\"Information\\\" to encompass \\\"the fact that the Parties have entered into this Agreement and are discussing and considering a business relationship,\\\" which directly supports the target claim regarding confidentiality of the agreement's existence and negotiations.\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"Contract definitions that explicitly include the existence of an agreement or ongoing negotiations within the scope of confidential information support entailment of a confidentiality obligation.\",\n      \"evidence_span\": \"“Information” means any and all confidential information or data exchanged... including but not limited to... the fact that the Parties have entered into this Agreement and are discussing and considering a business relationship\",\n      \"confidence\": 0.95,\n      \"tau\": 0.9,\n      \"rubric\": {\n        \"relevance\": 1.0,\n        \"factual_grounding\": 1.0,\n        \"specificity\": 0.9,\n        \"logical_coherence\": 1.0,\n        \"applicability\": 0.9\n      },\n      \"justification\": \"Directly maps the contractual definition of Information to the target statement's scope, providing strong textual support for entailment.\"\n    },\n    {\n      \"id\": \"a2\",\n      \"text\": \"The contract contains a clear non-disclosure provision stating that \\\"none of the Parties will make any public announcements, statements or otherwise publicise the subject matter of this Agreement (or its existence) without the prior written consent of the other Parties,\\\" which directly entails the obligation to keep the agreement confidential.\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"Explicit contractual prohibitions on publicizing an agreement's existence or subject matter constitute a direct confidentiality obligation.\",\n      \"evidence_span\": \"none of the Parties will make any public announcements, statements or otherwise publicise the subject matter of this Agreement (or its existence) without the prior written consent of the other Parties\",\n      \"confidence\": 0.95,\n      \"tau\": 0.95,\n      \"rubric\": {\n        \"relevance\": 1.0,\n        \"factual_grounding\": 1.0,\n        \"specificity\": 1.0,\n        \"logical_coherence\": 1.0,\n        \"applicability\": 1.0\n      },\n      \"justification\": \"Directly matches the target claim's requirement to keep the agreement's existence and subject matter confidential, providing the strongest textual basis for entailment.\"\n    },\n    {\n      \"id\": \"a3\",\n      \"text\": \"The confidentiality obligation is subject to a carve-out allowing disclosure with \\\"prior written consent of the other Parties.\\\" This limitation qualifies the absolute nature of the confidentiality but does not negate the default obligation, meaning the target statement is entailed as a general rule.\",\n      \"stance_to_claim\": \"neutral\",\n      \"legal_rule\": \"Standard contractual exceptions or consent-based carve-outs modify but do not inherently defeat the existence of a primary confidentiality obligation for NLI purposes.\",\n      \"evidence_span\": \"without the prior written consent of the other Parties\",\n      \"confidence\": 0.8,\n      \"tau\": 0.5,\n      \"rubric\": {\n        \"relevance\": 0.8,\n        \"factual_grounding\": 1.0,\n        \"specificity\": 0.7,\n        \"logical_coherence\": 0.8,\n        \"applicability\": 0.7\n      },\n      \"justification\": \"Acknowledges a limitation on the confidentiality duty. While it prevents the obligation from being absolute, it is a standard permissible disclosure mechanism that does not break the logical entailment of the core duty.\"\n    },\n    {\n      \"id\": \"a4\",\n      \"text\": \"The provision restricting the use of \\\"business names or trade marks\\\" pertains to intellectual property and branding rather than the confidentiality of the agreement's existence or terms, making it irrelevant to the specific target claim.\",\n      \"stance_to_claim\": \"neutral\",\n      \"legal_rule\": \"Contractual clauses addressing IP usage or branding are distinct from confidentiality obligations and do not contribute to the logical entailment of secrecy regarding the agreement itself.\",\n      \"evidence_span\": \"no Party will use the business names or trade marks of any other Party in any way without that Party’s prior written consent.\",\n      \"confidence\": 0.7,\n      \"tau\": 0.3,\n      \"rubric\": {\n        \"relevance\": 0.3,\n        \"factual_grounding\": 1.0,\n        \"specificity\": 0.5,\n        \"logical_coherence\": 0.6,\n        \"applicability\": 0.4\n      },\n      \"justification\": \"Extracted from the same clause but addresses a different legal domain (IP/branding). It does not support or attack the specific claim about confidentiality of the agreement's existence/status.\"\n    }\n  ],\n  \"relations\": [\n    {\n      \"source\": \"a1\",\n      \"target\": \"phi\",\n      \"type\": \"support\",\n      \"confidence\": 0.95\n    },\n    {\n      \"source\": \"a2\",\n      \"target\": \"phi\",\n      \"type\": \"support\",\n      \"confidence\": 0.95\n    },\n    {\n      \"source\": \"a3\",\n      \"target\": \"phi\",\n      \"type\": \"neutral\",\n      \"confidence\": 0.8\n    },\n    {\n      \"source\": \"a4\",\n      \"target\": \"phi\",\n      \"type\": \"neutral\",\n      \"confidence\": 0.7\n    },\n    {\n      \"source\": \"a3\",\n      \"target\": \"a2\",\n      \"type\": \"neutral\",\n      \"confidence\": 0.8\n    }\n  ]\n}",
     "parse_error": null,
-    "n_raw_arguments": 3
+    "n_raw_arguments": 4
   },
   "strengths": [
     {
       "argument_id": "a1",
       "tau": 0.9,
       "rubric": {
-        "legal_relevance": 0.9,
+        "legal_relevance": 1.0,
         "factual_grounding": 1.0,
-        "specificity": 0.8,
-        "logical_coherence": 0.9,
+        "specificity": 0.9,
+        "logical_coherence": 1.0,
         "fre_801c_applicability": 0.9
       },
-      "justification": "Directly establishes a confidentiality obligation by restricting public disclosure of the agreement's existence and subject matter, which strongly supports the target claim.",
+      "justification": "Directly maps the contractual definition of Information to the target statement's scope, providing strong textual support for entailment.",
       "model": "combined"
     },
     {
       "argument_id": "a2",
-      "tau": 0.85,
+      "tau": 0.95,
       "rubric": {
-        "legal_relevance": 0.85,
+        "legal_relevance": 1.0,
         "factual_grounding": 1.0,
-        "specificity": 0.8,
-        "logical_coherence": 0.85,
-        "fre_801c_applicability": 0.85
+        "specificity": 1.0,
+        "logical_coherence": 1.0,
+        "fre_801c_applicability": 1.0
       },
-      "justification": "Broadens the scope of protected information to explicitly include the agreement's existence and related discussions, providing direct definitional support for the confidentiality statement.",
+      "justification": "Directly matches the target claim's requirement to keep the agreement's existence and subject matter confidential, providing the strongest textual basis for entailment.",
       "model": "combined"
     }
   ],
@@ -81,23 +81,23 @@
       "nodes": {
         "phi": {
           "id": "phi",
-          "text": "Does the contract context entail the target confidentiality statement?",
+          "text": "Does the CONTRACT CONTEXT logically entail the EXACT TARGET STATEMENT, with every material element matched and no missing limitation, exception, party-scope mismatch, information-type mismatch, purpose limitation, recipient-scope mismatch, or disclosure carve-out?",
           "tau": 0.5,
-          "sigma": 0.9924999999999999,
+          "sigma": 0.9975,
           "is_claim": true
         },
         "a1": {
           "id": "a1",
-          "text": "The contract explicitly prohibits parties from making public announcements or publicizing the subject matter or existence of the Agreement without prior written consent.",
+          "text": "The contract explicitly defines \"Information\" to encompass \"the fact that the Parties have entered into this Agreement and are discussing and considering a business relationship,\" which directly supports the target claim regarding confidentiality of the agreement's existence and negotiations.",
           "tau": 0.9,
           "sigma": 0.9,
           "is_claim": false
         },
         "a2": {
           "id": "a2",
-          "text": "The definition of Information explicitly encompasses confidential data and specifically covers the fact that the parties have entered into the Agreement and are discussing a business relationship.",
-          "tau": 0.85,
-          "sigma": 0.85,
+          "text": "The contract contains a clear non-disclosure provision stating that \"none of the Parties will make any public announcements, statements or otherwise publicise the subject matter of this Agreement (or its existence) without the prior written consent of the other Parties,\" which directly entails the obligation to keep the agreement confidential.",
+          "tau": 0.95,
+          "sigma": 0.95,
           "is_claim": false
         }
       },
@@ -112,26 +112,26 @@
           "source": "a2",
           "target": "phi",
           "type": "support",
-          "confidence": 0.9
+          "confidence": 0.95
         }
       ],
       "solver_type": "df_quad"
     },
-    "sigma_phi": 0.9924999999999999,
+    "sigma_phi": 0.9975,
     "sigma_all": {
-      "phi": 0.9924999999999999,
+      "phi": 0.9975,
       "a1": 0.9,
-      "a2": 0.85
+      "a2": 0.95
     },
     "iterations": 2,
     "converged": true,
     "solver_type": "df_quad"
   },
-  "sigma_phi": 0.9924999999999999,
+  "sigma_phi": 0.9975,
   "decision": "Yes",
   "uncertainty": {
     "is_uncertain": false,
-    "sigma_phi": 0.9924999999999999,
+    "sigma_phi": 0.9975,
     "threshold_low": 0.45,
     "threshold_high": 0.55,
     "escalation_triggered": false,

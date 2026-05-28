@@ -1,0 +1,249 @@
+{
+  "case_id": "test_0072",
+  "input_text": "CONTRACT CONTEXT:\n3. Each party may disclose Conﬁdential Information only on a need-to-know basis to its own employees and to its consultants under appropriate written burden of conﬁdentiality.  \n\nTARGET STATEMENT:\nThe contract entails that the relevant party must keep confidential the existence, terms, subject matter, or status of the agreement, negotiations, discussions, or transaction between the parties.\n\nDECISION TASK:\nDetermine whether the contract context entails the target statement.",
+  "phi_text": "",
+  "gold_label": "No",
+  "extraction": {
+    "case_id": "test_0072",
+    "input_text": "CONTRACT CONTEXT:\n3. Each party may disclose Conﬁdential Information only on a need-to-know basis to its own employees and to its consultants under appropriate written burden of conﬁdentiality.  \n\nTARGET STATEMENT:\nThe contract entails that the relevant party must keep confidential the existence, terms, subject matter, or status of the agreement, negotiations, discussions, or transaction between the parties.\n\nDECISION TASK:\nDetermine whether the contract context entails the target statement.",
+    "claim": {
+      "id": "phi",
+      "text": "Does the CONTRACT CONTEXT logically entail the EXACT TARGET STATEMENT, with every material element matched and no missing limitation, exception, party-scope mismatch, information-type mismatch, purpose limitation, recipient-scope mismatch, or disclosure carve-out?"
+    },
+    "arguments": [
+      {
+        "id": "a1",
+        "text": "The contract context lacks an explicit confidentiality clause regarding the existence, terms, or status of the agreement. It only addresses the conditional disclosure of 'Confidential Information.'",
+        "stance_to_claim": "attack",
+        "legal_rule": "Contractual entailment requires explicit or necessarily implied obligations; the absence of a confidentiality clause regarding the agreement itself prevents logical entailment.",
+        "evidence_span": "Each party may disclose Conﬁdential Information only on a need-to-know basis...",
+        "confidence": 0.9
+      },
+      {
+        "id": "a2",
+        "text": "The target statement requires an affirmative duty to 'keep confidential' the agreement's existence and terms, but the contract text only grants a conditional permission to disclose 'Confidential Information' to specific recipients.",
+        "stance_to_claim": "attack",
+        "legal_rule": "A permissive clause regulating disclosure does not logically entail a broad affirmative confidentiality obligation regarding the agreement itself.",
+        "evidence_span": "Each party may disclose Conﬁdential Information only on a need-to-know basis to its own employees and to its consultants...",
+        "confidence": 0.9
+      },
+      {
+        "id": "a3",
+        "text": "The term 'Confidential Information' is not defined in the provided contract context, making it impossible to infer that the existence, terms, or status of the agreement fall within its scope.",
+        "stance_to_claim": "attack",
+        "legal_rule": "Contractual terms must be defined or clearly linked to the subject matter to support entailment; undefined terms prevent logical derivation of scope.",
+        "evidence_span": "Conﬁdential Information",
+        "confidence": 0.85
+      },
+      {
+        "id": "a4",
+        "text": "The contract context only restricts disclosure to employees and consultants under a written burden of confidentiality, which does not cover the general non-disclosure of the agreement's existence or status to third parties or the public.",
+        "stance_to_claim": "attack",
+        "legal_rule": "Scope limitations and permitted disclosures in a contract narrow the obligation; they do not expand it to cover unmentioned confidentiality duties.",
+        "evidence_span": "to its own employees and to its consultants under appropriate written burden of conﬁdentiality.",
+        "confidence": 0.85
+      }
+    ],
+    "relations": [
+      {
+        "source": "a1",
+        "target": "phi",
+        "type": "attack",
+        "confidence": 0.9
+      },
+      {
+        "source": "a2",
+        "target": "phi",
+        "type": "attack",
+        "confidence": 0.9
+      },
+      {
+        "source": "a3",
+        "target": "phi",
+        "type": "attack",
+        "confidence": 0.85
+      },
+      {
+        "source": "a4",
+        "target": "phi",
+        "type": "attack",
+        "confidence": 0.85
+      },
+      {
+        "source": "a1",
+        "target": "a2",
+        "type": "support",
+        "confidence": 0.8
+      },
+      {
+        "source": "a3",
+        "target": "a4",
+        "type": "support",
+        "confidence": 0.75
+      }
+    ],
+    "extraction_model": "",
+    "raw_llm_response": "{\n  \"case_id\": \"test_0072\",\n  \"phi\": \"Does the CONTRACT CONTEXT logically entail the EXACT TARGET STATEMENT, with every material element matched and no missing limitation, exception, party-scope mismatch, information-type mismatch, purpose limitation, recipient-scope mismatch, or disclosure carve-out?\",\n  \"arguments\": [\n    {\n      \"id\": \"a1\",\n      \"text\": \"The contract context lacks an explicit confidentiality clause regarding the existence, terms, or status of the agreement. It only addresses the conditional disclosure of 'Confidential Information.'\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"Contractual entailment requires explicit or necessarily implied obligations; the absence of a confidentiality clause regarding the agreement itself prevents logical entailment.\",\n      \"evidence_span\": \"Each party may disclose Conﬁdential Information only on a need-to-know basis...\",\n      \"confidence\": 0.9,\n      \"tau\": 0.8,\n      \"rubric\": {\n        \"relevance\": 0.9,\n        \"factual_grounding\": 0.9,\n        \"specificity\": 0.8,\n        \"logical_coherence\": 0.9,\n        \"applicability\": 0.8\n      },\n      \"justification\": \"The narrative only provides a disclosure permission, not a confidentiality obligation, directly attacking the claim that the contract entails a duty to keep the agreement confidential.\"\n    },\n    {\n      \"id\": \"a2\",\n      \"text\": \"The target statement requires an affirmative duty to 'keep confidential' the agreement's existence and terms, but the contract text only grants a conditional permission to disclose 'Confidential Information' to specific recipients.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"A permissive clause regulating disclosure does not logically entail a broad affirmative confidentiality obligation regarding the agreement itself.\",\n      \"evidence_span\": \"Each party may disclose Conﬁdential Information only on a need-to-know basis to its own employees and to its consultants...\",\n      \"confidence\": 0.9,\n      \"tau\": 0.85,\n      \"rubric\": {\n        \"relevance\": 0.9,\n        \"factual_grounding\": 0.9,\n        \"specificity\": 0.8,\n        \"logical_coherence\": 0.9,\n        \"applicability\": 0.8\n      },\n      \"justification\": \"The mismatch between a permissive disclosure rule and an affirmative confidentiality duty attacks the entailment.\"\n    },\n    {\n      \"id\": \"a3\",\n      \"text\": \"The term 'Confidential Information' is not defined in the provided contract context, making it impossible to infer that the existence, terms, or status of the agreement fall within its scope.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"Contractual terms must be defined or clearly linked to the subject matter to support entailment; undefined terms prevent logical derivation of scope.\",\n      \"evidence_span\": \"Conﬁdential Information\",\n      \"confidence\": 0.85,\n      \"tau\": 0.75,\n      \"rubric\": {\n        \"relevance\": 0.8,\n        \"factual_grounding\": 0.8,\n        \"specificity\": 0.7,\n        \"logical_coherence\": 0.8,\n        \"applicability\": 0.7\n      },\n      \"justification\": \"Without a definition linking 'Confidential Information' to the agreement's terms, the target statement's scope cannot be entailed.\"\n    },\n    {\n      \"id\": \"a4\",\n      \"text\": \"The contract context only restricts disclosure to employees and consultants under a written burden of confidentiality, which does not cover the general non-disclosure of the agreement's existence or status to third parties or the public.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"Scope limitations and permitted disclosures in a contract narrow the obligation; they do not expand it to cover unmentioned confidentiality duties.\",\n      \"evidence_span\": \"to its own employees and to its consultants under appropriate written burden of conﬁdentiality.\",\n      \"confidence\": 0.85,\n      \"tau\": 0.7,\n      \"rubric\": {\n        \"relevance\": 0.8,\n        \"factual_grounding\": 0.8,\n        \"specificity\": 0.7,\n        \"logical_coherence\": 0.8,\n        \"applicability\": 0.7\n      },\n      \"justification\": \"The narrow recipient scope and specific conditions attack the broad entailment claimed in the target statement.\"\n    }\n  ],\n  \"relations\": [\n    {\n      \"source\": \"a1\",\n      \"target\": \"phi\",\n      \"type\": \"attack\",\n      \"confidence\": 0.9\n    },\n    {\n      \"source\": \"a2\",\n      \"target\": \"phi\",\n      \"type\": \"attack\",\n      \"confidence\": 0.9\n    },\n    {\n      \"source\": \"a3\",\n      \"target\": \"phi\",\n      \"type\": \"attack\",\n      \"confidence\": 0.85\n    },\n    {\n      \"source\": \"a4\",\n      \"target\": \"phi\",\n      \"type\": \"attack\",\n      \"confidence\": 0.85\n    },\n    {\n      \"source\": \"a1\",\n      \"target\": \"a2\",\n      \"type\": \"support\",\n      \"confidence\": 0.8\n    },\n    {\n      \"source\": \"a3\",\n      \"target\": \"a4\",\n      \"type\": \"support\",\n      \"confidence\": 0.75\n    }\n  ]\n}",
+    "parse_error": null,
+    "n_raw_arguments": 4
+  },
+  "strengths": [
+    {
+      "argument_id": "a1",
+      "tau": 0.8,
+      "rubric": {
+        "legal_relevance": 0.9,
+        "factual_grounding": 0.9,
+        "specificity": 0.8,
+        "logical_coherence": 0.9,
+        "fre_801c_applicability": 0.8
+      },
+      "justification": "The narrative only provides a disclosure permission, not a confidentiality obligation, directly attacking the claim that the contract entails a duty to keep the agreement confidential.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a2",
+      "tau": 0.85,
+      "rubric": {
+        "legal_relevance": 0.9,
+        "factual_grounding": 0.9,
+        "specificity": 0.8,
+        "logical_coherence": 0.9,
+        "fre_801c_applicability": 0.8
+      },
+      "justification": "The mismatch between a permissive disclosure rule and an affirmative confidentiality duty attacks the entailment.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a3",
+      "tau": 0.75,
+      "rubric": {
+        "legal_relevance": 0.8,
+        "factual_grounding": 0.8,
+        "specificity": 0.7,
+        "logical_coherence": 0.8,
+        "fre_801c_applicability": 0.7
+      },
+      "justification": "Without a definition linking 'Confidential Information' to the agreement's terms, the target statement's scope cannot be entailed.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a4",
+      "tau": 0.7,
+      "rubric": {
+        "legal_relevance": 0.8,
+        "factual_grounding": 0.8,
+        "specificity": 0.7,
+        "logical_coherence": 0.8,
+        "fre_801c_applicability": 0.7
+      },
+      "justification": "The narrow recipient scope and specific conditions attack the broad entailment claimed in the target statement.",
+      "model": "combined"
+    }
+  ],
+  "solver_output": {
+    "case_id": "test_0072",
+    "graph": {
+      "nodes": {
+        "phi": {
+          "id": "phi",
+          "text": "Does the CONTRACT CONTEXT logically entail the EXACT TARGET STATEMENT, with every material element matched and no missing limitation, exception, party-scope mismatch, information-type mismatch, purpose limitation, recipient-scope mismatch, or disclosure carve-out?",
+          "tau": 0.5,
+          "sigma": 0.00005624999999997993,
+          "is_claim": true
+        },
+        "a1": {
+          "id": "a1",
+          "text": "The contract context lacks an explicit confidentiality clause regarding the existence, terms, or status of the agreement. It only addresses the conditional disclosure of 'Confidential Information.'",
+          "tau": 0.8,
+          "sigma": 0.8,
+          "is_claim": false
+        },
+        "a2": {
+          "id": "a2",
+          "text": "The target statement requires an affirmative duty to 'keep confidential' the agreement's existence and terms, but the contract text only grants a conditional permission to disclose 'Confidential Information' to specific recipients.",
+          "tau": 0.85,
+          "sigma": 0.97,
+          "is_claim": false
+        },
+        "a3": {
+          "id": "a3",
+          "text": "The term 'Confidential Information' is not defined in the provided contract context, making it impossible to infer that the existence, terms, or status of the agreement fall within its scope.",
+          "tau": 0.75,
+          "sigma": 0.75,
+          "is_claim": false
+        },
+        "a4": {
+          "id": "a4",
+          "text": "The contract context only restricts disclosure to employees and consultants under a written burden of confidentiality, which does not cover the general non-disclosure of the agreement's existence or status to third parties or the public.",
+          "tau": 0.7,
+          "sigma": 0.925,
+          "is_claim": false
+        }
+      },
+      "edges": [
+        {
+          "source": "a1",
+          "target": "phi",
+          "type": "attack",
+          "confidence": 0.9
+        },
+        {
+          "source": "a2",
+          "target": "phi",
+          "type": "attack",
+          "confidence": 0.9
+        },
+        {
+          "source": "a3",
+          "target": "phi",
+          "type": "attack",
+          "confidence": 0.85
+        },
+        {
+          "source": "a4",
+          "target": "phi",
+          "type": "attack",
+          "confidence": 0.85
+        },
+        {
+          "source": "a1",
+          "target": "a2",
+          "type": "support",
+          "confidence": 0.8
+        },
+        {
+          "source": "a3",
+          "target": "a4",
+          "type": "support",
+          "confidence": 0.75
+        }
+      ],
+      "solver_type": "df_quad"
+    },
+    "sigma_phi": 0.00005624999999997993,
+    "sigma_all": {
+      "phi": 0.00005624999999997993,
+      "a1": 0.8,
+      "a2": 0.97,
+      "a3": 0.75,
+      "a4": 0.925
+    },
+    "iterations": 2,
+    "converged": true,
+    "solver_type": "df_quad"
+  },
+  "sigma_phi": 0.00005624999999997993,
+  "decision": "No",
+  "uncertainty": {
+    "is_uncertain": false,
+    "sigma_phi": 0.00005624999999997993,
+    "threshold_low": 0.45,
+    "threshold_high": 0.55,
+    "escalation_triggered": false,
+    "escalation_actions": [],
+    "escalation_log": []
+  },
+  "hitl_interventions": [],
+  "pre_hitl_decision": null
+}

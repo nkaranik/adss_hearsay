@@ -1,0 +1,254 @@
+{
+  "case_id": "test_0033",
+  "input_text": "CONTRACT CONTEXT:\n4. Except to the extent required by law, neither party shall disclose the existence or subject matter of the negotiations or business relationship contemplated by this Agreement. \n\nTARGET STATEMENT:\nThe contract entails that the relevant party must keep confidential the existence, terms, subject matter, or status of the agreement, negotiations, discussions, or transaction between the parties.\n\nDECISION TASK:\nDetermine whether the contract context entails the target statement.",
+  "phi_text": "",
+  "gold_label": "Yes",
+  "extraction": {
+    "case_id": "test_0033",
+    "input_text": "CONTRACT CONTEXT:\n4. Except to the extent required by law, neither party shall disclose the existence or subject matter of the negotiations or business relationship contemplated by this Agreement. \n\nTARGET STATEMENT:\nThe contract entails that the relevant party must keep confidential the existence, terms, subject matter, or status of the agreement, negotiations, discussions, or transaction between the parties.\n\nDECISION TASK:\nDetermine whether the contract context entails the target statement.",
+    "claim": {
+      "id": "phi",
+      "text": "Does the CONTRACT CONTEXT logically entail the EXACT TARGET STATEMENT, with every material element matched and no missing limitation, exception, party-scope mismatch, information-type mismatch, purpose limitation, recipient-scope mismatch, or disclosure carve-out?"
+    },
+    "arguments": [
+      {
+        "id": "a1",
+        "text": "The contract context contains an explicit confidentiality clause stating that neither party shall disclose the existence or subject matter of the negotiations or business relationship contemplated by this Agreement.",
+        "stance_to_claim": "support",
+        "legal_rule": "Contract interpretation principle: explicit textual obligations govern party duties; direct clause language supports entailment of corresponding confidentiality claims.",
+        "evidence_span": "neither party shall disclose the existence or subject matter of the negotiations or business relationship contemplated by this Agreement.",
+        "confidence": 0.95
+      },
+      {
+        "id": "a2",
+        "text": "The confidentiality obligation applies to neither party, which matches the target statement's reference to the relevant party being bound to maintain confidentiality.",
+        "stance_to_claim": "support",
+        "legal_rule": "Party-scope alignment principle: obligations binding all parties to a contract satisfy claims referencing the relevant party's duties.",
+        "evidence_span": "neither party",
+        "confidence": 0.9
+      },
+      {
+        "id": "a3",
+        "text": "The target statement expands the protected information to include terms, status, discussions, and transaction, whereas the contract only explicitly covers existence or subject matter of negotiations or the business relationship.",
+        "stance_to_claim": "attack",
+        "legal_rule": "Textual entailment principle: a target claim is not entailed if it introduces material scope expansions not supported by the source text.",
+        "evidence_span": "existence or subject matter of the negotiations or business relationship",
+        "confidence": 0.85
+      },
+      {
+        "id": "a4",
+        "text": "The contract includes a statutory carve-out (Except to the extent required by law), which limits the absolute nature of the confidentiality obligation and means the target statement's unconditional phrasing is not strictly entailed.",
+        "stance_to_claim": "attack",
+        "legal_rule": "Carve-out limitation principle: explicit exceptions or conditions in a clause prevent the entailment of absolute or unconditional obligations in a target statement.",
+        "evidence_span": "Except to the extent required by law",
+        "confidence": 0.8
+      }
+    ],
+    "relations": [
+      {
+        "source": "a1",
+        "target": "phi",
+        "type": "support",
+        "confidence": 0.9
+      },
+      {
+        "source": "a2",
+        "target": "phi",
+        "type": "support",
+        "confidence": 0.85
+      },
+      {
+        "source": "a3",
+        "target": "phi",
+        "type": "attack",
+        "confidence": 0.8
+      },
+      {
+        "source": "a4",
+        "target": "phi",
+        "type": "attack",
+        "confidence": 0.75
+      },
+      {
+        "source": "a3",
+        "target": "a1",
+        "type": "attack",
+        "confidence": 0.7
+      },
+      {
+        "source": "a4",
+        "target": "a1",
+        "type": "attack",
+        "confidence": 0.65
+      }
+    ],
+    "extraction_model": "",
+    "raw_llm_response": "{\n  \"case_id\": \"test_0033\",\n  \"phi\": \"Does the CONTRACT CONTEXT logically entail the EXACT TARGET STATEMENT, with every material element matched and no missing limitation, exception, party-scope mismatch, information-type mismatch, purpose limitation, recipient-scope mismatch, or disclosure carve-out?\",\n  \"arguments\": [\n    {\n      \"id\": \"a1\",\n      \"text\": \"The contract context contains an explicit confidentiality clause stating that neither party shall disclose the existence or subject matter of the negotiations or business relationship contemplated by this Agreement.\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"Contract interpretation principle: explicit textual obligations govern party duties; direct clause language supports entailment of corresponding confidentiality claims.\",\n      \"evidence_span\": \"neither party shall disclose the existence or subject matter of the negotiations or business relationship contemplated by this Agreement.\",\n      \"confidence\": 0.95,\n      \"tau\": 0.9,\n      \"rubric\": {\n        \"relevance\": 0.9,\n        \"factual_grounding\": 1.0,\n        \"specificity\": 0.8,\n        \"logical_coherence\": 0.9,\n        \"applicability\": 0.9\n      },\n      \"justification\": \"Directly establishes a confidentiality duty that aligns with the core of the target statement, strongly supporting entailment.\"\n    },\n    {\n      \"id\": \"a2\",\n      \"text\": \"The confidentiality obligation applies to neither party, which matches the target statement's reference to the relevant party being bound to maintain confidentiality.\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"Party-scope alignment principle: obligations binding all parties to a contract satisfy claims referencing the relevant party's duties.\",\n      \"evidence_span\": \"neither party\",\n      \"confidence\": 0.9,\n      \"tau\": 0.8,\n      \"rubric\": {\n        \"relevance\": 0.8,\n        \"factual_grounding\": 1.0,\n        \"specificity\": 0.7,\n        \"logical_coherence\": 0.8,\n        \"applicability\": 0.8\n      },\n      \"justification\": \"Confirms the obligation's scope covers the parties referenced in the target statement, reinforcing the entailment.\"\n    },\n    {\n      \"id\": \"a3\",\n      \"text\": \"The target statement expands the protected information to include terms, status, discussions, and transaction, whereas the contract only explicitly covers existence or subject matter of negotiations or the business relationship.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"Textual entailment principle: a target claim is not entailed if it introduces material scope expansions not supported by the source text.\",\n      \"evidence_span\": \"existence or subject matter of the negotiations or business relationship\",\n      \"confidence\": 0.85,\n      \"tau\": 0.7,\n      \"rubric\": {\n        \"relevance\": 0.8,\n        \"factual_grounding\": 0.9,\n        \"specificity\": 0.8,\n        \"logical_coherence\": 0.7,\n        \"applicability\": 0.8\n      },\n      \"justification\": \"Highlights an information-type mismatch that weakens strict entailment, as the contract does not explicitly cover the broader categories listed in the target.\"\n    },\n    {\n      \"id\": \"a4\",\n      \"text\": \"The contract includes a statutory carve-out (Except to the extent required by law), which limits the absolute nature of the confidentiality obligation and means the target statement's unconditional phrasing is not strictly entailed.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"Carve-out limitation principle: explicit exceptions or conditions in a clause prevent the entailment of absolute or unconditional obligations in a target statement.\",\n      \"evidence_span\": \"Except to the extent required by law\",\n      \"confidence\": 0.8,\n      \"tau\": 0.6,\n      \"rubric\": {\n        \"relevance\": 0.7,\n        \"factual_grounding\": 1.0,\n        \"specificity\": 0.6,\n        \"logical_coherence\": 0.6,\n        \"applicability\": 0.7\n      },\n      \"justification\": \"Demonstrates a missing limitation in the target statement, attacking the claim of strict logical entailment due to the unconditional phrasing.\"\n    }\n  ],\n  \"relations\": [\n    {\n      \"source\": \"a1\",\n      \"target\": \"phi\",\n      \"type\": \"support\",\n      \"confidence\": 0.9\n    },\n    {\n      \"source\": \"a2\",\n      \"target\": \"phi\",\n      \"type\": \"support\",\n      \"confidence\": 0.85\n    },\n    {\n      \"source\": \"a3\",\n      \"target\": \"phi\",\n      \"type\": \"attack\",\n      \"confidence\": 0.8\n    },\n    {\n      \"source\": \"a4\",\n      \"target\": \"phi\",\n      \"type\": \"attack\",\n      \"confidence\": 0.75\n    },\n    {\n      \"source\": \"a3\",\n      \"target\": \"a1\",\n      \"type\": \"attack\",\n      \"confidence\": 0.7\n    },\n    {\n      \"source\": \"a4\",\n      \"target\": \"a1\",\n      \"type\": \"attack\",\n      \"confidence\": 0.65\n    }\n  ]\n}",
+    "parse_error": null,
+    "n_raw_arguments": 4
+  },
+  "strengths": [
+    {
+      "argument_id": "a1",
+      "tau": 0.9,
+      "rubric": {
+        "legal_relevance": 0.9,
+        "factual_grounding": 1.0,
+        "specificity": 0.8,
+        "logical_coherence": 0.9,
+        "fre_801c_applicability": 0.9
+      },
+      "justification": "Directly establishes a confidentiality duty that aligns with the core of the target statement, strongly supporting entailment.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a2",
+      "tau": 0.8,
+      "rubric": {
+        "legal_relevance": 0.8,
+        "factual_grounding": 1.0,
+        "specificity": 0.7,
+        "logical_coherence": 0.8,
+        "fre_801c_applicability": 0.8
+      },
+      "justification": "Confirms the obligation's scope covers the parties referenced in the target statement, reinforcing the entailment.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a3",
+      "tau": 0.7,
+      "rubric": {
+        "legal_relevance": 0.8,
+        "factual_grounding": 0.9,
+        "specificity": 0.8,
+        "logical_coherence": 0.7,
+        "fre_801c_applicability": 0.8
+      },
+      "justification": "Highlights an information-type mismatch that weakens strict entailment, as the contract does not explicitly cover the broader categories listed in the target.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a4",
+      "tau": 0.6,
+      "rubric": {
+        "legal_relevance": 0.7,
+        "factual_grounding": 1.0,
+        "specificity": 0.6,
+        "logical_coherence": 0.6,
+        "fre_801c_applicability": 0.7
+      },
+      "justification": "Demonstrates a missing limitation in the target statement, attacking the claim of strict logical entailment due to the unconditional phrasing.",
+      "model": "combined"
+    }
+  ],
+  "solver_output": {
+    "case_id": "test_0033",
+    "graph": {
+      "nodes": {
+        "phi": {
+          "id": "phi",
+          "text": "Does the CONTRACT CONTEXT logically entail the EXACT TARGET STATEMENT, with every material element matched and no missing limitation, exception, party-scope mismatch, information-type mismatch, purpose limitation, recipient-scope mismatch, or disclosure carve-out?",
+          "tau": 0.5,
+          "sigma": 0.47080000000000005,
+          "is_claim": true
+        },
+        "a1": {
+          "id": "a1",
+          "text": "The contract context contains an explicit confidentiality clause stating that neither party shall disclose the existence or subject matter of the negotiations or business relationship contemplated by this Agreement.",
+          "tau": 0.9,
+          "sigma": 0.10799999999999998,
+          "is_claim": false
+        },
+        "a2": {
+          "id": "a2",
+          "text": "The confidentiality obligation applies to neither party, which matches the target statement's reference to the relevant party being bound to maintain confidentiality.",
+          "tau": 0.8,
+          "sigma": 0.8,
+          "is_claim": false
+        },
+        "a3": {
+          "id": "a3",
+          "text": "The target statement expands the protected information to include terms, status, discussions, and transaction, whereas the contract only explicitly covers existence or subject matter of negotiations or the business relationship.",
+          "tau": 0.7,
+          "sigma": 0.7,
+          "is_claim": false
+        },
+        "a4": {
+          "id": "a4",
+          "text": "The contract includes a statutory carve-out (Except to the extent required by law), which limits the absolute nature of the confidentiality obligation and means the target statement's unconditional phrasing is not strictly entailed.",
+          "tau": 0.6,
+          "sigma": 0.6,
+          "is_claim": false
+        }
+      },
+      "edges": [
+        {
+          "source": "a1",
+          "target": "phi",
+          "type": "support",
+          "confidence": 0.9
+        },
+        {
+          "source": "a2",
+          "target": "phi",
+          "type": "support",
+          "confidence": 0.85
+        },
+        {
+          "source": "a3",
+          "target": "phi",
+          "type": "attack",
+          "confidence": 0.8
+        },
+        {
+          "source": "a4",
+          "target": "phi",
+          "type": "attack",
+          "confidence": 0.75
+        },
+        {
+          "source": "a3",
+          "target": "a1",
+          "type": "attack",
+          "confidence": 0.7
+        },
+        {
+          "source": "a4",
+          "target": "a1",
+          "type": "attack",
+          "confidence": 0.65
+        }
+      ],
+      "solver_type": "df_quad"
+    },
+    "sigma_phi": 0.47080000000000005,
+    "sigma_all": {
+      "phi": 0.47080000000000005,
+      "a1": 0.10799999999999998,
+      "a2": 0.8,
+      "a3": 0.7,
+      "a4": 0.6
+    },
+    "iterations": 2,
+    "converged": true,
+    "solver_type": "df_quad"
+  },
+  "sigma_phi": 0.47080000000000005,
+  "decision": "UNCERTAIN",
+  "uncertainty": {
+    "is_uncertain": true,
+    "sigma_phi": 0.47080000000000005,
+    "threshold_low": 0.45,
+    "threshold_high": 0.55,
+    "escalation_triggered": true,
+    "escalation_actions": [
+      "rerun_extraction",
+      "human_review"
+    ],
+    "escalation_log": [
+      "[test_0033] UNCERTAIN σ(φ)=0.4708 ∈ [0.45,0.55]. Human review recommended."
+    ]
+  },
+  "hitl_interventions": [],
+  "pre_hitl_decision": null
+}

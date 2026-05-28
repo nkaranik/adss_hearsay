@@ -1,0 +1,261 @@
+{
+  "case_id": "test_0026",
+  "input_text": "CONTRACT CONTEXT:\nAccordingly, unless required by applicable law or regulatory authority, you agree that prior to the closing of a Possible Transaction, without the prior written consent of the Company, you will not, and you will direct your representatives not to, disclose to any person (including, but not limited to, any customer, employee, supplier, creditor or competitor of the Company) the fact that discussions or negotiations are taking place concerning a possible transaction between you and the Company or any of the terms, conditions or other facts with respect to any such Possible Transaction, including the status thereof, nor will you or any of your representatives make inquiry about the Company’s business to any customer, employee, supplier, creditor or competitor of the Company.  \n\nTARGET STATEMENT:\nThe contract entails that the relevant party must keep confidential the existence, terms, subject matter, or status of the agreement, negotiations, discussions, or transaction between the parties.\n\nDECISION TASK:\nDetermine whether the contract context entails the target statement.",
+  "phi_text": "",
+  "gold_label": "Yes",
+  "extraction": {
+    "case_id": "test_0026",
+    "input_text": "CONTRACT CONTEXT:\nAccordingly, unless required by applicable law or regulatory authority, you agree that prior to the closing of a Possible Transaction, without the prior written consent of the Company, you will not, and you will direct your representatives not to, disclose to any person (including, but not limited to, any customer, employee, supplier, creditor or competitor of the Company) the fact that discussions or negotiations are taking place concerning a possible transaction between you and the Company or any of the terms, conditions or other facts with respect to any such Possible Transaction, including the status thereof, nor will you or any of your representatives make inquiry about the Company’s business to any customer, employee, supplier, creditor or competitor of the Company.  \n\nTARGET STATEMENT:\nThe contract entails that the relevant party must keep confidential the existence, terms, subject matter, or status of the agreement, negotiations, discussions, or transaction between the parties.\n\nDECISION TASK:\nDetermine whether the contract context entails the target statement.",
+    "claim": {
+      "id": "phi",
+      "text": "Does the CONTRACT CONTEXT logically entail the EXACT TARGET STATEMENT, with every material element matched and no missing limitation, exception, party-scope mismatch, information-type mismatch, purpose limitation, recipient-scope mismatch, or disclosure carve-out?"
+    },
+    "arguments": [
+      {
+        "id": "a1",
+        "text": "The contract explicitly imposes a confidentiality obligation on the relevant party regarding discussions, negotiations, terms, conditions, and status of a Possible Transaction.",
+        "stance_to_claim": "support",
+        "legal_rule": "Explicit contractual language creates binding confidentiality duties.",
+        "evidence_span": "you agree that ... you will not ... disclose ... the fact that discussions or negotiations are taking place concerning a possible transaction ... or any of the terms, conditions or other facts ... including the status thereof",
+        "confidence": 0.95
+      },
+      {
+        "id": "a2",
+        "text": "The confidentiality obligation is explicitly conditioned on the transaction not having closed, limiting its temporal scope to prior to the closing of a Possible Transaction.",
+        "stance_to_claim": "attack",
+        "legal_rule": "Temporal limitations in contractual obligations restrict the scope of the duty.",
+        "evidence_span": "prior to the closing of a Possible Transaction",
+        "confidence": 0.9
+      },
+      {
+        "id": "a3",
+        "text": "The obligation contains a statutory/regulatory carve-out, permitting disclosure if required by applicable law or regulatory authority.",
+        "stance_to_claim": "attack",
+        "legal_rule": "Mandatory legal exceptions override contractual confidentiality duties.",
+        "evidence_span": "unless required by applicable law or regulatory authority",
+        "confidence": 0.9
+      },
+      {
+        "id": "a4",
+        "text": "Permitted disclosures require prior written consent of the Company, adding a procedural condition not reflected in the target statement.",
+        "stance_to_claim": "attack",
+        "legal_rule": "Contractual conditions precedent limit the absolute nature of an obligation.",
+        "evidence_span": "without the prior written consent of the Company",
+        "confidence": 0.85
+      }
+    ],
+    "relations": [
+      {
+        "source": "a1",
+        "target": "phi",
+        "type": "support",
+        "confidence": 0.95
+      },
+      {
+        "source": "a2",
+        "target": "phi",
+        "type": "attack",
+        "confidence": 0.9
+      },
+      {
+        "source": "a3",
+        "target": "phi",
+        "type": "attack",
+        "confidence": 0.9
+      },
+      {
+        "source": "a4",
+        "target": "phi",
+        "type": "attack",
+        "confidence": 0.85
+      },
+      {
+        "source": "a2",
+        "target": "a1",
+        "type": "attack",
+        "confidence": 0.8
+      },
+      {
+        "source": "a3",
+        "target": "a1",
+        "type": "attack",
+        "confidence": 0.8
+      },
+      {
+        "source": "a4",
+        "target": "a1",
+        "type": "attack",
+        "confidence": 0.75
+      }
+    ],
+    "extraction_model": "",
+    "raw_llm_response": "{\n  \"case_id\": \"test_0026\",\n  \"phi\": \"Does the CONTRACT CONTEXT logically entail the EXACT TARGET STATEMENT, with every material element matched and no missing limitation, exception, party-scope mismatch, information-type mismatch, purpose limitation, recipient-scope mismatch, or disclosure carve-out?\",\n  \"arguments\": [\n    {\n      \"id\": \"a1\",\n      \"text\": \"The contract explicitly imposes a confidentiality obligation on the relevant party regarding discussions, negotiations, terms, conditions, and status of a Possible Transaction.\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"Explicit contractual language creates binding confidentiality duties.\",\n      \"evidence_span\": \"you agree that ... you will not ... disclose ... the fact that discussions or negotiations are taking place concerning a possible transaction ... or any of the terms, conditions or other facts ... including the status thereof\",\n      \"confidence\": 0.95,\n      \"tau\": 0.9,\n      \"rubric\": {\n        \"relevance\": 0.9,\n        \"factual_grounding\": 1.0,\n        \"specificity\": 0.9,\n        \"logical_coherence\": 0.9,\n        \"applicability\": 0.9\n      },\n      \"justification\": \"Directly establishes the core confidentiality obligation referenced in the target statement.\"\n    },\n    {\n      \"id\": \"a2\",\n      \"text\": \"The confidentiality obligation is explicitly conditioned on the transaction not having closed, limiting its temporal scope to prior to the closing of a Possible Transaction.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"Temporal limitations in contractual obligations restrict the scope of the duty.\",\n      \"evidence_span\": \"prior to the closing of a Possible Transaction\",\n      \"confidence\": 0.9,\n      \"tau\": 0.8,\n      \"rubric\": {\n        \"relevance\": 0.8,\n        \"factual_grounding\": 1.0,\n        \"specificity\": 0.8,\n        \"logical_coherence\": 0.9,\n        \"applicability\": 0.8\n      },\n      \"justification\": \"The target statement omits this temporal limitation, making it overbroad and not strictly entailed.\"\n    },\n    {\n      \"id\": \"a3\",\n      \"text\": \"The obligation contains a statutory/regulatory carve-out, permitting disclosure if required by applicable law or regulatory authority.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"Mandatory legal exceptions override contractual confidentiality duties.\",\n      \"evidence_span\": \"unless required by applicable law or regulatory authority\",\n      \"confidence\": 0.9,\n      \"tau\": 0.8,\n      \"rubric\": {\n        \"relevance\": 0.8,\n        \"factual_grounding\": 1.0,\n        \"specificity\": 0.8,\n        \"logical_coherence\": 0.9,\n        \"applicability\": 0.8\n      },\n      \"justification\": \"The target statement claims unconditional confidentiality, ignoring this explicit exception.\"\n    },\n    {\n      \"id\": \"a4\",\n      \"text\": \"Permitted disclosures require prior written consent of the Company, adding a procedural condition not reflected in the target statement.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"Contractual conditions precedent limit the absolute nature of an obligation.\",\n      \"evidence_span\": \"without the prior written consent of the Company\",\n      \"confidence\": 0.85,\n      \"tau\": 0.75,\n      \"rubric\": {\n        \"relevance\": 0.75,\n        \"factual_grounding\": 1.0,\n        \"specificity\": 0.75,\n        \"logical_coherence\": 0.8,\n        \"applicability\": 0.75\n      },\n      \"justification\": \"The target statement's broad assertion fails to account for this consent requirement, weakening strict entailment.\"\n    }\n  ],\n  \"relations\": [\n    {\n      \"source\": \"a1\",\n      \"target\": \"phi\",\n      \"type\": \"support\",\n      \"confidence\": 0.95\n    },\n    {\n      \"source\": \"a2\",\n      \"target\": \"phi\",\n      \"type\": \"attack\",\n      \"confidence\": 0.9\n    },\n    {\n      \"source\": \"a3\",\n      \"target\": \"phi\",\n      \"type\": \"attack\",\n      \"confidence\": 0.9\n    },\n    {\n      \"source\": \"a4\",\n      \"target\": \"phi\",\n      \"type\": \"attack\",\n      \"confidence\": 0.85\n    },\n    {\n      \"source\": \"a2\",\n      \"target\": \"a1\",\n      \"type\": \"attack\",\n      \"confidence\": 0.8\n    },\n    {\n      \"source\": \"a3\",\n      \"target\": \"a1\",\n      \"type\": \"attack\",\n      \"confidence\": 0.8\n    },\n    {\n      \"source\": \"a4\",\n      \"target\": \"a1\",\n      \"type\": \"attack\",\n      \"confidence\": 0.75\n    }\n  ]\n}",
+    "parse_error": null,
+    "n_raw_arguments": 4
+  },
+  "strengths": [
+    {
+      "argument_id": "a1",
+      "tau": 0.9,
+      "rubric": {
+        "legal_relevance": 0.9,
+        "factual_grounding": 1.0,
+        "specificity": 0.9,
+        "logical_coherence": 0.9,
+        "fre_801c_applicability": 0.9
+      },
+      "justification": "Directly establishes the core confidentiality obligation referenced in the target statement.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a2",
+      "tau": 0.8,
+      "rubric": {
+        "legal_relevance": 0.8,
+        "factual_grounding": 1.0,
+        "specificity": 0.8,
+        "logical_coherence": 0.9,
+        "fre_801c_applicability": 0.8
+      },
+      "justification": "The target statement omits this temporal limitation, making it overbroad and not strictly entailed.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a3",
+      "tau": 0.8,
+      "rubric": {
+        "legal_relevance": 0.8,
+        "factual_grounding": 1.0,
+        "specificity": 0.8,
+        "logical_coherence": 0.9,
+        "fre_801c_applicability": 0.8
+      },
+      "justification": "The target statement claims unconditional confidentiality, ignoring this explicit exception.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a4",
+      "tau": 0.75,
+      "rubric": {
+        "legal_relevance": 0.75,
+        "factual_grounding": 1.0,
+        "specificity": 0.75,
+        "logical_coherence": 0.8,
+        "fre_801c_applicability": 0.75
+      },
+      "justification": "The target statement's broad assertion fails to account for this consent requirement, weakening strict entailment.",
+      "model": "combined"
+    }
+  ],
+  "solver_output": {
+    "case_id": "test_0026",
+    "graph": {
+      "nodes": {
+        "phi": {
+          "id": "phi",
+          "text": "Does the CONTRACT CONTEXT logically entail the EXACT TARGET STATEMENT, with every material element matched and no missing limitation, exception, party-scope mismatch, information-type mismatch, purpose limitation, recipient-scope mismatch, or disclosure carve-out?",
+          "tau": 0.5,
+          "sigma": 0.009499999999999953,
+          "is_claim": true
+        },
+        "a1": {
+          "id": "a1",
+          "text": "The contract explicitly imposes a confidentiality obligation on the relevant party regarding discussions, negotiations, terms, conditions, and status of a Possible Transaction.",
+          "tau": 0.9,
+          "sigma": 0.009000000000000008,
+          "is_claim": false
+        },
+        "a2": {
+          "id": "a2",
+          "text": "The confidentiality obligation is explicitly conditioned on the transaction not having closed, limiting its temporal scope to prior to the closing of a Possible Transaction.",
+          "tau": 0.8,
+          "sigma": 0.8,
+          "is_claim": false
+        },
+        "a3": {
+          "id": "a3",
+          "text": "The obligation contains a statutory/regulatory carve-out, permitting disclosure if required by applicable law or regulatory authority.",
+          "tau": 0.8,
+          "sigma": 0.8,
+          "is_claim": false
+        },
+        "a4": {
+          "id": "a4",
+          "text": "Permitted disclosures require prior written consent of the Company, adding a procedural condition not reflected in the target statement.",
+          "tau": 0.75,
+          "sigma": 0.75,
+          "is_claim": false
+        }
+      },
+      "edges": [
+        {
+          "source": "a1",
+          "target": "phi",
+          "type": "support",
+          "confidence": 0.95
+        },
+        {
+          "source": "a2",
+          "target": "phi",
+          "type": "attack",
+          "confidence": 0.9
+        },
+        {
+          "source": "a3",
+          "target": "phi",
+          "type": "attack",
+          "confidence": 0.9
+        },
+        {
+          "source": "a4",
+          "target": "phi",
+          "type": "attack",
+          "confidence": 0.85
+        },
+        {
+          "source": "a2",
+          "target": "a1",
+          "type": "attack",
+          "confidence": 0.8
+        },
+        {
+          "source": "a3",
+          "target": "a1",
+          "type": "attack",
+          "confidence": 0.8
+        },
+        {
+          "source": "a4",
+          "target": "a1",
+          "type": "attack",
+          "confidence": 0.75
+        }
+      ],
+      "solver_type": "df_quad"
+    },
+    "sigma_phi": 0.009499999999999953,
+    "sigma_all": {
+      "phi": 0.009499999999999953,
+      "a1": 0.009000000000000008,
+      "a2": 0.8,
+      "a3": 0.8,
+      "a4": 0.75
+    },
+    "iterations": 2,
+    "converged": true,
+    "solver_type": "df_quad"
+  },
+  "sigma_phi": 0.009499999999999953,
+  "decision": "No",
+  "uncertainty": {
+    "is_uncertain": false,
+    "sigma_phi": 0.009499999999999953,
+    "threshold_low": 0.45,
+    "threshold_high": 0.55,
+    "escalation_triggered": false,
+    "escalation_actions": [],
+    "escalation_log": []
+  },
+  "hitl_interventions": [],
+  "pre_hitl_decision": null
+}

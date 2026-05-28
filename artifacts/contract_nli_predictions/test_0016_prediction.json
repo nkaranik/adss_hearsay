@@ -1,0 +1,249 @@
+{
+  "case_id": "test_0016",
+  "input_text": "CONTRACT CONTEXT:\n“Confidential Information” means: [(b) the terms [(but not the existence)] of this Agreement; and]5 \n\nTARGET STATEMENT:\nThe contract entails that the relevant party must keep confidential the existence, terms, subject matter, or status of the agreement, negotiations, discussions, or transaction between the parties.\n\nDECISION TASK:\nDetermine whether the contract context entails the target statement.",
+  "phi_text": "",
+  "gold_label": "Yes",
+  "extraction": {
+    "case_id": "test_0016",
+    "input_text": "CONTRACT CONTEXT:\n“Confidential Information” means: [(b) the terms [(but not the existence)] of this Agreement; and]5 \n\nTARGET STATEMENT:\nThe contract entails that the relevant party must keep confidential the existence, terms, subject matter, or status of the agreement, negotiations, discussions, or transaction between the parties.\n\nDECISION TASK:\nDetermine whether the contract context entails the target statement.",
+    "claim": {
+      "id": "phi",
+      "text": "Does the CONTRACT CONTEXT logically entail the EXACT TARGET STATEMENT, with every material element matched and no missing limitation, exception, party-scope mismatch, information-type mismatch, purpose limitation, recipient-scope mismatch, or disclosure carve-out?"
+    },
+    "arguments": [
+      {
+        "id": "a1",
+        "text": "The contract explicitly defines 'Confidential Information' to include the terms of the Agreement.",
+        "stance_to_claim": "support",
+        "legal_rule": "Contract interpretation requires giving effect to explicit definitions and scope limitations.",
+        "evidence_span": "“Confidential Information” means: [(b) the terms [(but not the existence)] of this Agreement; and]5",
+        "confidence": 1.0
+      },
+      {
+        "id": "a2",
+        "text": "The contract explicitly carves out 'the existence' of the Agreement from the definition of Confidential Information.",
+        "stance_to_claim": "attack",
+        "legal_rule": "Explicit carve-outs or exclusions in contract definitions limit the scope of obligations and override broader interpretations.",
+        "evidence_span": "[(but not the existence)]",
+        "confidence": 1.0
+      },
+      {
+        "id": "a3",
+        "text": "The target statement requires confidentiality over 'existence, terms, subject matter, or status', which is broader than the contract's explicit scope.",
+        "stance_to_claim": "attack",
+        "legal_rule": "Entailment in contract NLI requires every material element of the target to be supported by the context; broader claims are not entailed by narrower texts.",
+        "evidence_span": "“Confidential Information” means: [(b) the terms [(but not the existence)] of this Agreement; and]5",
+        "confidence": 1.0
+      },
+      {
+        "id": "a4",
+        "text": "The contract context does not logically entail the target statement due to the explicit limitation on confidentiality scope.",
+        "stance_to_claim": "attack",
+        "legal_rule": "Logical entailment fails when the hypothesis introduces obligations not present in or explicitly excluded by the premise.",
+        "evidence_span": null,
+        "confidence": 1.0
+      }
+    ],
+    "relations": [
+      {
+        "source": "a1",
+        "target": "phi",
+        "type": "support",
+        "confidence": 1.0
+      },
+      {
+        "source": "a2",
+        "target": "phi",
+        "type": "attack",
+        "confidence": 1.0
+      },
+      {
+        "source": "a3",
+        "target": "phi",
+        "type": "attack",
+        "confidence": 1.0
+      },
+      {
+        "source": "a4",
+        "target": "phi",
+        "type": "attack",
+        "confidence": 1.0
+      },
+      {
+        "source": "a2",
+        "target": "a3",
+        "type": "support",
+        "confidence": 1.0
+      },
+      {
+        "source": "a3",
+        "target": "a4",
+        "type": "support",
+        "confidence": 1.0
+      }
+    ],
+    "extraction_model": "",
+    "raw_llm_response": "{\n  \"case_id\": \"test_0016\",\n  \"phi\": \"Does the CONTRACT CONTEXT logically entail the EXACT TARGET STATEMENT, with every material element matched and no missing limitation, exception, party-scope mismatch, information-type mismatch, purpose limitation, recipient-scope mismatch, or disclosure carve-out?\",\n  \"arguments\": [\n    {\n      \"id\": \"a1\",\n      \"text\": \"The contract explicitly defines 'Confidential Information' to include the terms of the Agreement.\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"Contract interpretation requires giving effect to explicit definitions and scope limitations.\",\n      \"evidence_span\": \"“Confidential Information” means: [(b) the terms [(but not the existence)] of this Agreement; and]5\",\n      \"confidence\": 1.0,\n      \"tau\": 0.75,\n      \"rubric\": {\n        \"relevance\": 0.8,\n        \"factual_grounding\": 1.0,\n        \"specificity\": 0.9,\n        \"logical_coherence\": 0.8,\n        \"applicability\": 0.9\n      },\n      \"justification\": \"Directly supports the portion of the target statement regarding 'terms', but is inherently limited by the subsequent exclusion clause.\"\n    },\n    {\n      \"id\": \"a2\",\n      \"text\": \"The contract explicitly carves out 'the existence' of the Agreement from the definition of Confidential Information.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"Explicit carve-outs or exclusions in contract definitions limit the scope of obligations and override broader interpretations.\",\n      \"evidence_span\": \"[(but not the existence)]\",\n      \"confidence\": 1.0,\n      \"tau\": 0.95,\n      \"rubric\": {\n        \"relevance\": 1.0,\n        \"factual_grounding\": 1.0,\n        \"specificity\": 1.0,\n        \"logical_coherence\": 1.0,\n        \"applicability\": 1.0\n      },\n      \"justification\": \"Directly contradicts the target statement's requirement to keep 'existence' confidential, making entailment impossible for that element.\"\n    },\n    {\n      \"id\": \"a3\",\n      \"text\": \"The target statement requires confidentiality over 'existence, terms, subject matter, or status', which is broader than the contract's explicit scope.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"Entailment in contract NLI requires every material element of the target to be supported by the context; broader claims are not entailed by narrower texts.\",\n      \"evidence_span\": \"“Confidential Information” means: [(b) the terms [(but not the existence)] of this Agreement; and]5\",\n      \"confidence\": 1.0,\n      \"tau\": 0.9,\n      \"rubric\": {\n        \"relevance\": 1.0,\n        \"factual_grounding\": 0.9,\n        \"specificity\": 0.9,\n        \"logical_coherence\": 1.0,\n        \"applicability\": 1.0\n      },\n      \"justification\": \"Highlights the scope mismatch between the target's broad list and the contract's narrow, explicitly limited definition, weakening the entailment claim.\"\n    },\n    {\n      \"id\": \"a4\",\n      \"text\": \"The contract context does not logically entail the target statement due to the explicit limitation on confidentiality scope.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"Logical entailment fails when the hypothesis introduces obligations not present in or explicitly excluded by the premise.\",\n      \"evidence_span\": null,\n      \"confidence\": 1.0,\n      \"tau\": 0.95,\n      \"rubric\": {\n        \"relevance\": 1.0,\n        \"factual_grounding\": 0.8,\n        \"specificity\": 0.8,\n        \"logical_coherence\": 1.0,\n        \"applicability\": 1.0\n      },\n      \"justification\": \"Serves as the concluding argument that synthesizes the mismatch and explicitly denies entailment based on the contract's explicit carve-out.\"\n    }\n  ],\n  \"relations\": [\n    {\n      \"source\": \"a1\",\n      \"target\": \"phi\",\n      \"type\": \"support\",\n      \"confidence\": 1.0\n    },\n    {\n      \"source\": \"a2\",\n      \"target\": \"phi\",\n      \"type\": \"attack\",\n      \"confidence\": 1.0\n    },\n    {\n      \"source\": \"a3\",\n      \"target\": \"phi\",\n      \"type\": \"attack\",\n      \"confidence\": 1.0\n    },\n    {\n      \"source\": \"a4\",\n      \"target\": \"phi\",\n      \"type\": \"attack\",\n      \"confidence\": 1.0\n    },\n    {\n      \"source\": \"a2\",\n      \"target\": \"a3\",\n      \"type\": \"support\",\n      \"confidence\": 1.0\n    },\n    {\n      \"source\": \"a3\",\n      \"target\": \"a4\",\n      \"type\": \"support\",\n      \"confidence\": 1.0\n    }\n  ]\n}",
+    "parse_error": null,
+    "n_raw_arguments": 4
+  },
+  "strengths": [
+    {
+      "argument_id": "a1",
+      "tau": 0.75,
+      "rubric": {
+        "legal_relevance": 0.8,
+        "factual_grounding": 1.0,
+        "specificity": 0.9,
+        "logical_coherence": 0.8,
+        "fre_801c_applicability": 0.9
+      },
+      "justification": "Directly supports the portion of the target statement regarding 'terms', but is inherently limited by the subsequent exclusion clause.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a2",
+      "tau": 0.95,
+      "rubric": {
+        "legal_relevance": 1.0,
+        "factual_grounding": 1.0,
+        "specificity": 1.0,
+        "logical_coherence": 1.0,
+        "fre_801c_applicability": 1.0
+      },
+      "justification": "Directly contradicts the target statement's requirement to keep 'existence' confidential, making entailment impossible for that element.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a3",
+      "tau": 0.9,
+      "rubric": {
+        "legal_relevance": 1.0,
+        "factual_grounding": 0.9,
+        "specificity": 0.9,
+        "logical_coherence": 1.0,
+        "fre_801c_applicability": 1.0
+      },
+      "justification": "Highlights the scope mismatch between the target's broad list and the contract's narrow, explicitly limited definition, weakening the entailment claim.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a4",
+      "tau": 0.95,
+      "rubric": {
+        "legal_relevance": 1.0,
+        "factual_grounding": 0.8,
+        "specificity": 0.8,
+        "logical_coherence": 1.0,
+        "fre_801c_applicability": 1.0
+      },
+      "justification": "Serves as the concluding argument that synthesizes the mismatch and explicitly denies entailment based on the contract's explicit carve-out.",
+      "model": "combined"
+    }
+  ],
+  "solver_output": {
+    "case_id": "test_0016",
+    "graph": {
+      "nodes": {
+        "phi": {
+          "id": "phi",
+          "text": "Does the CONTRACT CONTEXT logically entail the EXACT TARGET STATEMENT, with every material element matched and no missing limitation, exception, party-scope mismatch, information-type mismatch, purpose limitation, recipient-scope mismatch, or disclosure carve-out?",
+          "tau": 0.5,
+          "sigma": 0.37500003125,
+          "is_claim": true
+        },
+        "a1": {
+          "id": "a1",
+          "text": "The contract explicitly defines 'Confidential Information' to include the terms of the Agreement.",
+          "tau": 0.75,
+          "sigma": 0.75,
+          "is_claim": false
+        },
+        "a2": {
+          "id": "a2",
+          "text": "The contract explicitly carves out 'the existence' of the Agreement from the definition of Confidential Information.",
+          "tau": 0.95,
+          "sigma": 0.95,
+          "is_claim": false
+        },
+        "a3": {
+          "id": "a3",
+          "text": "The target statement requires confidentiality over 'existence, terms, subject matter, or status', which is broader than the contract's explicit scope.",
+          "tau": 0.9,
+          "sigma": 0.995,
+          "is_claim": false
+        },
+        "a4": {
+          "id": "a4",
+          "text": "The contract context does not logically entail the target statement due to the explicit limitation on confidentiality scope.",
+          "tau": 0.95,
+          "sigma": 0.99975,
+          "is_claim": false
+        }
+      },
+      "edges": [
+        {
+          "source": "a1",
+          "target": "phi",
+          "type": "support",
+          "confidence": 1.0
+        },
+        {
+          "source": "a2",
+          "target": "phi",
+          "type": "attack",
+          "confidence": 1.0
+        },
+        {
+          "source": "a3",
+          "target": "phi",
+          "type": "attack",
+          "confidence": 1.0
+        },
+        {
+          "source": "a4",
+          "target": "phi",
+          "type": "attack",
+          "confidence": 1.0
+        },
+        {
+          "source": "a2",
+          "target": "a3",
+          "type": "support",
+          "confidence": 1.0
+        },
+        {
+          "source": "a3",
+          "target": "a4",
+          "type": "support",
+          "confidence": 1.0
+        }
+      ],
+      "solver_type": "df_quad"
+    },
+    "sigma_phi": 0.37500003125,
+    "sigma_all": {
+      "phi": 0.37500003125,
+      "a1": 0.75,
+      "a2": 0.95,
+      "a3": 0.995,
+      "a4": 0.99975
+    },
+    "iterations": 2,
+    "converged": true,
+    "solver_type": "df_quad"
+  },
+  "sigma_phi": 0.37500003125,
+  "decision": "No",
+  "uncertainty": {
+    "is_uncertain": false,
+    "sigma_phi": 0.37500003125,
+    "threshold_low": 0.45,
+    "threshold_high": 0.55,
+    "escalation_triggered": false,
+    "escalation_actions": [],
+    "escalation_log": []
+  },
+  "hitl_interventions": [],
+  "pre_hitl_decision": null
+}

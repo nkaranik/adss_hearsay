@@ -1,0 +1,208 @@
+{
+  "case_id": "test_0069",
+  "input_text": "CONTRACT CONTEXT:\nIn the event that the Recipient is legally required to disclose any Confidential Information, the Recipient must immediately notify the Discloser of that fact. \n\nTARGET STATEMENT:\nThe contract entails that the relevant party must keep confidential the existence, terms, subject matter, or status of the agreement, negotiations, discussions, or transaction between the parties.\n\nDECISION TASK:\nDetermine whether the contract context entails the target statement.",
+  "phi_text": "",
+  "gold_label": "No",
+  "extraction": {
+    "case_id": "test_0069",
+    "input_text": "CONTRACT CONTEXT:\nIn the event that the Recipient is legally required to disclose any Confidential Information, the Recipient must immediately notify the Discloser of that fact. \n\nTARGET STATEMENT:\nThe contract entails that the relevant party must keep confidential the existence, terms, subject matter, or status of the agreement, negotiations, discussions, or transaction between the parties.\n\nDECISION TASK:\nDetermine whether the contract context entails the target statement.",
+    "claim": {
+      "id": "phi",
+      "text": "Does the CONTRACT CONTEXT logically entail the EXACT TARGET STATEMENT, with every material element matched and no missing limitation, exception, party-scope mismatch, information-type mismatch, purpose limitation, recipient-scope mismatch, or disclosure carve-out?"
+    },
+    "arguments": [
+      {
+        "id": "a2",
+        "text": "The contract context lacks any explicit or implicit provision requiring the parties to keep confidential the existence, terms, subject matter, or status of the agreement or negotiations.",
+        "stance_to_claim": "attack",
+        "legal_rule": "In contract NLI, the absence of a relevant contractual clause or definition attacks entailment when the target claim asserts a substantive obligation not found in the text.",
+        "evidence_span": null,
+        "confidence": 0.95
+      },
+      {
+        "id": "a3",
+        "text": "The target statement claims a substantive confidentiality obligation regarding the agreement's existence and terms, which is not mentioned or inferable from the contract text.",
+        "stance_to_claim": "attack",
+        "legal_rule": "Contractual entailment requires the target claim to be directly supported or logically necessitated by the contract's express terms; mere possibility or silence does not constitute entailment.",
+        "evidence_span": null,
+        "confidence": 0.95
+      },
+      {
+        "id": "a4",
+        "text": "Entailment in contract interpretation requires the target claim to be directly supported or logically necessitated by the contract's express terms; the absence of such support means the contract does not entail the target statement.",
+        "stance_to_claim": "attack",
+        "legal_rule": "Textual entailment in legal contracts demands that material elements of the target claim be explicitly stated or strictly implied by the contract language.",
+        "evidence_span": null,
+        "confidence": 0.95
+      }
+    ],
+    "relations": [
+      {
+        "source": "a2",
+        "target": "phi",
+        "type": "attack",
+        "confidence": 0.95
+      },
+      {
+        "source": "a3",
+        "target": "phi",
+        "type": "attack",
+        "confidence": 0.95
+      },
+      {
+        "source": "a4",
+        "target": "phi",
+        "type": "attack",
+        "confidence": 0.95
+      },
+      {
+        "source": "a2",
+        "target": "a3",
+        "type": "support",
+        "confidence": 0.9
+      },
+      {
+        "source": "a3",
+        "target": "a4",
+        "type": "support",
+        "confidence": 0.9
+      }
+    ],
+    "extraction_model": "",
+    "raw_llm_response": "{\n  \"case_id\": \"test_0069\",\n  \"phi\": \"Does the CONTRACT CONTEXT logically entail the EXACT TARGET STATEMENT, with every material element matched and no missing limitation, exception, party-scope mismatch, information-type mismatch, purpose limitation, recipient-scope mismatch, or disclosure carve-out?\",\n  \"arguments\": [\n    {\n      \"id\": \"a1\",\n      \"text\": \"The contract context explicitly imposes a notification obligation on the Recipient if legally required to disclose Confidential Information, but does not address general confidentiality of the agreement itself.\",\n      \"stance_to_claim\": \"neutral\",\n      \"legal_rule\": \"Contract interpretation requires examining express terms to determine scope of obligations.\",\n      \"evidence_span\": \"In the event that the Recipient is legally required to disclose any Confidential Information, the Recipient must immediately notify the Discloser of that fact.\",\n      \"confidence\": 0.95,\n      \"tau\": 0.5,\n      \"rubric\": {\n        \"relevance\": 0.3,\n        \"factual_grounding\": 1.0,\n        \"specificity\": 0.5,\n        \"logical_coherence\": 0.5,\n        \"applicability\": 0.4\n      },\n      \"justification\": \"This argument establishes the only express obligation in the context, which is procedural rather than substantive, making it neutral to the entailment of a broad confidentiality claim.\"\n    },\n    {\n      \"id\": \"a2\",\n      \"text\": \"The contract context lacks any explicit or implicit provision requiring the parties to keep confidential the existence, terms, subject matter, or status of the agreement or negotiations.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"In contract NLI, the absence of a relevant contractual clause or definition attacks entailment when the target claim asserts a substantive obligation not found in the text.\",\n      \"evidence_span\": null,\n      \"confidence\": 0.95,\n      \"tau\": 0.95,\n      \"rubric\": {\n        \"relevance\": 0.9,\n        \"factual_grounding\": 1.0,\n        \"specificity\": 0.8,\n        \"logical_coherence\": 0.9,\n        \"applicability\": 0.9\n      },\n      \"justification\": \"Directly addresses the missing substantive confidentiality obligation, which is the core reason the contract does not entail the target statement.\"\n    },\n    {\n      \"id\": \"a3\",\n      \"text\": \"The target statement claims a substantive confidentiality obligation regarding the agreement's existence and terms, which is not mentioned or inferable from the contract text.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"Contractual entailment requires the target claim to be directly supported or logically necessitated by the contract's express terms; mere possibility or silence does not constitute entailment.\",\n      \"evidence_span\": null,\n      \"confidence\": 0.95,\n      \"tau\": 0.9,\n      \"rubric\": {\n        \"relevance\": 0.9,\n        \"factual_grounding\": 0.8,\n        \"specificity\": 0.8,\n        \"logical_coherence\": 0.9,\n        \"applicability\": 0.9\n      },\n      \"justification\": \"Highlights the gap between the target's broad confidentiality assertion and the contract's silence on that specific scope, attacking the entailment.\"\n    },\n    {\n      \"id\": \"a4\",\n      \"text\": \"Entailment in contract interpretation requires the target claim to be directly supported or logically necessitated by the contract's express terms; the absence of such support means the contract does not entail the target statement.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"Textual entailment in legal contracts demands that material elements of the target claim be explicitly stated or strictly implied by the contract language.\",\n      \"evidence_span\": null,\n      \"confidence\": 0.95,\n      \"tau\": 0.95,\n      \"rubric\": {\n        \"relevance\": 0.95,\n        \"factual_grounding\": 0.7,\n        \"specificity\": 0.7,\n        \"logical_coherence\": 0.95,\n        \"applicability\": 0.95\n      },\n      \"justification\": \"Provides the governing logical principle for contract NLI, concluding that the lack of textual support definitively attacks the entailment claim.\"\n    }\n  ],\n  \"relations\": [\n    {\n      \"source\": \"a1\",\n      \"target\": \"phi\",\n      \"type\": \"neutral\",\n      \"confidence\": 0.95\n    },\n    {\n      \"source\": \"a2\",\n      \"target\": \"phi\",\n      \"type\": \"attack\",\n      \"confidence\": 0.95\n    },\n    {\n      \"source\": \"a3\",\n      \"target\": \"phi\",\n      \"type\": \"attack\",\n      \"confidence\": 0.95\n    },\n    {\n      \"source\": \"a4\",\n      \"target\": \"phi\",\n      \"type\": \"attack\",\n      \"confidence\": 0.95\n    },\n    {\n      \"source\": \"a2\",\n      \"target\": \"a3\",\n      \"type\": \"support\",\n      \"confidence\": 0.9\n    },\n    {\n      \"source\": \"a3\",\n      \"target\": \"a4\",\n      \"type\": \"support\",\n      \"confidence\": 0.9\n    }\n  ]\n}",
+    "parse_error": null,
+    "n_raw_arguments": 4
+  },
+  "strengths": [
+    {
+      "argument_id": "a2",
+      "tau": 0.95,
+      "rubric": {
+        "legal_relevance": 0.9,
+        "factual_grounding": 1.0,
+        "specificity": 0.8,
+        "logical_coherence": 0.9,
+        "fre_801c_applicability": 0.9
+      },
+      "justification": "Directly addresses the missing substantive confidentiality obligation, which is the core reason the contract does not entail the target statement.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a3",
+      "tau": 0.9,
+      "rubric": {
+        "legal_relevance": 0.9,
+        "factual_grounding": 0.8,
+        "specificity": 0.8,
+        "logical_coherence": 0.9,
+        "fre_801c_applicability": 0.9
+      },
+      "justification": "Highlights the gap between the target's broad confidentiality assertion and the contract's silence on that specific scope, attacking the entailment.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a4",
+      "tau": 0.95,
+      "rubric": {
+        "legal_relevance": 0.95,
+        "factual_grounding": 0.7,
+        "specificity": 0.7,
+        "logical_coherence": 0.95,
+        "fre_801c_applicability": 0.95
+      },
+      "justification": "Provides the governing logical principle for contract NLI, concluding that the lack of textual support definitively attacks the entailment claim.",
+      "model": "combined"
+    }
+  ],
+  "solver_output": {
+    "case_id": "test_0069",
+    "graph": {
+      "nodes": {
+        "phi": {
+          "id": "phi",
+          "text": "Does the CONTRACT CONTEXT logically entail the EXACT TARGET STATEMENT, with every material element matched and no missing limitation, exception, party-scope mismatch, information-type mismatch, purpose limitation, recipient-scope mismatch, or disclosure carve-out?",
+          "tau": 0.5,
+          "sigma": 3.1249999976612486e-8,
+          "is_claim": true
+        },
+        "a2": {
+          "id": "a2",
+          "text": "The contract context lacks any explicit or implicit provision requiring the parties to keep confidential the existence, terms, subject matter, or status of the agreement or negotiations.",
+          "tau": 0.95,
+          "sigma": 0.95,
+          "is_claim": false
+        },
+        "a3": {
+          "id": "a3",
+          "text": "The target statement claims a substantive confidentiality obligation regarding the agreement's existence and terms, which is not mentioned or inferable from the contract text.",
+          "tau": 0.9,
+          "sigma": 0.995,
+          "is_claim": false
+        },
+        "a4": {
+          "id": "a4",
+          "text": "Entailment in contract interpretation requires the target claim to be directly supported or logically necessitated by the contract's express terms; the absence of such support means the contract does not entail the target statement.",
+          "tau": 0.95,
+          "sigma": 0.99975,
+          "is_claim": false
+        }
+      },
+      "edges": [
+        {
+          "source": "a2",
+          "target": "phi",
+          "type": "attack",
+          "confidence": 0.95
+        },
+        {
+          "source": "a3",
+          "target": "phi",
+          "type": "attack",
+          "confidence": 0.95
+        },
+        {
+          "source": "a4",
+          "target": "phi",
+          "type": "attack",
+          "confidence": 0.95
+        },
+        {
+          "source": "a2",
+          "target": "a3",
+          "type": "support",
+          "confidence": 0.9
+        },
+        {
+          "source": "a3",
+          "target": "a4",
+          "type": "support",
+          "confidence": 0.9
+        }
+      ],
+      "solver_type": "df_quad"
+    },
+    "sigma_phi": 3.1249999976612486e-8,
+    "sigma_all": {
+      "phi": 3.1249999976612486e-8,
+      "a2": 0.95,
+      "a3": 0.995,
+      "a4": 0.99975
+    },
+    "iterations": 2,
+    "converged": true,
+    "solver_type": "df_quad"
+  },
+  "sigma_phi": 3.1249999976612486e-8,
+  "decision": "No",
+  "uncertainty": {
+    "is_uncertain": false,
+    "sigma_phi": 3.1249999976612486e-8,
+    "threshold_low": 0.45,
+    "threshold_high": 0.55,
+    "escalation_triggered": false,
+    "escalation_actions": [],
+    "escalation_log": []
+  },
+  "hitl_interventions": [],
+  "pre_hitl_decision": null
+}

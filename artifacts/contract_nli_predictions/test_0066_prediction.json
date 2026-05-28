@@ -1,0 +1,225 @@
+{
+  "case_id": "test_0066",
+  "input_text": "CONTRACT CONTEXT:\nAny reproduction of any Confidential Information by Company shall remain the property of Verenium unless otherwise authorized in writing by Verenium. 7. All right, title and interest in and to Confidential Information shall be retained by Verenium and nothing in this Agreement shall be construed as granting any license or right under any patent or other intellectual property rights, or other rights, or representing any commitment by either Party to enter into any additional agreement, by implication or otherwise, or creating any partnership, joint venture or agency relationship.  \n\nTARGET STATEMENT:\nThe contract entails that the relevant party must keep confidential the existence, terms, subject matter, or status of the agreement, negotiations, discussions, or transaction between the parties.\n\nDECISION TASK:\nDetermine whether the contract context entails the target statement.",
+  "phi_text": "",
+  "gold_label": "No",
+  "extraction": {
+    "case_id": "test_0066",
+    "input_text": "CONTRACT CONTEXT:\nAny reproduction of any Confidential Information by Company shall remain the property of Verenium unless otherwise authorized in writing by Verenium. 7. All right, title and interest in and to Confidential Information shall be retained by Verenium and nothing in this Agreement shall be construed as granting any license or right under any patent or other intellectual property rights, or other rights, or representing any commitment by either Party to enter into any additional agreement, by implication or otherwise, or creating any partnership, joint venture or agency relationship.  \n\nTARGET STATEMENT:\nThe contract entails that the relevant party must keep confidential the existence, terms, subject matter, or status of the agreement, negotiations, discussions, or transaction between the parties.\n\nDECISION TASK:\nDetermine whether the contract context entails the target statement.",
+    "claim": {
+      "id": "phi",
+      "text": "Does the CONTRACT CONTEXT logically entail the EXACT TARGET STATEMENT, with every material element matched and no missing limitation, exception, party-scope mismatch, information-type mismatch, purpose limitation, recipient-scope mismatch, or disclosure carve-out?"
+    },
+    "arguments": [
+      {
+        "id": "a1",
+        "text": "The contract context explicitly addresses ownership of 'Confidential Information' and intellectual property rights, but does not define 'Confidential Information' to include the agreement itself.",
+        "stance_to_claim": "attack",
+        "legal_rule": "Contract interpretation requires explicit language or clear implication to extend confidentiality obligations to the agreement's existence or terms.",
+        "evidence_span": "Any reproduction of any Confidential Information by Company shall remain the property of Verenium... All right, title and interest in and to Confidential Information shall be retained by Verenium",
+        "confidence": 0.95
+      },
+      {
+        "id": "a2",
+        "text": "The target statement requires an obligation to keep confidential the existence, terms, or status of the agreement, which is a distinct legal concept from general information confidentiality.",
+        "stance_to_claim": "attack",
+        "legal_rule": "Confidentiality of the agreement (non-disclosure of the deal itself) requires specific contractual language and is not automatically inferred from general confidentiality or IP clauses.",
+        "evidence_span": null,
+        "confidence": 0.9
+      },
+      {
+        "id": "a3",
+        "text": "The contract text contains no clause, explicit or implicit, that imposes a confidentiality obligation on the parties regarding the agreement's existence or terms.",
+        "stance_to_claim": "attack",
+        "legal_rule": "In contract NLI, the absence of a relevant confidentiality-of-agreement clause directly attacks the claim that the contract entails such an obligation.",
+        "evidence_span": null,
+        "confidence": 0.95
+      },
+      {
+        "id": "a4",
+        "text": "The contract explicitly limits its scope to 'Confidential Information' and intellectual property rights, with no mention of confidentiality regarding the agreement itself.",
+        "stance_to_claim": "attack",
+        "legal_rule": "Contractual obligations are strictly construed; limitations to specific terms or categories preclude the extension of duties to unmentioned subjects like the agreement's existence.",
+        "evidence_span": "nothing in this Agreement shall be construed as granting any license or right under any patent or other intellectual property rights... or creating any partnership, joint venture or agency relationship.",
+        "confidence": 0.9
+      }
+    ],
+    "relations": [
+      {
+        "source": "a1",
+        "target": "phi",
+        "type": "attack",
+        "confidence": 0.95
+      },
+      {
+        "source": "a2",
+        "target": "phi",
+        "type": "attack",
+        "confidence": 0.9
+      },
+      {
+        "source": "a3",
+        "target": "phi",
+        "type": "attack",
+        "confidence": 0.95
+      },
+      {
+        "source": "a4",
+        "target": "phi",
+        "type": "attack",
+        "confidence": 0.9
+      }
+    ],
+    "extraction_model": "",
+    "raw_llm_response": "{\n  \"case_id\": \"test_0066\",\n  \"phi\": \"Does the CONTRACT CONTEXT logically entail the EXACT TARGET STATEMENT, with every material element matched and no missing limitation, exception, party-scope mismatch, information-type mismatch, purpose limitation, recipient-scope mismatch, or disclosure carve-out?\",\n  \"arguments\": [\n    {\n      \"id\": \"a1\",\n      \"text\": \"The contract context explicitly addresses ownership of 'Confidential Information' and intellectual property rights, but does not define 'Confidential Information' to include the agreement itself.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"Contract interpretation requires explicit language or clear implication to extend confidentiality obligations to the agreement's existence or terms.\",\n      \"evidence_span\": \"Any reproduction of any Confidential Information by Company shall remain the property of Verenium... All right, title and interest in and to Confidential Information shall be retained by Verenium\",\n      \"confidence\": 0.95,\n      \"tau\": 0.85,\n      \"rubric\": {\n        \"relevance\": 0.9,\n        \"factual_grounding\": 0.9,\n        \"specificity\": 0.8,\n        \"logical_coherence\": 0.9,\n        \"applicability\": 0.8\n      },\n      \"justification\": \"The text limits its scope to 'Confidential Information' and IP rights, failing to support the target claim about the agreement itself.\"\n    },\n    {\n      \"id\": \"a2\",\n      \"text\": \"The target statement requires an obligation to keep confidential the existence, terms, or status of the agreement, which is a distinct legal concept from general information confidentiality.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"Confidentiality of the agreement (non-disclosure of the deal itself) requires specific contractual language and is not automatically inferred from general confidentiality or IP clauses.\",\n      \"evidence_span\": null,\n      \"confidence\": 0.9,\n      \"tau\": 0.8,\n      \"rubric\": {\n        \"relevance\": 0.9,\n        \"factual_grounding\": 0.7,\n        \"specificity\": 0.8,\n        \"logical_coherence\": 0.9,\n        \"applicability\": 0.9\n      },\n      \"justification\": \"Establishes the mismatch between the target claim's specific requirement and the contract's actual scope.\"\n    },\n    {\n      \"id\": \"a3\",\n      \"text\": \"The contract text contains no clause, explicit or implicit, that imposes a confidentiality obligation on the parties regarding the agreement's existence or terms.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"In contract NLI, the absence of a relevant confidentiality-of-agreement clause directly attacks the claim that the contract entails such an obligation.\",\n      \"evidence_span\": null,\n      \"confidence\": 0.95,\n      \"tau\": 0.9,\n      \"rubric\": {\n        \"relevance\": 0.95,\n        \"factual_grounding\": 0.9,\n        \"specificity\": 0.8,\n        \"logical_coherence\": 0.95,\n        \"applicability\": 0.9\n      },\n      \"justification\": \"Directly addresses the entailment task by noting the missing contractual support for the target statement.\"\n    },\n    {\n      \"id\": \"a4\",\n      \"text\": \"The contract explicitly limits its scope to 'Confidential Information' and intellectual property rights, with no mention of confidentiality regarding the agreement itself.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"Contractual obligations are strictly construed; limitations to specific terms or categories preclude the extension of duties to unmentioned subjects like the agreement's existence.\",\n      \"evidence_span\": \"nothing in this Agreement shall be construed as granting any license or right under any patent or other intellectual property rights... or creating any partnership, joint venture or agency relationship.\",\n      \"confidence\": 0.9,\n      \"tau\": 0.85,\n      \"rubric\": {\n        \"relevance\": 0.9,\n        \"factual_grounding\": 0.9,\n        \"specificity\": 0.8,\n        \"logical_coherence\": 0.9,\n        \"applicability\": 0.85\n      },\n      \"justification\": \"The explicit limitation language reinforces that the contract does not create the broad or unmentioned confidentiality obligation claimed in the target statement.\"\n    }\n  ],\n  \"relations\": [\n    {\n      \"source\": \"a1\",\n      \"target\": \"phi\",\n      \"type\": \"attack\",\n      \"confidence\": 0.95\n    },\n    {\n      \"source\": \"a2\",\n      \"target\": \"phi\",\n      \"type\": \"attack\",\n      \"confidence\": 0.9\n    },\n    {\n      \"source\": \"a3\",\n      \"target\": \"phi\",\n      \"type\": \"attack\",\n      \"confidence\": 0.95\n    },\n    {\n      \"source\": \"a4\",\n      \"target\": \"phi\",\n      \"type\": \"attack\",\n      \"confidence\": 0.9\n    }\n  ]\n}",
+    "parse_error": null,
+    "n_raw_arguments": 4
+  },
+  "strengths": [
+    {
+      "argument_id": "a1",
+      "tau": 0.85,
+      "rubric": {
+        "legal_relevance": 0.9,
+        "factual_grounding": 0.9,
+        "specificity": 0.8,
+        "logical_coherence": 0.9,
+        "fre_801c_applicability": 0.8
+      },
+      "justification": "The text limits its scope to 'Confidential Information' and IP rights, failing to support the target claim about the agreement itself.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a2",
+      "tau": 0.8,
+      "rubric": {
+        "legal_relevance": 0.9,
+        "factual_grounding": 0.7,
+        "specificity": 0.8,
+        "logical_coherence": 0.9,
+        "fre_801c_applicability": 0.9
+      },
+      "justification": "Establishes the mismatch between the target claim's specific requirement and the contract's actual scope.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a3",
+      "tau": 0.9,
+      "rubric": {
+        "legal_relevance": 0.95,
+        "factual_grounding": 0.9,
+        "specificity": 0.8,
+        "logical_coherence": 0.95,
+        "fre_801c_applicability": 0.9
+      },
+      "justification": "Directly addresses the entailment task by noting the missing contractual support for the target statement.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a4",
+      "tau": 0.85,
+      "rubric": {
+        "legal_relevance": 0.9,
+        "factual_grounding": 0.9,
+        "specificity": 0.8,
+        "logical_coherence": 0.9,
+        "fre_801c_applicability": 0.85
+      },
+      "justification": "The explicit limitation language reinforces that the contract does not create the broad or unmentioned confidentiality obligation claimed in the target statement.",
+      "model": "combined"
+    }
+  ],
+  "solver_output": {
+    "case_id": "test_0066",
+    "graph": {
+      "nodes": {
+        "phi": {
+          "id": "phi",
+          "text": "Does the CONTRACT CONTEXT logically entail the EXACT TARGET STATEMENT, with every material element matched and no missing limitation, exception, party-scope mismatch, information-type mismatch, purpose limitation, recipient-scope mismatch, or disclosure carve-out?",
+          "tau": 0.5,
+          "sigma": 0.00022499999999997522,
+          "is_claim": true
+        },
+        "a1": {
+          "id": "a1",
+          "text": "The contract context explicitly addresses ownership of 'Confidential Information' and intellectual property rights, but does not define 'Confidential Information' to include the agreement itself.",
+          "tau": 0.85,
+          "sigma": 0.85,
+          "is_claim": false
+        },
+        "a2": {
+          "id": "a2",
+          "text": "The target statement requires an obligation to keep confidential the existence, terms, or status of the agreement, which is a distinct legal concept from general information confidentiality.",
+          "tau": 0.8,
+          "sigma": 0.8,
+          "is_claim": false
+        },
+        "a3": {
+          "id": "a3",
+          "text": "The contract text contains no clause, explicit or implicit, that imposes a confidentiality obligation on the parties regarding the agreement's existence or terms.",
+          "tau": 0.9,
+          "sigma": 0.9,
+          "is_claim": false
+        },
+        "a4": {
+          "id": "a4",
+          "text": "The contract explicitly limits its scope to 'Confidential Information' and intellectual property rights, with no mention of confidentiality regarding the agreement itself.",
+          "tau": 0.85,
+          "sigma": 0.85,
+          "is_claim": false
+        }
+      },
+      "edges": [
+        {
+          "source": "a1",
+          "target": "phi",
+          "type": "attack",
+          "confidence": 0.95
+        },
+        {
+          "source": "a2",
+          "target": "phi",
+          "type": "attack",
+          "confidence": 0.9
+        },
+        {
+          "source": "a3",
+          "target": "phi",
+          "type": "attack",
+          "confidence": 0.95
+        },
+        {
+          "source": "a4",
+          "target": "phi",
+          "type": "attack",
+          "confidence": 0.9
+        }
+      ],
+      "solver_type": "df_quad"
+    },
+    "sigma_phi": 0.00022499999999997522,
+    "sigma_all": {
+      "phi": 0.00022499999999997522,
+      "a1": 0.85,
+      "a2": 0.8,
+      "a3": 0.9,
+      "a4": 0.85
+    },
+    "iterations": 2,
+    "converged": true,
+    "solver_type": "df_quad"
+  },
+  "sigma_phi": 0.00022499999999997522,
+  "decision": "No",
+  "uncertainty": {
+    "is_uncertain": false,
+    "sigma_phi": 0.00022499999999997522,
+    "threshold_low": 0.45,
+    "threshold_high": 0.55,
+    "escalation_triggered": false,
+    "escalation_actions": [],
+    "escalation_log": []
+  },
+  "hitl_interventions": [],
+  "pre_hitl_decision": null
+}

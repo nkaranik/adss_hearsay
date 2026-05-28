@@ -1,0 +1,184 @@
+{
+  "case_id": "test_0061",
+  "input_text": "CONTRACT CONTEXT:\nNotwithstanding the foregoing, Recipient may make such disclosure if it is required to do so by law, provided always that Recipient has informed Discloser about such disclosure at least two business days prior to the disclosure. \n\nTARGET STATEMENT:\nThe contract entails that the relevant party must keep confidential the existence, terms, subject matter, or status of the agreement, negotiations, discussions, or transaction between the parties.\n\nDECISION TASK:\nDetermine whether the contract context entails the target statement.",
+  "phi_text": "",
+  "gold_label": "No",
+  "extraction": {
+    "case_id": "test_0061",
+    "input_text": "CONTRACT CONTEXT:\nNotwithstanding the foregoing, Recipient may make such disclosure if it is required to do so by law, provided always that Recipient has informed Discloser about such disclosure at least two business days prior to the disclosure. \n\nTARGET STATEMENT:\nThe contract entails that the relevant party must keep confidential the existence, terms, subject matter, or status of the agreement, negotiations, discussions, or transaction between the parties.\n\nDECISION TASK:\nDetermine whether the contract context entails the target statement.",
+    "claim": {
+      "id": "phi",
+      "text": "Does the CONTRACT CONTEXT logically entail the EXACT TARGET STATEMENT, with every material element matched and no missing limitation, exception, party-scope mismatch, information-type mismatch, purpose limitation, recipient-scope mismatch, or disclosure carve-out?"
+    },
+    "arguments": [
+      {
+        "id": "a1",
+        "text": "The contract context provides only a conditional disclosure exception and omits any explicit or implicit confidentiality obligation. The absence of a core duty to keep information confidential attacks the entailment.",
+        "stance_to_claim": "attack",
+        "legal_rule": "Contractual entailment demands explicit textual support or clear implication; missing core obligations defeat entailment.",
+        "evidence_span": "Notwithstanding the foregoing, Recipient may make such disclosure if it is required to do so by law, provided always that Recipient has informed Discloser about such disclosure at least two business days prior to the disclosure.",
+        "confidence": 1.0
+      },
+      {
+        "id": "a2",
+        "text": "The target statement specifies detailed information types (existence, terms, subject matter, negotiations, etc.) that are entirely absent from the provided contract context. This information-type mismatch attacks the entailment.",
+        "stance_to_claim": "attack",
+        "legal_rule": "Entailment requires matching material elements; scope mismatches between the target claim and contract text defeat logical derivation.",
+        "evidence_span": null,
+        "confidence": 1.0
+      },
+      {
+        "id": "a3",
+        "text": "The phrase 'Notwithstanding the foregoing' references preceding contractual text that is omitted from the narrative. Without the foundational obligation, the target statement cannot be logically derived from the given context, attacking the entailment.",
+        "stance_to_claim": "attack",
+        "legal_rule": "Contractual interpretation relies on the provided text; referencing missing provisions prevents establishing the claimed obligation.",
+        "evidence_span": "Notwithstanding the foregoing",
+        "confidence": 1.0
+      }
+    ],
+    "relations": [
+      {
+        "source": "a1",
+        "target": "phi",
+        "type": "attack",
+        "confidence": 1.0
+      },
+      {
+        "source": "a2",
+        "target": "phi",
+        "type": "attack",
+        "confidence": 1.0
+      },
+      {
+        "source": "a3",
+        "target": "phi",
+        "type": "attack",
+        "confidence": 1.0
+      }
+    ],
+    "extraction_model": "",
+    "raw_llm_response": "{\n  \"case_id\": \"test_0061\",\n  \"phi\": \"Does the CONTRACT CONTEXT logically entail the EXACT TARGET STATEMENT, with every material element matched and no missing limitation, exception, party-scope mismatch, information-type mismatch, purpose limitation, recipient-scope mismatch, or disclosure carve-out?\",\n  \"arguments\": [\n    {\n      \"id\": \"a1\",\n      \"text\": \"The contract context provides only a conditional disclosure exception and omits any explicit or implicit confidentiality obligation. The absence of a core duty to keep information confidential attacks the entailment.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"Contractual entailment demands explicit textual support or clear implication; missing core obligations defeat entailment.\",\n      \"evidence_span\": \"Notwithstanding the foregoing, Recipient may make such disclosure if it is required to do so by law, provided always that Recipient has informed Discloser about such disclosure at least two business days prior to the disclosure.\",\n      \"confidence\": 1.0,\n      \"tau\": 0.85,\n      \"rubric\": {\n        \"relevance\": 0.9,\n        \"factual_grounding\": 0.9,\n        \"specificity\": 0.8,\n        \"logical_coherence\": 0.9,\n        \"applicability\": 0.9\n      },\n      \"justification\": \"The narrative lacks a confidentiality clause, containing only an exception. This absence directly undermines the claim that the contract entails a confidentiality duty.\"\n    },\n    {\n      \"id\": \"a2\",\n      \"text\": \"The target statement specifies detailed information types (existence, terms, subject matter, negotiations, etc.) that are entirely absent from the provided contract context. This information-type mismatch attacks the entailment.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"Entailment requires matching material elements; scope mismatches between the target claim and contract text defeat logical derivation.\",\n      \"evidence_span\": null,\n      \"confidence\": 1.0,\n      \"tau\": 0.75,\n      \"rubric\": {\n        \"relevance\": 0.8,\n        \"factual_grounding\": 0.7,\n        \"specificity\": 0.8,\n        \"logical_coherence\": 0.9,\n        \"applicability\": 0.8\n      },\n      \"justification\": \"The target claim's specific information categories are not addressed in the narrative, creating a material mismatch that prevents entailment.\"\n    },\n    {\n      \"id\": \"a3\",\n      \"text\": \"The phrase 'Notwithstanding the foregoing' references preceding contractual text that is omitted from the narrative. Without the foundational obligation, the target statement cannot be logically derived from the given context, attacking the entailment.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"Contractual interpretation relies on the provided text; referencing missing provisions prevents establishing the claimed obligation.\",\n      \"evidence_span\": \"Notwithstanding the foregoing\",\n      \"confidence\": 1.0,\n      \"tau\": 0.9,\n      \"rubric\": {\n        \"relevance\": 0.9,\n        \"factual_grounding\": 0.9,\n        \"specificity\": 0.9,\n        \"logical_coherence\": 0.9,\n        \"applicability\": 0.9\n      },\n      \"justification\": \"The explicit reference to missing text confirms that the necessary contractual basis for the target claim is absent, directly attacking the entailment.\"\n    }\n  ],\n  \"relations\": [\n    {\n      \"source\": \"a1\",\n      \"target\": \"phi\",\n      \"type\": \"attack\",\n      \"confidence\": 1.0\n    },\n    {\n      \"source\": \"a2\",\n      \"target\": \"phi\",\n      \"type\": \"attack\",\n      \"confidence\": 1.0\n    },\n    {\n      \"source\": \"a3\",\n      \"target\": \"phi\",\n      \"type\": \"attack\",\n      \"confidence\": 1.0\n    }\n  ]\n}",
+    "parse_error": null,
+    "n_raw_arguments": 3
+  },
+  "strengths": [
+    {
+      "argument_id": "a1",
+      "tau": 0.85,
+      "rubric": {
+        "legal_relevance": 0.9,
+        "factual_grounding": 0.9,
+        "specificity": 0.8,
+        "logical_coherence": 0.9,
+        "fre_801c_applicability": 0.9
+      },
+      "justification": "The narrative lacks a confidentiality clause, containing only an exception. This absence directly undermines the claim that the contract entails a confidentiality duty.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a2",
+      "tau": 0.75,
+      "rubric": {
+        "legal_relevance": 0.8,
+        "factual_grounding": 0.7,
+        "specificity": 0.8,
+        "logical_coherence": 0.9,
+        "fre_801c_applicability": 0.8
+      },
+      "justification": "The target claim's specific information categories are not addressed in the narrative, creating a material mismatch that prevents entailment.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a3",
+      "tau": 0.9,
+      "rubric": {
+        "legal_relevance": 0.9,
+        "factual_grounding": 0.9,
+        "specificity": 0.9,
+        "logical_coherence": 0.9,
+        "fre_801c_applicability": 0.9
+      },
+      "justification": "The explicit reference to missing text confirms that the necessary contractual basis for the target claim is absent, directly attacking the entailment.",
+      "model": "combined"
+    }
+  ],
+  "solver_output": {
+    "case_id": "test_0061",
+    "graph": {
+      "nodes": {
+        "phi": {
+          "id": "phi",
+          "text": "Does the CONTRACT CONTEXT logically entail the EXACT TARGET STATEMENT, with every material element matched and no missing limitation, exception, party-scope mismatch, information-type mismatch, purpose limitation, recipient-scope mismatch, or disclosure carve-out?",
+          "tau": 0.5,
+          "sigma": 0.0018750000000000155,
+          "is_claim": true
+        },
+        "a1": {
+          "id": "a1",
+          "text": "The contract context provides only a conditional disclosure exception and omits any explicit or implicit confidentiality obligation. The absence of a core duty to keep information confidential attacks the entailment.",
+          "tau": 0.85,
+          "sigma": 0.85,
+          "is_claim": false
+        },
+        "a2": {
+          "id": "a2",
+          "text": "The target statement specifies detailed information types (existence, terms, subject matter, negotiations, etc.) that are entirely absent from the provided contract context. This information-type mismatch attacks the entailment.",
+          "tau": 0.75,
+          "sigma": 0.75,
+          "is_claim": false
+        },
+        "a3": {
+          "id": "a3",
+          "text": "The phrase 'Notwithstanding the foregoing' references preceding contractual text that is omitted from the narrative. Without the foundational obligation, the target statement cannot be logically derived from the given context, attacking the entailment.",
+          "tau": 0.9,
+          "sigma": 0.9,
+          "is_claim": false
+        }
+      },
+      "edges": [
+        {
+          "source": "a1",
+          "target": "phi",
+          "type": "attack",
+          "confidence": 1.0
+        },
+        {
+          "source": "a2",
+          "target": "phi",
+          "type": "attack",
+          "confidence": 1.0
+        },
+        {
+          "source": "a3",
+          "target": "phi",
+          "type": "attack",
+          "confidence": 1.0
+        }
+      ],
+      "solver_type": "df_quad"
+    },
+    "sigma_phi": 0.0018750000000000155,
+    "sigma_all": {
+      "phi": 0.0018750000000000155,
+      "a1": 0.85,
+      "a2": 0.75,
+      "a3": 0.9
+    },
+    "iterations": 2,
+    "converged": true,
+    "solver_type": "df_quad"
+  },
+  "sigma_phi": 0.0018750000000000155,
+  "decision": "No",
+  "uncertainty": {
+    "is_uncertain": false,
+    "sigma_phi": 0.0018750000000000155,
+    "threshold_low": 0.45,
+    "threshold_high": 0.55,
+    "escalation_triggered": false,
+    "escalation_actions": [],
+    "escalation_log": []
+  },
+  "hitl_interventions": [],
+  "pre_hitl_decision": null
+}

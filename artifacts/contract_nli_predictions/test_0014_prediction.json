@@ -1,0 +1,249 @@
+{
+  "case_id": "test_0014",
+  "input_text": "CONTRACT CONTEXT:\nxiii) required to be disclosed pursuant to a governmental or legal requirement provided that the disclosing party gives to the other party written notice of such requirement prior to any such disclosure. No media releases, public announcements or public disclosure by either party relating to this Agreement, its subject matter or the Information, including but not limited to promotional or marketing, shall be made without the prior written consent of the other party. \n\nTARGET STATEMENT:\nThe contract entails that the relevant party must keep confidential the existence, terms, subject matter, or status of the agreement, negotiations, discussions, or transaction between the parties.\n\nDECISION TASK:\nDetermine whether the contract context entails the target statement.",
+  "phi_text": "",
+  "gold_label": "Yes",
+  "extraction": {
+    "case_id": "test_0014",
+    "input_text": "CONTRACT CONTEXT:\nxiii) required to be disclosed pursuant to a governmental or legal requirement provided that the disclosing party gives to the other party written notice of such requirement prior to any such disclosure. No media releases, public announcements or public disclosure by either party relating to this Agreement, its subject matter or the Information, including but not limited to promotional or marketing, shall be made without the prior written consent of the other party. \n\nTARGET STATEMENT:\nThe contract entails that the relevant party must keep confidential the existence, terms, subject matter, or status of the agreement, negotiations, discussions, or transaction between the parties.\n\nDECISION TASK:\nDetermine whether the contract context entails the target statement.",
+    "claim": {
+      "id": "phi",
+      "text": "Does the CONTRACT CONTEXT logically entail the EXACT TARGET STATEMENT, with every material element matched and no missing limitation, exception, party-scope mismatch, information-type mismatch, purpose limitation, recipient-scope mismatch, or disclosure carve-out?"
+    },
+    "arguments": [
+      {
+        "id": "a1",
+        "text": "The contract contains an explicit non-disclosure provision prohibiting 'media releases, public announcements or public disclosure by either party relating to this Agreement, its subject matter or the Information' without prior written consent. This directly supports the target claim that the contract entails confidentiality regarding the agreement.",
+        "stance_to_claim": "support",
+        "legal_rule": "Contract interpretation requires that explicit confidentiality clauses be read to enforce the stated prohibition on public disclosure.",
+        "evidence_span": "No media releases, public announcements or public disclosure by either party relating to this Agreement, its subject matter or the Information, including but not limited to promotional or marketing, shall be made without the prior written consent of the other party.",
+        "confidence": 0.95
+      },
+      {
+        "id": "a2",
+        "text": "The confidentiality obligation applies to 'either party' and covers 'this Agreement, its subject matter,' which aligns with the target statement's requirement to keep confidential the 'existence, terms, subject matter, or status of the agreement.'",
+        "stance_to_claim": "support",
+        "legal_rule": "Scope alignment in contract NLI requires that the parties and information types in the target match those in the contract text.",
+        "evidence_span": "either party relating to this Agreement, its subject matter",
+        "confidence": 0.9
+      },
+      {
+        "id": "a3",
+        "text": "The contract includes a mandatory carve-out for disclosures 'required to be disclosed pursuant to a governmental or legal requirement provided that the disclosing party gives to the other party written notice.' This limitation contradicts the target statement's implication of an absolute or unrestricted confidentiality obligation, attacking the strict entailment.",
+        "stance_to_claim": "attack",
+        "legal_rule": "Entailment in contract NLI fails if the target statement omits material exceptions or carve-outs present in the source text.",
+        "evidence_span": "required to be disclosed pursuant to a governmental or legal requirement provided that the disclosing party gives to the other party written notice of such requirement prior to any such disclosure.",
+        "confidence": 0.95
+      },
+      {
+        "id": "a4",
+        "text": "The target statement asserts confidentiality over 'negotiations, discussions, or transaction,' but the contract text only explicitly prohibits disclosure relating to 'this Agreement, its subject matter or the Information.' This scope mismatch weakens the direct entailment of the broader target claim.",
+        "stance_to_claim": "attack",
+        "legal_rule": "Material element matching requires that all specific information types listed in the target be supported by the contract text.",
+        "evidence_span": "this Agreement, its subject matter or the Information",
+        "confidence": 0.85
+      }
+    ],
+    "relations": [
+      {
+        "source": "a1",
+        "target": "phi",
+        "type": "support",
+        "confidence": 0.95
+      },
+      {
+        "source": "a2",
+        "target": "phi",
+        "type": "support",
+        "confidence": 0.9
+      },
+      {
+        "source": "a3",
+        "target": "phi",
+        "type": "attack",
+        "confidence": 0.95
+      },
+      {
+        "source": "a4",
+        "target": "phi",
+        "type": "attack",
+        "confidence": 0.85
+      },
+      {
+        "source": "a3",
+        "target": "a1",
+        "type": "attack",
+        "confidence": 0.9
+      },
+      {
+        "source": "a4",
+        "target": "a1",
+        "type": "attack",
+        "confidence": 0.8
+      }
+    ],
+    "extraction_model": "",
+    "raw_llm_response": "{\n  \"case_id\": \"test_0014\",\n  \"phi\": \"Does the CONTRACT CONTEXT logically entail the EXACT TARGET STATEMENT, with every material element matched and no missing limitation, exception, party-scope mismatch, information-type mismatch, purpose limitation, recipient-scope mismatch, or disclosure carve-out?\",\n  \"arguments\": [\n    {\n      \"id\": \"a1\",\n      \"text\": \"The contract contains an explicit non-disclosure provision prohibiting 'media releases, public announcements or public disclosure by either party relating to this Agreement, its subject matter or the Information' without prior written consent. This directly supports the target claim that the contract entails confidentiality regarding the agreement.\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"Contract interpretation requires that explicit confidentiality clauses be read to enforce the stated prohibition on public disclosure.\",\n      \"evidence_span\": \"No media releases, public announcements or public disclosure by either party relating to this Agreement, its subject matter or the Information, including but not limited to promotional or marketing, shall be made without the prior written consent of the other party.\",\n      \"confidence\": 0.95,\n      \"tau\": 0.90,\n      \"rubric\": {\n        \"relevance\": 0.95,\n        \"factual_grounding\": 1.0,\n        \"specificity\": 0.90,\n        \"logical_coherence\": 0.95,\n        \"applicability\": 0.90\n      },\n      \"justification\": \"The clause explicitly mandates confidentiality over the agreement and its subject matter, directly supporting the core of the target statement.\"\n    },\n    {\n      \"id\": \"a2\",\n      \"text\": \"The confidentiality obligation applies to 'either party' and covers 'this Agreement, its subject matter,' which aligns with the target statement's requirement to keep confidential the 'existence, terms, subject matter, or status of the agreement.'\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"Scope alignment in contract NLI requires that the parties and information types in the target match those in the contract text.\",\n      \"evidence_span\": \"either party relating to this Agreement, its subject matter\",\n      \"confidence\": 0.90,\n      \"tau\": 0.85,\n      \"rubric\": {\n        \"relevance\": 0.90,\n        \"factual_grounding\": 0.95,\n        \"specificity\": 0.80,\n        \"logical_coherence\": 0.90,\n        \"applicability\": 0.85\n      },\n      \"justification\": \"The party scope and information scope in the contract directly match the target's requirements, reinforcing the entailment.\"\n    },\n    {\n      \"id\": \"a3\",\n      \"text\": \"The contract includes a mandatory carve-out for disclosures 'required to be disclosed pursuant to a governmental or legal requirement provided that the disclosing party gives to the other party written notice.' This limitation contradicts the target statement's implication of an absolute or unrestricted confidentiality obligation, attacking the strict entailment.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"Entailment in contract NLI fails if the target statement omits material exceptions or carve-outs present in the source text.\",\n      \"evidence_span\": \"required to be disclosed pursuant to a governmental or legal requirement provided that the disclosing party gives to the other party written notice of such requirement prior to any such disclosure.\",\n      \"confidence\": 0.95,\n      \"tau\": 0.95,\n      \"rubric\": {\n        \"relevance\": 1.0,\n        \"factual_grounding\": 1.0,\n        \"specificity\": 0.95,\n        \"logical_coherence\": 0.95,\n        \"applicability\": 0.95\n      },\n      \"justification\": \"The presence of a legal disclosure exception means the contract does not entail an unconditional confidentiality duty, directly attacking the strict entailment claim.\"\n    },\n    {\n      \"id\": \"a4\",\n      \"text\": \"The target statement asserts confidentiality over 'negotiations, discussions, or transaction,' but the contract text only explicitly prohibits disclosure relating to 'this Agreement, its subject matter or the Information.' This scope mismatch weakens the direct entailment of the broader target claim.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"Material element matching requires that all specific information types listed in the target be supported by the contract text.\",\n      \"evidence_span\": \"this Agreement, its subject matter or the Information\",\n      \"confidence\": 0.85,\n      \"tau\": 0.75,\n      \"rubric\": {\n        \"relevance\": 0.80,\n        \"factual_grounding\": 0.85,\n        \"specificity\": 0.70,\n        \"logical_coherence\": 0.80,\n        \"applicability\": 0.75\n      },\n      \"justification\": \"The contract's explicit list of covered items does not fully encompass the target's broader list of 'negotiations, discussions, or transaction,' indicating a scope mismatch that attacks the exact entailment.\"\n    }\n  ],\n  \"relations\": [\n    {\n      \"source\": \"a1\",\n      \"target\": \"phi\",\n      \"type\": \"support\",\n      \"confidence\": 0.95\n    },\n    {\n      \"source\": \"a2\",\n      \"target\": \"phi\",\n      \"type\": \"support\",\n      \"confidence\": 0.90\n    },\n    {\n      \"source\": \"a3\",\n      \"target\": \"phi\",\n      \"type\": \"attack\",\n      \"confidence\": 0.95\n    },\n    {\n      \"source\": \"a4\",\n      \"target\": \"phi\",\n      \"type\": \"attack\",\n      \"confidence\": 0.85\n    },\n    {\n      \"source\": \"a3\",\n      \"target\": \"a1\",\n      \"type\": \"attack\",\n      \"confidence\": 0.90\n    },\n    {\n      \"source\": \"a4\",\n      \"target\": \"a1\",\n      \"type\": \"attack\",\n      \"confidence\": 0.80\n    }\n  ]\n}",
+    "parse_error": null,
+    "n_raw_arguments": 4
+  },
+  "strengths": [
+    {
+      "argument_id": "a1",
+      "tau": 0.9,
+      "rubric": {
+        "legal_relevance": 0.95,
+        "factual_grounding": 1.0,
+        "specificity": 0.9,
+        "logical_coherence": 0.95,
+        "fre_801c_applicability": 0.9
+      },
+      "justification": "The clause explicitly mandates confidentiality over the agreement and its subject matter, directly supporting the core of the target statement.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a2",
+      "tau": 0.85,
+      "rubric": {
+        "legal_relevance": 0.9,
+        "factual_grounding": 0.95,
+        "specificity": 0.8,
+        "logical_coherence": 0.9,
+        "fre_801c_applicability": 0.85
+      },
+      "justification": "The party scope and information scope in the contract directly match the target's requirements, reinforcing the entailment.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a3",
+      "tau": 0.95,
+      "rubric": {
+        "legal_relevance": 1.0,
+        "factual_grounding": 1.0,
+        "specificity": 0.95,
+        "logical_coherence": 0.95,
+        "fre_801c_applicability": 0.95
+      },
+      "justification": "The presence of a legal disclosure exception means the contract does not entail an unconditional confidentiality duty, directly attacking the strict entailment claim.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a4",
+      "tau": 0.75,
+      "rubric": {
+        "legal_relevance": 0.8,
+        "factual_grounding": 0.85,
+        "specificity": 0.7,
+        "logical_coherence": 0.8,
+        "fre_801c_applicability": 0.75
+      },
+      "justification": "The contract's explicit list of covered items does not fully encompass the target's broader list of 'negotiations, discussions, or transaction,' indicating a scope mismatch that attacks the exact entailment.",
+      "model": "combined"
+    }
+  ],
+  "solver_output": {
+    "case_id": "test_0014",
+    "graph": {
+      "nodes": {
+        "phi": {
+          "id": "phi",
+          "text": "Does the CONTRACT CONTEXT logically entail the EXACT TARGET STATEMENT, with every material element matched and no missing limitation, exception, party-scope mismatch, information-type mismatch, purpose limitation, recipient-scope mismatch, or disclosure carve-out?",
+          "tau": 0.5,
+          "sigma": 0.43209374999999994,
+          "is_claim": true
+        },
+        "a1": {
+          "id": "a1",
+          "text": "The contract contains an explicit non-disclosure provision prohibiting 'media releases, public announcements or public disclosure by either party relating to this Agreement, its subject matter or the Information' without prior written consent. This directly supports the target claim that the contract entails confidentiality regarding the agreement.",
+          "tau": 0.9,
+          "sigma": 0.011249999999999982,
+          "is_claim": false
+        },
+        "a2": {
+          "id": "a2",
+          "text": "The confidentiality obligation applies to 'either party' and covers 'this Agreement, its subject matter,' which aligns with the target statement's requirement to keep confidential the 'existence, terms, subject matter, or status of the agreement.'",
+          "tau": 0.85,
+          "sigma": 0.85,
+          "is_claim": false
+        },
+        "a3": {
+          "id": "a3",
+          "text": "The contract includes a mandatory carve-out for disclosures 'required to be disclosed pursuant to a governmental or legal requirement provided that the disclosing party gives to the other party written notice.' This limitation contradicts the target statement's implication of an absolute or unrestricted confidentiality obligation, attacking the strict entailment.",
+          "tau": 0.95,
+          "sigma": 0.95,
+          "is_claim": false
+        },
+        "a4": {
+          "id": "a4",
+          "text": "The target statement asserts confidentiality over 'negotiations, discussions, or transaction,' but the contract text only explicitly prohibits disclosure relating to 'this Agreement, its subject matter or the Information.' This scope mismatch weakens the direct entailment of the broader target claim.",
+          "tau": 0.75,
+          "sigma": 0.75,
+          "is_claim": false
+        }
+      },
+      "edges": [
+        {
+          "source": "a1",
+          "target": "phi",
+          "type": "support",
+          "confidence": 0.95
+        },
+        {
+          "source": "a2",
+          "target": "phi",
+          "type": "support",
+          "confidence": 0.9
+        },
+        {
+          "source": "a3",
+          "target": "phi",
+          "type": "attack",
+          "confidence": 0.95
+        },
+        {
+          "source": "a4",
+          "target": "phi",
+          "type": "attack",
+          "confidence": 0.85
+        },
+        {
+          "source": "a3",
+          "target": "a1",
+          "type": "attack",
+          "confidence": 0.9
+        },
+        {
+          "source": "a4",
+          "target": "a1",
+          "type": "attack",
+          "confidence": 0.8
+        }
+      ],
+      "solver_type": "df_quad"
+    },
+    "sigma_phi": 0.43209374999999994,
+    "sigma_all": {
+      "phi": 0.43209374999999994,
+      "a1": 0.011249999999999982,
+      "a2": 0.85,
+      "a3": 0.95,
+      "a4": 0.75
+    },
+    "iterations": 2,
+    "converged": true,
+    "solver_type": "df_quad"
+  },
+  "sigma_phi": 0.43209374999999994,
+  "decision": "No",
+  "uncertainty": {
+    "is_uncertain": false,
+    "sigma_phi": 0.43209374999999994,
+    "threshold_low": 0.45,
+    "threshold_high": 0.55,
+    "escalation_triggered": false,
+    "escalation_actions": [],
+    "escalation_log": []
+  },
+  "hitl_interventions": [],
+  "pre_hitl_decision": null
+}

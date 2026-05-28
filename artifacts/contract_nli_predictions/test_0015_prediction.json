@@ -1,0 +1,302 @@
+{
+  "case_id": "test_0015",
+  "input_text": "CONTRACT CONTEXT:\n4. Except as otherwise provided in this Agreement, without the prior written consent of the Disclosing Party, Recipient shall not disclose to any person or entity (other than its Representatives who are involved in its evaluation of the Purpose) any information with respect to the occurrence or content of any discussions or negotiations between the Parties. \n\nTARGET STATEMENT:\nThe contract entails that the relevant party must keep confidential the existence, terms, subject matter, or status of the agreement, negotiations, discussions, or transaction between the parties.\n\nDECISION TASK:\nDetermine whether the contract context entails the target statement.",
+  "phi_text": "",
+  "gold_label": "Yes",
+  "extraction": {
+    "case_id": "test_0015",
+    "input_text": "CONTRACT CONTEXT:\n4. Except as otherwise provided in this Agreement, without the prior written consent of the Disclosing Party, Recipient shall not disclose to any person or entity (other than its Representatives who are involved in its evaluation of the Purpose) any information with respect to the occurrence or content of any discussions or negotiations between the Parties. \n\nTARGET STATEMENT:\nThe contract entails that the relevant party must keep confidential the existence, terms, subject matter, or status of the agreement, negotiations, discussions, or transaction between the parties.\n\nDECISION TASK:\nDetermine whether the contract context entails the target statement.",
+    "claim": {
+      "id": "phi",
+      "text": "Does the CONTRACT CONTEXT logically entail the EXACT TARGET STATEMENT, with every material element matched and no missing limitation, exception, party-scope mismatch, information-type mismatch, purpose limitation, recipient-scope mismatch, or disclosure carve-out?"
+    },
+    "arguments": [
+      {
+        "id": "a1",
+        "text": "The contract contains an explicit confidentiality clause prohibiting the Recipient from disclosing information about the occurrence or content of discussions or negotiations between the Parties.",
+        "stance_to_claim": "support",
+        "legal_rule": "Contractual confidentiality obligations are established through explicit prohibitions on disclosure of specified information types.",
+        "evidence_span": "Recipient shall not disclose to any person or entity ... any information with respect to the occurrence or content of any discussions or negotiations between the Parties.",
+        "confidence": 0.95
+      },
+      {
+        "id": "a2",
+        "text": "The confidentiality obligation is expressly conditioned on the absence of prior written consent from the Disclosing Party, meaning the duty is not absolute.",
+        "stance_to_claim": "attack",
+        "legal_rule": "Conditional obligations limit the scope of a general duty; entailment requires matching all material conditions.",
+        "evidence_span": "Except as otherwise provided in this Agreement, without the prior written consent of the Disclosing Party,",
+        "confidence": 0.9
+      },
+      {
+        "id": "a3",
+        "text": "The clause carves out an exception for disclosure to the Recipient's Representatives who are involved in evaluating the Purpose, narrowing the recipient scope.",
+        "stance_to_claim": "attack",
+        "legal_rule": "Permitted disclosures to specific third parties constitute a recipient-scope mismatch that weakens a blanket confidentiality entailment.",
+        "evidence_span": "(other than its Representatives who are involved in its evaluation of the Purpose)",
+        "confidence": 0.9
+      },
+      {
+        "id": "a4",
+        "text": "The target statement's reference to existence, terms, subject matter, or status aligns semantically with the contract's prohibition on disclosing information regarding the occurrence or content of negotiations.",
+        "stance_to_claim": "support",
+        "legal_rule": "Semantic equivalence in legal drafting supports entailment when the target captures the core protected subject matter.",
+        "evidence_span": "any information with respect to the occurrence or content of any discussions or negotiations between the Parties",
+        "confidence": 0.85
+      },
+      {
+        "id": "a5",
+        "text": "The opening phrase Except as otherwise provided in this Agreement indicates that other contractual provisions may modify or override the confidentiality duty.",
+        "stance_to_claim": "attack",
+        "legal_rule": "General clauses subject to except as otherwise provided are non-absolute and require checking for conflicting or supplementary terms to determine exact entailment.",
+        "evidence_span": "Except as otherwise provided in this Agreement,",
+        "confidence": 0.85
+      }
+    ],
+    "relations": [
+      {
+        "source": "a1",
+        "target": "phi",
+        "type": "support",
+        "confidence": 0.9
+      },
+      {
+        "source": "a2",
+        "target": "phi",
+        "type": "attack",
+        "confidence": 0.85
+      },
+      {
+        "source": "a3",
+        "target": "phi",
+        "type": "attack",
+        "confidence": 0.85
+      },
+      {
+        "source": "a4",
+        "target": "phi",
+        "type": "support",
+        "confidence": 0.8
+      },
+      {
+        "source": "a5",
+        "target": "phi",
+        "type": "attack",
+        "confidence": 0.8
+      },
+      {
+        "source": "a2",
+        "target": "a1",
+        "type": "attack",
+        "confidence": 0.85
+      },
+      {
+        "source": "a3",
+        "target": "a1",
+        "type": "attack",
+        "confidence": 0.85
+      },
+      {
+        "source": "a5",
+        "target": "a1",
+        "type": "attack",
+        "confidence": 0.8
+      }
+    ],
+    "extraction_model": "",
+    "raw_llm_response": "{\n  \"case_id\": \"test_0015\",\n  \"phi\": \"Does the CONTRACT CONTEXT logically entail the EXACT TARGET STATEMENT, with every material element matched and no missing limitation, exception, party-scope mismatch, information-type mismatch, purpose limitation, recipient-scope mismatch, or disclosure carve-out?\",\n  \"arguments\": [\n    {\n      \"id\": \"a1\",\n      \"text\": \"The contract contains an explicit confidentiality clause prohibiting the Recipient from disclosing information about the occurrence or content of discussions or negotiations between the Parties.\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"Contractual confidentiality obligations are established through explicit prohibitions on disclosure of specified information types.\",\n      \"evidence_span\": \"Recipient shall not disclose to any person or entity ... any information with respect to the occurrence or content of any discussions or negotiations between the Parties.\",\n      \"confidence\": 0.95,\n      \"tau\": 0.9,\n      \"rubric\": {\n        \"relevance\": 0.9,\n        \"factual_grounding\": 0.95,\n        \"specificity\": 0.8,\n        \"logical_coherence\": 0.9,\n        \"applicability\": 0.9\n      },\n      \"justification\": \"Directly supports the target claim by establishing a core confidentiality duty that matches the subject matter of the target statement.\"\n    },\n    {\n      \"id\": \"a2\",\n      \"text\": \"The confidentiality obligation is expressly conditioned on the absence of prior written consent from the Disclosing Party, meaning the duty is not absolute.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"Conditional obligations limit the scope of a general duty; entailment requires matching all material conditions.\",\n      \"evidence_span\": \"Except as otherwise provided in this Agreement, without the prior written consent of the Disclosing Party,\",\n      \"confidence\": 0.9,\n      \"tau\": 0.85,\n      \"rubric\": {\n        \"relevance\": 0.9,\n        \"factual_grounding\": 0.95,\n        \"specificity\": 0.8,\n        \"logical_coherence\": 0.9,\n        \"applicability\": 0.9\n      },\n      \"justification\": \"Attacks the exact entailment because the target statement omits this critical limitation, implying a broader duty than the contract provides.\"\n    },\n    {\n      \"id\": \"a3\",\n      \"text\": \"The clause carves out an exception for disclosure to the Recipient's Representatives who are involved in evaluating the Purpose, narrowing the recipient scope.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"Permitted disclosures to specific third parties constitute a recipient-scope mismatch that weakens a blanket confidentiality entailment.\",\n      \"evidence_span\": \"(other than its Representatives who are involved in its evaluation of the Purpose)\",\n      \"confidence\": 0.9,\n      \"tau\": 0.8,\n      \"rubric\": {\n        \"relevance\": 0.85,\n        \"factual_grounding\": 0.95,\n        \"specificity\": 0.75,\n        \"logical_coherence\": 0.85,\n        \"applicability\": 0.85\n      },\n      \"justification\": \"Attacks the target's broad prohibition by showing a defined carve-out for internal representatives, creating a recipient-scope mismatch.\"\n    },\n    {\n      \"id\": \"a4\",\n      \"text\": \"The target statement's reference to existence, terms, subject matter, or status aligns semantically with the contract's prohibition on disclosing information regarding the occurrence or content of negotiations.\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"Semantic equivalence in legal drafting supports entailment when the target captures the core protected subject matter.\",\n      \"evidence_span\": \"any information with respect to the occurrence or content of any discussions or negotiations between the Parties\",\n      \"confidence\": 0.85,\n      \"tau\": 0.8,\n      \"rubric\": {\n        \"relevance\": 0.85,\n        \"factual_grounding\": 0.8,\n        \"specificity\": 0.7,\n        \"logical_coherence\": 0.85,\n        \"applicability\": 0.8\n      },\n      \"justification\": \"Supports the target claim by demonstrating that the protected information types in the contract map directly to those enumerated in the target statement.\"\n    },\n    {\n      \"id\": \"a5\",\n      \"text\": \"The opening phrase Except as otherwise provided in this Agreement indicates that other contractual provisions may modify or override the confidentiality duty.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"General clauses subject to except as otherwise provided are non-absolute and require checking for conflicting or supplementary terms to determine exact entailment.\",\n      \"evidence_span\": \"Except as otherwise provided in this Agreement,\",\n      \"confidence\": 0.85,\n      \"tau\": 0.75,\n      \"rubric\": {\n        \"relevance\": 0.8,\n        \"factual_grounding\": 0.9,\n        \"specificity\": 0.7,\n        \"logical_coherence\": 0.8,\n        \"applicability\": 0.8\n      },\n      \"justification\": \"Attacks the exact entailment by highlighting a structural limitation that prevents the target statement from being a complete logical consequence without further context.\"\n    }\n  ],\n  \"relations\": [\n    {\n      \"source\": \"a1\",\n      \"target\": \"phi\",\n      \"type\": \"support\",\n      \"confidence\": 0.9\n    },\n    {\n      \"source\": \"a2\",\n      \"target\": \"phi\",\n      \"type\": \"attack\",\n      \"confidence\": 0.85\n    },\n    {\n      \"source\": \"a3\",\n      \"target\": \"phi\",\n      \"type\": \"attack\",\n      \"confidence\": 0.85\n    },\n    {\n      \"source\": \"a4\",\n      \"target\": \"phi\",\n      \"type\": \"support\",\n      \"confidence\": 0.8\n    },\n    {\n      \"source\": \"a5\",\n      \"target\": \"phi\",\n      \"type\": \"attack\",\n      \"confidence\": 0.8\n    },\n    {\n      \"source\": \"a2\",\n      \"target\": \"a1\",\n      \"type\": \"attack\",\n      \"confidence\": 0.85\n    },\n    {\n      \"source\": \"a3\",\n      \"target\": \"a1\",\n      \"type\": \"attack\",\n      \"confidence\": 0.85\n    },\n    {\n      \"source\": \"a5\",\n      \"target\": \"a1\",\n      \"type\": \"attack\",\n      \"confidence\": 0.8\n    }\n  ]\n}",
+    "parse_error": null,
+    "n_raw_arguments": 5
+  },
+  "strengths": [
+    {
+      "argument_id": "a1",
+      "tau": 0.9,
+      "rubric": {
+        "legal_relevance": 0.9,
+        "factual_grounding": 0.95,
+        "specificity": 0.8,
+        "logical_coherence": 0.9,
+        "fre_801c_applicability": 0.9
+      },
+      "justification": "Directly supports the target claim by establishing a core confidentiality duty that matches the subject matter of the target statement.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a2",
+      "tau": 0.85,
+      "rubric": {
+        "legal_relevance": 0.9,
+        "factual_grounding": 0.95,
+        "specificity": 0.8,
+        "logical_coherence": 0.9,
+        "fre_801c_applicability": 0.9
+      },
+      "justification": "Attacks the exact entailment because the target statement omits this critical limitation, implying a broader duty than the contract provides.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a3",
+      "tau": 0.8,
+      "rubric": {
+        "legal_relevance": 0.85,
+        "factual_grounding": 0.95,
+        "specificity": 0.75,
+        "logical_coherence": 0.85,
+        "fre_801c_applicability": 0.85
+      },
+      "justification": "Attacks the target's broad prohibition by showing a defined carve-out for internal representatives, creating a recipient-scope mismatch.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a4",
+      "tau": 0.8,
+      "rubric": {
+        "legal_relevance": 0.85,
+        "factual_grounding": 0.8,
+        "specificity": 0.7,
+        "logical_coherence": 0.85,
+        "fre_801c_applicability": 0.8
+      },
+      "justification": "Supports the target claim by demonstrating that the protected information types in the contract map directly to those enumerated in the target statement.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a5",
+      "tau": 0.75,
+      "rubric": {
+        "legal_relevance": 0.8,
+        "factual_grounding": 0.9,
+        "specificity": 0.7,
+        "logical_coherence": 0.8,
+        "fre_801c_applicability": 0.8
+      },
+      "justification": "Attacks the exact entailment by highlighting a structural limitation that prevents the target statement from being a complete logical consequence without further context.",
+      "model": "combined"
+    }
+  ],
+  "solver_output": {
+    "case_id": "test_0015",
+    "graph": {
+      "nodes": {
+        "phi": {
+          "id": "phi",
+          "text": "Does the CONTRACT CONTEXT logically entail the EXACT TARGET STATEMENT, with every material element matched and no missing limitation, exception, party-scope mismatch, information-type mismatch, purpose limitation, recipient-scope mismatch, or disclosure carve-out?",
+          "tau": 0.5,
+          "sigma": 0.404425,
+          "is_claim": true
+        },
+        "a1": {
+          "id": "a1",
+          "text": "The contract contains an explicit confidentiality clause prohibiting the Recipient from disclosing information about the occurrence or content of discussions or negotiations between the Parties.",
+          "tau": 0.9,
+          "sigma": 0.006749999999999923,
+          "is_claim": false
+        },
+        "a2": {
+          "id": "a2",
+          "text": "The confidentiality obligation is expressly conditioned on the absence of prior written consent from the Disclosing Party, meaning the duty is not absolute.",
+          "tau": 0.85,
+          "sigma": 0.85,
+          "is_claim": false
+        },
+        "a3": {
+          "id": "a3",
+          "text": "The clause carves out an exception for disclosure to the Recipient's Representatives who are involved in evaluating the Purpose, narrowing the recipient scope.",
+          "tau": 0.8,
+          "sigma": 0.8,
+          "is_claim": false
+        },
+        "a4": {
+          "id": "a4",
+          "text": "The target statement's reference to existence, terms, subject matter, or status aligns semantically with the contract's prohibition on disclosing information regarding the occurrence or content of negotiations.",
+          "tau": 0.8,
+          "sigma": 0.8,
+          "is_claim": false
+        },
+        "a5": {
+          "id": "a5",
+          "text": "The opening phrase Except as otherwise provided in this Agreement indicates that other contractual provisions may modify or override the confidentiality duty.",
+          "tau": 0.75,
+          "sigma": 0.75,
+          "is_claim": false
+        }
+      },
+      "edges": [
+        {
+          "source": "a1",
+          "target": "phi",
+          "type": "support",
+          "confidence": 0.9
+        },
+        {
+          "source": "a2",
+          "target": "phi",
+          "type": "attack",
+          "confidence": 0.85
+        },
+        {
+          "source": "a3",
+          "target": "phi",
+          "type": "attack",
+          "confidence": 0.85
+        },
+        {
+          "source": "a4",
+          "target": "phi",
+          "type": "support",
+          "confidence": 0.8
+        },
+        {
+          "source": "a5",
+          "target": "phi",
+          "type": "attack",
+          "confidence": 0.8
+        },
+        {
+          "source": "a2",
+          "target": "a1",
+          "type": "attack",
+          "confidence": 0.85
+        },
+        {
+          "source": "a3",
+          "target": "a1",
+          "type": "attack",
+          "confidence": 0.85
+        },
+        {
+          "source": "a5",
+          "target": "a1",
+          "type": "attack",
+          "confidence": 0.8
+        }
+      ],
+      "solver_type": "df_quad"
+    },
+    "sigma_phi": 0.404425,
+    "sigma_all": {
+      "phi": 0.404425,
+      "a1": 0.006749999999999923,
+      "a2": 0.85,
+      "a3": 0.8,
+      "a4": 0.8,
+      "a5": 0.75
+    },
+    "iterations": 2,
+    "converged": true,
+    "solver_type": "df_quad"
+  },
+  "sigma_phi": 0.404425,
+  "decision": "No",
+  "uncertainty": {
+    "is_uncertain": false,
+    "sigma_phi": 0.404425,
+    "threshold_low": 0.45,
+    "threshold_high": 0.55,
+    "escalation_triggered": false,
+    "escalation_actions": [],
+    "escalation_log": []
+  },
+  "hitl_interventions": [],
+  "pre_hitl_decision": null
+}

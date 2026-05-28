@@ -1,46 +1,46 @@
 [
   {
     "system_name": "ADSS w/o Symbolic Solver",
-    "n": 2,
-    "n_uncertain": 0,
+    "n": 82,
+    "n_uncertain": 17,
     "accuracy": {
-      "score": 1.0,
-      "ci_low": 1.0,
-      "ci_high": 1.0
+      "score": 0.7317073170731707,
+      "ci_low": 0.6341463414634146,
+      "ci_high": 0.8292682926829268
     },
     "macro_f1": {
-      "score": 0.5,
-      "ci_low": 0.5,
-      "ci_high": 0.5
+      "score": 0.7147375079063883,
+      "ci_low": 0.6095238095238096,
+      "ci_high": 0.8123569794050344
     },
-    "false_certainty_rate": 0.0,
-    "certain_n": 2,
-    "certain_accuracy": 1.0,
-    "certain_macro_f1": 0.5,
-    "borderline_n": 0,
-    "borderline_accuracy": 0.0,
-    "borderline_macro_f1": 0.0
+    "false_certainty_rate": 0.07317073170731707,
+    "certain_n": 65,
+    "certain_accuracy": 0.9076923076923077,
+    "certain_macro_f1": 0.8990683229813664,
+    "borderline_n": 17,
+    "borderline_accuracy": 0.058823529411764705,
+    "borderline_macro_f1": 0.05555555555555555
   },
   {
     "system_name": "Full ADSS",
-    "n": 2,
-    "n_uncertain": 0,
+    "n": 82,
+    "n_uncertain": 8,
     "accuracy": {
-      "score": 1.0,
-      "ci_low": 1.0,
-      "ci_high": 1.0
+      "score": 0.7804878048780488,
+      "ci_low": 0.6829268292682927,
+      "ci_high": 0.8658536585365854
     },
     "macro_f1": {
-      "score": 0.5,
-      "ci_low": 0.5,
-      "ci_high": 0.5
+      "score": 0.771799628942486,
+      "ci_low": 0.6778249253496778,
+      "ci_high": 0.853658536585366
     },
-    "false_certainty_rate": 0.0,
-    "certain_n": 2,
-    "certain_accuracy": 1.0,
-    "certain_macro_f1": 0.5,
-    "borderline_n": 0,
-    "borderline_accuracy": 0.0,
-    "borderline_macro_f1": 0.0
+    "false_certainty_rate": 0.13414634146341464,
+    "certain_n": 74,
+    "certain_accuracy": 0.8513513513513513,
+    "certain_macro_f1": 0.8449819082079604,
+    "borderline_n": 8,
+    "borderline_accuracy": 0.125,
+    "borderline_macro_f1": 0.1111111111111111
   }
 ]

@@ -1,0 +1,249 @@
+{
+  "case_id": "test_0019",
+  "input_text": "CONTRACT CONTEXT:\nIn addition, except as permitted herein, Recipient shall not disclose the fact that the parties are exchanging Confidential Information and having discussions.  In connection therewith, it is agreed that no public release or disclosure of any contemplated transaction shall be made except by a mutually agreed disclosure except that each party may make such disclosure if advised by its outside securities counsel in writing that such disclosure is required; PROVIDED, HOWEVER, that in such event such party will notify the other party that it intends, as a preliminary matter, to take such action and the outside securities counsel of such party shall first discuss the mater with the outside securities counsel of the other party before any definitive decision is made on the disclosure. \n\nTARGET STATEMENT:\nThe contract entails that the relevant party must keep confidential the existence, terms, subject matter, or status of the agreement, negotiations, discussions, or transaction between the parties.\n\nDECISION TASK:\nDetermine whether the contract context entails the target statement.",
+  "phi_text": "",
+  "gold_label": "Yes",
+  "extraction": {
+    "case_id": "test_0019",
+    "input_text": "CONTRACT CONTEXT:\nIn addition, except as permitted herein, Recipient shall not disclose the fact that the parties are exchanging Confidential Information and having discussions.  In connection therewith, it is agreed that no public release or disclosure of any contemplated transaction shall be made except by a mutually agreed disclosure except that each party may make such disclosure if advised by its outside securities counsel in writing that such disclosure is required; PROVIDED, HOWEVER, that in such event such party will notify the other party that it intends, as a preliminary matter, to take such action and the outside securities counsel of such party shall first discuss the mater with the outside securities counsel of the other party before any definitive decision is made on the disclosure. \n\nTARGET STATEMENT:\nThe contract entails that the relevant party must keep confidential the existence, terms, subject matter, or status of the agreement, negotiations, discussions, or transaction between the parties.\n\nDECISION TASK:\nDetermine whether the contract context entails the target statement.",
+    "claim": {
+      "id": "phi",
+      "text": "Does the CONTRACT CONTEXT logically entail the EXACT TARGET STATEMENT, with every material element matched and no missing limitation, exception, party-scope mismatch, information-type mismatch, purpose limitation, recipient-scope mismatch, or disclosure carve-out?"
+    },
+    "arguments": [
+      {
+        "id": "a1",
+        "text": "The contract explicitly states that the Recipient shall not disclose the fact that the parties are exchanging Confidential Information and having discussions, directly establishing a confidentiality obligation regarding the existence and status of the negotiations.",
+        "stance_to_claim": "support",
+        "legal_rule": "Explicit contractual prohibitions on disclosing the fact of negotiations or information exchange directly entail a confidentiality obligation over the existence and status of those discussions.",
+        "evidence_span": "Recipient shall not disclose the fact that the parties are exchanging Confidential Information and having discussions.",
+        "confidence": 0.95
+      },
+      {
+        "id": "a2",
+        "text": "The contract further prohibits any public release or disclosure of a contemplated transaction, reinforcing the obligation to keep the transaction's existence and subject matter confidential.",
+        "stance_to_claim": "support",
+        "legal_rule": "Prohibitions on public disclosure of a contemplated transaction logically entail confidentiality regarding the transaction's status and subject matter.",
+        "evidence_span": "no public release or disclosure of any contemplated transaction shall be made",
+        "confidence": 0.95
+      },
+      {
+        "id": "a3",
+        "text": "The contract contains explicit exceptions permitting disclosures, including mutually agreed disclosures and those required by outside securities counsel, which limit the absolute nature of the confidentiality obligation.",
+        "stance_to_claim": "attack",
+        "legal_rule": "Permitted disclosures and statutory/counsel-required carve-outs narrow the scope of a confidentiality clause, weakening the entailment of an unconditional obligation.",
+        "evidence_span": "except as permitted herein... except by a mutually agreed disclosure except that each party may make such disclosure if advised by its outside securities counsel in writing that such disclosure is required",
+        "confidence": 0.9
+      },
+      {
+        "id": "a4",
+        "text": "The target statement's broad reference to existence, terms, subject matter, or status is substantively covered by the contract's focus on the fact of exchanges and the contemplated transaction, despite the contract not listing every synonymous term.",
+        "stance_to_claim": "support",
+        "legal_rule": "Contractual interpretation favors substantive equivalence over lexical matching; covering the fact of negotiations and the transaction satisfies the target's broad confidentiality scope.",
+        "evidence_span": "fact that the parties are exchanging Confidential Information and having discussions / contemplated transaction",
+        "confidence": 0.85
+      }
+    ],
+    "relations": [
+      {
+        "source": "a1",
+        "target": "phi",
+        "type": "support",
+        "confidence": 0.95
+      },
+      {
+        "source": "a2",
+        "target": "phi",
+        "type": "support",
+        "confidence": 0.9
+      },
+      {
+        "source": "a3",
+        "target": "phi",
+        "type": "attack",
+        "confidence": 0.85
+      },
+      {
+        "source": "a4",
+        "target": "phi",
+        "type": "support",
+        "confidence": 0.8
+      },
+      {
+        "source": "a1",
+        "target": "a4",
+        "type": "support",
+        "confidence": 0.85
+      },
+      {
+        "source": "a3",
+        "target": "a1",
+        "type": "attack",
+        "confidence": 0.8
+      }
+    ],
+    "extraction_model": "",
+    "raw_llm_response": "{\n  \"case_id\": \"test_0019\",\n  \"phi\": \"Does the CONTRACT CONTEXT logically entail the EXACT TARGET STATEMENT, with every material element matched and no missing limitation, exception, party-scope mismatch, information-type mismatch, purpose limitation, recipient-scope mismatch, or disclosure carve-out?\",\n  \"arguments\": [\n    {\n      \"id\": \"a1\",\n      \"text\": \"The contract explicitly states that the Recipient shall not disclose the fact that the parties are exchanging Confidential Information and having discussions, directly establishing a confidentiality obligation regarding the existence and status of the negotiations.\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"Explicit contractual prohibitions on disclosing the fact of negotiations or information exchange directly entail a confidentiality obligation over the existence and status of those discussions.\",\n      \"evidence_span\": \"Recipient shall not disclose the fact that the parties are exchanging Confidential Information and having discussions.\",\n      \"confidence\": 0.95,\n      \"tau\": 0.9,\n      \"rubric\": {\n        \"relevance\": 1.0,\n        \"factual_grounding\": 1.0,\n        \"specificity\": 0.9,\n        \"logical_coherence\": 0.95,\n        \"applicability\": 0.9\n      },\n      \"justification\": \"Direct textual match to the core of the target claim, establishing the primary confidentiality duty without requiring inference.\"\n    },\n    {\n      \"id\": \"a2\",\n      \"text\": \"The contract further prohibits any public release or disclosure of a contemplated transaction, reinforcing the obligation to keep the transaction's existence and subject matter confidential.\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"Prohibitions on public disclosure of a contemplated transaction logically entail confidentiality regarding the transaction's status and subject matter.\",\n      \"evidence_span\": \"no public release or disclosure of any contemplated transaction shall be made\",\n      \"confidence\": 0.95,\n      \"tau\": 0.85,\n      \"rubric\": {\n        \"relevance\": 1.0,\n        \"factual_grounding\": 1.0,\n        \"specificity\": 0.8,\n        \"logical_coherence\": 0.9,\n        \"applicability\": 0.9\n      },\n      \"justification\": \"Extends the confidentiality obligation to the broader transaction context, supporting the target statement's coverage of transaction status.\"\n    },\n    {\n      \"id\": \"a3\",\n      \"text\": \"The contract contains explicit exceptions permitting disclosures, including mutually agreed disclosures and those required by outside securities counsel, which limit the absolute nature of the confidentiality obligation.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"Permitted disclosures and statutory/counsel-required carve-outs narrow the scope of a confidentiality clause, weakening the entailment of an unconditional obligation.\",\n      \"evidence_span\": \"except as permitted herein... except by a mutually agreed disclosure except that each party may make such disclosure if advised by its outside securities counsel in writing that such disclosure is required\",\n      \"confidence\": 0.9,\n      \"tau\": 0.7,\n      \"rubric\": {\n        \"relevance\": 0.9,\n        \"factual_grounding\": 1.0,\n        \"specificity\": 0.8,\n        \"logical_coherence\": 0.85,\n        \"applicability\": 0.8\n      },\n      \"justification\": \"The presence of carve-outs means the contract does not entail a strict, exception-free confidentiality obligation, attacking the absolute phrasing of the target claim.\"\n    },\n    {\n      \"id\": \"a4\",\n      \"text\": \"The target statement's broad reference to existence, terms, subject matter, or status is substantively covered by the contract's focus on the fact of exchanges and the contemplated transaction, despite the contract not listing every synonymous term.\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"Contractual interpretation favors substantive equivalence over lexical matching; covering the fact of negotiations and the transaction satisfies the target's broad confidentiality scope.\",\n      \"evidence_span\": \"fact that the parties are exchanging Confidential Information and having discussions / contemplated transaction\",\n      \"confidence\": 0.85,\n      \"tau\": 0.75,\n      \"rubric\": {\n        \"relevance\": 0.8,\n        \"factual_grounding\": 0.9,\n        \"specificity\": 0.7,\n        \"logical_coherence\": 0.8,\n        \"applicability\": 0.8\n      },\n      \"justification\": \"Bridges the lexical gap between the target's broad list and the contract's specific phrasing, supporting entailment through substantive coverage.\"\n    }\n  ],\n  \"relations\": [\n    {\n      \"source\": \"a1\",\n      \"target\": \"phi\",\n      \"type\": \"support\",\n      \"confidence\": 0.95\n    },\n    {\n      \"source\": \"a2\",\n      \"target\": \"phi\",\n      \"type\": \"support\",\n      \"confidence\": 0.9\n    },\n    {\n      \"source\": \"a3\",\n      \"target\": \"phi\",\n      \"type\": \"attack\",\n      \"confidence\": 0.85\n    },\n    {\n      \"source\": \"a4\",\n      \"target\": \"phi\",\n      \"type\": \"support\",\n      \"confidence\": 0.8\n    },\n    {\n      \"source\": \"a1\",\n      \"target\": \"a4\",\n      \"type\": \"support\",\n      \"confidence\": 0.85\n    },\n    {\n      \"source\": \"a3\",\n      \"target\": \"a1\",\n      \"type\": \"attack\",\n      \"confidence\": 0.8\n    }\n  ]\n}",
+    "parse_error": null,
+    "n_raw_arguments": 4
+  },
+  "strengths": [
+    {
+      "argument_id": "a1",
+      "tau": 0.9,
+      "rubric": {
+        "legal_relevance": 1.0,
+        "factual_grounding": 1.0,
+        "specificity": 0.9,
+        "logical_coherence": 0.95,
+        "fre_801c_applicability": 0.9
+      },
+      "justification": "Direct textual match to the core of the target claim, establishing the primary confidentiality duty without requiring inference.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a2",
+      "tau": 0.85,
+      "rubric": {
+        "legal_relevance": 1.0,
+        "factual_grounding": 1.0,
+        "specificity": 0.8,
+        "logical_coherence": 0.9,
+        "fre_801c_applicability": 0.9
+      },
+      "justification": "Extends the confidentiality obligation to the broader transaction context, supporting the target statement's coverage of transaction status.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a3",
+      "tau": 0.7,
+      "rubric": {
+        "legal_relevance": 0.9,
+        "factual_grounding": 1.0,
+        "specificity": 0.8,
+        "logical_coherence": 0.85,
+        "fre_801c_applicability": 0.8
+      },
+      "justification": "The presence of carve-outs means the contract does not entail a strict, exception-free confidentiality obligation, attacking the absolute phrasing of the target claim.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a4",
+      "tau": 0.75,
+      "rubric": {
+        "legal_relevance": 0.8,
+        "factual_grounding": 0.9,
+        "specificity": 0.7,
+        "logical_coherence": 0.8,
+        "fre_801c_applicability": 0.8
+      },
+      "justification": "Bridges the lexical gap between the target's broad list and the contract's specific phrasing, supporting entailment through substantive coverage.",
+      "model": "combined"
+    }
+  ],
+  "solver_output": {
+    "case_id": "test_0019",
+    "graph": {
+      "nodes": {
+        "phi": {
+          "id": "phi",
+          "text": "Does the CONTRACT CONTEXT logically entail the EXACT TARGET STATEMENT, with every material element matched and no missing limitation, exception, party-scope mismatch, information-type mismatch, purpose limitation, recipient-scope mismatch, or disclosure carve-out?",
+          "tau": 0.5,
+          "sigma": 0.640008125,
+          "is_claim": true
+        },
+        "a1": {
+          "id": "a1",
+          "text": "The contract explicitly states that the Recipient shall not disclose the fact that the parties are exchanging Confidential Information and having discussions, directly establishing a confidentiality obligation regarding the existence and status of the negotiations.",
+          "tau": 0.9,
+          "sigma": 0.27,
+          "is_claim": false
+        },
+        "a2": {
+          "id": "a2",
+          "text": "The contract further prohibits any public release or disclosure of a contemplated transaction, reinforcing the obligation to keep the transaction's existence and subject matter confidential.",
+          "tau": 0.85,
+          "sigma": 0.85,
+          "is_claim": false
+        },
+        "a3": {
+          "id": "a3",
+          "text": "The contract contains explicit exceptions permitting disclosures, including mutually agreed disclosures and those required by outside securities counsel, which limit the absolute nature of the confidentiality obligation.",
+          "tau": 0.7,
+          "sigma": 0.7,
+          "is_claim": false
+        },
+        "a4": {
+          "id": "a4",
+          "text": "The target statement's broad reference to existence, terms, subject matter, or status is substantively covered by the contract's focus on the fact of exchanges and the contemplated transaction, despite the contract not listing every synonymous term.",
+          "tau": 0.75,
+          "sigma": 0.8175,
+          "is_claim": false
+        }
+      },
+      "edges": [
+        {
+          "source": "a1",
+          "target": "phi",
+          "type": "support",
+          "confidence": 0.95
+        },
+        {
+          "source": "a2",
+          "target": "phi",
+          "type": "support",
+          "confidence": 0.9
+        },
+        {
+          "source": "a3",
+          "target": "phi",
+          "type": "attack",
+          "confidence": 0.85
+        },
+        {
+          "source": "a4",
+          "target": "phi",
+          "type": "support",
+          "confidence": 0.8
+        },
+        {
+          "source": "a1",
+          "target": "a4",
+          "type": "support",
+          "confidence": 0.85
+        },
+        {
+          "source": "a3",
+          "target": "a1",
+          "type": "attack",
+          "confidence": 0.8
+        }
+      ],
+      "solver_type": "df_quad"
+    },
+    "sigma_phi": 0.640008125,
+    "sigma_all": {
+      "phi": 0.640008125,
+      "a1": 0.27,
+      "a2": 0.85,
+      "a3": 0.7,
+      "a4": 0.8175
+    },
+    "iterations": 2,
+    "converged": true,
+    "solver_type": "df_quad"
+  },
+  "sigma_phi": 0.640008125,
+  "decision": "Yes",
+  "uncertainty": {
+    "is_uncertain": false,
+    "sigma_phi": 0.640008125,
+    "threshold_low": 0.45,
+    "threshold_high": 0.55,
+    "escalation_triggered": false,
+    "escalation_actions": [],
+    "escalation_log": []
+  },
+  "hitl_interventions": [],
+  "pre_hitl_decision": null
+}

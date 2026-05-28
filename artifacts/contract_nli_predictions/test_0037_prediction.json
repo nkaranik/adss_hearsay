@@ -1,0 +1,249 @@
+{
+  "case_id": "test_0037",
+  "input_text": "CONTRACT CONTEXT:\n(c) neither party shall, nor cause or permit their respective Representatives to, disclose to any person the existence or terms of this Agreement or that discussions or negotiations are taking or have taken place concerning the Possible Transaction, or any term, condition or other matter relating to the Possible Transaction (the information referred to in this clause  (c), the “Transaction Information”).  \n\nTARGET STATEMENT:\nThe contract entails that the relevant party must keep confidential the existence, terms, subject matter, or status of the agreement, negotiations, discussions, or transaction between the parties.\n\nDECISION TASK:\nDetermine whether the contract context entails the target statement.",
+  "phi_text": "",
+  "gold_label": "Yes",
+  "extraction": {
+    "case_id": "test_0037",
+    "input_text": "CONTRACT CONTEXT:\n(c) neither party shall, nor cause or permit their respective Representatives to, disclose to any person the existence or terms of this Agreement or that discussions or negotiations are taking or have taken place concerning the Possible Transaction, or any term, condition or other matter relating to the Possible Transaction (the information referred to in this clause  (c), the “Transaction Information”).  \n\nTARGET STATEMENT:\nThe contract entails that the relevant party must keep confidential the existence, terms, subject matter, or status of the agreement, negotiations, discussions, or transaction between the parties.\n\nDECISION TASK:\nDetermine whether the contract context entails the target statement.",
+    "claim": {
+      "id": "phi",
+      "text": "Does the CONTRACT CONTEXT logically entail the EXACT TARGET STATEMENT, with every material element matched and no missing limitation, exception, party-scope mismatch, information-type mismatch, purpose limitation, recipient-scope mismatch, or disclosure carve-out?"
+    },
+    "arguments": [
+      {
+        "id": "a1",
+        "text": "The contract context contains an explicit non-disclosure clause stating that neither party shall disclose to any person the existence or terms of the Agreement or that discussions or negotiations concerning the Possible Transaction are taking place.",
+        "stance_to_claim": "support",
+        "legal_rule": "Contract interpretation principle that explicit prohibitions on disclosure constitute binding confidentiality obligations.",
+        "evidence_span": "(c) neither party shall, nor cause or permit their respective Representatives to, disclose to any person the existence or terms of this Agreement or that discussions or negotiations are taking or have taken place concerning the Possible Transaction",
+        "confidence": 1.0
+      },
+      {
+        "id": "a2",
+        "text": "The information types protected by the clause (existence/terms of the Agreement, discussions/negotiations concerning the Possible Transaction, and related terms/conditions) directly correspond to the existence, terms, subject matter, or status of the agreement, negotiations, discussions, or transaction listed in the target statement.",
+        "stance_to_claim": "support",
+        "legal_rule": "Entailment in contract NLI requires matching material elements and information types without overreach or omission.",
+        "evidence_span": "existence or terms of this Agreement or that discussions or negotiations are taking or have taken place concerning the Possible Transaction, or any term, condition or other matter relating to the Possible Transaction",
+        "confidence": 1.0
+      },
+      {
+        "id": "a3",
+        "text": "The provided contract excerpt contains no exceptions, permitted disclosures, duration limits, or carve-outs that would restrict or negate the confidentiality obligation regarding the agreement's existence or transaction details.",
+        "stance_to_claim": "support",
+        "legal_rule": "In contract entailment, the absence of limiting language in the relevant clause supports a broad interpretation of the obligation as stated.",
+        "evidence_span": null,
+        "confidence": 0.9
+      },
+      {
+        "id": "a4",
+        "text": "The obligation binds neither party and their respective Representatives, which aligns with the target statement's reference to the relevant party having a duty to keep information confidential.",
+        "stance_to_claim": "support",
+        "legal_rule": "Contractual obligations apply to the parties and their agents unless explicitly limited to a narrower scope.",
+        "evidence_span": "neither party shall, nor cause or permit their respective Representatives to, disclose",
+        "confidence": 0.95
+      }
+    ],
+    "relations": [
+      {
+        "source": "a1",
+        "target": "phi",
+        "type": "support",
+        "confidence": 1.0
+      },
+      {
+        "source": "a2",
+        "target": "phi",
+        "type": "support",
+        "confidence": 1.0
+      },
+      {
+        "source": "a3",
+        "target": "phi",
+        "type": "support",
+        "confidence": 0.9
+      },
+      {
+        "source": "a4",
+        "target": "phi",
+        "type": "support",
+        "confidence": 0.95
+      },
+      {
+        "source": "a1",
+        "target": "a2",
+        "type": "support",
+        "confidence": 0.9
+      },
+      {
+        "source": "a4",
+        "target": "a1",
+        "type": "support",
+        "confidence": 0.85
+      }
+    ],
+    "extraction_model": "",
+    "raw_llm_response": "{\n  \"case_id\": \"test_0037\",\n  \"phi\": \"Does the CONTRACT CONTEXT logically entail the EXACT TARGET STATEMENT, with every material element matched and no missing limitation, exception, party-scope mismatch, information-type mismatch, purpose limitation, recipient-scope mismatch, or disclosure carve-out?\",\n  \"arguments\": [\n    {\n      \"id\": \"a1\",\n      \"text\": \"The contract context contains an explicit non-disclosure clause stating that neither party shall disclose to any person the existence or terms of the Agreement or that discussions or negotiations concerning the Possible Transaction are taking place.\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"Contract interpretation principle that explicit prohibitions on disclosure constitute binding confidentiality obligations.\",\n      \"evidence_span\": \"(c) neither party shall, nor cause or permit their respective Representatives to, disclose to any person the existence or terms of this Agreement or that discussions or negotiations are taking or have taken place concerning the Possible Transaction\",\n      \"confidence\": 1.0,\n      \"tau\": 0.95,\n      \"rubric\": {\n        \"relevance\": 1.0,\n        \"factual_grounding\": 1.0,\n        \"specificity\": 0.9,\n        \"logical_coherence\": 1.0,\n        \"applicability\": 1.0\n      },\n      \"justification\": \"Directly establishes the core confidentiality obligation referenced in the target statement, providing strong foundational support for entailment.\"\n    },\n    {\n      \"id\": \"a2\",\n      \"text\": \"The information types protected by the clause (existence/terms of the Agreement, discussions/negotiations concerning the Possible Transaction, and related terms/conditions) directly correspond to the existence, terms, subject matter, or status of the agreement, negotiations, discussions, or transaction listed in the target statement.\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"Entailment in contract NLI requires matching material elements and information types without overreach or omission.\",\n      \"evidence_span\": \"existence or terms of this Agreement or that discussions or negotiations are taking or have taken place concerning the Possible Transaction, or any term, condition or other matter relating to the Possible Transaction\",\n      \"confidence\": 1.0,\n      \"tau\": 0.9,\n      \"rubric\": {\n        \"relevance\": 1.0,\n        \"factual_grounding\": 1.0,\n        \"specificity\": 0.9,\n        \"logical_coherence\": 1.0,\n        \"applicability\": 1.0\n      },\n      \"justification\": \"Demonstrates that the target statement's scope is fully covered by the contract text, confirming material element alignment.\"\n    },\n    {\n      \"id\": \"a3\",\n      \"text\": \"The provided contract excerpt contains no exceptions, permitted disclosures, duration limits, or carve-outs that would restrict or negate the confidentiality obligation regarding the agreement's existence or transaction details.\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"In contract entailment, the absence of limiting language in the relevant clause supports a broad interpretation of the obligation as stated.\",\n      \"evidence_span\": null,\n      \"confidence\": 0.9,\n      \"tau\": 0.8,\n      \"rubric\": {\n        \"relevance\": 0.9,\n        \"factual_grounding\": 0.8,\n        \"specificity\": 0.7,\n        \"logical_coherence\": 0.9,\n        \"applicability\": 0.9\n      },\n      \"justification\": \"Confirms that the target statement is not weakened by unmentioned limitations, strengthening the logical entailment.\"\n    },\n    {\n      \"id\": \"a4\",\n      \"text\": \"The obligation binds neither party and their respective Representatives, which aligns with the target statement's reference to the relevant party having a duty to keep information confidential.\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"Contractual obligations apply to the parties and their agents unless explicitly limited to a narrower scope.\",\n      \"evidence_span\": \"neither party shall, nor cause or permit their respective Representatives to, disclose\",\n      \"confidence\": 0.95,\n      \"tau\": 0.85,\n      \"rubric\": {\n        \"relevance\": 0.9,\n        \"factual_grounding\": 0.9,\n        \"specificity\": 0.8,\n        \"logical_coherence\": 0.9,\n        \"applicability\": 0.9\n      },\n      \"justification\": \"Validates that the duty bearer in the target statement matches the contractual obligors, supporting party-scope alignment.\"\n    }\n  ],\n  \"relations\": [\n    {\n      \"source\": \"a1\",\n      \"target\": \"phi\",\n      \"type\": \"support\",\n      \"confidence\": 1.0\n    },\n    {\n      \"source\": \"a2\",\n      \"target\": \"phi\",\n      \"type\": \"support\",\n      \"confidence\": 1.0\n    },\n    {\n      \"source\": \"a3\",\n      \"target\": \"phi\",\n      \"type\": \"support\",\n      \"confidence\": 0.9\n    },\n    {\n      \"source\": \"a4\",\n      \"target\": \"phi\",\n      \"type\": \"support\",\n      \"confidence\": 0.95\n    },\n    {\n      \"source\": \"a1\",\n      \"target\": \"a2\",\n      \"type\": \"support\",\n      \"confidence\": 0.9\n    },\n    {\n      \"source\": \"a4\",\n      \"target\": \"a1\",\n      \"type\": \"support\",\n      \"confidence\": 0.85\n    }\n  ]\n}",
+    "parse_error": null,
+    "n_raw_arguments": 4
+  },
+  "strengths": [
+    {
+      "argument_id": "a1",
+      "tau": 0.95,
+      "rubric": {
+        "legal_relevance": 1.0,
+        "factual_grounding": 1.0,
+        "specificity": 0.9,
+        "logical_coherence": 1.0,
+        "fre_801c_applicability": 1.0
+      },
+      "justification": "Directly establishes the core confidentiality obligation referenced in the target statement, providing strong foundational support for entailment.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a2",
+      "tau": 0.9,
+      "rubric": {
+        "legal_relevance": 1.0,
+        "factual_grounding": 1.0,
+        "specificity": 0.9,
+        "logical_coherence": 1.0,
+        "fre_801c_applicability": 1.0
+      },
+      "justification": "Demonstrates that the target statement's scope is fully covered by the contract text, confirming material element alignment.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a3",
+      "tau": 0.8,
+      "rubric": {
+        "legal_relevance": 0.9,
+        "factual_grounding": 0.8,
+        "specificity": 0.7,
+        "logical_coherence": 0.9,
+        "fre_801c_applicability": 0.9
+      },
+      "justification": "Confirms that the target statement is not weakened by unmentioned limitations, strengthening the logical entailment.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a4",
+      "tau": 0.85,
+      "rubric": {
+        "legal_relevance": 0.9,
+        "factual_grounding": 0.9,
+        "specificity": 0.8,
+        "logical_coherence": 0.9,
+        "fre_801c_applicability": 0.9
+      },
+      "justification": "Validates that the duty bearer in the target statement matches the contractual obligors, supporting party-scope alignment.",
+      "model": "combined"
+    }
+  ],
+  "solver_output": {
+    "case_id": "test_0037",
+    "graph": {
+      "nodes": {
+        "phi": {
+          "id": "phi",
+          "text": "Does the CONTRACT CONTEXT logically entail the EXACT TARGET STATEMENT, with every material element matched and no missing limitation, exception, party-scope mismatch, information-type mismatch, purpose limitation, recipient-scope mismatch, or disclosure carve-out?",
+          "tau": 0.5,
+          "sigma": 0.999999915625,
+          "is_claim": true
+        },
+        "a1": {
+          "id": "a1",
+          "text": "The contract context contains an explicit non-disclosure clause stating that neither party shall disclose to any person the existence or terms of the Agreement or that discussions or negotiations concerning the Possible Transaction are taking place.",
+          "tau": 0.95,
+          "sigma": 0.9924999999999999,
+          "is_claim": false
+        },
+        "a2": {
+          "id": "a2",
+          "text": "The information types protected by the clause (existence/terms of the Agreement, discussions/negotiations concerning the Possible Transaction, and related terms/conditions) directly correspond to the existence, terms, subject matter, or status of the agreement, negotiations, discussions, or transaction listed in the target statement.",
+          "tau": 0.9,
+          "sigma": 0.99925,
+          "is_claim": false
+        },
+        "a3": {
+          "id": "a3",
+          "text": "The provided contract excerpt contains no exceptions, permitted disclosures, duration limits, or carve-outs that would restrict or negate the confidentiality obligation regarding the agreement's existence or transaction details.",
+          "tau": 0.8,
+          "sigma": 0.8,
+          "is_claim": false
+        },
+        "a4": {
+          "id": "a4",
+          "text": "The obligation binds neither party and their respective Representatives, which aligns with the target statement's reference to the relevant party having a duty to keep information confidential.",
+          "tau": 0.85,
+          "sigma": 0.85,
+          "is_claim": false
+        }
+      },
+      "edges": [
+        {
+          "source": "a1",
+          "target": "phi",
+          "type": "support",
+          "confidence": 1.0
+        },
+        {
+          "source": "a2",
+          "target": "phi",
+          "type": "support",
+          "confidence": 1.0
+        },
+        {
+          "source": "a3",
+          "target": "phi",
+          "type": "support",
+          "confidence": 0.9
+        },
+        {
+          "source": "a4",
+          "target": "phi",
+          "type": "support",
+          "confidence": 0.95
+        },
+        {
+          "source": "a1",
+          "target": "a2",
+          "type": "support",
+          "confidence": 0.9
+        },
+        {
+          "source": "a4",
+          "target": "a1",
+          "type": "support",
+          "confidence": 0.85
+        }
+      ],
+      "solver_type": "df_quad"
+    },
+    "sigma_phi": 0.999999915625,
+    "sigma_all": {
+      "phi": 0.999999915625,
+      "a1": 0.9924999999999999,
+      "a2": 0.99925,
+      "a3": 0.8,
+      "a4": 0.85
+    },
+    "iterations": 2,
+    "converged": true,
+    "solver_type": "df_quad"
+  },
+  "sigma_phi": 0.999999915625,
+  "decision": "Yes",
+  "uncertainty": {
+    "is_uncertain": false,
+    "sigma_phi": 0.999999915625,
+    "threshold_low": 0.45,
+    "threshold_high": 0.55,
+    "escalation_triggered": false,
+    "escalation_actions": [],
+    "escalation_log": []
+  },
+  "hitl_interventions": [],
+  "pre_hitl_decision": null
+}

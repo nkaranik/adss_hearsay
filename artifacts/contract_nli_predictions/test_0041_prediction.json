@@ -1,0 +1,208 @@
+{
+  "case_id": "test_0041",
+  "input_text": "CONTRACT CONTEXT:\n7. The Parties agree and understand that, notwithstanding any pending or future disputes between them or any claims relating to or arising from such disputes, the provision of the Information is not intended to and should not be construed as a waiver of any confidentiality or privilege over such material for any other purpose and such confidentiality and privileges are expressly reserved. \n\nTARGET STATEMENT:\nThe contract entails that the relevant party must keep confidential the existence, terms, subject matter, or status of the agreement, negotiations, discussions, or transaction between the parties.\n\nDECISION TASK:\nDetermine whether the contract context entails the target statement.",
+  "phi_text": "",
+  "gold_label": "No",
+  "extraction": {
+    "case_id": "test_0041",
+    "input_text": "CONTRACT CONTEXT:\n7. The Parties agree and understand that, notwithstanding any pending or future disputes between them or any claims relating to or arising from such disputes, the provision of the Information is not intended to and should not be construed as a waiver of any confidentiality or privilege over such material for any other purpose and such confidentiality and privileges are expressly reserved. \n\nTARGET STATEMENT:\nThe contract entails that the relevant party must keep confidential the existence, terms, subject matter, or status of the agreement, negotiations, discussions, or transaction between the parties.\n\nDECISION TASK:\nDetermine whether the contract context entails the target statement.",
+    "claim": {
+      "id": "phi",
+      "text": "Does the CONTRACT CONTEXT logically entail the EXACT TARGET STATEMENT, with every material element matched and no missing limitation, exception, party-scope mismatch, information-type mismatch, purpose limitation, recipient-scope mismatch, or disclosure carve-out?"
+    },
+    "arguments": [
+      {
+        "id": "a2",
+        "text": "The contract context explicitly reserves confidentiality and privilege only over such material (the Information), indicating a narrow scope that does not extend to the agreement itself.",
+        "stance_to_claim": "attack",
+        "legal_rule": "Scope limitation principle: contractual confidentiality obligations are strictly construed to their expressed subject matter and do not automatically extend to the agreement's existence or terms.",
+        "evidence_span": "such confidentiality and privileges are expressly reserved",
+        "confidence": 0.95
+      },
+      {
+        "id": "a3",
+        "text": "The target statement requires an obligation to keep confidential the existence, terms, subject matter, or status of the agreement, which is entirely absent from the contract context.",
+        "stance_to_claim": "attack",
+        "legal_rule": "Entailment requires explicit or necessarily implied contractual language matching the target claim's material elements.",
+        "evidence_span": null,
+        "confidence": 0.95
+      },
+      {
+        "id": "a4",
+        "text": "The contract context lacks any provision that explicitly or implicitly obligates the parties to maintain confidentiality regarding the agreement's existence or terms, rendering the target statement unentailed.",
+        "stance_to_claim": "attack",
+        "legal_rule": "Absence of relevant contractual support defeats entailment in contract NLI tasks when the target claim introduces new substantive obligations.",
+        "evidence_span": null,
+        "confidence": 0.9
+      }
+    ],
+    "relations": [
+      {
+        "source": "a2",
+        "target": "phi",
+        "type": "attack",
+        "confidence": 0.95
+      },
+      {
+        "source": "a3",
+        "target": "phi",
+        "type": "attack",
+        "confidence": 0.95
+      },
+      {
+        "source": "a4",
+        "target": "phi",
+        "type": "attack",
+        "confidence": 0.9
+      },
+      {
+        "source": "a2",
+        "target": "a3",
+        "type": "support",
+        "confidence": 0.85
+      },
+      {
+        "source": "a4",
+        "target": "a3",
+        "type": "support",
+        "confidence": 0.8
+      }
+    ],
+    "extraction_model": "",
+    "raw_llm_response": "{\n  \"case_id\": \"test_0041\",\n  \"phi\": \"Does the CONTRACT CONTEXT logically entail the EXACT TARGET STATEMENT, with every material element matched and no missing limitation, exception, party-scope mismatch, information-type mismatch, purpose limitation, recipient-scope mismatch, or disclosure carve-out?\",\n  \"arguments\": [\n    {\n      \"id\": \"a1\",\n      \"text\": \"The contract context contains a non-waiver clause stating that providing Information does not waive confidentiality or privilege over that Information.\",\n      \"stance_to_claim\": \"neutral\",\n      \"legal_rule\": \"Contract interpretation principle that non-waiver clauses preserve existing rights but do not create new obligations beyond their expressed scope.\",\n      \"evidence_span\": \"the provision of the Information is not intended to and should not be construed as a waiver of any confidentiality or privilege over such material\",\n      \"confidence\": 0.9,\n      \"tau\": 0.5,\n      \"rubric\": {\n        \"relevance\": 0.6,\n        \"factual_grounding\": 1.0,\n        \"specificity\": 0.7,\n        \"logical_coherence\": 0.8,\n        \"applicability\": 0.6\n      },\n      \"justification\": \"Establishes the actual scope of the contractual provision but does not directly address the target claim regarding the agreement's existence or terms.\"\n    },\n    {\n      \"id\": \"a2\",\n      \"text\": \"The contract context explicitly reserves confidentiality and privilege only over such material (the Information), indicating a narrow scope that does not extend to the agreement itself.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"Scope limitation principle: contractual confidentiality obligations are strictly construed to their expressed subject matter and do not automatically extend to the agreement's existence or terms.\",\n      \"evidence_span\": \"such confidentiality and privileges are expressly reserved\",\n      \"confidence\": 0.95,\n      \"tau\": 0.9,\n      \"rubric\": {\n        \"relevance\": 0.9,\n        \"factual_grounding\": 1.0,\n        \"specificity\": 0.8,\n        \"logical_coherence\": 0.9,\n        \"applicability\": 0.9\n      },\n      \"justification\": \"Directly attacks the entailment by showing the clause's scope is limited to provided information, not the agreement, creating a party-scope and information-type mismatch with the target statement.\"\n    },\n    {\n      \"id\": \"a3\",\n      \"text\": \"The target statement requires an obligation to keep confidential the existence, terms, subject matter, or status of the agreement, which is entirely absent from the contract context.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"Entailment requires explicit or necessarily implied contractual language matching the target claim's material elements.\",\n      \"evidence_span\": null,\n      \"confidence\": 0.95,\n      \"tau\": 0.95,\n      \"rubric\": {\n        \"relevance\": 1.0,\n        \"factual_grounding\": 0.9,\n        \"specificity\": 0.9,\n        \"logical_coherence\": 1.0,\n        \"applicability\": 0.9\n      },\n      \"justification\": \"Highlights the exact missing obligation required by the target statement, directly undermining the logical entailment.\"\n    },\n    {\n      \"id\": \"a4\",\n      \"text\": \"The contract context lacks any provision that explicitly or implicitly obligates the parties to maintain confidentiality regarding the agreement's existence or terms, rendering the target statement unentailed.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"Absence of relevant contractual support defeats entailment in contract NLI tasks when the target claim introduces new substantive obligations.\",\n      \"evidence_span\": null,\n      \"confidence\": 0.9,\n      \"tau\": 0.85,\n      \"rubric\": {\n        \"relevance\": 0.9,\n        \"factual_grounding\": 0.9,\n        \"specificity\": 0.8,\n        \"logical_coherence\": 0.9,\n        \"applicability\": 0.8\n      },\n      \"justification\": \"Emphasizes the lack of contractual basis for the target claim, reinforcing the attack on entailment by pointing to the complete absence of the required confidentiality obligation.\"\n    }\n  ],\n  \"relations\": [\n    {\n      \"source\": \"a1\",\n      \"target\": \"phi\",\n      \"type\": \"neutral\",\n      \"confidence\": 0.8\n    },\n    {\n      \"source\": \"a2\",\n      \"target\": \"phi\",\n      \"type\": \"attack\",\n      \"confidence\": 0.95\n    },\n    {\n      \"source\": \"a3\",\n      \"target\": \"phi\",\n      \"type\": \"attack\",\n      \"confidence\": 0.95\n    },\n    {\n      \"source\": \"a4\",\n      \"target\": \"phi\",\n      \"type\": \"attack\",\n      \"confidence\": 0.9\n    },\n    {\n      \"source\": \"a2\",\n      \"target\": \"a3\",\n      \"type\": \"support\",\n      \"confidence\": 0.85\n    },\n    {\n      \"source\": \"a4\",\n      \"target\": \"a3\",\n      \"type\": \"support\",\n      \"confidence\": 0.8\n    }\n  ]\n}",
+    "parse_error": null,
+    "n_raw_arguments": 4
+  },
+  "strengths": [
+    {
+      "argument_id": "a2",
+      "tau": 0.9,
+      "rubric": {
+        "legal_relevance": 0.9,
+        "factual_grounding": 1.0,
+        "specificity": 0.8,
+        "logical_coherence": 0.9,
+        "fre_801c_applicability": 0.9
+      },
+      "justification": "Directly attacks the entailment by showing the clause's scope is limited to provided information, not the agreement, creating a party-scope and information-type mismatch with the target statement.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a3",
+      "tau": 0.95,
+      "rubric": {
+        "legal_relevance": 1.0,
+        "factual_grounding": 0.9,
+        "specificity": 0.9,
+        "logical_coherence": 1.0,
+        "fre_801c_applicability": 0.9
+      },
+      "justification": "Highlights the exact missing obligation required by the target statement, directly undermining the logical entailment.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a4",
+      "tau": 0.85,
+      "rubric": {
+        "legal_relevance": 0.9,
+        "factual_grounding": 0.9,
+        "specificity": 0.8,
+        "logical_coherence": 0.9,
+        "fre_801c_applicability": 0.8
+      },
+      "justification": "Emphasizes the lack of contractual basis for the target claim, reinforcing the attack on entailment by pointing to the complete absence of the required confidentiality obligation.",
+      "model": "combined"
+    }
+  ],
+  "solver_output": {
+    "case_id": "test_0041",
+    "graph": {
+      "nodes": {
+        "phi": {
+          "id": "phi",
+          "text": "Does the CONTRACT CONTEXT logically entail the EXACT TARGET STATEMENT, with every material element matched and no missing limitation, exception, party-scope mismatch, information-type mismatch, purpose limitation, recipient-scope mismatch, or disclosure carve-out?",
+          "tau": 0.5,
+          "sigma": 5.625000000009095e-6,
+          "is_claim": true
+        },
+        "a2": {
+          "id": "a2",
+          "text": "The contract context explicitly reserves confidentiality and privilege only over such material (the Information), indicating a narrow scope that does not extend to the agreement itself.",
+          "tau": 0.9,
+          "sigma": 0.9,
+          "is_claim": false
+        },
+        "a3": {
+          "id": "a3",
+          "text": "The target statement requires an obligation to keep confidential the existence, terms, subject matter, or status of the agreement, which is entirely absent from the contract context.",
+          "tau": 0.95,
+          "sigma": 0.99925,
+          "is_claim": false
+        },
+        "a4": {
+          "id": "a4",
+          "text": "The contract context lacks any provision that explicitly or implicitly obligates the parties to maintain confidentiality regarding the agreement's existence or terms, rendering the target statement unentailed.",
+          "tau": 0.85,
+          "sigma": 0.85,
+          "is_claim": false
+        }
+      },
+      "edges": [
+        {
+          "source": "a2",
+          "target": "phi",
+          "type": "attack",
+          "confidence": 0.95
+        },
+        {
+          "source": "a3",
+          "target": "phi",
+          "type": "attack",
+          "confidence": 0.95
+        },
+        {
+          "source": "a4",
+          "target": "phi",
+          "type": "attack",
+          "confidence": 0.9
+        },
+        {
+          "source": "a2",
+          "target": "a3",
+          "type": "support",
+          "confidence": 0.85
+        },
+        {
+          "source": "a4",
+          "target": "a3",
+          "type": "support",
+          "confidence": 0.8
+        }
+      ],
+      "solver_type": "df_quad"
+    },
+    "sigma_phi": 5.625000000009095e-6,
+    "sigma_all": {
+      "phi": 5.625000000009095e-6,
+      "a2": 0.9,
+      "a3": 0.99925,
+      "a4": 0.85
+    },
+    "iterations": 2,
+    "converged": true,
+    "solver_type": "df_quad"
+  },
+  "sigma_phi": 5.625000000009095e-6,
+  "decision": "No",
+  "uncertainty": {
+    "is_uncertain": false,
+    "sigma_phi": 5.625000000009095e-6,
+    "threshold_low": 0.45,
+    "threshold_high": 0.55,
+    "escalation_triggered": false,
+    "escalation_actions": [],
+    "escalation_log": []
+  },
+  "hitl_interventions": [],
+  "pre_hitl_decision": null
+}

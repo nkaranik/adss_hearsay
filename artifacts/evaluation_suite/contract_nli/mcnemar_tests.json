@@ -2,9 +2,9 @@
   {
     "system_a": "Full ADSS",
     "system_b": "ADSS w/o Symbolic Solver",
-    "n01": 0,
-    "n10": 0,
-    "statistic": 0.0,
-    "p_value": 1.0
+    "n01": 1,
+    "n10": 5,
+    "statistic": 1.5,
+    "p_value": 0.21875
   }
 ]

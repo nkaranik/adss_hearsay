@@ -1,0 +1,208 @@
+{
+  "case_id": "test_0030",
+  "input_text": "CONTRACT CONTEXT:\nExcept as required by law, neither PictureTel, Polycom nor their respective Representatives shall disclose to any person (including, without limitation, any director, officer or employee that is not set forth on Annex A) the existence, status or terms of any discussions, negotiations or agreements between them concerning a possible Transaction, including without limitation any offer, letter of intent, proposal, price, value or valuation, or any similar terms, agreements or understandings between PictureTel and Polycom with respect thereto, or that such party has provided to or received from the other Confidential Information, without obtaining the prior written consent of the other party.  \n\nTARGET STATEMENT:\nThe contract entails that the relevant party must keep confidential the existence, terms, subject matter, or status of the agreement, negotiations, discussions, or transaction between the parties.\n\nDECISION TASK:\nDetermine whether the contract context entails the target statement.",
+  "phi_text": "",
+  "gold_label": "Yes",
+  "extraction": {
+    "case_id": "test_0030",
+    "input_text": "CONTRACT CONTEXT:\nExcept as required by law, neither PictureTel, Polycom nor their respective Representatives shall disclose to any person (including, without limitation, any director, officer or employee that is not set forth on Annex A) the existence, status or terms of any discussions, negotiations or agreements between them concerning a possible Transaction, including without limitation any offer, letter of intent, proposal, price, value or valuation, or any similar terms, agreements or understandings between PictureTel and Polycom with respect thereto, or that such party has provided to or received from the other Confidential Information, without obtaining the prior written consent of the other party.  \n\nTARGET STATEMENT:\nThe contract entails that the relevant party must keep confidential the existence, terms, subject matter, or status of the agreement, negotiations, discussions, or transaction between the parties.\n\nDECISION TASK:\nDetermine whether the contract context entails the target statement.",
+    "claim": {
+      "id": "phi",
+      "text": "Does the CONTRACT CONTEXT logically entail the EXACT TARGET STATEMENT, with every material element matched and no missing limitation, exception, party-scope mismatch, information-type mismatch, purpose limitation, recipient-scope mismatch, or disclosure carve-out?"
+    },
+    "arguments": [
+      {
+        "id": "a1",
+        "text": "The contract context explicitly imposes a confidentiality obligation on PictureTel, Polycom, and their Representatives, prohibiting them from disclosing the existence, status, or terms of discussions, negotiations, or agreements concerning a possible transaction.",
+        "stance_to_claim": "support",
+        "legal_rule": "Contract interpretation principles regarding explicit confidentiality clauses establish a baseline obligation to maintain secrecy over specified transactional information.",
+        "evidence_span": "neither PictureTel, Polycom nor their respective Representatives shall disclose... the existence, status or terms of any discussions, negotiations or agreements between them concerning a possible Transaction",
+        "confidence": 1.0
+      },
+      {
+        "id": "a2",
+        "text": "The information covered by the clause (existence, status, terms of discussions/negotiations/agreements/transactions) precisely matches the subject matter listed in the target statement, confirming that the contract entails keeping this specific information confidential.",
+        "stance_to_claim": "support",
+        "legal_rule": "Entailment requires matching material elements between the premise and hypothesis; exact alignment of covered information types strengthens the logical connection.",
+        "evidence_span": "existence, status or terms of any discussions, negotiations or agreements between them concerning a possible Transaction",
+        "confidence": 1.0
+      },
+      {
+        "id": "a4",
+        "text": "The target statement refers to the relevant party, which aligns with the contract's explicit naming of PictureTel, Polycom, and their Representatives as the bound entities, ensuring no party-scope mismatch.",
+        "stance_to_claim": "support",
+        "legal_rule": "Entailment holds when the parties bound by the obligation in the premise correspond to the parties referenced in the hypothesis.",
+        "evidence_span": "neither PictureTel, Polycom nor their respective Representatives shall disclose",
+        "confidence": 1.0
+      }
+    ],
+    "relations": [
+      {
+        "source": "a1",
+        "target": "phi",
+        "type": "support",
+        "confidence": 1.0
+      },
+      {
+        "source": "a2",
+        "target": "phi",
+        "type": "support",
+        "confidence": 1.0
+      },
+      {
+        "source": "a4",
+        "target": "phi",
+        "type": "support",
+        "confidence": 1.0
+      },
+      {
+        "source": "a1",
+        "target": "a2",
+        "type": "support",
+        "confidence": 0.95
+      },
+      {
+        "source": "a4",
+        "target": "a2",
+        "type": "support",
+        "confidence": 0.9
+      }
+    ],
+    "extraction_model": "",
+    "raw_llm_response": "{\n  \"case_id\": \"test_0030\",\n  \"phi\": \"Does the CONTRACT CONTEXT logically entail the EXACT TARGET STATEMENT, with every material element matched and no missing limitation, exception, party-scope mismatch, information-type mismatch, purpose limitation, recipient-scope mismatch, or disclosure carve-out?\",\n  \"arguments\": [\n    {\n      \"id\": \"a1\",\n      \"text\": \"The contract context explicitly imposes a confidentiality obligation on PictureTel, Polycom, and their Representatives, prohibiting them from disclosing the existence, status, or terms of discussions, negotiations, or agreements concerning a possible transaction.\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"Contract interpretation principles regarding explicit confidentiality clauses establish a baseline obligation to maintain secrecy over specified transactional information.\",\n      \"evidence_span\": \"neither PictureTel, Polycom nor their respective Representatives shall disclose... the existence, status or terms of any discussions, negotiations or agreements between them concerning a possible Transaction\",\n      \"confidence\": 1.0,\n      \"tau\": 0.95,\n      \"rubric\": {\n        \"relevance\": 1.0,\n        \"factual_grounding\": 1.0,\n        \"specificity\": 1.0,\n        \"logical_coherence\": 1.0,\n        \"applicability\": 1.0\n      },\n      \"justification\": \"Directly establishes the core confidentiality obligation referenced in the target statement, providing strong foundational support for entailment.\"\n    },\n    {\n      \"id\": \"a2\",\n      \"text\": \"The information covered by the clause (existence, status, terms of discussions/negotiations/agreements/transactions) precisely matches the subject matter listed in the target statement, confirming that the contract entails keeping this specific information confidential.\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"Entailment requires matching material elements between the premise and hypothesis; exact alignment of covered information types strengthens the logical connection.\",\n      \"evidence_span\": \"existence, status or terms of any discussions, negotiations or agreements between them concerning a possible Transaction\",\n      \"confidence\": 1.0,\n      \"tau\": 0.95,\n      \"rubric\": {\n        \"relevance\": 1.0,\n        \"factual_grounding\": 1.0,\n        \"specificity\": 1.0,\n        \"logical_coherence\": 1.0,\n        \"applicability\": 1.0\n      },\n      \"justification\": \"Demonstrates that the target statement's scope aligns exactly with the contractual provision, satisfying the entailment condition without overreach.\"\n    },\n    {\n      \"id\": \"a3\",\n      \"text\": \"The contract includes standard exceptions for disclosures required by law and mandates prior written consent for other disclosures, which limits the absolute scope of the obligation but does not negate the fundamental entailment that the parties must maintain confidentiality under the contract's terms.\",\n      \"stance_to_claim\": \"neutral\",\n      \"legal_rule\": \"Standard contractual exceptions and consent requirements qualify an obligation but do not typically defeat the general entailment of a confidentiality duty unless they explicitly contradict the core claim.\",\n      \"evidence_span\": \"Except as required by law... without obtaining the prior written consent of the other party.\",\n      \"confidence\": 0.9,\n      \"tau\": 0.8,\n      \"rubric\": {\n        \"relevance\": 0.8,\n        \"factual_grounding\": 1.0,\n        \"specificity\": 0.8,\n        \"logical_coherence\": 0.9,\n        \"applicability\": 0.8\n      },\n      \"justification\": \"Acknowledges limitations in the contract text that qualify the obligation, but correctly assesses that they do not undermine the primary entailment of confidentiality.\"\n    },\n    {\n      \"id\": \"a4\",\n      \"text\": \"The target statement refers to the relevant party, which aligns with the contract's explicit naming of PictureTel, Polycom, and their Representatives as the bound entities, ensuring no party-scope mismatch.\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"Entailment holds when the parties bound by the obligation in the premise correspond to the parties referenced in the hypothesis.\",\n      \"evidence_span\": \"neither PictureTel, Polycom nor their respective Representatives shall disclose\",\n      \"confidence\": 1.0,\n      \"tau\": 0.9,\n      \"rubric\": {\n        \"relevance\": 1.0,\n        \"factual_grounding\": 1.0,\n        \"specificity\": 1.0,\n        \"logical_coherence\": 1.0,\n        \"applicability\": 1.0\n      },\n      \"justification\": \"Confirms that the obligation applies to the correct parties, supporting the validity of the target statement's entailment and ruling out scope mismatches.\"\n    }\n  ],\n  \"relations\": [\n    {\n      \"source\": \"a1\",\n      \"target\": \"phi\",\n      \"type\": \"support\",\n      \"confidence\": 1.0\n    },\n    {\n      \"source\": \"a2\",\n      \"target\": \"phi\",\n      \"type\": \"support\",\n      \"confidence\": 1.0\n    },\n    {\n      \"source\": \"a3\",\n      \"target\": \"phi\",\n      \"type\": \"neutral\",\n      \"confidence\": 0.9\n    },\n    {\n      \"source\": \"a4\",\n      \"target\": \"phi\",\n      \"type\": \"support\",\n      \"confidence\": 1.0\n    },\n    {\n      \"source\": \"a1\",\n      \"target\": \"a2\",\n      \"type\": \"support\",\n      \"confidence\": 0.95\n    },\n    {\n      \"source\": \"a4\",\n      \"target\": \"a2\",\n      \"type\": \"support\",\n      \"confidence\": 0.9\n    }\n  ]\n}",
+    "parse_error": null,
+    "n_raw_arguments": 4
+  },
+  "strengths": [
+    {
+      "argument_id": "a1",
+      "tau": 0.95,
+      "rubric": {
+        "legal_relevance": 1.0,
+        "factual_grounding": 1.0,
+        "specificity": 1.0,
+        "logical_coherence": 1.0,
+        "fre_801c_applicability": 1.0
+      },
+      "justification": "Directly establishes the core confidentiality obligation referenced in the target statement, providing strong foundational support for entailment.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a2",
+      "tau": 0.95,
+      "rubric": {
+        "legal_relevance": 1.0,
+        "factual_grounding": 1.0,
+        "specificity": 1.0,
+        "logical_coherence": 1.0,
+        "fre_801c_applicability": 1.0
+      },
+      "justification": "Demonstrates that the target statement's scope aligns exactly with the contractual provision, satisfying the entailment condition without overreach.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a4",
+      "tau": 0.9,
+      "rubric": {
+        "legal_relevance": 1.0,
+        "factual_grounding": 1.0,
+        "specificity": 1.0,
+        "logical_coherence": 1.0,
+        "fre_801c_applicability": 1.0
+      },
+      "justification": "Confirms that the obligation applies to the correct parties, supporting the validity of the target statement's entailment and ruling out scope mismatches.",
+      "model": "combined"
+    }
+  ],
+  "solver_output": {
+    "case_id": "test_0030",
+    "graph": {
+      "nodes": {
+        "phi": {
+          "id": "phi",
+          "text": "Does the CONTRACT CONTEXT logically entail the EXACT TARGET STATEMENT, with every material element matched and no missing limitation, exception, party-scope mismatch, information-type mismatch, purpose limitation, recipient-scope mismatch, or disclosure carve-out?",
+          "tau": 0.5,
+          "sigma": 0.999999375,
+          "is_claim": true
+        },
+        "a1": {
+          "id": "a1",
+          "text": "The contract context explicitly imposes a confidentiality obligation on PictureTel, Polycom, and their Representatives, prohibiting them from disclosing the existence, status, or terms of discussions, negotiations, or agreements concerning a possible transaction.",
+          "tau": 0.95,
+          "sigma": 0.95,
+          "is_claim": false
+        },
+        "a2": {
+          "id": "a2",
+          "text": "The information covered by the clause (existence, status, terms of discussions/negotiations/agreements/transactions) precisely matches the subject matter listed in the target statement, confirming that the contract entails keeping this specific information confidential.",
+          "tau": 0.95,
+          "sigma": 0.99975,
+          "is_claim": false
+        },
+        "a4": {
+          "id": "a4",
+          "text": "The target statement refers to the relevant party, which aligns with the contract's explicit naming of PictureTel, Polycom, and their Representatives as the bound entities, ensuring no party-scope mismatch.",
+          "tau": 0.9,
+          "sigma": 0.9,
+          "is_claim": false
+        }
+      },
+      "edges": [
+        {
+          "source": "a1",
+          "target": "phi",
+          "type": "support",
+          "confidence": 1.0
+        },
+        {
+          "source": "a2",
+          "target": "phi",
+          "type": "support",
+          "confidence": 1.0
+        },
+        {
+          "source": "a4",
+          "target": "phi",
+          "type": "support",
+          "confidence": 1.0
+        },
+        {
+          "source": "a1",
+          "target": "a2",
+          "type": "support",
+          "confidence": 0.95
+        },
+        {
+          "source": "a4",
+          "target": "a2",
+          "type": "support",
+          "confidence": 0.9
+        }
+      ],
+      "solver_type": "df_quad"
+    },
+    "sigma_phi": 0.999999375,
+    "sigma_all": {
+      "phi": 0.999999375,
+      "a1": 0.95,
+      "a2": 0.99975,
+      "a4": 0.9
+    },
+    "iterations": 2,
+    "converged": true,
+    "solver_type": "df_quad"
+  },
+  "sigma_phi": 0.999999375,
+  "decision": "Yes",
+  "uncertainty": {
+    "is_uncertain": false,
+    "sigma_phi": 0.999999375,
+    "threshold_low": 0.45,
+    "threshold_high": 0.55,
+    "escalation_triggered": false,
+    "escalation_actions": [],
+    "escalation_log": []
+  },
+  "hitl_interventions": [],
+  "pre_hitl_decision": null
+}

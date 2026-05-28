@@ -1,0 +1,62 @@
+{
+  "case_id": "test_0021",
+  "input_text": "CONTRACT CONTEXT:\nExcept to the extent required by law, neither party shall disclose the existence or subject matter of the negotiations or business relationship contemplated by this Agreement. \n\nTARGET STATEMENT:\nThe contract entails that the relevant party must keep confidential the existence, terms, subject matter, or status of the agreement, negotiations, discussions, or transaction between the parties.\n\nDECISION TASK:\nDetermine whether the contract context entails the target statement.",
+  "phi_text": "",
+  "gold_label": "Yes",
+  "extraction": {
+    "case_id": "test_0021",
+    "input_text": "CONTRACT CONTEXT:\nExcept to the extent required by law, neither party shall disclose the existence or subject matter of the negotiations or business relationship contemplated by this Agreement. \n\nTARGET STATEMENT:\nThe contract entails that the relevant party must keep confidential the existence, terms, subject matter, or status of the agreement, negotiations, discussions, or transaction between the parties.\n\nDECISION TASK:\nDetermine whether the contract context entails the target statement.",
+    "claim": {
+      "id": "phi",
+      "text": "Does the CONTRACT CONTEXT logically entail the EXACT TARGET STATEMENT, with every material element matched and no missing limitation, exception, party-scope mismatch, information-type mismatch, purpose limitation, recipient-scope mismatch, or disclosure carve-out?"
+    },
+    "arguments": [],
+    "relations": [],
+    "extraction_model": "",
+    "raw_llm_response": "",
+    "parse_error": "Request timed out.",
+    "n_raw_arguments": 0
+  },
+  "strengths": [],
+  "solver_output": {
+    "case_id": "test_0021",
+    "graph": {
+      "nodes": {
+        "phi": {
+          "id": "phi",
+          "text": "Does the CONTRACT CONTEXT logically entail the EXACT TARGET STATEMENT, with every material element matched and no missing limitation, exception, party-scope mismatch, information-type mismatch, purpose limitation, recipient-scope mismatch, or disclosure carve-out?",
+          "tau": 0.5,
+          "sigma": 0.5,
+          "is_claim": true
+        }
+      },
+      "edges": [],
+      "solver_type": "df_quad"
+    },
+    "sigma_phi": 0.5,
+    "sigma_all": {
+      "phi": 0.5
+    },
+    "iterations": 1,
+    "converged": true,
+    "solver_type": "df_quad"
+  },
+  "sigma_phi": 0.5,
+  "decision": "UNCERTAIN",
+  "uncertainty": {
+    "is_uncertain": true,
+    "sigma_phi": 0.5,
+    "threshold_low": 0.45,
+    "threshold_high": 0.55,
+    "escalation_triggered": true,
+    "escalation_actions": [
+      "rerun_extraction",
+      "human_review"
+    ],
+    "escalation_log": [
+      "[test_0021] UNCERTAIN σ(φ)=0.5000 ∈ [0.45,0.55]. Human review recommended."
+    ]
+  },
+  "hitl_interventions": [],
+  "pre_hitl_decision": null
+}

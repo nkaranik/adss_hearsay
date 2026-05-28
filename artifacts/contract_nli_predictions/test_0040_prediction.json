@@ -1,0 +1,249 @@
+{
+  "case_id": "test_0040",
+  "input_text": "CONTRACT CONTEXT:\nThe Receiving Party: (d) shall not disclose to any person (other than those of its Representatives who are actively and directly participating in the Evaluation or who otherwise need to know for the purpose of the Evaluation) any information about the Evaluation, or the terms or conditions or any other facts relating thereto, including, without limitation, the fact that discussions are taking place with respect thereto or the status thereof, or the fact that Confidential Information has been made available to the Receiving Party or its Representatives.  \n\nTARGET STATEMENT:\nThe contract entails that the relevant party must keep confidential the existence, terms, subject matter, or status of the agreement, negotiations, discussions, or transaction between the parties.\n\nDECISION TASK:\nDetermine whether the contract context entails the target statement.",
+  "phi_text": "",
+  "gold_label": "Yes",
+  "extraction": {
+    "case_id": "test_0040",
+    "input_text": "CONTRACT CONTEXT:\nThe Receiving Party: (d) shall not disclose to any person (other than those of its Representatives who are actively and directly participating in the Evaluation or who otherwise need to know for the purpose of the Evaluation) any information about the Evaluation, or the terms or conditions or any other facts relating thereto, including, without limitation, the fact that discussions are taking place with respect thereto or the status thereof, or the fact that Confidential Information has been made available to the Receiving Party or its Representatives.  \n\nTARGET STATEMENT:\nThe contract entails that the relevant party must keep confidential the existence, terms, subject matter, or status of the agreement, negotiations, discussions, or transaction between the parties.\n\nDECISION TASK:\nDetermine whether the contract context entails the target statement.",
+    "claim": {
+      "id": "phi",
+      "text": "Does the CONTRACT CONTEXT logically entail the EXACT TARGET STATEMENT, with every material element matched and no missing limitation, exception, party-scope mismatch, information-type mismatch, purpose limitation, recipient-scope mismatch, or disclosure carve-out?"
+    },
+    "arguments": [
+      {
+        "id": "a1",
+        "text": "The contract context contains an explicit confidentiality clause prohibiting the Receiving Party from disclosing information about the Evaluation, its terms, conditions, or related facts.",
+        "stance_to_claim": "support",
+        "legal_rule": "Contract interpretation requires identifying explicit obligations that match the target claim's core requirement.",
+        "evidence_span": "shall not disclose to any person ... any information about the Evaluation, or the terms or conditions or any other facts relating thereto",
+        "confidence": 0.95
+      },
+      {
+        "id": "a2",
+        "text": "The scope of the confidential information explicitly covers the fact that discussions are taking place and their status, which directly matches the target statement's requirement to keep confidential the existence, terms, subject matter, or status of the agreement or negotiations.",
+        "stance_to_claim": "support",
+        "legal_rule": "Entailment in contract NLI is satisfied when the text explicitly covers the specific elements listed in the target claim.",
+        "evidence_span": "including, without limitation, the fact that discussions are taking place with respect thereto or the status thereof",
+        "confidence": 0.95
+      },
+      {
+        "id": "a3",
+        "text": "The clause includes a permitted disclosure carve-out for Representatives actively participating in the Evaluation or who need to know for that purpose, which defines the scope of the confidentiality obligation without negating the core entailment.",
+        "stance_to_claim": "support",
+        "legal_rule": "Standard confidentiality carve-outs for necessary personnel do not defeat the general entailment of a confidentiality obligation; they merely define its boundaries.",
+        "evidence_span": "(other than those of its Representatives who are actively and directly participating in the Evaluation or who otherwise need to know for the purpose of the Evaluation)",
+        "confidence": 0.85
+      },
+      {
+        "id": "a4",
+        "text": "The target statement broadly claims the contract entails confidentiality of the agreement/discussions, and the contract context provides a direct, uncontradicted mandate for this exact obligation regarding the Evaluation.",
+        "stance_to_claim": "support",
+        "legal_rule": "In contract NLI, if the text explicitly mandates the action described in the target statement without contradiction, entailment is established.",
+        "evidence_span": "The Receiving Party: (d) shall not disclose... any information about the Evaluation",
+        "confidence": 0.9
+      }
+    ],
+    "relations": [
+      {
+        "source": "a1",
+        "target": "phi",
+        "type": "support",
+        "confidence": 0.95
+      },
+      {
+        "source": "a2",
+        "target": "phi",
+        "type": "support",
+        "confidence": 0.95
+      },
+      {
+        "source": "a3",
+        "target": "phi",
+        "type": "support",
+        "confidence": 0.85
+      },
+      {
+        "source": "a4",
+        "target": "phi",
+        "type": "support",
+        "confidence": 0.9
+      },
+      {
+        "source": "a1",
+        "target": "a2",
+        "type": "support",
+        "confidence": 0.9
+      },
+      {
+        "source": "a2",
+        "target": "a4",
+        "type": "support",
+        "confidence": 0.9
+      }
+    ],
+    "extraction_model": "",
+    "raw_llm_response": "{\n  \"case_id\": \"test_0040\",\n  \"phi\": \"Does the CONTRACT CONTEXT logically entail the EXACT TARGET STATEMENT, with every material element matched and no missing limitation, exception, party-scope mismatch, information-type mismatch, purpose limitation, recipient-scope mismatch, or disclosure carve-out?\",\n  \"arguments\": [\n    {\n      \"id\": \"a1\",\n      \"text\": \"The contract context contains an explicit confidentiality clause prohibiting the Receiving Party from disclosing information about the Evaluation, its terms, conditions, or related facts.\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"Contract interpretation requires identifying explicit obligations that match the target claim's core requirement.\",\n      \"evidence_span\": \"shall not disclose to any person ... any information about the Evaluation, or the terms or conditions or any other facts relating thereto\",\n      \"confidence\": 0.95,\n      \"tau\": 0.9,\n      \"rubric\": {\n        \"relevance\": 1.0,\n        \"factual_grounding\": 1.0,\n        \"specificity\": 0.9,\n        \"logical_coherence\": 1.0,\n        \"applicability\": 1.0\n      },\n      \"justification\": \"Directly establishes the existence of a confidentiality obligation that aligns with the target statement.\"\n    },\n    {\n      \"id\": \"a2\",\n      \"text\": \"The scope of the confidential information explicitly covers the fact that discussions are taking place and their status, which directly matches the target statement's requirement to keep confidential the existence, terms, subject matter, or status of the agreement or negotiations.\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"Entailment in contract NLI is satisfied when the text explicitly covers the specific elements listed in the target claim.\",\n      \"evidence_span\": \"including, without limitation, the fact that discussions are taking place with respect thereto or the status thereof\",\n      \"confidence\": 0.95,\n      \"tau\": 0.95,\n      \"rubric\": {\n        \"relevance\": 1.0,\n        \"factual_grounding\": 1.0,\n        \"specificity\": 1.0,\n        \"logical_coherence\": 1.0,\n        \"applicability\": 1.0\n      },\n      \"justification\": \"The text explicitly enumerates the exact categories of information referenced in the target statement, confirming direct entailment.\"\n    },\n    {\n      \"id\": \"a3\",\n      \"text\": \"The clause includes a permitted disclosure carve-out for Representatives actively participating in the Evaluation or who need to know for that purpose, which defines the scope of the confidentiality obligation without negating the core entailment.\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"Standard confidentiality carve-outs for necessary personnel do not defeat the general entailment of a confidentiality obligation; they merely define its boundaries.\",\n      \"evidence_span\": \"(other than those of its Representatives who are actively and directly participating in the Evaluation or who otherwise need to know for the purpose of the Evaluation)\",\n      \"confidence\": 0.85,\n      \"tau\": 0.8,\n      \"rubric\": {\n        \"relevance\": 0.8,\n        \"factual_grounding\": 1.0,\n        \"specificity\": 0.8,\n        \"logical_coherence\": 0.9,\n        \"applicability\": 0.9\n      },\n      \"justification\": \"Acknowledges the limitation but correctly interprets it as a standard scope definition that supports, rather than attacks, the overall entailment.\"\n    },\n    {\n      \"id\": \"a4\",\n      \"text\": \"The target statement broadly claims the contract entails confidentiality of the agreement/discussions, and the contract context provides a direct, uncontradicted mandate for this exact obligation regarding the Evaluation.\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"In contract NLI, if the text explicitly mandates the action described in the target statement without contradiction, entailment is established.\",\n      \"evidence_span\": \"The Receiving Party: (d) shall not disclose... any information about the Evaluation\",\n      \"confidence\": 0.9,\n      \"tau\": 0.85,\n      \"rubric\": {\n        \"relevance\": 0.9,\n        \"factual_grounding\": 0.9,\n        \"specificity\": 0.8,\n        \"logical_coherence\": 1.0,\n        \"applicability\": 0.9\n      },\n      \"justification\": \"Synthesizes the explicit prohibition with the target claim to confirm logical entailment, noting no missing limitations or party-scope mismatches that would break the entailment.\"\n    }\n  ],\n  \"relations\": [\n    {\n      \"source\": \"a1\",\n      \"target\": \"phi\",\n      \"type\": \"support\",\n      \"confidence\": 0.95\n    },\n    {\n      \"source\": \"a2\",\n      \"target\": \"phi\",\n      \"type\": \"support\",\n      \"confidence\": 0.95\n    },\n    {\n      \"source\": \"a3\",\n      \"target\": \"phi\",\n      \"type\": \"support\",\n      \"confidence\": 0.85\n    },\n    {\n      \"source\": \"a4\",\n      \"target\": \"phi\",\n      \"type\": \"support\",\n      \"confidence\": 0.9\n    },\n    {\n      \"source\": \"a1\",\n      \"target\": \"a2\",\n      \"type\": \"support\",\n      \"confidence\": 0.9\n    },\n    {\n      \"source\": \"a2\",\n      \"target\": \"a4\",\n      \"type\": \"support\",\n      \"confidence\": 0.9\n    }\n  ]\n}",
+    "parse_error": null,
+    "n_raw_arguments": 4
+  },
+  "strengths": [
+    {
+      "argument_id": "a1",
+      "tau": 0.9,
+      "rubric": {
+        "legal_relevance": 1.0,
+        "factual_grounding": 1.0,
+        "specificity": 0.9,
+        "logical_coherence": 1.0,
+        "fre_801c_applicability": 1.0
+      },
+      "justification": "Directly establishes the existence of a confidentiality obligation that aligns with the target statement.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a2",
+      "tau": 0.95,
+      "rubric": {
+        "legal_relevance": 1.0,
+        "factual_grounding": 1.0,
+        "specificity": 1.0,
+        "logical_coherence": 1.0,
+        "fre_801c_applicability": 1.0
+      },
+      "justification": "The text explicitly enumerates the exact categories of information referenced in the target statement, confirming direct entailment.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a3",
+      "tau": 0.8,
+      "rubric": {
+        "legal_relevance": 0.8,
+        "factual_grounding": 1.0,
+        "specificity": 0.8,
+        "logical_coherence": 0.9,
+        "fre_801c_applicability": 0.9
+      },
+      "justification": "Acknowledges the limitation but correctly interprets it as a standard scope definition that supports, rather than attacks, the overall entailment.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a4",
+      "tau": 0.85,
+      "rubric": {
+        "legal_relevance": 0.9,
+        "factual_grounding": 0.9,
+        "specificity": 0.8,
+        "logical_coherence": 1.0,
+        "fre_801c_applicability": 0.9
+      },
+      "justification": "Synthesizes the explicit prohibition with the target claim to confirm logical entailment, noting no missing limitations or party-scope mismatches that would break the entailment.",
+      "model": "combined"
+    }
+  ],
+  "solver_output": {
+    "case_id": "test_0040",
+    "graph": {
+      "nodes": {
+        "phi": {
+          "id": "phi",
+          "text": "Does the CONTRACT CONTEXT logically entail the EXACT TARGET STATEMENT, with every material element matched and no missing limitation, exception, party-scope mismatch, information-type mismatch, purpose limitation, recipient-scope mismatch, or disclosure carve-out?",
+          "tau": 0.5,
+          "sigma": 0.9999999625,
+          "is_claim": true
+        },
+        "a1": {
+          "id": "a1",
+          "text": "The contract context contains an explicit confidentiality clause prohibiting the Receiving Party from disclosing information about the Evaluation, its terms, conditions, or related facts.",
+          "tau": 0.9,
+          "sigma": 0.9,
+          "is_claim": false
+        },
+        "a2": {
+          "id": "a2",
+          "text": "The scope of the confidential information explicitly covers the fact that discussions are taking place and their status, which directly matches the target statement's requirement to keep confidential the existence, terms, subject matter, or status of the agreement or negotiations.",
+          "tau": 0.95,
+          "sigma": 0.995,
+          "is_claim": false
+        },
+        "a3": {
+          "id": "a3",
+          "text": "The clause includes a permitted disclosure carve-out for Representatives actively participating in the Evaluation or who need to know for that purpose, which defines the scope of the confidentiality obligation without negating the core entailment.",
+          "tau": 0.8,
+          "sigma": 0.8,
+          "is_claim": false
+        },
+        "a4": {
+          "id": "a4",
+          "text": "The target statement broadly claims the contract entails confidentiality of the agreement/discussions, and the contract context provides a direct, uncontradicted mandate for this exact obligation regarding the Evaluation.",
+          "tau": 0.85,
+          "sigma": 0.99925,
+          "is_claim": false
+        }
+      },
+      "edges": [
+        {
+          "source": "a1",
+          "target": "phi",
+          "type": "support",
+          "confidence": 0.95
+        },
+        {
+          "source": "a2",
+          "target": "phi",
+          "type": "support",
+          "confidence": 0.95
+        },
+        {
+          "source": "a3",
+          "target": "phi",
+          "type": "support",
+          "confidence": 0.85
+        },
+        {
+          "source": "a4",
+          "target": "phi",
+          "type": "support",
+          "confidence": 0.9
+        },
+        {
+          "source": "a1",
+          "target": "a2",
+          "type": "support",
+          "confidence": 0.9
+        },
+        {
+          "source": "a2",
+          "target": "a4",
+          "type": "support",
+          "confidence": 0.9
+        }
+      ],
+      "solver_type": "df_quad"
+    },
+    "sigma_phi": 0.9999999625,
+    "sigma_all": {
+      "phi": 0.9999999625,
+      "a1": 0.9,
+      "a2": 0.995,
+      "a3": 0.8,
+      "a4": 0.99925
+    },
+    "iterations": 2,
+    "converged": true,
+    "solver_type": "df_quad"
+  },
+  "sigma_phi": 0.9999999625,
+  "decision": "Yes",
+  "uncertainty": {
+    "is_uncertain": false,
+    "sigma_phi": 0.9999999625,
+    "threshold_low": 0.45,
+    "threshold_high": 0.55,
+    "escalation_triggered": false,
+    "escalation_actions": [],
+    "escalation_log": []
+  },
+  "hitl_interventions": [],
+  "pre_hitl_decision": null
+}

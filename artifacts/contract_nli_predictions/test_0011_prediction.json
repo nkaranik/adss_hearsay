@@ -1,0 +1,249 @@
+{
+  "case_id": "test_0011",
+  "input_text": "CONTRACT CONTEXT:\n2.1 Confidential Information shall mean: ii) information relating to the existence of this Agreement; \n\nTARGET STATEMENT:\nThe contract entails that the relevant party must keep confidential the existence, terms, subject matter, or status of the agreement, negotiations, discussions, or transaction between the parties.\n\nDECISION TASK:\nDetermine whether the contract context entails the target statement.",
+  "phi_text": "",
+  "gold_label": "Yes",
+  "extraction": {
+    "case_id": "test_0011",
+    "input_text": "CONTRACT CONTEXT:\n2.1 Confidential Information shall mean: ii) information relating to the existence of this Agreement; \n\nTARGET STATEMENT:\nThe contract entails that the relevant party must keep confidential the existence, terms, subject matter, or status of the agreement, negotiations, discussions, or transaction between the parties.\n\nDECISION TASK:\nDetermine whether the contract context entails the target statement.",
+    "claim": {
+      "id": "phi",
+      "text": "Does the CONTRACT CONTEXT logically entail the EXACT TARGET STATEMENT, with every material element matched and no missing limitation, exception, party-scope mismatch, information-type mismatch, purpose limitation, recipient-scope mismatch, or disclosure carve-out?"
+    },
+    "arguments": [
+      {
+        "id": "a1",
+        "text": "The contract context explicitly defines Confidential Information to include information relating to the existence of the Agreement, which directly supports the portion of the target statement regarding the confidentiality of the agreement's existence.",
+        "stance_to_claim": "support",
+        "legal_rule": "Contract interpretation requires matching defined terms to the target claim's scope; explicit definitions support entailment for covered elements.",
+        "evidence_span": "2.1 Confidential Information shall mean: ii) information relating to the existence of this Agreement;",
+        "confidence": 0.9
+      },
+      {
+        "id": "a2",
+        "text": "The target statement asserts confidentiality extends to 'terms, subject matter, or status of the agreement, negotiations, discussions, or transaction,' but the contract context only defines confidentiality regarding the 'existence of this Agreement,' creating a material scope mismatch.",
+        "stance_to_claim": "attack",
+        "legal_rule": "Entailment in contract NLI requires every material element of the target claim to be supported by the contract text; missing elements break entailment.",
+        "evidence_span": "2.1 Confidential Information shall mean: ii) information relating to the existence of this Agreement;",
+        "confidence": 0.95
+      },
+      {
+        "id": "a3",
+        "text": "The contract context lacks any language expanding the confidentiality obligation to cover negotiations, discussions, or the transaction's status, meaning the target statement's broader claims are not inferable from the provided text.",
+        "stance_to_claim": "attack",
+        "legal_rule": "Absence of relevant contractual support for specific claims in an entailment task usually attacks the target claim when the task requires exact matching.",
+        "evidence_span": "2.1 Confidential Information shall mean: ii) information relating to the existence of this Agreement;",
+        "confidence": 0.85
+      },
+      {
+        "id": "a4",
+        "text": "The explicit limitation of the definition to 'existence' implies that other aspects (terms, subject matter, etc.) are not automatically covered by this clause, weakening the target statement's universal claim.",
+        "stance_to_claim": "attack",
+        "legal_rule": "Expressio unius est exclusio alterius (expression of one thing implies exclusion of others) applies to contractual definitions and scope limitations.",
+        "evidence_span": "2.1 Confidential Information shall mean: ii) information relating to the existence of this Agreement;",
+        "confidence": 0.8
+      }
+    ],
+    "relations": [
+      {
+        "source": "a1",
+        "target": "phi",
+        "type": "support",
+        "confidence": 0.9
+      },
+      {
+        "source": "a2",
+        "target": "phi",
+        "type": "attack",
+        "confidence": 0.95
+      },
+      {
+        "source": "a3",
+        "target": "phi",
+        "type": "attack",
+        "confidence": 0.85
+      },
+      {
+        "source": "a4",
+        "target": "phi",
+        "type": "attack",
+        "confidence": 0.8
+      },
+      {
+        "source": "a2",
+        "target": "a4",
+        "type": "support",
+        "confidence": 0.85
+      },
+      {
+        "source": "a3",
+        "target": "a2",
+        "type": "support",
+        "confidence": 0.8
+      }
+    ],
+    "extraction_model": "",
+    "raw_llm_response": "{\n  \"case_id\": \"test_0011\",\n  \"phi\": \"Does the CONTRACT CONTEXT logically entail the EXACT TARGET STATEMENT, with every material element matched and no missing limitation, exception, party-scope mismatch, information-type mismatch, purpose limitation, recipient-scope mismatch, or disclosure carve-out?\",\n  \"arguments\": [\n    {\n      \"id\": \"a1\",\n      \"text\": \"The contract context explicitly defines Confidential Information to include information relating to the existence of the Agreement, which directly supports the portion of the target statement regarding the confidentiality of the agreement's existence.\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"Contract interpretation requires matching defined terms to the target claim's scope; explicit definitions support entailment for covered elements.\",\n      \"evidence_span\": \"2.1 Confidential Information shall mean: ii) information relating to the existence of this Agreement;\",\n      \"confidence\": 0.9,\n      \"tau\": 0.8,\n      \"rubric\": {\n        \"relevance\": 0.9,\n        \"factual_grounding\": 1.0,\n        \"specificity\": 0.8,\n        \"logical_coherence\": 0.9,\n        \"applicability\": 0.8\n      },\n      \"justification\": \"This argument supports phi because the contract explicitly covers the 'existence' element mentioned in the target statement, establishing a partial but valid entailment for that specific component.\"\n    },\n    {\n      \"id\": \"a2\",\n      \"text\": \"The target statement asserts confidentiality extends to 'terms, subject matter, or status of the agreement, negotiations, discussions, or transaction,' but the contract context only defines confidentiality regarding the 'existence of this Agreement,' creating a material scope mismatch.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"Entailment in contract NLI requires every material element of the target claim to be supported by the contract text; missing elements break entailment.\",\n      \"evidence_span\": \"2.1 Confidential Information shall mean: ii) information relating to the existence of this Agreement;\",\n      \"confidence\": 0.95,\n      \"tau\": 0.9,\n      \"rubric\": {\n        \"relevance\": 0.9,\n        \"factual_grounding\": 1.0,\n        \"specificity\": 0.9,\n        \"logical_coherence\": 0.9,\n        \"applicability\": 0.9\n      },\n      \"justification\": \"This argument attacks phi because the target statement's broad list of covered items is not matched by the narrow definition in the contract, indicating a failure of logical entailment for the full claim.\"\n    },\n    {\n      \"id\": \"a3\",\n      \"text\": \"The contract context lacks any language expanding the confidentiality obligation to cover negotiations, discussions, or the transaction's status, meaning the target statement's broader claims are not inferable from the provided text.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"Absence of relevant contractual support for specific claims in an entailment task usually attacks the target claim when the task requires exact matching.\",\n      \"evidence_span\": \"2.1 Confidential Information shall mean: ii) information relating to the existence of this Agreement;\",\n      \"confidence\": 0.85,\n      \"tau\": 0.85,\n      \"rubric\": {\n        \"relevance\": 0.8,\n        \"factual_grounding\": 0.9,\n        \"specificity\": 0.8,\n        \"logical_coherence\": 0.8,\n        \"applicability\": 0.8\n      },\n      \"justification\": \"This argument attacks phi by highlighting that the contract's silence on the additional elements listed in the target statement prevents their logical entailment, as silence cannot be construed as coverage in strict NLI tasks.\"\n    },\n    {\n      \"id\": \"a4\",\n      \"text\": \"The explicit limitation of the definition to 'existence' implies that other aspects (terms, subject matter, etc.) are not automatically covered by this clause, weakening the target statement's universal claim.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"Expressio unius est exclusio alterius (expression of one thing implies exclusion of others) applies to contractual definitions and scope limitations.\",\n      \"evidence_span\": \"2.1 Confidential Information shall mean: ii) information relating to the existence of this Agreement;\",\n      \"confidence\": 0.8,\n      \"tau\": 0.75,\n      \"rubric\": {\n        \"relevance\": 0.7,\n        \"factual_grounding\": 0.8,\n        \"specificity\": 0.7,\n        \"logical_coherence\": 0.8,\n        \"applicability\": 0.7\n      },\n      \"justification\": \"This argument attacks phi by applying a standard interpretive principle: limiting the definition to 'existence' suggests the parties did not intend to cover the other listed elements, thereby undermining the target statement's breadth.\"\n    }\n  ],\n  \"relations\": [\n    {\n      \"source\": \"a1\",\n      \"target\": \"phi\",\n      \"type\": \"support\",\n      \"confidence\": 0.9\n    },\n    {\n      \"source\": \"a2\",\n      \"target\": \"phi\",\n      \"type\": \"attack\",\n      \"confidence\": 0.95\n    },\n    {\n      \"source\": \"a3\",\n      \"target\": \"phi\",\n      \"type\": \"attack\",\n      \"confidence\": 0.85\n    },\n    {\n      \"source\": \"a4\",\n      \"target\": \"phi\",\n      \"type\": \"attack\",\n      \"confidence\": 0.8\n    },\n    {\n      \"source\": \"a2\",\n      \"target\": \"a4\",\n      \"type\": \"support\",\n      \"confidence\": 0.85\n    },\n    {\n      \"source\": \"a3\",\n      \"target\": \"a2\",\n      \"type\": \"support\",\n      \"confidence\": 0.8\n    }\n  ]\n}",
+    "parse_error": null,
+    "n_raw_arguments": 4
+  },
+  "strengths": [
+    {
+      "argument_id": "a1",
+      "tau": 0.8,
+      "rubric": {
+        "legal_relevance": 0.9,
+        "factual_grounding": 1.0,
+        "specificity": 0.8,
+        "logical_coherence": 0.9,
+        "fre_801c_applicability": 0.8
+      },
+      "justification": "This argument supports phi because the contract explicitly covers the 'existence' element mentioned in the target statement, establishing a partial but valid entailment for that specific component.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a2",
+      "tau": 0.9,
+      "rubric": {
+        "legal_relevance": 0.9,
+        "factual_grounding": 1.0,
+        "specificity": 0.9,
+        "logical_coherence": 0.9,
+        "fre_801c_applicability": 0.9
+      },
+      "justification": "This argument attacks phi because the target statement's broad list of covered items is not matched by the narrow definition in the contract, indicating a failure of logical entailment for the full claim.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a3",
+      "tau": 0.85,
+      "rubric": {
+        "legal_relevance": 0.8,
+        "factual_grounding": 0.9,
+        "specificity": 0.8,
+        "logical_coherence": 0.8,
+        "fre_801c_applicability": 0.8
+      },
+      "justification": "This argument attacks phi by highlighting that the contract's silence on the additional elements listed in the target statement prevents their logical entailment, as silence cannot be construed as coverage in strict NLI tasks.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a4",
+      "tau": 0.75,
+      "rubric": {
+        "legal_relevance": 0.7,
+        "factual_grounding": 0.8,
+        "specificity": 0.7,
+        "logical_coherence": 0.8,
+        "fre_801c_applicability": 0.7
+      },
+      "justification": "This argument attacks phi by applying a standard interpretive principle: limiting the definition to 'existence' suggests the parties did not intend to cover the other listed elements, thereby undermining the target statement's breadth.",
+      "model": "combined"
+    }
+  ],
+  "solver_output": {
+    "case_id": "test_0011",
+    "graph": {
+      "nodes": {
+        "phi": {
+          "id": "phi",
+          "text": "Does the CONTRACT CONTEXT logically entail the EXACT TARGET STATEMENT, with every material element matched and no missing limitation, exception, party-scope mismatch, information-type mismatch, purpose limitation, recipient-scope mismatch, or disclosure carve-out?",
+          "tau": 0.5,
+          "sigma": 0.40000421875000003,
+          "is_claim": true
+        },
+        "a1": {
+          "id": "a1",
+          "text": "The contract context explicitly defines Confidential Information to include information relating to the existence of the Agreement, which directly supports the portion of the target statement regarding the confidentiality of the agreement's existence.",
+          "tau": 0.8,
+          "sigma": 0.8,
+          "is_claim": false
+        },
+        "a2": {
+          "id": "a2",
+          "text": "The target statement asserts confidentiality extends to 'terms, subject matter, or status of the agreement, negotiations, discussions, or transaction,' but the contract context only defines confidentiality regarding the 'existence of this Agreement,' creating a material scope mismatch.",
+          "tau": 0.9,
+          "sigma": 0.985,
+          "is_claim": false
+        },
+        "a3": {
+          "id": "a3",
+          "text": "The contract context lacks any language expanding the confidentiality obligation to cover negotiations, discussions, or the transaction's status, meaning the target statement's broader claims are not inferable from the provided text.",
+          "tau": 0.85,
+          "sigma": 0.85,
+          "is_claim": false
+        },
+        "a4": {
+          "id": "a4",
+          "text": "The explicit limitation of the definition to 'existence' implies that other aspects (terms, subject matter, etc.) are not automatically covered by this clause, weakening the target statement's universal claim.",
+          "tau": 0.75,
+          "sigma": 0.99625,
+          "is_claim": false
+        }
+      },
+      "edges": [
+        {
+          "source": "a1",
+          "target": "phi",
+          "type": "support",
+          "confidence": 0.9
+        },
+        {
+          "source": "a2",
+          "target": "phi",
+          "type": "attack",
+          "confidence": 0.95
+        },
+        {
+          "source": "a3",
+          "target": "phi",
+          "type": "attack",
+          "confidence": 0.85
+        },
+        {
+          "source": "a4",
+          "target": "phi",
+          "type": "attack",
+          "confidence": 0.8
+        },
+        {
+          "source": "a2",
+          "target": "a4",
+          "type": "support",
+          "confidence": 0.85
+        },
+        {
+          "source": "a3",
+          "target": "a2",
+          "type": "support",
+          "confidence": 0.8
+        }
+      ],
+      "solver_type": "df_quad"
+    },
+    "sigma_phi": 0.40000421875000003,
+    "sigma_all": {
+      "phi": 0.40000421875000003,
+      "a1": 0.8,
+      "a2": 0.985,
+      "a3": 0.85,
+      "a4": 0.99625
+    },
+    "iterations": 2,
+    "converged": true,
+    "solver_type": "df_quad"
+  },
+  "sigma_phi": 0.40000421875000003,
+  "decision": "No",
+  "uncertainty": {
+    "is_uncertain": false,
+    "sigma_phi": 0.40000421875000003,
+    "threshold_low": 0.45,
+    "threshold_high": 0.55,
+    "escalation_triggered": false,
+    "escalation_actions": [],
+    "escalation_log": []
+  },
+  "hitl_interventions": [],
+  "pre_hitl_decision": null
+}

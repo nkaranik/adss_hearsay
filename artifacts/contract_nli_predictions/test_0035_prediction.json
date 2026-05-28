@@ -1,0 +1,290 @@
+{
+  "case_id": "test_0035",
+  "input_text": "CONTRACT CONTEXT:\nFor purposes of this Agreement, the term “Evaluation Material” shall mean any and all information provided to Investor by or on behalf of the Company in connection with the Transaction whether in writing, orally, visually, electronically or in machine readable form, through demonstration or in any other manner, and shall include, without limitation, any information regarding or relating to the Company’s operations, business opportunities, costs, finances, personnel, marketing and promotion plans, financial statements, financial information and business practices or policies, and any other business information of the Company or the terms or existence of this Agreement, the Company’s consideration of a possible Transaction or any discussions between the parties with respect thereto, transmitted by or on behalf of the Company to Investor in connection with the Transaction, whether prior to or after the execution and delivery of this Agreement and whether or not such information is marked “confidential”.  Each of the Company and Investor acknowledge and agree that it will not, and it will cause its respective employees, representatives, affiliates and agents not to, publicly disclose, confirm or acknowledge the existence, or terms and conditions, of this Agreement, or the fact that the Company may be considering a possible Transaction with Investor, other than in a press release approved by each party hereto or as otherwise specifically agreed in writing by the parties hereto, except to the extent the Company believes in good faith, after consultation with counsel, it is required by any law, rule or listing requirement to make such disclosure, provided that the Company shall not identify the Investor or any of its affiliates by name without the Investor’s consent. \n\nTARGET STATEMENT:\nThe contract entails that the relevant party must keep confidential the existence, terms, subject matter, or status of the agreement, negotiations, discussions, or transaction between the parties.\n\nDECISION TASK:\nDetermine whether the contract context entails the target statement.",
+  "phi_text": "",
+  "gold_label": "Yes",
+  "extraction": {
+    "case_id": "test_0035",
+    "input_text": "CONTRACT CONTEXT:\nFor purposes of this Agreement, the term “Evaluation Material” shall mean any and all information provided to Investor by or on behalf of the Company in connection with the Transaction whether in writing, orally, visually, electronically or in machine readable form, through demonstration or in any other manner, and shall include, without limitation, any information regarding or relating to the Company’s operations, business opportunities, costs, finances, personnel, marketing and promotion plans, financial statements, financial information and business practices or policies, and any other business information of the Company or the terms or existence of this Agreement, the Company’s consideration of a possible Transaction or any discussions between the parties with respect thereto, transmitted by or on behalf of the Company to Investor in connection with the Transaction, whether prior to or after the execution and delivery of this Agreement and whether or not such information is marked “confidential”.  Each of the Company and Investor acknowledge and agree that it will not, and it will cause its respective employees, representatives, affiliates and agents not to, publicly disclose, confirm or acknowledge the existence, or terms and conditions, of this Agreement, or the fact that the Company may be considering a possible Transaction with Investor, other than in a press release approved by each party hereto or as otherwise specifically agreed in writing by the parties hereto, except to the extent the Company believes in good faith, after consultation with counsel, it is required by any law, rule or listing requirement to make such disclosure, provided that the Company shall not identify the Investor or any of its affiliates by name without the Investor’s consent. \n\nTARGET STATEMENT:\nThe contract entails that the relevant party must keep confidential the existence, terms, subject matter, or status of the agreement, negotiations, discussions, or transaction between the parties.\n\nDECISION TASK:\nDetermine whether the contract context entails the target statement.",
+    "claim": {
+      "id": "phi",
+      "text": "Does the CONTRACT CONTEXT logically entail the EXACT TARGET STATEMENT, with every material element matched and no missing limitation, exception, party-scope mismatch, information-type mismatch, purpose limitation, recipient-scope mismatch, or disclosure carve-out?"
+    },
+    "arguments": [
+      {
+        "id": "a1",
+        "text": "The contract explicitly states that both the Company and Investor agree not to publicly disclose, confirm, or acknowledge the existence or terms of the Agreement, or the fact that a Transaction is being considered. This directly establishes a confidentiality obligation regarding the agreement and transaction status.",
+        "stance_to_claim": "support",
+        "legal_rule": "Contract interpretation requires giving effect to explicit covenants; explicit non-disclosure clauses directly entail corresponding confidentiality obligations.",
+        "evidence_span": "Each of the Company and Investor acknowledge and agree that it will not, and it will cause its respective employees, representatives, affiliates and agents not to, publicly disclose, confirm or acknowledge the existence, or terms and conditions, of this Agreement, or the fact that the Company may be considering a possible Transaction with Investor",
+        "confidence": 0.95
+      },
+      {
+        "id": "a2",
+        "text": "The confidentiality obligation explicitly binds both the Company and the Investor, along with their respective employees, representatives, affiliates, and agents. This matches the target statement's reference to 'the relevant party' and ensures the obligation is not limited to a single entity.",
+        "stance_to_claim": "support",
+        "legal_rule": "Contractual obligations bind specified parties and their agents; scope expansion to affiliates/agents strengthens the entailment of a broad confidentiality duty.",
+        "evidence_span": "Each of the Company and Investor acknowledge and agree that it will not, and it will cause its respective employees, representatives, affiliates and agents not to",
+        "confidence": 0.9
+      },
+      {
+        "id": "a3",
+        "text": "The contract includes specific exceptions to the confidentiality obligation, permitting disclosure in approved press releases, mutually agreed written disclosures, or when required by law/rule/listing requirements (with a restriction on naming the Investor). These carve-outs mean the obligation is not absolute.",
+        "stance_to_claim": "attack",
+        "legal_rule": "Permitted disclosures and legal compulsion exceptions limit the scope of confidentiality obligations; their presence indicates the target statement's absolute phrasing is incomplete regarding missing limitations.",
+        "evidence_span": "other than in a press release approved by each party hereto or as otherwise specifically agreed in writing by the parties hereto, except to the extent the Company believes in good faith, after consultation with counsel, it is required by any law, rule or listing requirement to make such disclosure, provided that the Company shall not identify the Investor or any of its affiliates by name without the Investor’s consent.",
+        "confidence": 0.85
+      },
+      {
+        "id": "a4",
+        "text": "The contract defines 'Evaluation Material' to include any information regarding the Company's operations, finances, business practices, or the terms/existence of the Agreement and discussions regarding a possible Transaction. This definition explicitly encompasses the subject matter and status of the transaction.",
+        "stance_to_claim": "support",
+        "legal_rule": "Contract definitions control the scope of covered information; explicit inclusion of transaction-related discussions and agreement terms supports the target's scope.",
+        "evidence_span": "any information regarding or relating to the Company’s operations, business opportunities, costs, finances, personnel, marketing and promotion plans, financial statements, financial information and business practices or policies, and any other business information of the Company or the terms or existence of this Agreement, the Company’s consideration of a possible Transaction or any discussions between the parties with respect thereto",
+        "confidence": 0.9
+      },
+      {
+        "id": "a5",
+        "text": "Despite the presence of exceptions, the contract's explicit covenant not to publicly disclose, confirm, or acknowledge the existence or terms of the Agreement directly entails the target statement's requirement that the relevant party must keep confidential the existence, terms, subject matter, or status of the agreement and transaction.",
+        "stance_to_claim": "support",
+        "legal_rule": "In contract NLI, explicit prohibitions on disclosure directly entail corresponding confidentiality obligations unless contradicted; the core obligation stands even with carve-outs.",
+        "evidence_span": "Each of the Company and Investor acknowledge and agree that it will not, and it will cause its respective employees, representatives, affiliates and agents not to, publicly disclose, confirm or acknowledge the existence, or terms and conditions, of this Agreement, or the fact that the Company may be considering a possible Transaction with Investor",
+        "confidence": 0.95
+      }
+    ],
+    "relations": [
+      {
+        "source": "a1",
+        "target": "phi",
+        "type": "support",
+        "confidence": 0.95
+      },
+      {
+        "source": "a2",
+        "target": "phi",
+        "type": "support",
+        "confidence": 0.9
+      },
+      {
+        "source": "a3",
+        "target": "phi",
+        "type": "attack",
+        "confidence": 0.85
+      },
+      {
+        "source": "a4",
+        "target": "phi",
+        "type": "support",
+        "confidence": 0.9
+      },
+      {
+        "source": "a5",
+        "target": "phi",
+        "type": "support",
+        "confidence": 0.95
+      },
+      {
+        "source": "a1",
+        "target": "a5",
+        "type": "support",
+        "confidence": 0.9
+      },
+      {
+        "source": "a3",
+        "target": "a5",
+        "type": "attack",
+        "confidence": 0.8
+      }
+    ],
+    "extraction_model": "",
+    "raw_llm_response": "{\n  \"case_id\": \"test_0035\",\n  \"phi\": \"Does the CONTRACT CONTEXT logically entail the EXACT TARGET STATEMENT, with every material element matched and no missing limitation, exception, party-scope mismatch, information-type mismatch, purpose limitation, recipient-scope mismatch, or disclosure carve-out?\",\n  \"arguments\": [\n    {\n      \"id\": \"a1\",\n      \"text\": \"The contract explicitly states that both the Company and Investor agree not to publicly disclose, confirm, or acknowledge the existence or terms of the Agreement, or the fact that a Transaction is being considered. This directly establishes a confidentiality obligation regarding the agreement and transaction status.\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"Contract interpretation requires giving effect to explicit covenants; explicit non-disclosure clauses directly entail corresponding confidentiality obligations.\",\n      \"evidence_span\": \"Each of the Company and Investor acknowledge and agree that it will not, and it will cause its respective employees, representatives, affiliates and agents not to, publicly disclose, confirm or acknowledge the existence, or terms and conditions, of this Agreement, or the fact that the Company may be considering a possible Transaction with Investor\",\n      \"confidence\": 0.95,\n      \"tau\": 0.9,\n      \"rubric\": {\n        \"relevance\": 1.0,\n        \"factual_grounding\": 1.0,\n        \"specificity\": 0.9,\n        \"logical_coherence\": 1.0,\n        \"applicability\": 0.9\n      },\n      \"justification\": \"Direct textual match to the core of the target statement, establishing the primary obligation without ambiguity.\"\n    },\n    {\n      \"id\": \"a2\",\n      \"text\": \"The confidentiality obligation explicitly binds both the Company and the Investor, along with their respective employees, representatives, affiliates, and agents. This matches the target statement's reference to 'the relevant party' and ensures the obligation is not limited to a single entity.\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"Contractual obligations bind specified parties and their agents; scope expansion to affiliates/agents strengthens the entailment of a broad confidentiality duty.\",\n      \"evidence_span\": \"Each of the Company and Investor acknowledge and agree that it will not, and it will cause its respective employees, representatives, affiliates and agents not to\",\n      \"confidence\": 0.9,\n      \"tau\": 0.85,\n      \"rubric\": {\n        \"relevance\": 0.9,\n        \"factual_grounding\": 1.0,\n        \"specificity\": 0.8,\n        \"logical_coherence\": 0.9,\n        \"applicability\": 0.9\n      },\n      \"justification\": \"Confirms that the obligation applies to the parties involved in the transaction, aligning with the target's 'relevant party' phrasing and satisfying recipient-scope requirements.\"\n    },\n    {\n      \"id\": \"a3\",\n      \"text\": \"The contract includes specific exceptions to the confidentiality obligation, permitting disclosure in approved press releases, mutually agreed written disclosures, or when required by law/rule/listing requirements (with a restriction on naming the Investor). These carve-outs mean the obligation is not absolute.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"Permitted disclosures and legal compulsion exceptions limit the scope of confidentiality obligations; their presence indicates the target statement's absolute phrasing is incomplete regarding missing limitations.\",\n      \"evidence_span\": \"other than in a press release approved by each party hereto or as otherwise specifically agreed in writing by the parties hereto, except to the extent the Company believes in good faith, after consultation with counsel, it is required by any law, rule or listing requirement to make such disclosure, provided that the Company shall not identify the Investor or any of its affiliates by name without the Investor’s consent.\",\n      \"confidence\": 0.85,\n      \"tau\": 0.7,\n      \"rubric\": {\n        \"relevance\": 0.9,\n        \"factual_grounding\": 1.0,\n        \"specificity\": 0.8,\n        \"logical_coherence\": 0.8,\n        \"applicability\": 0.8\n      },\n      \"justification\": \"Directly addresses the 'no missing limitation, exception, or disclosure carve-out' condition in φ, showing that the target statement omits these critical qualifications and thus cannot be entailed absolutely.\"\n    },\n    {\n      \"id\": \"a4\",\n      \"text\": \"The contract defines 'Evaluation Material' to include any information regarding the Company's operations, finances, business practices, or the terms/existence of the Agreement and discussions regarding a possible Transaction. This definition explicitly encompasses the subject matter and status of the transaction.\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"Contract definitions control the scope of covered information; explicit inclusion of transaction-related discussions and agreement terms supports the target's scope.\",\n      \"evidence_span\": \"any information regarding or relating to the Company’s operations, business opportunities, costs, finances, personnel, marketing and promotion plans, financial statements, financial information and business practices or policies, and any other business information of the Company or the terms or existence of this Agreement, the Company’s consideration of a possible Transaction or any discussions between the parties with respect thereto\",\n      \"confidence\": 0.9,\n      \"tau\": 0.85,\n      \"rubric\": {\n        \"relevance\": 0.8,\n        \"factual_grounding\": 1.0,\n        \"specificity\": 0.9,\n        \"logical_coherence\": 0.9,\n        \"applicability\": 0.8\n      },\n      \"justification\": \"Reinforces that the information type and transaction status are explicitly covered, supporting the target statement's scope and satisfying information-type matching.\"\n    },\n    {\n      \"id\": \"a5\",\n      \"text\": \"Despite the presence of exceptions, the contract's explicit covenant not to publicly disclose, confirm, or acknowledge the existence or terms of the Agreement directly entails the target statement's requirement that the relevant party must keep confidential the existence, terms, subject matter, or status of the agreement and transaction.\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"In contract NLI, explicit prohibitions on disclosure directly entail corresponding confidentiality obligations unless contradicted; the core obligation stands even with carve-outs.\",\n      \"evidence_span\": \"Each of the Company and Investor acknowledge and agree that it will not, and it will cause its respective employees, representatives, affiliates and agents not to, publicly disclose, confirm or acknowledge the existence, or terms and conditions, of this Agreement, or the fact that the Company may be considering a possible Transaction with Investor\",\n      \"confidence\": 0.95,\n      \"tau\": 0.9,\n      \"rubric\": {\n        \"relevance\": 1.0,\n        \"factual_grounding\": 1.0,\n        \"specificity\": 0.9,\n        \"logical_coherence\": 1.0,\n        \"applicability\": 0.9\n      },\n      \"justification\": \"Synthesizes the explicit clause to confirm that the core entailment holds, satisfying the primary condition of φ while acknowledging the obligation's existence.\"\n    }\n  ],\n  \"relations\": [\n    {\n      \"source\": \"a1\",\n      \"target\": \"phi\",\n      \"type\": \"support\",\n      \"confidence\": 0.95\n    },\n    {\n      \"source\": \"a2\",\n      \"target\": \"phi\",\n      \"type\": \"support\",\n      \"confidence\": 0.9\n    },\n    {\n      \"source\": \"a3\",\n      \"target\": \"phi\",\n      \"type\": \"attack\",\n      \"confidence\": 0.85\n    },\n    {\n      \"source\": \"a4\",\n      \"target\": \"phi\",\n      \"type\": \"support\",\n      \"confidence\": 0.9\n    },\n    {\n      \"source\": \"a5\",\n      \"target\": \"phi\",\n      \"type\": \"support\",\n      \"confidence\": 0.95\n    },\n    {\n      \"source\": \"a1\",\n      \"target\": \"a5\",\n      \"type\": \"support\",\n      \"confidence\": 0.9\n    },\n    {\n      \"source\": \"a3\",\n      \"target\": \"a5\",\n      \"type\": \"attack\",\n      \"confidence\": 0.8\n    }\n  ]\n}",
+    "parse_error": null,
+    "n_raw_arguments": 5
+  },
+  "strengths": [
+    {
+      "argument_id": "a1",
+      "tau": 0.9,
+      "rubric": {
+        "legal_relevance": 1.0,
+        "factual_grounding": 1.0,
+        "specificity": 0.9,
+        "logical_coherence": 1.0,
+        "fre_801c_applicability": 0.9
+      },
+      "justification": "Direct textual match to the core of the target statement, establishing the primary obligation without ambiguity.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a2",
+      "tau": 0.85,
+      "rubric": {
+        "legal_relevance": 0.9,
+        "factual_grounding": 1.0,
+        "specificity": 0.8,
+        "logical_coherence": 0.9,
+        "fre_801c_applicability": 0.9
+      },
+      "justification": "Confirms that the obligation applies to the parties involved in the transaction, aligning with the target's 'relevant party' phrasing and satisfying recipient-scope requirements.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a3",
+      "tau": 0.7,
+      "rubric": {
+        "legal_relevance": 0.9,
+        "factual_grounding": 1.0,
+        "specificity": 0.8,
+        "logical_coherence": 0.8,
+        "fre_801c_applicability": 0.8
+      },
+      "justification": "Directly addresses the 'no missing limitation, exception, or disclosure carve-out' condition in φ, showing that the target statement omits these critical qualifications and thus cannot be entailed absolutely.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a4",
+      "tau": 0.85,
+      "rubric": {
+        "legal_relevance": 0.8,
+        "factual_grounding": 1.0,
+        "specificity": 0.9,
+        "logical_coherence": 0.9,
+        "fre_801c_applicability": 0.8
+      },
+      "justification": "Reinforces that the information type and transaction status are explicitly covered, supporting the target statement's scope and satisfying information-type matching.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a5",
+      "tau": 0.9,
+      "rubric": {
+        "legal_relevance": 1.0,
+        "factual_grounding": 1.0,
+        "specificity": 0.9,
+        "logical_coherence": 1.0,
+        "fre_801c_applicability": 0.9
+      },
+      "justification": "Synthesizes the explicit clause to confirm that the core entailment holds, satisfying the primary condition of φ while acknowledging the obligation's existence.",
+      "model": "combined"
+    }
+  ],
+  "solver_output": {
+    "case_id": "test_0035",
+    "graph": {
+      "nodes": {
+        "phi": {
+          "id": "phi",
+          "text": "Does the CONTRACT CONTEXT logically entail the EXACT TARGET STATEMENT, with every material element matched and no missing limitation, exception, party-scope mismatch, information-type mismatch, purpose limitation, recipient-scope mismatch, or disclosure carve-out?",
+          "tau": 0.5,
+          "sigma": 0.64928,
+          "is_claim": true
+        },
+        "a1": {
+          "id": "a1",
+          "text": "The contract explicitly states that both the Company and Investor agree not to publicly disclose, confirm, or acknowledge the existence or terms of the Agreement, or the fact that a Transaction is being considered. This directly establishes a confidentiality obligation regarding the agreement and transaction status.",
+          "tau": 0.9,
+          "sigma": 0.9,
+          "is_claim": false
+        },
+        "a2": {
+          "id": "a2",
+          "text": "The confidentiality obligation explicitly binds both the Company and the Investor, along with their respective employees, representatives, affiliates, and agents. This matches the target statement's reference to 'the relevant party' and ensures the obligation is not limited to a single entity.",
+          "tau": 0.85,
+          "sigma": 0.85,
+          "is_claim": false
+        },
+        "a3": {
+          "id": "a3",
+          "text": "The contract includes specific exceptions to the confidentiality obligation, permitting disclosure in approved press releases, mutually agreed written disclosures, or when required by law/rule/listing requirements (with a restriction on naming the Investor). These carve-outs mean the obligation is not absolute.",
+          "tau": 0.7,
+          "sigma": 0.7,
+          "is_claim": false
+        },
+        "a4": {
+          "id": "a4",
+          "text": "The contract defines 'Evaluation Material' to include any information regarding the Company's operations, finances, business practices, or the terms/existence of the Agreement and discussions regarding a possible Transaction. This definition explicitly encompasses the subject matter and status of the transaction.",
+          "tau": 0.85,
+          "sigma": 0.85,
+          "is_claim": false
+        },
+        "a5": {
+          "id": "a5",
+          "text": "Despite the presence of exceptions, the contract's explicit covenant not to publicly disclose, confirm, or acknowledge the existence or terms of the Agreement directly entails the target statement's requirement that the relevant party must keep confidential the existence, terms, subject matter, or status of the agreement and transaction.",
+          "tau": 0.9,
+          "sigma": 0.36,
+          "is_claim": false
+        }
+      },
+      "edges": [
+        {
+          "source": "a1",
+          "target": "phi",
+          "type": "support",
+          "confidence": 0.95
+        },
+        {
+          "source": "a2",
+          "target": "phi",
+          "type": "support",
+          "confidence": 0.9
+        },
+        {
+          "source": "a3",
+          "target": "phi",
+          "type": "attack",
+          "confidence": 0.85
+        },
+        {
+          "source": "a4",
+          "target": "phi",
+          "type": "support",
+          "confidence": 0.9
+        },
+        {
+          "source": "a5",
+          "target": "phi",
+          "type": "support",
+          "confidence": 0.95
+        },
+        {
+          "source": "a1",
+          "target": "a5",
+          "type": "support",
+          "confidence": 0.9
+        },
+        {
+          "source": "a3",
+          "target": "a5",
+          "type": "attack",
+          "confidence": 0.8
+        }
+      ],
+      "solver_type": "df_quad"
+    },
+    "sigma_phi": 0.64928,
+    "sigma_all": {
+      "phi": 0.64928,
+      "a1": 0.9,
+      "a2": 0.85,
+      "a3": 0.7,
+      "a4": 0.85,
+      "a5": 0.36
+    },
+    "iterations": 2,
+    "converged": true,
+    "solver_type": "df_quad"
+  },
+  "sigma_phi": 0.64928,
+  "decision": "Yes",
+  "uncertainty": {
+    "is_uncertain": false,
+    "sigma_phi": 0.64928,
+    "threshold_low": 0.45,
+    "threshold_high": 0.55,
+    "escalation_triggered": false,
+    "escalation_actions": [],
+    "escalation_log": []
+  },
+  "hitl_interventions": [],
+  "pre_hitl_decision": null
+}

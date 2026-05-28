@@ -1,0 +1,155 @@
+{
+  "case_id": "test_0054",
+  "input_text": "CONTRACT CONTEXT:\nA  Upon receipt by the Recipient of a written demand from the Disclosers: 8.1.1 the Recipient must return or procure the return to the Disclosers or, as the Disclosers may require, destroy or procure the destruction of any and all materials containing the Confidential Information together with all copies; 8.1.3 the Recipient must delete or procure the deletion of all electronic copies of Confidential Information; and 8.1.4 the Recipient must make, and procure that the Authorised Persons shall make, no further Use of the Confidential Information. \n\nTARGET STATEMENT:\nThe contract entails that the relevant party must keep confidential the existence, terms, subject matter, or status of the agreement, negotiations, discussions, or transaction between the parties.\n\nDECISION TASK:\nDetermine whether the contract context entails the target statement.",
+  "phi_text": "",
+  "gold_label": "No",
+  "extraction": {
+    "case_id": "test_0054",
+    "input_text": "CONTRACT CONTEXT:\nA  Upon receipt by the Recipient of a written demand from the Disclosers: 8.1.1 the Recipient must return or procure the return to the Disclosers or, as the Disclosers may require, destroy or procure the destruction of any and all materials containing the Confidential Information together with all copies; 8.1.3 the Recipient must delete or procure the deletion of all electronic copies of Confidential Information; and 8.1.4 the Recipient must make, and procure that the Authorised Persons shall make, no further Use of the Confidential Information. \n\nTARGET STATEMENT:\nThe contract entails that the relevant party must keep confidential the existence, terms, subject matter, or status of the agreement, negotiations, discussions, or transaction between the parties.\n\nDECISION TASK:\nDetermine whether the contract context entails the target statement.",
+    "claim": {
+      "id": "phi",
+      "text": "Does the CONTRACT CONTEXT logically entail the EXACT TARGET STATEMENT, with every material element matched and no missing limitation, exception, party-scope mismatch, information-type mismatch, purpose limitation, recipient-scope mismatch, or disclosure carve-out?"
+    },
+    "arguments": [
+      {
+        "id": "a3",
+        "text": "The contract context lacks any clause, definition, or implicit provision that extends confidentiality obligations to the agreement itself, its negotiations, or its status.",
+        "stance_to_claim": "attack",
+        "legal_rule": "In contract NLI, entailment requires explicit textual support or necessary logical inference; mere silence or unrelated provisions do not satisfy the burden of proof.",
+        "evidence_span": null,
+        "confidence": 0.9
+      },
+      {
+        "id": "a4",
+        "text": "Because the provided text only governs the handling of specific Confidential Information upon demand and contains no agreement confidentiality provision, the target statement is not logically entailed.",
+        "stance_to_claim": "attack",
+        "legal_rule": "Logical entailment in contract interpretation fails when the target claim introduces a material obligation absent from the source text.",
+        "evidence_span": "Upon receipt by the Recipient of a written demand from the Disclosers: 8.1.1 the Recipient must return... 8.1.4 the Recipient must make... no further Use of the Confidential Information.",
+        "confidence": 0.95
+      }
+    ],
+    "relations": [
+      {
+        "source": "a3",
+        "target": "phi",
+        "type": "attack",
+        "confidence": 0.9
+      },
+      {
+        "source": "a4",
+        "target": "phi",
+        "type": "attack",
+        "confidence": 0.95
+      },
+      {
+        "source": "a3",
+        "target": "a4",
+        "type": "support",
+        "confidence": 0.9
+      }
+    ],
+    "extraction_model": "",
+    "raw_llm_response": "{\n  \"case_id\": \"test_0054\",\n  \"phi\": \"Does the CONTRACT CONTEXT logically entail the EXACT TARGET STATEMENT, with every material element matched and no missing limitation, exception, party-scope mismatch, information-type mismatch, purpose limitation, recipient-scope mismatch, or disclosure carve-out?\",\n  \"arguments\": [\n    {\n      \"id\": \"a1\",\n      \"text\": \"The contract context explicitly imposes post-demand obligations to return, destroy, or delete materials containing \\\"Confidential Information\\\" and to cease further use of such information.\",\n      \"stance_to_claim\": \"neutral\",\n      \"legal_rule\": \"Contract interpretation requires examining explicit textual provisions to determine the scope of obligations.\",\n      \"evidence_span\": \"Upon receipt by the Recipient of a written demand from the Disclosers: 8.1.1 the Recipient must return or procure the return to the Disclosers or, as the Disclosers may require, destroy or procure the destruction of any and all materials containing the Confidential Information together with all copies; 8.1.3 the Recipient must delete or procure the deletion of all electronic copies of Confidential Information; and 8.1.4 the Recipient must make, and procure that the Authorised Persons shall make, no further Use of the Confidential Information.\",\n      \"confidence\": 1.0,\n      \"tau\": 0.0,\n      \"rubric\": {\n        \"relevance\": 0.5,\n        \"factual_grounding\": 1.0,\n        \"specificity\": 0.8,\n        \"logical_coherence\": 0.5,\n        \"applicability\": 0.5\n      },\n      \"justification\": \"States the actual contractual obligations present in the narrative, which are relevant for comparison but do not directly decide φ.\"\n    },\n    {\n      \"id\": \"a2\",\n      \"text\": \"The target statement requires the contract to entail an obligation to keep confidential the existence, terms, subject matter, or status of the agreement, negotiations, or transaction.\",\n      \"stance_to_claim\": \"neutral\",\n      \"legal_rule\": \"Definition of the target claim for entailment evaluation.\",\n      \"evidence_span\": \"The contract entails that the relevant party must keep confidential the existence, terms, subject matter, or status of the agreement, negotiations, discussions, or transaction between the parties.\",\n      \"confidence\": 1.0,\n      \"tau\": 0.0,\n      \"rubric\": {\n        \"relevance\": 0.5,\n        \"factual_grounding\": 1.0,\n        \"specificity\": 0.8,\n        \"logical_coherence\": 0.5,\n        \"applicability\": 0.5\n      },\n      \"justification\": \"Precisely captures the material elements of φ that must be matched against the contract context.\"\n    },\n    {\n      \"id\": \"a3\",\n      \"text\": \"The contract context lacks any clause, definition, or implicit provision that extends confidentiality obligations to the agreement itself, its negotiations, or its status.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"In contract NLI, entailment requires explicit textual support or necessary logical inference; mere silence or unrelated provisions do not satisfy the burden of proof.\",\n      \"evidence_span\": null,\n      \"confidence\": 0.9,\n      \"tau\": 0.8,\n      \"rubric\": {\n        \"relevance\": 0.9,\n        \"factual_grounding\": 0.9,\n        \"specificity\": 0.8,\n        \"logical_coherence\": 0.9,\n        \"applicability\": 0.9\n      },\n      \"justification\": \"Directly addresses the gap between the contract's actual scope (Confidential Information) and the target claim (agreement confidentiality), attacking φ based on absence of support.\"\n    },\n    {\n      \"id\": \"a4\",\n      \"text\": \"Because the provided text only governs the handling of specific Confidential Information upon demand and contains no agreement confidentiality provision, the target statement is not logically entailed.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"Logical entailment in contract interpretation fails when the target claim introduces a material obligation absent from the source text.\",\n      \"evidence_span\": \"Upon receipt by the Recipient of a written demand from the Disclosers: 8.1.1 the Recipient must return... 8.1.4 the Recipient must make... no further Use of the Confidential Information.\",\n      \"confidence\": 0.95,\n      \"tau\": 0.85,\n      \"rubric\": {\n        \"relevance\": 1.0,\n        \"factual_grounding\": 0.9,\n        \"specificity\": 0.9,\n        \"logical_coherence\": 1.0,\n        \"applicability\": 0.9\n      },\n      \"justification\": \"Synthesizes the factual gap identified in a3 with the legal standard for contractual entailment to conclude that φ is false.\"\n    }\n  ],\n  \"relations\": [\n    {\n      \"source\": \"a1\",\n      \"target\": \"phi\",\n      \"type\": \"neutral\",\n      \"confidence\": 1.0\n    },\n    {\n      \"source\": \"a2\",\n      \"target\": \"phi\",\n      \"type\": \"neutral\",\n      \"confidence\": 1.0\n    },\n    {\n      \"source\": \"a3\",\n      \"target\": \"phi\",\n      \"type\": \"attack\",\n      \"confidence\": 0.9\n    },\n    {\n      \"source\": \"a4\",\n      \"target\": \"phi\",\n      \"type\": \"attack\",\n      \"confidence\": 0.95\n    },\n    {\n      \"source\": \"a3\",\n      \"target\": \"a4\",\n      \"type\": \"support\",\n      \"confidence\": 0.9\n    }\n  ]\n}",
+    "parse_error": null,
+    "n_raw_arguments": 4
+  },
+  "strengths": [
+    {
+      "argument_id": "a3",
+      "tau": 0.8,
+      "rubric": {
+        "legal_relevance": 0.9,
+        "factual_grounding": 0.9,
+        "specificity": 0.8,
+        "logical_coherence": 0.9,
+        "fre_801c_applicability": 0.9
+      },
+      "justification": "Directly addresses the gap between the contract's actual scope (Confidential Information) and the target claim (agreement confidentiality), attacking φ based on absence of support.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a4",
+      "tau": 0.85,
+      "rubric": {
+        "legal_relevance": 1.0,
+        "factual_grounding": 0.9,
+        "specificity": 0.9,
+        "logical_coherence": 1.0,
+        "fre_801c_applicability": 0.9
+      },
+      "justification": "Synthesizes the factual gap identified in a3 with the legal standard for contractual entailment to conclude that φ is false.",
+      "model": "combined"
+    }
+  ],
+  "solver_output": {
+    "case_id": "test_0054",
+    "graph": {
+      "nodes": {
+        "phi": {
+          "id": "phi",
+          "text": "Does the CONTRACT CONTEXT logically entail the EXACT TARGET STATEMENT, with every material element matched and no missing limitation, exception, party-scope mismatch, information-type mismatch, purpose limitation, recipient-scope mismatch, or disclosure carve-out?",
+          "tau": 0.5,
+          "sigma": 0.0030000000000000027,
+          "is_claim": true
+        },
+        "a3": {
+          "id": "a3",
+          "text": "The contract context lacks any clause, definition, or implicit provision that extends confidentiality obligations to the agreement itself, its negotiations, or its status.",
+          "tau": 0.8,
+          "sigma": 0.8,
+          "is_claim": false
+        },
+        "a4": {
+          "id": "a4",
+          "text": "Because the provided text only governs the handling of specific Confidential Information upon demand and contains no agreement confidentiality provision, the target statement is not logically entailed.",
+          "tau": 0.85,
+          "sigma": 0.97,
+          "is_claim": false
+        }
+      },
+      "edges": [
+        {
+          "source": "a3",
+          "target": "phi",
+          "type": "attack",
+          "confidence": 0.9
+        },
+        {
+          "source": "a4",
+          "target": "phi",
+          "type": "attack",
+          "confidence": 0.95
+        },
+        {
+          "source": "a3",
+          "target": "a4",
+          "type": "support",
+          "confidence": 0.9
+        }
+      ],
+      "solver_type": "df_quad"
+    },
+    "sigma_phi": 0.0030000000000000027,
+    "sigma_all": {
+      "phi": 0.0030000000000000027,
+      "a3": 0.8,
+      "a4": 0.97
+    },
+    "iterations": 2,
+    "converged": true,
+    "solver_type": "df_quad"
+  },
+  "sigma_phi": 0.0030000000000000027,
+  "decision": "No",
+  "uncertainty": {
+    "is_uncertain": false,
+    "sigma_phi": 0.0030000000000000027,
+    "threshold_low": 0.45,
+    "threshold_high": 0.55,
+    "escalation_triggered": false,
+    "escalation_actions": [],
+    "escalation_log": []
+  },
+  "hitl_interventions": [],
+  "pre_hitl_decision": null
+}

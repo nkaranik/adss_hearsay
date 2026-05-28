@@ -1,0 +1,225 @@
+{
+  "case_id": "test_0080",
+  "input_text": "CONTRACT CONTEXT:\nIn the event that we or any of our representatives receive a request or are required (by deposition, interrogatory, request for documents, subpoena, civil investigative demand or similar process) to disclose all or any part of the Evaluation Materials, we or our representatives, as the case may be, agree to  (i) immediately notify the Company of the existence, terms and circumstances surrounding such a request,  \n\nTARGET STATEMENT:\nThe contract entails that the relevant party must keep confidential the existence, terms, subject matter, or status of the agreement, negotiations, discussions, or transaction between the parties.\n\nDECISION TASK:\nDetermine whether the contract context entails the target statement.",
+  "phi_text": "",
+  "gold_label": "No",
+  "extraction": {
+    "case_id": "test_0080",
+    "input_text": "CONTRACT CONTEXT:\nIn the event that we or any of our representatives receive a request or are required (by deposition, interrogatory, request for documents, subpoena, civil investigative demand or similar process) to disclose all or any part of the Evaluation Materials, we or our representatives, as the case may be, agree to  (i) immediately notify the Company of the existence, terms and circumstances surrounding such a request,  \n\nTARGET STATEMENT:\nThe contract entails that the relevant party must keep confidential the existence, terms, subject matter, or status of the agreement, negotiations, discussions, or transaction between the parties.\n\nDECISION TASK:\nDetermine whether the contract context entails the target statement.",
+    "claim": {
+      "id": "phi",
+      "text": "Does the CONTRACT CONTEXT logically entail the EXACT TARGET STATEMENT, with every material element matched and no missing limitation, exception, party-scope mismatch, information-type mismatch, purpose limitation, recipient-scope mismatch, or disclosure carve-out?"
+    },
+    "arguments": [
+      {
+        "id": "a1",
+        "text": "The contract context explicitly mandates notification to the Company upon receiving a request to disclose Evaluation Materials, but does not impose any confidentiality obligation regarding the agreement's existence, terms, or status.",
+        "stance_to_claim": "attack",
+        "legal_rule": "Contractual entailment requires explicit language or necessary implication; absence of a confidentiality clause regarding the agreement's existence/terms defeats entailment.",
+        "evidence_span": "In the event that we or any of our representatives receive a request or are required ... to disclose all or any part of the Evaluation Materials, we or our representatives ... agree to (i) immediately notify the Company",
+        "confidence": 0.95
+      },
+      {
+        "id": "a2",
+        "text": "The target statement asserts that the contract entails confidentiality of the agreement's existence, terms, subject matter, or status, but the provided contract context contains no such provision.",
+        "stance_to_claim": "attack",
+        "legal_rule": "In contract NLI, the absence of relevant contractual support for a claimed obligation attacks the entailment hypothesis.",
+        "evidence_span": null,
+        "confidence": 0.9
+      },
+      {
+        "id": "a3",
+        "text": "The contract context's scope is strictly limited to procedural responses for compelled disclosure of Evaluation Materials, which does not logically extend to a general duty to keep the agreement's existence or terms confidential.",
+        "stance_to_claim": "attack",
+        "legal_rule": "Contractual obligations are construed within their express scope; expanding a narrow notification duty to a broad confidentiality obligation violates principles of contractual interpretation.",
+        "evidence_span": "disclose all or any part of the Evaluation Materials",
+        "confidence": 0.85
+      },
+      {
+        "id": "a4",
+        "text": "The contract context only addresses notification upon legal compulsion (e.g., subpoena, civil investigative demand), leaving no room to infer a voluntary or general confidentiality obligation regarding the agreement itself.",
+        "stance_to_claim": "attack",
+        "legal_rule": "Obligations triggered by specific legal processes do not imply broader, unconditioned confidentiality duties absent explicit language.",
+        "evidence_span": "by deposition, interrogatory, request for documents, subpoena, civil investigative demand or similar process",
+        "confidence": 0.8
+      }
+    ],
+    "relations": [
+      {
+        "source": "a1",
+        "target": "phi",
+        "type": "attack",
+        "confidence": 0.95
+      },
+      {
+        "source": "a2",
+        "target": "phi",
+        "type": "attack",
+        "confidence": 0.9
+      },
+      {
+        "source": "a3",
+        "target": "phi",
+        "type": "attack",
+        "confidence": 0.85
+      },
+      {
+        "source": "a4",
+        "target": "phi",
+        "type": "attack",
+        "confidence": 0.8
+      }
+    ],
+    "extraction_model": "",
+    "raw_llm_response": "{\n  \"case_id\": \"test_0080\",\n  \"phi\": \"Does the CONTRACT CONTEXT logically entail the EXACT TARGET STATEMENT, with every material element matched and no missing limitation, exception, party-scope mismatch, information-type mismatch, purpose limitation, recipient-scope mismatch, or disclosure carve-out?\",\n  \"arguments\": [\n    {\n      \"id\": \"a1\",\n      \"text\": \"The contract context explicitly mandates notification to the Company upon receiving a request to disclose Evaluation Materials, but does not impose any confidentiality obligation regarding the agreement's existence, terms, or status.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"Contractual entailment requires explicit language or necessary implication; absence of a confidentiality clause regarding the agreement's existence/terms defeats entailment.\",\n      \"evidence_span\": \"In the event that we or any of our representatives receive a request or are required ... to disclose all or any part of the Evaluation Materials, we or our representatives ... agree to (i) immediately notify the Company\",\n      \"confidence\": 0.95,\n      \"tau\": 0.9,\n      \"rubric\": {\n        \"relevance\": 0.9,\n        \"factual_grounding\": 0.9,\n        \"specificity\": 0.8,\n        \"logical_coherence\": 0.9,\n        \"applicability\": 0.9\n      },\n      \"justification\": \"Directly addresses the mismatch between the narrow notification duty in the text and the broad confidentiality claim in the target statement.\"\n    },\n    {\n      \"id\": \"a2\",\n      \"text\": \"The target statement asserts that the contract entails confidentiality of the agreement's existence, terms, subject matter, or status, but the provided contract context contains no such provision.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"In contract NLI, the absence of relevant contractual support for a claimed obligation attacks the entailment hypothesis.\",\n      \"evidence_span\": null,\n      \"confidence\": 0.9,\n      \"tau\": 0.85,\n      \"rubric\": {\n        \"relevance\": 0.9,\n        \"factual_grounding\": 0.8,\n        \"specificity\": 0.7,\n        \"logical_coherence\": 0.9,\n        \"applicability\": 0.9\n      },\n      \"justification\": \"Highlights the direct absence of the required confidentiality language, which is fatal to the entailment claim.\"\n    },\n    {\n      \"id\": \"a3\",\n      \"text\": \"The contract context's scope is strictly limited to procedural responses for compelled disclosure of Evaluation Materials, which does not logically extend to a general duty to keep the agreement's existence or terms confidential.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"Contractual obligations are construed within their express scope; expanding a narrow notification duty to a broad confidentiality obligation violates principles of contractual interpretation.\",\n      \"evidence_span\": \"disclose all or any part of the Evaluation Materials\",\n      \"confidence\": 0.85,\n      \"tau\": 0.8,\n      \"rubric\": {\n        \"relevance\": 0.8,\n        \"factual_grounding\": 0.8,\n        \"specificity\": 0.8,\n        \"logical_coherence\": 0.85,\n        \"applicability\": 0.85\n      },\n      \"justification\": \"Demonstrates that the limited scope of the text cannot support the expansive claim in the target statement.\"\n    },\n    {\n      \"id\": \"a4\",\n      \"text\": \"The contract context only addresses notification upon legal compulsion (e.g., subpoena, civil investigative demand), leaving no room to infer a voluntary or general confidentiality obligation regarding the agreement itself.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"Obligations triggered by specific legal processes do not imply broader, unconditioned confidentiality duties absent explicit language.\",\n      \"evidence_span\": \"by deposition, interrogatory, request for documents, subpoena, civil investigative demand or similar process\",\n      \"confidence\": 0.8,\n      \"tau\": 0.75,\n      \"rubric\": {\n        \"relevance\": 0.7,\n        \"factual_grounding\": 0.8,\n        \"specificity\": 0.7,\n        \"logical_coherence\": 0.8,\n        \"applicability\": 0.8\n      },\n      \"justification\": \"Shows that the conditional nature of the text precludes the unconditional confidentiality claim in the target statement.\"\n    }\n  ],\n  \"relations\": [\n    {\n      \"source\": \"a1\",\n      \"target\": \"phi\",\n      \"type\": \"attack\",\n      \"confidence\": 0.95\n    },\n    {\n      \"source\": \"a2\",\n      \"target\": \"phi\",\n      \"type\": \"attack\",\n      \"confidence\": 0.9\n    },\n    {\n      \"source\": \"a3\",\n      \"target\": \"phi\",\n      \"type\": \"attack\",\n      \"confidence\": 0.85\n    },\n    {\n      \"source\": \"a4\",\n      \"target\": \"phi\",\n      \"type\": \"attack\",\n      \"confidence\": 0.8\n    }\n  ]\n}",
+    "parse_error": null,
+    "n_raw_arguments": 4
+  },
+  "strengths": [
+    {
+      "argument_id": "a1",
+      "tau": 0.9,
+      "rubric": {
+        "legal_relevance": 0.9,
+        "factual_grounding": 0.9,
+        "specificity": 0.8,
+        "logical_coherence": 0.9,
+        "fre_801c_applicability": 0.9
+      },
+      "justification": "Directly addresses the mismatch between the narrow notification duty in the text and the broad confidentiality claim in the target statement.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a2",
+      "tau": 0.85,
+      "rubric": {
+        "legal_relevance": 0.9,
+        "factual_grounding": 0.8,
+        "specificity": 0.7,
+        "logical_coherence": 0.9,
+        "fre_801c_applicability": 0.9
+      },
+      "justification": "Highlights the direct absence of the required confidentiality language, which is fatal to the entailment claim.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a3",
+      "tau": 0.8,
+      "rubric": {
+        "legal_relevance": 0.8,
+        "factual_grounding": 0.8,
+        "specificity": 0.8,
+        "logical_coherence": 0.85,
+        "fre_801c_applicability": 0.85
+      },
+      "justification": "Demonstrates that the limited scope of the text cannot support the expansive claim in the target statement.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a4",
+      "tau": 0.75,
+      "rubric": {
+        "legal_relevance": 0.7,
+        "factual_grounding": 0.8,
+        "specificity": 0.7,
+        "logical_coherence": 0.8,
+        "fre_801c_applicability": 0.8
+      },
+      "justification": "Shows that the conditional nature of the text precludes the unconditional confidentiality claim in the target statement.",
+      "model": "combined"
+    }
+  ],
+  "solver_output": {
+    "case_id": "test_0080",
+    "graph": {
+      "nodes": {
+        "phi": {
+          "id": "phi",
+          "text": "Does the CONTRACT CONTEXT logically entail the EXACT TARGET STATEMENT, with every material element matched and no missing limitation, exception, party-scope mismatch, information-type mismatch, purpose limitation, recipient-scope mismatch, or disclosure carve-out?",
+          "tau": 0.5,
+          "sigma": 0.0003750000000000142,
+          "is_claim": true
+        },
+        "a1": {
+          "id": "a1",
+          "text": "The contract context explicitly mandates notification to the Company upon receiving a request to disclose Evaluation Materials, but does not impose any confidentiality obligation regarding the agreement's existence, terms, or status.",
+          "tau": 0.9,
+          "sigma": 0.9,
+          "is_claim": false
+        },
+        "a2": {
+          "id": "a2",
+          "text": "The target statement asserts that the contract entails confidentiality of the agreement's existence, terms, subject matter, or status, but the provided contract context contains no such provision.",
+          "tau": 0.85,
+          "sigma": 0.85,
+          "is_claim": false
+        },
+        "a3": {
+          "id": "a3",
+          "text": "The contract context's scope is strictly limited to procedural responses for compelled disclosure of Evaluation Materials, which does not logically extend to a general duty to keep the agreement's existence or terms confidential.",
+          "tau": 0.8,
+          "sigma": 0.8,
+          "is_claim": false
+        },
+        "a4": {
+          "id": "a4",
+          "text": "The contract context only addresses notification upon legal compulsion (e.g., subpoena, civil investigative demand), leaving no room to infer a voluntary or general confidentiality obligation regarding the agreement itself.",
+          "tau": 0.75,
+          "sigma": 0.75,
+          "is_claim": false
+        }
+      },
+      "edges": [
+        {
+          "source": "a1",
+          "target": "phi",
+          "type": "attack",
+          "confidence": 0.95
+        },
+        {
+          "source": "a2",
+          "target": "phi",
+          "type": "attack",
+          "confidence": 0.9
+        },
+        {
+          "source": "a3",
+          "target": "phi",
+          "type": "attack",
+          "confidence": 0.85
+        },
+        {
+          "source": "a4",
+          "target": "phi",
+          "type": "attack",
+          "confidence": 0.8
+        }
+      ],
+      "solver_type": "df_quad"
+    },
+    "sigma_phi": 0.0003750000000000142,
+    "sigma_all": {
+      "phi": 0.0003750000000000142,
+      "a1": 0.9,
+      "a2": 0.85,
+      "a3": 0.8,
+      "a4": 0.75
+    },
+    "iterations": 2,
+    "converged": true,
+    "solver_type": "df_quad"
+  },
+  "sigma_phi": 0.0003750000000000142,
+  "decision": "No",
+  "uncertainty": {
+    "is_uncertain": false,
+    "sigma_phi": 0.0003750000000000142,
+    "threshold_low": 0.45,
+    "threshold_high": 0.55,
+    "escalation_triggered": false,
+    "escalation_actions": [],
+    "escalation_log": []
+  },
+  "hitl_interventions": [],
+  "pre_hitl_decision": null
+}

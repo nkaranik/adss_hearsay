@@ -1,0 +1,254 @@
+{
+  "case_id": "test_0039",
+  "input_text": "CONTRACT CONTEXT:\nSubject to Section 5, each Party agrees that, without the prior written consent of the other Party, such Party will not, and will cause its Representative not to, disclose to any other Person  (i) that Evaluation Material has been exchanged between the Parties,  (ii) that discussions or negotiations are taking place between the Parties concerning a Possible Transaction or any other transaction between the Parties or  (iii) any of the terms, conditions or other facts with respect thereto (including the status thereof) ; provided, however, that nothing contained herein shall be deemed to inhibit, impair or restrict the ability of Recipient or its Representatives from having discussions or negotiations with other persons relating to potential financing in connection with the Possible Transaction so long as each of such Persons agrees in writing to be bound by the terms of this Agreement applicable to Representatives. \n\nTARGET STATEMENT:\nThe contract entails that the relevant party must keep confidential the existence, terms, subject matter, or status of the agreement, negotiations, discussions, or transaction between the parties.\n\nDECISION TASK:\nDetermine whether the contract context entails the target statement.",
+  "phi_text": "",
+  "gold_label": "Yes",
+  "extraction": {
+    "case_id": "test_0039",
+    "input_text": "CONTRACT CONTEXT:\nSubject to Section 5, each Party agrees that, without the prior written consent of the other Party, such Party will not, and will cause its Representative not to, disclose to any other Person  (i) that Evaluation Material has been exchanged between the Parties,  (ii) that discussions or negotiations are taking place between the Parties concerning a Possible Transaction or any other transaction between the Parties or  (iii) any of the terms, conditions or other facts with respect thereto (including the status thereof) ; provided, however, that nothing contained herein shall be deemed to inhibit, impair or restrict the ability of Recipient or its Representatives from having discussions or negotiations with other persons relating to potential financing in connection with the Possible Transaction so long as each of such Persons agrees in writing to be bound by the terms of this Agreement applicable to Representatives. \n\nTARGET STATEMENT:\nThe contract entails that the relevant party must keep confidential the existence, terms, subject matter, or status of the agreement, negotiations, discussions, or transaction between the parties.\n\nDECISION TASK:\nDetermine whether the contract context entails the target statement.",
+    "claim": {
+      "id": "phi",
+      "text": "Does the CONTRACT CONTEXT logically entail the EXACT TARGET STATEMENT, with every material element matched and no missing limitation, exception, party-scope mismatch, information-type mismatch, purpose limitation, recipient-scope mismatch, or disclosure carve-out?"
+    },
+    "arguments": [
+      {
+        "id": "a1",
+        "text": "The contract explicitly imposes a confidentiality obligation on \"each Party\" to refrain from disclosing the exchange of Evaluation Material, ongoing discussions or negotiations, and related terms, conditions, or status.",
+        "stance_to_claim": "support",
+        "legal_rule": "Contract interpretation requires identifying explicit obligations that form the basis of entailment.",
+        "evidence_span": "each Party agrees that... such Party will not... disclose to any other Person (i) that Evaluation Material has been exchanged... (ii) that discussions or negotiations are taking place... or (iii) any of the terms, conditions or other facts with respect thereto (including the status thereof)",
+        "confidence": 0.95
+      },
+      {
+        "id": "a2",
+        "text": "The confidentiality clause applies to \"each Party\" and covers the exact information types listed in the target statement, including the existence of discussions, terms, and status.",
+        "stance_to_claim": "support",
+        "legal_rule": "Scope matching in contract NLI requires verifying that the obligated party and information categories align with the target claim.",
+        "evidence_span": "each Party agrees that... disclose... (i) that Evaluation Material has been exchanged... (ii) that discussions or negotiations are taking place... or (iii) any of the terms, conditions or other facts with respect thereto (including the status thereof)",
+        "confidence": 0.9
+      },
+      {
+        "id": "a3",
+        "text": "The contract contains a specific disclosure carve-out permitting discussions with third parties regarding potential financing, provided they agree in writing to be bound.",
+        "stance_to_claim": "attack",
+        "legal_rule": "Exceptions and carve-outs in contractual obligations limit the scope of entailment and must be accounted for when evaluating strict logical entailment.",
+        "evidence_span": "provided, however, that nothing contained herein shall be deemed to inhibit, impair or restrict the ability of Recipient or its Representatives from having discussions or negotiations with other persons relating to potential financing... so long as each of such Persons agrees in writing to be bound",
+        "confidence": 0.9
+      },
+      {
+        "id": "a4",
+        "text": "The target statement asserts a blanket confidentiality obligation without acknowledging the prior written consent requirement or the financing carve-out, creating a scope mismatch.",
+        "stance_to_claim": "attack",
+        "legal_rule": "Strict entailment in contract NLI fails when the target statement omits material conditions, limitations, or exceptions present in the source text.",
+        "evidence_span": "without the prior written consent of the other Party\" / \"provided, however, that nothing contained herein shall be deemed to inhibit... potential financing",
+        "confidence": 0.85
+      }
+    ],
+    "relations": [
+      {
+        "source": "a1",
+        "target": "phi",
+        "type": "support",
+        "confidence": 0.95
+      },
+      {
+        "source": "a2",
+        "target": "phi",
+        "type": "support",
+        "confidence": 0.9
+      },
+      {
+        "source": "a3",
+        "target": "phi",
+        "type": "attack",
+        "confidence": 0.9
+      },
+      {
+        "source": "a4",
+        "target": "phi",
+        "type": "attack",
+        "confidence": 0.85
+      },
+      {
+        "source": "a3",
+        "target": "a4",
+        "type": "support",
+        "confidence": 0.85
+      },
+      {
+        "source": "a1",
+        "target": "a2",
+        "type": "support",
+        "confidence": 0.85
+      }
+    ],
+    "extraction_model": "",
+    "raw_llm_response": "{\n  \"case_id\": \"test_0039\",\n  \"phi\": \"Does the CONTRACT CONTEXT logically entail the EXACT TARGET STATEMENT, with every material element matched and no missing limitation, exception, party-scope mismatch, information-type mismatch, purpose limitation, recipient-scope mismatch, or disclosure carve-out?\",\n  \"arguments\": [\n    {\n      \"id\": \"a1\",\n      \"text\": \"The contract explicitly imposes a confidentiality obligation on \\\"each Party\\\" to refrain from disclosing the exchange of Evaluation Material, ongoing discussions or negotiations, and related terms, conditions, or status.\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"Contract interpretation requires identifying explicit obligations that form the basis of entailment.\",\n      \"evidence_span\": \"each Party agrees that... such Party will not... disclose to any other Person (i) that Evaluation Material has been exchanged... (ii) that discussions or negotiations are taking place... or (iii) any of the terms, conditions or other facts with respect thereto (including the status thereof)\",\n      \"confidence\": 0.95,\n      \"tau\": 0.9,\n      \"rubric\": {\n        \"relevance\": 0.9,\n        \"factual_grounding\": 0.9,\n        \"specificity\": 0.8,\n        \"logical_coherence\": 0.9,\n        \"applicability\": 0.9\n      },\n      \"justification\": \"Directly establishes the core confidentiality provision that aligns with the target statement's primary claim.\"\n    },\n    {\n      \"id\": \"a2\",\n      \"text\": \"The confidentiality clause applies to \\\"each Party\\\" and covers the exact information types listed in the target statement, including the existence of discussions, terms, and status.\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"Scope matching in contract NLI requires verifying that the obligated party and information categories align with the target claim.\",\n      \"evidence_span\": \"each Party agrees that... disclose... (i) that Evaluation Material has been exchanged... (ii) that discussions or negotiations are taking place... or (iii) any of the terms, conditions or other facts with respect thereto (including the status thereof)\",\n      \"confidence\": 0.9,\n      \"tau\": 0.85,\n      \"rubric\": {\n        \"relevance\": 0.8,\n        \"factual_grounding\": 0.9,\n        \"specificity\": 0.7,\n        \"logical_coherence\": 0.8,\n        \"applicability\": 0.8\n      },\n      \"justification\": \"Confirms that the contract's scope of application and covered information directly match the target statement's elements.\"\n    },\n    {\n      \"id\": \"a3\",\n      \"text\": \"The contract contains a specific disclosure carve-out permitting discussions with third parties regarding potential financing, provided they agree in writing to be bound.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"Exceptions and carve-outs in contractual obligations limit the scope of entailment and must be accounted for when evaluating strict logical entailment.\",\n      \"evidence_span\": \"provided, however, that nothing contained herein shall be deemed to inhibit, impair or restrict the ability of Recipient or its Representatives from having discussions or negotiations with other persons relating to potential financing... so long as each of such Persons agrees in writing to be bound\",\n      \"confidence\": 0.9,\n      \"tau\": 0.8,\n      \"rubric\": {\n        \"relevance\": 0.9,\n        \"factual_grounding\": 0.9,\n        \"specificity\": 0.8,\n        \"logical_coherence\": 0.8,\n        \"applicability\": 0.8\n      },\n      \"justification\": \"Identifies a material exception in the contract that the target statement omits, directly addressing the \\\"no missing limitation, exception\\\" condition in phi.\"\n    },\n    {\n      \"id\": \"a4\",\n      \"text\": \"The target statement asserts a blanket confidentiality obligation without acknowledging the prior written consent requirement or the financing carve-out, creating a scope mismatch.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"Strict entailment in contract NLI fails when the target statement omits material conditions, limitations, or exceptions present in the source text.\",\n      \"evidence_span\": \"without the prior written consent of the other Party\" / \"provided, however, that nothing contained herein shall be deemed to inhibit... potential financing\",\n      \"confidence\": 0.85,\n      \"tau\": 0.75,\n      \"rubric\": {\n        \"relevance\": 0.8,\n        \"factual_grounding\": 0.8,\n        \"specificity\": 0.7,\n        \"logical_coherence\": 0.8,\n        \"applicability\": 0.7\n      },\n      \"justification\": \"Highlights that the target statement's absolute phrasing conflicts with the conditional and exception-laden nature of the contract, weakening strict entailment.\"\n    }\n  ],\n  \"relations\": [\n    {\n      \"source\": \"a1\",\n      \"target\": \"phi\",\n      \"type\": \"support\",\n      \"confidence\": 0.95\n    },\n    {\n      \"source\": \"a2\",\n      \"target\": \"phi\",\n      \"type\": \"support\",\n      \"confidence\": 0.9\n    },\n    {\n      \"source\": \"a3\",\n      \"target\": \"phi\",\n      \"type\": \"attack\",\n      \"confidence\": 0.9\n    },\n    {\n      \"source\": \"a4\",\n      \"target\": \"phi\",\n      \"type\": \"attack\",\n      \"confidence\": 0.85\n    },\n    {\n      \"source\": \"a3\",\n      \"target\": \"a4\",\n      \"type\": \"support\",\n      \"confidence\": 0.85\n    },\n    {\n      \"source\": \"a1\",\n      \"target\": \"a2\",\n      \"type\": \"support\",\n      \"confidence\": 0.85\n    }\n  ]\n}",
+    "parse_error": null,
+    "n_raw_arguments": 4
+  },
+  "strengths": [
+    {
+      "argument_id": "a1",
+      "tau": 0.9,
+      "rubric": {
+        "legal_relevance": 0.9,
+        "factual_grounding": 0.9,
+        "specificity": 0.8,
+        "logical_coherence": 0.9,
+        "fre_801c_applicability": 0.9
+      },
+      "justification": "Directly establishes the core confidentiality provision that aligns with the target statement's primary claim.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a2",
+      "tau": 0.85,
+      "rubric": {
+        "legal_relevance": 0.8,
+        "factual_grounding": 0.9,
+        "specificity": 0.7,
+        "logical_coherence": 0.8,
+        "fre_801c_applicability": 0.8
+      },
+      "justification": "Confirms that the contract's scope of application and covered information directly match the target statement's elements.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a3",
+      "tau": 0.8,
+      "rubric": {
+        "legal_relevance": 0.9,
+        "factual_grounding": 0.9,
+        "specificity": 0.8,
+        "logical_coherence": 0.8,
+        "fre_801c_applicability": 0.8
+      },
+      "justification": "Identifies a material exception in the contract that the target statement omits, directly addressing the \"no missing limitation, exception\" condition in phi.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a4",
+      "tau": 0.75,
+      "rubric": {
+        "legal_relevance": 0.8,
+        "factual_grounding": 0.8,
+        "specificity": 0.7,
+        "logical_coherence": 0.8,
+        "fre_801c_applicability": 0.7
+      },
+      "justification": "Highlights that the target statement's absolute phrasing conflicts with the conditional and exception-laden nature of the contract, weakening strict entailment.",
+      "model": "combined"
+    }
+  ],
+  "solver_output": {
+    "case_id": "test_0039",
+    "graph": {
+      "nodes": {
+        "phi": {
+          "id": "phi",
+          "text": "Does the CONTRACT CONTEXT logically entail the EXACT TARGET STATEMENT, with every material element matched and no missing limitation, exception, party-scope mismatch, information-type mismatch, purpose limitation, recipient-scope mismatch, or disclosure carve-out?",
+          "tau": 0.5,
+          "sigma": 0.50425,
+          "is_claim": true
+        },
+        "a1": {
+          "id": "a1",
+          "text": "The contract explicitly imposes a confidentiality obligation on \"each Party\" to refrain from disclosing the exchange of Evaluation Material, ongoing discussions or negotiations, and related terms, conditions, or status.",
+          "tau": 0.9,
+          "sigma": 0.9,
+          "is_claim": false
+        },
+        "a2": {
+          "id": "a2",
+          "text": "The confidentiality clause applies to \"each Party\" and covers the exact information types listed in the target statement, including the existence of discussions, terms, and status.",
+          "tau": 0.85,
+          "sigma": 0.985,
+          "is_claim": false
+        },
+        "a3": {
+          "id": "a3",
+          "text": "The contract contains a specific disclosure carve-out permitting discussions with third parties regarding potential financing, provided they agree in writing to be bound.",
+          "tau": 0.8,
+          "sigma": 0.8,
+          "is_claim": false
+        },
+        "a4": {
+          "id": "a4",
+          "text": "The target statement asserts a blanket confidentiality obligation without acknowledging the prior written consent requirement or the financing carve-out, creating a scope mismatch.",
+          "tau": 0.75,
+          "sigma": 0.95,
+          "is_claim": false
+        }
+      },
+      "edges": [
+        {
+          "source": "a1",
+          "target": "phi",
+          "type": "support",
+          "confidence": 0.95
+        },
+        {
+          "source": "a2",
+          "target": "phi",
+          "type": "support",
+          "confidence": 0.9
+        },
+        {
+          "source": "a3",
+          "target": "phi",
+          "type": "attack",
+          "confidence": 0.9
+        },
+        {
+          "source": "a4",
+          "target": "phi",
+          "type": "attack",
+          "confidence": 0.85
+        },
+        {
+          "source": "a3",
+          "target": "a4",
+          "type": "support",
+          "confidence": 0.85
+        },
+        {
+          "source": "a1",
+          "target": "a2",
+          "type": "support",
+          "confidence": 0.85
+        }
+      ],
+      "solver_type": "df_quad"
+    },
+    "sigma_phi": 0.50425,
+    "sigma_all": {
+      "phi": 0.50425,
+      "a1": 0.9,
+      "a2": 0.985,
+      "a3": 0.8,
+      "a4": 0.95
+    },
+    "iterations": 2,
+    "converged": true,
+    "solver_type": "df_quad"
+  },
+  "sigma_phi": 0.50425,
+  "decision": "UNCERTAIN",
+  "uncertainty": {
+    "is_uncertain": true,
+    "sigma_phi": 0.50425,
+    "threshold_low": 0.45,
+    "threshold_high": 0.55,
+    "escalation_triggered": true,
+    "escalation_actions": [
+      "rerun_extraction",
+      "human_review"
+    ],
+    "escalation_log": [
+      "[test_0039] UNCERTAIN σ(φ)=0.5042 ∈ [0.45,0.55]. Human review recommended."
+    ]
+  },
+  "hitl_interventions": [],
+  "pre_hitl_decision": null
+}

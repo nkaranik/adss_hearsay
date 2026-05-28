@@ -1,0 +1,249 @@
+{
+  "case_id": "test_0073",
+  "input_text": "CONTRACT CONTEXT:\nTangible forms of the CONFIDENTIAL INFORMATION shall not be copied, in whole or in part, without the prior written consent of the DISCLOSING PARTY. \n\nTARGET STATEMENT:\nThe contract entails that the relevant party must keep confidential the existence, terms, subject matter, or status of the agreement, negotiations, discussions, or transaction between the parties.\n\nDECISION TASK:\nDetermine whether the contract context entails the target statement.",
+  "phi_text": "",
+  "gold_label": "No",
+  "extraction": {
+    "case_id": "test_0073",
+    "input_text": "CONTRACT CONTEXT:\nTangible forms of the CONFIDENTIAL INFORMATION shall not be copied, in whole or in part, without the prior written consent of the DISCLOSING PARTY. \n\nTARGET STATEMENT:\nThe contract entails that the relevant party must keep confidential the existence, terms, subject matter, or status of the agreement, negotiations, discussions, or transaction between the parties.\n\nDECISION TASK:\nDetermine whether the contract context entails the target statement.",
+    "claim": {
+      "id": "phi",
+      "text": "Does the CONTRACT CONTEXT logically entail the EXACT TARGET STATEMENT, with every material element matched and no missing limitation, exception, party-scope mismatch, information-type mismatch, purpose limitation, recipient-scope mismatch, or disclosure carve-out?"
+    },
+    "arguments": [
+      {
+        "id": "a1",
+        "text": "The contract context explicitly restricts copying tangible forms of CONFIDENTIAL INFORMATION without prior written consent. This provision addresses physical reproduction of specific information, not the confidentiality of the agreement's existence or terms.",
+        "stance_to_claim": "attack",
+        "legal_rule": "Contract interpretation requires matching the scope of obligations to the explicit text; obligations do not extend to unmentioned subjects.",
+        "evidence_span": "Tangible forms of the CONFIDENTIAL INFORMATION shall not be copied, in whole or in part, without the prior written consent of the DISCLOSING PARTY.",
+        "confidence": 0.95
+      },
+      {
+        "id": "a2",
+        "text": "The target statement requires confidentiality regarding the existence, terms, subject matter, or status of the agreement and negotiations. The contract context contains no language that addresses or covers these elements.",
+        "stance_to_claim": "attack",
+        "legal_rule": "In contract NLI, the absence of relevant textual support for a claimed obligation attacks logical entailment.",
+        "evidence_span": null,
+        "confidence": 0.95
+      },
+      {
+        "id": "a3",
+        "text": "There is a clear information-type and scope mismatch: the contract's obligation applies to tangible copies of confidential information, while the target statement applies to the abstract existence and terms of the agreement itself.",
+        "stance_to_claim": "attack",
+        "legal_rule": "Material element matching requires that the subject matter and scope of the obligation align exactly; a mismatch prevents entailment.",
+        "evidence_span": null,
+        "confidence": 0.95
+      },
+      {
+        "id": "a4",
+        "text": "Entailment requires that every material element of the target statement be supported by the contract context. The absence of any clause covering the agreement's existence or terms means the contract context fails to entail the target statement.",
+        "stance_to_claim": "attack",
+        "legal_rule": "Logical entailment in contract analysis demands that all material elements of the target claim are explicitly or implicitly covered by the source text.",
+        "evidence_span": null,
+        "confidence": 0.95
+      }
+    ],
+    "relations": [
+      {
+        "source": "a1",
+        "target": "phi",
+        "type": "attack",
+        "confidence": 0.95
+      },
+      {
+        "source": "a2",
+        "target": "phi",
+        "type": "attack",
+        "confidence": 0.95
+      },
+      {
+        "source": "a3",
+        "target": "phi",
+        "type": "attack",
+        "confidence": 0.95
+      },
+      {
+        "source": "a4",
+        "target": "phi",
+        "type": "attack",
+        "confidence": 0.95
+      },
+      {
+        "source": "a2",
+        "target": "a3",
+        "type": "support",
+        "confidence": 0.9
+      },
+      {
+        "source": "a3",
+        "target": "a4",
+        "type": "support",
+        "confidence": 0.9
+      }
+    ],
+    "extraction_model": "",
+    "raw_llm_response": "{\n  \"case_id\": \"test_0073\",\n  \"phi\": \"Does the CONTRACT CONTEXT logically entail the EXACT TARGET STATEMENT, with every material element matched and no missing limitation, exception, party-scope mismatch, information-type mismatch, purpose limitation, recipient-scope mismatch, or disclosure carve-out?\",\n  \"arguments\": [\n    {\n      \"id\": \"a1\",\n      \"text\": \"The contract context explicitly restricts copying tangible forms of CONFIDENTIAL INFORMATION without prior written consent. This provision addresses physical reproduction of specific information, not the confidentiality of the agreement's existence or terms.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"Contract interpretation requires matching the scope of obligations to the explicit text; obligations do not extend to unmentioned subjects.\",\n      \"evidence_span\": \"Tangible forms of the CONFIDENTIAL INFORMATION shall not be copied, in whole or in part, without the prior written consent of the DISCLOSING PARTY.\",\n      \"confidence\": 0.95,\n      \"tau\": 0.9,\n      \"rubric\": {\n        \"relevance\": 0.9,\n        \"factual_grounding\": 1.0,\n        \"specificity\": 0.8,\n        \"logical_coherence\": 0.9,\n        \"applicability\": 0.9\n      },\n      \"justification\": \"Highlights the actual scope of the contract, showing it diverges from the target statement's scope, thereby attacking entailment.\"\n    },\n    {\n      \"id\": \"a2\",\n      \"text\": \"The target statement requires confidentiality regarding the existence, terms, subject matter, or status of the agreement and negotiations. The contract context contains no language that addresses or covers these elements.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"In contract NLI, the absence of relevant textual support for a claimed obligation attacks logical entailment.\",\n      \"evidence_span\": null,\n      \"confidence\": 0.95,\n      \"tau\": 0.95,\n      \"rubric\": {\n        \"relevance\": 1.0,\n        \"factual_grounding\": 1.0,\n        \"specificity\": 0.9,\n        \"logical_coherence\": 1.0,\n        \"applicability\": 1.0\n      },\n      \"justification\": \"Directly addresses the missing scope in the contract, which is fatal to the entailment claim.\"\n    },\n    {\n      \"id\": \"a3\",\n      \"text\": \"There is a clear information-type and scope mismatch: the contract's obligation applies to tangible copies of confidential information, while the target statement applies to the abstract existence and terms of the agreement itself.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"Material element matching requires that the subject matter and scope of the obligation align exactly; a mismatch prevents entailment.\",\n      \"evidence_span\": null,\n      \"confidence\": 0.95,\n      \"tau\": 0.9,\n      \"rubric\": {\n        \"relevance\": 1.0,\n        \"factual_grounding\": 0.9,\n        \"specificity\": 0.9,\n        \"logical_coherence\": 1.0,\n        \"applicability\": 1.0\n      },\n      \"justification\": \"Demonstrates the specific divergence in information type and scope, reinforcing the attack on entailment.\"\n    },\n    {\n      \"id\": \"a4\",\n      \"text\": \"Entailment requires that every material element of the target statement be supported by the contract context. The absence of any clause covering the agreement's existence or terms means the contract context fails to entail the target statement.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"Logical entailment in contract analysis demands that all material elements of the target claim are explicitly or implicitly covered by the source text.\",\n      \"evidence_span\": null,\n      \"confidence\": 0.95,\n      \"tau\": 0.95,\n      \"rubric\": {\n        \"relevance\": 1.0,\n        \"factual_grounding\": 0.8,\n        \"specificity\": 0.8,\n        \"logical_coherence\": 1.0,\n        \"applicability\": 1.0\n      },\n      \"justification\": \"Synthesizes the lack of coverage and scope mismatch to conclude that entailment does not hold.\"\n    }\n  ],\n  \"relations\": [\n    {\n      \"source\": \"a1\",\n      \"target\": \"phi\",\n      \"type\": \"attack\",\n      \"confidence\": 0.95\n    },\n    {\n      \"source\": \"a2\",\n      \"target\": \"phi\",\n      \"type\": \"attack\",\n      \"confidence\": 0.95\n    },\n    {\n      \"source\": \"a3\",\n      \"target\": \"phi\",\n      \"type\": \"attack\",\n      \"confidence\": 0.95\n    },\n    {\n      \"source\": \"a4\",\n      \"target\": \"phi\",\n      \"type\": \"attack\",\n      \"confidence\": 0.95\n    },\n    {\n      \"source\": \"a2\",\n      \"target\": \"a3\",\n      \"type\": \"support\",\n      \"confidence\": 0.9\n    },\n    {\n      \"source\": \"a3\",\n      \"target\": \"a4\",\n      \"type\": \"support\",\n      \"confidence\": 0.9\n    }\n  ]\n}",
+    "parse_error": null,
+    "n_raw_arguments": 4
+  },
+  "strengths": [
+    {
+      "argument_id": "a1",
+      "tau": 0.9,
+      "rubric": {
+        "legal_relevance": 0.9,
+        "factual_grounding": 1.0,
+        "specificity": 0.8,
+        "logical_coherence": 0.9,
+        "fre_801c_applicability": 0.9
+      },
+      "justification": "Highlights the actual scope of the contract, showing it diverges from the target statement's scope, thereby attacking entailment.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a2",
+      "tau": 0.95,
+      "rubric": {
+        "legal_relevance": 1.0,
+        "factual_grounding": 1.0,
+        "specificity": 0.9,
+        "logical_coherence": 1.0,
+        "fre_801c_applicability": 1.0
+      },
+      "justification": "Directly addresses the missing scope in the contract, which is fatal to the entailment claim.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a3",
+      "tau": 0.9,
+      "rubric": {
+        "legal_relevance": 1.0,
+        "factual_grounding": 0.9,
+        "specificity": 0.9,
+        "logical_coherence": 1.0,
+        "fre_801c_applicability": 1.0
+      },
+      "justification": "Demonstrates the specific divergence in information type and scope, reinforcing the attack on entailment.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a4",
+      "tau": 0.95,
+      "rubric": {
+        "legal_relevance": 1.0,
+        "factual_grounding": 0.8,
+        "specificity": 0.8,
+        "logical_coherence": 1.0,
+        "fre_801c_applicability": 1.0
+      },
+      "justification": "Synthesizes the lack of coverage and scope mismatch to conclude that entailment does not hold.",
+      "model": "combined"
+    }
+  ],
+  "solver_output": {
+    "case_id": "test_0073",
+    "graph": {
+      "nodes": {
+        "phi": {
+          "id": "phi",
+          "text": "Does the CONTRACT CONTEXT logically entail the EXACT TARGET STATEMENT, with every material element matched and no missing limitation, exception, party-scope mismatch, information-type mismatch, purpose limitation, recipient-scope mismatch, or disclosure carve-out?",
+          "tau": 0.5,
+          "sigma": 3.1249999810079032e-9,
+          "is_claim": true
+        },
+        "a1": {
+          "id": "a1",
+          "text": "The contract context explicitly restricts copying tangible forms of CONFIDENTIAL INFORMATION without prior written consent. This provision addresses physical reproduction of specific information, not the confidentiality of the agreement's existence or terms.",
+          "tau": 0.9,
+          "sigma": 0.9,
+          "is_claim": false
+        },
+        "a2": {
+          "id": "a2",
+          "text": "The target statement requires confidentiality regarding the existence, terms, subject matter, or status of the agreement and negotiations. The contract context contains no language that addresses or covers these elements.",
+          "tau": 0.95,
+          "sigma": 0.95,
+          "is_claim": false
+        },
+        "a3": {
+          "id": "a3",
+          "text": "There is a clear information-type and scope mismatch: the contract's obligation applies to tangible copies of confidential information, while the target statement applies to the abstract existence and terms of the agreement itself.",
+          "tau": 0.9,
+          "sigma": 0.995,
+          "is_claim": false
+        },
+        "a4": {
+          "id": "a4",
+          "text": "Entailment requires that every material element of the target statement be supported by the contract context. The absence of any clause covering the agreement's existence or terms means the contract context fails to entail the target statement.",
+          "tau": 0.95,
+          "sigma": 0.99975,
+          "is_claim": false
+        }
+      },
+      "edges": [
+        {
+          "source": "a1",
+          "target": "phi",
+          "type": "attack",
+          "confidence": 0.95
+        },
+        {
+          "source": "a2",
+          "target": "phi",
+          "type": "attack",
+          "confidence": 0.95
+        },
+        {
+          "source": "a3",
+          "target": "phi",
+          "type": "attack",
+          "confidence": 0.95
+        },
+        {
+          "source": "a4",
+          "target": "phi",
+          "type": "attack",
+          "confidence": 0.95
+        },
+        {
+          "source": "a2",
+          "target": "a3",
+          "type": "support",
+          "confidence": 0.9
+        },
+        {
+          "source": "a3",
+          "target": "a4",
+          "type": "support",
+          "confidence": 0.9
+        }
+      ],
+      "solver_type": "df_quad"
+    },
+    "sigma_phi": 3.1249999810079032e-9,
+    "sigma_all": {
+      "phi": 3.1249999810079032e-9,
+      "a1": 0.9,
+      "a2": 0.95,
+      "a3": 0.995,
+      "a4": 0.99975
+    },
+    "iterations": 2,
+    "converged": true,
+    "solver_type": "df_quad"
+  },
+  "sigma_phi": 3.1249999810079032e-9,
+  "decision": "No",
+  "uncertainty": {
+    "is_uncertain": false,
+    "sigma_phi": 3.1249999810079032e-9,
+    "threshold_low": 0.45,
+    "threshold_high": 0.55,
+    "escalation_triggered": false,
+    "escalation_actions": [],
+    "escalation_log": []
+  },
+  "hitl_interventions": [],
+  "pre_hitl_decision": null
+}

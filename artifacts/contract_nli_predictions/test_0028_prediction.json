@@ -1,0 +1,225 @@
+{
+  "case_id": "test_0028",
+  "input_text": "CONTRACT CONTEXT:\nWithout the prior written consent of the Company or except as may be required by applicable law or regulation, the Receiving Party and its Representatives shall not disclose to any person that any discussions or negotiations are taking place between the parties concerning a possible Transaction, including the content, timing and status of such discussions or negotiations (the “Discussion Information”). \n\nTARGET STATEMENT:\nThe contract entails that the relevant party must keep confidential the existence, terms, subject matter, or status of the agreement, negotiations, discussions, or transaction between the parties.\n\nDECISION TASK:\nDetermine whether the contract context entails the target statement.",
+  "phi_text": "",
+  "gold_label": "Yes",
+  "extraction": {
+    "case_id": "test_0028",
+    "input_text": "CONTRACT CONTEXT:\nWithout the prior written consent of the Company or except as may be required by applicable law or regulation, the Receiving Party and its Representatives shall not disclose to any person that any discussions or negotiations are taking place between the parties concerning a possible Transaction, including the content, timing and status of such discussions or negotiations (the “Discussion Information”). \n\nTARGET STATEMENT:\nThe contract entails that the relevant party must keep confidential the existence, terms, subject matter, or status of the agreement, negotiations, discussions, or transaction between the parties.\n\nDECISION TASK:\nDetermine whether the contract context entails the target statement.",
+    "claim": {
+      "id": "phi",
+      "text": "Does the CONTRACT CONTEXT logically entail the EXACT TARGET STATEMENT, with every material element matched and no missing limitation, exception, party-scope mismatch, information-type mismatch, purpose limitation, recipient-scope mismatch, or disclosure carve-out?"
+    },
+    "arguments": [
+      {
+        "id": "a1",
+        "text": "The contract context contains an explicit confidentiality clause imposing a duty on the Receiving Party and its Representatives not to disclose \"Discussion Information.\"",
+        "stance_to_claim": "support",
+        "legal_rule": "Contract interpretation requires identifying explicit obligations and their direct textual basis.",
+        "evidence_span": "the Receiving Party and its Representatives shall not disclose to any person that any discussions or negotiations are taking place between the parties concerning a possible Transaction",
+        "confidence": 0.95
+      },
+      {
+        "id": "a2",
+        "text": "The defined \"Discussion Information\" explicitly covers the existence, content, timing, and status of discussions or negotiations concerning a possible Transaction, which directly aligns with the target statement's reference to negotiations, discussions, or transaction.",
+        "stance_to_claim": "support",
+        "legal_rule": "Entailment in contract NLI is supported when the defined scope of confidential information matches or encompasses the target claim's scope.",
+        "evidence_span": "including the content, timing and status of such discussions or negotiations (the “Discussion Information”)",
+        "confidence": 0.95
+      },
+      {
+        "id": "a3",
+        "text": "The confidentiality obligation is subject to explicit carve-outs, including prior written consent and applicable law or regulation. These exceptions limit the absolute scope of the duty and introduce limitations that the strict entailment question in φ accounts for.",
+        "stance_to_claim": "attack",
+        "legal_rule": "Exceptions and carve-outs in confidentiality clauses narrow the scope of the obligation and can defeat strict entailment claims that imply absolute confidentiality.",
+        "evidence_span": "Without the prior written consent of the Company or except as may be required by applicable law or regulation",
+        "confidence": 0.85
+      },
+      {
+        "id": "a4",
+        "text": "The target statement broadly claims confidentiality over the \"agreement, negotiations, discussions, or transaction.\" While the contract specifically addresses \"discussions or negotiations... concerning a possible Transaction,\" the core obligation to maintain confidentiality is clearly established and supports the target claim.",
+        "stance_to_claim": "support",
+        "legal_rule": "Broad target statements are generally entailed by contract clauses if the clause covers the primary subject matter, even if minor terminological differences exist.",
+        "evidence_span": "concerning a possible Transaction",
+        "confidence": 0.85
+      }
+    ],
+    "relations": [
+      {
+        "source": "a1",
+        "target": "phi",
+        "type": "support",
+        "confidence": 0.9
+      },
+      {
+        "source": "a2",
+        "target": "phi",
+        "type": "support",
+        "confidence": 0.95
+      },
+      {
+        "source": "a3",
+        "target": "phi",
+        "type": "attack",
+        "confidence": 0.85
+      },
+      {
+        "source": "a4",
+        "target": "phi",
+        "type": "support",
+        "confidence": 0.85
+      }
+    ],
+    "extraction_model": "",
+    "raw_llm_response": "{\n  \"case_id\": \"test_0028\",\n  \"phi\": \"Does the CONTRACT CONTEXT logically entail the EXACT TARGET STATEMENT, with every material element matched and no missing limitation, exception, party-scope mismatch, information-type mismatch, purpose limitation, recipient-scope mismatch, or disclosure carve-out?\",\n  \"arguments\": [\n    {\n      \"id\": \"a1\",\n      \"text\": \"The contract context contains an explicit confidentiality clause imposing a duty on the Receiving Party and its Representatives not to disclose \\\"Discussion Information.\\\"\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"Contract interpretation requires identifying explicit obligations and their direct textual basis.\",\n      \"evidence_span\": \"the Receiving Party and its Representatives shall not disclose to any person that any discussions or negotiations are taking place between the parties concerning a possible Transaction\",\n      \"confidence\": 0.95,\n      \"tau\": 0.9,\n      \"rubric\": {\n        \"relevance\": 0.9,\n        \"factual_grounding\": 1.0,\n        \"specificity\": 0.8,\n        \"logical_coherence\": 0.9,\n        \"applicability\": 0.9\n      },\n      \"justification\": \"Directly establishes the existence of a confidentiality obligation, which is the foundational premise for the target claim.\"\n    },\n    {\n      \"id\": \"a2\",\n      \"text\": \"The defined \\\"Discussion Information\\\" explicitly covers the existence, content, timing, and status of discussions or negotiations concerning a possible Transaction, which directly aligns with the target statement's reference to negotiations, discussions, or transaction.\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"Entailment in contract NLI is supported when the defined scope of confidential information matches or encompasses the target claim's scope.\",\n      \"evidence_span\": \"including the content, timing and status of such discussions or negotiations (the “Discussion Information”)\",\n      \"confidence\": 0.95,\n      \"tau\": 0.95,\n      \"rubric\": {\n        \"relevance\": 1.0,\n        \"factual_grounding\": 1.0,\n        \"specificity\": 0.9,\n        \"logical_coherence\": 0.95,\n        \"applicability\": 0.95\n      },\n      \"justification\": \"Demonstrates precise alignment between the contract's defined scope and the target statement's core elements, strongly supporting entailment.\"\n    },\n    {\n      \"id\": \"a3\",\n      \"text\": \"The confidentiality obligation is subject to explicit carve-outs, including prior written consent and applicable law or regulation. These exceptions limit the absolute scope of the duty and introduce limitations that the strict entailment question in φ accounts for.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"Exceptions and carve-outs in confidentiality clauses narrow the scope of the obligation and can defeat strict entailment claims that imply absolute confidentiality.\",\n      \"evidence_span\": \"Without the prior written consent of the Company or except as may be required by applicable law or regulation\",\n      \"confidence\": 0.85,\n      \"tau\": 0.7,\n      \"rubric\": {\n        \"relevance\": 0.8,\n        \"factual_grounding\": 1.0,\n        \"specificity\": 0.7,\n        \"logical_coherence\": 0.8,\n        \"applicability\": 0.8\n      },\n      \"justification\": \"Directly addresses the 'no missing limitation, exception' constraint in φ. The presence of carve-outs means the entailment is not absolute, thus attacking the strict entailment claim.\"\n    },\n    {\n      \"id\": \"a4\",\n      \"text\": \"The target statement broadly claims confidentiality over the \\\"agreement, negotiations, discussions, or transaction.\\\" While the contract specifically addresses \\\"discussions or negotiations... concerning a possible Transaction,\\\" the core obligation to maintain confidentiality is clearly established and supports the target claim.\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"Broad target statements are generally entailed by contract clauses if the clause covers the primary subject matter, even if minor terminological differences exist.\",\n      \"evidence_span\": \"concerning a possible Transaction\",\n      \"confidence\": 0.85,\n      \"tau\": 0.8,\n      \"rubric\": {\n        \"relevance\": 0.8,\n        \"factual_grounding\": 0.9,\n        \"specificity\": 0.7,\n        \"logical_coherence\": 0.85,\n        \"applicability\": 0.85\n      },\n      \"justification\": \"Acknowledges a slight terminological gap ('agreement' vs 'possible Transaction') but concludes that the substantive duty to keep negotiations confidential is sufficiently entailed.\"\n    }\n  ],\n  \"relations\": [\n    {\n      \"source\": \"a1\",\n      \"target\": \"phi\",\n      \"type\": \"support\",\n      \"confidence\": 0.9\n    },\n    {\n      \"source\": \"a2\",\n      \"target\": \"phi\",\n      \"type\": \"support\",\n      \"confidence\": 0.95\n    },\n    {\n      \"source\": \"a3\",\n      \"target\": \"phi\",\n      \"type\": \"attack\",\n      \"confidence\": 0.85\n    },\n    {\n      \"source\": \"a4\",\n      \"target\": \"phi\",\n      \"type\": \"support\",\n      \"confidence\": 0.85\n    }\n  ]\n}",
+    "parse_error": null,
+    "n_raw_arguments": 4
+  },
+  "strengths": [
+    {
+      "argument_id": "a1",
+      "tau": 0.9,
+      "rubric": {
+        "legal_relevance": 0.9,
+        "factual_grounding": 1.0,
+        "specificity": 0.8,
+        "logical_coherence": 0.9,
+        "fre_801c_applicability": 0.9
+      },
+      "justification": "Directly establishes the existence of a confidentiality obligation, which is the foundational premise for the target claim.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a2",
+      "tau": 0.95,
+      "rubric": {
+        "legal_relevance": 1.0,
+        "factual_grounding": 1.0,
+        "specificity": 0.9,
+        "logical_coherence": 0.95,
+        "fre_801c_applicability": 0.95
+      },
+      "justification": "Demonstrates precise alignment between the contract's defined scope and the target statement's core elements, strongly supporting entailment.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a3",
+      "tau": 0.7,
+      "rubric": {
+        "legal_relevance": 0.8,
+        "factual_grounding": 1.0,
+        "specificity": 0.7,
+        "logical_coherence": 0.8,
+        "fre_801c_applicability": 0.8
+      },
+      "justification": "Directly addresses the 'no missing limitation, exception' constraint in φ. The presence of carve-outs means the entailment is not absolute, thus attacking the strict entailment claim.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a4",
+      "tau": 0.8,
+      "rubric": {
+        "legal_relevance": 0.8,
+        "factual_grounding": 0.9,
+        "specificity": 0.7,
+        "logical_coherence": 0.85,
+        "fre_801c_applicability": 0.85
+      },
+      "justification": "Acknowledges a slight terminological gap ('agreement' vs 'possible Transaction') but concludes that the substantive duty to keep negotiations confidential is sufficiently entailed.",
+      "model": "combined"
+    }
+  ],
+  "solver_output": {
+    "case_id": "test_0028",
+    "graph": {
+      "nodes": {
+        "phi": {
+          "id": "phi",
+          "text": "Does the CONTRACT CONTEXT logically entail the EXACT TARGET STATEMENT, with every material element matched and no missing limitation, exception, party-scope mismatch, information-type mismatch, purpose limitation, recipient-scope mismatch, or disclosure carve-out?",
+          "tau": 0.5,
+          "sigma": 0.6495000000000001,
+          "is_claim": true
+        },
+        "a1": {
+          "id": "a1",
+          "text": "The contract context contains an explicit confidentiality clause imposing a duty on the Receiving Party and its Representatives not to disclose \"Discussion Information.\"",
+          "tau": 0.9,
+          "sigma": 0.9,
+          "is_claim": false
+        },
+        "a2": {
+          "id": "a2",
+          "text": "The defined \"Discussion Information\" explicitly covers the existence, content, timing, and status of discussions or negotiations concerning a possible Transaction, which directly aligns with the target statement's reference to negotiations, discussions, or transaction.",
+          "tau": 0.95,
+          "sigma": 0.95,
+          "is_claim": false
+        },
+        "a3": {
+          "id": "a3",
+          "text": "The confidentiality obligation is subject to explicit carve-outs, including prior written consent and applicable law or regulation. These exceptions limit the absolute scope of the duty and introduce limitations that the strict entailment question in φ accounts for.",
+          "tau": 0.7,
+          "sigma": 0.7,
+          "is_claim": false
+        },
+        "a4": {
+          "id": "a4",
+          "text": "The target statement broadly claims confidentiality over the \"agreement, negotiations, discussions, or transaction.\" While the contract specifically addresses \"discussions or negotiations... concerning a possible Transaction,\" the core obligation to maintain confidentiality is clearly established and supports the target claim.",
+          "tau": 0.8,
+          "sigma": 0.8,
+          "is_claim": false
+        }
+      },
+      "edges": [
+        {
+          "source": "a1",
+          "target": "phi",
+          "type": "support",
+          "confidence": 0.9
+        },
+        {
+          "source": "a2",
+          "target": "phi",
+          "type": "support",
+          "confidence": 0.95
+        },
+        {
+          "source": "a3",
+          "target": "phi",
+          "type": "attack",
+          "confidence": 0.85
+        },
+        {
+          "source": "a4",
+          "target": "phi",
+          "type": "support",
+          "confidence": 0.85
+        }
+      ],
+      "solver_type": "df_quad"
+    },
+    "sigma_phi": 0.6495000000000001,
+    "sigma_all": {
+      "phi": 0.6495000000000001,
+      "a1": 0.9,
+      "a2": 0.95,
+      "a3": 0.7,
+      "a4": 0.8
+    },
+    "iterations": 2,
+    "converged": true,
+    "solver_type": "df_quad"
+  },
+  "sigma_phi": 0.6495000000000001,
+  "decision": "Yes",
+  "uncertainty": {
+    "is_uncertain": false,
+    "sigma_phi": 0.6495000000000001,
+    "threshold_low": 0.45,
+    "threshold_high": 0.55,
+    "escalation_triggered": false,
+    "escalation_actions": [],
+    "escalation_log": []
+  },
+  "hitl_interventions": [],
+  "pre_hitl_decision": null
+}

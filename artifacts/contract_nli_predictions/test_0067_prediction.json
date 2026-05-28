@@ -1,0 +1,184 @@
+{
+  "case_id": "test_0067",
+  "input_text": "CONTRACT CONTEXT:\nThis Agreement shall survive the execution of any subsequent contract between the parties hereto, excepting solely if the subsequent contract relates to the Matter and expressly addresses Recipient's non-disclosure obligations with respect to the Matter. \n\nTARGET STATEMENT:\nThe contract entails that the relevant party must keep confidential the existence, terms, subject matter, or status of the agreement, negotiations, discussions, or transaction between the parties.\n\nDECISION TASK:\nDetermine whether the contract context entails the target statement.",
+  "phi_text": "",
+  "gold_label": "No",
+  "extraction": {
+    "case_id": "test_0067",
+    "input_text": "CONTRACT CONTEXT:\nThis Agreement shall survive the execution of any subsequent contract between the parties hereto, excepting solely if the subsequent contract relates to the Matter and expressly addresses Recipient's non-disclosure obligations with respect to the Matter. \n\nTARGET STATEMENT:\nThe contract entails that the relevant party must keep confidential the existence, terms, subject matter, or status of the agreement, negotiations, discussions, or transaction between the parties.\n\nDECISION TASK:\nDetermine whether the contract context entails the target statement.",
+    "claim": {
+      "id": "phi",
+      "text": "Does the CONTRACT CONTEXT logically entail the EXACT TARGET STATEMENT, with every material element matched and no missing limitation, exception, party-scope mismatch, information-type mismatch, purpose limitation, recipient-scope mismatch, or disclosure carve-out?"
+    },
+    "arguments": [
+      {
+        "id": "a1",
+        "text": "The contract context lacks an explicit confidentiality clause covering the existence, terms, subject matter, or status of the agreement.",
+        "stance_to_claim": "attack",
+        "legal_rule": "Contract NLI requires direct textual support or clear inference for entailment of confidentiality obligations.",
+        "evidence_span": "This Agreement shall survive the execution of any subsequent contract between the parties hereto, excepting solely if the subsequent contract relates to the Matter and expressly addresses Recipient's non-disclosure obligations with respect to the Matter.",
+        "confidence": 0.95
+      },
+      {
+        "id": "a2",
+        "text": "The contract context only addresses the survival of the agreement and a conditional exception for subsequent contracts regarding non-disclosure, rather than imposing a confidentiality duty on the current agreement.",
+        "stance_to_claim": "attack",
+        "legal_rule": "Entailment in contract NLI demands that the target statement be directly supported by the text, not merely implied by survival clauses.",
+        "evidence_span": "This Agreement shall survive the execution of any subsequent contract between the parties hereto, excepting solely if the subsequent contract relates to the Matter and expressly addresses Recipient's non-disclosure obligations with respect to the Matter.",
+        "confidence": 0.9
+      },
+      {
+        "id": "a3",
+        "text": "The target statement requires a direct confidentiality obligation regarding the agreement's existence and terms, which is not mentioned or inferable from the provided contract context.",
+        "stance_to_claim": "attack",
+        "legal_rule": "In contract NLI, mere silence on a topic attacks the claim of logical entailment for that topic.",
+        "evidence_span": "This Agreement shall survive the execution of any subsequent contract between the parties hereto, excepting solely if the subsequent contract relates to the Matter and expressly addresses Recipient's non-disclosure obligations with respect to the Matter.",
+        "confidence": 0.95
+      }
+    ],
+    "relations": [
+      {
+        "source": "a1",
+        "target": "phi",
+        "type": "attack",
+        "confidence": 0.95
+      },
+      {
+        "source": "a2",
+        "target": "phi",
+        "type": "attack",
+        "confidence": 0.9
+      },
+      {
+        "source": "a3",
+        "target": "phi",
+        "type": "attack",
+        "confidence": 0.95
+      }
+    ],
+    "extraction_model": "",
+    "raw_llm_response": "{\n  \"case_id\": \"test_0067\",\n  \"phi\": \"Does the CONTRACT CONTEXT logically entail the EXACT TARGET STATEMENT, with every material element matched and no missing limitation, exception, party-scope mismatch, information-type mismatch, purpose limitation, recipient-scope mismatch, or disclosure carve-out?\",\n  \"arguments\": [\n    {\n      \"id\": \"a1\",\n      \"text\": \"The contract context lacks an explicit confidentiality clause covering the existence, terms, subject matter, or status of the agreement.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"Contract NLI requires direct textual support or clear inference for entailment of confidentiality obligations.\",\n      \"evidence_span\": \"This Agreement shall survive the execution of any subsequent contract between the parties hereto, excepting solely if the subsequent contract relates to the Matter and expressly addresses Recipient's non-disclosure obligations with respect to the Matter.\",\n      \"confidence\": 0.95,\n      \"tau\": 0.9,\n      \"rubric\": {\n        \"relevance\": 0.9,\n        \"factual_grounding\": 0.9,\n        \"specificity\": 0.8,\n        \"logical_coherence\": 0.9,\n        \"applicability\": 0.9\n      },\n      \"justification\": \"The absence of a confidentiality clause directly attacks the claim that the contract entails such an obligation.\"\n    },\n    {\n      \"id\": \"a2\",\n      \"text\": \"The contract context only addresses the survival of the agreement and a conditional exception for subsequent contracts regarding non-disclosure, rather than imposing a confidentiality duty on the current agreement.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"Entailment in contract NLI demands that the target statement be directly supported by the text, not merely implied by survival clauses.\",\n      \"evidence_span\": \"This Agreement shall survive the execution of any subsequent contract between the parties hereto, excepting solely if the subsequent contract relates to the Matter and expressly addresses Recipient's non-disclosure obligations with respect to the Matter.\",\n      \"confidence\": 0.9,\n      \"tau\": 0.85,\n      \"rubric\": {\n        \"relevance\": 0.9,\n        \"factual_grounding\": 0.9,\n        \"specificity\": 0.8,\n        \"logical_coherence\": 0.9,\n        \"applicability\": 0.8\n      },\n      \"justification\": \"The text focuses on survival and exceptions, not confidentiality, weakening the entailment claim.\"\n    },\n    {\n      \"id\": \"a3\",\n      \"text\": \"The target statement requires a direct confidentiality obligation regarding the agreement's existence and terms, which is not mentioned or inferable from the provided contract context.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"In contract NLI, mere silence on a topic attacks the claim of logical entailment for that topic.\",\n      \"evidence_span\": \"This Agreement shall survive the execution of any subsequent contract between the parties hereto, excepting solely if the subsequent contract relates to the Matter and expressly addresses Recipient's non-disclosure obligations with respect to the Matter.\",\n      \"confidence\": 0.95,\n      \"tau\": 0.9,\n      \"rubric\": {\n        \"relevance\": 0.9,\n        \"factual_grounding\": 0.9,\n        \"specificity\": 0.8,\n        \"logical_coherence\": 0.9,\n        \"applicability\": 0.9\n      },\n      \"justification\": \"The lack of mention or inference for confidentiality directly attacks the entailment target.\"\n    }\n  ],\n  \"relations\": [\n    {\n      \"source\": \"a1\",\n      \"target\": \"phi\",\n      \"type\": \"attack\",\n      \"confidence\": 0.95\n    },\n    {\n      \"source\": \"a2\",\n      \"target\": \"phi\",\n      \"type\": \"attack\",\n      \"confidence\": 0.9\n    },\n    {\n      \"source\": \"a3\",\n      \"target\": \"phi\",\n      \"type\": \"attack\",\n      \"confidence\": 0.95\n    }\n  ]\n}",
+    "parse_error": null,
+    "n_raw_arguments": 3
+  },
+  "strengths": [
+    {
+      "argument_id": "a1",
+      "tau": 0.9,
+      "rubric": {
+        "legal_relevance": 0.9,
+        "factual_grounding": 0.9,
+        "specificity": 0.8,
+        "logical_coherence": 0.9,
+        "fre_801c_applicability": 0.9
+      },
+      "justification": "The absence of a confidentiality clause directly attacks the claim that the contract entails such an obligation.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a2",
+      "tau": 0.85,
+      "rubric": {
+        "legal_relevance": 0.9,
+        "factual_grounding": 0.9,
+        "specificity": 0.8,
+        "logical_coherence": 0.9,
+        "fre_801c_applicability": 0.8
+      },
+      "justification": "The text focuses on survival and exceptions, not confidentiality, weakening the entailment claim.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a3",
+      "tau": 0.9,
+      "rubric": {
+        "legal_relevance": 0.9,
+        "factual_grounding": 0.9,
+        "specificity": 0.8,
+        "logical_coherence": 0.9,
+        "fre_801c_applicability": 0.9
+      },
+      "justification": "The lack of mention or inference for confidentiality directly attacks the entailment target.",
+      "model": "combined"
+    }
+  ],
+  "solver_output": {
+    "case_id": "test_0067",
+    "graph": {
+      "nodes": {
+        "phi": {
+          "id": "phi",
+          "text": "Does the CONTRACT CONTEXT logically entail the EXACT TARGET STATEMENT, with every material element matched and no missing limitation, exception, party-scope mismatch, information-type mismatch, purpose limitation, recipient-scope mismatch, or disclosure carve-out?",
+          "tau": 0.5,
+          "sigma": 0.0007499999999999729,
+          "is_claim": true
+        },
+        "a1": {
+          "id": "a1",
+          "text": "The contract context lacks an explicit confidentiality clause covering the existence, terms, subject matter, or status of the agreement.",
+          "tau": 0.9,
+          "sigma": 0.9,
+          "is_claim": false
+        },
+        "a2": {
+          "id": "a2",
+          "text": "The contract context only addresses the survival of the agreement and a conditional exception for subsequent contracts regarding non-disclosure, rather than imposing a confidentiality duty on the current agreement.",
+          "tau": 0.85,
+          "sigma": 0.85,
+          "is_claim": false
+        },
+        "a3": {
+          "id": "a3",
+          "text": "The target statement requires a direct confidentiality obligation regarding the agreement's existence and terms, which is not mentioned or inferable from the provided contract context.",
+          "tau": 0.9,
+          "sigma": 0.9,
+          "is_claim": false
+        }
+      },
+      "edges": [
+        {
+          "source": "a1",
+          "target": "phi",
+          "type": "attack",
+          "confidence": 0.95
+        },
+        {
+          "source": "a2",
+          "target": "phi",
+          "type": "attack",
+          "confidence": 0.9
+        },
+        {
+          "source": "a3",
+          "target": "phi",
+          "type": "attack",
+          "confidence": 0.95
+        }
+      ],
+      "solver_type": "df_quad"
+    },
+    "sigma_phi": 0.0007499999999999729,
+    "sigma_all": {
+      "phi": 0.0007499999999999729,
+      "a1": 0.9,
+      "a2": 0.85,
+      "a3": 0.9
+    },
+    "iterations": 2,
+    "converged": true,
+    "solver_type": "df_quad"
+  },
+  "sigma_phi": 0.0007499999999999729,
+  "decision": "No",
+  "uncertainty": {
+    "is_uncertain": false,
+    "sigma_phi": 0.0007499999999999729,
+    "threshold_low": 0.45,
+    "threshold_high": 0.55,
+    "escalation_triggered": false,
+    "escalation_actions": [],
+    "escalation_log": []
+  },
+  "hitl_interventions": [],
+  "pre_hitl_decision": null
+}

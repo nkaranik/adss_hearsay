@@ -1,0 +1,249 @@
+{
+  "case_id": "test_0025",
+  "input_text": "CONTRACT CONTEXT:\n(c) Each Party agrees that, without the prior written consent of the other Party, neither it nor its Representatives will disclose to any other person the fact that the other Party or its Representative have received Confidential Information or that Confidential Information has been made available to the other Party or its Representatives, that investigations, discussions or negotiations are taking place concerning a Possible Transaction or any of the terms, conditions or other facts with respect to any Possible Transaction, including the status this Agreement and the identity of the parties hereto (collectively, the “Discussion Information”), provided that the Receiving Party may make such disclosure if required by law or the applicable rules of any securities exchange or interdealer quotation system.  \n\nTARGET STATEMENT:\nThe contract entails that the relevant party must keep confidential the existence, terms, subject matter, or status of the agreement, negotiations, discussions, or transaction between the parties.\n\nDECISION TASK:\nDetermine whether the contract context entails the target statement.",
+  "phi_text": "",
+  "gold_label": "Yes",
+  "extraction": {
+    "case_id": "test_0025",
+    "input_text": "CONTRACT CONTEXT:\n(c) Each Party agrees that, without the prior written consent of the other Party, neither it nor its Representatives will disclose to any other person the fact that the other Party or its Representative have received Confidential Information or that Confidential Information has been made available to the other Party or its Representatives, that investigations, discussions or negotiations are taking place concerning a Possible Transaction or any of the terms, conditions or other facts with respect to any Possible Transaction, including the status this Agreement and the identity of the parties hereto (collectively, the “Discussion Information”), provided that the Receiving Party may make such disclosure if required by law or the applicable rules of any securities exchange or interdealer quotation system.  \n\nTARGET STATEMENT:\nThe contract entails that the relevant party must keep confidential the existence, terms, subject matter, or status of the agreement, negotiations, discussions, or transaction between the parties.\n\nDECISION TASK:\nDetermine whether the contract context entails the target statement.",
+    "claim": {
+      "id": "phi",
+      "text": "Does the CONTRACT CONTEXT logically entail the EXACT TARGET STATEMENT, with every material element matched and no missing limitation, exception, party-scope mismatch, information-type mismatch, purpose limitation, recipient-scope mismatch, or disclosure carve-out?"
+    },
+    "arguments": [
+      {
+        "id": "a1",
+        "text": "The contract explicitly imposes a confidentiality obligation on 'Each Party' regarding 'Discussion Information,' which includes the status of the Agreement, negotiations, and terms. This directly supports the target statement.",
+        "stance_to_claim": "support",
+        "legal_rule": "Contractual interpretation requires matching explicit obligations in the text to the target claim's scope.",
+        "evidence_span": "Each Party agrees that, without the prior written consent of the other Party, neither it nor its Representatives will disclose to any other person the fact that the other Party or its Representative have received Confidential Information or that Confidential Information has been made available to the other Party or its Representatives, that investigations, discussions or negotiations are taking place concerning a Possible Transaction or any of the terms, conditions or other facts with respect to any Possible Transaction, including the status this Agreement and the identity of the parties hereto (collectively, the “Discussion Information”)",
+        "confidence": 0.95
+      },
+      {
+        "id": "a2",
+        "text": "The confidentiality obligation extends to the party's 'Representatives,' broadening the scope of the duty to keep the information confidential, which supports the target statement's applicability to the relevant party.",
+        "stance_to_claim": "support",
+        "legal_rule": "Contractual duties binding a party typically extend to its authorized representatives unless explicitly excluded.",
+        "evidence_span": "neither it nor its Representatives will disclose to any other person",
+        "confidence": 0.9
+      },
+      {
+        "id": "a3",
+        "text": "The contract contains a carve-out permitting disclosure if 'required by law or the applicable rules of any securities exchange or interdealer quotation system.' This limitation means the obligation is not absolute, which attacks the strict entailment of an unconditional confidentiality duty.",
+        "stance_to_claim": "attack",
+        "legal_rule": "Permitted disclosures or statutory carve-outs limit the absolute nature of contractual confidentiality obligations.",
+        "evidence_span": "provided that the Receiving Party may make such disclosure if required by law or the applicable rules of any securities exchange or interdealer quotation system.",
+        "confidence": 0.85
+      },
+      {
+        "id": "a4",
+        "text": "The target statement's broad claim is directly supported by the explicit listing of 'status this Agreement', 'investigations, discussions or negotiations', and 'terms, conditions' under the defined 'Discussion Information,' strongly supporting the entailment.",
+        "stance_to_claim": "support",
+        "legal_rule": "Direct lexical and semantic matching between contract definitions and target claims confirms entailment.",
+        "evidence_span": "including the status this Agreement and the identity of the parties hereto (collectively, the “Discussion Information”)",
+        "confidence": 0.95
+      }
+    ],
+    "relations": [
+      {
+        "source": "a1",
+        "target": "phi",
+        "type": "support",
+        "confidence": 0.9
+      },
+      {
+        "source": "a2",
+        "target": "phi",
+        "type": "support",
+        "confidence": 0.85
+      },
+      {
+        "source": "a3",
+        "target": "phi",
+        "type": "attack",
+        "confidence": 0.8
+      },
+      {
+        "source": "a4",
+        "target": "phi",
+        "type": "support",
+        "confidence": 0.95
+      },
+      {
+        "source": "a1",
+        "target": "a4",
+        "type": "support",
+        "confidence": 0.8
+      },
+      {
+        "source": "a3",
+        "target": "a1",
+        "type": "attack",
+        "confidence": 0.75
+      }
+    ],
+    "extraction_model": "",
+    "raw_llm_response": "{\n  \"case_id\": \"test_0025\",\n  \"phi\": \"Does the CONTRACT CONTEXT logically entail the EXACT TARGET STATEMENT, with every material element matched and no missing limitation, exception, party-scope mismatch, information-type mismatch, purpose limitation, recipient-scope mismatch, or disclosure carve-out?\",\n  \"arguments\": [\n    {\n      \"id\": \"a1\",\n      \"text\": \"The contract explicitly imposes a confidentiality obligation on 'Each Party' regarding 'Discussion Information,' which includes the status of the Agreement, negotiations, and terms. This directly supports the target statement.\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"Contractual interpretation requires matching explicit obligations in the text to the target claim's scope.\",\n      \"evidence_span\": \"Each Party agrees that, without the prior written consent of the other Party, neither it nor its Representatives will disclose to any other person the fact that the other Party or its Representative have received Confidential Information or that Confidential Information has been made available to the other Party or its Representatives, that investigations, discussions or negotiations are taking place concerning a Possible Transaction or any of the terms, conditions or other facts with respect to any Possible Transaction, including the status this Agreement and the identity of the parties hereto (collectively, the “Discussion Information”)\",\n      \"confidence\": 0.95,\n      \"tau\": 0.9,\n      \"rubric\": {\n        \"relevance\": 0.9,\n        \"factual_grounding\": 1.0,\n        \"specificity\": 0.8,\n        \"logical_coherence\": 0.9,\n        \"applicability\": 0.9\n      },\n      \"justification\": \"The clause establishes the core confidentiality duty referenced in the target statement, directly supporting entailment.\"\n    },\n    {\n      \"id\": \"a2\",\n      \"text\": \"The confidentiality obligation extends to the party's 'Representatives,' broadening the scope of the duty to keep the information confidential, which supports the target statement's applicability to the relevant party.\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"Contractual duties binding a party typically extend to its authorized representatives unless explicitly excluded.\",\n      \"evidence_span\": \"neither it nor its Representatives will disclose to any other person\",\n      \"confidence\": 0.9,\n      \"tau\": 0.85,\n      \"rubric\": {\n        \"relevance\": 0.8,\n        \"factual_grounding\": 1.0,\n        \"specificity\": 0.7,\n        \"logical_coherence\": 0.8,\n        \"applicability\": 0.8\n      },\n      \"justification\": \"Expands the bound party scope to match the target statement's reference to 'the relevant party,' reinforcing the obligation's breadth.\"\n    },\n    {\n      \"id\": \"a3\",\n      \"text\": \"The contract contains a carve-out permitting disclosure if 'required by law or the applicable rules of any securities exchange or interdealer quotation system.' This limitation means the obligation is not absolute, which attacks the strict entailment of an unconditional confidentiality duty.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"Permitted disclosures or statutory carve-outs limit the absolute nature of contractual confidentiality obligations.\",\n      \"evidence_span\": \"provided that the Receiving Party may make such disclosure if required by law or the applicable rules of any securities exchange or interdealer quotation system.\",\n      \"confidence\": 0.85,\n      \"tau\": 0.6,\n      \"rubric\": {\n        \"relevance\": 0.8,\n        \"factual_grounding\": 1.0,\n        \"specificity\": 0.7,\n        \"logical_coherence\": 0.7,\n        \"applicability\": 0.8\n      },\n      \"justification\": \"The explicit exception introduces a missing limitation in the target statement's unconditional claim, weakening the strict entailment.\"\n    },\n    {\n      \"id\": \"a4\",\n      \"text\": \"The target statement's broad claim is directly supported by the explicit listing of 'status this Agreement', 'investigations, discussions or negotiations', and 'terms, conditions' under the defined 'Discussion Information,' strongly supporting the entailment.\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"Direct lexical and semantic matching between contract definitions and target claims confirms entailment.\",\n      \"evidence_span\": \"including the status this Agreement and the identity of the parties hereto (collectively, the “Discussion Information”)\",\n      \"confidence\": 0.95,\n      \"tau\": 0.95,\n      \"rubric\": {\n        \"relevance\": 1.0,\n        \"factual_grounding\": 1.0,\n        \"specificity\": 0.9,\n        \"logical_coherence\": 0.95,\n        \"applicability\": 0.9\n      },\n      \"justification\": \"The contract explicitly enumerates the exact information types cited in the target statement, confirming a direct information-type match.\"\n    }\n  ],\n  \"relations\": [\n    {\n      \"source\": \"a1\",\n      \"target\": \"phi\",\n      \"type\": \"support\",\n      \"confidence\": 0.9\n    },\n    {\n      \"source\": \"a2\",\n      \"target\": \"phi\",\n      \"type\": \"support\",\n      \"confidence\": 0.85\n    },\n    {\n      \"source\": \"a3\",\n      \"target\": \"phi\",\n      \"type\": \"attack\",\n      \"confidence\": 0.8\n    },\n    {\n      \"source\": \"a4\",\n      \"target\": \"phi\",\n      \"type\": \"support\",\n      \"confidence\": 0.95\n    },\n    {\n      \"source\": \"a1\",\n      \"target\": \"a4\",\n      \"type\": \"support\",\n      \"confidence\": 0.8\n    },\n    {\n      \"source\": \"a3\",\n      \"target\": \"a1\",\n      \"type\": \"attack\",\n      \"confidence\": 0.75\n    }\n  ]\n}",
+    "parse_error": null,
+    "n_raw_arguments": 4
+  },
+  "strengths": [
+    {
+      "argument_id": "a1",
+      "tau": 0.9,
+      "rubric": {
+        "legal_relevance": 0.9,
+        "factual_grounding": 1.0,
+        "specificity": 0.8,
+        "logical_coherence": 0.9,
+        "fre_801c_applicability": 0.9
+      },
+      "justification": "The clause establishes the core confidentiality duty referenced in the target statement, directly supporting entailment.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a2",
+      "tau": 0.85,
+      "rubric": {
+        "legal_relevance": 0.8,
+        "factual_grounding": 1.0,
+        "specificity": 0.7,
+        "logical_coherence": 0.8,
+        "fre_801c_applicability": 0.8
+      },
+      "justification": "Expands the bound party scope to match the target statement's reference to 'the relevant party,' reinforcing the obligation's breadth.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a3",
+      "tau": 0.6,
+      "rubric": {
+        "legal_relevance": 0.8,
+        "factual_grounding": 1.0,
+        "specificity": 0.7,
+        "logical_coherence": 0.7,
+        "fre_801c_applicability": 0.8
+      },
+      "justification": "The explicit exception introduces a missing limitation in the target statement's unconditional claim, weakening the strict entailment.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a4",
+      "tau": 0.95,
+      "rubric": {
+        "legal_relevance": 1.0,
+        "factual_grounding": 1.0,
+        "specificity": 0.9,
+        "logical_coherence": 0.95,
+        "fre_801c_applicability": 0.9
+      },
+      "justification": "The contract explicitly enumerates the exact information types cited in the target statement, confirming a direct information-type match.",
+      "model": "combined"
+    }
+  ],
+  "solver_output": {
+    "case_id": "test_0025",
+    "graph": {
+      "nodes": {
+        "phi": {
+          "id": "phi",
+          "text": "Does the CONTRACT CONTEXT logically entail the EXACT TARGET STATEMENT, with every material element matched and no missing limitation, exception, party-scope mismatch, information-type mismatch, purpose limitation, recipient-scope mismatch, or disclosure carve-out?",
+          "tau": 0.5,
+          "sigma": 0.698464,
+          "is_claim": true
+        },
+        "a1": {
+          "id": "a1",
+          "text": "The contract explicitly imposes a confidentiality obligation on 'Each Party' regarding 'Discussion Information,' which includes the status of the Agreement, negotiations, and terms. This directly supports the target statement.",
+          "tau": 0.9,
+          "sigma": 0.36,
+          "is_claim": false
+        },
+        "a2": {
+          "id": "a2",
+          "text": "The confidentiality obligation extends to the party's 'Representatives,' broadening the scope of the duty to keep the information confidential, which supports the target statement's applicability to the relevant party.",
+          "tau": 0.85,
+          "sigma": 0.85,
+          "is_claim": false
+        },
+        "a3": {
+          "id": "a3",
+          "text": "The contract contains a carve-out permitting disclosure if 'required by law or the applicable rules of any securities exchange or interdealer quotation system.' This limitation means the obligation is not absolute, which attacks the strict entailment of an unconditional confidentiality duty.",
+          "tau": 0.6,
+          "sigma": 0.6,
+          "is_claim": false
+        },
+        "a4": {
+          "id": "a4",
+          "text": "The target statement's broad claim is directly supported by the explicit listing of 'status this Agreement', 'investigations, discussions or negotiations', and 'terms, conditions' under the defined 'Discussion Information,' strongly supporting the entailment.",
+          "tau": 0.95,
+          "sigma": 0.968,
+          "is_claim": false
+        }
+      },
+      "edges": [
+        {
+          "source": "a1",
+          "target": "phi",
+          "type": "support",
+          "confidence": 0.9
+        },
+        {
+          "source": "a2",
+          "target": "phi",
+          "type": "support",
+          "confidence": 0.85
+        },
+        {
+          "source": "a3",
+          "target": "phi",
+          "type": "attack",
+          "confidence": 0.8
+        },
+        {
+          "source": "a4",
+          "target": "phi",
+          "type": "support",
+          "confidence": 0.95
+        },
+        {
+          "source": "a1",
+          "target": "a4",
+          "type": "support",
+          "confidence": 0.8
+        },
+        {
+          "source": "a3",
+          "target": "a1",
+          "type": "attack",
+          "confidence": 0.75
+        }
+      ],
+      "solver_type": "df_quad"
+    },
+    "sigma_phi": 0.698464,
+    "sigma_all": {
+      "phi": 0.698464,
+      "a1": 0.36,
+      "a2": 0.85,
+      "a3": 0.6,
+      "a4": 0.968
+    },
+    "iterations": 2,
+    "converged": true,
+    "solver_type": "df_quad"
+  },
+  "sigma_phi": 0.698464,
+  "decision": "Yes",
+  "uncertainty": {
+    "is_uncertain": false,
+    "sigma_phi": 0.698464,
+    "threshold_low": 0.45,
+    "threshold_high": 0.55,
+    "escalation_triggered": false,
+    "escalation_actions": [],
+    "escalation_log": []
+  },
+  "hitl_interventions": [],
+  "pre_hitl_decision": null
+}

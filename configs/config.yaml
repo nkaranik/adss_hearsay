@@ -15,7 +15,7 @@ gemini:
 lmstudio:
   base_url: "http://127.0.0.1:1234/v1"
   model: "qwen/qwen3.6-35b-a3b"
-  max_tokens: 260000
+  max_tokens: 8192
   temperature: 0.0
   disable_thinking: true
 
@@ -50,12 +50,12 @@ datasets:
     test_split: "test"
     max_samples: null
     local_cache: "data/contract_nli_confidentiality_cache.json"
-    decision_problem: "Does the contract context entail the target confidentiality statement?"
+    decision_problem: "Does the CONTRACT CONTEXT logically entail the EXACT TARGET STATEMENT, with every material element matched and no missing limitation, exception, party-scope mismatch, information-type mismatch, purpose limitation, recipient-scope mismatch, or disclosure carve-out?"
 
 mining:
-  max_arguments: 6
+  max_arguments: 20
   min_confidence: 0.3
-  include_neutral_relations: false
+  include_neutral_relations: true
   max_retries: 2
 
 scoring:

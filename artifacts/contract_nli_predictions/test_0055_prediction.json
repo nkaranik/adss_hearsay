@@ -1,0 +1,249 @@
+{
+  "case_id": "test_0055",
+  "input_text": "CONTRACT CONTEXT:\nThis agreement will come into effect on the date of signature by both parties and will continue indefinitely, subject to any subsequent agreement entered into between the parties in relation to the purpose which includes obligations relating to the protection of confidential information.  \n\nTARGET STATEMENT:\nThe contract entails that the relevant party must keep confidential the existence, terms, subject matter, or status of the agreement, negotiations, discussions, or transaction between the parties.\n\nDECISION TASK:\nDetermine whether the contract context entails the target statement.",
+  "phi_text": "",
+  "gold_label": "No",
+  "extraction": {
+    "case_id": "test_0055",
+    "input_text": "CONTRACT CONTEXT:\nThis agreement will come into effect on the date of signature by both parties and will continue indefinitely, subject to any subsequent agreement entered into between the parties in relation to the purpose which includes obligations relating to the protection of confidential information.  \n\nTARGET STATEMENT:\nThe contract entails that the relevant party must keep confidential the existence, terms, subject matter, or status of the agreement, negotiations, discussions, or transaction between the parties.\n\nDECISION TASK:\nDetermine whether the contract context entails the target statement.",
+    "claim": {
+      "id": "phi",
+      "text": "Does the CONTRACT CONTEXT logically entail the EXACT TARGET STATEMENT, with every material element matched and no missing limitation, exception, party-scope mismatch, information-type mismatch, purpose limitation, recipient-scope mismatch, or disclosure carve-out?"
+    },
+    "arguments": [
+      {
+        "id": "a1",
+        "text": "The contract context contains a general confidentiality provision stating the purpose includes obligations relating to the protection of confidential information.",
+        "stance_to_claim": "support",
+        "legal_rule": "Contract interpretation requires explicit or necessarily implied terms to establish specific confidentiality scopes.",
+        "evidence_span": "purpose which includes obligations relating to the protection of confidential information",
+        "confidence": 0.9
+      },
+      {
+        "id": "a2",
+        "text": "The contract context fails to define confidential information or explicitly enumerate the existence, terms, subject matter, or status of the agreement as protected.",
+        "stance_to_claim": "attack",
+        "legal_rule": "Entailment in contract NLI requires that the target claim's specific elements be present in or necessarily follow from the source text.",
+        "evidence_span": null,
+        "confidence": 0.95
+      },
+      {
+        "id": "a3",
+        "text": "The target statement specifies confidentiality of the agreement's existence, terms, negotiations, and discussions, which are not mentioned or inferable from the contract context.",
+        "stance_to_claim": "attack",
+        "legal_rule": "Absence of relevant contractual support for specific claims usually attacks entailment in contract NLI tasks.",
+        "evidence_span": "existence, terms, subject matter, or status of the agreement, negotiations, discussions, or transaction",
+        "confidence": 0.95
+      },
+      {
+        "id": "a5",
+        "text": "Because the contract lacks explicit language or necessary inference linking confidential information to the agreement's existence and terms, the target statement is not logically entailed.",
+        "stance_to_claim": "attack",
+        "legal_rule": "Logical entailment in legal texts requires that all material elements of the target claim be matched by the source text without missing limitations or scope mismatches.",
+        "evidence_span": null,
+        "confidence": 0.9
+      }
+    ],
+    "relations": [
+      {
+        "source": "a1",
+        "target": "phi",
+        "type": "support",
+        "confidence": 0.7
+      },
+      {
+        "source": "a2",
+        "target": "phi",
+        "type": "attack",
+        "confidence": 0.95
+      },
+      {
+        "source": "a3",
+        "target": "phi",
+        "type": "attack",
+        "confidence": 0.95
+      },
+      {
+        "source": "a5",
+        "target": "phi",
+        "type": "attack",
+        "confidence": 0.9
+      },
+      {
+        "source": "a2",
+        "target": "a3",
+        "type": "support",
+        "confidence": 0.85
+      },
+      {
+        "source": "a5",
+        "target": "a2",
+        "type": "support",
+        "confidence": 0.8
+      }
+    ],
+    "extraction_model": "",
+    "raw_llm_response": "{\n  \"case_id\": \"test_0055\",\n  \"phi\": \"Does the CONTRACT CONTEXT logically entail the EXACT TARGET STATEMENT, with every material element matched and no missing limitation, exception, party-scope mismatch, information-type mismatch, purpose limitation, recipient-scope mismatch, or disclosure carve-out?\",\n  \"arguments\": [\n    {\n      \"id\": \"a1\",\n      \"text\": \"The contract context contains a general confidentiality provision stating the purpose includes obligations relating to the protection of confidential information.\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"Contract interpretation requires explicit or necessarily implied terms to establish specific confidentiality scopes.\",\n      \"evidence_span\": \"purpose which includes obligations relating to the protection of confidential information\",\n      \"confidence\": 0.9,\n      \"tau\": 0.6,\n      \"rubric\": {\n        \"relevance\": 0.8,\n        \"factual_grounding\": 0.9,\n        \"specificity\": 0.4,\n        \"logical_coherence\": 0.7,\n        \"applicability\": 0.8\n      },\n      \"justification\": \"Establishes a baseline confidentiality obligation that is a necessary precondition for the target claim, but is too broad to fully entail it.\"\n    },\n    {\n      \"id\": \"a2\",\n      \"text\": \"The contract context fails to define confidential information or explicitly enumerate the existence, terms, subject matter, or status of the agreement as protected.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"Entailment in contract NLI requires that the target claim's specific elements be present in or necessarily follow from the source text.\",\n      \"evidence_span\": null,\n      \"confidence\": 0.95,\n      \"tau\": 0.8,\n      \"rubric\": {\n        \"relevance\": 0.9,\n        \"factual_grounding\": 0.9,\n        \"specificity\": 0.8,\n        \"logical_coherence\": 0.9,\n        \"applicability\": 0.9\n      },\n      \"justification\": \"Directly attacks entailment by highlighting the missing scope and definitions required by the target statement.\"\n    },\n    {\n      \"id\": \"a3\",\n      \"text\": \"The target statement specifies confidentiality of the agreement's existence, terms, negotiations, and discussions, which are not mentioned or inferable from the contract context.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"Absence of relevant contractual support for specific claims usually attacks entailment in contract NLI tasks.\",\n      \"evidence_span\": \"existence, terms, subject matter, or status of the agreement, negotiations, discussions, or transaction\",\n      \"confidence\": 0.95,\n      \"tau\": 0.85,\n      \"rubric\": {\n        \"relevance\": 0.9,\n        \"factual_grounding\": 0.9,\n        \"specificity\": 0.9,\n        \"logical_coherence\": 0.9,\n        \"applicability\": 0.9\n      },\n      \"justification\": \"Highlights the precise mismatch between the broad contract language and the specific target claim, weakening entailment.\"\n    },\n    {\n      \"id\": \"a4\",\n      \"text\": \"The contract's duration clause and condition regarding subsequent agreements do not expand the scope of confidential information to cover the agreement's existence or terms.\",\n      \"stance_to_claim\": \"neutral\",\n      \"legal_rule\": \"Temporal or conditional provisions govern contract lifespan, not the substantive scope of confidentiality obligations.\",\n      \"evidence_span\": \"continue indefinitely, subject to any subsequent agreement entered into between the parties\",\n      \"confidence\": 0.8,\n      \"tau\": 0.0,\n      \"rubric\": {\n        \"relevance\": 0.3,\n        \"factual_grounding\": 0.8,\n        \"specificity\": 0.5,\n        \"logical_coherence\": 0.6,\n        \"applicability\": 0.4\n      },\n      \"justification\": \"Background provision regarding contract duration that does not directly support or attack the specific entailment question.\"\n    },\n    {\n      \"id\": \"a5\",\n      \"text\": \"Because the contract lacks explicit language or necessary inference linking confidential information to the agreement's existence and terms, the target statement is not logically entailed.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"Logical entailment in legal texts requires that all material elements of the target claim be matched by the source text without missing limitations or scope mismatches.\",\n      \"evidence_span\": null,\n      \"confidence\": 0.9,\n      \"tau\": 0.9,\n      \"rubric\": {\n        \"relevance\": 0.9,\n        \"factual_grounding\": 0.8,\n        \"specificity\": 0.7,\n        \"logical_coherence\": 0.9,\n        \"applicability\": 0.9\n      },\n      \"justification\": \"Synthesizes the lack of scope definition and specific enumeration to conclude that entailment fails.\"\n    }\n  ],\n  \"relations\": [\n    {\n      \"source\": \"a1\",\n      \"target\": \"phi\",\n      \"type\": \"support\",\n      \"confidence\": 0.7\n    },\n    {\n      \"source\": \"a2\",\n      \"target\": \"phi\",\n      \"type\": \"attack\",\n      \"confidence\": 0.95\n    },\n    {\n      \"source\": \"a3\",\n      \"target\": \"phi\",\n      \"type\": \"attack\",\n      \"confidence\": 0.95\n    },\n    {\n      \"source\": \"a4\",\n      \"target\": \"phi\",\n      \"type\": \"neutral\",\n      \"confidence\": 0.8\n    },\n    {\n      \"source\": \"a5\",\n      \"target\": \"phi\",\n      \"type\": \"attack\",\n      \"confidence\": 0.9\n    },\n    {\n      \"source\": \"a2\",\n      \"target\": \"a3\",\n      \"type\": \"support\",\n      \"confidence\": 0.85\n    },\n    {\n      \"source\": \"a5\",\n      \"target\": \"a2\",\n      \"type\": \"support\",\n      \"confidence\": 0.8\n    }\n  ]\n}",
+    "parse_error": null,
+    "n_raw_arguments": 5
+  },
+  "strengths": [
+    {
+      "argument_id": "a1",
+      "tau": 0.6,
+      "rubric": {
+        "legal_relevance": 0.8,
+        "factual_grounding": 0.9,
+        "specificity": 0.4,
+        "logical_coherence": 0.7,
+        "fre_801c_applicability": 0.8
+      },
+      "justification": "Establishes a baseline confidentiality obligation that is a necessary precondition for the target claim, but is too broad to fully entail it.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a2",
+      "tau": 0.8,
+      "rubric": {
+        "legal_relevance": 0.9,
+        "factual_grounding": 0.9,
+        "specificity": 0.8,
+        "logical_coherence": 0.9,
+        "fre_801c_applicability": 0.9
+      },
+      "justification": "Directly attacks entailment by highlighting the missing scope and definitions required by the target statement.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a3",
+      "tau": 0.85,
+      "rubric": {
+        "legal_relevance": 0.9,
+        "factual_grounding": 0.9,
+        "specificity": 0.9,
+        "logical_coherence": 0.9,
+        "fre_801c_applicability": 0.9
+      },
+      "justification": "Highlights the precise mismatch between the broad contract language and the specific target claim, weakening entailment.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a5",
+      "tau": 0.9,
+      "rubric": {
+        "legal_relevance": 0.9,
+        "factual_grounding": 0.8,
+        "specificity": 0.7,
+        "logical_coherence": 0.9,
+        "fre_801c_applicability": 0.9
+      },
+      "justification": "Synthesizes the lack of scope definition and specific enumeration to conclude that entailment fails.",
+      "model": "combined"
+    }
+  ],
+  "solver_output": {
+    "case_id": "test_0055",
+    "graph": {
+      "nodes": {
+        "phi": {
+          "id": "phi",
+          "text": "Does the CONTRACT CONTEXT logically entail the EXACT TARGET STATEMENT, with every material element matched and no missing limitation, exception, party-scope mismatch, information-type mismatch, purpose limitation, recipient-scope mismatch, or disclosure carve-out?",
+          "tau": 0.5,
+          "sigma": 0.300003,
+          "is_claim": true
+        },
+        "a1": {
+          "id": "a1",
+          "text": "The contract context contains a general confidentiality provision stating the purpose includes obligations relating to the protection of confidential information.",
+          "tau": 0.6,
+          "sigma": 0.6,
+          "is_claim": false
+        },
+        "a2": {
+          "id": "a2",
+          "text": "The contract context fails to define confidential information or explicitly enumerate the existence, terms, subject matter, or status of the agreement as protected.",
+          "tau": 0.8,
+          "sigma": 0.98,
+          "is_claim": false
+        },
+        "a3": {
+          "id": "a3",
+          "text": "The target statement specifies confidentiality of the agreement's existence, terms, negotiations, and discussions, which are not mentioned or inferable from the contract context.",
+          "tau": 0.85,
+          "sigma": 0.997,
+          "is_claim": false
+        },
+        "a5": {
+          "id": "a5",
+          "text": "Because the contract lacks explicit language or necessary inference linking confidential information to the agreement's existence and terms, the target statement is not logically entailed.",
+          "tau": 0.9,
+          "sigma": 0.9,
+          "is_claim": false
+        }
+      },
+      "edges": [
+        {
+          "source": "a1",
+          "target": "phi",
+          "type": "support",
+          "confidence": 0.7
+        },
+        {
+          "source": "a2",
+          "target": "phi",
+          "type": "attack",
+          "confidence": 0.95
+        },
+        {
+          "source": "a3",
+          "target": "phi",
+          "type": "attack",
+          "confidence": 0.95
+        },
+        {
+          "source": "a5",
+          "target": "phi",
+          "type": "attack",
+          "confidence": 0.9
+        },
+        {
+          "source": "a2",
+          "target": "a3",
+          "type": "support",
+          "confidence": 0.85
+        },
+        {
+          "source": "a5",
+          "target": "a2",
+          "type": "support",
+          "confidence": 0.8
+        }
+      ],
+      "solver_type": "df_quad"
+    },
+    "sigma_phi": 0.300003,
+    "sigma_all": {
+      "phi": 0.300003,
+      "a1": 0.6,
+      "a2": 0.98,
+      "a3": 0.997,
+      "a5": 0.9
+    },
+    "iterations": 2,
+    "converged": true,
+    "solver_type": "df_quad"
+  },
+  "sigma_phi": 0.300003,
+  "decision": "No",
+  "uncertainty": {
+    "is_uncertain": false,
+    "sigma_phi": 0.300003,
+    "threshold_low": 0.45,
+    "threshold_high": 0.55,
+    "escalation_triggered": false,
+    "escalation_actions": [],
+    "escalation_log": []
+  },
+  "hitl_interventions": [],
+  "pre_hitl_decision": null
+}

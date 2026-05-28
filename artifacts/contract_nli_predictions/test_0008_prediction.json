@@ -1,0 +1,237 @@
+{
+  "case_id": "test_0008",
+  "input_text": "CONTRACT CONTEXT:\n(b) \"Confidential Information\" means: (iii) the existence and terms of this Agreement and any other agreements related to a possible Transaction; \n\nTARGET STATEMENT:\nThe contract entails that the relevant party must keep confidential the existence, terms, subject matter, or status of the agreement, negotiations, discussions, or transaction between the parties.\n\nDECISION TASK:\nDetermine whether the contract context entails the target statement.",
+  "phi_text": "",
+  "gold_label": "Yes",
+  "extraction": {
+    "case_id": "test_0008",
+    "input_text": "CONTRACT CONTEXT:\n(b) \"Confidential Information\" means: (iii) the existence and terms of this Agreement and any other agreements related to a possible Transaction; \n\nTARGET STATEMENT:\nThe contract entails that the relevant party must keep confidential the existence, terms, subject matter, or status of the agreement, negotiations, discussions, or transaction between the parties.\n\nDECISION TASK:\nDetermine whether the contract context entails the target statement.",
+    "claim": {
+      "id": "phi",
+      "text": "Does the CONTRACT CONTEXT logically entail the EXACT TARGET STATEMENT, with every material element matched and no missing limitation, exception, party-scope mismatch, information-type mismatch, purpose limitation, recipient-scope mismatch, or disclosure carve-out?"
+    },
+    "arguments": [
+      {
+        "id": "a1",
+        "text": "The contract explicitly defines \"Confidential Information\" to include the existence and terms of the Agreement. This establishes a direct confidentiality obligation for these specific elements.",
+        "stance_to_claim": "support",
+        "legal_rule": "Contract interpretation principles dictate that explicit definitions of confidential information create binding obligations for the listed items.",
+        "evidence_span": "(b) \"Confidential Information\" means: (iii) the existence and terms of this Agreement",
+        "confidence": 0.95
+      },
+      {
+        "id": "a2",
+        "text": "The target statement extends confidentiality to \"subject matter, status, negotiations, discussions, or transaction,\" which are not explicitly enumerated in the provided contract text. This expansion beyond the explicit definition weakens strict logical entailment.",
+        "stance_to_claim": "attack",
+        "legal_rule": "Entailment requires that the target claim be fully supported by the source text without introducing unsupported expansions or scope mismatches.",
+        "evidence_span": "the existence and terms of this Agreement",
+        "confidence": 0.85
+      },
+      {
+        "id": "a3",
+        "text": "The provided contract excerpt contains no language introducing exceptions, carve-outs, duration limits, or permitted disclosures that would limit the confidentiality obligation for the existence and terms.",
+        "stance_to_claim": "support",
+        "legal_rule": "In the absence of explicit limitations or carve-outs, the plain meaning of a confidentiality definition governs the scope of the obligation.",
+        "evidence_span": null,
+        "confidence": 0.8
+      },
+      {
+        "id": "a4",
+        "text": "The definition of \"Confidential Information\" in the contract context directly maps to the primary elements of the target statement regarding the agreement's existence and terms, providing strong foundational support for the entailment claim.",
+        "stance_to_claim": "support",
+        "legal_rule": "Contractual definitions control the interpretation of obligations; explicit inclusion of terms and existence in the definition supports entailment.",
+        "evidence_span": "\"Confidential Information\" means: (iii) the existence and terms of this Agreement",
+        "confidence": 0.9
+      }
+    ],
+    "relations": [
+      {
+        "source": "a1",
+        "target": "phi",
+        "type": "support",
+        "confidence": 0.95
+      },
+      {
+        "source": "a2",
+        "target": "phi",
+        "type": "attack",
+        "confidence": 0.85
+      },
+      {
+        "source": "a3",
+        "target": "phi",
+        "type": "support",
+        "confidence": 0.8
+      },
+      {
+        "source": "a4",
+        "target": "phi",
+        "type": "support",
+        "confidence": 0.9
+      },
+      {
+        "source": "a1",
+        "target": "a4",
+        "type": "support",
+        "confidence": 0.85
+      }
+    ],
+    "extraction_model": "",
+    "raw_llm_response": "{\n  \"case_id\": \"test_0008\",\n  \"phi\": \"Does the CONTRACT CONTEXT logically entail the EXACT TARGET STATEMENT, with every material element matched and no missing limitation, exception, party-scope mismatch, information-type mismatch, purpose limitation, recipient-scope mismatch, or disclosure carve-out?\",\n  \"arguments\": [\n    {\n      \"id\": \"a1\",\n      \"text\": \"The contract explicitly defines \\\"Confidential Information\\\" to include the existence and terms of the Agreement. This establishes a direct confidentiality obligation for these specific elements.\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"Contract interpretation principles dictate that explicit definitions of confidential information create binding obligations for the listed items.\",\n      \"evidence_span\": \"(b) \\\"Confidential Information\\\" means: (iii) the existence and terms of this Agreement\",\n      \"confidence\": 0.95,\n      \"tau\": 0.9,\n      \"rubric\": {\n        \"relevance\": 1.0,\n        \"factual_grounding\": 1.0,\n        \"specificity\": 0.9,\n        \"logical_coherence\": 0.9,\n        \"applicability\": 0.9\n      },\n      \"justification\": \"Directly addresses the presence of a confidentiality definition that matches the core of the target claim, providing strong foundational support for entailment.\"\n    },\n    {\n      \"id\": \"a2\",\n      \"text\": \"The target statement extends confidentiality to \\\"subject matter, status, negotiations, discussions, or transaction,\\\" which are not explicitly enumerated in the provided contract text. This expansion beyond the explicit definition weakens strict logical entailment.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"Entailment requires that the target claim be fully supported by the source text without introducing unsupported expansions or scope mismatches.\",\n      \"evidence_span\": \"the existence and terms of this Agreement\",\n      \"confidence\": 0.85,\n      \"tau\": 0.7,\n      \"rubric\": {\n        \"relevance\": 0.9,\n        \"factual_grounding\": 0.8,\n        \"specificity\": 0.8,\n        \"logical_coherence\": 0.8,\n        \"applicability\": 0.8\n      },\n      \"justification\": \"Highlights the scope mismatch between the contract's explicit list and the target's broader list, attacking the claim of exact logical entailment.\"\n    },\n    {\n      \"id\": \"a3\",\n      \"text\": \"The provided contract excerpt contains no language introducing exceptions, carve-outs, duration limits, or permitted disclosures that would limit the confidentiality obligation for the existence and terms.\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"In the absence of explicit limitations or carve-outs, the plain meaning of a confidentiality definition governs the scope of the obligation.\",\n      \"evidence_span\": null,\n      \"confidence\": 0.8,\n      \"tau\": 0.6,\n      \"rubric\": {\n        \"relevance\": 0.8,\n        \"factual_grounding\": 0.7,\n        \"specificity\": 0.6,\n        \"logical_coherence\": 0.8,\n        \"applicability\": 0.8\n      },\n      \"justification\": \"Addresses the absence of limiting factors, supporting the robustness and unqualified nature of the confidentiality claim relative to the target statement.\"\n    },\n    {\n      \"id\": \"a4\",\n      \"text\": \"The definition of \\\"Confidential Information\\\" in the contract context directly maps to the primary elements of the target statement regarding the agreement's existence and terms, providing strong foundational support for the entailment claim.\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"Contractual definitions control the interpretation of obligations; explicit inclusion of terms and existence in the definition supports entailment.\",\n      \"evidence_span\": \"\\\"Confidential Information\\\" means: (iii) the existence and terms of this Agreement\",\n      \"confidence\": 0.9,\n      \"tau\": 0.85,\n      \"rubric\": {\n        \"relevance\": 0.9,\n        \"factual_grounding\": 0.9,\n        \"specificity\": 0.8,\n        \"logical_coherence\": 0.9,\n        \"applicability\": 0.9\n      },\n      \"justification\": \"Reinforces the direct link between the contractual definition and the target claim's core assertion, strengthening the overall support for entailment.\"\n    }\n  ],\n  \"relations\": [\n    {\n      \"source\": \"a1\",\n      \"target\": \"phi\",\n      \"type\": \"support\",\n      \"confidence\": 0.95\n    },\n    {\n      \"source\": \"a2\",\n      \"target\": \"phi\",\n      \"type\": \"attack\",\n      \"confidence\": 0.85\n    },\n    {\n      \"source\": \"a3\",\n      \"target\": \"phi\",\n      \"type\": \"support\",\n      \"confidence\": 0.8\n    },\n    {\n      \"source\": \"a4\",\n      \"target\": \"phi\",\n      \"type\": \"support\",\n      \"confidence\": 0.9\n    },\n    {\n      \"source\": \"a1\",\n      \"target\": \"a4\",\n      \"type\": \"support\",\n      \"confidence\": 0.85\n    }\n  ]\n}",
+    "parse_error": null,
+    "n_raw_arguments": 4
+  },
+  "strengths": [
+    {
+      "argument_id": "a1",
+      "tau": 0.9,
+      "rubric": {
+        "legal_relevance": 1.0,
+        "factual_grounding": 1.0,
+        "specificity": 0.9,
+        "logical_coherence": 0.9,
+        "fre_801c_applicability": 0.9
+      },
+      "justification": "Directly addresses the presence of a confidentiality definition that matches the core of the target claim, providing strong foundational support for entailment.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a2",
+      "tau": 0.7,
+      "rubric": {
+        "legal_relevance": 0.9,
+        "factual_grounding": 0.8,
+        "specificity": 0.8,
+        "logical_coherence": 0.8,
+        "fre_801c_applicability": 0.8
+      },
+      "justification": "Highlights the scope mismatch between the contract's explicit list and the target's broader list, attacking the claim of exact logical entailment.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a3",
+      "tau": 0.6,
+      "rubric": {
+        "legal_relevance": 0.8,
+        "factual_grounding": 0.7,
+        "specificity": 0.6,
+        "logical_coherence": 0.8,
+        "fre_801c_applicability": 0.8
+      },
+      "justification": "Addresses the absence of limiting factors, supporting the robustness and unqualified nature of the confidentiality claim relative to the target statement.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a4",
+      "tau": 0.85,
+      "rubric": {
+        "legal_relevance": 0.9,
+        "factual_grounding": 0.9,
+        "specificity": 0.8,
+        "logical_coherence": 0.9,
+        "fre_801c_applicability": 0.9
+      },
+      "justification": "Reinforces the direct link between the contractual definition and the target claim's core assertion, strengthening the overall support for entailment.",
+      "model": "combined"
+    }
+  ],
+  "solver_output": {
+    "case_id": "test_0008",
+    "graph": {
+      "nodes": {
+        "phi": {
+          "id": "phi",
+          "text": "Does the CONTRACT CONTEXT logically entail the EXACT TARGET STATEMENT, with every material element matched and no missing limitation, exception, party-scope mismatch, information-type mismatch, purpose limitation, recipient-scope mismatch, or disclosure carve-out?",
+          "tau": 0.5,
+          "sigma": 0.6497,
+          "is_claim": true
+        },
+        "a1": {
+          "id": "a1",
+          "text": "The contract explicitly defines \"Confidential Information\" to include the existence and terms of the Agreement. This establishes a direct confidentiality obligation for these specific elements.",
+          "tau": 0.9,
+          "sigma": 0.9,
+          "is_claim": false
+        },
+        "a2": {
+          "id": "a2",
+          "text": "The target statement extends confidentiality to \"subject matter, status, negotiations, discussions, or transaction,\" which are not explicitly enumerated in the provided contract text. This expansion beyond the explicit definition weakens strict logical entailment.",
+          "tau": 0.7,
+          "sigma": 0.7,
+          "is_claim": false
+        },
+        "a3": {
+          "id": "a3",
+          "text": "The provided contract excerpt contains no language introducing exceptions, carve-outs, duration limits, or permitted disclosures that would limit the confidentiality obligation for the existence and terms.",
+          "tau": 0.6,
+          "sigma": 0.6,
+          "is_claim": false
+        },
+        "a4": {
+          "id": "a4",
+          "text": "The definition of \"Confidential Information\" in the contract context directly maps to the primary elements of the target statement regarding the agreement's existence and terms, providing strong foundational support for the entailment claim.",
+          "tau": 0.85,
+          "sigma": 0.985,
+          "is_claim": false
+        }
+      },
+      "edges": [
+        {
+          "source": "a1",
+          "target": "phi",
+          "type": "support",
+          "confidence": 0.95
+        },
+        {
+          "source": "a2",
+          "target": "phi",
+          "type": "attack",
+          "confidence": 0.85
+        },
+        {
+          "source": "a3",
+          "target": "phi",
+          "type": "support",
+          "confidence": 0.8
+        },
+        {
+          "source": "a4",
+          "target": "phi",
+          "type": "support",
+          "confidence": 0.9
+        },
+        {
+          "source": "a1",
+          "target": "a4",
+          "type": "support",
+          "confidence": 0.85
+        }
+      ],
+      "solver_type": "df_quad"
+    },
+    "sigma_phi": 0.6497,
+    "sigma_all": {
+      "phi": 0.6497,
+      "a1": 0.9,
+      "a2": 0.7,
+      "a3": 0.6,
+      "a4": 0.985
+    },
+    "iterations": 2,
+    "converged": true,
+    "solver_type": "df_quad"
+  },
+  "sigma_phi": 0.6497,
+  "decision": "Yes",
+  "uncertainty": {
+    "is_uncertain": false,
+    "sigma_phi": 0.6497,
+    "threshold_low": 0.45,
+    "threshold_high": 0.55,
+    "escalation_triggered": false,
+    "escalation_actions": [],
+    "escalation_log": []
+  },
+  "hitl_interventions": [],
+  "pre_hitl_decision": null
+}

@@ -1,0 +1,225 @@
+{
+  "case_id": "test_0007",
+  "input_text": "CONTRACT CONTEXT:\n10. The execution, existence and performance of this Agreement shall be kept confidential by the Parties hereto and shall not be disclosed by either Party without the prior written consent of the other. \n\nTARGET STATEMENT:\nThe contract entails that the relevant party must keep confidential the existence, terms, subject matter, or status of the agreement, negotiations, discussions, or transaction between the parties.\n\nDECISION TASK:\nDetermine whether the contract context entails the target statement.",
+  "phi_text": "",
+  "gold_label": "Yes",
+  "extraction": {
+    "case_id": "test_0007",
+    "input_text": "CONTRACT CONTEXT:\n10. The execution, existence and performance of this Agreement shall be kept confidential by the Parties hereto and shall not be disclosed by either Party without the prior written consent of the other. \n\nTARGET STATEMENT:\nThe contract entails that the relevant party must keep confidential the existence, terms, subject matter, or status of the agreement, negotiations, discussions, or transaction between the parties.\n\nDECISION TASK:\nDetermine whether the contract context entails the target statement.",
+    "claim": {
+      "id": "phi",
+      "text": "Does the CONTRACT CONTEXT logically entail the EXACT TARGET STATEMENT, with every material element matched and no missing limitation, exception, party-scope mismatch, information-type mismatch, purpose limitation, recipient-scope mismatch, or disclosure carve-out?"
+    },
+    "arguments": [
+      {
+        "id": "a1",
+        "text": "The contract context contains an explicit confidentiality clause stating that 'The execution, existence and performance of this Agreement shall be kept confidential by the Parties hereto...'",
+        "stance_to_claim": "support",
+        "legal_rule": "Contractual Obligation Formation",
+        "evidence_span": "The execution, existence and performance of this Agreement shall be kept confidential by the Parties hereto",
+        "confidence": 0.95
+      },
+      {
+        "id": "a2",
+        "text": "The contract limits the confidentiality scope to the 'execution, existence and performance' of the agreement, whereas the target statement broadly covers 'terms, subject matter, or status of the agreement, negotiations, discussions, or transaction.' This constitutes a material information-type and scope mismatch.",
+        "stance_to_claim": "attack",
+        "legal_rule": "Scope Limitation & Expressio Unius",
+        "evidence_span": "The execution, existence and performance of this Agreement shall be kept confidential",
+        "confidence": 0.95
+      },
+      {
+        "id": "a3",
+        "text": "The contract includes a specific disclosure carve-out permitting disclosure 'without the prior written consent of the other.' The target statement omits this exception, failing to match the exact contractual limitation.",
+        "stance_to_claim": "attack",
+        "legal_rule": "Disclosure Carve-out & Exception Principle",
+        "evidence_span": "shall not be disclosed by either Party without the prior written consent of the other",
+        "confidence": 0.95
+      },
+      {
+        "id": "a4",
+        "text": "Because the contract explicitly enumerates the covered items and includes a consent-based carve-out, it does not logically entail the broader, unqualified target statement.",
+        "stance_to_claim": "attack",
+        "legal_rule": "Logical Entailment Standard for Contracts",
+        "evidence_span": "The execution, existence and performance of this Agreement shall be kept confidential by the Parties hereto and shall not be disclosed by either Party without the prior written consent of the other.",
+        "confidence": 0.95
+      }
+    ],
+    "relations": [
+      {
+        "source": "a1",
+        "target": "phi",
+        "type": "support",
+        "confidence": 0.9
+      },
+      {
+        "source": "a2",
+        "target": "phi",
+        "type": "attack",
+        "confidence": 0.95
+      },
+      {
+        "source": "a3",
+        "target": "phi",
+        "type": "attack",
+        "confidence": 0.95
+      },
+      {
+        "source": "a4",
+        "target": "phi",
+        "type": "attack",
+        "confidence": 0.95
+      }
+    ],
+    "extraction_model": "",
+    "raw_llm_response": "{\n  \"case_id\": \"test_0007\",\n  \"phi\": \"Does the CONTRACT CONTEXT logically entail the EXACT TARGET STATEMENT, with every material element matched and no missing limitation, exception, party-scope mismatch, information-type mismatch, purpose limitation, recipient-scope mismatch, or disclosure carve-out?\",\n  \"arguments\": [\n    {\n      \"id\": \"a1\",\n      \"text\": \"The contract context contains an explicit confidentiality clause stating that 'The execution, existence and performance of this Agreement shall be kept confidential by the Parties hereto...'\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"Contractual Obligation Formation\",\n      \"evidence_span\": \"The execution, existence and performance of this Agreement shall be kept confidential by the Parties hereto\",\n      \"confidence\": 0.95,\n      \"tau\": 0.80,\n      \"rubric\": {\n        \"relevance\": 0.90,\n        \"factual_grounding\": 1.00,\n        \"specificity\": 0.85,\n        \"logical_coherence\": 0.80,\n        \"applicability\": 0.90\n      },\n      \"justification\": \"Establishes the baseline confidentiality obligation, providing partial support for the target claim, though limited in scope.\"\n    },\n    {\n      \"id\": \"a2\",\n      \"text\": \"The contract limits the confidentiality scope to the 'execution, existence and performance' of the agreement, whereas the target statement broadly covers 'terms, subject matter, or status of the agreement, negotiations, discussions, or transaction.' This constitutes a material information-type and scope mismatch.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"Scope Limitation & Expressio Unius\",\n      \"evidence_span\": \"The execution, existence and performance of this Agreement shall be kept confidential\",\n      \"confidence\": 0.95,\n      \"tau\": 0.90,\n      \"rubric\": {\n        \"relevance\": 1.00,\n        \"factual_grounding\": 1.00,\n        \"specificity\": 1.00,\n        \"logical_coherence\": 0.95,\n        \"applicability\": 1.00\n      },\n      \"justification\": \"Directly addresses the scope mismatch between the contract's explicit enumeration and the target's broader disjunctive list, attacking entailment.\"\n    },\n    {\n      \"id\": \"a3\",\n      \"text\": \"The contract includes a specific disclosure carve-out permitting disclosure 'without the prior written consent of the other.' The target statement omits this exception, failing to match the exact contractual limitation.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"Disclosure Carve-out & Exception Principle\",\n      \"evidence_span\": \"shall not be disclosed by either Party without the prior written consent of the other\",\n      \"confidence\": 0.95,\n      \"tau\": 0.85,\n      \"rubric\": {\n        \"relevance\": 1.00,\n        \"factual_grounding\": 1.00,\n        \"specificity\": 0.90,\n        \"logical_coherence\": 0.95,\n        \"applicability\": 1.00\n      },\n      \"justification\": \"Highlights the missing carve-out exception, which is a material limitation in the contract context, attacking entailment.\"\n    },\n    {\n      \"id\": \"a4\",\n      \"text\": \"Because the contract explicitly enumerates the covered items and includes a consent-based carve-out, it does not logically entail the broader, unqualified target statement.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"Logical Entailment Standard for Contracts\",\n      \"evidence_span\": \"The execution, existence and performance of this Agreement shall be kept confidential by the Parties hereto and shall not be disclosed by either Party without the prior written consent of the other.\",\n      \"confidence\": 0.95,\n      \"tau\": 0.95,\n      \"rubric\": {\n        \"relevance\": 1.00,\n        \"factual_grounding\": 0.85,\n        \"specificity\": 0.95,\n        \"logical_coherence\": 1.00,\n        \"applicability\": 1.00\n      },\n      \"justification\": \"Synthesizes the scope limitation and missing exception to conclude that logical entailment fails, directly attacking φ.\"\n    }\n  ],\n  \"relations\": [\n    {\n      \"source\": \"a1\",\n      \"target\": \"phi\",\n      \"type\": \"support\",\n      \"confidence\": 0.90\n    },\n    {\n      \"source\": \"a2\",\n      \"target\": \"phi\",\n      \"type\": \"attack\",\n      \"confidence\": 0.95\n    },\n    {\n      \"source\": \"a3\",\n      \"target\": \"phi\",\n      \"type\": \"attack\",\n      \"confidence\": 0.95\n    },\n    {\n      \"source\": \"a4\",\n      \"target\": \"phi\",\n      \"type\": \"attack\",\n      \"confidence\": 0.95\n    }\n  ]\n}",
+    "parse_error": null,
+    "n_raw_arguments": 4
+  },
+  "strengths": [
+    {
+      "argument_id": "a1",
+      "tau": 0.8,
+      "rubric": {
+        "legal_relevance": 0.9,
+        "factual_grounding": 1.0,
+        "specificity": 0.85,
+        "logical_coherence": 0.8,
+        "fre_801c_applicability": 0.9
+      },
+      "justification": "Establishes the baseline confidentiality obligation, providing partial support for the target claim, though limited in scope.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a2",
+      "tau": 0.9,
+      "rubric": {
+        "legal_relevance": 1.0,
+        "factual_grounding": 1.0,
+        "specificity": 1.0,
+        "logical_coherence": 0.95,
+        "fre_801c_applicability": 1.0
+      },
+      "justification": "Directly addresses the scope mismatch between the contract's explicit enumeration and the target's broader disjunctive list, attacking entailment.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a3",
+      "tau": 0.85,
+      "rubric": {
+        "legal_relevance": 1.0,
+        "factual_grounding": 1.0,
+        "specificity": 0.9,
+        "logical_coherence": 0.95,
+        "fre_801c_applicability": 1.0
+      },
+      "justification": "Highlights the missing carve-out exception, which is a material limitation in the contract context, attacking entailment.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a4",
+      "tau": 0.95,
+      "rubric": {
+        "legal_relevance": 1.0,
+        "factual_grounding": 0.85,
+        "specificity": 0.95,
+        "logical_coherence": 1.0,
+        "fre_801c_applicability": 1.0
+      },
+      "justification": "Synthesizes the scope limitation and missing exception to conclude that logical entailment fails, directly attacking φ.",
+      "model": "combined"
+    }
+  ],
+  "solver_output": {
+    "case_id": "test_0007",
+    "graph": {
+      "nodes": {
+        "phi": {
+          "id": "phi",
+          "text": "Does the CONTRACT CONTEXT logically entail the EXACT TARGET STATEMENT, with every material element matched and no missing limitation, exception, party-scope mismatch, information-type mismatch, purpose limitation, recipient-scope mismatch, or disclosure carve-out?",
+          "tau": 0.5,
+          "sigma": 0.40037500000000004,
+          "is_claim": true
+        },
+        "a1": {
+          "id": "a1",
+          "text": "The contract context contains an explicit confidentiality clause stating that 'The execution, existence and performance of this Agreement shall be kept confidential by the Parties hereto...'",
+          "tau": 0.8,
+          "sigma": 0.8,
+          "is_claim": false
+        },
+        "a2": {
+          "id": "a2",
+          "text": "The contract limits the confidentiality scope to the 'execution, existence and performance' of the agreement, whereas the target statement broadly covers 'terms, subject matter, or status of the agreement, negotiations, discussions, or transaction.' This constitutes a material information-type and scope mismatch.",
+          "tau": 0.9,
+          "sigma": 0.9,
+          "is_claim": false
+        },
+        "a3": {
+          "id": "a3",
+          "text": "The contract includes a specific disclosure carve-out permitting disclosure 'without the prior written consent of the other.' The target statement omits this exception, failing to match the exact contractual limitation.",
+          "tau": 0.85,
+          "sigma": 0.85,
+          "is_claim": false
+        },
+        "a4": {
+          "id": "a4",
+          "text": "Because the contract explicitly enumerates the covered items and includes a consent-based carve-out, it does not logically entail the broader, unqualified target statement.",
+          "tau": 0.95,
+          "sigma": 0.95,
+          "is_claim": false
+        }
+      },
+      "edges": [
+        {
+          "source": "a1",
+          "target": "phi",
+          "type": "support",
+          "confidence": 0.9
+        },
+        {
+          "source": "a2",
+          "target": "phi",
+          "type": "attack",
+          "confidence": 0.95
+        },
+        {
+          "source": "a3",
+          "target": "phi",
+          "type": "attack",
+          "confidence": 0.95
+        },
+        {
+          "source": "a4",
+          "target": "phi",
+          "type": "attack",
+          "confidence": 0.95
+        }
+      ],
+      "solver_type": "df_quad"
+    },
+    "sigma_phi": 0.40037500000000004,
+    "sigma_all": {
+      "phi": 0.40037500000000004,
+      "a1": 0.8,
+      "a2": 0.9,
+      "a3": 0.85,
+      "a4": 0.95
+    },
+    "iterations": 2,
+    "converged": true,
+    "solver_type": "df_quad"
+  },
+  "sigma_phi": 0.40037500000000004,
+  "decision": "No",
+  "uncertainty": {
+    "is_uncertain": false,
+    "sigma_phi": 0.40037500000000004,
+    "threshold_low": 0.45,
+    "threshold_high": 0.55,
+    "escalation_triggered": false,
+    "escalation_actions": [],
+    "escalation_log": []
+  },
+  "hitl_interventions": [],
+  "pre_hitl_decision": null
+}

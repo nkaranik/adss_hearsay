@@ -1,0 +1,184 @@
+{
+  "case_id": "test_0076",
+  "input_text": "CONTRACT CONTEXT:\nThe nondisclosure provisions of this Agreement shall survive the termination of this Agreement and Receiving Party's duty to hold Confidential Information in confidence shall remain in effect until the Confidential Information no longer qualifies as a trade secret or until Disclosing Party sends Receiving Party written notice releasing Receiving Party from this Agreement, whichever occurs first. \n\nTARGET STATEMENT:\nThe contract entails that the relevant party must keep confidential the existence, terms, subject matter, or status of the agreement, negotiations, discussions, or transaction between the parties.\n\nDECISION TASK:\nDetermine whether the contract context entails the target statement.",
+  "phi_text": "",
+  "gold_label": "No",
+  "extraction": {
+    "case_id": "test_0076",
+    "input_text": "CONTRACT CONTEXT:\nThe nondisclosure provisions of this Agreement shall survive the termination of this Agreement and Receiving Party's duty to hold Confidential Information in confidence shall remain in effect until the Confidential Information no longer qualifies as a trade secret or until Disclosing Party sends Receiving Party written notice releasing Receiving Party from this Agreement, whichever occurs first. \n\nTARGET STATEMENT:\nThe contract entails that the relevant party must keep confidential the existence, terms, subject matter, or status of the agreement, negotiations, discussions, or transaction between the parties.\n\nDECISION TASK:\nDetermine whether the contract context entails the target statement.",
+    "claim": {
+      "id": "phi",
+      "text": "Does the CONTRACT CONTEXT logically entail the EXACT TARGET STATEMENT, with every material element matched and no missing limitation, exception, party-scope mismatch, information-type mismatch, purpose limitation, recipient-scope mismatch, or disclosure carve-out?"
+    },
+    "arguments": [
+      {
+        "id": "a2",
+        "text": "The confidentiality obligation is strictly scoped to 'Confidential Information' and does not extend to the existence, terms, subject matter, or status of the agreement itself.",
+        "stance_to_claim": "attack",
+        "legal_rule": "Scope limitation principle: contractual duties are confined to explicitly defined terms and do not automatically expand to related but distinct subjects.",
+        "evidence_span": "Receiving Party's duty to hold Confidential Information in confidence",
+        "confidence": 0.95
+      },
+      {
+        "id": "a3",
+        "text": "The contract provides duration limits and release mechanisms for the confidentiality duty but lacks any provision addressing confidentiality of the agreement's status or negotiations.",
+        "stance_to_claim": "attack",
+        "legal_rule": "Expressio unius est exclusio alterius: specifying limits for one subject implies exclusion of others not mentioned.",
+        "evidence_span": "shall remain in effect until the Confidential Information no longer qualifies as a trade secret or until Disclosing Party sends Receiving Party written notice releasing Receiving Party from this Agreement, whichever occurs first.",
+        "confidence": 0.9
+      },
+      {
+        "id": "a4",
+        "text": "The target statement requires confidentiality over the agreement's existence or terms, which constitutes a distinct obligation not supported by the provided contract text.",
+        "stance_to_claim": "attack",
+        "legal_rule": "Entailment in contract NLI requires explicit textual support or necessary implication for every material element of the target claim.",
+        "evidence_span": "The contract entails that the relevant party must keep confidential the existence, terms, subject matter, or status of the agreement, negotiations, discussions, or transaction between the parties.",
+        "confidence": 0.95
+      }
+    ],
+    "relations": [
+      {
+        "source": "a2",
+        "target": "phi",
+        "type": "attack",
+        "confidence": 0.95
+      },
+      {
+        "source": "a3",
+        "target": "phi",
+        "type": "attack",
+        "confidence": 0.9
+      },
+      {
+        "source": "a4",
+        "target": "phi",
+        "type": "attack",
+        "confidence": 0.95
+      }
+    ],
+    "extraction_model": "",
+    "raw_llm_response": "{\n  \"case_id\": \"test_0076\",\n  \"phi\": \"Does the CONTRACT CONTEXT logically entail the EXACT TARGET STATEMENT, with every material element matched and no missing limitation, exception, party-scope mismatch, information-type mismatch, purpose limitation, recipient-scope mismatch, or disclosure carve-out?\",\n  \"arguments\": [\n    {\n      \"id\": \"a1\",\n      \"text\": \"The contract context contains an explicit nondisclosure clause imposing a duty on the Receiving Party to hold 'Confidential Information' in confidence.\",\n      \"stance_to_claim\": \"neutral\",\n      \"legal_rule\": \"Contract interpretation requires identifying explicit obligations before assessing entailment.\",\n      \"evidence_span\": \"Receiving Party's duty to hold Confidential Information in confidence\",\n      \"confidence\": 0.95,\n      \"tau\": 0.9,\n      \"rubric\": {\n        \"relevance\": 0.8,\n        \"factual_grounding\": 1.0,\n        \"specificity\": 0.8,\n        \"logical_coherence\": 0.9,\n        \"applicability\": 0.8\n      },\n      \"justification\": \"Establishes the baseline confidentiality obligation but does not directly address the target claim's scope.\"\n    },\n    {\n      \"id\": \"a2\",\n      \"text\": \"The confidentiality obligation is strictly scoped to 'Confidential Information' and does not extend to the existence, terms, subject matter, or status of the agreement itself.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"Scope limitation principle: contractual duties are confined to explicitly defined terms and do not automatically expand to related but distinct subjects.\",\n      \"evidence_span\": \"Receiving Party's duty to hold Confidential Information in confidence\",\n      \"confidence\": 0.95,\n      \"tau\": 0.95,\n      \"rubric\": {\n        \"relevance\": 1.0,\n        \"factual_grounding\": 1.0,\n        \"specificity\": 0.9,\n        \"logical_coherence\": 1.0,\n        \"applicability\": 0.95\n      },\n      \"justification\": \"Directly highlights a party-scope and information-type mismatch between the contract's duty and the target statement, weakening entailment.\"\n    },\n    {\n      \"id\": \"a3\",\n      \"text\": \"The contract provides duration limits and release mechanisms for the confidentiality duty but lacks any provision addressing confidentiality of the agreement's status or negotiations.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"Expressio unius est exclusio alterius: specifying limits for one subject implies exclusion of others not mentioned.\",\n      \"evidence_span\": \"shall remain in effect until the Confidential Information no longer qualifies as a trade secret or until Disclosing Party sends Receiving Party written notice releasing Receiving Party from this Agreement, whichever occurs first.\",\n      \"confidence\": 0.9,\n      \"tau\": 0.9,\n      \"rubric\": {\n        \"relevance\": 0.9,\n        \"factual_grounding\": 1.0,\n        \"specificity\": 0.8,\n        \"logical_coherence\": 0.9,\n        \"applicability\": 0.85\n      },\n      \"justification\": \"Demonstrates that the contract's detailed terms apply only to 'Confidential Information', reinforcing that the target statement is not entailed.\"\n    },\n    {\n      \"id\": \"a4\",\n      \"text\": \"The target statement requires confidentiality over the agreement's existence or terms, which constitutes a distinct obligation not supported by the provided contract text.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"Entailment in contract NLI requires explicit textual support or necessary implication for every material element of the target claim.\",\n      \"evidence_span\": \"The contract entails that the relevant party must keep confidential the existence, terms, subject matter, or status of the agreement, negotiations, discussions, or transaction between the parties.\",\n      \"confidence\": 0.95,\n      \"tau\": 0.95,\n      \"rubric\": {\n        \"relevance\": 1.0,\n        \"factual_grounding\": 1.0,\n        \"specificity\": 0.9,\n        \"logical_coherence\": 1.0,\n        \"applicability\": 0.95\n      },\n      \"justification\": \"Directly addresses the target claim and confirms the absence of contractual basis, definitively attacking the entailment.\"\n    }\n  ],\n  \"relations\": [\n    {\n      \"source\": \"a1\",\n      \"target\": \"phi\",\n      \"type\": \"neutral\",\n      \"confidence\": 0.9\n    },\n    {\n      \"source\": \"a2\",\n      \"target\": \"phi\",\n      \"type\": \"attack\",\n      \"confidence\": 0.95\n    },\n    {\n      \"source\": \"a3\",\n      \"target\": \"phi\",\n      \"type\": \"attack\",\n      \"confidence\": 0.9\n    },\n    {\n      \"source\": \"a4\",\n      \"target\": \"phi\",\n      \"type\": \"attack\",\n      \"confidence\": 0.95\n    }\n  ]\n}",
+    "parse_error": null,
+    "n_raw_arguments": 4
+  },
+  "strengths": [
+    {
+      "argument_id": "a2",
+      "tau": 0.95,
+      "rubric": {
+        "legal_relevance": 1.0,
+        "factual_grounding": 1.0,
+        "specificity": 0.9,
+        "logical_coherence": 1.0,
+        "fre_801c_applicability": 0.95
+      },
+      "justification": "Directly highlights a party-scope and information-type mismatch between the contract's duty and the target statement, weakening entailment.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a3",
+      "tau": 0.9,
+      "rubric": {
+        "legal_relevance": 0.9,
+        "factual_grounding": 1.0,
+        "specificity": 0.8,
+        "logical_coherence": 0.9,
+        "fre_801c_applicability": 0.85
+      },
+      "justification": "Demonstrates that the contract's detailed terms apply only to 'Confidential Information', reinforcing that the target statement is not entailed.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a4",
+      "tau": 0.95,
+      "rubric": {
+        "legal_relevance": 1.0,
+        "factual_grounding": 1.0,
+        "specificity": 0.9,
+        "logical_coherence": 1.0,
+        "fre_801c_applicability": 0.95
+      },
+      "justification": "Directly addresses the target claim and confirms the absence of contractual basis, definitively attacking the entailment.",
+      "model": "combined"
+    }
+  ],
+  "solver_output": {
+    "case_id": "test_0076",
+    "graph": {
+      "nodes": {
+        "phi": {
+          "id": "phi",
+          "text": "Does the CONTRACT CONTEXT logically entail the EXACT TARGET STATEMENT, with every material element matched and no missing limitation, exception, party-scope mismatch, information-type mismatch, purpose limitation, recipient-scope mismatch, or disclosure carve-out?",
+          "tau": 0.5,
+          "sigma": 0.00012499999999998623,
+          "is_claim": true
+        },
+        "a2": {
+          "id": "a2",
+          "text": "The confidentiality obligation is strictly scoped to 'Confidential Information' and does not extend to the existence, terms, subject matter, or status of the agreement itself.",
+          "tau": 0.95,
+          "sigma": 0.95,
+          "is_claim": false
+        },
+        "a3": {
+          "id": "a3",
+          "text": "The contract provides duration limits and release mechanisms for the confidentiality duty but lacks any provision addressing confidentiality of the agreement's status or negotiations.",
+          "tau": 0.9,
+          "sigma": 0.9,
+          "is_claim": false
+        },
+        "a4": {
+          "id": "a4",
+          "text": "The target statement requires confidentiality over the agreement's existence or terms, which constitutes a distinct obligation not supported by the provided contract text.",
+          "tau": 0.95,
+          "sigma": 0.95,
+          "is_claim": false
+        }
+      },
+      "edges": [
+        {
+          "source": "a2",
+          "target": "phi",
+          "type": "attack",
+          "confidence": 0.95
+        },
+        {
+          "source": "a3",
+          "target": "phi",
+          "type": "attack",
+          "confidence": 0.9
+        },
+        {
+          "source": "a4",
+          "target": "phi",
+          "type": "attack",
+          "confidence": 0.95
+        }
+      ],
+      "solver_type": "df_quad"
+    },
+    "sigma_phi": 0.00012499999999998623,
+    "sigma_all": {
+      "phi": 0.00012499999999998623,
+      "a2": 0.95,
+      "a3": 0.9,
+      "a4": 0.95
+    },
+    "iterations": 2,
+    "converged": true,
+    "solver_type": "df_quad"
+  },
+  "sigma_phi": 0.00012499999999998623,
+  "decision": "No",
+  "uncertainty": {
+    "is_uncertain": false,
+    "sigma_phi": 0.00012499999999998623,
+    "threshold_low": 0.45,
+    "threshold_high": 0.55,
+    "escalation_triggered": false,
+    "escalation_actions": [],
+    "escalation_log": []
+  },
+  "hitl_interventions": [],
+  "pre_hitl_decision": null
+}

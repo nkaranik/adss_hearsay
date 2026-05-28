@@ -1,1 +1,19 @@
 case_id,gold_label,predicted_label,sigma_phi,category,reason
+test_0003,Yes,UNCERTAIN,0.49749999999999994,relation_error,Arguments exist with non-extreme strengths; relation polarity or graph structure is the likely failure.
+test_0007,Yes,No,0.40037500000000004,relation_error,Arguments exist with non-extreme strengths; relation polarity or graph structure is the likely failure.
+test_0009,Yes,No,1.898437499980865e-06,relation_error,Arguments exist with non-extreme strengths; relation polarity or graph structure is the likely failure.
+test_0010,Yes,No,7.499999999999174e-05,relation_error,Arguments exist with non-extreme strengths; relation polarity or graph structure is the likely failure.
+test_0011,Yes,No,0.40000421875000003,relation_error,Arguments exist with non-extreme strengths; relation polarity or graph structure is the likely failure.
+test_0012,Yes,No,5.625000000009095e-06,relation_error,Arguments exist with non-extreme strengths; relation polarity or graph structure is the likely failure.
+test_0013,Yes,UNCERTAIN,0.5,argument_omission,No relevant arguments were retained for the target claim.
+test_0014,Yes,No,0.43209374999999994,relation_error,Arguments exist with non-extreme strengths; relation polarity or graph structure is the likely failure.
+test_0015,Yes,No,0.404425,relation_error,Arguments exist with non-extreme strengths; relation polarity or graph structure is the likely failure.
+test_0016,Yes,No,0.37500003125,relation_error,Arguments exist with non-extreme strengths; relation polarity or graph structure is the likely failure.
+test_0020,Yes,UNCERTAIN,0.45008,relation_error,Arguments exist with non-extreme strengths; relation polarity or graph structure is the likely failure.
+test_0021,Yes,UNCERTAIN,0.5,argument_omission,No relevant arguments were retained for the target claim.
+test_0026,Yes,No,0.009499999999999953,relation_error,Arguments exist with non-extreme strengths; relation polarity or graph structure is the likely failure.
+test_0027,Yes,No,0.00022499999999997522,relation_error,Arguments exist with non-extreme strengths; relation polarity or graph structure is the likely failure.
+test_0033,Yes,UNCERTAIN,0.47080000000000005,relation_error,Arguments exist with non-extreme strengths; relation polarity or graph structure is the likely failure.
+test_0038,Yes,UNCERTAIN,0.5,argument_omission,No relevant arguments were retained for the target claim.
+test_0039,Yes,UNCERTAIN,0.50425,relation_error,Arguments exist with non-extreme strengths; relation polarity or graph structure is the likely failure.
+test_0062,No,Yes,0.56625,relation_error,Arguments exist with non-extreme strengths; relation polarity or graph structure is the likely failure.

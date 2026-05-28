@@ -1,0 +1,155 @@
+{
+  "case_id": "test_0043",
+  "input_text": "CONTRACT CONTEXT:\n9. At the end of the contract the receiving party shall return the confidential information and any possibly extant copies after receipt of a written request, provided that this is technically feasible and does not violate the retention obligations.  \n\nTARGET STATEMENT:\nThe contract entails that the relevant party must keep confidential the existence, terms, subject matter, or status of the agreement, negotiations, discussions, or transaction between the parties.\n\nDECISION TASK:\nDetermine whether the contract context entails the target statement.",
+  "phi_text": "",
+  "gold_label": "No",
+  "extraction": {
+    "case_id": "test_0043",
+    "input_text": "CONTRACT CONTEXT:\n9. At the end of the contract the receiving party shall return the confidential information and any possibly extant copies after receipt of a written request, provided that this is technically feasible and does not violate the retention obligations.  \n\nTARGET STATEMENT:\nThe contract entails that the relevant party must keep confidential the existence, terms, subject matter, or status of the agreement, negotiations, discussions, or transaction between the parties.\n\nDECISION TASK:\nDetermine whether the contract context entails the target statement.",
+    "claim": {
+      "id": "phi",
+      "text": "Does the CONTRACT CONTEXT logically entail the EXACT TARGET STATEMENT, with every material element matched and no missing limitation, exception, party-scope mismatch, information-type mismatch, purpose limitation, recipient-scope mismatch, or disclosure carve-out?"
+    },
+    "arguments": [
+      {
+        "id": "a3",
+        "text": "The contract context lacks any explicit or implicit provision imposing confidentiality on the existence, terms, subject matter, or status of the agreement.",
+        "stance_to_claim": "attack",
+        "legal_rule": "In contract NLI, absence of relevant contractual support for a specific obligation attacks entailment.",
+        "evidence_span": null,
+        "confidence": 0.9
+      },
+      {
+        "id": "a4",
+        "text": "The only confidentiality-related provision in the context pertains to returning information upon request, which does not extend to or support confidentiality of the agreement itself.",
+        "stance_to_claim": "attack",
+        "legal_rule": "Contract clauses are interpreted based on their explicit scope; provisions limited to return obligations do not entail broader confidentiality duties.",
+        "evidence_span": "At the end of the contract the receiving party shall return the confidential information and any possibly extant copies after receipt of a written request, provided that this is technically feasible and does not violate the retention obligations.",
+        "confidence": 0.9
+      }
+    ],
+    "relations": [
+      {
+        "source": "a3",
+        "target": "phi",
+        "type": "attack",
+        "confidence": 0.9
+      },
+      {
+        "source": "a4",
+        "target": "phi",
+        "type": "attack",
+        "confidence": 0.9
+      },
+      {
+        "source": "a3",
+        "target": "a4",
+        "type": "support",
+        "confidence": 0.8
+      }
+    ],
+    "extraction_model": "",
+    "raw_llm_response": "{\n  \"case_id\": \"test_0043\",\n  \"phi\": \"Does the CONTRACT CONTEXT logically entail the EXACT TARGET STATEMENT, with every material element matched and no missing limitation, exception, party-scope mismatch, information-type mismatch, purpose limitation, recipient-scope mismatch, or disclosure carve-out?\",\n  \"arguments\": [\n    {\n      \"id\": \"a1\",\n      \"text\": \"The contract context explicitly mandates the return of confidential information and copies upon written request at the end of the contract.\",\n      \"stance_to_claim\": \"neutral\",\n      \"legal_rule\": \"Contract interpretation requires examining explicit clauses to determine the scope of obligations.\",\n      \"evidence_span\": \"At the end of the contract the receiving party shall return the confidential information and any possibly extant copies after receipt of a written request\",\n      \"confidence\": 1.0,\n      \"tau\": 0.0,\n      \"rubric\": {\n        \"relevance\": 0.0,\n        \"factual_grounding\": 1.0,\n        \"specificity\": 1.0,\n        \"logical_coherence\": 1.0,\n        \"applicability\": 0.0\n      },\n      \"justification\": \"Establishes the actual scope of the provided contract text, which is limited to return obligations and does not directly address the target claim.\"\n    },\n    {\n      \"id\": \"a2\",\n      \"text\": \"The target statement requires an obligation to keep confidential the existence, terms, subject matter, or status of the agreement between the parties.\",\n      \"stance_to_claim\": \"neutral\",\n      \"legal_rule\": \"Target claim specification for contract NLI entailment.\",\n      \"evidence_span\": \"The contract entails that the relevant party must keep confidential the existence, terms, subject matter, or status of the agreement, negotiations, discussions, or transaction between the parties.\",\n      \"confidence\": 1.0,\n      \"tau\": 0.0,\n      \"rubric\": {\n        \"relevance\": 0.0,\n        \"factual_grounding\": 1.0,\n        \"specificity\": 1.0,\n        \"logical_coherence\": 1.0,\n        \"applicability\": 0.0\n      },\n      \"justification\": \"Defines the precise requirement of the target claim to establish the benchmark for entailment evaluation.\"\n    },\n    {\n      \"id\": \"a3\",\n      \"text\": \"The contract context lacks any explicit or implicit provision imposing confidentiality on the existence, terms, subject matter, or status of the agreement.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"In contract NLI, absence of relevant contractual support for a specific obligation attacks entailment.\",\n      \"evidence_span\": null,\n      \"confidence\": 0.9,\n      \"tau\": 0.8,\n      \"rubric\": {\n        \"relevance\": 1.0,\n        \"factual_grounding\": 1.0,\n        \"specificity\": 1.0,\n        \"logical_coherence\": 1.0,\n        \"applicability\": 1.0\n      },\n      \"justification\": \"Directly addresses the missing element required by the target statement, weakening the entailment claim due to lack of textual support.\"\n    },\n    {\n      \"id\": \"a4\",\n      \"text\": \"The only confidentiality-related provision in the context pertains to returning information upon request, which does not extend to or support confidentiality of the agreement itself.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"Contract clauses are interpreted based on their explicit scope; provisions limited to return obligations do not entail broader confidentiality duties.\",\n      \"evidence_span\": \"At the end of the contract the receiving party shall return the confidential information and any possibly extant copies after receipt of a written request, provided that this is technically feasible and does not violate the retention obligations.\",\n      \"confidence\": 0.9,\n      \"tau\": 0.7,\n      \"rubric\": {\n        \"relevance\": 1.0,\n        \"factual_grounding\": 1.0,\n        \"specificity\": 0.8,\n        \"logical_coherence\": 1.0,\n        \"applicability\": 1.0\n      },\n      \"justification\": \"Highlights the mismatch between the narrow scope of the contract text and the broad scope of the target statement, attacking entailment.\"\n    }\n  ],\n  \"relations\": [\n    {\n      \"source\": \"a1\",\n      \"target\": \"phi\",\n      \"type\": \"neutral\",\n      \"confidence\": 1.0\n    },\n    {\n      \"source\": \"a2\",\n      \"target\": \"phi\",\n      \"type\": \"neutral\",\n      \"confidence\": 1.0\n    },\n    {\n      \"source\": \"a3\",\n      \"target\": \"phi\",\n      \"type\": \"attack\",\n      \"confidence\": 0.9\n    },\n    {\n      \"source\": \"a4\",\n      \"target\": \"phi\",\n      \"type\": \"attack\",\n      \"confidence\": 0.9\n    },\n    {\n      \"source\": \"a3\",\n      \"target\": \"a4\",\n      \"type\": \"support\",\n      \"confidence\": 0.8\n    }\n  ]\n}",
+    "parse_error": null,
+    "n_raw_arguments": 4
+  },
+  "strengths": [
+    {
+      "argument_id": "a3",
+      "tau": 0.8,
+      "rubric": {
+        "legal_relevance": 1.0,
+        "factual_grounding": 1.0,
+        "specificity": 1.0,
+        "logical_coherence": 1.0,
+        "fre_801c_applicability": 1.0
+      },
+      "justification": "Directly addresses the missing element required by the target statement, weakening the entailment claim due to lack of textual support.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a4",
+      "tau": 0.7,
+      "rubric": {
+        "legal_relevance": 1.0,
+        "factual_grounding": 1.0,
+        "specificity": 0.8,
+        "logical_coherence": 1.0,
+        "fre_801c_applicability": 1.0
+      },
+      "justification": "Highlights the mismatch between the narrow scope of the contract text and the broad scope of the target statement, attacking entailment.",
+      "model": "combined"
+    }
+  ],
+  "solver_output": {
+    "case_id": "test_0043",
+    "graph": {
+      "nodes": {
+        "phi": {
+          "id": "phi",
+          "text": "Does the CONTRACT CONTEXT logically entail the EXACT TARGET STATEMENT, with every material element matched and no missing limitation, exception, party-scope mismatch, information-type mismatch, purpose limitation, recipient-scope mismatch, or disclosure carve-out?",
+          "tau": 0.5,
+          "sigma": 0.006000000000000005,
+          "is_claim": true
+        },
+        "a3": {
+          "id": "a3",
+          "text": "The contract context lacks any explicit or implicit provision imposing confidentiality on the existence, terms, subject matter, or status of the agreement.",
+          "tau": 0.8,
+          "sigma": 0.8,
+          "is_claim": false
+        },
+        "a4": {
+          "id": "a4",
+          "text": "The only confidentiality-related provision in the context pertains to returning information upon request, which does not extend to or support confidentiality of the agreement itself.",
+          "tau": 0.7,
+          "sigma": 0.94,
+          "is_claim": false
+        }
+      },
+      "edges": [
+        {
+          "source": "a3",
+          "target": "phi",
+          "type": "attack",
+          "confidence": 0.9
+        },
+        {
+          "source": "a4",
+          "target": "phi",
+          "type": "attack",
+          "confidence": 0.9
+        },
+        {
+          "source": "a3",
+          "target": "a4",
+          "type": "support",
+          "confidence": 0.8
+        }
+      ],
+      "solver_type": "df_quad"
+    },
+    "sigma_phi": 0.006000000000000005,
+    "sigma_all": {
+      "phi": 0.006000000000000005,
+      "a3": 0.8,
+      "a4": 0.94
+    },
+    "iterations": 2,
+    "converged": true,
+    "solver_type": "df_quad"
+  },
+  "sigma_phi": 0.006000000000000005,
+  "decision": "No",
+  "uncertainty": {
+    "is_uncertain": false,
+    "sigma_phi": 0.006000000000000005,
+    "threshold_low": 0.45,
+    "threshold_high": 0.55,
+    "escalation_triggered": false,
+    "escalation_actions": [],
+    "escalation_log": []
+  },
+  "hitl_interventions": [],
+  "pre_hitl_decision": null
+}

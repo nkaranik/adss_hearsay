@@ -1,0 +1,225 @@
+{
+  "case_id": "test_0062",
+  "input_text": "CONTRACT CONTEXT:\n2. The Receiving Party shall limit the possession and use of the Information to a “need-to-know” basis among its Representatives. 4. The Receiving Party agrees that the Information will be used solely for giving effect to the Business Under Discussion and further that it will not disclose to any person  (i) the Information and  (ii) the fact that the Information has been made available to the Receiving Party or that the Receiving Party have inspected any portion of the Information, for any reason or purpose whatsoever, unless the Providing Party has consented in writing to such disclosure or except as stated otherwise herein or as required by law, order, decree, regulation, or governmental agency request.  No modification, amendment or waiver of this Agreement shall be binding unless it is in writing and signed by each of the Parties.  \n\nTARGET STATEMENT:\nThe contract entails that the relevant party must keep confidential the existence, terms, subject matter, or status of the agreement, negotiations, discussions, or transaction between the parties.\n\nDECISION TASK:\nDetermine whether the contract context entails the target statement.",
+  "phi_text": "",
+  "gold_label": "No",
+  "extraction": {
+    "case_id": "test_0062",
+    "input_text": "CONTRACT CONTEXT:\n2. The Receiving Party shall limit the possession and use of the Information to a “need-to-know” basis among its Representatives. 4. The Receiving Party agrees that the Information will be used solely for giving effect to the Business Under Discussion and further that it will not disclose to any person  (i) the Information and  (ii) the fact that the Information has been made available to the Receiving Party or that the Receiving Party have inspected any portion of the Information, for any reason or purpose whatsoever, unless the Providing Party has consented in writing to such disclosure or except as stated otherwise herein or as required by law, order, decree, regulation, or governmental agency request.  No modification, amendment or waiver of this Agreement shall be binding unless it is in writing and signed by each of the Parties.  \n\nTARGET STATEMENT:\nThe contract entails that the relevant party must keep confidential the existence, terms, subject matter, or status of the agreement, negotiations, discussions, or transaction between the parties.\n\nDECISION TASK:\nDetermine whether the contract context entails the target statement.",
+    "claim": {
+      "id": "phi",
+      "text": "Does the CONTRACT CONTEXT logically entail the EXACT TARGET STATEMENT, with every material element matched and no missing limitation, exception, party-scope mismatch, information-type mismatch, purpose limitation, recipient-scope mismatch, or disclosure carve-out?"
+    },
+    "arguments": [
+      {
+        "id": "a1",
+        "text": "The contract explicitly prohibits the Receiving Party from disclosing the fact that information has been made available or inspected, directly supporting the target statement's claim that the contract entails keeping confidential the existence or status of the agreement or transaction.",
+        "stance_to_claim": "support",
+        "legal_rule": "Contractual confidentiality obligation principle: explicit non-disclosure clauses create a binding duty to maintain secrecy regarding specified facts.",
+        "evidence_span": "it will not disclose to any person (i) the Information and (ii) the fact that the Information has been made available to the Receiving Party or that the Receiving Party have inspected any portion of the Information",
+        "confidence": 0.95
+      },
+      {
+        "id": "a2",
+        "text": "The confidentiality obligation is explicitly scoped to the Receiving Party and its Representatives on a need-to-know basis, aligning with the relevant party scope in the target statement.",
+        "stance_to_claim": "support",
+        "legal_rule": "Party-scope limitation principle: confidentiality duties bind only designated parties and their authorized representatives.",
+        "evidence_span": "The Receiving Party shall limit the possession and use of the Information to a “need-to-know” basis among its Representatives.",
+        "confidence": 0.85
+      },
+      {
+        "id": "a3",
+        "text": "The contract contains explicit exceptions to the confidentiality obligation, including disclosures with written consent, those required by law, and those stated otherwise in the agreement. These carve-outs prevent the contract from entailing an absolute confidentiality obligation, thereby attacking the strict entailment of the target statement.",
+        "stance_to_claim": "attack",
+        "legal_rule": "Contractual exception/carve-out principle: standard legal and consent-based exceptions limit the absolute scope of confidentiality duties.",
+        "evidence_span": "unless the Providing Party has consented in writing to such disclosure or except as stated otherwise herein or as required by law, order, decree, regulation, or governmental agency request.",
+        "confidence": 0.8
+      },
+      {
+        "id": "a4",
+        "text": "The target statement broadly claims confidentiality of the terms, subject matter, or status of the agreement, negotiations, or transaction. The contract's obligation is specifically tied to the Information and the fact of its availability, which may not fully encompass the broader terms or negotiations mentioned in the target statement, indicating a potential scope mismatch.",
+        "stance_to_claim": "attack",
+        "legal_rule": "Information scope definition principle: confidentiality duties are strictly construed to the defined subject matter and do not automatically extend to broader agreement terms or negotiations unless explicitly stated.",
+        "evidence_span": "the Information",
+        "confidence": 0.75
+      }
+    ],
+    "relations": [
+      {
+        "source": "a1",
+        "target": "phi",
+        "type": "support",
+        "confidence": 0.95
+      },
+      {
+        "source": "a2",
+        "target": "phi",
+        "type": "support",
+        "confidence": 0.85
+      },
+      {
+        "source": "a3",
+        "target": "phi",
+        "type": "attack",
+        "confidence": 0.8
+      },
+      {
+        "source": "a4",
+        "target": "phi",
+        "type": "attack",
+        "confidence": 0.75
+      }
+    ],
+    "extraction_model": "",
+    "raw_llm_response": "{\n  \"case_id\": \"test_0062\",\n  \"phi\": \"Does the CONTRACT CONTEXT logically entail the EXACT TARGET STATEMENT, with every material element matched and no missing limitation, exception, party-scope mismatch, information-type mismatch, purpose limitation, recipient-scope mismatch, or disclosure carve-out?\",\n  \"arguments\": [\n    {\n      \"id\": \"a1\",\n      \"text\": \"The contract explicitly prohibits the Receiving Party from disclosing the fact that information has been made available or inspected, directly supporting the target statement's claim that the contract entails keeping confidential the existence or status of the agreement or transaction.\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"Contractual confidentiality obligation principle: explicit non-disclosure clauses create a binding duty to maintain secrecy regarding specified facts.\",\n      \"evidence_span\": \"it will not disclose to any person (i) the Information and (ii) the fact that the Information has been made available to the Receiving Party or that the Receiving Party have inspected any portion of the Information\",\n      \"confidence\": 0.95,\n      \"tau\": 0.90,\n      \"rubric\": {\n        \"relevance\": 0.95,\n        \"factual_grounding\": 1.0,\n        \"specificity\": 0.90,\n        \"logical_coherence\": 0.95,\n        \"applicability\": 0.90\n      },\n      \"justification\": \"Directly quotes clause 4(ii) which mandates non-disclosure of the fact of availability, strongly supporting the core entailment of the target statement.\"\n    },\n    {\n      \"id\": \"a2\",\n      \"text\": \"The confidentiality obligation is explicitly scoped to the Receiving Party and its Representatives on a need-to-know basis, aligning with the relevant party scope in the target statement.\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"Party-scope limitation principle: confidentiality duties bind only designated parties and their authorized representatives.\",\n      \"evidence_span\": \"The Receiving Party shall limit the possession and use of the Information to a “need-to-know” basis among its Representatives.\",\n      \"confidence\": 0.85,\n      \"tau\": 0.75,\n      \"rubric\": {\n        \"relevance\": 0.80,\n        \"factual_grounding\": 0.90,\n        \"specificity\": 0.70,\n        \"logical_coherence\": 0.80,\n        \"applicability\": 0.85\n      },\n      \"justification\": \"Identifies the party scope alignment between the contract's 'Receiving Party' and the target's 'relevant party,' supporting the entailment without overextending it.\"\n    },\n    {\n      \"id\": \"a3\",\n      \"text\": \"The contract contains explicit exceptions to the confidentiality obligation, including disclosures with written consent, those required by law, and those stated otherwise in the agreement. These carve-outs prevent the contract from entailing an absolute confidentiality obligation, thereby attacking the strict entailment of the target statement.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"Contractual exception/carve-out principle: standard legal and consent-based exceptions limit the absolute scope of confidentiality duties.\",\n      \"evidence_span\": \"unless the Providing Party has consented in writing to such disclosure or except as stated otherwise herein or as required by law, order, decree, regulation, or governmental agency request.\",\n      \"confidence\": 0.80,\n      \"tau\": 0.65,\n      \"rubric\": {\n        \"relevance\": 0.85,\n        \"factual_grounding\": 0.90,\n        \"specificity\": 0.60,\n        \"logical_coherence\": 0.70,\n        \"applicability\": 0.80\n      },\n      \"justification\": \"Highlights standard legal carve-outs that limit the absolute nature of the confidentiality obligation, weakening the strict entailment of the target statement which implies an unqualified duty.\"\n    },\n    {\n      \"id\": \"a4\",\n      \"text\": \"The target statement broadly claims confidentiality of the terms, subject matter, or status of the agreement, negotiations, or transaction. The contract's obligation is specifically tied to the Information and the fact of its availability, which may not fully encompass the broader terms or negotiations mentioned in the target statement, indicating a potential scope mismatch.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"Information scope definition principle: confidentiality duties are strictly construed to the defined subject matter and do not automatically extend to broader agreement terms or negotiations unless explicitly stated.\",\n      \"evidence_span\": \"the Information\",\n      \"confidence\": 0.75,\n      \"tau\": 0.55,\n      \"rubric\": {\n        \"relevance\": 0.70,\n        \"factual_grounding\": 0.60,\n        \"specificity\": 0.50,\n        \"logical_coherence\": 0.65,\n        \"applicability\": 0.75\n      },\n      \"justification\": \"Points out a potential scope mismatch where the target statement's broad reference to 'terms' and 'negotiations' exceeds the contract's specific focus on 'Information' and its availability, attacking the precise entailment.\"\n    }\n  ],\n  \"relations\": [\n    {\n      \"source\": \"a1\",\n      \"target\": \"phi\",\n      \"type\": \"support\",\n      \"confidence\": 0.95\n    },\n    {\n      \"source\": \"a2\",\n      \"target\": \"phi\",\n      \"type\": \"support\",\n      \"confidence\": 0.85\n    },\n    {\n      \"source\": \"a3\",\n      \"target\": \"phi\",\n      \"type\": \"attack\",\n      \"confidence\": 0.80\n    },\n    {\n      \"source\": \"a4\",\n      \"target\": \"phi\",\n      \"type\": \"attack\",\n      \"confidence\": 0.75\n    }\n  ]\n}",
+    "parse_error": null,
+    "n_raw_arguments": 4
+  },
+  "strengths": [
+    {
+      "argument_id": "a1",
+      "tau": 0.9,
+      "rubric": {
+        "legal_relevance": 0.95,
+        "factual_grounding": 1.0,
+        "specificity": 0.9,
+        "logical_coherence": 0.95,
+        "fre_801c_applicability": 0.9
+      },
+      "justification": "Directly quotes clause 4(ii) which mandates non-disclosure of the fact of availability, strongly supporting the core entailment of the target statement.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a2",
+      "tau": 0.75,
+      "rubric": {
+        "legal_relevance": 0.8,
+        "factual_grounding": 0.9,
+        "specificity": 0.7,
+        "logical_coherence": 0.8,
+        "fre_801c_applicability": 0.85
+      },
+      "justification": "Identifies the party scope alignment between the contract's 'Receiving Party' and the target's 'relevant party,' supporting the entailment without overextending it.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a3",
+      "tau": 0.65,
+      "rubric": {
+        "legal_relevance": 0.85,
+        "factual_grounding": 0.9,
+        "specificity": 0.6,
+        "logical_coherence": 0.7,
+        "fre_801c_applicability": 0.8
+      },
+      "justification": "Highlights standard legal carve-outs that limit the absolute nature of the confidentiality obligation, weakening the strict entailment of the target statement which implies an unqualified duty.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a4",
+      "tau": 0.55,
+      "rubric": {
+        "legal_relevance": 0.7,
+        "factual_grounding": 0.6,
+        "specificity": 0.5,
+        "logical_coherence": 0.65,
+        "fre_801c_applicability": 0.75
+      },
+      "justification": "Points out a potential scope mismatch where the target statement's broad reference to 'terms' and 'negotiations' exceeds the contract's specific focus on 'Information' and its availability, attacking the precise entailment.",
+      "model": "combined"
+    }
+  ],
+  "solver_output": {
+    "case_id": "test_0062",
+    "graph": {
+      "nodes": {
+        "phi": {
+          "id": "phi",
+          "text": "Does the CONTRACT CONTEXT logically entail the EXACT TARGET STATEMENT, with every material element matched and no missing limitation, exception, party-scope mismatch, information-type mismatch, purpose limitation, recipient-scope mismatch, or disclosure carve-out?",
+          "tau": 0.5,
+          "sigma": 0.56625,
+          "is_claim": true
+        },
+        "a1": {
+          "id": "a1",
+          "text": "The contract explicitly prohibits the Receiving Party from disclosing the fact that information has been made available or inspected, directly supporting the target statement's claim that the contract entails keeping confidential the existence or status of the agreement or transaction.",
+          "tau": 0.9,
+          "sigma": 0.9,
+          "is_claim": false
+        },
+        "a2": {
+          "id": "a2",
+          "text": "The confidentiality obligation is explicitly scoped to the Receiving Party and its Representatives on a need-to-know basis, aligning with the relevant party scope in the target statement.",
+          "tau": 0.75,
+          "sigma": 0.75,
+          "is_claim": false
+        },
+        "a3": {
+          "id": "a3",
+          "text": "The contract contains explicit exceptions to the confidentiality obligation, including disclosures with written consent, those required by law, and those stated otherwise in the agreement. These carve-outs prevent the contract from entailing an absolute confidentiality obligation, thereby attacking the strict entailment of the target statement.",
+          "tau": 0.65,
+          "sigma": 0.65,
+          "is_claim": false
+        },
+        "a4": {
+          "id": "a4",
+          "text": "The target statement broadly claims confidentiality of the terms, subject matter, or status of the agreement, negotiations, or transaction. The contract's obligation is specifically tied to the Information and the fact of its availability, which may not fully encompass the broader terms or negotiations mentioned in the target statement, indicating a potential scope mismatch.",
+          "tau": 0.55,
+          "sigma": 0.55,
+          "is_claim": false
+        }
+      },
+      "edges": [
+        {
+          "source": "a1",
+          "target": "phi",
+          "type": "support",
+          "confidence": 0.95
+        },
+        {
+          "source": "a2",
+          "target": "phi",
+          "type": "support",
+          "confidence": 0.85
+        },
+        {
+          "source": "a3",
+          "target": "phi",
+          "type": "attack",
+          "confidence": 0.8
+        },
+        {
+          "source": "a4",
+          "target": "phi",
+          "type": "attack",
+          "confidence": 0.75
+        }
+      ],
+      "solver_type": "df_quad"
+    },
+    "sigma_phi": 0.56625,
+    "sigma_all": {
+      "phi": 0.56625,
+      "a1": 0.9,
+      "a2": 0.75,
+      "a3": 0.65,
+      "a4": 0.55
+    },
+    "iterations": 2,
+    "converged": true,
+    "solver_type": "df_quad"
+  },
+  "sigma_phi": 0.56625,
+  "decision": "Yes",
+  "uncertainty": {
+    "is_uncertain": false,
+    "sigma_phi": 0.56625,
+    "threshold_low": 0.45,
+    "threshold_high": 0.55,
+    "escalation_triggered": false,
+    "escalation_actions": [],
+    "escalation_log": []
+  },
+  "hitl_interventions": [],
+  "pre_hitl_decision": null
+}

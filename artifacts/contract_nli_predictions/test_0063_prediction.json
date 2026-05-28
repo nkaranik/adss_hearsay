@@ -1,0 +1,225 @@
+{
+  "case_id": "test_0063",
+  "input_text": "CONTRACT CONTEXT:\nFor avoidance of doubt, in this Agreement “third party” means any party other than Client and AfriGIS and their holding and subsidiary companies or agents. 3.4 Notwithstanding anything to the contrary contained in this Agreement the Parties agree that the Confidential Information may be disclosed by the Receiving Party to its professional advisors on a need-to-know basis; provided that that Party takes whatever steps are necessary to procure that such professional advisors agree to abide by the terms of this Agreement to prevent the unauthorised disclosure of the Confidential Information to third parties.  \n\nTARGET STATEMENT:\nThe contract entails that the relevant party must keep confidential the existence, terms, subject matter, or status of the agreement, negotiations, discussions, or transaction between the parties.\n\nDECISION TASK:\nDetermine whether the contract context entails the target statement.",
+  "phi_text": "",
+  "gold_label": "No",
+  "extraction": {
+    "case_id": "test_0063",
+    "input_text": "CONTRACT CONTEXT:\nFor avoidance of doubt, in this Agreement “third party” means any party other than Client and AfriGIS and their holding and subsidiary companies or agents. 3.4 Notwithstanding anything to the contrary contained in this Agreement the Parties agree that the Confidential Information may be disclosed by the Receiving Party to its professional advisors on a need-to-know basis; provided that that Party takes whatever steps are necessary to procure that such professional advisors agree to abide by the terms of this Agreement to prevent the unauthorised disclosure of the Confidential Information to third parties.  \n\nTARGET STATEMENT:\nThe contract entails that the relevant party must keep confidential the existence, terms, subject matter, or status of the agreement, negotiations, discussions, or transaction between the parties.\n\nDECISION TASK:\nDetermine whether the contract context entails the target statement.",
+    "claim": {
+      "id": "phi",
+      "text": "Does the CONTRACT CONTEXT logically entail the EXACT TARGET STATEMENT, with every material element matched and no missing limitation, exception, party-scope mismatch, information-type mismatch, purpose limitation, recipient-scope mismatch, or disclosure carve-out?"
+    },
+    "arguments": [
+      {
+        "id": "a1",
+        "text": "The contract context lacks an explicit confidentiality clause covering the existence, terms, subject matter, or status of the agreement.",
+        "stance_to_claim": "attack",
+        "legal_rule": "Contractual entailment requires that the target claim be explicitly stated or necessarily inferred from the provided text.",
+        "evidence_span": "For avoidance of doubt, in this Agreement “third party” means any party other than Client and AfriGIS and their holding and subsidiary companies or agents.",
+        "confidence": 0.9
+      },
+      {
+        "id": "a2",
+        "text": "The provided text defines \"third party\" but does not define \"Confidential Information,\" leaving the scope of any potential confidentiality obligation undefined.",
+        "stance_to_claim": "attack",
+        "legal_rule": "Undefined terms in a contract context prevent the logical entailment of specific obligations not explicitly stated.",
+        "evidence_span": "“third party” means any party other than Client and AfriGIS",
+        "confidence": 0.85
+      },
+      {
+        "id": "a3",
+        "text": "Clause 3.4 permits disclosure of \"Confidential Information\" to professional advisors, which does not support an obligation to keep the agreement's existence or terms confidential.",
+        "stance_to_claim": "attack",
+        "legal_rule": "Permissive disclosure clauses do not establish confidentiality obligations for unrelated subject matter.",
+        "evidence_span": "3.4 Notwithstanding anything to the contrary contained in this Agreement the Parties agree that the Confidential Information may be disclosed by the Receiving Party to its professional advisors on a need-to-know basis",
+        "confidence": 0.85
+      },
+      {
+        "id": "a4",
+        "text": "The target confidentiality statement is not directly entailed by the contract text because the narrative provides no basis for inferring an obligation to keep the agreement's existence or terms confidential.",
+        "stance_to_claim": "attack",
+        "legal_rule": "In contract NLI, the absence of relevant contractual support for a material element attacks the entailment claim.",
+        "evidence_span": null,
+        "confidence": 0.9
+      }
+    ],
+    "relations": [
+      {
+        "source": "a1",
+        "target": "phi",
+        "type": "attack",
+        "confidence": 0.9
+      },
+      {
+        "source": "a2",
+        "target": "phi",
+        "type": "attack",
+        "confidence": 0.85
+      },
+      {
+        "source": "a3",
+        "target": "phi",
+        "type": "attack",
+        "confidence": 0.85
+      },
+      {
+        "source": "a4",
+        "target": "phi",
+        "type": "attack",
+        "confidence": 0.9
+      }
+    ],
+    "extraction_model": "",
+    "raw_llm_response": "{\n  \"case_id\": \"test_0063\",\n  \"phi\": \"Does the CONTRACT CONTEXT logically entail the EXACT TARGET STATEMENT, with every material element matched and no missing limitation, exception, party-scope mismatch, information-type mismatch, purpose limitation, recipient-scope mismatch, or disclosure carve-out?\",\n  \"arguments\": [\n    {\n      \"id\": \"a1\",\n      \"text\": \"The contract context lacks an explicit confidentiality clause covering the existence, terms, subject matter, or status of the agreement.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"Contractual entailment requires that the target claim be explicitly stated or necessarily inferred from the provided text.\",\n      \"evidence_span\": \"For avoidance of doubt, in this Agreement “third party” means any party other than Client and AfriGIS and their holding and subsidiary companies or agents.\",\n      \"confidence\": 0.9,\n      \"tau\": 0.8,\n      \"rubric\": {\n        \"relevance\": 0.9,\n        \"factual_grounding\": 0.9,\n        \"specificity\": 0.8,\n        \"logical_coherence\": 0.9,\n        \"applicability\": 0.8\n      },\n      \"justification\": \"The absence of a confidentiality clause regarding the agreement's existence or terms directly undermines the entailment claim.\"\n    },\n    {\n      \"id\": \"a2\",\n      \"text\": \"The provided text defines \\\"third party\\\" but does not define \\\"Confidential Information,\\\" leaving the scope of any potential confidentiality obligation undefined.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"Undefined terms in a contract context prevent the logical entailment of specific obligations not explicitly stated.\",\n      \"evidence_span\": \"“third party” means any party other than Client and AfriGIS\",\n      \"confidence\": 0.85,\n      \"tau\": 0.7,\n      \"rubric\": {\n        \"relevance\": 0.8,\n        \"factual_grounding\": 0.9,\n        \"specificity\": 0.7,\n        \"logical_coherence\": 0.8,\n        \"applicability\": 0.7\n      },\n      \"justification\": \"The lack of a definition for \\\"Confidential Information\\\" means the contract cannot logically entail a confidentiality obligation for the agreement's terms.\"\n    },\n    {\n      \"id\": \"a3\",\n      \"text\": \"Clause 3.4 permits disclosure of \\\"Confidential Information\\\" to professional advisors, which does not support an obligation to keep the agreement's existence or terms confidential.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"Permissive disclosure clauses do not establish confidentiality obligations for unrelated subject matter.\",\n      \"evidence_span\": \"3.4 Notwithstanding anything to the contrary contained in this Agreement the Parties agree that the Confidential Information may be disclosed by the Receiving Party to its professional advisors on a need-to-know basis\",\n      \"confidence\": 0.85,\n      \"tau\": 0.75,\n      \"rubric\": {\n        \"relevance\": 0.8,\n        \"factual_grounding\": 0.9,\n        \"specificity\": 0.8,\n        \"logical_coherence\": 0.8,\n        \"applicability\": 0.7\n      },\n      \"justification\": \"The clause addresses a specific, limited disclosure exception rather than creating the broad confidentiality obligation claimed in the target statement.\"\n    },\n    {\n      \"id\": \"a4\",\n      \"text\": \"The target confidentiality statement is not directly entailed by the contract text because the narrative provides no basis for inferring an obligation to keep the agreement's existence or terms confidential.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"In contract NLI, the absence of relevant contractual support for a material element attacks the entailment claim.\",\n      \"evidence_span\": null,\n      \"confidence\": 0.9,\n      \"tau\": 0.85,\n      \"rubric\": {\n        \"relevance\": 0.9,\n        \"factual_grounding\": 0.9,\n        \"specificity\": 0.8,\n        \"logical_coherence\": 0.9,\n        \"applicability\": 0.9\n      },\n      \"justification\": \"Directly addresses the decision problem by noting the complete lack of textual basis for the target claim.\"\n    }\n  ],\n  \"relations\": [\n    {\n      \"source\": \"a1\",\n      \"target\": \"phi\",\n      \"type\": \"attack\",\n      \"confidence\": 0.9\n    },\n    {\n      \"source\": \"a2\",\n      \"target\": \"phi\",\n      \"type\": \"attack\",\n      \"confidence\": 0.85\n    },\n    {\n      \"source\": \"a3\",\n      \"target\": \"phi\",\n      \"type\": \"attack\",\n      \"confidence\": 0.85\n    },\n    {\n      \"source\": \"a4\",\n      \"target\": \"phi\",\n      \"type\": \"attack\",\n      \"confidence\": 0.9\n    }\n  ]\n}",
+    "parse_error": null,
+    "n_raw_arguments": 4
+  },
+  "strengths": [
+    {
+      "argument_id": "a1",
+      "tau": 0.8,
+      "rubric": {
+        "legal_relevance": 0.9,
+        "factual_grounding": 0.9,
+        "specificity": 0.8,
+        "logical_coherence": 0.9,
+        "fre_801c_applicability": 0.8
+      },
+      "justification": "The absence of a confidentiality clause regarding the agreement's existence or terms directly undermines the entailment claim.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a2",
+      "tau": 0.7,
+      "rubric": {
+        "legal_relevance": 0.8,
+        "factual_grounding": 0.9,
+        "specificity": 0.7,
+        "logical_coherence": 0.8,
+        "fre_801c_applicability": 0.7
+      },
+      "justification": "The lack of a definition for \"Confidential Information\" means the contract cannot logically entail a confidentiality obligation for the agreement's terms.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a3",
+      "tau": 0.75,
+      "rubric": {
+        "legal_relevance": 0.8,
+        "factual_grounding": 0.9,
+        "specificity": 0.8,
+        "logical_coherence": 0.8,
+        "fre_801c_applicability": 0.7
+      },
+      "justification": "The clause addresses a specific, limited disclosure exception rather than creating the broad confidentiality obligation claimed in the target statement.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a4",
+      "tau": 0.85,
+      "rubric": {
+        "legal_relevance": 0.9,
+        "factual_grounding": 0.9,
+        "specificity": 0.8,
+        "logical_coherence": 0.9,
+        "fre_801c_applicability": 0.9
+      },
+      "justification": "Directly addresses the decision problem by noting the complete lack of textual basis for the target claim.",
+      "model": "combined"
+    }
+  ],
+  "solver_output": {
+    "case_id": "test_0063",
+    "graph": {
+      "nodes": {
+        "phi": {
+          "id": "phi",
+          "text": "Does the CONTRACT CONTEXT logically entail the EXACT TARGET STATEMENT, with every material element matched and no missing limitation, exception, party-scope mismatch, information-type mismatch, purpose limitation, recipient-scope mismatch, or disclosure carve-out?",
+          "tau": 0.5,
+          "sigma": 0.0011249999999999871,
+          "is_claim": true
+        },
+        "a1": {
+          "id": "a1",
+          "text": "The contract context lacks an explicit confidentiality clause covering the existence, terms, subject matter, or status of the agreement.",
+          "tau": 0.8,
+          "sigma": 0.8,
+          "is_claim": false
+        },
+        "a2": {
+          "id": "a2",
+          "text": "The provided text defines \"third party\" but does not define \"Confidential Information,\" leaving the scope of any potential confidentiality obligation undefined.",
+          "tau": 0.7,
+          "sigma": 0.7,
+          "is_claim": false
+        },
+        "a3": {
+          "id": "a3",
+          "text": "Clause 3.4 permits disclosure of \"Confidential Information\" to professional advisors, which does not support an obligation to keep the agreement's existence or terms confidential.",
+          "tau": 0.75,
+          "sigma": 0.75,
+          "is_claim": false
+        },
+        "a4": {
+          "id": "a4",
+          "text": "The target confidentiality statement is not directly entailed by the contract text because the narrative provides no basis for inferring an obligation to keep the agreement's existence or terms confidential.",
+          "tau": 0.85,
+          "sigma": 0.85,
+          "is_claim": false
+        }
+      },
+      "edges": [
+        {
+          "source": "a1",
+          "target": "phi",
+          "type": "attack",
+          "confidence": 0.9
+        },
+        {
+          "source": "a2",
+          "target": "phi",
+          "type": "attack",
+          "confidence": 0.85
+        },
+        {
+          "source": "a3",
+          "target": "phi",
+          "type": "attack",
+          "confidence": 0.85
+        },
+        {
+          "source": "a4",
+          "target": "phi",
+          "type": "attack",
+          "confidence": 0.9
+        }
+      ],
+      "solver_type": "df_quad"
+    },
+    "sigma_phi": 0.0011249999999999871,
+    "sigma_all": {
+      "phi": 0.0011249999999999871,
+      "a1": 0.8,
+      "a2": 0.7,
+      "a3": 0.75,
+      "a4": 0.85
+    },
+    "iterations": 2,
+    "converged": true,
+    "solver_type": "df_quad"
+  },
+  "sigma_phi": 0.0011249999999999871,
+  "decision": "No",
+  "uncertainty": {
+    "is_uncertain": false,
+    "sigma_phi": 0.0011249999999999871,
+    "threshold_low": 0.45,
+    "threshold_high": 0.55,
+    "escalation_triggered": false,
+    "escalation_actions": [],
+    "escalation_log": []
+  },
+  "hitl_interventions": [],
+  "pre_hitl_decision": null
+}

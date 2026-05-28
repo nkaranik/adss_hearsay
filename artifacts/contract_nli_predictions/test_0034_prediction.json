@@ -1,0 +1,225 @@
+{
+  "case_id": "test_0034",
+  "input_text": "CONTRACT CONTEXT:\nEach party agrees that, without the prior written consent of the other party, neither it nor its Representatives will disclose to any other person (other than to such party’s Representatives who agree, or are otherwise bound, not to disclose the following except as contemplated by this Agreement) any of the other party’s Evaluation Material, the fact that discussions between the parties are taking place concerning the Transaction, or any terms or other facts relating to the Transaction.  \n\nTARGET STATEMENT:\nThe contract entails that the relevant party must keep confidential the existence, terms, subject matter, or status of the agreement, negotiations, discussions, or transaction between the parties.\n\nDECISION TASK:\nDetermine whether the contract context entails the target statement.",
+  "phi_text": "",
+  "gold_label": "Yes",
+  "extraction": {
+    "case_id": "test_0034",
+    "input_text": "CONTRACT CONTEXT:\nEach party agrees that, without the prior written consent of the other party, neither it nor its Representatives will disclose to any other person (other than to such party’s Representatives who agree, or are otherwise bound, not to disclose the following except as contemplated by this Agreement) any of the other party’s Evaluation Material, the fact that discussions between the parties are taking place concerning the Transaction, or any terms or other facts relating to the Transaction.  \n\nTARGET STATEMENT:\nThe contract entails that the relevant party must keep confidential the existence, terms, subject matter, or status of the agreement, negotiations, discussions, or transaction between the parties.\n\nDECISION TASK:\nDetermine whether the contract context entails the target statement.",
+    "claim": {
+      "id": "phi",
+      "text": "Does the CONTRACT CONTEXT logically entail the EXACT TARGET STATEMENT, with every material element matched and no missing limitation, exception, party-scope mismatch, information-type mismatch, purpose limitation, recipient-scope mismatch, or disclosure carve-out?"
+    },
+    "arguments": [
+      {
+        "id": "a1",
+        "text": "The contract contains an explicit confidentiality clause prohibiting disclosure of transaction-related information without prior written consent, establishing a foundational duty of confidentiality.",
+        "stance_to_claim": "support",
+        "legal_rule": "Contractual confidentiality obligations are established through explicit textual prohibitions on disclosure.",
+        "evidence_span": "Each party agrees that, without the prior written consent of the other party, neither it nor its Representatives will disclose...",
+        "confidence": 0.95
+      },
+      {
+        "id": "a2",
+        "text": "The protected information scope explicitly covers 'the fact that discussions between the parties are taking place concerning the Transaction, or any terms or other facts relating to the Transaction,' which directly aligns with the target statement's reference to existence, terms, subject matter, or status.",
+        "stance_to_claim": "support",
+        "legal_rule": "Entailment in contract NLI requires matching material elements of information type and scope between the clause and the target claim.",
+        "evidence_span": "the fact that discussions between the parties are taking place concerning the Transaction, or any terms or other facts relating to the Transaction",
+        "confidence": 0.95
+      },
+      {
+        "id": "a3",
+        "text": "The obligation binds 'Each party' and its Representatives, satisfying the target statement's requirement that 'the relevant party' must maintain confidentiality regarding the transaction.",
+        "stance_to_claim": "support",
+        "legal_rule": "Party scope in confidentiality clauses is determined by explicit designation of obligated entities.",
+        "evidence_span": "Each party agrees that... neither it nor its Representatives will disclose",
+        "confidence": 0.95
+      },
+      {
+        "id": "a4",
+        "text": "The clause permits disclosure to bound Representatives and allows disclosure with prior written consent. These standard carve-outs define operational boundaries without negating the core confidentiality entailment.",
+        "stance_to_claim": "support",
+        "legal_rule": "Standard confidentiality carve-outs and consent mechanisms do not invalidate the primary duty of confidentiality but rather delineate its permissible exceptions.",
+        "evidence_span": "other than to such party’s Representatives who agree, or are otherwise bound, not to disclose the following except as contemplated by this Agreement",
+        "confidence": 0.9
+      }
+    ],
+    "relations": [
+      {
+        "source": "a1",
+        "target": "phi",
+        "type": "support",
+        "confidence": 0.95
+      },
+      {
+        "source": "a2",
+        "target": "phi",
+        "type": "support",
+        "confidence": 0.95
+      },
+      {
+        "source": "a3",
+        "target": "phi",
+        "type": "support",
+        "confidence": 0.95
+      },
+      {
+        "source": "a4",
+        "target": "phi",
+        "type": "support",
+        "confidence": 0.9
+      }
+    ],
+    "extraction_model": "",
+    "raw_llm_response": "{\n  \"case_id\": \"test_0034\",\n  \"phi\": \"Does the CONTRACT CONTEXT logically entail the EXACT TARGET STATEMENT, with every material element matched and no missing limitation, exception, party-scope mismatch, information-type mismatch, purpose limitation, recipient-scope mismatch, or disclosure carve-out?\",\n  \"arguments\": [\n    {\n      \"id\": \"a1\",\n      \"text\": \"The contract contains an explicit confidentiality clause prohibiting disclosure of transaction-related information without prior written consent, establishing a foundational duty of confidentiality.\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"Contractual confidentiality obligations are established through explicit textual prohibitions on disclosure.\",\n      \"evidence_span\": \"Each party agrees that, without the prior written consent of the other party, neither it nor its Representatives will disclose...\",\n      \"confidence\": 0.95,\n      \"tau\": 0.9,\n      \"rubric\": {\n        \"relevance\": 0.9,\n        \"factual_grounding\": 1.0,\n        \"specificity\": 0.8,\n        \"logical_coherence\": 0.9,\n        \"applicability\": 0.9\n      },\n      \"justification\": \"Directly establishes the core confidentiality duty referenced in the target statement, strongly supporting entailment.\"\n    },\n    {\n      \"id\": \"a2\",\n      \"text\": \"The protected information scope explicitly covers 'the fact that discussions between the parties are taking place concerning the Transaction, or any terms or other facts relating to the Transaction,' which directly aligns with the target statement's reference to existence, terms, subject matter, or status.\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"Entailment in contract NLI requires matching material elements of information type and scope between the clause and the target claim.\",\n      \"evidence_span\": \"the fact that discussions between the parties are taking place concerning the Transaction, or any terms or other facts relating to the Transaction\",\n      \"confidence\": 0.95,\n      \"tau\": 1.0,\n      \"rubric\": {\n        \"relevance\": 1.0,\n        \"factual_grounding\": 1.0,\n        \"specificity\": 1.0,\n        \"logical_coherence\": 1.0,\n        \"applicability\": 1.0\n      },\n      \"justification\": \"Provides exact lexical and semantic overlap between the contract text and the target statement's information scope, confirming direct entailment.\"\n    },\n    {\n      \"id\": \"a3\",\n      \"text\": \"The obligation binds 'Each party' and its Representatives, satisfying the target statement's requirement that 'the relevant party' must maintain confidentiality regarding the transaction.\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"Party scope in confidentiality clauses is determined by explicit designation of obligated entities.\",\n      \"evidence_span\": \"Each party agrees that... neither it nor its Representatives will disclose\",\n      \"confidence\": 0.95,\n      \"tau\": 0.9,\n      \"rubric\": {\n        \"relevance\": 0.9,\n        \"factual_grounding\": 1.0,\n        \"specificity\": 0.9,\n        \"logical_coherence\": 0.9,\n        \"applicability\": 0.9\n      },\n      \"justification\": \"Confirms that the obligated parties in the contract match the 'relevant party' in the target statement, supporting the entailment.\"\n    },\n    {\n      \"id\": \"a4\",\n      \"text\": \"The clause permits disclosure to bound Representatives and allows disclosure with prior written consent. These standard carve-outs define operational boundaries without negating the core confidentiality entailment.\",\n      \"stance_to_claim\": \"support\",\n      \"legal_rule\": \"Standard confidentiality carve-outs and consent mechanisms do not invalidate the primary duty of confidentiality but rather delineate its permissible exceptions.\",\n      \"evidence_span\": \"other than to such party’s Representatives who agree, or are otherwise bound, not to disclose the following except as contemplated by this Agreement\",\n      \"confidence\": 0.9,\n      \"tau\": 0.85,\n      \"rubric\": {\n        \"relevance\": 0.8,\n        \"factual_grounding\": 0.9,\n        \"specificity\": 0.8,\n        \"logical_coherence\": 0.8,\n        \"applicability\": 0.8\n      },\n      \"justification\": \"Addresses potential scope limitations mentioned in the decision problem, demonstrating that carve-outs are consistent with and do not break the entailment of the target statement.\"\n    }\n  ],\n  \"relations\": [\n    {\n      \"source\": \"a1\",\n      \"target\": \"phi\",\n      \"type\": \"support\",\n      \"confidence\": 0.95\n    },\n    {\n      \"source\": \"a2\",\n      \"target\": \"phi\",\n      \"type\": \"support\",\n      \"confidence\": 0.95\n    },\n    {\n      \"source\": \"a3\",\n      \"target\": \"phi\",\n      \"type\": \"support\",\n      \"confidence\": 0.95\n    },\n    {\n      \"source\": \"a4\",\n      \"target\": \"phi\",\n      \"type\": \"support\",\n      \"confidence\": 0.9\n    }\n  ]\n}",
+    "parse_error": null,
+    "n_raw_arguments": 4
+  },
+  "strengths": [
+    {
+      "argument_id": "a1",
+      "tau": 0.9,
+      "rubric": {
+        "legal_relevance": 0.9,
+        "factual_grounding": 1.0,
+        "specificity": 0.8,
+        "logical_coherence": 0.9,
+        "fre_801c_applicability": 0.9
+      },
+      "justification": "Directly establishes the core confidentiality duty referenced in the target statement, strongly supporting entailment.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a2",
+      "tau": 1.0,
+      "rubric": {
+        "legal_relevance": 1.0,
+        "factual_grounding": 1.0,
+        "specificity": 1.0,
+        "logical_coherence": 1.0,
+        "fre_801c_applicability": 1.0
+      },
+      "justification": "Provides exact lexical and semantic overlap between the contract text and the target statement's information scope, confirming direct entailment.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a3",
+      "tau": 0.9,
+      "rubric": {
+        "legal_relevance": 0.9,
+        "factual_grounding": 1.0,
+        "specificity": 0.9,
+        "logical_coherence": 0.9,
+        "fre_801c_applicability": 0.9
+      },
+      "justification": "Confirms that the obligated parties in the contract match the 'relevant party' in the target statement, supporting the entailment.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a4",
+      "tau": 0.85,
+      "rubric": {
+        "legal_relevance": 0.8,
+        "factual_grounding": 0.9,
+        "specificity": 0.8,
+        "logical_coherence": 0.8,
+        "fre_801c_applicability": 0.8
+      },
+      "justification": "Addresses potential scope limitations mentioned in the decision problem, demonstrating that carve-outs are consistent with and do not break the entailment of the target statement.",
+      "model": "combined"
+    }
+  ],
+  "solver_output": {
+    "case_id": "test_0034",
+    "graph": {
+      "nodes": {
+        "phi": {
+          "id": "phi",
+          "text": "Does the CONTRACT CONTEXT logically entail the EXACT TARGET STATEMENT, with every material element matched and no missing limitation, exception, party-scope mismatch, information-type mismatch, purpose limitation, recipient-scope mismatch, or disclosure carve-out?",
+          "tau": 0.5,
+          "sigma": 1.0,
+          "is_claim": true
+        },
+        "a1": {
+          "id": "a1",
+          "text": "The contract contains an explicit confidentiality clause prohibiting disclosure of transaction-related information without prior written consent, establishing a foundational duty of confidentiality.",
+          "tau": 0.9,
+          "sigma": 0.9,
+          "is_claim": false
+        },
+        "a2": {
+          "id": "a2",
+          "text": "The protected information scope explicitly covers 'the fact that discussions between the parties are taking place concerning the Transaction, or any terms or other facts relating to the Transaction,' which directly aligns with the target statement's reference to existence, terms, subject matter, or status.",
+          "tau": 1.0,
+          "sigma": 1.0,
+          "is_claim": false
+        },
+        "a3": {
+          "id": "a3",
+          "text": "The obligation binds 'Each party' and its Representatives, satisfying the target statement's requirement that 'the relevant party' must maintain confidentiality regarding the transaction.",
+          "tau": 0.9,
+          "sigma": 0.9,
+          "is_claim": false
+        },
+        "a4": {
+          "id": "a4",
+          "text": "The clause permits disclosure to bound Representatives and allows disclosure with prior written consent. These standard carve-outs define operational boundaries without negating the core confidentiality entailment.",
+          "tau": 0.85,
+          "sigma": 0.85,
+          "is_claim": false
+        }
+      },
+      "edges": [
+        {
+          "source": "a1",
+          "target": "phi",
+          "type": "support",
+          "confidence": 0.95
+        },
+        {
+          "source": "a2",
+          "target": "phi",
+          "type": "support",
+          "confidence": 0.95
+        },
+        {
+          "source": "a3",
+          "target": "phi",
+          "type": "support",
+          "confidence": 0.95
+        },
+        {
+          "source": "a4",
+          "target": "phi",
+          "type": "support",
+          "confidence": 0.9
+        }
+      ],
+      "solver_type": "df_quad"
+    },
+    "sigma_phi": 1.0,
+    "sigma_all": {
+      "phi": 1.0,
+      "a1": 0.9,
+      "a2": 1.0,
+      "a3": 0.9,
+      "a4": 0.85
+    },
+    "iterations": 2,
+    "converged": true,
+    "solver_type": "df_quad"
+  },
+  "sigma_phi": 1.0,
+  "decision": "Yes",
+  "uncertainty": {
+    "is_uncertain": false,
+    "sigma_phi": 1.0,
+    "threshold_low": 0.45,
+    "threshold_high": 0.55,
+    "escalation_triggered": false,
+    "escalation_actions": [],
+    "escalation_log": []
+  },
+  "hitl_interventions": [],
+  "pre_hitl_decision": null
+}

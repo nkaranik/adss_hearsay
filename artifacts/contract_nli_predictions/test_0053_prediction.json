@@ -1,0 +1,184 @@
+{
+  "case_id": "test_0053",
+  "input_text": "CONTRACT CONTEXT:\nFor purposes of this Agreement, “BCSI” shall mean:  (i) all information designated as such by VELCO, whether furnished before or after the date hereof, whether oral, written or recorded/electronic, and regardless of the manner in which it is furnished; and  For purposes of this Agreement, CEII shall mean:  (i) all information designated as such by VELCO, whether furnished before or after the date hereof, whether oral, written or recorded/electronic, and regardless of the manner in which it is furnished; and  CI subject to this Agreement may be in intangible form, such as information communicated orally or by visual observation, or may be embodied in tangible form, such as a document.  \n\nTARGET STATEMENT:\nThe contract entails that the relevant party must keep confidential the existence, terms, subject matter, or status of the agreement, negotiations, discussions, or transaction between the parties.\n\nDECISION TASK:\nDetermine whether the contract context entails the target statement.",
+  "phi_text": "",
+  "gold_label": "No",
+  "extraction": {
+    "case_id": "test_0053",
+    "input_text": "CONTRACT CONTEXT:\nFor purposes of this Agreement, “BCSI” shall mean:  (i) all information designated as such by VELCO, whether furnished before or after the date hereof, whether oral, written or recorded/electronic, and regardless of the manner in which it is furnished; and  For purposes of this Agreement, CEII shall mean:  (i) all information designated as such by VELCO, whether furnished before or after the date hereof, whether oral, written or recorded/electronic, and regardless of the manner in which it is furnished; and  CI subject to this Agreement may be in intangible form, such as information communicated orally or by visual observation, or may be embodied in tangible form, such as a document.  \n\nTARGET STATEMENT:\nThe contract entails that the relevant party must keep confidential the existence, terms, subject matter, or status of the agreement, negotiations, discussions, or transaction between the parties.\n\nDECISION TASK:\nDetermine whether the contract context entails the target statement.",
+    "claim": {
+      "id": "phi",
+      "text": "Does the CONTRACT CONTEXT logically entail the EXACT TARGET STATEMENT, with every material element matched and no missing limitation, exception, party-scope mismatch, information-type mismatch, purpose limitation, recipient-scope mismatch, or disclosure carve-out?"
+    },
+    "arguments": [
+      {
+        "id": "a1",
+        "text": "The contract context defines terms such as BCSI, CEII, and CI but does not impose any confidentiality obligations or restrictions on disclosure.",
+        "stance_to_claim": "attack",
+        "legal_rule": "In contract NLI, the absence of an explicit or implicit confidentiality clause attacks the entailment of a confidentiality obligation.",
+        "evidence_span": "For purposes of this Agreement, “BCSI” shall mean: (i) all information designated as such by VELCO... For purposes of this Agreement, CEII shall mean: (i) all information designated as such by VELCO... CI subject to this Agreement may be in intangible form...",
+        "confidence": 0.95
+      },
+      {
+        "id": "a3",
+        "text": "The provided contract text contains no clauses restricting disclosure, mandating confidentiality, or limiting the use of information.",
+        "stance_to_claim": "attack",
+        "legal_rule": "Absence of relevant contractual support attacks entailment claims in contract NLI tasks.",
+        "evidence_span": "CI subject to this Agreement may be in intangible form, such as information communicated orally or by visual observation, or may be embodied in tangible form, such as a document.",
+        "confidence": 0.95
+      },
+      {
+        "id": "a4",
+        "text": "Definitions of information formats (oral, written, electronic) do not establish a confidentiality regime for the agreement itself or its negotiations.",
+        "stance_to_claim": "attack",
+        "legal_rule": "Definitional clauses regarding information scope do not equate to substantive confidentiality obligations.",
+        "evidence_span": "whether oral, written or recorded/electronic, and regardless of the manner in which it is furnished",
+        "confidence": 0.9
+      }
+    ],
+    "relations": [
+      {
+        "source": "a1",
+        "target": "phi",
+        "type": "attack",
+        "confidence": 0.95
+      },
+      {
+        "source": "a3",
+        "target": "phi",
+        "type": "attack",
+        "confidence": 0.95
+      },
+      {
+        "source": "a4",
+        "target": "phi",
+        "type": "attack",
+        "confidence": 0.9
+      }
+    ],
+    "extraction_model": "",
+    "raw_llm_response": "{\n  \"case_id\": \"test_0053\",\n  \"phi\": \"Does the CONTRACT CONTEXT logically entail the EXACT TARGET STATEMENT, with every material element matched and no missing limitation, exception, party-scope mismatch, information-type mismatch, purpose limitation, recipient-scope mismatch, or disclosure carve-out?\",\n  \"arguments\": [\n    {\n      \"id\": \"a1\",\n      \"text\": \"The contract context defines terms such as BCSI, CEII, and CI but does not impose any confidentiality obligations or restrictions on disclosure.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"In contract NLI, the absence of an explicit or implicit confidentiality clause attacks the entailment of a confidentiality obligation.\",\n      \"evidence_span\": \"For purposes of this Agreement, “BCSI” shall mean: (i) all information designated as such by VELCO... For purposes of this Agreement, CEII shall mean: (i) all information designated as such by VELCO... CI subject to this Agreement may be in intangible form...\",\n      \"confidence\": 0.95,\n      \"tau\": 0.85,\n      \"rubric\": {\n        \"relevance\": 0.9,\n        \"factual_grounding\": 0.9,\n        \"specificity\": 0.8,\n        \"logical_coherence\": 0.9,\n        \"applicability\": 0.9\n      },\n      \"justification\": \"The narrative only provides definitions of information types. Without a corresponding obligation clause, the target statement cannot be entailed.\"\n    },\n    {\n      \"id\": \"a2\",\n      \"text\": \"The target statement requires the contract to entail a duty to keep confidential the existence, terms, subject matter, or status of the agreement.\",\n      \"stance_to_claim\": \"neutral\",\n      \"legal_rule\": \"Standard for contractual entailment requires matching material elements of the target claim.\",\n      \"evidence_span\": \"The contract entails that the relevant party must keep confidential the existence, terms, subject matter, or status of the agreement, negotiations, discussions, or transaction between the parties.\",\n      \"confidence\": 0.9,\n      \"tau\": 0.0,\n      \"rubric\": {\n        \"relevance\": 0.8,\n        \"factual_grounding\": 0.8,\n        \"specificity\": 0.7,\n        \"logical_coherence\": 0.8,\n        \"applicability\": 0.8\n      },\n      \"justification\": \"This argument frames the decision problem and establishes the baseline for entailment without taking a stance on the outcome.\"\n    },\n    {\n      \"id\": \"a3\",\n      \"text\": \"The provided contract text contains no clauses restricting disclosure, mandating confidentiality, or limiting the use of information.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"Absence of relevant contractual support attacks entailment claims in contract NLI tasks.\",\n      \"evidence_span\": \"CI subject to this Agreement may be in intangible form, such as information communicated orally or by visual observation, or may be embodied in tangible form, such as a document.\",\n      \"confidence\": 0.95,\n      \"tau\": 0.8,\n      \"rubric\": {\n        \"relevance\": 0.9,\n        \"factual_grounding\": 0.9,\n        \"specificity\": 0.8,\n        \"logical_coherence\": 0.9,\n        \"applicability\": 0.9\n      },\n      \"justification\": \"The text explicitly limits itself to defining information forms and designation, leaving confidentiality obligations entirely unaddressed.\"\n    },\n    {\n      \"id\": \"a4\",\n      \"text\": \"Definitions of information formats (oral, written, electronic) do not establish a confidentiality regime for the agreement itself or its negotiations.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"Definitional clauses regarding information scope do not equate to substantive confidentiality obligations.\",\n      \"evidence_span\": \"whether oral, written or recorded/electronic, and regardless of the manner in which it is furnished\",\n      \"confidence\": 0.9,\n      \"tau\": 0.75,\n      \"rubric\": {\n        \"relevance\": 0.8,\n        \"factual_grounding\": 0.8,\n        \"specificity\": 0.7,\n        \"logical_coherence\": 0.8,\n        \"applicability\": 0.8\n      },\n      \"justification\": \"The narrative focuses on the medium and designation of information, not on the duty to protect the agreement's existence or terms.\"\n    }\n  ],\n  \"relations\": [\n    {\n      \"source\": \"a1\",\n      \"target\": \"phi\",\n      \"type\": \"attack\",\n      \"confidence\": 0.95\n    },\n    {\n      \"source\": \"a2\",\n      \"target\": \"phi\",\n      \"type\": \"neutral\",\n      \"confidence\": 0.9\n    },\n    {\n      \"source\": \"a3\",\n      \"target\": \"phi\",\n      \"type\": \"attack\",\n      \"confidence\": 0.95\n    },\n    {\n      \"source\": \"a4\",\n      \"target\": \"phi\",\n      \"type\": \"attack\",\n      \"confidence\": 0.9\n    }\n  ]\n}",
+    "parse_error": null,
+    "n_raw_arguments": 4
+  },
+  "strengths": [
+    {
+      "argument_id": "a1",
+      "tau": 0.85,
+      "rubric": {
+        "legal_relevance": 0.9,
+        "factual_grounding": 0.9,
+        "specificity": 0.8,
+        "logical_coherence": 0.9,
+        "fre_801c_applicability": 0.9
+      },
+      "justification": "The narrative only provides definitions of information types. Without a corresponding obligation clause, the target statement cannot be entailed.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a3",
+      "tau": 0.8,
+      "rubric": {
+        "legal_relevance": 0.9,
+        "factual_grounding": 0.9,
+        "specificity": 0.8,
+        "logical_coherence": 0.9,
+        "fre_801c_applicability": 0.9
+      },
+      "justification": "The text explicitly limits itself to defining information forms and designation, leaving confidentiality obligations entirely unaddressed.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a4",
+      "tau": 0.75,
+      "rubric": {
+        "legal_relevance": 0.8,
+        "factual_grounding": 0.8,
+        "specificity": 0.7,
+        "logical_coherence": 0.8,
+        "fre_801c_applicability": 0.8
+      },
+      "justification": "The narrative focuses on the medium and designation of information, not on the duty to protect the agreement's existence or terms.",
+      "model": "combined"
+    }
+  ],
+  "solver_output": {
+    "case_id": "test_0053",
+    "graph": {
+      "nodes": {
+        "phi": {
+          "id": "phi",
+          "text": "Does the CONTRACT CONTEXT logically entail the EXACT TARGET STATEMENT, with every material element matched and no missing limitation, exception, party-scope mismatch, information-type mismatch, purpose limitation, recipient-scope mismatch, or disclosure carve-out?",
+          "tau": 0.5,
+          "sigma": 0.0037499999999999756,
+          "is_claim": true
+        },
+        "a1": {
+          "id": "a1",
+          "text": "The contract context defines terms such as BCSI, CEII, and CI but does not impose any confidentiality obligations or restrictions on disclosure.",
+          "tau": 0.85,
+          "sigma": 0.85,
+          "is_claim": false
+        },
+        "a3": {
+          "id": "a3",
+          "text": "The provided contract text contains no clauses restricting disclosure, mandating confidentiality, or limiting the use of information.",
+          "tau": 0.8,
+          "sigma": 0.8,
+          "is_claim": false
+        },
+        "a4": {
+          "id": "a4",
+          "text": "Definitions of information formats (oral, written, electronic) do not establish a confidentiality regime for the agreement itself or its negotiations.",
+          "tau": 0.75,
+          "sigma": 0.75,
+          "is_claim": false
+        }
+      },
+      "edges": [
+        {
+          "source": "a1",
+          "target": "phi",
+          "type": "attack",
+          "confidence": 0.95
+        },
+        {
+          "source": "a3",
+          "target": "phi",
+          "type": "attack",
+          "confidence": 0.95
+        },
+        {
+          "source": "a4",
+          "target": "phi",
+          "type": "attack",
+          "confidence": 0.9
+        }
+      ],
+      "solver_type": "df_quad"
+    },
+    "sigma_phi": 0.0037499999999999756,
+    "sigma_all": {
+      "phi": 0.0037499999999999756,
+      "a1": 0.85,
+      "a3": 0.8,
+      "a4": 0.75
+    },
+    "iterations": 2,
+    "converged": true,
+    "solver_type": "df_quad"
+  },
+  "sigma_phi": 0.0037499999999999756,
+  "decision": "No",
+  "uncertainty": {
+    "is_uncertain": false,
+    "sigma_phi": 0.0037499999999999756,
+    "threshold_low": 0.45,
+    "threshold_high": 0.55,
+    "escalation_triggered": false,
+    "escalation_actions": [],
+    "escalation_log": []
+  },
+  "hitl_interventions": [],
+  "pre_hitl_decision": null
+}

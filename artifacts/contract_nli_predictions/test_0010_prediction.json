@@ -1,0 +1,225 @@
+{
+  "case_id": "test_0010",
+  "input_text": "CONTRACT CONTEXT:\n7. Customer agrees that, without the prior written consent of Minnesota Power, it will not make any statement to any competitor, customer or other third party with respect to the Information exchanged hereunder or regarding the Project itself. \n\nTARGET STATEMENT:\nThe contract entails that the relevant party must keep confidential the existence, terms, subject matter, or status of the agreement, negotiations, discussions, or transaction between the parties.\n\nDECISION TASK:\nDetermine whether the contract context entails the target statement.",
+  "phi_text": "",
+  "gold_label": "Yes",
+  "extraction": {
+    "case_id": "test_0010",
+    "input_text": "CONTRACT CONTEXT:\n7. Customer agrees that, without the prior written consent of Minnesota Power, it will not make any statement to any competitor, customer or other third party with respect to the Information exchanged hereunder or regarding the Project itself. \n\nTARGET STATEMENT:\nThe contract entails that the relevant party must keep confidential the existence, terms, subject matter, or status of the agreement, negotiations, discussions, or transaction between the parties.\n\nDECISION TASK:\nDetermine whether the contract context entails the target statement.",
+    "claim": {
+      "id": "phi",
+      "text": "Does the CONTRACT CONTEXT logically entail the EXACT TARGET STATEMENT, with every material element matched and no missing limitation, exception, party-scope mismatch, information-type mismatch, purpose limitation, recipient-scope mismatch, or disclosure carve-out?"
+    },
+    "arguments": [
+      {
+        "id": "a2",
+        "text": "The restriction clause applies specifically to 'Information exchanged hereunder or regarding the Project itself,' which does not encompass the existence, terms, or status of the agreement itself.",
+        "stance_to_claim": "attack",
+        "legal_rule": "Scope limitations in contract clauses narrow the applicability of confidentiality obligations.",
+        "evidence_span": "with respect to the Information exchanged hereunder or regarding the Project itself.",
+        "confidence": 0.9
+      },
+      {
+        "id": "a3",
+        "text": "The target statement requires confidentiality over the 'existence, terms, subject matter, or status of the agreement,' which is not mentioned or covered by the contract text.",
+        "stance_to_claim": "attack",
+        "legal_rule": "Entailment requires explicit coverage or necessary inference of the target claim's elements.",
+        "evidence_span": "The contract entails that the relevant party must keep confidential the existence, terms, subject matter, or status of the agreement, negotiations, discussions, or transaction between the parties.",
+        "confidence": 0.95
+      },
+      {
+        "id": "a4",
+        "text": "The obligation is conditional on obtaining 'prior written consent,' indicating a limited, non-absolute confidentiality obligation that does not match the target's broad mandate.",
+        "stance_to_claim": "attack",
+        "legal_rule": "Conditional permissions or carve-outs weaken absolute confidentiality entailments.",
+        "evidence_span": "without the prior written consent of Minnesota Power",
+        "confidence": 0.85
+      },
+      {
+        "id": "a5",
+        "text": "The contract context fails to logically entail the target statement due to a material scope mismatch and the absence of any provision covering the agreement's existence or terms.",
+        "stance_to_claim": "attack",
+        "legal_rule": "Logical entailment in contract NLI requires every material element of the target to be matched by the context.",
+        "evidence_span": null,
+        "confidence": 0.9
+      }
+    ],
+    "relations": [
+      {
+        "source": "a2",
+        "target": "phi",
+        "type": "attack",
+        "confidence": 0.9
+      },
+      {
+        "source": "a3",
+        "target": "phi",
+        "type": "attack",
+        "confidence": 0.95
+      },
+      {
+        "source": "a4",
+        "target": "phi",
+        "type": "attack",
+        "confidence": 0.85
+      },
+      {
+        "source": "a5",
+        "target": "phi",
+        "type": "attack",
+        "confidence": 0.9
+      }
+    ],
+    "extraction_model": "",
+    "raw_llm_response": "{\n  \"case_id\": \"test_0010\",\n  \"phi\": \"Does the CONTRACT CONTEXT logically entail the EXACT TARGET STATEMENT, with every material element matched and no missing limitation, exception, party-scope mismatch, information-type mismatch, purpose limitation, recipient-scope mismatch, or disclosure carve-out?\",\n  \"arguments\": [\n    {\n      \"id\": \"a1\",\n      \"text\": \"The contract contains an explicit restriction clause (Clause 7) limiting the Customer from making statements to third parties regarding exchanged information or the Project.\",\n      \"stance_to_claim\": \"neutral\",\n      \"legal_rule\": \"Contract interpretation requires matching the scope of restrictive clauses to the target claim.\",\n      \"evidence_span\": \"7. Customer agrees that, without the prior written consent of Minnesota Power, it will not make any statement to any competitor, customer or other third party with respect to the Information exchanged hereunder or regarding the Project itself.\",\n      \"confidence\": 0.95,\n      \"tau\": 0.5,\n      \"rubric\": {\n        \"relevance\": 0.8,\n        \"factual_grounding\": 1.0,\n        \"specificity\": 0.9,\n        \"logical_coherence\": 0.8,\n        \"applicability\": 0.7\n      },\n      \"justification\": \"Establishes the existence of a confidentiality-like provision but does not directly address the target claim's scope.\"\n    },\n    {\n      \"id\": \"a2\",\n      \"text\": \"The restriction clause applies specifically to 'Information exchanged hereunder or regarding the Project itself,' which does not encompass the existence, terms, or status of the agreement itself.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"Scope limitations in contract clauses narrow the applicability of confidentiality obligations.\",\n      \"evidence_span\": \"with respect to the Information exchanged hereunder or regarding the Project itself.\",\n      \"confidence\": 0.9,\n      \"tau\": 0.85,\n      \"rubric\": {\n        \"relevance\": 0.9,\n        \"factual_grounding\": 1.0,\n        \"specificity\": 0.9,\n        \"logical_coherence\": 0.9,\n        \"applicability\": 0.9\n      },\n      \"justification\": \"Directly attacks the entailment by showing the contractual scope is narrower than the target statement's scope.\"\n    },\n    {\n      \"id\": \"a3\",\n      \"text\": \"The target statement requires confidentiality over the 'existence, terms, subject matter, or status of the agreement,' which is not mentioned or covered by the contract text.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"Entailment requires explicit coverage or necessary inference of the target claim's elements.\",\n      \"evidence_span\": \"The contract entails that the relevant party must keep confidential the existence, terms, subject matter, or status of the agreement, negotiations, discussions, or transaction between the parties.\",\n      \"confidence\": 0.95,\n      \"tau\": 0.9,\n      \"rubric\": {\n        \"relevance\": 1.0,\n        \"factual_grounding\": 0.9,\n        \"specificity\": 0.9,\n        \"logical_coherence\": 0.9,\n        \"applicability\": 0.9\n      },\n      \"justification\": \"Highlights the absence of contractual support for the target claim's core elements, directly attacking the entailment.\"\n    },\n    {\n      \"id\": \"a4\",\n      \"text\": \"The obligation is conditional on obtaining 'prior written consent,' indicating a limited, non-absolute confidentiality obligation that does not match the target's broad mandate.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"Conditional permissions or carve-outs weaken absolute confidentiality entailments.\",\n      \"evidence_span\": \"without the prior written consent of Minnesota Power\",\n      \"confidence\": 0.85,\n      \"tau\": 0.8,\n      \"rubric\": {\n        \"relevance\": 0.8,\n        \"factual_grounding\": 0.9,\n        \"specificity\": 0.8,\n        \"logical_coherence\": 0.8,\n        \"applicability\": 0.8\n      },\n      \"justification\": \"Attacks the entailment by demonstrating that the contractual obligation is not absolute, contradicting the target's implied broad mandate.\"\n    },\n    {\n      \"id\": \"a5\",\n      \"text\": \"The contract context fails to logically entail the target statement due to a material scope mismatch and the absence of any provision covering the agreement's existence or terms.\",\n      \"stance_to_claim\": \"attack\",\n      \"legal_rule\": \"Logical entailment in contract NLI requires every material element of the target to be matched by the context.\",\n      \"evidence_span\": null,\n      \"confidence\": 0.9,\n      \"tau\": 0.95,\n      \"rubric\": {\n        \"relevance\": 1.0,\n        \"factual_grounding\": 0.8,\n        \"specificity\": 0.7,\n        \"logical_coherence\": 1.0,\n        \"applicability\": 0.9\n      },\n      \"justification\": \"Synthesizes the scope mismatch and missing elements to conclude that the target statement is not entailed.\"\n    }\n  ],\n  \"relations\": [\n    {\n      \"source\": \"a1\",\n      \"target\": \"phi\",\n      \"type\": \"neutral\",\n      \"confidence\": 0.95\n    },\n    {\n      \"source\": \"a2\",\n      \"target\": \"phi\",\n      \"type\": \"attack\",\n      \"confidence\": 0.9\n    },\n    {\n      \"source\": \"a3\",\n      \"target\": \"phi\",\n      \"type\": \"attack\",\n      \"confidence\": 0.95\n    },\n    {\n      \"source\": \"a4\",\n      \"target\": \"phi\",\n      \"type\": \"attack\",\n      \"confidence\": 0.85\n    },\n    {\n      \"source\": \"a5\",\n      \"target\": \"phi\",\n      \"type\": \"attack\",\n      \"confidence\": 0.9\n    }\n  ]\n}",
+    "parse_error": null,
+    "n_raw_arguments": 5
+  },
+  "strengths": [
+    {
+      "argument_id": "a2",
+      "tau": 0.85,
+      "rubric": {
+        "legal_relevance": 0.9,
+        "factual_grounding": 1.0,
+        "specificity": 0.9,
+        "logical_coherence": 0.9,
+        "fre_801c_applicability": 0.9
+      },
+      "justification": "Directly attacks the entailment by showing the contractual scope is narrower than the target statement's scope.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a3",
+      "tau": 0.9,
+      "rubric": {
+        "legal_relevance": 1.0,
+        "factual_grounding": 0.9,
+        "specificity": 0.9,
+        "logical_coherence": 0.9,
+        "fre_801c_applicability": 0.9
+      },
+      "justification": "Highlights the absence of contractual support for the target claim's core elements, directly attacking the entailment.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a4",
+      "tau": 0.8,
+      "rubric": {
+        "legal_relevance": 0.8,
+        "factual_grounding": 0.9,
+        "specificity": 0.8,
+        "logical_coherence": 0.8,
+        "fre_801c_applicability": 0.8
+      },
+      "justification": "Attacks the entailment by demonstrating that the contractual obligation is not absolute, contradicting the target's implied broad mandate.",
+      "model": "combined"
+    },
+    {
+      "argument_id": "a5",
+      "tau": 0.95,
+      "rubric": {
+        "legal_relevance": 1.0,
+        "factual_grounding": 0.8,
+        "specificity": 0.7,
+        "logical_coherence": 1.0,
+        "fre_801c_applicability": 0.9
+      },
+      "justification": "Synthesizes the scope mismatch and missing elements to conclude that the target statement is not entailed.",
+      "model": "combined"
+    }
+  ],
+  "solver_output": {
+    "case_id": "test_0010",
+    "graph": {
+      "nodes": {
+        "phi": {
+          "id": "phi",
+          "text": "Does the CONTRACT CONTEXT logically entail the EXACT TARGET STATEMENT, with every material element matched and no missing limitation, exception, party-scope mismatch, information-type mismatch, purpose limitation, recipient-scope mismatch, or disclosure carve-out?",
+          "tau": 0.5,
+          "sigma": 0.00007499999999999174,
+          "is_claim": true
+        },
+        "a2": {
+          "id": "a2",
+          "text": "The restriction clause applies specifically to 'Information exchanged hereunder or regarding the Project itself,' which does not encompass the existence, terms, or status of the agreement itself.",
+          "tau": 0.85,
+          "sigma": 0.85,
+          "is_claim": false
+        },
+        "a3": {
+          "id": "a3",
+          "text": "The target statement requires confidentiality over the 'existence, terms, subject matter, or status of the agreement,' which is not mentioned or covered by the contract text.",
+          "tau": 0.9,
+          "sigma": 0.9,
+          "is_claim": false
+        },
+        "a4": {
+          "id": "a4",
+          "text": "The obligation is conditional on obtaining 'prior written consent,' indicating a limited, non-absolute confidentiality obligation that does not match the target's broad mandate.",
+          "tau": 0.8,
+          "sigma": 0.8,
+          "is_claim": false
+        },
+        "a5": {
+          "id": "a5",
+          "text": "The contract context fails to logically entail the target statement due to a material scope mismatch and the absence of any provision covering the agreement's existence or terms.",
+          "tau": 0.95,
+          "sigma": 0.95,
+          "is_claim": false
+        }
+      },
+      "edges": [
+        {
+          "source": "a2",
+          "target": "phi",
+          "type": "attack",
+          "confidence": 0.9
+        },
+        {
+          "source": "a3",
+          "target": "phi",
+          "type": "attack",
+          "confidence": 0.95
+        },
+        {
+          "source": "a4",
+          "target": "phi",
+          "type": "attack",
+          "confidence": 0.85
+        },
+        {
+          "source": "a5",
+          "target": "phi",
+          "type": "attack",
+          "confidence": 0.9
+        }
+      ],
+      "solver_type": "df_quad"
+    },
+    "sigma_phi": 0.00007499999999999174,
+    "sigma_all": {
+      "phi": 0.00007499999999999174,
+      "a2": 0.85,
+      "a3": 0.9,
+      "a4": 0.8,
+      "a5": 0.95
+    },
+    "iterations": 2,
+    "converged": true,
+    "solver_type": "df_quad"
+  },
+  "sigma_phi": 0.00007499999999999174,
+  "decision": "No",
+  "uncertainty": {
+    "is_uncertain": false,
+    "sigma_phi": 0.00007499999999999174,
+    "threshold_low": 0.45,
+    "threshold_high": 0.55,
+    "escalation_triggered": false,
+    "escalation_actions": [],
+    "escalation_log": []
+  },
+  "hitl_interventions": [],
+  "pre_hitl_decision": null
+}
