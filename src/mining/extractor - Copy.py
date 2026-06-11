@@ -327,24 +327,6 @@ def _parse_combined(
             [],
         )
 
-    # Guard against json_repair accepting a severely truncated LLM response.
-    # If the model started producing arguments but never reached the relations
-    # section required by the schema, treating the partial repair as successful
-    # can leave only the first argument in the graph.
-    raw_l = raw.lower()
-    if isinstance(data, dict) and "arguments" in data and "relations" not in data and '"relations"' not in raw_l:
-        logger.warning(f"[{case_id}] LLM output appears truncated before relations; rejecting partial JSON repair.")
-        return (
-            ExtractionResult(
-                case_id=case_id,
-                input_text=input_text,
-                claim=ClaimNode(text=decision_problem),
-                raw_llm_response=raw,
-                parse_error="LLM output appears truncated before relations.",
-            ),
-            [],
-        )
-
     llm_phi = str(data.get("phi", "")).strip()
     if _should_adopt_llm_phi(decision_problem, llm_phi):
         decision_problem = llm_phi
@@ -434,28 +416,17 @@ def _parse_combined(
         except Exception as e:
             logger.debug(f"[{case_id}] Skipping malformed relation: {e}")
 
-    # Add fallback direct-to-phi edges only for arguments that are otherwise
-    # disconnected as sources. This avoids double-counting undercutters and
-    # rebuttals. For example, if the LLM says C1 attacks A8, C1 should not be
-    # automatically added as C1 -> phi attack; its role is already represented
-    # by the argument-to-argument edge.
+    # Ensure every kept argument has a direct stance edge to phi. This prevents
+    # empty or disconnected QBAF graphs when the LLM omits direct phi relations.
     existing = {(r.source, r.target) for r in rels}
-    outgoing_non_phi = {r.source for r in rels if r.target != "phi"}
     for arg in args:
-        if (arg.id, "phi") in existing:
-            continue
-        if arg.id in outgoing_non_phi:
-            logger.debug(
-                f"[{case_id}] Not auto-adding direct phi edge for {arg.id}: "
-                "argument already has argument-to-argument relation(s)."
-            )
-            continue
-        rels.append(Relation(
-            source=arg.id,
-            target="phi",
-            type=RelationType.SUPPORT if arg.stance_to_claim.value == "support" else RelationType.ATTACK,
-            confidence=arg.confidence,
-        ))
+        if (arg.id, "phi") not in existing:
+            rels.append(Relation(
+                source=arg.id,
+                target="phi",
+                type=RelationType.SUPPORT if arg.stance_to_claim.value == "support" else RelationType.ATTACK,
+                confidence=arg.confidence,
+            ))
 
     try:
         extraction = ExtractionResult(

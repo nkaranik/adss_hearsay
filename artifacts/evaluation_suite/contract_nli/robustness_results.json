@@ -4,119 +4,119 @@
     "p": 0.0,
     "n": 82,
     "score_stability_delta_p": 0.0,
-    "accuracy": 0.5487804878048781,
-    "macro_f1": 0.5285159285159285
+    "accuracy": 0.7804878048780488,
+    "macro_f1": 0.771799628942486
   },
   {
     "perturbation": "argument_removal",
     "p": 0.1,
     "n": 82,
     "score_stability_delta_p": 0.0,
-    "accuracy": 0.5487804878048781,
-    "macro_f1": 0.5285159285159285
+    "accuracy": 0.7804878048780488,
+    "macro_f1": 0.771799628942486
   },
   {
     "perturbation": "argument_removal",
     "p": 0.2,
     "n": 82,
-    "score_stability_delta_p": 0.021844325861280486,
-    "accuracy": 0.524390243902439,
-    "macro_f1": 0.5030303030303029
+    "score_stability_delta_p": 0.03262356297251335,
+    "accuracy": 0.7804878048780488,
+    "macro_f1": 0.771799628942486
   },
   {
     "perturbation": "argument_removal",
     "p": 0.3,
     "n": 82,
-    "score_stability_delta_p": 0.0350202897332317,
-    "accuracy": 0.5487804878048781,
-    "macro_f1": 0.5285159285159285
+    "score_stability_delta_p": 0.03358828324690359,
+    "accuracy": 0.8414634146341463,
+    "macro_f1": 0.8373760488176965
   },
   {
     "perturbation": "argument_removal",
     "p": 0.5,
     "n": 82,
-    "score_stability_delta_p": 0.06568234275152438,
-    "accuracy": 0.573170731707317,
-    "macro_f1": 0.5583935990152332
+    "score_stability_delta_p": 0.088924382713367,
+    "accuracy": 0.7560975609756098,
+    "macro_f1": 0.74375
   },
   {
     "perturbation": "relation_flip",
     "p": 0.0,
     "n": 82,
     "score_stability_delta_p": 0.0,
-    "accuracy": 0.5487804878048781,
-    "macro_f1": 0.5285159285159285
+    "accuracy": 0.7804878048780488,
+    "macro_f1": 0.771799628942486
   },
   {
     "perturbation": "relation_flip",
     "p": 0.1,
     "n": 82,
-    "score_stability_delta_p": 0.029350995182736282,
-    "accuracy": 0.524390243902439,
-    "macro_f1": 0.5121281464530892
+    "score_stability_delta_p": 0.06538882804492188,
+    "accuracy": 0.7439024390243902,
+    "macro_f1": 0.7293729372937294
   },
   {
     "perturbation": "relation_flip",
     "p": 0.2,
     "n": 82,
-    "score_stability_delta_p": 0.21137824577743905,
-    "accuracy": 0.5365853658536586,
-    "macro_f1": 0.5340909090909091
+    "score_stability_delta_p": 0.28385222187452364,
+    "accuracy": 0.6463414634146342,
+    "macro_f1": 0.6033361134278565
   },
   {
     "perturbation": "relation_flip",
     "p": 0.3,
     "n": 82,
-    "score_stability_delta_p": 0.27462323298780483,
-    "accuracy": 0.47560975609756095,
-    "macro_f1": 0.4620900076277651
+    "score_stability_delta_p": 0.31826612722556213,
+    "accuracy": 0.6219512195121951,
+    "macro_f1": 0.5832103623544844
   },
   {
     "perturbation": "relation_flip",
     "p": 0.5,
     "n": 82,
-    "score_stability_delta_p": 0.36692075040396344,
+    "score_stability_delta_p": 0.35546544153577553,
     "accuracy": 0.5,
-    "macro_f1": 0.45730427764326076
+    "macro_f1": 0.4487620921462535
   },
   {
     "perturbation": "tau_noise",
     "p": 0.0,
     "n": 82,
     "score_stability_delta_p": 0.0,
-    "accuracy": 0.5487804878048781,
-    "macro_f1": 0.5285159285159285
+    "accuracy": 0.7804878048780488,
+    "macro_f1": 0.771799628942486
   },
   {
     "perturbation": "tau_noise",
     "p": 0.1,
     "n": 82,
-    "score_stability_delta_p": 0.0001580652929436496,
-    "accuracy": 0.5487804878048781,
-    "macro_f1": 0.5285159285159285
+    "score_stability_delta_p": 0.0022331684353887396,
+    "accuracy": 0.7804878048780488,
+    "macro_f1": 0.771799628942486
   },
   {
     "perturbation": "tau_noise",
     "p": 0.2,
     "n": 82,
-    "score_stability_delta_p": 0.0010290958087765154,
-    "accuracy": 0.5487804878048781,
-    "macro_f1": 0.5285159285159285
+    "score_stability_delta_p": 0.002474850932371718,
+    "accuracy": 0.7926829268292683,
+    "macro_f1": 0.7833721833721834
   },
   {
     "perturbation": "tau_noise",
     "p": 0.3,
     "n": 82,
-    "score_stability_delta_p": 0.0003470717715519168,
-    "accuracy": 0.5487804878048781,
-    "macro_f1": 0.5285159285159285
+    "score_stability_delta_p": 0.0032293314268638015,
+    "accuracy": 0.7804878048780488,
+    "macro_f1": 0.771799628942486
   },
   {
     "perturbation": "tau_noise",
     "p": 0.5,
     "n": 82,
-    "score_stability_delta_p": 0.0031143331778736476,
-    "accuracy": 0.5365853658536586,
-    "macro_f1": 0.513125
+    "score_stability_delta_p": 0.006791169989884479,
+    "accuracy": 0.7682926829268293,
+    "macro_f1": 0.7578865578865579
   }
 ]

@@ -65,8 +65,13 @@ Each argument must be a distinct reasoning component.
 Avoid duplicate arguments.
 Avoid generic boilerplate unless it is tied to the case facts.
 Neutral or irrelevant components may be included with stance_to_claim = "neutral", but they will be excluded from the QBAF graph.
-Prefer 3-6 arguments when the narrative supports that many distinct components.
-Do not force the number of arguments to reach {max_arguments}.
+
+ARGUMENT GRANULARITY RULES
+- If the narrative contains an explicit list of arguments, reasons, objections, counterarguments, risk factors, rebuttals, or considerations, preserve them as separate argumentative components whenever possible.
+- Do NOT merge distinct listed arguments into broad meta-arguments.
+- For structured or semi-structured inputs, use as many arguments as needed up to {max_arguments}.
+- Only prefer 3-6 arguments for short unstructured narratives that do not contain a detailed argument list.
+- If the narrative contains labels such as A1, A2, B1, C1, preserve the labeled item as a distinct argument node whenever possible.
 
 STANCE DEFINITIONS
 - "support": the argument increases the acceptability of φ.
@@ -87,10 +92,46 @@ For contract NLI cases:
 - Unrelated contractual provisions should be marked NEUTRAL.
 
 RELATION REQUIREMENTS
-Create relations among arguments and φ.
-Every non-neutral argument should have at least one direct relation to "phi".
-Also add argument-to-argument relations when one argument reinforces or weakens another.
-Use relation type: "support", "attack", or "neutral".
+Create both:
+1. argument-to-claim relations, where arguments support or attack phi;
+2. argument-to-argument relations, where one argument supports, attacks, rebuts, undercuts, qualifies, or weakens another argument.
+
+- Every non-neutral argument should normally have a direct relation to "phi", except when its primary role is clearly to support, attack, rebut, undercut, qualify, or weaken another argument.
+- In that case, an argument-to-argument relation is sufficient.
+
+You MUST add argument-to-argument relations when:
+- a counterargument says that another argument is insufficient;
+- a counterargument gives an alternative explanation;
+- a rebuttal says that a risk or objection is acceptable, outweighed, or not decisive;
+- one argument narrows, qualifies, or limits another argument.
+
+Use relation type:
+- "support" when the source strengthens the target;
+- "attack" when the source weakens, rebuts, undercuts, or challenges the target;
+- "neutral" only when there is no argumentative interaction.
+
+You must infer not only relations between arguments and phi, but also relations between arguments.
+
+An argument attacks another argument when it:
+- challenges the sufficiency of that argument;
+- challenges the relevance of that argument;
+- challenges the causal link from that argument to phi;
+- provides an alternative explanation for that argument's evidence;
+- weakens the evidential value of that argument;
+- rebuts a risk, objection, or counterargument;
+- says that a consideration does not automatically imply the conclusion.
+
+When an argument weakens the inference from another argument to phi, encode this as an attack relation from the weakening argument to the original argument.
+
+Examples:
+- "Severe symptoms alone do not prove surgery is necessary" attacks an argument saying "Symptoms are severe and persistent" when the latter supports surgery.
+- "Falls may have other causes besides spinal stenosis" attacks an argument saying "Function is clearly impaired" or "falls support surgery".
+- "Neurologic decline needs objective confirmation" attacks an argument claiming progressive neurologic decline if objective confirmation is not established.
+- "Surgical risk may be acceptable given severe disability and failed conservative treatment" attacks an argument saying surgical risks count against surgery.
+- "Controlled diabetes and age do not automatically rule out surgery" attacks an argument saying age and diabetes count against surgery.
+- "A difficult recovery may still be justified if expected benefit is substantial" attacks an argument saying difficult recovery counts against surgery.
+
+Do not collapse these into generic direct attacks on phi if the target argument can be identified.
 
 STRENGTH / TAU REQUIREMENTS
 For each non-neutral argument, assign tau in [0.1, 1.0].
@@ -136,11 +177,32 @@ Return exactly this structure:
   ]
 }
 
+OUTPUT LENGTH CONTROL
+- Keep each argument text under 120 characters.
+- Keep each legal_rule under 80 characters.
+- Keep each justification under 120 characters.
+- Use short evidence spans, not full paragraphs.
+- For semi-structured inputs with listed arguments, preserve the listed argument text concisely rather than expanding it.
+- Do not repeat the full facts in every argument.
+
+SEMI-STRUCTURED INPUT RULES
+For semi-structured inputs with listed arguments, objections, or rebuttals:
+- First preserve the listed items as separate arguments.
+- Then infer the most specific argument-to-argument relations among them.
+- Do not satisfy the relation requirement only by connecting every argument to phi.
+- If a counterargument clearly targets a specific earlier argument, create an argument-to-argument attack relation.
+- If a rebuttal clearly responds to a risk, objection, or counterargument, create an argument-to-argument attack relation against that risk/objection/counterargument.
+
 VALIDATION RULES
 - The JSON must be parseable by Python json.loads.
-- Argument ids must be unique: a1, a2, a3, ...
 - Relation source and target must refer to existing argument ids or "phi".
+- Argument ids must be unique.
+- If the narrative provides labels such as A1, A2, B1, C1, use those labels as the argument ids.
+- Otherwise use a1, a2, a3, ...
 - Use "phi" exactly for the target claim node.
 - Do not output more than {max_arguments} arguments.
 - Do not omit tau for non-neutral arguments.
-- Do not omit direct relations from non-neutral arguments to "phi".
+- Every non-neutral argument should normally have a direct relation to "phi", except when its primary role is clearly to support, attack, rebut, undercut, qualify, or weaken another argument.
+- In that case, an argument-to-argument relation is sufficient.
+
+

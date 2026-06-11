@@ -1,5 +1,49 @@
 [
   {
+    "system_name": "Zero-shot CoT",
+    "n": 82,
+    "n_uncertain": 0,
+    "accuracy": {
+      "score": 0.7682926829268293,
+      "ci_low": 0.6707317073170732,
+      "ci_high": 0.8658536585365854
+    },
+    "macro_f1": {
+      "score": 0.7551469432657552,
+      "ci_low": 0.6620879120879122,
+      "ci_high": 0.8444022770398482
+    },
+    "false_certainty_rate": 0.23170731707317074,
+    "certain_n": 82,
+    "certain_accuracy": 0.7682926829268293,
+    "certain_macro_f1": 0.7551469432657552,
+    "borderline_n": 0,
+    "borderline_accuracy": 0.0,
+    "borderline_macro_f1": 0.0
+  },
+  {
+    "system_name": "Few-shot Prompting",
+    "n": 82,
+    "n_uncertain": 0,
+    "accuracy": {
+      "score": 0.8414634146341463,
+      "ci_low": 0.7560975609756098,
+      "ci_high": 0.9146341463414634
+    },
+    "macro_f1": {
+      "score": 0.8373760488176965,
+      "ci_low": 0.7485068603712672,
+      "ci_high": 0.9145197319434102
+    },
+    "false_certainty_rate": 0.15853658536585366,
+    "certain_n": 82,
+    "certain_accuracy": 0.8414634146341463,
+    "certain_macro_f1": 0.8373760488176965,
+    "borderline_n": 0,
+    "borderline_accuracy": 0.0,
+    "borderline_macro_f1": 0.0
+  },
+  {
     "system_name": "ADSS w/o Symbolic Solver",
     "n": 82,
     "n_uncertain": 17,

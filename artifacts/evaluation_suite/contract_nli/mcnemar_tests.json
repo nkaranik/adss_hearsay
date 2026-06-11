@@ -1,6 +1,22 @@
 [
   {
     "system_a": "Full ADSS",
+    "system_b": "Zero-shot CoT",
+    "n01": 4,
+    "n10": 5,
+    "statistic": 0.0,
+    "p_value": 1.0
+  },
+  {
+    "system_a": "Full ADSS",
+    "system_b": "Few-shot Prompting",
+    "n01": 8,
+    "n10": 3,
+    "statistic": 1.4545454545454546,
+    "p_value": 0.2265625
+  },
+  {
+    "system_a": "Full ADSS",
     "system_b": "ADSS w/o Symbolic Solver",
     "n01": 1,
     "n10": 5,
